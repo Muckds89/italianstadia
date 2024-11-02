@@ -1,0 +1,22 @@
+{
+    "cities": [
+        "https://en.wikipedia.org/wiki/Milan"
+    ],
+    "stadia": [
+        {
+            "wikipedia": "https://en.wikipedia.org/wiki/San_Siro",
+            "transfermarkt": "https://www.transfermarkt.it/ac-mailand/besucherzahlenentwicklung/verein/5"
+        }
+    ],
+    "teams": [
+        {
+            "name": "Milan",
+            "url": "https://en.wikipedia.org/wiki/AC_Milan"
+        },
+        {
+            "name": "Inter",
+            "url": "https://en.wikipedia.org/wiki/Inter_Milan"
+        }
+    ]
+    
+}

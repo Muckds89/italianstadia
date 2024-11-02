@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Team List</title>
+</head>
+<body>
+    <h1> Team List</h1>
+    <a href="{% url 'index' %}">Back to Index</a>
+    <ul>
+        {% for team in teams %}
+            <li>{{ team.name }} - Capacity: {{ team.capacity }} - Address: {{ team.address }} - Year of Construction: {{ team.year_of_construction }} - Average Attendance: {{ team.average_attendance }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

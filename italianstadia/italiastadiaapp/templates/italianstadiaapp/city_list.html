@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> City List</title>
+</head>
+<body>
+    <h1> City List</h1>
+    <a href="{% url 'index' %}">Back to Index</a>
+    {% if cities %}
+    <ul>
+        {% for city in cities %}
+            <li>{{ city.name }} - Population: {{ city.population }} - Country: {{ city.country }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+     <p>No Cities are listed</p> 
+     {% endif %}
+</body>
+</html>

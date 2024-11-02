@@ -1,0 +1,39 @@
+2024-09-28 17:51:56,950 - INFO - Scraping team data from: https://en.wikipedia.org/wiki/AC_Milan
+2024-09-28 17:51:57,806 - INFO - Team name extracted: AC Milan
+2024-09-28 17:51:57,808 - INFO - Extracting data for header: full name
+2024-09-28 17:51:57,808 - INFO - Extracting data for header: nickname(s)
+2024-09-28 17:51:57,808 - INFO - Extracting data for header: founded
+2024-09-28 17:51:57,808 - INFO - Extracting data for header: ground
+2024-09-28 17:51:57,808 - INFO - Extracting data for header: capacity
+2024-09-28 17:51:57,808 - INFO - Extracting data for header: owner
+2024-09-28 17:51:57,808 - INFO - Extracting data for header: chairman
+2024-09-28 17:51:57,808 - INFO - Extracting data for header: head coach
+2024-09-28 17:51:57,808 - INFO - Extracting data for header: league
+2024-09-28 17:51:57,808 - INFO - Extracting data for header: 2023–24
+2024-09-28 17:51:57,808 - INFO - Extracting data for header: website
+2024-09-28 17:51:57,814 - INFO - Extracted team info - Founded: 13 December 1899; 124 years ago (1899-12-13),[2] as Milan Foot-Ball and Cricket Club, Tier: None, Stadium: San Siro, Manager: None, City: milan
+2024-09-28 17:51:57,814 - INFO - Extracted data - Founded: 13 December 1899; 124 years ago (1899-12-13),[2] as Milan Foot-Ball and Cricket Club, Tier: None, Stadium: San Siro, Manager: None, City: milan
+2024-09-28 17:51:57,814 - WARNING - Tier information missing for team: AC Milan. Setting tier to default value 1.
+2024-09-28 17:51:57,814 - INFO - Cleaned founded date: 13 December 1899
+2024-09-28 17:51:57,820 - INFO - Team data - Name: AC Milan, Founded: 1899-12-13, Tier: 1, Stadium: San Siro, Manager: None, City: Milan
+2024-09-28 17:51:57,838 - INFO - Team updated: AC Milan
+2024-09-28 17:51:57,840 - INFO - Scraping team data from: https://en.wikipedia.org/wiki/Inter_Milan
+2024-09-28 17:51:58,801 - INFO - Team name extracted: Inter Milan
+2024-09-28 17:51:58,803 - INFO - Extracting data for header: full name
+2024-09-28 17:51:58,803 - INFO - Extracting data for header: nickname(s)
+2024-09-28 17:51:58,803 - INFO - Extracting data for header: short name
+2024-09-28 17:51:58,803 - INFO - Extracting data for header: founded
+2024-09-28 17:51:58,803 - INFO - Extracting data for header: ground
+2024-09-28 17:51:58,803 - INFO - Extracting data for header: capacity
+2024-09-28 17:51:58,803 - INFO - Extracting data for header: owner
+2024-09-28 17:51:58,803 - INFO - Extracting data for header: chairman
+2024-09-28 17:51:58,803 - INFO - Extracting data for header: head coach
+2024-09-28 17:51:58,803 - INFO - Extracting data for header: league
+2024-09-28 17:51:58,803 - INFO - Extracting data for header: 2023–24
+2024-09-28 17:51:58,804 - INFO - Extracting data for header: website
+2024-09-28 17:51:58,810 - INFO - Extracted team info - Founded: 9 March 1908; 116 years ago (1908-03-09) (as Football Club Internazionale), Tier: None, Stadium: Stadio Giuseppe Meazza, Manager: None, City: milan
+2024-09-28 17:51:58,810 - INFO - Extracted data - Founded: 9 March 1908; 116 years ago (1908-03-09) (as Football Club Internazionale), Tier: None, Stadium: Stadio Giuseppe Meazza, Manager: None, City: milan
+2024-09-28 17:51:58,811 - WARNING - Tier information missing for team: Inter Milan. Setting tier to default value 1.
+2024-09-28 17:51:58,811 - INFO - Cleaned founded date: 9 March 1908
+2024-09-28 17:51:58,812 - INFO - Team data - Name: Inter Milan, Founded: 1908-03-09, Tier: 1, Stadium: San Siro, Manager: None, City: Milan
+2024-09-28 17:51:58,825 - INFO - Team updated: Inter Milan
