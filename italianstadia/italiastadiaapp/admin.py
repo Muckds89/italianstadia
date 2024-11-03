@@ -1,14 +1,13 @@
 from django.contrib import admin
-from .models import City,Stadium,Team
+from .models import City, Stadium, Team
 
-# Register your models here.
 @admin.register(Stadium)
 class StadiumAdmin(admin.ModelAdmin):
-    list_display = ('name','capacity','address','year_of_construction','average_attendance','city')
+    list_display = ('name', 'capacity', 'address', 'year_of_construction', 'city')
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
-    list_display = ('name','founded','tier','stadium')
+    list_display = ('name', 'founded', 'tier', 'stadium', 'manager', 'num_of_titles', 'average_attendance')  # Updated to include new fields
 
 class StadiaInLine(admin.StackedInline):
     model = Stadium
@@ -17,8 +16,6 @@ class StadiaInLine(admin.StackedInline):
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
     inlines = [StadiaInLine]
-    list_display = ('name','population','country')
+    list_display = ('name', 'population', 'country')
     search_fields = ['name']
     list_filter = ['country']
-
-# admin.site.register(City)

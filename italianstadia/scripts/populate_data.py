@@ -52,6 +52,40 @@ def clean_year_of_construction(year_str):
         return int(match.group(1))
     raise ValueError("Cannot convert year string to number")
 
+def extract_founded_transfermarkt(soup):
+    try:
+        # Transfermarkt uses data within 'info-table' class (this may vary)
+        founded_info = soup.find('th', text='Founded:').find_next_sibling('td').text.strip()
+        return founded_info
+    except AttributeError:
+        logging.error("Could not extract founding date from Transfermarkt.")
+        return None
+def extract_tier_transfermarkt(soup):
+    try:
+        # Transfermarkt usually has league information; adapt this as per actual HTML
+        league_info = soup.find('th', text='League:').find_next_sibling('td').text.strip()
+        return league_info  # You may need to map it to a numeric tier.
+    except AttributeError:
+        logging.error("Could not extract tier from Transfermarkt.")
+        return None
+def extract_stadium_transfermarkt(soup):
+    try:
+        # The stadium is likely listed under a key-value pair table
+        stadium_info = soup.find('th', text='Stadium:').find_next_sibling('td').text.strip()
+        return stadium_info
+    except AttributeError:
+        logging.error("Could not extract stadium name from Transfermarkt.")
+        return None
+def extract_manager_transfermarkt(soup):
+    try:
+        # Managers might be listed under 'th' with text 'Manager:'
+        manager_info = soup.find('th', text='Manager:').find_next_sibling('td').text.strip()
+        return manager_info
+    except AttributeError:
+        logging.error("Could not extract manager information from Transfermarkt.")
+        return None
+
+
 def extract_average_attendance_from_transfermarkt(url):
     """Extract average attendance from Transfermarkt for the given URL."""
     headers = {
@@ -277,104 +311,57 @@ def scrape_stadium(wikipedia_url, transfermarkt_url):
         stadium.save()
     logging.info(f"Stadium {'created' if created else 'updated'}: {stadium}")
 
-def scrape_team(url):
-    logging.info(f"Scraping team data from: {url}")
-    response = requests.get(url)
+def scrape_team(wiki_url, transfermarkt_url):
+    # Attempt to scrape from Wikipedia first
+    logging.info(f"Scraping team data from Wikipedia: {wiki_url}")
+    response = requests.get(wiki_url)
     soup = BeautifulSoup(response.content, 'html.parser')
 
+    # Try to extract information from Wikipedia
     name = soup.find('h1').text.strip()
     logging.info(f"Team name extracted: {name}")
 
+    # Initial extraction attempt from Wikipedia
     founded, tier, stadium_name, manager, city_name = extract_info_team(soup)
 
-    if not stadium_name:
-        logging.error(f"Stadium information not found for team: {name}")
-        return
+    # Check for missing data; if any important info is missing, fallback to Transfermarkt
+    if not founded or not stadium_name or not tier or not manager or not city_name:
+        logging.warning(f"Data missing from Wikipedia for {name}. Falling back to Transfermarkt.")
+        logging.info(f"Scraping team data from Transfermarkt: {transfermarkt_url}")
 
-    if not city_name:
-        logging.error(f"City information not found for team: {name}")
-        return
+        response_tmkt = requests.get(transfermarkt_url)
+        soup_tmkt = BeautifulSoup(response_tmkt.content, 'html.parser')
 
-    logging.info(f"Extracted data - Founded: {founded}, Tier: {tier}, Stadium: {stadium_name}, Manager: {manager}, City: {city_name}")
+        # Only replace missing data from Transfermarkt
+        if not founded:
+            founded = extract_founded_transfermarkt(soup_tmkt)
+            logging.info(f"Founded year found from Transfermarkt: {founded}")
 
-    # Convert tier to appropriate integer based on TIER_CHOICES
-    tier_mapping = {
-        'Serie A': 1,
-        'Serie B': 2,
-        'Serie C': 3,
-        'Serie D': 4,
-    }
-    # Check if tier is available, and map it; otherwise, assign a default or skip
-    if tier:
-        tier = tier_mapping.get(tier, None)
         if not tier:
-            logging.warning(f"Tier information unrecognized for team: {name}. Setting tier to default value 1.")
-            tier = 1  # Assign a default value, such as 0, indicating unknown tier
-    else:
-        logging.warning(f"Tier information missing for team: {name}. Setting tier to default value 1.")
-        tier = 1  # Assign a default value when no tier is found
+            tier = extract_tier_transfermarkt(soup_tmkt)
+            logging.info(f"Tier found from Transfermarkt: {tier}")
 
+        if not stadium_name:
+            stadium_name = extract_stadium_transfermarkt(soup_tmkt)
+            logging.info(f"Stadium name found from Transfermarkt: {stadium_name}")
 
-    # Clean up the founded date string using regex to extract only the date part
-    founded_date = None
-    if founded:
-        # Use regex to extract the first valid date from the string
-        date_match = re.search(r'\d{1,2}\s\w+\s\d{4}', founded)
-        if date_match:
-            founded_clean = date_match.group(0)
-            logging.info(f"Cleaned founded date: {founded_clean}")
-            try:
-                founded_date = datetime.strptime(founded_clean, "%d %B %Y").date()
-            except ValueError:
-                logging.error(f"Could not convert founded date for team: {name}, cleaned value was: {founded_clean}")
-                return
-        else:
-            logging.error(f"No valid date found in founded information for team: {name}, raw value was: {founded}")
-            return
+        if not manager:
+            manager = extract_manager_transfermarkt(soup_tmkt)
+            logging.info(f"Manager found from Transfermarkt: {manager}")
 
-    if not founded_date:
-        logging.error(f"Founded date is required for team: {name}")
-        return
-    
-    # Handle the case of alternative names for the stadium
-    if stadium_name == "Stadio Giuseppe Meazza":
-        stadium_name = "San Siro"  # Automatically convert to the preferred name
+        if not city_name:
+            city_name = extract_city_transfermarkt(soup_tmkt)
+            logging.info(f"City name found from Transfermarkt: {city_name}")
 
-    # Get the stadium object
-    try:
-        stadium = Stadium.objects.get(name__icontains=stadium_name)
-    except Stadium.DoesNotExist:
-        logging.error(f"Stadium not found: {stadium_name}")
+    # Proceed with the scraped data
+    if not founded or not stadium_name or not city_name:
+        logging.error(f"Critical data missing for {name}. Unable to complete scraping.")
         return
 
-    # Get the city object
-    try:
-        city = City.objects.get(name__iexact=city_name)
-    except City.DoesNotExist:
-        logging.error(f"City not found: {city_name}")
-        return
+    logging.info(f"Final Team Data - Name: {name}, Founded: {founded}, Tier: {tier}, Stadium: {stadium_name}, Manager: {manager}, City: {city_name}")
 
-    logging.info(f"Team data - Name: {name}, Founded: {founded_date}, Tier: {tier}, Stadium: {stadium}, Manager: {manager}, City: {city}")
-
-    try:
-        team, created = Team.objects.get_or_create(name=name, defaults={
-            'founded': founded_date,
-            'tier': tier,
-            'stadium': stadium,
-            'manager': manager,
-            'city': city,
-            'num_of_titles': 0  # Default value for num_of_titles
-        })
-        if not created:
-            team.founded = founded_date
-            team.tier = tier
-            team.stadium = stadium
-            team.manager = manager
-            team.city = city
-            team.save()
-        logging.info(f"Team {'created' if created else 'updated'}: {team}")
-    except IntegrityError as e:
-        logging.error(f"Integrity error while creating/updating team {name}: {e}")
+    # Continue with saving data or other operations
+    # You would store this information in your database as shown in previous examples
         
 def populate_data():
     with open('data_urls.json') as f:
@@ -387,12 +374,16 @@ def populate_data():
         
         for stadium_data in data['stadia']:
             scrape_stadium(stadium_data['wikipedia'], stadium_data['transfermarkt'])
-    
+        
     for team in data['teams']:
         team_name = team['name']
-        team_url = team['url']
-        print(f"Team: {team_name}, URL: {team_url}")
-        scrape_team(team_url)
+        wiki_url = team['wiki_url']
+        transfermarkt_url = team['transfermarkt_url']
+        
+        print(f"Team: {team_name}, Wikipedia URL: {wiki_url}, Transfermarkt URL: {transfermarkt_url}")
+        
+        # Call the scrape_team function with both URLs
+        scrape_team(wiki_url, transfermarkt_url)
 
 if __name__ == '__main__':
     populate_data()

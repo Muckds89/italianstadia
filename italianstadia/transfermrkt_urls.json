@@ -1,0 +1,41 @@
+{
+    "cities": [
+        "https://en.wikipedia.org/wiki/Milan",
+        "https://en.wikipedia.org/wiki/Turin",
+        "https://en.wikipedia.org/wiki/Rome"
+    ],
+    "stadia": [
+        {
+            "transfermarkt": "https://www.transfermarkt.com/ac-mailand/stadion/verein/5/saison_id/2024",
+            "transfermarkt": "https://www.transfermarkt.com/inter-mailand/stadion/verein/46/saison_id/2024",
+            "transfermarkt": "https://www.transfermarkt.com/juventus-turin/stadion/verein/506/saison_id/2024",
+            "transfermarkt": "https://www.transfermarkt.com/as-rom/stadion/verein/12/saison_id/2024"
+        }
+    ],
+    "teams": [
+        {
+            "name": "AC Milan",
+            "transfermarkt_url": "https://www.transfermarkt.com/ac-milan/startseite/verein/5",
+            "transfermarkt_url_attendace": "https://www.transfermarkt.com/ac-mailand/besucherzahlenentwicklung/verein/5"
+        },
+        {
+            "name": "Inter Milan",
+            "transfermarkt_url": "https://www.transfermarkt.com/fc-internazionale/startseite/verein/46",
+            "transfermarkt_url_attendace": "https://www.transfermarkt.com/inter-mailand/besucherzahlenentwicklung/verein/46"
+
+        },
+        {
+            "name": "Juventus FC",
+            "transfermarkt_url": "https://www.transfermarkt.com/juventus-turin/startseite/verein/506",
+            "transfermarkt_url_attendace": "https://www.transfermarkt.com/juventus-turin/besucherzahlenentwicklung/verein/506"
+
+        },
+        {
+            "name": "AS Roma",
+            "transfermarkt_url":"https://www.transfermarkt.com/as-roma/startseite/verein/12",
+            "transfermarkt_url_attendace":"https://www.transfermarkt.com/as-rom/besucherzahlenentwicklung/verein/12"
+        
+        }
+    ]
+    
+}

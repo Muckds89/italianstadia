@@ -11,11 +11,13 @@
     "teams": [
         {
             "name": "Milan",
-            "url": "https://en.wikipedia.org/wiki/AC_Milan"
+            "wiki_url": "https://en.wikipedia.org/wiki/AC_Milan",
+            "transfermarkt_url": "https://www.transfermarkt.com/ac-mailand/startseite/verein/5"
         },
         {
             "name": "Inter",
-            "url": "https://en.wikipedia.org/wiki/Inter_Milan"
+            "wiki_url": "https://en.wikipedia.org/wiki/Inter_Milan",
+            "transfermarkt_url": "https://www.transfermarkt.com/fc-internazionale/startseite/verein/46"
         }
     ]
     

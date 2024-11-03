@@ -1,0 +1,83 @@
+2024-11-03 17:59:50,302 - INFO - City Milan already exists
+2024-11-03 17:59:50,700 - INFO - City Turin already exists
+2024-11-03 17:59:51,285 - INFO - City Rome already exists
+2024-11-03 17:59:51,286 - INFO - ====== WebDriver manager ======
+2024-11-03 17:59:52,121 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 17:59:52,244 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 17:59:52,369 - INFO - Driver [C:\Users\marco\.wdm\drivers\chromedriver\win64\130.0.6723.91\chromedriver-win32/chromedriver.exe] found in cache
+2024-11-03 17:59:56,589 - INFO - Switched to iframe.
+2024-11-03 18:00:06,862 - INFO - Consent button not found in this iframe.
+2024-11-03 18:00:06,881 - INFO - Switched to iframe.
+2024-11-03 18:00:07,003 - INFO - Accepted consent in iframe.
+2024-11-03 18:00:12,580 - INFO - Stadium Olimpico di Roma already exists
+2024-11-03 18:00:16,625 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000224C0C79090>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/72d973a29b6d3eeedcf08ec99f48bb12
+2024-11-03 18:00:20,661 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000224C0C7B890>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/72d973a29b6d3eeedcf08ec99f48bb12
+2024-11-03 18:00:24,694 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000224C0C8E3F0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/72d973a29b6d3eeedcf08ec99f48bb12
+2024-11-03 18:00:32,784 - INFO - ====== WebDriver manager ======
+2024-11-03 18:00:33,734 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:00:33,855 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:00:38,055 - INFO - Driver [C:\Users\marco\.wdm\drivers\chromedriver\win64\130.0.6723.91\chromedriver-win32/chromedriver.exe] found in cache
+2024-11-03 18:00:54,001 - INFO - Accepted consent in iframe.
+2024-11-03 18:00:56,345 - INFO - Italian Champion titles: 19
+2024-11-03 18:00:56,641 - INFO - Extracted founded date: 1899-12-16
+2024-11-03 18:00:56,686 - INFO - Extracted tier text: First Tier
+2024-11-03 18:00:58,973 - INFO - ====== WebDriver manager ======
+2024-11-03 18:00:59,898 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:01:00,014 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:01:00,132 - INFO - Driver [C:\Users\marco\.wdm\drivers\chromedriver\win64\130.0.6723.91\chromedriver-win32/chromedriver.exe] found in cache
+2024-11-03 18:01:07,520 - INFO - Extracted average attendance: 71529
+2024-11-03 18:01:13,760 - INFO - Team AC Milan already exists
+2024-11-03 18:01:17,828 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000224C07EC9E0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/df24297a5bdfadfdf3452c568ec0b263
+2024-11-03 18:01:21,864 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000224C07ED480>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/df24297a5bdfadfdf3452c568ec0b263
+2024-11-03 18:01:25,888 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000224C07ECC00>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/df24297a5bdfadfdf3452c568ec0b263
+2024-11-03 18:01:33,996 - INFO - ====== WebDriver manager ======
+2024-11-03 18:01:35,123 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:01:35,251 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:01:35,369 - INFO - Driver [C:\Users\marco\.wdm\drivers\chromedriver\win64\130.0.6723.91\chromedriver-win32/chromedriver.exe] found in cache
+2024-11-03 18:01:51,140 - INFO - Accepted consent in iframe.
+2024-11-03 18:01:54,196 - INFO - Italian Champion titles: 20
+2024-11-03 18:01:54,294 - INFO - Extracted founded date: 1908-03-09
+2024-11-03 18:01:54,502 - INFO - Extracted tier text: First Tier
+2024-11-03 18:01:56,729 - INFO - ====== WebDriver manager ======
+2024-11-03 18:01:57,561 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:01:57,678 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:01:57,805 - INFO - Driver [C:\Users\marco\.wdm\drivers\chromedriver\win64\130.0.6723.91\chromedriver-win32/chromedriver.exe] found in cache
+2024-11-03 18:02:04,315 - INFO - Extracted average attendance: 73287
+2024-11-03 18:02:10,517 - INFO - Team Inter Milan already exists
+2024-11-03 18:02:14,554 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000224C07EC7C0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/189f351f92404673694ad7c58d392674
+2024-11-03 18:02:18,621 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000224C07ECD10>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/189f351f92404673694ad7c58d392674
+2024-11-03 18:02:22,663 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000224C07EC5A0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/189f351f92404673694ad7c58d392674
+2024-11-03 18:02:30,761 - INFO - ====== WebDriver manager ======
+2024-11-03 18:02:31,668 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:02:31,784 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:02:31,912 - INFO - Driver [C:\Users\marco\.wdm\drivers\chromedriver\win64\130.0.6723.91\chromedriver-win32/chromedriver.exe] found in cache
+2024-11-03 18:02:47,157 - INFO - Accepted consent in iframe.
+2024-11-03 18:02:49,968 - INFO - Italian Champion titles: 36
+2024-11-03 18:02:50,130 - INFO - Extracted founded date: 1897-11-01
+2024-11-03 18:02:52,326 - INFO - Extracted tier text: First Tier
+2024-11-03 18:02:54,958 - INFO - ====== WebDriver manager ======
+2024-11-03 18:02:55,825 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:02:55,943 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:02:56,061 - INFO - Driver [C:\Users\marco\.wdm\drivers\chromedriver\win64\130.0.6723.91\chromedriver-win32/chromedriver.exe] found in cache
+2024-11-03 18:03:02,942 - INFO - Extracted average attendance: 40755
+2024-11-03 18:03:09,166 - INFO - Created new Team: Juventus FC
+2024-11-03 18:03:13,211 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000224C07EFCE0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/a437b8c017d30dfb160d02836f124c82
+2024-11-03 18:03:17,279 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000224C07EC050>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/a437b8c017d30dfb160d02836f124c82
+2024-11-03 18:03:21,331 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000224C17506B0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/a437b8c017d30dfb160d02836f124c82
+2024-11-03 18:03:29,427 - INFO - ====== WebDriver manager ======
+2024-11-03 18:03:30,249 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:03:30,365 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:03:30,484 - INFO - Driver [C:\Users\marco\.wdm\drivers\chromedriver\win64\130.0.6723.91\chromedriver-win32/chromedriver.exe] found in cache
+2024-11-03 18:03:46,407 - INFO - Accepted consent in iframe.
+2024-11-03 18:03:49,202 - INFO - Italian Champion titles: 3
+2024-11-03 18:03:49,230 - INFO - Extracted founded date: 1927-06-07
+2024-11-03 18:03:49,271 - INFO - Extracted tier text: First Tier
+2024-11-03 18:03:51,547 - INFO - ====== WebDriver manager ======
+2024-11-03 18:03:52,399 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:03:52,521 - INFO - Get LATEST chromedriver version for google-chrome
+2024-11-03 18:03:52,635 - INFO - Driver [C:\Users\marco\.wdm\drivers\chromedriver\win64\130.0.6723.91\chromedriver-win32/chromedriver.exe] found in cache
+2024-11-03 18:03:59,612 - INFO - Extracted average attendance: 63660
+2024-11-03 18:04:05,888 - INFO - Team AS Roma already exists
+2024-11-03 18:04:09,941 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000224C1751370>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/89a0795c478c86b29d5f9a581a8c0783
+2024-11-03 18:04:13,983 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000224C1750AF0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/89a0795c478c86b29d5f9a581a8c0783
+2024-11-03 18:04:18,025 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000224C1751260>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/89a0795c478c86b29d5f9a581a8c0783

@@ -13,7 +13,6 @@ class Stadium(models.Model):
     capacity = models.IntegerField()
     address = models.CharField(max_length=255)
     year_of_construction = models.IntegerField()
-    average_attendance = models.FloatField(null=True, blank=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='stadiums')
 
     def __str__(self):
@@ -34,6 +33,8 @@ class Team(models.Model):
     manager = models.CharField(max_length=100, blank=True, null=True)
     num_of_titles = models.IntegerField(default=0)
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='teams')
+    average_attendance = models.FloatField(null=True, blank=True)  # Moved from Stadium to Team
+
 
     def __str__(self):
         return self.name
