@@ -3,7 +3,17 @@ from .models import City, Stadium, Team
 
 @admin.register(Stadium)
 class StadiumAdmin(admin.ModelAdmin):
-    list_display = ('name', 'capacity', 'address', 'year_of_construction', 'city')
+    list_display = ('name', 'capacity', 'address', 'year_of_construction', 'city',"latitude", "longitude")
+    list_editable  = (
+        "capacity",
+        "address",
+        "year_of_construction",
+        "city",
+        "latitude",
+        "longitude",
+    )
+    search_fields = ("name", "city", "team")
+    list_filter = ("city",)
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):

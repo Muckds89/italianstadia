@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Italian Stadia</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+
+<div class="navbar">
+    <a href="/">Home</a> |
+    <a href="/stadia/">Stadia</a> |
+    <a href="/teams/">Teams</a> |
+    <a href="/cities/">Cities</a>
+
+    <br><br>
+
+    <select id="cityFilter">
+        <option value="">All Cities</option>
+        {% for city in cities %}
+        <option value="{{ city.name }}">{{ city.name }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="{% static 'js/map.js' %}"></script>
+
+</body>
+</html>

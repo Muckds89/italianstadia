@@ -14,6 +14,8 @@ class Stadium(models.Model):
     address = models.CharField(max_length=255)
     year_of_construction = models.IntegerField()
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='stadiums')
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return self.name
