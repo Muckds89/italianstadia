@@ -16,3 +16,8 @@ html, body {
 .leaflet-popup-content {
     font-size: 14px;
 }
+
+.card:hover {
+    transform: scale(1.02);
+    transition: 0.2s;
+}

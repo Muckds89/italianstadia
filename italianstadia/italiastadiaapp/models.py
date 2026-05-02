@@ -7,6 +7,10 @@ class City(models.Model):
     country = models.CharField(max_length=100)
     wikipedia_url = models.URLField(blank=True, null=True)
 
+    image_url = models.URLField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+
+
     def __str__(self):
         return self.name
 
@@ -22,6 +26,9 @@ class Stadium(models.Model):
 
     wikipedia_url = models.URLField(blank=True, null=True)
     transfermarkt_url = models.URLField(blank=True, null=True)
+
+    image_url = models.URLField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -46,6 +53,10 @@ class Team(models.Model):
 
     wikipedia_url = models.URLField(blank=True, null=True)
     transfermarkt_url = models.URLField(blank=True, null=True)
+
+    image_url = models.URLField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+
 
     def __str__(self):
         return self.name

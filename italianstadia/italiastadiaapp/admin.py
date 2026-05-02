@@ -4,7 +4,12 @@ from .models import City, Stadium, Team
 
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
-    list_display = ("name", "country", "population", "wikipedia_url")
+    list_display = ("name",
+                    "country",
+                    "population",
+                    "wikipedia_url",
+                    "image_url",
+        )
     search_fields = ("name", "country")
 
 
@@ -19,7 +24,9 @@ class StadiumAdmin(admin.ModelAdmin):
         "longitude",
         "wikipedia_url",
         "transfermarkt_url",
+        "image_url",
     )
+
     search_fields = ("name", "city__name")
     list_filter = ("city",)
 
@@ -35,6 +42,8 @@ class TeamAdmin(admin.ModelAdmin):
         "num_of_titles",
         "wikipedia_url",
         "transfermarkt_url",
+        "image_url",
+
     )
     search_fields = ("name", "city__name", "stadium__name")
     list_filter = ("tier", "city")
