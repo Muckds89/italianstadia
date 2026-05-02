@@ -1,12 +1,15 @@
 from django.db import models
 
+
 class City(models.Model):
     name = models.CharField(max_length=100)
     population = models.IntegerField()
     country = models.CharField(max_length=100)
+    wikipedia_url = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.name
+
 
 class Stadium(models.Model):
     name = models.CharField(max_length=100)
@@ -17,8 +20,12 @@ class Stadium(models.Model):
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
 
+    wikipedia_url = models.URLField(blank=True, null=True)
+    transfermarkt_url = models.URLField(blank=True, null=True)
+
     def __str__(self):
         return self.name
+
 
 class Team(models.Model):
     TIER_CHOICES = [
@@ -35,8 +42,10 @@ class Team(models.Model):
     manager = models.CharField(max_length=100, blank=True, null=True)
     num_of_titles = models.IntegerField(default=0)
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='teams')
-    average_attendance = models.FloatField(null=True, blank=True)  # Moved from Stadium to Team
+    average_attendance = models.FloatField(null=True, blank=True)
 
+    wikipedia_url = models.URLField(blank=True, null=True)
+    transfermarkt_url = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.name

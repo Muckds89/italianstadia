@@ -13,6 +13,8 @@ def stadiums_geojson(request):
 
     for s in Stadium.objects.all():
         if s.latitude and s.longitude:
+            main_team = s.teams.first()
+
             features.append({
                 "type": "Feature",
                 "geometry": {
@@ -23,13 +25,19 @@ def stadiums_geojson(request):
                     "id": s.id,
                     "name": s.name,
                     "city": s.city.name if s.city else "",
+                    "capacity": s.capacity,
+                    "team": main_team.name if main_team else "",
+                    "tier": main_team.tier if main_team else "",
+                    "tier_name": main_team.get_tier_display() if main_team else "",
+                    "wikipedia_url": s.wikipedia_url or "",
+                    "transfermarkt_url": s.transfermarkt_url or "",
                 }
             })
 
     return JsonResponse({
         "type": "FeatureCollection",
         "features": features
-    })
+    })      
 
 def stadiums_json(request):
     data = []
