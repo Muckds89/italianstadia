@@ -17,7 +17,16 @@ html, body {
     font-size: 14px;
 }
 
+.stadium-hero-img {
+    height: 420px;
+    object-fit: cover;
+}
+
+.card {
+    border-radius: 14px;
+}
+
 .card:hover {
-    transform: scale(1.02);
+    transform: scale(1.01);
     transition: 0.2s;
 }

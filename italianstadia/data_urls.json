@@ -1,24 +1,109 @@
 {
-    "cities": [
-        "https://en.wikipedia.org/wiki/Milan"
-    ],
-    "stadia": [
-        {
-            "wikipedia": "https://en.wikipedia.org/wiki/San_Siro",
-            "transfermarkt": "https://www.transfermarkt.it/ac-mailand/besucherzahlenentwicklung/verein/5"
-        }
-    ],
-    "teams": [
-        {
-            "name": "Milan",
-            "wiki_url": "https://en.wikipedia.org/wiki/AC_Milan",
-            "transfermarkt_url": "https://www.transfermarkt.com/ac-mailand/startseite/verein/5"
-        },
-        {
-            "name": "Inter",
-            "wiki_url": "https://en.wikipedia.org/wiki/Inter_Milan",
-            "transfermarkt_url": "https://www.transfermarkt.com/fc-internazionale/startseite/verein/46"
-        }
-    ]
-    
+  "cities": [
+    "https://en.wikipedia.org/wiki/Milan",
+    "https://en.wikipedia.org/wiki/Turin",
+    "https://en.wikipedia.org/wiki/Rome",
+    "https://en.wikipedia.org/wiki/Naples",
+    "https://en.wikipedia.org/wiki/Bergamo",
+    "https://en.wikipedia.org/wiki/Bologna",
+    "https://en.wikipedia.org/wiki/Florence",
+    "https://en.wikipedia.org/wiki/Genoa",
+    "https://en.wikipedia.org/wiki/Lecce",
+    "https://en.wikipedia.org/wiki/Udine",
+    "https://en.wikipedia.org/wiki/Verona",
+    "https://en.wikipedia.org/wiki/Sassuolo"
+  ],
+
+  "teams": [
+    {
+      "name": "AC Milan",
+      "tier": 1,
+      "transfermarkt_url": "https://www.transfermarkt.com/ac-milan/startseite/verein/5",
+      "transfermarkt_url_attendance": "https://www.transfermarkt.com/ac-mailand/besucherzahlenentwicklung/verein/5"
+    },
+    {
+      "name": "Inter Milan",
+      "tier": 1,
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-internazionale/startseite/verein/46",
+      "transfermarkt_url_attendance": "https://www.transfermarkt.com/inter-mailand/besucherzahlenentwicklung/verein/46"
+    },
+    {
+      "name": "Juventus FC",
+      "tier": 1,
+      "transfermarkt_url": "https://www.transfermarkt.com/juventus-turin/startseite/verein/506",
+      "transfermarkt_url_attendance": "https://www.transfermarkt.com/juventus-turin/besucherzahlenentwicklung/verein/506"
+    },
+    {
+      "name": "AS Roma",
+      "tier": 1,
+      "transfermarkt_url": "https://www.transfermarkt.com/as-roma/startseite/verein/12",
+      "transfermarkt_url_attendance": "https://www.transfermarkt.com/as-rom/besucherzahlenentwicklung/verein/12"
+    },
+    {
+      "name": "Lazio",
+      "tier": 1,
+      "transfermarkt_url": "https://www.transfermarkt.com/lazio-rom/startseite/verein/398",
+      "transfermarkt_url_attendance": "https://www.transfermarkt.com/lazio-rom/besucherzahlenentwicklung/verein/398"
+    },
+    {
+      "name": "Napoli",
+      "tier": 1,
+      "transfermarkt_url": "https://www.transfermarkt.com/ssc-neapel/startseite/verein/6195",
+      "transfermarkt_url_attendance": "https://www.transfermarkt.com/ssc-neapel/besucherzahlenentwicklung/verein/6195"
+    },
+    {
+      "name": "Atalanta",
+      "tier": 1,
+      "transfermarkt_url": "https://www.transfermarkt.com/atalanta-bergamo/startseite/verein/800",
+      "transfermarkt_url_attendance": "https://www.transfermarkt.com/atalanta-bergamo/besucherzahlenentwicklung/verein/800"
+    },
+    {
+      "name": "Bologna",
+      "tier": 1,
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-bologna/startseite/verein/1025",
+      "transfermarkt_url_attendance": "https://www.transfermarkt.com/fc-bologna/besucherzahlenentwicklung/verein/1025"
+    },
+    {
+      "name": "Fiorentina",
+      "tier": 1,
+      "transfermarkt_url": "https://www.transfermarkt.com/ac-florenz/startseite/verein/430",
+      "transfermarkt_url_attendance": "https://www.transfermarkt.com/ac-florenz/besucherzahlenentwicklung/verein/430"
+    },
+    {
+      "name": "Torino",
+      "tier": 1,
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-turin/startseite/verein/416",
+      "transfermarkt_url_attendance": "https://www.transfermarkt.com/fc-turin/besucherzahlenentwicklung/verein/416"
+    },
+    {
+      "name": "Genoa",
+      "tier": 1,
+      "transfermarkt_url": "https://www.transfermarkt.com/genua-cfc/startseite/verein/252",
+      "transfermarkt_url_attendance": "https://www.transfermarkt.com/genua-cfc/besucherzahlenentwicklung/verein/252"
+    },
+    {
+      "name": "Sassuolo",
+      "tier": 1,
+      "transfermarkt_url": "https://www.transfermarkt.com/us-sassuolo/startseite/verein/6574",
+      "transfermarkt_url_attendance": "https://www.transfermarkt.com/us-sassuolo/besucherzahlenentwicklung/verein/6574"
+    },
+    {
+      "name": "Udinese",
+      "tier": 1,
+      "transfermarkt_url": "https://www.transfermarkt.com/udinese-calcio/startseite/verein/410",
+      "transfermarkt_url_attendance": "https://www.transfermarkt.com/udinese-calcio/besucherzahlenentwicklung/verein/410"
+    },
+    {
+      "name": "Verona",
+      "tier": 1,
+      "transfermarkt_url": "https://www.transfermarkt.com/hellas-verona/startseite/verein/276",
+      "transfermarkt_url_attendance": "https://www.transfermarkt.com/hellas-verona/besucherzahlenentwicklung/verein/276"
+    },
+    {
+      "name": "Lecce",
+      "tier": 1,
+      "transfermarkt_url": "https://www.transfermarkt.com/us-lecce/startseite/verein/1006",
+      "transfermarkt_url_attendance": "https://www.transfermarkt.com/us-lecce/besucherzahlenentwicklung/verein/1006"
+    }
+  ]
 }
