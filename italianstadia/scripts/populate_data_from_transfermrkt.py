@@ -6,8 +6,11 @@ import os
 import sys
 import logging
 import re
-from datetime import datetime
-from django.db.utils import IntegrityError
+import time
+from datetime import datetime, date
+from urllib.parse import urljoin
+import logging
+
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -16,305 +19,1003 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
-import re
-import logging
-import time
 
-# Set up Django environment
+from urllib.parse import urljoin
+
+# --------------------------------------------------
+# Utils functions
+# --------------------------------------------------
+
+
+HEADERS = {
+    "User-Agent": "ItalianStadiaBot/1.0 (learning project; contact: example@example.com)"
+}
+
+
+def get_soup(url):
+    try:
+        response = requests.get(url, headers=HEADERS, timeout=20)
+        response.raise_for_status()
+        return BeautifulSoup(response.text, "html.parser")
+    except Exception as e:
+        logging.error(f"Error loading Wikipedia page {url}: {e}")
+        return None
+
+
+def clean_text(value):
+    if not value:
+        return None
+
+    value = re.sub(r"\[\d+\]", "", value)
+    value = re.sub(r"\s+", " ", value)
+    return value.strip()
+
+
+def get_infobox(soup):
+    if not soup:
+        return None
+
+    return (
+        soup.find("table", class_="infobox")
+        or soup.find("table", class_="vcard")
+        or soup.find("table", class_="infobox vcard")
+    )
+
+
+def get_infobox_value(soup, labels):
+    infobox = get_infobox(soup)
+    if not infobox:
+        return None
+
+    labels = [label.lower() for label in labels]
+
+    for row in infobox.find_all("tr"):
+        header = row.find("th")
+        data = row.find("td")
+
+        if not header or not data:
+            continue
+
+        header_text = clean_text(header.get_text(" ", strip=True))
+        if not header_text:
+            continue
+
+        header_text_lower = header_text.lower()
+
+        if any(label in header_text_lower for label in labels):
+            return clean_text(data.get_text(" ", strip=True))
+
+    return None
+
+
+def extract_first_int(value):
+    if not value:
+        return None
+
+    # captures 1,362,863 or 1362863, but avoids 181.67
+    match = re.search(r"\d{1,3}(?:,\d{3})+|\d{4,}", value)
+
+    if not match:
+        return None
+
+    return int(match.group(0).replace(",", ""))
+    #
+def extract_year(value):
+    if not value:
+        return None
+
+    match = re.search(r"\b(18|19|20)\d{2}\b", value)
+    return int(match.group(0)) if match else None
+
+
+# --------------------------------------------------
+# Django setup
+# --------------------------------------------------
+
 project_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 sys.path.append(project_path)
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "italianstadia.settings")
 django.setup()
 
 from italiastadiaapp.models import City, Stadium, Team
 
-# Check if 'scraping.log' exists and delete it
-log_file = 'scraping_tranfermrkt.log'
+
+# --------------------------------------------------
+# Logging
+# --------------------------------------------------
+
+def log_field(entity, name, field, value, source=None, reason=None):
+    if value not in [None, "", 0]:
+        logging.info(f"[{entity}: {name}] {field} → {value} ({source})")
+    else:
+        logging.warning(
+            f"[{entity}: {name}] {field} → NOT FOUND"
+            + (f" ({reason})" if reason else "")
+        )
+
+log_file = "scraping_transfermarkt.log"
+
 if os.path.exists(log_file):
     os.remove(log_file)
-    print(f"{log_file} has been deleted.")
-else:
-    print(f"{log_file} does not exist.")
 
-# Configure logging
 logging.basicConfig(
-    filename='scraping_tranfermrkt.log',
+    filename=log_file,
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
+    format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# Load JSON data
-with open('transfermrkt_urls.json') as f:
+
+# --------------------------------------------------
+# Load JSON
+# --------------------------------------------------
+
+with open("transfermrkt_urls_with_girone.json", encoding="utf-8") as f:
     data = json.load(f)
 
-def scrape_city(url):
-    """Scrape city data from Wikipedia."""
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, 'html.parser')
-    try:
-        # Example: finding the city name and population from the Wikipedia page
-        name = soup.find('h1', {'id': 'firstHeading'}).text
-        population_text = soup.find(string="Population").find_next().text
-        population_cleaned = re.sub(r'\D', '', population_text)  # Remove non-digit characters
-        population = int(population_cleaned)
-        country = soup.find(string="Country").find_next().text
-        
-        city, created = City.objects.get_or_create(name=name, defaults={
-            'population': population,
-            'country': country
-        })
-        if created:
-            logging.info(f"Created new City: {name}")
-        else:
-            logging.info(f"City {name} already exists")
-        return city
-    except Exception as e:
-        logging.error(f"Error scraping city {url}: {e}")
 
+# --------------------------------------------------
+# Helpers
+# --------------------------------------------------
 
-
-def scrape_stadium(url, city):
-    """Scrape stadium data from Transfermarkt using Selenium."""
-    # Set up Selenium WebDriver with WebDriver Manager
+def create_driver():
     service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
-    
-    driver.get(url)
-    time.sleep(2)  # Allow time for the page to load
+    return webdriver.Chrome(service=service)
 
+def extract_city_population(soup):
+    if not soup:
+        logging.warning("[City population] No soup provided")
+        return None
+
+    infobox = get_infobox(soup)
+
+    if not infobox:
+        logging.warning("[City population] No infobox found")
+        return None
+
+    candidate_population = None
+
+    for row in infobox.find_all("tr"):
+        header = row.find("th")
+        data = row.find("td")
+
+        if not header or not data:
+            continue
+
+        header_text = clean_text(header.get_text(" ", strip=True))
+        data_text = clean_text(data.get_text(" ", strip=True))
+
+        if not header_text or not data_text:
+            continue
+
+        header_lower = header_text.lower()
+        data_lower = data_text.lower()
+
+        logging.info(f"[City population DEBUG] row header='{header_text}' value='{data_text}'")
+
+        # Skip obvious non-population values
+        if any(word in data_lower for word in ["km", "sq mi", "/km", "billion", "utc", "cfa"]):
+            continue
+
+        if any(word in header_lower for word in ["density", "rank", "demonym", "time zone", "postal", "area code"]):
+            continue
+
+        # Skip metro if you want city/comune population, not metro population
+        if "metro" in header_lower:
+            continue
+
+        number = extract_first_int(data_text)
+
+        if not number:
+            continue
+
+        # City populations should usually be at least 1,000
+        if number < 1000:
+            continue
+
+        # Best case: explicit population row
+        if "population" in header_lower:
+            logging.info(f"[City population] Found from explicit population row '{header_text}': {number}")
+            return number
+
+        # Common Wikipedia case: under Population section, row header is just Comune/Municipality
+        if any(word in header_lower for word in ["comune", "municipality", "city", "total"]):
+            candidate_population = number
+            logging.info(f"[City population] Candidate from row '{header_text}': {number}")
+
+    if candidate_population:
+        logging.info(f"[City population] Found from municipality/comune candidate: {candidate_population}")
+        return candidate_population
+
+    logging.warning("[City population] NOT FOUND in infobox")
+    return None
+
+def accept_consent_if_present(driver):
     try:
-        # Check for multiple iframes and iterate through each
         iframes = driver.find_elements(By.TAG_NAME, "iframe")
-        consent_given = False
+
         for iframe in iframes:
             driver.switch_to.frame(iframe)
-            logging.info("Switched to iframe.")
-            
+
             try:
-                # Try clicking the "Accept & continue" button
-                accept_button = WebDriverWait(driver, 10).until(
-                    EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Accept & continue')]"))
+                accept_button = WebDriverWait(driver, 5).until(
+                    EC.element_to_be_clickable(
+                        (By.XPATH, "//button[contains(text(), 'Accept & continue')]")
+                    )
                 )
                 accept_button.click()
-                logging.info("Accepted consent in iframe.")
-                consent_given = True
-                driver.switch_to.default_content()  # Switch back to main content after clicking
-                time.sleep(2)  # Allow time for the page to proceed
+                logging.info("Accepted consent popup.")
+                driver.switch_to.default_content()
+                time.sleep(2)
+                return
+            except Exception:
+                driver.switch_to.default_content()
+
+    except Exception as e:
+        logging.info(f"No consent popup handled: {e}")
+
+
+def clean_int(value):
+    if not value:
+        return None
+
+    cleaned = re.sub(r"\D", "", value)
+    return int(cleaned) if cleaned else None
+
+def extract_coordinates_from_wikipedia(soup):
+    if not soup:
+        logging.error("[Wikipedia] No soup provided for coordinates")
+        return None, None
+
+    # Method 1: geo microformat
+    geo = soup.find(class_="geo")
+    if geo:
+        text = geo.get_text(strip=True)
+
+        if ";" in text:
+            parts = text.split(";")
+        elif "," in text:
+            parts = text.split(",")
+        else:
+            parts = None
+
+        if parts and len(parts) >= 2:
+            try:
+                return float(parts[0].strip()), float(parts[1].strip())
+            except ValueError:
+                pass
+
+    else:
+        logging.info("[Wikipedia] geo class not found")
+
+    # Method 2: latitude / longitude spans
+    lat = soup.find(class_="latitude")
+    lon = soup.find(class_="longitude")
+
+    if lat and lon:
+        try:
+            return dms_to_decimal(lat.get_text(strip=True)), dms_to_decimal(lon.get_text(strip=True))
+        except Exception:
+            logging.info("[Wikipedia] Error parsing DMS coordinates")
+            pass
+
+    else:
+        logging.info("[Wikipedia] latitude/longitude span not found")
+
+    # Method 3: coordinates link
+    coord_link = soup.find("a", href=re.compile(r"geohack"))
+    if coord_link:
+        href = coord_link.get("href", "")
+
+        match = re.search(r"params=([0-9\._NSWE-]+)", href)
+        if match:
+            try:
+                return parse_geohack_params(match.group(1))
+            except Exception:
+                logging.info("[Wikipedia] Error parsing geohack parameters")
+    logging.warning(f"[Wikipedia] Coordinates not found for {soup.title.string if soup else 'unknown'}")
+    logging.warning("[Wikipedia] All coordinate methods failed")
+    return None, None
+
+
+def dms_to_decimal(value):
+    value = value.replace("−", "-")
+
+    direction = None
+    for d in ["N", "S", "E", "W"]:
+        if d in value:
+            direction = d
+            value = value.replace(d, "")
+
+    nums = re.findall(r"[-+]?\d+(?:\.\d+)?", value)
+
+    if not nums:
+        return None
+
+    degrees = float(nums[0])
+    minutes = float(nums[1]) if len(nums) > 1 else 0
+    seconds = float(nums[2]) if len(nums) > 2 else 0
+
+    decimal = degrees + minutes / 60 + seconds / 3600
+
+    if direction in ["S", "W"]:
+        decimal *= -1
+
+    return decimal
+
+
+def parse_geohack_params(params):
+    parts = params.split("_")
+
+    lat_deg = float(parts[0])
+    lat_min = float(parts[1]) if len(parts) > 1 else 0
+    lat_sec = float(parts[2]) if len(parts) > 2 else 0
+    lat_dir = parts[3]
+
+    lon_deg = float(parts[4])
+    lon_min = float(parts[5]) if len(parts) > 5 else 0
+    lon_sec = float(parts[6]) if len(parts) > 6 else 0
+    lon_dir = parts[7]
+
+    lat = lat_deg + lat_min / 60 + lat_sec / 3600
+    lon = lon_deg + lon_min / 60 + lon_sec / 3600
+
+    if lat_dir == "S":
+        lat *= -1
+    if lon_dir == "W":
+        lon *= -1
+
+    return lat, lon
+
+
+def extract_wikipedia_image(soup, page_url):
+    if not soup:
+        logging.error("[Wikipedia] No soup provided for image extraction")
+        return None
+
+    infobox = get_infobox(soup)
+
+    # Method 1: image from infobox
+    if infobox:
+        img = infobox.find("img")
+        if img and img.get("src"):
+            src = img["src"]
+
+            if src.startswith("//"):
+                return "https:" + src
+
+            return urljoin(page_url, src)
+    else:
+        logging.info("[Wikipedia] No infobox found for image extraction")
+
+    # Method 2: Open Graph image
+    og_image = soup.find("meta", property="og:image")
+    if og_image and og_image.get("content"):
+        return og_image["content"]
+    else:
+        logging.info("[Wikipedia] No Open Graph image found")
+
+    # Method 3: first useful page image
+    for img in soup.find_all("img"):
+        src = img.get("src", "")
+
+        if not src:
+            continue
+
+        if "static/images" in src:
+            continue
+
+        if src.startswith("//"):
+            return "https:" + src
+
+        return urljoin(page_url, src)
+    
+    logging.info("[Wikipedia] No useful images found")
+    return None
+
+def scrape_wikipedia_summary_and_image(url):
+    if not url or not url.startswith("http"):
+        return {
+            "description": None,
+            "image_url": None,
+        }
+
+    try:
+        response = requests.get(url, timeout=15, headers={
+            "User-Agent": "Mozilla/5.0"
+        })
+        soup = BeautifulSoup(response.text, "html.parser")
+
+        description = None
+        image_url = None
+
+        # Description
+        paragraphs = soup.select("div.mw-parser-output > p")
+        for p in paragraphs:
+            text = p.get_text(" ", strip=True)
+            if len(text) > 80:
+                description = text
                 break
-            except (TimeoutException, NoSuchElementException):
-                logging.info("Consent button not found in this iframe.")
-                driver.switch_to.default_content()  # Go back to main content to try the next iframe
 
-        if not consent_given:
-            logging.info("No consent popup found, or it was already dismissed.")
+        # Method 1: OpenGraph image, often easiest
+        og_image = soup.find("meta", property="og:image")
+        if og_image and og_image.get("content"):
+            image_url = og_image["content"]
 
-        # Extract the stadium name from the "Name of stadium" row
-        name_row = WebDriverWait(driver, 15).until(
-            EC.presence_of_element_located((By.XPATH, "//th[text()='Name of stadium:']"))
+        # Method 2: infobox image fallback
+        if not image_url:
+            image = soup.select_one("table.infobox img")
+            if image and image.get("src"):
+                image_url = image["src"]
+                if image_url.startswith("//"):
+                    image_url = "https:" + image_url
+                elif image_url.startswith("/"):
+                    image_url = "https://en.wikipedia.org" + image_url
+
+        return {
+            "description": description,
+            "image_url": image_url,
+        }
+
+    except Exception as e:
+        logging.error(f"Error scraping Wikipedia metadata from {url}: {e}")
+        return {
+            "description": None,
+            "image_url": None,
+        }
+
+
+# --------------------------------------------------
+# City
+# --------------------------------------------------
+
+def scrape_city_from_wikipedia(wikipedia_url):
+    soup = get_soup(wikipedia_url)
+
+    if not soup:
+        return {}
+
+    population = extract_city_population(soup)
+
+    return {
+        "wikipedia_url": wikipedia_url,
+        "population": population,
+        "image_url": extract_wikipedia_image(soup, wikipedia_url),
+    }
+
+def first_valid(*values):
+    for value in values:
+        if value not in [None, "", 0, "Unknown"]:
+            return value
+    return None
+
+
+def scrape_city(city_data):
+    wikipedia_url = city_data.get("wikipedia_url")
+    fallback_name = city_data.get("name")
+
+    # 1. Structured Wikipedia scraping (your resilient function)
+    wiki_data = scrape_city_from_wikipedia(wikipedia_url) if wikipedia_url else {}
+
+    # 2. Extra metadata (description + image fallback)
+    wiki_meta = scrape_wikipedia_summary_and_image(wikipedia_url) if wikipedia_url else {}
+
+    # 3. Get page for name + country (safe)
+    soup = get_soup(wikipedia_url)
+
+    name = fallback_name
+    country = "Italy"
+
+    if soup:
+        try:
+            title = soup.find("h1", {"id": "firstHeading"})
+            if title:
+                name = title.get_text(strip=True)
+        except Exception:
+            logging.info(f"City name not found, using fallback: {fallback_name}")
+
+        # Country from infobox (much safer than your previous approach)
+        country_value = get_infobox_value(soup, ["country"])
+        if country_value:
+            country = country_value
+
+    # 4. Merge values (priority logic)
+    final_name = first_valid(name, fallback_name)
+    final_population = wiki_data.get("population") or 0
+    final_country = first_valid(country, "Italy") or "Italy"
+    log_field("City", final_name, "population", final_population, "Wikipedia")
+    log_field("City", final_name, "image", wiki_data.get("image_url"), "Wikipedia")
+
+    # 5. Save
+    city, created = City.objects.update_or_create(
+        name=final_name,
+        defaults={
+            "population": final_population,
+            "country": final_country,
+            "wikipedia_url": wikipedia_url,
+            "description": first_valid(wiki_meta.get("description")),
+            "image_url": first_valid(
+                wiki_data.get("image_url"),
+                wiki_meta.get("image_url")
+            ),
+        }
+    )
+
+    logging.info(f"{'Created' if created else 'Updated'} city: {city.name}")
+    return city
+
+
+# --------------------------------------------------
+# Stadium
+# --------------------------------------------------
+
+def extract_best_stadium_image(
+    transfermarkt_soup=None,
+    transfermarkt_url=None,
+    wikipedia_soup=None,
+    wikipedia_url=None,
+):
+    transfermarkt_image = None
+
+    if transfermarkt_soup and transfermarkt_url:
+        transfermarkt_image = extract_transfermarkt_stadium_image(
+            transfermarkt_soup,
+            transfermarkt_url
         )
-        name = name_row.find_element(By.XPATH, "following-sibling::td").text.strip()
 
-        # Scroll to "Total capacity" to ensure it loads
-        capacity_row = WebDriverWait(driver, 15).until(
-            EC.presence_of_element_located((By.XPATH, "//th[text()='Total capacity:']"))
-        )
-        driver.execute_script("arguments[0].scrollIntoView(true);", capacity_row)
-        time.sleep(1)  # Allow time after scrolling
+    if transfermarkt_image:
+        return transfermarkt_image
 
-        # Once the row is located, find the next <td> element
-        capacity_text = capacity_row.find_element(By.XPATH, "following-sibling::td").text.strip()
-        
-        # Check if capacity_text is not empty
-        if not capacity_text:
-            logging.error(f"Total capacity field is empty for stadium at {url}")
-            return None
-        
-        # Process the capacity text if it is not empty
-        capacity = int(re.sub(r'\D', '', capacity_text))  # Remove any non-numeric characters
+    if wikipedia_soup and wikipedia_url:
+        return extract_wikipedia_image(wikipedia_soup, wikipedia_url)
 
-         # Extract the year of construction using "Built:"
+    return None
+
+
+def extract_transfermarkt_stadium_image(soup, page_url):
+    if not soup:
+        return None
+
+    # 1. Transfermarkt stadium/gallery slider image
+    slider_img = soup.select_one("img.slider__img")
+
+    if slider_img:
+        src = slider_img.get("src") or slider_img.get("data-src")
+        if src:
+            if src.startswith("//"):
+                return "https:" + src
+            return urljoin(page_url, src)
+
+    # 2. Any useful Transfermarkt photo image
+    for img in soup.find_all("img"):
+        src = img.get("src") or img.get("data-src") or ""
+
+        if not src:
+            continue
+
+        src_lower = src.lower()
+
+        if "images/foto" in src_lower:
+            if src.startswith("//"):
+                return "https:" + src
+            return urljoin(page_url, src)
+
+    # 3. Do NOT use og:image unless you want the Transfermarkt logo
+    return None
+
+def classify_ownership(owner_raw):
+    if not owner_raw:
+        return "UNKNOWN"
+
+    text = owner_raw.lower()
+
+    public_keywords = [
+        "city of",
+        "comune di",
+        "comune",
+        "municipality",
+        "municipal",
+        "council",
+        "government",
+        "region",
+        "province",
+        "provincia",
+        "metropolitan city",
+        "città metropolitana",
+        "Salute",
+    ]
+
+    private_keywords = [
+        "football club",
+        "fc ",
+        "ac ",
+        "as ",
+        "ss ",
+        "ssc ",
+        "us ",
+        "club",
+        "s.p.a",
+        "S.p.A.",
+        "spa",
+        "srl",
+        "s.r.l.",
+        "ltd",
+        "group",
+        "Calcio",
+    ]
+
+    has_public = any(keyword in text for keyword in public_keywords)
+
+    # If it explicitly says Comune/City/Municipality, treat as public
+    # unless there is also a clear club/company ownership in the same text.
+    if has_public:
+        has_private = any(keyword in text for keyword in private_keywords)
+
+        if has_private:
+            return "MIXED"
+
+        return "PUBLIC"
+
+    has_private = any(keyword in text for keyword in private_keywords)
+
+    if has_private:
+        return "PRIVATE"
+
+    return "UNKNOWN"
+
+def scrape_stadium_data(wikipedia_url=None, transfermarkt_url=None):
+    wikipedia_soup = get_soup(wikipedia_url) if wikipedia_url else None
+    transfermarkt_soup = get_soup(transfermarkt_url) if transfermarkt_url else None
+
+    if not wikipedia_soup:
+        return {}
+
+    latitude, longitude = extract_coordinates_from_wikipedia(wikipedia_soup)
+
+    capacity_raw = get_infobox_value(wikipedia_soup, ["capacity"])
+    opened_raw = get_infobox_value(wikipedia_soup, ["opened", "built", "construction", "opened on"])
+    address = get_infobox_value(wikipedia_soup, ["address", "location"])
+    owner_raw = get_infobox_value(wikipedia_soup, ["owner"])
+
+    return {
+        "wikipedia_url": wikipedia_url,
+        "capacity": extract_first_int(capacity_raw),
+        "year_of_construction": extract_year(opened_raw),
+        "address": address,
+        "latitude": latitude,
+        "longitude": longitude,
+        "image_url": extract_best_stadium_image(
+            transfermarkt_soup=transfermarkt_soup,
+            transfermarkt_url=transfermarkt_url,
+            wikipedia_soup=wikipedia_soup,
+            wikipedia_url=wikipedia_url,
+        ),
+        "owner_raw": owner_raw,
+        "ownership": classify_ownership(owner_raw),
+    }
+
+def first_valid(*values):
+    for value in values:
+        if value not in [None, "", 0, "Unknown"]:
+            return value
+    return None
+
+
+def scrape_stadium(stadium_data, city):
+    transfermarkt_url = stadium_data.get("transfermarkt_url")
+    wikipedia_url = stadium_data.get("wikipedia_url")
+    fallback_name = stadium_data.get("name")
+
+    # 1. Scrape Wikipedia first
+    wiki_data = scrape_stadium_data(wikipedia_url=wikipedia_url, transfermarkt_url=transfermarkt_url) if wikipedia_url and transfermarkt_url else {}
+
+    # 2. Default values
+    name = fallback_name
+    capacity = None
+    year_of_construction = None
+    address = None
+
+    # 3. Scrape Transfermarkt
+    driver = create_driver()
+
+    try:
+        driver.get(transfermarkt_url)
+        time.sleep(2)
+
+        accept_consent_if_present(driver)
+
+        try:
+            name_row = WebDriverWait(driver, 15).until(
+                EC.presence_of_element_located((By.XPATH, "//th[text()='Name of stadium:']"))
+            )
+            name = name_row.find_element(By.XPATH, "following-sibling::td").text.strip()
+        except Exception:
+            logging.info(f"Stadium name not found on Transfermarkt, using fallback: {fallback_name}")
+
+        try:
+            capacity_row = WebDriverWait(driver, 15).until(
+                EC.presence_of_element_located((By.XPATH, "//th[text()='Total capacity:']"))
+            )
+            capacity_text = capacity_row.find_element(By.XPATH, "following-sibling::td").text.strip()
+            capacity = clean_int(capacity_text)
+        except Exception:
+            logging.info(f"Capacity not found on Transfermarkt for stadium {name}")
+
         try:
             built_row = driver.find_element(By.XPATH, "//th[text()='Built:']")
-            year_of_construction_text = built_row.find_element(By.XPATH, "following-sibling::td").text.strip()
-            year_of_construction = int(year_of_construction_text) if year_of_construction_text.isdigit() else None
+            built_text = built_row.find_element(By.XPATH, "following-sibling::td").text.strip()
+            year_of_construction = clean_int(built_text)
         except NoSuchElementException:
-            logging.info("Year of construction not found.")
-            year_of_construction = None  # Set to None if not found
+            logging.info(f"Year not found on Transfermarkt for stadium {name}")
 
-        # Optional: extract other fields if needed, such as address
-        address = "Unknown"  # Replace with actual extraction if needed
-
-        driver.quit()
-
-        # Store data in the database
-        stadium, created = Stadium.objects.get_or_create(name=name, city=city, defaults={
-            'capacity': capacity,
-            'address': address,
-            'year_of_construction': year_of_construction
-        })
-        if created:
-            logging.info(f"Created new Stadium: {name}")
-        else:
-            logging.info(f"Stadium {name} already exists")
-        return stadium
-    except TimeoutException:
-        logging.error(f"Timed out waiting for 'Total capacity' field at {url}")
     except Exception as e:
-        logging.error(f"Error scraping stadium {url}: {e}")
+        logging.error(f"Error scraping stadium {transfermarkt_url}: {e}")
+
     finally:
         driver.quit()
 
-from datetime import datetime
+    # 4. Merge Transfermarkt + Wikipedia + JSON fallback
+    final_name = first_valid(name, fallback_name)
+    final_capacity = first_valid(capacity, wiki_data.get("capacity"))
+    final_year = first_valid(year_of_construction, wiki_data.get("year_of_construction"))
+    final_address = first_valid(wiki_data.get("address"), "Unknown")
+    final_latitude = wiki_data.get("latitude")
+    final_longitude = wiki_data.get("longitude")
+
+    # logging
+    log_field("Stadium", final_name, "capacity", final_capacity, "Transfermarkt/Wikipedia")
+    log_field("Stadium", final_name, "year", final_year, "Transfermarkt/Wikipedia")
+    log_field("Stadium", final_name, "latitude", final_latitude, "Wikipedia")
+    log_field("Stadium", final_name, "longitude", final_longitude, "Wikipedia")
+    log_field("Stadium", final_name, "image", wiki_data.get("image_url"), "Wikipedia")
+    log_field("Stadium", final_name, "owner_raw", wiki_data.get("owner_raw"), "Wikipedia")
+    log_field("Stadium", final_name, "ownership", wiki_data.get("ownership"), "Wikipedia")
+
+    # 5. Save to DB
+    stadium, created = Stadium.objects.update_or_create(
+        name=final_name,
+        city=city,
+        defaults={
+            "capacity": final_capacity,
+            "address": final_address,
+            "year_of_construction": final_year,
+            "wikipedia_url": wikipedia_url,
+            "transfermarkt_url": transfermarkt_url,
+            "image_url": wiki_data.get("image_url"),
+            "latitude": final_latitude,
+            "longitude": final_longitude,
+            "owner_raw": wiki_data.get("owner_raw"),
+            "ownership": wiki_data.get("ownership") or "UNKNOWN",
+        }
+    )
+
+    logging.info(f"{'Created' if created else 'Updated'} stadium: {stadium.name}")
+    return stadium
+
+
+# --------------------------------------------------
+# Attendance
+# --------------------------------------------------
 
 def scrape_average_attendance(attendance_url):
-    """Scrape average attendance for the current season from a team's attendance page."""
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
+    if not attendance_url:
+        return None
 
-    driver.get(attendance_url)
-    time.sleep(3)  # Allow time for the page to load
+    driver = create_driver()
 
     try:
-        # Locate the row for the 2024/25 season and target the last <td class="rechts"> element
+        driver.get(attendance_url)
+        time.sleep(3)
+
+        accept_consent_if_present(driver)
+
         attendance_row = WebDriverWait(driver, 15).until(
             EC.presence_of_element_located((By.XPATH, "//tr[td[contains(text(), '24/25')]]"))
         )
 
-        # Scroll to the row to ensure it loads
-        driver.execute_script("arguments[0].scrollIntoView(true);", attendance_row)
-        time.sleep(1)  # Wait a moment after scrolling
-
-        # Use JavaScript to get the text of the last <td class="rechts"> element
         attendance_text = driver.execute_script(
-            "return arguments[0].querySelectorAll('.rechts')[arguments[0].querySelectorAll('.rechts').length - 1].textContent;",
+            """
+            const cells = arguments[0].querySelectorAll('.rechts');
+            if (!cells.length) return '';
+            return cells[cells.length - 1].textContent;
+            """,
             attendance_row
         ).strip()
 
-        if attendance_text:
-            average_attendance = int(attendance_text.replace(",", ""))
-            logging.info(f"Extracted average attendance: {average_attendance}")
-        else:
-            logging.error("Attendance data is empty.")
-            average_attendance = None
+        average_attendance = clean_int(attendance_text)
+
+        logging.info(f"Average attendance extracted: {average_attendance}")
+        return average_attendance
+
     except Exception as e:
-        logging.error(f"Error scraping attendance data: {e}")
-        average_attendance = None
+        logging.error(f"Error scraping attendance from {attendance_url}: {e}")
+        return None
+
     finally:
         driver.quit()
 
-    return average_attendance
 
-def scrape_team(team_name, team_url, attendance_url, stadium, city):
-    """Scrape team data from Transfermarkt using Selenium."""
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
+# --------------------------------------------------
+# Team
+# --------------------------------------------------
 
-    driver.get(team_url)
-    time.sleep(2)  # Allow time for the page to load
+def scrape_team_from_wikipedia(wikipedia_url):
+    soup = get_soup(wikipedia_url)
 
-    manager_name = None  # Initialize manager_name to avoid scoping issues
+    if not soup:
+        return {}
+
+    founded_raw = get_infobox_value(soup, ["founded"])
+    manager = get_infobox_value(soup, ["head coach", "manager", "coach"])
+
+    return {
+        "wikipedia_url": wikipedia_url,
+        "founded_raw": founded_raw,
+        "manager": manager,
+        "image_url": extract_wikipedia_image(soup, wikipedia_url),
+    }
+
+def parse_founded_date(value):
+    if not value:
+        return None
+
+    value = clean_text(value)
+
+    formats = [
+        "%b %d, %Y",   # Dec 16, 1899
+        "%B %d, %Y",  # December 16, 1899
+        "%d %B %Y",   # 16 December 1899
+        "%Y",         # 1899
+    ]
+
+    for fmt in formats:
+        try:
+            parsed = datetime.strptime(value, fmt)
+            return parsed.date()
+        except Exception:
+            pass
+
+    year = extract_year(value)
+    if year:
+        return date(year, 1, 1)
+
+    return None
+
+
+def scrape_team(team_data, stadium, city):
+    team_name = team_data.get("name")
+    team_url = team_data.get("transfermarkt_url")
+    attendance_url = team_data.get("transfermarkt_attendance_url")
+    wikipedia_url = team_data.get("wikipedia_url")
+
+    # 1. Wikipedia fallback/enrichment
+    wiki_data = scrape_team_from_wikipedia(wikipedia_url) if wikipedia_url else {}
+    wiki_meta = scrape_wikipedia_summary_and_image(wikipedia_url) if wikipedia_url else {}
+
+    # 2. Defaults from JSON / Wikipedia
+    manager_name = wiki_data.get("manager")
+    founded = parse_founded_date(wiki_data.get("founded_raw"))
+    tier = team_data.get("tier")
+    girone = team_data.get("girone")
+    italian_champion_titles = 0
+
+    # 3. Transfermarkt scraping
+    driver = create_driver()
+
     try:
-        # Handle consent popup if present
-        iframes = driver.find_elements(By.TAG_NAME, "iframe")
-        for iframe in iframes:
-            driver.switch_to.frame(iframe)
-            try:
-                accept_button = WebDriverWait(driver, 10).until(
-                    EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Accept & continue')]"))
-                )
-                accept_button.click()
-                logging.info("Accepted consent in iframe.")
-                driver.switch_to.default_content()
-                time.sleep(2)  # Allow time for the page to proceed
-                break
-            except (TimeoutException, NoSuchElementException):
-                driver.switch_to.default_content()  # Go back to main content to try the next iframe
+        driver.get(team_url)
+        time.sleep(2)
 
-        # Extract Italian Champion titles (example)
+        accept_consent_if_present(driver)
+
         try:
             italian_champion_element = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.XPATH, "//a[@title='Italian Champion']/span[@class='data-header__success-number']"))
+                EC.presence_of_element_located(
+                    (By.XPATH, "//a[@title='Italian Champion']/span[@class='data-header__success-number']")
+                )
             )
-            italian_champion_text = italian_champion_element.text.strip()
-            italian_champion_titles = int(italian_champion_text.replace(",", "")) if italian_champion_text.isdigit() else 0
-            logging.info(f"Italian Champion titles: {italian_champion_titles}")
-        except NoSuchElementException:
+            italian_champion_titles = clean_int(italian_champion_element.text) or 0
+        except Exception:
             italian_champion_titles = 0
-            
-        # Extract the founded date
+
         try:
             founded_element = driver.find_element(By.XPATH, "//span[@itemprop='foundingDate']")
             founded_text = founded_element.text.strip()
-            founded = datetime.strptime(founded_text, "%b %d, %Y").date()
-            logging.info(f"Extracted founded date: {founded}")
-        except NoSuchElementException:
-            logging.info("Founded year not found; setting to None.")
-            founded = None
+            founded_from_transfermarkt = parse_founded_date(founded_text)
+            founded = first_valid(founded_from_transfermarkt, founded)
+        except Exception:
+            logging.info(f"Founded date not found on Transfermarkt for {team_name}; using Wikipedia/JSON fallback")
 
-        # Extract the "tier" information based on the correct structure
         try:
-            tier_element = driver.find_element(By.XPATH, "//span[@class='data-header__content']/a[contains(@href, '/wettbewerb/')]")
+            tier_element = driver.find_element(
+                By.XPATH,
+                "//span[@class='data-header__content']/a[contains(@href, '/wettbewerb/')]"
+            )
             tier_text = tier_element.text.strip()
-            logging.info(f"Extracted tier text: {tier_text}")
 
-            # Determine tier number based on extracted text
             if "First Tier" in tier_text:
                 tier = 1
             elif "Second Tier" in tier_text:
                 tier = 2
             elif "Third Tier" in tier_text:
                 tier = 3
-            elif "Fourth Tier" in tier_text:
-                tier = 4
-            else:
-                logging.error(f"Unrecognized tier text '{tier_text}' for team at {team_url}")
-                return None
-        except NoSuchElementException:
-            logging.error("Tier information not found.")
-            return None
-        
-        driver.quit()
 
-        # Scrape average attendance from attendance page
-        average_attendance = scrape_average_attendance(attendance_url)
+        except Exception:
+            logging.info(f"Tier not found on Transfermarkt for {team_name}; using JSON tier: {tier}")
 
-        # Save team data to the database
-        team, created = Team.objects.get_or_create(name=team_name, city=city, stadium=stadium, defaults={
-            'founded': founded,
-            'tier': tier,
-            'num_of_titles': italian_champion_titles,
-            'manager': manager_name,
-            'average_attendance': average_attendance,
-        })
-
-        if created:
-            logging.info(f"Created new Team: {team_name}")
-        else:
-            logging.info(f"Team {team_name} already exists")
-
-        return team
-    except TimeoutException:
-        logging.error(f"Timed out waiting for 'Italian Champion' field at {team_url}")
     except Exception as e:
-        logging.error(f"Error scraping team at {team_url}: {e}")
+        logging.error(f"Error scraping team {team_name}: {e}")
+
     finally:
         driver.quit()
 
+    # 4. Attendance
+    average_attendance = scrape_average_attendance(attendance_url) if attendance_url else None
 
-# Main script execution
-for city_url in data['cities']:
-    city = scrape_city(city_url)
-
-for stadium_data in data['stadia']:
-    for stadium_url in stadium_data.values():
-        stadium = scrape_stadium(stadium_url, city)
-
-for team_data in data['teams']:
-    team_name = team_data.get('name')
-    team_url = team_data.get('transfermarkt_url')
-    attendance_url = team_data.get('transfermarkt_url_attendace')
+    # logging
+    log_field("Team", team_name, "founded", founded, "Transfermarkt/Wikipedia")
+    log_field("Team", team_name, "tier", tier, "Transfermarkt/Wikipedia")
+    log_field("Team", team_name, "girone", girone, "Wikipedia")
+    log_field("Team", team_name, "stadium", stadium, "Wikipedia")
+    log_field("Team", team_name, "manager", manager_name, "Wikipedia")
+    log_field("Team", team_name, "num_of_titles", italian_champion_titles, "Transfermarkt/Wikipedia")
+    log_field("Team", team_name, "wikipedia_url", wiki_data.get("wikipedia_url"), "Wikipedia")
+    log_field("Team", team_name, "transfermarkt_url", team_url, "Transfermarkt")
+    log_field("Team", team_name, "average_attendance", average_attendance, "Transfermarkt")
+    log_field("Team", team_name, "description", wiki_meta.get("description"), "Wikipedia")
+    log_field("Team", team_name, "image_url", wiki_data.get("image_url"), "Wikipedia")
     
-    if team_name and team_url:
-        scrape_team(team_name, team_url, attendance_url, stadium, city)
-    else:
-        logging.error(f"Missing name or URL for team data: {team_data}")
+
+
+
+    # 5. Save
+    team, created = Team.objects.update_or_create(
+        name=team_name,
+        defaults={
+            "founded": founded,
+            "tier": tier or 1,
+            "girone": girone,
+            "stadium": stadium,
+            "manager": manager_name,
+            "num_of_titles": italian_champion_titles,
+            "city": city,
+            "average_attendance": average_attendance,
+            "wikipedia_url": wikipedia_url,
+            "transfermarkt_url": team_url,
+            "description": first_valid(
+                wiki_meta.get("description"),
+                wiki_data.get("description")
+            ),
+            "image_url": first_valid(
+                wiki_data.get("image_url"),
+                wiki_meta.get("image_url")
+            ),
+        }
+    )
+    log_field("Team", team_name, "manager", manager_name, "Wikipedia")
+    log_field("Team", team_name, "founded", founded, "Transfermarkt/Wikipedia")
+    log_field("Team", team_name, "tier", tier, "Transfermarkt/JSON")
+    logging.info(f"{'Created' if created else 'Updated'} team: {team.name}")
+    return team
+
+# --------------------------------------------------
+# Main execution
+# --------------------------------------------------
+
+def run():
+    for team_data in data["teams"]:
+        logging.info("-----------------------------------------")
+        logging.info(f"Processing team: {team_data.get('name')}")
+
+        stadium_data = team_data.get("stadium", {})
+        city_data = stadium_data.get("city", {})
+
+        city = scrape_city(city_data)
+        stadium = scrape_stadium(stadium_data, city)
+        team = scrape_team(team_data, stadium, city)
+
+        logging.info(f"Finished processing {team.name}")
+
+
+if __name__ == "__main__":
+    run()

@@ -25,10 +25,12 @@ class StadiumAdmin(admin.ModelAdmin):
         "wikipedia_url",
         "transfermarkt_url",
         "image_url",
+        "ownership",
+        "owner_raw",
     )
 
-    search_fields = ("name", "city__name")
-    list_filter = ("city",)
+    list_filter = ("ownership", "city")
+    search_fields = ("name", "city__name", "owner_raw")
 
 
 @admin.register(Team)
@@ -38,6 +40,8 @@ class TeamAdmin(admin.ModelAdmin):
         "city",
         "stadium",
         "tier",
+        "girone",
+        "founded",
         "manager",
         "num_of_titles",
         "wikipedia_url",
@@ -47,3 +51,25 @@ class TeamAdmin(admin.ModelAdmin):
     )
     search_fields = ("name", "city__name", "stadium__name")
     list_filter = ("tier", "city")
+
+from .models import StadiumDevelopment
+
+@admin.register(StadiumDevelopment)
+class StadiumDevelopmentAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "project_type",
+        "status",
+        "future_capacity",
+        "estimated_opening",
+        "architect",
+        "developer",
+        "latitude",
+        "longitude",
+        "source_url",
+        "image_url",
+        "image_credit",
+        "notes",
+    )
+    list_filter = ("project_type", "status")
+    search_fields = ("name", "notes", "architect", "developer")
