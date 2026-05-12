@@ -138,3 +138,6 @@ class StadiumDevelopment(models.Model):
 
 
     notes = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name

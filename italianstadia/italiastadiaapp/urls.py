@@ -4,7 +4,7 @@ from .views import city_list, stadium_developments_geojson,stadium_list,team_lis
 
 appname = "italiastadiaapp"
 urlpatterns = [
-    path('',views.index,name='index'),
+    path('',views.index,name='home'),
     path('cities/', city_list, name='city_list'),
     path('stadia/', stadium_list, name='stadium_list'),
     path('teams/', team_list, name='team_list'),
