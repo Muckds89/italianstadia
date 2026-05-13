@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ development.name }}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Italian Stadia</a>
+
+        <div class="navbar-nav">
+            <a class="nav-link" href="/">Map</a>
+            <a class="nav-link" href="/stadia/">Stadia</a>
+            <a class="nav-link" href="/teams/">Teams</a>
+            <a class="nav-link" href="/cities/">Cities</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-5">
+
+    <a href="/" class="btn btn-outline-secondary mb-4">← Back to map</a>
+
+    <div class="card shadow-sm overflow-hidden">
+
+        {% if development.image_url %}
+        <img src="{{ development.image_url }}"
+             class="card-img-top stadium-hero-img"
+             alt="{{ development.name }}">
+        {% endif %}
+        {% if development.image_credit %}
+        <div class="image-credit">
+            Image © {{ development.image_credit }}
+        </div>
+        {% endif %}
+
+        <div class="card-body p-4">
+            <h1 class="card-title mb-3">{{ development.name }}</h1>
+
+            <span class="badge bg-warning text-dark mb-3">
+                {{ development.get_status_display }}
+            </span>
+
+            {% if development.notes %}
+            <p class="lead">{{ development.notes }}</p>
+            {% endif %}
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Project information</h5>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Project type:</strong> {{ development.get_project_type_display }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Status:</strong> {{ development.get_status_display }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Future capacity:</strong> {{ development.future_capacity }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Estimated opening:</strong> {{ development.estimated_opening }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Architect:</strong> {{ development.architect|default:"Unknown" }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Developer:</strong> {{ development.developer|default:"Unknown" }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6">
+                    <h5>Location</h5>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Latitude:</strong> {{ development.latitude }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Longitude:</strong> {{ development.longitude }}
+                        </li>
+                    </ul>
+
+                    <div class="mt-4">
+                        {% if development.source_url %}
+                        <a href="{{ development.source_url }}" target="_blank" class="btn btn-primary me-2">
+                            Source
+                        </a>
+                        {% endif %}
+
+                        <a
+                            href="https://www.google.com/maps/search/?api=1&query={{ development.latitude }},{{ development.longitude }}"
+                            target="_blank"
+                            class="btn btn-outline-primary"
+                        >
+                            Open in Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {% if development.future_tenants.all %}
+            <hr>
+
+            <h5>Future tenants</h5>
+
+            <div class="row">
+                {% for team in development.future_tenants.all %}
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 border-0 bg-light">
+                        <div class="card-body">
+                            {% if team.image_url %}
+                            <img src="{{ team.image_url }}" style="height:60px; object-fit:contain;" class="mb-2">
+                            {% endif %}
+
+                            <h6 class="card-title">{{ team.name }}</h6>
+
+                            <p class="card-text mb-1">
+                                <strong>League:</strong> {{ team.get_tier_display }}
+                            </p>
+
+                            <a href="/team/{{ team.id }}/" class="btn btn-sm btn-outline-primary">
+                                View team
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

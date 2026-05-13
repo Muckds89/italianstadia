@@ -1,0 +1,374 @@
+html, body {
+    min-height: 100%;
+    margin: 0;
+}
+
+#map {
+    height: 100vh;
+    width: 100%;
+    padding-top: 56px;
+}
+
+.leaflet-container {
+    background: #111;
+}
+
+.leaflet-popup-content {
+    font-size: 14px;
+}
+
+.stadium-hero-img {
+    height: 400px;
+    object-fit: cover;
+}
+
+.card {
+    border-radius: 14px;
+}
+
+.card:hover {
+    transform: scale(1.01);
+    transition: 0.2s;
+}
+
+.leaflet-popup-content {
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.leaflet-popup-content-wrapper {
+    max-width: 300px;
+}
+
+.topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 64px;
+    background: #171b1f;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 14px;
+}
+
+.site-title {
+    color: white;
+    font-size: 22px;
+    white-space: nowrap;
+}
+
+.main-links {
+    display: flex;
+    gap: 14px;
+}
+
+.main-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.main-links a:hover {
+    text-decoration: underline;
+}
+
+.filters {
+    margin-left: auto;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.sticky-jump-menu {
+    top: 70px;
+    z-index: 2000;
+}
+
+.sticky-jump-menu .card-body {
+    padding: 0.75rem 1rem;
+}
+
+.jump-menu-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 3000;
+    background: white;
+    padding: 0.5rem 0;
+}
+
+.jump-menu-spacer {
+    height: 0.5rem;
+}
+
+.team-logo-wrap {
+    height: 150px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+.team-logo {
+    max-height: 120px;
+    max-width: 120px;
+    object-fit: contain;
+}
+
+.team-logo-placeholder {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.team-card .card-title {
+    min-height: 48px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.team-jump-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 3000;
+    background: white;
+    padding: 0.5rem 0;
+}
+
+.team-jump-menu-spacer {
+    height: 75px;
+}
+
+.fixed-team-nav {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0;
+    width: 100%;
+    z-index: 99999;
+    background: yellow !important;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 16px;
+}
+
+.fixed-team-nav-spacer {
+    height: 70px;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+
+
+.stadium-map-card {
+    max-width: 420px;
+}
+
+
+
+.team-map-logo {
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+}
+
+
+
+.team-map-logo-placeholder {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.stadium-map-card {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#stadium-detail-map {
+    height: 420px;
+    width: 100%;
+}
+
+.stadium-logo-marker {
+    width: 64px !important;
+    height: 64px !important;
+    background: transparent !important;
+    border-radius: 50% !important;
+    padding: 7px !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.65) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    z-index: 9999 !important;
+}
+
+.stadium-logo-marker img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+.legend {
+    background: rgba(23, 27, 31, 0.95) !important;
+    padding: 14px 16px !important;
+    border-radius: 14px !important;
+    color: white !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.45) !important;
+    min-width: 140px;
+    font-size: 14px;
+    z-index: 9999;
+}
+
+.leaflet-control.legend {
+    background: rgba(23, 27, 31, 0.95) !important;
+    padding: 14px 16px !important;
+    border-radius: 14px !important;
+    color: white !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.45) !important;
+    min-width: 140px;
+    font-size: 14px;
+}
+
+.legend-title {
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.legend-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    border: 2px solid rgba(255,255,255,0.75);
+}
+
+.serie-a {
+    background: #00c853;
+}
+
+.serie-b {
+    background: white;
+}
+
+.serie-c {
+    background: #ff1744;
+}
+
+.mode-switch-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 24px;
+    color: white;
+    white-space: nowrap;
+}
+
+.mode-label {
+    font-size: 13px;
+    font-weight: 700;
+    opacity: 0.45;
+}
+
+.mode-label.active {
+    opacity: 1;
+}
+
+.mode-switch {
+    position: relative;
+    display: inline-block;
+    width: 74px;
+    height: 36px;
+    margin: 0;
+}
+
+.mode-switch input[type="checkbox"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.mode-slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: linear-gradient(135deg, #00c853, #00e5ff);
+    border-radius: 999px;
+    transition: 0.25s;
+    box-shadow: inset 0 0 4px rgba(255,255,255,0.4);
+}
+
+.mode-slider::before {
+    content: "";
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    left: 4px;
+    top: 4px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.25s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+
+.mode-switch input:checked + .mode-slider {
+    background: linear-gradient(135deg, #ffc107, #ff1744);
+}
+
+.mode-switch input:checked + .mode-slider::before {
+    transform: translateX(38px);
+}
+
+.status-planning {
+    background: #ffc107;
+}
+
+.status-approved {
+    background: #ff9800;
+}
+
+.status-construction {
+    background: #ff1744;
+}
+.image-credit {
+    font-size: 11px;
+    color: #888;
+    margin-top: 4px;
+    text-align: right;
+    padding-right: 4px;
+    line-height: 1.2;
+}
