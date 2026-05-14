@@ -75,6 +75,39 @@
         .mode-switch input:checked + .mode-slider::before {
             transform: translateX(38px);
         }
+        .filter-area {
+            flex-wrap: wrap;
+        }
+
+        #operationalFilters select,
+        #developmentFilters select {
+            min-width: 170px;
+        }
+
+        #stadiumFilter,
+        #developmentStadiumFilter {
+            min-width: 260px;
+        }
+
+        @media (max-width: 1200px) {
+            .mode-switch-wrap {
+                margin-right: 0;
+            }
+
+            #operationalFilters select,
+            #developmentFilters select,
+            #stadiumFilter,
+            #developmentStadiumFilter {
+                width: 100% !important;
+                max-width: 100%;
+            }
+
+            .filter-area,
+            #operationalFilters,
+            #developmentFilters {
+                width: 100%;
+            }
+        }
         </style>
 </head>
 
@@ -91,7 +124,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="mainNavbar">
+        <div class="collapse navbar-collapse flex-wrap gap-3" id="mainNavbar"></div>
 
             <!-- LEFT LINKS -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -120,9 +153,8 @@
                 <span id="developmentLabel" class="mode-label">Under Development</span>
             </div>
 <!-- FILTER AREA -->
-<div class="d-flex align-items-center gap-3">
-
-    <div id="operationalFilters" class="d-flex align-items-center gap-3">
+<div class="filter-area d-flex flex-wrap align-items-center gap-3">
+    <div id="operationalFilters" class="d-flex flex-wrap align-items-center gap-3">
         <select id="tierFilter" class="form-select w-auto">
             <option value="">All leagues</option>
             <option value="1">Serie A</option>
@@ -150,7 +182,7 @@
         </select>
     </div>
 
-    <div id="developmentFilters" class="d-none align-items-center gap-3">
+    <div id="developmentFilters" class="d-none flex-wrap align-items-center gap-3">
         <select id="developmentStatusFilter" class="form-select w-auto">
             <option value="">All statuses</option>
         </select>
