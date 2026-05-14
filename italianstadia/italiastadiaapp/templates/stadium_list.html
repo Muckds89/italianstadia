@@ -25,9 +25,9 @@
     <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-secondary btn-sm me-2">Back to Map</a>
 
     {% for key, section in tier_sections.items %}
-        {% if section.stadium_list %}
+        {% if section.stadia %}
             <a href="#{{ key }}" class="btn btn-outline-primary btn-sm me-2">
-                {{ section.title }} ({{ section.stadium_list|length }})
+                {{ section.title }} ({{ section.stadia|length }})
             </a>
         {% endif %}
     {% endfor %}
@@ -48,7 +48,7 @@
 
 
     {% for key, section in tier_sections.items %}
-        {% if section.stadium_list %}
+        {% if section.stadia %}
             <section id="{{ key }}" class="mb-5">
                 <div class="d-flex justify-content-between align-items-end mb-3">
                     <div>
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="row">
-                    {% for stadium in section.stadium_list %}
+                    {% for stadium in section.stadia %}
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 shadow-sm">
                             {% if stadium.image_url %}
