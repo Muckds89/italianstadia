@@ -7,8 +7,8 @@ class City(models.Model):
     country = models.CharField(max_length=100)
     wikipedia_url = models.URLField(blank=True, null=True)
 
-    image_url = models.URLField(max_length=500, blank=True, null=True)  
-    image_credit = models.CharField(max_length=255, blank=True, null=True)
+    image_url = models.URLField(max_length=1000, blank=True, null=True)  
+    image_credit = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
 
@@ -41,8 +41,8 @@ class Stadium(models.Model):
     wikipedia_url = models.URLField(blank=True, null=True)
     transfermarkt_url = models.URLField(blank=True, null=True)
 
-    image_url = models.URLField(blank=True, null=True)
-    image_credit = models.CharField(max_length=255, blank=True, null=True)
+    image_url = models.URLField(max_length=1000,blank=True, null=True)
+    image_credit = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -81,8 +81,8 @@ class Team(models.Model):
     wikipedia_url = models.URLField(blank=True, null=True)
     transfermarkt_url = models.URLField(blank=True, null=True)
 
-    image_url = models.URLField(blank=True, null=True)
-    image_credit = models.CharField(max_length=255, blank=True, null=True)
+    image_url = models.URLField(max_length=1000, blank=True, null=True)
+    image_credit = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
     under_development_stadium = models.ForeignKey(
@@ -132,8 +132,8 @@ class StadiumDevelopment(models.Model):
     architect = models.CharField(max_length=255, blank=True)
     developer = models.CharField(max_length=255, blank=True)
 
-    image_url = models.URLField(blank=True, null=True)
-    image_credit = models.CharField(max_length=255, blank=True, null=True)
+    image_url = models.URLField(max_length=1000, blank=True, null=True)
+    image_credit =models.TextField(blank=True, null=True)
     source_url = models.URLField(blank=True)
 
 
