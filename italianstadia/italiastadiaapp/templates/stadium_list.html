@@ -25,9 +25,9 @@
     <a href="{% url 'index' %}" class="btn btn-secondary btn-sm me-2">Back to Map</a>
 
     {% for key, section in tier_sections.items %}
-        {% if section.stadia %}
+        {% if section.stadium_list %}
             <a href="#{{ key }}" class="btn btn-outline-primary btn-sm me-2">
-                {{ section.title }} ({{ section.stadia|length }})
+                {{ section.title }} ({{ section.stadium_list|length }})
             </a>
         {% endif %}
     {% endfor %}
@@ -48,7 +48,7 @@
 
 
     {% for key, section in tier_sections.items %}
-        {% if section.stadia %}
+        {% if section.stadium_list %}
             <section id="{{ key }}" class="mb-5">
                 <div class="d-flex justify-content-between align-items-end mb-3">
                     <div>
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="row">
-                    {% for stadium in section.stadia %}
+                    {% for stadium in section.stadium_list %}
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 shadow-sm">
                             {% if stadium.image_url %}
