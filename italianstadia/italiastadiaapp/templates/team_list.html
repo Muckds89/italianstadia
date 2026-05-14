@@ -22,7 +22,7 @@
 <body id="top">
 
 <div class="fixed-team-nav" >
-    <a href="{% url ''home' %}" class="btn btn-secondary btn-sm me-2">Back to Map</a>
+    <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-secondary btn-sm me-2">Back to Map</a>
 
     {% for key, section in tier_sections.items %}
         {% if section.teams %}
@@ -39,7 +39,7 @@
 
 <div class="container mt-4">
     <h1>Team List</h1>
-    <a href="{% url ''home' %}" class="btn btn-secondary mb-3">Back to Map</a>
+    <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-secondary mb-3">Back to Map</a>
 
     <h2>Italian Teams</h2>
     <p>
