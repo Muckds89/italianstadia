@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from .views import city_list, stadium_developments_geojson,stadium_list,team_list,stadium_detail,stadiums_geojson, stadium_development_detail
 
-appname = "italiastadiaapp"
+app_name = "italiastadiaapp"
 urlpatterns = [
     path('',views.index,name='home'),
     path('cities/', city_list, name='city_list'),
