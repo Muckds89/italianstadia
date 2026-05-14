@@ -75,38 +75,67 @@
         .mode-switch input:checked + .mode-slider::before {
             transform: translateX(38px);
         }
+        .navbar {
+            height: 80px;
+        }
+
+        .navbar-brand {
+            font-size: clamp(18px, 1.4vw, 28px);
+            white-space: nowrap;
+        }
+
+        .nav-link,
+        .mode-label {
+            font-size: clamp(13px, 1vw, 18px);
+            white-space: nowrap;
+        }
+
+        .mode-switch-wrap {
+            gap: 8px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .mode-switch {
+            width: clamp(54px, 5vw, 74px);
+            height: clamp(28px, 2.6vw, 36px);
+        }
+
+        .mode-slider::before {
+            width: calc(clamp(28px, 2.6vw, 36px) - 8px);
+            height: calc(clamp(28px, 2.6vw, 36px) - 8px);
+        }
+
+        .mode-switch input:checked + .mode-slider::before {
+            transform: translateX(clamp(26px, 2.5vw, 38px));
+        }
+
         .filter-area {
-            flex-wrap: wrap;
+            min-width: 0;
+            flex-shrink: 1;
+        }
+
+        #operationalFilters,
+        #developmentFilters {
+            min-width: 0;
+            flex-shrink: 1;
         }
 
         #operationalFilters select,
         #developmentFilters select {
-            min-width: 170px;
+            width: clamp(120px, 11vw, 210px) !important;
+            min-width: 0;
+            font-size: clamp(13px, 1vw, 18px);
         }
 
         #stadiumFilter,
         #developmentStadiumFilter {
-            min-width: 260px;
+            width: clamp(180px, 20vw, 420px) !important;
         }
 
-        @media (max-width: 1200px) {
-            .mode-switch-wrap {
-                margin-right: 0;
-            }
-
-            #operationalFilters select,
-            #developmentFilters select,
-            #stadiumFilter,
-            #developmentStadiumFilter {
-                width: 100% !important;
-                max-width: 100%;
-            }
-
-            .filter-area,
-            #operationalFilters,
-            #developmentFilters {
-                width: 100%;
-            }
+        #stadiumCounter {
+            white-space: nowrap;
+            font-size: clamp(12px, 0.9vw, 16px);
         }
         </style>
 </head>
@@ -124,7 +153,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse flex-wrap gap-3" id="mainNavbar"></div>
+        <div class="collapse navbar-collapse" id="mainNavbar"></div>
 
             <!-- LEFT LINKS -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -153,8 +182,8 @@
                 <span id="developmentLabel" class="mode-label">Under Development</span>
             </div>
 <!-- FILTER AREA -->
-<div class="filter-area d-flex flex-wrap align-items-center gap-3">
-    <div id="operationalFilters" class="d-flex flex-wrap align-items-center gap-3">
+<div class="d-flex align-items-center gap-3">
+    <div id="operationalFilters" class="d-flex align-items-center gap-3">
         <select id="tierFilter" class="form-select w-auto">
             <option value="">All leagues</option>
             <option value="1">Serie A</option>
@@ -182,7 +211,7 @@
         </select>
     </div>
 
-    <div id="developmentFilters" class="d-none flex-wrap align-items-center gap-3">
+    <div id="developmentFilters" class="d-none align-items-center gap-3">
         <select id="developmentStatusFilter" class="form-select w-auto">
             <option value="">All statuses</option>
         </select>
