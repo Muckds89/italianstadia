@@ -123,7 +123,7 @@ def index(request):
     return render(request,'italianstadiaapp/index.html')
 
 def city_list(request):
-    cities = City.objects.all()
+    cities = City.objects.all().order_by("-population", "name")
     if cities is None:
         return HttpResponse(status=404, content="city not found")
     else:

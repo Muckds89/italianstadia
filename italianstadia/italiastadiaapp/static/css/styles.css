@@ -372,3 +372,15 @@ html {
     padding-right: 4px;
     line-height: 1.2;
 }
+
+.card-img-top {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 220px;
+    }
+}
