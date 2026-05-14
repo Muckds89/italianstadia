@@ -7,7 +7,7 @@ class City(models.Model):
     country = models.CharField(max_length=100)
     wikipedia_url = models.URLField(blank=True, null=True)
 
-    image_url = models.URLField(blank=True, null=True)
+    image_url = models.URLField(max_length=500, blank=True, null=True)  
     image_credit = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
