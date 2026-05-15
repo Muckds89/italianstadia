@@ -278,13 +278,15 @@ function loadDevelopmentStadiums() {
                 const coords = feature.geometry.coordinates;
                 const props = feature.properties;
 
+                const isMobile = window.innerWidth <= 768;
+
                 const marker = L.circleMarker([coords[1], coords[0]], {
-                    radius: 9,
-                    fillColor: getDevelopmentMarkerColor(props.status),
-                    color: "#111",
-                    weight: 2,
+                    radius: isMobile ? 13 : 7,
+                    fillColor: "#00e5ff",
+                    color: "#111111",
+                    weight: isMobile ? 3 : 1.5,
                     opacity: 1,
-                    fillOpacity: 0.95
+                    fillOpacity: 0.9
                 });
 
                 marker.developmentId = String(props.id);
@@ -294,15 +296,46 @@ function loadDevelopmentStadiums() {
                     ? String(props.estimated_opening)
                     : "";
 
-                marker.bindPopup(`
-                    <strong>${props.name}</strong><br>
-                    ${props.project_type}<br>
-                    <strong>Status:</strong> ${props.status}<br>
-                    <strong>Future capacity:</strong> ${props.future_capacity || "Unknown"}<br>
-                    <strong>Opening:</strong> ${props.estimated_opening || "Unknown"}<br>
-                    <br>
-                    <a href="/stadium-development/${props.id}/">View project details</a>
-                `);
+                const popupContent = `
+                    <div class="stadium-popup">
+                        <h4>${props.name}</h4>
+                        <p class="popup-city">${props.city || ""}</p>
+
+                        <div class="popup-row">
+                            <strong>Capacity</strong>
+                            <span>${props.capacity || "Unknown"}</span>
+                        </div>
+
+                        <div class="popup-row">
+                            <strong>Ownership</strong>
+                            <span>${props.ownership || "Unknown"}</span>
+                        </div>
+
+                        <a class="popup-btn popup-primary" href="/stadium/${props.id}/">
+                            View stadium details
+                        </a>
+
+                        ${props.wikipedia_url ? `
+                            <a class="popup-btn" href="${props.wikipedia_url}" target="_blank">
+                                Wikipedia
+                            </a>
+                        ` : ""}
+
+                        ${props.transfermarkt_url ? `
+                            <a class="popup-btn" href="${props.transfermarkt_url}" target="_blank">
+                                Transfermarkt
+                            </a>
+                        ` : ""}
+                    </div>
+                `;
+
+                marker.bindPopup(popupContent, {
+                    maxWidth: isMobile ? 340 : 260,
+                    minWidth: isMobile ? 300 : 220,
+                    autoPan: true,
+                    autoPanPadding: isMobile ? [30, 120] : [20, 20],
+                    closeButton: true
+                });
 
                 marker.addTo(map);
                 developmentMarkers.push(marker);

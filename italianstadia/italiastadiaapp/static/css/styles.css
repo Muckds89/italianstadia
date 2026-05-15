@@ -384,3 +384,82 @@ html {
         height: 220px;
     }
 }
+
+.stadium-popup {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.stadium-popup h4 {
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.popup-city {
+    margin: 0 0 12px;
+    color: #666;
+    font-size: 14px;
+}
+
+.popup-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 0;
+    border-top: 1px solid #e6e6e6;
+    font-size: 14px;
+}
+
+.popup-btn {
+    display: block;
+    margin-top: 10px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #f1f3f5;
+    color: #111;
+    text-decoration: none;
+    font-weight: 700;
+    text-align: center;
+}
+
+.popup-primary {
+    background: #111;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .leaflet-popup-content-wrapper {
+        border-radius: 18px;
+    }
+
+    .leaflet-popup-content {
+        width: 300px !important;
+        margin: 18px;
+    }
+
+    .stadium-popup h4 {
+        font-size: 22px;
+    }
+
+    .popup-city {
+        font-size: 16px;
+    }
+
+    .popup-row {
+        font-size: 16px;
+        padding: 11px 0;
+    }
+
+    .popup-btn {
+        font-size: 17px;
+        padding: 16px;
+        border-radius: 14px;
+    }
+
+    .leaflet-popup-close-button {
+        font-size: 28px !important;
+        width: 36px !important;
+        height: 36px !important;
+        line-height: 32px !important;
+    }
+}
