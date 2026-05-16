@@ -282,7 +282,7 @@ function loadDevelopmentStadiums() {
 
                 const marker = L.circleMarker([coords[1], coords[0]], {
                     radius: isMobile ? 13 : 7,
-                    fillColor: "#00e5ff",
+                    fillColor: getDevelopmentMarkerColor(props.status),
                     color: "#111111",
                     weight: isMobile ? 3 : 1.5,
                     opacity: 1,
