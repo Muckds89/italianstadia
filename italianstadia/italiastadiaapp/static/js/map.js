@@ -296,38 +296,51 @@ function loadDevelopmentStadiums() {
                     ? String(props.estimated_opening)
                     : "";
 
-                const popupContent = `
-                    <div class="stadium-popup">
-                        <h4>${props.name}</h4>
-                        <p class="popup-city">${props.city || ""}</p>
+            const popupContent = `
+                <div class="stadium-popup development-popup">
+                    <h4>${props.name}</h4>
 
-                        <div class="popup-row">
-                            <strong>Capacity</strong>
-                            <span>${props.capacity || "Unknown"}</span>
-                        </div>
-
-                        <div class="popup-row">
-                            <strong>Ownership</strong>
-                            <span>${props.ownership || "Unknown"}</span>
-                        </div>
-
-                        <a class="popup-btn popup-primary" href="/stadium/${props.id}/">
-                            View stadium details
-                        </a>
-
-                        ${props.wikipedia_url ? `
-                            <a class="popup-btn" href="${props.wikipedia_url}" target="_blank">
-                                Wikipedia
-                            </a>
-                        ` : ""}
-
-                        ${props.transfermarkt_url ? `
-                            <a class="popup-btn" href="${props.transfermarkt_url}" target="_blank">
-                                Transfermarkt
-                            </a>
-                        ` : ""}
+                    <div class="popup-row">
+                        <strong>Status</strong>
+                        <span>${props.status || "Unknown"}</span>
                     </div>
-                `;
+
+                    <div class="popup-row">
+                        <strong>Project type</strong>
+                        <span>${props.project_type || "Unknown"}</span>
+                    </div>
+
+                    <div class="popup-row">
+                        <strong>Future capacity</strong>
+                        <span>${props.future_capacity || "Unknown"}</span>
+                    </div>
+
+                    <div class="popup-row">
+                        <strong>Opening</strong>
+                        <span>${props.estimated_opening || "TBD"}</span>
+                    </div>
+
+                    ${props.architect ? `
+                    <div class="popup-row">
+                        <strong>Architect</strong>
+                        <span>${props.architect}</span>
+                    </div>
+                    ` : ""}
+
+                    <a class="popup-btn popup-primary"
+                    href="/stadium-development/${props.id}/">
+                        View project
+                    </a>
+
+                    ${props.source_url ? `
+                        <a class="popup-btn"
+                        href="${props.source_url}"
+                        target="_blank">
+                        Source
+                        </a>
+                    ` : ""}
+                </div>
+            `;                
 
                 marker.bindPopup(popupContent, {
                     maxWidth: isMobile ? 340 : 260,
