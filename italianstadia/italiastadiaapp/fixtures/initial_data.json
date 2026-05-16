@@ -5282,7 +5282,7 @@
     "longitude": 11.2822,
     "architect": "Arup",
     "developer": "Comune di Firenze",
-    "image_url": "https://www.arup.com/globalassets/images/news/2022/03-march/city-of-florence-unveils-winning-design-for-stadio-artemio-franchi-rennovation/new-fiorentina-stadium-video-overlay.jpg?format=webp&width=10",
+    "image_url": "https://www.arup.com/globalassets/images/news/2022/03-march/city-of-florence-unveils-winning-design-for-stadio-artemio-franchi-rennovation/artists-impression-of-fiorentinas-new-stadium.jpg?format=webp&width=760&quality=80",
     "image_credit": "arup.com",
     "source_url": "https://www.arup.com/news/city-of-florence-unveils-winning-design-for-stadio-artemio-franchi-renovation/",
     "notes": ""
@@ -5345,7 +5345,7 @@
     "image_url": "https://populous.com/uploads/2025/02/Como-Stadium_1-1920x1440-c-center-1920x0-c-default.webp",
     "image_credit": "populous.com",
     "source_url": "https://populous.com/article/como-1907-announces-first-stage-of-populous-designed-stadio-giuseppe-sinigaglia-redevelopment",
-    "notes": "Now, in collaboration with the Municipality of Como, the Club has announced initial plans and unveiled concept images for the Populous-designed redevelopment of their iconic stadium.\r\n\r\nWhile all of the current renderings are concept images, and therefore not necessarily representative of the final designs, the club expects to show completed designs following the completion of the first phase – the submission and approval of the Document of Feasibility of Project Alternatives (DOCFAP).\r\n\r\nThe full expected timeline for the redevelopmen"
+    "notes": "Now, in collaboration with the Municipality of Como, the Club has announced initial plans and unveiled concept images for the Populous-designed redevelopment of their iconic stadium.\r\n\r\nWhile all of the current renderings are concept images, and therefore not necessarily representative of the final designs, the club expects to show completed designs following the completion of the first phase – the submission and approval of the Document of Feasibility of Project Alternatives (DOCFAP)."
   }
 },
 {
@@ -5426,6 +5426,26 @@
     "image_credit": "progettocmr",
     "source_url": "https://www.progettocmr.com/project/stadio-del-cagliari-calcio-2/",
     "notes": "Il progetto del nuovo stadio del Cagliari Calcio, presentato con Sportium, intende dare vita ad una vera e propria smart arena, perfettamente integrata nell’ambiente esterno.\r\n\r\nMorfologicamente coerente con l’ambiente circostante e con la città di Cagliari, lo stadio ne richiama costantemente le peculiarità sia cromatiche che materiche, non astratto ed alieno edificio ma componente sostanziale del paesaggio, di cui riporta armonicamente le linee essenziali e si configura come intervento di efficace ricucitura con i diversi ambiti."
+  }
+},
+{
+  "model": "italiastadiaapp.stadiumdevelopment",
+  "pk": 10,
+  "fields": {
+    "stadium": null,
+    "name": "Nuovo Stadio Erasmo Iacovone",
+    "project_type": "NEW",
+    "status": "UNDER_CONSTRUCTION",
+    "future_capacity": 21000,
+    "estimated_opening": 2026,
+    "latitude": 40.4757,
+    "longitude": 17.247,
+    "architect": "Studio GAU Arena",
+    "developer": "Comune di Taranto / Giochi del Mediterraneo 2026 commissioners",
+    "image_url": "https://www.gauarena.com/wp-content/uploads/2022/08/4-1500x800.png",
+    "image_credit": "gauarena.com",
+    "source_url": "https://www.gauarena.com/progetti/nuovo-stadio-e-iacovone-taranto/",
+    "notes": "Complete reconstruction of the historic Stadio Erasmo Iacovone in Taranto for the 2026 Mediterranean Games. The project includes a fully modernized football stadium with covered stands, upgraded hospitality and media facilities, and improved urban integration. Taranto FC is expected to return after completion."
   }
 }
 ]
