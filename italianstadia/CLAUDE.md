@@ -109,10 +109,10 @@ All filter state and map logic lives in `map.js` as a single file. Filter DOM el
 
 **Field limits — existing models have violations** (`CharField(max_length=100)` on scraped names). When adding new fields or models:
 ```python
-name = models.CharField(max_length=255)      # not 100
-url = models.URLField(max_length=1000)       # already used in image_url — keep consistent
-coordinates = models.FloatField()            # current pattern (not DecimalField)
-capacity = models.IntegerField()             # not SmallIntegerField
+name = models.CharField(max_length=255)                              # not 100
+url = models.URLField(max_length=1000)                               # image_url pattern — keep consistent
+coordinates = models.DecimalField(max_digits=9, decimal_places=6)   # not FloatField
+capacity = models.IntegerField()                                     # not SmallIntegerField
 ```
 
 **N+1 prevention** — `stadium_list` and `team_list` already use `select_related` + `prefetch_related`. Keep this pattern; `stadiums_json` view (`/api/stadiums-json/` — unused) does not and should be fixed or removed.

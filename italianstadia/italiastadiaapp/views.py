@@ -1,13 +1,13 @@
-from pyexpat import features
-
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse
-from .models import City,Stadium,Team, StadiumDevelopment
+from django.http import HttpResponse, JsonResponse
+from .models import City, Stadium, Team, StadiumDevelopment
 
-from django.http import JsonResponse
 
 def stadium_detail(request, id):
-    stadium = Stadium.objects.get(id=id)
+    stadium = get_object_or_404(
+        Stadium.objects.select_related("city").prefetch_related("teams"),
+        id=id,
+    )
     return render(request, "stadium_detail.html", {"stadium": stadium})
 
 def stadium_development_detail(request, pk):
@@ -97,37 +97,12 @@ def stadiums_geojson(request):
         "features": features
     })
 
-def stadiums_json(request):
-    data = []
-
-    for s in Stadium.objects.all():
-        data.append({
-            "id": s.id,
-            "name": s.name,
-            "city": s.city.name if s.city else "",
-            "lat": s.latitude,
-            "lng": s.longitude,
-        })
-
-    return JsonResponse(data, safe=False)
-
-# Create your views here.
-# def home(request):
-#     return HttpResponse("Hello World")
 def index(request):
-    stadiums = Stadium.objects.all()
-
-    return render(request, "index.html", {
-        "stadiums": stadiums
-    })
-    return render(request,'italianstadiaapp/index.html')
+    return render(request, "index.html")
 
 def city_list(request):
     cities = City.objects.all().order_by("-population", "name")
-    if cities is None:
-        return HttpResponse(status=404, content="city not found")
-    else:
-        return render(request,'city_list.html',{'cities': cities})
+    return render(request, 'city_list.html', {'cities': cities})
 
 def stadium_list(request):
     stadia = (
