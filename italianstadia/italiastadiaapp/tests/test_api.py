@@ -24,7 +24,7 @@ def test_stadiums_geojson_returns_valid_feature_collection(client):
         ownership="PUBLIC",
     )
 
-    response = client.get(reverse("stadiums_geojson"))
+    response = client.get(reverse("italiastadiaapp:stadiums_geojson"))
 
     assert response.status_code == 200
 
@@ -48,7 +48,7 @@ def test_stadium_developments_geojson(client):
         longitude=9.0,
     )
 
-    response = client.get(reverse("stadium_developments_geojson"))
+    response = client.get(reverse("italiastadiaapp:stadium_developments_geojson"))
 
     assert response.status_code == 200
 

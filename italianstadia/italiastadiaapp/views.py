@@ -31,7 +31,7 @@ def stadium_developments_geojson(request):
             "type": "Feature",
             "geometry": {
                 "type": "Point",
-                "coordinates": [s.longitude, s.latitude],
+                "coordinates": [float(s.longitude), float(s.latitude)],
             },
             "properties": {
                 "id": s.id,
@@ -66,7 +66,7 @@ def stadiums_geojson(request):
             "type": "Feature",
             "geometry": {
                 "type": "Point",
-                "coordinates": [s.longitude, s.latitude],
+                "coordinates": [float(s.longitude), float(s.latitude)],
             },
             "properties": {
                 "id": s.id,

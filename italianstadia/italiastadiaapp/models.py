@@ -2,10 +2,10 @@ from django.db import models
 
 
 class City(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=255)
     population = models.IntegerField()
-    country = models.CharField(max_length=100)
-    wikipedia_url = models.URLField(blank=True, null=True)
+    country = models.CharField(max_length=255)
+    wikipedia_url = models.URLField(max_length=500, blank=True, null=True)
 
     image_url = models.URLField(max_length=1000, blank=True, null=True)  
     image_credit = models.TextField(blank=True, null=True)
@@ -23,13 +23,13 @@ class Stadium(models.Model):
         ("MIXED", "Mixed"),
         ("UNKNOWN", "Unknown"),
     ]
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=255)
     capacity = models.IntegerField(null=True, blank=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
+    address = models.CharField(max_length=500, blank=True, null=True)
     year_of_construction = models.IntegerField(null=True, blank=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='stadiums')
-    latitude = models.FloatField(null=True, blank=True)
-    longitude = models.FloatField(null=True, blank=True)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
 
     owner_raw = models.TextField(blank=True, null=True)
     ownership = models.CharField(
@@ -38,10 +38,10 @@ class Stadium(models.Model):
         default="UNKNOWN"
     )
 
-    wikipedia_url = models.URLField(blank=True, null=True)
-    transfermarkt_url = models.URLField(blank=True, null=True)
+    wikipedia_url = models.URLField(max_length=500, blank=True, null=True)
+    transfermarkt_url = models.URLField(max_length=500, blank=True, null=True)
 
-    image_url = models.URLField(max_length=1000,blank=True, null=True)
+    image_url = models.URLField(max_length=1000, blank=True, null=True)
     image_credit = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
@@ -63,7 +63,7 @@ class Team(models.Model):
 
 
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=255)
     founded = models.DateField(null=True, blank=True)
     tier = models.IntegerField(choices=TIER_CHOICES)
     girone = models.CharField(
@@ -73,13 +73,13 @@ class Team(models.Model):
     null=True
     )
     stadium = models.ForeignKey(Stadium, on_delete=models.CASCADE, related_name='teams')
-    manager = models.CharField(max_length=100, blank=True, null=True)
+    manager = models.CharField(max_length=255, blank=True, null=True)
     num_of_titles = models.IntegerField(default=0)
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='teams')
     average_attendance = models.FloatField(null=True, blank=True)
 
-    wikipedia_url = models.URLField(blank=True, null=True)
-    transfermarkt_url = models.URLField(blank=True, null=True)
+    wikipedia_url = models.URLField(max_length=500, blank=True, null=True)
+    transfermarkt_url = models.URLField(max_length=500, blank=True, null=True)
 
     image_url = models.URLField(max_length=1000, blank=True, null=True)
     image_credit = models.TextField(blank=True, null=True)
@@ -126,15 +126,15 @@ class StadiumDevelopment(models.Model):
 
     estimated_opening = models.IntegerField(null=True, blank=True)
 
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
 
-    architect = models.CharField(max_length=255, blank=True)
-    developer = models.CharField(max_length=255, blank=True)
+    architect = models.CharField(max_length=255, blank=True, null=True)
+    developer = models.CharField(max_length=255, blank=True, null=True)
 
     image_url = models.URLField(max_length=1000, blank=True, null=True)
     image_credit =models.TextField(blank=True, null=True)
-    source_url = models.URLField(blank=True)
+    source_url = models.URLField(max_length=500, blank=True, null=True)
 
 
     notes = models.TextField(blank=True)
