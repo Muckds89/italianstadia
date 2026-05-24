@@ -93,11 +93,33 @@ Stadium `tier` filtering is derived from the teams that play there — `stadium_
 - `GET /api/stadiums/` → `stadiums_geojson` — FeatureCollection with teams array in `properties`
 - `GET /api/stadium-developments/` → `stadium_developments_geojson` — FeatureCollection for planned/under-construction stadiums
 
-Both endpoints return `[longitude, latitude]` coordinates (GeoJSON standard). The `stadiums_geojson` view already uses `select_related("city").prefetch_related("teams")`.
+Both endpoints return `[longitude, latitude]` coordinates (GeoJSON standard). Current `/api/stadiums/` response shape:
+
+```json
+{
+  "type": "FeatureCollection",
+  "features": [{
+    "type": "Feature",
+    "geometry": {"type": "Point", "coordinates": [longitude, latitude]},
+    "properties": {
+      "id": 1, "name": "...", "capacity": 80000,
+      "city": "Milan", "ownership": "PUBLIC", "owner_raw": "...",
+      "wikipedia_url": "...", "transfermarkt_url": "...",
+      "teams": [{"id": 1, "name": "...", "tier": 1, "tier_name": "Serie A", "girone": ""}]
+    }
+  }]
+}
+```
+
+The `stadiums_geojson` view uses `select_related("city").prefetch_related("teams")`. `DecimalField` coordinates are cast to `float()` before serialisation so they come out as JSON numbers, not strings.
 
 ## Frontend (map.js)
 
-All filter state and map logic lives in `map.js` as a single file. Filter DOM elements are grabbed at top-level; the map supports two modes: `"operational"` (default, shows Stadium markers) and `"development"` (shows StadiumDevelopment markers). `currentLayerMode` tracks this. The map fetches GeoJSON via `fetch()` from the URL stored in `data-url` attributes on DOM elements in the template.
+All filter state and map logic lives in `map.js` as a single file. Filter DOM elements are grabbed at top-level; the map supports two modes: `"operational"` (default, shows Stadium markers) and `"development"` (shows StadiumDevelopment markers). `currentLayerMode` tracks this.
+
+When adding filter logic, keep all filter state local to `applyFilters()` / `applyDevelopmentFilters()` — do not scatter state across individual event handlers. Each event handler calls one of those two functions, nothing else.
+
+API URLs are currently hardcoded in `map.js` (`fetch("/api/stadiums/")`). When this is fixed, they should come from `data-url` attributes on DOM elements, not hardcoded strings.
 
 ## Database setup
 
@@ -107,26 +129,84 @@ All filter state and map logic lives in `map.js` as a single file. Filter DOM el
 
 ## Critical constraints
 
-**Field limits — existing models have violations** (`CharField(max_length=100)` on scraped names). When adding new fields or models:
+### PostgreSQL field limits
+
+Always use these rules when adding fields — violations cause silent truncation or `DataError` in production:
+
 ```python
-name = models.CharField(max_length=255)                              # not 100
-url = models.URLField(max_length=1000)                               # image_url pattern — keep consistent
-coordinates = models.DecimalField(max_digits=9, decimal_places=6)   # not FloatField
-capacity = models.IntegerField()                                     # not SmallIntegerField
+# BAD — breaks if scraped name exceeds 100 chars
+name = models.CharField(max_length=100)
+
+# GOOD
+name = models.CharField(max_length=255)                            # names, titles
+description = models.TextField(blank=True)                         # free text
+url = models.URLField(max_length=1000)                             # image_url pattern — keep consistent
+coordinates = models.DecimalField(max_digits=9, decimal_places=6)  # not FloatField
+capacity = models.IntegerField(null=True, blank=True)              # not SmallIntegerField (max 32767)
+
+# Always add db_index=True on ForeignKey fields used in filter() calls
+league = models.ForeignKey(League, on_delete=models.SET_NULL, null=True, db_index=True)
 ```
 
-**N+1 prevention** — `stadium_list` and `team_list` already use `select_related` + `prefetch_related`. Keep this pattern; `stadiums_json` view (`/api/stadiums-json/` — unused) does not and should be fixed or removed.
+Scraped fields that may be missing **must** have `blank=True, null=True` — a `None` from a scraper will raise `IntegrityError` otherwise.
 
-**Template lookup** — `APP_DIRS=True` and `DIRS=[]`, so templates must be in `italiastadiaapp/templates/`. The `index` view renders `"index.html"` (not `"italiastadiaapp/index.html"`). All other views do the same — no subdirectory prefix.
+### N+1 query prevention
 
-**URL reversal in tests** — All URL names must use the `italiastadiaapp` namespace: `reverse("italiastadiaapp:stadiums_geojson")`. Even though the root urlconf uses `include('italiastadiaapp.urls')` without an explicit namespace kwarg, Django still applies the `app_name` from the included module as the namespace — bare names like `reverse("stadiums_geojson")` will raise `NoReverseMatch`.
+All views that iterate over related objects must use `select_related` / `prefetch_related`:
+
+```python
+# BAD — fires one query per stadium to get city
+Stadium.objects.all()
+
+# GOOD
+Stadium.objects.select_related("city").prefetch_related("teams")
+```
+
+`stadium_list`, `team_list`, `stadiums_geojson`, and `stadium_detail` already follow this pattern. Keep it on any new view.
+
+### Template lookup
+
+`APP_DIRS=True` and `DIRS=[]`, so templates must be in `italiastadiaapp/templates/`. All views render with no subdirectory prefix — `render(request, "index.html")`, not `render(request, "italiastadiaapp/index.html")`.
+
+### URL reversal in tests
+
+All URL names must use the `italiastadiaapp` namespace: `reverse("italiastadiaapp:stadiums_geojson")`. Even though the root urlconf uses `include('italiastadiaapp.urls')` without an explicit namespace kwarg, Django still applies the `app_name` from the included module as the namespace — bare names like `reverse("stadiums_geojson")` will raise `NoReverseMatch`.
+
+## What NOT to do
+
+- Do not put business logic in templates
+- Do not query the DB in a template tag or loop
+- Do not use `CharField(max_length=100)` for scraped content
+- Do not add inline `<script>` blocks to templates — put JS in `static/js/`
+- Do not skip migrations — always run `makemigrations` after model changes
+- Do not hardcode API URLs in JS — use `data-url` attributes rendered by the template
 
 ## Roadmap context
 
-The project is currently Italy-only (Serie A/B/C). Planned expansions in `italianstadia_ROADMAP.md`:
-- Phase 2: Add `Country`, `League`, `TeamSeasonRecord` models for multi-league Europe
-- Phase 3: Historical season filtering
-- Phase 4: Mobile-first UI, PWA
-- Phase 5: Stadium depth (timelines, search, rankings)
+The project is currently Italy-only (Serie A/B/C). Full roadmap in `italianstadia_ROADMAP.md`.
 
-Do not skip Phase 1 stabilization tasks (DB field limits, JS modularization, N+1 fixes) before expanding to multi-league.
+**Planned expansions:**
+
+| Phase | Work |
+|-------|------|
+| Phase 2 | Add `Country`, `League`, `TeamSeasonRecord` models; multi-league Europe |
+| Phase 3 | Historical season filtering via `TeamSeasonRecord(team, league, season_year)` |
+| Phase 4 | Mobile-first UI, PWA |
+| Phase 5 | Stadium depth (timelines, search, rankings) |
+
+**Phase 2 leagues (priority order):**
+
+| League | Country | Division |
+|--------|---------|----------|
+| Serie A/B/C | Italy | 1–3 ✓ live |
+| Premier League | England | 1 |
+| Bundesliga / 2. Bundesliga | Germany | 1–2 |
+| La Liga / Segunda | Spain | 1–2 |
+| Ligue 1 / Ligue 2 | France | 1–2 |
+| Eredivisie | Netherlands | 1 |
+| Primeira Liga | Portugal | 1 |
+| Süper Lig | Turkey | 1 |
+| Scottish Premiership | Scotland | 1 |
+| Belgian Pro League | Belgium | 1 |
+
+Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 fixes) before expanding to multi-league.
