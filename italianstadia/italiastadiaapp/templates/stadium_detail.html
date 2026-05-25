@@ -59,6 +59,7 @@
 
             <hr>
 
+            {% with teams=stadium.teams.all %}
             <div class="row">
                 <div class="col-md-6">
                     <h5>Stadium information</h5>
@@ -85,7 +86,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    {% if stadium.latitude and stadium.longitude %}
+                    {% if has_coords %}
                     <div class="container mb-5">
                         <div class="card shadow-sm stadium-map-card">
                             <div class="card-header">
@@ -93,22 +94,22 @@
                             </div>
 
                             <div class="card-body p-0">
-                                {% with team=stadium.teams.all.0 %}
                                 <div
                                     id="stadium-detail-map"
                                     data-lat="{{ stadium.latitude }}"
                                     data-lng="{{ stadium.longitude }}"
                                     data-name="{{ stadium.name|escapejs }}"
-                                    {% if team and team.image_url %}
-                                    data-logo="{{ team.image_url }}"
+                                    {% with first_team=teams.0 %}
+                                    {% if first_team and first_team.image_url %}
+                                    data-logo="{{ first_team.image_url }}"
                                     {% endif %}
+                                    {% endwith %}
                                 ></div>
-                                {% endwith %}
                             </div>
 
                             <div class="card-footer d-flex gap-2">
                                 <a
-                                    href="https://www.google.com/maps/search/?api=1&query={{ stadium.latitude }},{{ stadium.longitude }}"
+                                    href="https://www.google.com/maps/search/?api=1&amp;query={{ stadium.latitude }},{{ stadium.longitude }}"
                                     target="_blank"
                                     class="btn btn-outline-primary btn-sm"
                                 >
@@ -139,13 +140,13 @@
                 </div>
             </div>
 
-            {% if stadium.teams.all %}
+            {% if teams %}
             <hr>
 
             <h5>Teams using this stadium</h5>
 
             <div class="row">
-                {% for team in stadium.teams.all %}
+                {% for team in teams %}
                 <div class="col-md-4 mb-3">
                     <div class="card h-100 border-0 bg-light">
                         <div class="card-body">
@@ -165,6 +166,7 @@
 
         </div>
     </div>
+    {% endwith %}
 </div>
 
 

@@ -8,7 +8,10 @@ def stadium_detail(request, id):
         Stadium.objects.select_related("city").prefetch_related("teams"),
         id=id,
     )
-    return render(request, "stadium_detail.html", {"stadium": stadium})
+    return render(request, "stadium_detail.html", {
+        "stadium": stadium,
+        "has_coords": stadium.latitude is not None and stadium.longitude is not None,
+    })
 
 def stadium_development_detail(request, pk):
     development = get_object_or_404(
