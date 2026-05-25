@@ -1,6 +1,6 @@
 import pytest
 
-from italiastadiaapp.models import City, Stadium, Team, StadiumDevelopment
+from italiastadiaapp.models import City, Country, League, Stadium, Team, StadiumDevelopment
 
 
 @pytest.mark.django_db
@@ -59,3 +59,24 @@ def test_stadium_development_string_representation():
         longitude=9.0,
     )
     assert str(stadium_development) == "Test New Stadium"
+
+
+@pytest.mark.django_db
+def test_country_and_league_str():
+    country = Country.objects.create(name="Italy", code="IT")
+    assert str(country) == "Italy"
+
+    league = League.objects.create(name="Serie A", country=country, division_level=1)
+    assert "Serie A" in str(league)
+    assert "Italy" in str(league)
+
+
+@pytest.mark.django_db
+def test_league_ordering():
+    country = Country.objects.create(name="Italy", code="IT")
+    League.objects.create(name="Serie C", country=country, division_level=3)
+    League.objects.create(name="Serie A", country=country, division_level=1)
+    League.objects.create(name="Serie B", country=country, division_level=2)
+
+    names = list(League.objects.filter(country=country).values_list("name", flat=True))
+    assert names == ["Serie A", "Serie B", "Serie C"]
