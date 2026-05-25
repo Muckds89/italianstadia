@@ -106,7 +106,7 @@
                                 {% endwith %}
                             </div>
 
-                            <div class="card-footer">
+                            <div class="card-footer d-flex gap-2">
                                 <a
                                     href="https://www.google.com/maps/search/?api=1&query={{ stadium.latitude }},{{ stadium.longitude }}"
                                     target="_blank"
@@ -114,6 +114,9 @@
                                 >
                                     Open in Google Maps
                                 </a>
+                                <button id="replay-animation" class="btn btn-outline-secondary btn-sm">
+                                    Replay ↺
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -165,8 +168,6 @@
 </div>
 
 
-
-<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="{% static 'js/stadium-detail-map.js' %}"></script>
