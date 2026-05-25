@@ -42,8 +42,11 @@ def test_stadiums_geojson_returns_valid_feature_collection(client):
 
 @pytest.mark.django_db
 def test_stadiums_geojson_team_league_fields(client):
-    country = Country.objects.create(name="Italy", code="IT")
-    league = League.objects.create(name="Serie A", country=country, division_level=1)
+    # Use get_or_create — data migration may have already seeded Italy / Serie A
+    country, _ = Country.objects.get_or_create(name="Italy", defaults={"code": "IT"})
+    league, _ = League.objects.get_or_create(
+        name="Serie A", country=country, defaults={"division_level": 1}
+    )
 
     city = City.objects.create(name="Milan", population=1300000, country="Italy")
     stadium = Stadium.objects.create(

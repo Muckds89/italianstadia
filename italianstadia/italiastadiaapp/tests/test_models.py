@@ -63,20 +63,24 @@ def test_stadium_development_string_representation():
 
 @pytest.mark.django_db
 def test_country_and_league_str():
-    country = Country.objects.create(name="Italy", code="IT")
+    # Use get_or_create — data migration may have already seeded Italy
+    country, _ = Country.objects.get_or_create(name="Italy", defaults={"code": "IT"})
     assert str(country) == "Italy"
 
-    league = League.objects.create(name="Serie A", country=country, division_level=1)
+    league, _ = League.objects.get_or_create(
+        name="Serie A", country=country, defaults={"division_level": 1}
+    )
     assert "Serie A" in str(league)
     assert "Italy" in str(league)
 
 
 @pytest.mark.django_db
 def test_league_ordering():
-    country = Country.objects.create(name="Italy", code="IT")
-    League.objects.create(name="Serie C", country=country, division_level=3)
-    League.objects.create(name="Serie A", country=country, division_level=1)
-    League.objects.create(name="Serie B", country=country, division_level=2)
+    # Use get_or_create — data migration may have already seeded these rows
+    country, _ = Country.objects.get_or_create(name="Italy", defaults={"code": "IT"})
+    League.objects.get_or_create(name="Serie C", country=country, defaults={"division_level": 3})
+    League.objects.get_or_create(name="Serie A", country=country, defaults={"division_level": 1})
+    League.objects.get_or_create(name="Serie B", country=country, defaults={"division_level": 2})
 
     names = list(League.objects.filter(country=country).values_list("name", flat=True))
     assert names == ["Serie A", "Serie B", "Serie C"]
