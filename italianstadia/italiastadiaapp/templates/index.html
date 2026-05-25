@@ -75,10 +75,6 @@
         .mode-switch input:checked + .mode-slider::before {
             transform: translateX(38px);
         }
-        .navbar {
-            height: 80px;
-        }
-
         .navbar-brand {
             font-size: clamp(18px, 1.4vw, 28px);
             white-space: nowrap;
@@ -142,100 +138,91 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container-fluid">
+<nav class="navbar navbar-dark bg-dark fixed-top py-0">
+    <div class="container-fluid flex-wrap py-1">
 
         <a class="navbar-brand" href="/">Stadiums of Italy</a>
 
-        <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#mainNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <!-- LEFT LINKS -->
+        <ul class="navbar-nav flex-row me-auto">
+            <li class="nav-item">
+                <a class="nav-link px-2" href="{% url 'italiastadiaapp:stadium_list' %}">Stadiums</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-2" href="{% url 'italiastadiaapp:team_list' %}">Teams</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-2" href="{% url 'italiastadiaapp:city_list' %}">Cities</a>
+            </li>
+        </ul>
 
-        <div class="collapse navbar-collapse" id="mainNavbar"></div>
+        <div class="mode-switch-wrap">
+            <span id="operationalLabel" class="mode-label active">Operational</span>
+            <label class="mode-switch">
+                <input type="checkbox" id="mapModeToggle">
+                <span class="mode-slider"></span>
+            </label>
+            <span id="developmentLabel" class="mode-label">Under Development</span>
+        </div>
 
-            <!-- LEFT LINKS -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Flex break: push filters to second row -->
+        <div class="w-100"></div>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'italiastadiaapp:stadium_list' %}">Stadiums</a>
-                </li>
+        <!-- FILTER AREA — second row -->
+        <div class="d-flex align-items-center flex-wrap gap-2 pb-1 w-100">
+            <div id="operationalFilters" class="d-flex align-items-center flex-wrap gap-2">
+                <select id="countryFilter" class="form-select">
+                    <option value="">All countries</option>
+                </select>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'italiastadiaapp:team_list' %}">Teams</a>
-                </li>
+                <select id="leagueFilter" class="form-select">
+                    <option value="">All leagues</option>
+                </select>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'italiastadiaapp:city_list' %}">Cities</a>
-                </li>
+                <select id="gironeFilter" class="form-select" style="display: none;">
+                    <option value="">All Gironi</option>
+                    <option value="A">Girone A</option>
+                    <option value="B">Girone B</option>
+                    <option value="C">Girone C</option>
+                </select>
 
-            </ul>
-            <div class="mode-switch-wrap">
-                <span id="operationalLabel" class="mode-label active">Operational</span>
+                <select id="ownershipFilter" class="form-select">
+                    <option value="">All ownership</option>
+                    <option value="PUBLIC">Public</option>
+                    <option value="PRIVATE">Private</option>
+                    <option value="MIXED">Mixed</option>
+                    <option value="UNKNOWN">Unknown</option>
+                </select>
 
-                <label class="mode-switch">
-                    <input type="checkbox" id="mapModeToggle">
-                    <span class="mode-slider"></span>
-                </label>
-
-                <span id="developmentLabel" class="mode-label">Under Development</span>
+                <select id="stadiumFilter" class="form-select">
+                    <option value="">All stadiums</option>
+                </select>
             </div>
-<!-- FILTER AREA -->
-<div class="d-flex align-items-center gap-3">
-    <div id="operationalFilters" class="d-flex align-items-center gap-3">
-        <select id="countryFilter" class="form-select w-auto">
-            <option value="">All countries</option>
-        </select>
 
-        <select id="leagueFilter" class="form-select w-auto">
-            <option value="">All leagues</option>
-        </select>
+            <div id="developmentFilters" class="d-none align-items-center flex-wrap gap-2">
+                <select id="developmentStatusFilter" class="form-select">
+                    <option value="">All statuses</option>
+                </select>
 
-        <select id="gironeFilter" class="form-select w-auto" style="display: none;">
-            <option value="">All Gironi</option>
-            <option value="A">Girone A</option>
-            <option value="B">Girone B</option>
-            <option value="C">Girone C</option>
-        </select>
+                <select id="developmentYearFilter" class="form-select">
+                    <option value="">All opening years</option>
+                </select>
 
-        <select id="ownershipFilter" class="form-select w-auto">
-            <option value="">All ownership</option>
-            <option value="PUBLIC">Public</option>
-            <option value="PRIVATE">Private</option>
-            <option value="MIXED">Mixed</option>
-            <option value="UNKNOWN">Unknown</option>
-        </select>
+                <select id="developmentStadiumFilter" class="form-select">
+                    <option value="">All projects</option>
+                </select>
+            </div>
 
-        <select id="stadiumFilter" class="form-select w-auto">
-            <option value="">All stadiums</option>
-        </select>
+            <span id="stadiumCounter" class="badge bg-light text-dark ms-auto">
+                0 stadiums
+            </span>
+        </div>
     </div>
-
-    <div id="developmentFilters" class="d-none align-items-center gap-3">
-        <select id="developmentStatusFilter" class="form-select w-auto">
-            <option value="">All statuses</option>
-        </select>
-
-        <select id="developmentYearFilter" class="form-select w-auto">
-            <option value="">All opening years</option>
-        </select>
-
-        <select id="developmentStadiumFilter" class="form-select w-auto">
-            <option value="">All projects</option>
-        </select>
-    </div>
-
-    <span id="stadiumCounter" class="badge bg-light text-dark">
-        0 stadiums
-    </span>
-
-</div>
 </nav>
 <div id="map"></div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{% static 'js/map.js' %}?v=8"></script>
+<script src="{% static 'js/map.js' %}?v=9"></script>
 </body>
 </html>
