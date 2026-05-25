@@ -71,14 +71,17 @@ build.sh                ← Render deploy: pip install + collectstatic + migrate
 ## Data model
 
 ```
-City (name, population, country, wikipedia_url, image_url, description)
+Country (name unique, code unique[ISO-2])
+  └── League (name, country FK, division_level[1=top flight, 2=second, ...])
+
+City (name, population, country CharField, wikipedia_url, image_url, description)
   └── Stadium (name, capacity, address, year_of_construction, latitude, longitude,
                ownership[PUBLIC/PRIVATE/MIXED/UNKNOWN], owner_raw,
                wikipedia_url, transfermarkt_url, image_url, description)
         └── Team (name, tier[1=A/2=B/3=C], girone[A/B/C], founded, manager,
                   num_of_titles, average_attendance, stadium FK, city FK,
-                  wikipedia_url, transfermarkt_url, image_url,
-                  under_development_stadium FK → StadiumDevelopment)
+                  league FK → League (nullable), wikipedia_url, transfermarkt_url,
+                  image_url, under_development_stadium FK → StadiumDevelopment)
 StadiumDevelopment (name, project_type[NEW/REDEVELOPMENT/EXPANSION],
                     status[PLANNING/APPROVED/UNDER_CONSTRUCTION/ON_HOLD/COMPLETED],
                     future_capacity, estimated_opening, latitude, longitude,
@@ -86,7 +89,7 @@ StadiumDevelopment (name, project_type[NEW/REDEVELOPMENT/EXPANSION],
                     stadium FK → existing Stadium if redevelopment)
 ```
 
-Stadium `tier` filtering is derived from the teams that play there — `stadium_list` view groups stadiums by `{team.tier for team in stadium.teams.all()}`.
+Stadium `tier` filtering is derived from the teams that play there — `stadium_list` view groups stadiums by `{team.tier for team in stadium.teams.all()}`. For the map filter, country and league are derived from `Team.league FK → League → Country`.
 
 ## GeoJSON endpoints
 
@@ -103,15 +106,22 @@ Both endpoints return `[longitude, latitude]` coordinates (GeoJSON standard). Cu
     "geometry": {"type": "Point", "coordinates": [longitude, latitude]},
     "properties": {
       "id": 1, "name": "...", "capacity": 80000,
-      "city": "Milan", "ownership": "PUBLIC", "owner_raw": "...",
+      "city": "Milan", "country": "Italy",
+      "ownership": "PUBLIC", "owner_raw": "...",
       "wikipedia_url": "...", "transfermarkt_url": "...",
-      "teams": [{"id": 1, "name": "...", "tier": 1, "tier_name": "Serie A", "girone": ""}]
+      "teams": [{
+        "id": 1, "name": "...",
+        "tier": 1, "tier_name": "Serie A", "girone": "",
+        "league_id": 1, "league_name": "Serie A",
+        "division_level": 1, "country": "Italy",
+        "wikipedia_url": "...", "transfermarkt_url": "..."
+      }]
     }
   }]
 }
 ```
 
-The `stadiums_geojson` view uses `select_related("city").prefetch_related("teams")`. `DecimalField` coordinates are cast to `float()` before serialisation so they come out as JSON numbers, not strings.
+The `stadiums_geojson` view uses `select_related("city").prefetch_related("teams__league__country")`. `DecimalField` coordinates are cast to `float()` before serialisation so they come out as JSON numbers, not strings.
 
 ## Frontend (map.js)
 
@@ -189,7 +199,7 @@ The project is currently Italy-only (Serie A/B/C). Full roadmap in `italianstadi
 
 | Phase | Work |
 |-------|------|
-| Phase 2 | Add `Country`, `League`, `TeamSeasonRecord` models; multi-league Europe |
+| Phase 2 | `Country` ✓, `League` ✓ models live; scrape European data; `TeamSeasonRecord` |
 | Phase 3 | Historical season filtering via `TeamSeasonRecord(team, league, season_year)` |
 | Phase 4 | Mobile-first UI, PWA |
 | Phase 5 | Stadium depth (timelines, search, rankings) |

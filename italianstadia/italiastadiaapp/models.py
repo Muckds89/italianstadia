@@ -2,8 +2,8 @@ from django.db import models
 
 
 class Country(models.Model):
-    name = models.CharField(max_length=255)
-    code = models.CharField(max_length=2)  # ISO 3166-1 alpha-2
+    name = models.CharField(max_length=255, unique=True)
+    code = models.CharField(max_length=2, unique=True)  # ISO 3166-1 alpha-2
 
     def __str__(self):
         return self.name

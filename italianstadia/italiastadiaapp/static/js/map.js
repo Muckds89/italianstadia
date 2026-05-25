@@ -118,7 +118,7 @@ function buildPopupContent(props, teamIndex = 0) {
                 team
                 ? `
                     <strong>Team:</strong> ${team.name}<br>
-                    <strong>League:</strong> ${team.tier_name || "Unknown"}${team.girone ? ` - Girone ${team.girone}` : ""}<br>
+                    <strong>League:</strong> ${team.league_name || team.tier_name || "Unknown"}${team.girone ? ` - Girone ${team.girone}` : ""}<br>
                     ${team.wikipedia_url ? `<a href="${team.wikipedia_url}" target="_blank">Team Wikipedia</a><br>` : ""}
                     ${team.transfermarkt_url ? `<a href="${team.transfermarkt_url}" target="_blank">Team Transfermarkt</a><br>` : ""}
                 `
@@ -583,8 +583,8 @@ countryFilter.addEventListener("change", function () {
 
 leagueFilter.addEventListener("change", function () {
     const selected = leagueFilter.options[leagueFilter.selectedIndex];
-    const divLevel = selected ? Number(selected.dataset.divisionLevel) : null;
-    const country  = selected ? selected.dataset.country : "";
+    const divLevel = selected?.value ? Number(selected.dataset.divisionLevel) : null;
+    const country  = selected?.value ? selected.dataset.country : "";
 
     if (divLevel === 3 && country === "Italy") {
         gironeFilter.style.display = "inline-block";
