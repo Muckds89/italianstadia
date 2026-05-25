@@ -59,11 +59,14 @@ def stadium_developments_geojson(request):
 def stadiums_geojson(request):
     features = []
 
-    for s in Stadium.objects.prefetch_related("teams").select_related("city"):
+    for s in Stadium.objects.select_related("city").prefetch_related(
+        "teams__league__country"
+    ):
         if s.latitude is None or s.longitude is None:
             continue
 
         teams = list(s.teams.all())
+        city_country = s.city.country if s.city else ""
 
         features.append({
             "type": "Feature",
@@ -75,6 +78,7 @@ def stadiums_geojson(request):
                 "id": s.id,
                 "name": s.name,
                 "city": s.city.name if s.city else "",
+                "country": city_country,
                 "capacity": s.capacity,
                 "ownership": s.ownership,
                 "owner_raw": s.owner_raw or "",
@@ -87,6 +91,14 @@ def stadiums_geojson(request):
                         "tier": t.tier,
                         "tier_name": t.get_tier_display(),
                         "girone": t.girone or "",
+                        "league_id": t.league_id,
+                        "league_name": t.league.name if t.league else t.get_tier_display(),
+                        "division_level": t.league.division_level if t.league else t.tier,
+                        "country": (
+                            t.league.country.name
+                            if t.league and t.league.country
+                            else city_country
+                        ),
                         "wikipedia_url": t.wikipedia_url or "",
                         "transfermarkt_url": t.transfermarkt_url or "",
                     }

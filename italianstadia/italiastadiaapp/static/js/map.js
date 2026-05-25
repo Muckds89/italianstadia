@@ -23,10 +23,11 @@ let legendDiv = null;
 
 
 
-const tierFilter = document.getElementById("tierFilter");
-const gironeFilter = document.getElementById("gironeFilter");
+const countryFilter  = document.getElementById("countryFilter");
+const leagueFilter   = document.getElementById("leagueFilter");
+const gironeFilter   = document.getElementById("gironeFilter");
 const ownershipFilter = document.getElementById("ownershipFilter");
-const stadiumFilter = document.getElementById("stadiumFilter");
+const stadiumFilter  = document.getElementById("stadiumFilter");
 const stadiumCounter = document.getElementById("stadiumCounter");
 
 const mapModeToggle = document.getElementById("mapModeToggle");
@@ -48,48 +49,54 @@ legend.onAdd = function () {
 
 legend.addTo(map);
 
+const LEVEL_COLORS = { 1: "#00c853", 2: "#ffffff", 3: "#ff1744" };
+
 function updateLegend(mode) {
     if (!legendDiv) return;
 
     if (mode === "development") {
         legendDiv.innerHTML = `
             <h6 class="legend-title">Status</h6>
-
             <div class="legend-item">
                 <span class="legend-dot status-planning"></span>
                 Planning
             </div>
-
             <div class="legend-item">
                 <span class="legend-dot status-approved"></span>
                 Approved
             </div>
-
             <div class="legend-item">
                 <span class="legend-dot status-construction"></span>
                 Under construction
             </div>
         `;
-    } else {
-        legendDiv.innerHTML = `
-            <h6 class="legend-title">Leagues</h6>
-
-            <div class="legend-item">
-                <span class="legend-dot serie-a"></span>
-                Serie A
-            </div>
-
-            <div class="legend-item">
-                <span class="legend-dot serie-b"></span>
-                Serie B
-            </div>
-
-            <div class="legend-item">
-                <span class="legend-dot serie-c"></span>
-                Serie C
-            </div>
-        `;
+        return;
     }
+
+    // operational: build from loaded marker data for the current country selection
+    const country = countryFilter ? countryFilter.value : "";
+    const seen = new Map();
+    markers.forEach(m => {
+        m.leagues.forEach(l => {
+            if (!l.id || seen.has(l.id)) return;
+            if (country && l.country !== country) return;
+            seen.set(l.id, l);
+        });
+    });
+
+    const leagues = [...seen.values()].sort(
+        (a, b) => (a.divisionLevel ?? 99) - (b.divisionLevel ?? 99)
+    );
+
+    const items = leagues.map(l => {
+        const color = LEVEL_COLORS[l.divisionLevel] || "#9e9e9e";
+        return `<div class="legend-item">
+                    <span class="legend-dot" style="background:${color};border:1px solid #555"></span>
+                    ${l.name}
+                </div>`;
+    }).join("");
+
+    legendDiv.innerHTML = `<h6 class="legend-title">Leagues</h6>${items || "<em style='font-size:11px;color:#aaa'>No leagues</em>"}`;
 }
 // console.log("Legend added ", document.querySelector(".legend"));
 
@@ -184,18 +191,24 @@ function closeActivePopup() {
 }
 
 function applyFilters(updateStadiumDropdown = true) {
-    const selectedTier = tierFilter.value;
-    const selectedGirone = gironeFilter.value;
+    const selectedCountry  = countryFilter.value;
+    const selectedLeague   = leagueFilter.value;   // league ID string or ""
+    const selectedGirone   = gironeFilter.value;
     const selectedOwnership = ownershipFilter.value;
-    const selectedStadium = stadiumFilter.value;
+    const selectedStadium  = stadiumFilter.value;
 
     let visibleMarkers = [];
 
     markers.forEach(marker => {
-        const tierMatches = !selectedTier || marker.tiers.includes(selectedTier);
+        const countryMatches =
+            !selectedCountry ||
+            marker.leagues.some(l => l.country === selectedCountry);
+
+        const leagueMatches =
+            !selectedLeague ||
+            marker.leagues.some(l => l.id === selectedLeague);
 
         const gironeMatches =
-            selectedTier !== "3" ||
             !selectedGirone ||
             marker.gironi.includes(selectedGirone);
 
@@ -205,7 +218,8 @@ function applyFilters(updateStadiumDropdown = true) {
         const stadiumMatches =
             !selectedStadium || marker.stadiumId === selectedStadium;
 
-        if (tierMatches && gironeMatches && ownershipMatches && stadiumMatches) {
+        if (countryMatches && leagueMatches && gironeMatches &&
+                ownershipMatches && stadiumMatches) {
             marker.addTo(map);
             visibleMarkers.push(marker);
         } else {
@@ -213,7 +227,8 @@ function applyFilters(updateStadiumDropdown = true) {
         }
     });
 
-    stadiumCounter.textContent = `${visibleMarkers.length} stadium${visibleMarkers.length === 1 ? "" : "s"}`;
+    stadiumCounter.textContent =
+        `${visibleMarkers.length} stadium${visibleMarkers.length === 1 ? "" : "s"}`;
 
     if (updateStadiumDropdown) {
         updateStadiumDropdownOptions(visibleMarkers);
@@ -223,27 +238,25 @@ function applyFilters(updateStadiumDropdown = true) {
 }
 
 function getMarkerColor(marker) {
-    const tiers = marker.tiers || [];
-    const gironi = marker.gironi || [];
+    const primary = marker.primaryLeague;
+    const level = primary ? primary.divisionLevel : null;
+    const isItaly = primary ? primary.country === "Italy" : false;
 
-    if (tiers.includes("1")) {
-        return "#00c853"; // green - Serie A
+    if (level === 1) return "#00c853";  // green  — top flight
+
+    if (level === 2) return "#ffffff";  // white  — second tier
+
+    if (level === 3) {
+        if (isItaly) {
+            const girone = (marker.gironi || [])[0];
+            if (girone === "A") return "#ff8a80";
+            if (girone === "B") return "#ff5252";
+            if (girone === "C") return "#d50000";
+        }
+        return "#ff1744";              // generic third-tier red
     }
 
-    if (tiers.includes("2")) {
-        return "#ffffff"; // white - Serie B
-    }
-
-    if (tiers.includes("3")) {
-        if (gironi.includes("A")) return "#ff8a80"; // light red
-        if (gironi.includes("B")) return "#ff5252"; // medium red
-        if (gironi.includes("C")) return "#d50000"; // dark red
-        return "#ff1744"; // generic Serie C red
-    }
-
-
-
-    return "#00e5ff"; // fallback
+    return "#9e9e9e";                  // grey — unknown / unassigned
 }
 
 function updateStadiumDropdownOptions(visibleMarkers) {
@@ -427,6 +440,45 @@ function applyDevelopmentFilters() {
 // }))
 // );
 
+function populateCountryFilter() {
+    const countries = [...new Set(
+        markers.flatMap(m => m.leagues.map(l => l.country)).filter(Boolean)
+    )].sort();
+    countryFilter.innerHTML = `<option value="">All countries</option>`;
+    countries.forEach(c => {
+        const opt = document.createElement("option");
+        opt.value = c;
+        opt.textContent = c;
+        countryFilter.appendChild(opt);
+    });
+}
+
+function populateLeagueFilter(country) {
+    const seen = new Map();
+    markers.forEach(m => {
+        m.leagues.forEach(l => {
+            if (!l.id) return;
+            if (country && l.country !== country) return;
+            if (!seen.has(l.id)) seen.set(l.id, l);
+        });
+    });
+    const leagues = [...seen.values()].sort(
+        (a, b) => (a.divisionLevel ?? 99) - (b.divisionLevel ?? 99)
+    );
+    leagueFilter.innerHTML = `<option value="">All leagues</option>`;
+    leagues.forEach(l => {
+        const opt = document.createElement("option");
+        opt.value = l.id;
+        opt.textContent = l.name;
+        opt.dataset.divisionLevel = l.divisionLevel ?? "";
+        opt.dataset.country = l.country;
+        leagueFilter.appendChild(opt);
+    });
+    leagueFilter.value = "";
+    gironeFilter.style.display = "none";
+    gironeFilter.value = "";
+}
+
 fetch("/api/stadiums/")
   
     .then(res => res.json())
@@ -449,18 +501,24 @@ fetch("/api/stadiums/")
 
             marker.teams = props.teams || [];
 
-            marker.tiers =
-                marker.teams.length > 0
-                    ? marker.teams.map(t => String(t.tier))
-                    : (props.tier ? [String(props.tier)] : []);
+            marker.leagues = marker.teams.map(t => ({
+                id:            String(t.league_id ?? ""),
+                name:          t.league_name  || "",
+                divisionLevel: t.division_level != null ? Number(t.division_level) : null,
+                country:       t.country || props.country || "",
+            }));
 
-            marker.gironi =
-                marker.teams.length > 0
-                    ? marker.teams.map(t => t.girone ? String(t.girone) : "")
-                    : (props.girone ? [String(props.girone)] : []);
-            marker.setStyle({
-                fillColor: getMarkerColor(marker)
-            });
+            const sortedLeagues = [...marker.leagues].sort(
+                (a, b) => (a.divisionLevel ?? 99) - (b.divisionLevel ?? 99)
+            );
+            marker.primaryLeague = sortedLeagues[0] || null;
+            marker.country = marker.primaryLeague
+                ? marker.primaryLeague.country
+                : (props.country || "");
+
+            marker.gironi = marker.teams.map(t => t.girone || "");
+
+            marker.setStyle({ fillColor: getMarkerColor(marker) });
             marker.ownership = props.ownership ? String(props.ownership) : "UNKNOWN";
             marker.stadiumId = String(props.id);
             marker.stadiumName = props.name;
@@ -510,17 +568,30 @@ fetch("/api/stadiums/")
             operationalMarkers.push(marker);
         });
 
-        applyFilters(); 
+        populateCountryFilter();
+        populateLeagueFilter("");
+        updateLegend("operational");
+        applyFilters();
     });
 
-tierFilter.addEventListener("change", function () {
-    if (this.value === "3") {
+countryFilter.addEventListener("change", function () {
+    stadiumFilter.value = "";
+    populateLeagueFilter(this.value);
+    updateLegend("operational");
+    applyFilters();
+});
+
+leagueFilter.addEventListener("change", function () {
+    const selected = leagueFilter.options[leagueFilter.selectedIndex];
+    const divLevel = selected ? Number(selected.dataset.divisionLevel) : null;
+    const country  = selected ? selected.dataset.country : "";
+
+    if (divLevel === 3 && country === "Italy") {
         gironeFilter.style.display = "inline-block";
     } else {
         gironeFilter.style.display = "none";
         gironeFilter.value = "";
     }
-
     stadiumFilter.value = "";
     applyFilters();
 });

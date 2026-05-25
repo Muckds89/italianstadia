@@ -1,5 +1,18 @@
 from django.contrib import admin
-from .models import City, Stadium, Team
+from .models import City, Country, League, Stadium, Team
+
+
+@admin.register(Country)
+class CountryAdmin(admin.ModelAdmin):
+    list_display = ("name", "code")
+    search_fields = ("name", "code")
+
+
+@admin.register(League)
+class LeagueAdmin(admin.ModelAdmin):
+    list_display = ("name", "country", "division_level")
+    list_filter = ("country",)
+    ordering = ("country", "division_level")
 
 
 @admin.register(City)
@@ -39,6 +52,7 @@ class TeamAdmin(admin.ModelAdmin):
         "name",
         "city",
         "stadium",
+        "league",
         "tier",
         "girone",
         "founded",
@@ -47,10 +61,9 @@ class TeamAdmin(admin.ModelAdmin):
         "wikipedia_url",
         "transfermarkt_url",
         "image_url",
-
     )
     search_fields = ("name", "city__name", "stadium__name")
-    list_filter = ("tier", "city")
+    list_filter = ("league", "tier", "city")
 
 from .models import StadiumDevelopment
 

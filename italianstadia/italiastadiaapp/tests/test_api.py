@@ -3,8 +3,11 @@ from django.urls import reverse
 
 from italiastadiaapp.models import (
     City,
+    Country,
+    League,
     Stadium,
     StadiumDevelopment,
+    Team,
 )
 
 
@@ -32,7 +35,37 @@ def test_stadiums_geojson_returns_valid_feature_collection(client):
 
     assert data["type"] == "FeatureCollection"
     assert len(data["features"]) == 1
-    assert data["features"][0]["geometry"]["coordinates"] == [9.0, 45.0]
+    feature = data["features"][0]
+    assert feature["geometry"]["coordinates"] == [9.0, 45.0]
+    assert "country" in feature["properties"]
+
+
+@pytest.mark.django_db
+def test_stadiums_geojson_team_league_fields(client):
+    country = Country.objects.create(name="Italy", code="IT")
+    league = League.objects.create(name="Serie A", country=country, division_level=1)
+
+    city = City.objects.create(name="Milan", population=1300000, country="Italy")
+    stadium = Stadium.objects.create(
+        name="San Siro", city=city, latitude=45.478, longitude=9.124, ownership="PUBLIC"
+    )
+    Team.objects.create(
+        name="AC Milan", city=city, stadium=stadium, tier=1, league=league
+    )
+
+    response = client.get(reverse("italiastadiaapp:stadiums_geojson"))
+    assert response.status_code == 200
+
+    teams = response.json()["features"][0]["properties"]["teams"]
+    assert len(teams) == 1
+    t = teams[0]
+    assert "league_id" in t
+    assert "league_name" in t
+    assert "division_level" in t
+    assert "country" in t
+    assert t["league_name"] == "Serie A"
+    assert t["division_level"] == 1
+    assert t["country"] == "Italy"
 
 
 @pytest.mark.django_db
