@@ -98,7 +98,6 @@ function updateLegend(mode) {
 
     legendDiv.innerHTML = `<h6 class="legend-title">Leagues</h6>${items || "<em style='font-size:11px;color:#aaa'>No leagues</em>"}`;
 }
-// console.log("Legend added ", document.querySelector(".legend"));
 
 function buildPopupContent(props, teamIndex = 0) {
     const teams = props.teams || [];
@@ -430,15 +429,6 @@ function applyDevelopmentFilters() {
 
     stadiumCounter.textContent = `${visibleMarkers.length} project${visibleMarkers.length === 1 ? "" : "s"}`;
 }
-// console.log(data.features.length);
-
-// console.log(
-// data.features.map(f => ({
-//     name: f.properties.name,
-//     coords: f.geometry.coordinates,
-//     tier: f.properties.teams?.map(t => t.tier)
-// }))
-// );
 
 function populateCountryFilter() {
     const countries = [...new Set(
