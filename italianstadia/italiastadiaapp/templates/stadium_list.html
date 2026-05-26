@@ -15,86 +15,95 @@
         left: 0;
         right: 0;
         z-index: 99999;
+        padding: 6px 12px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.12);
     }
+    body { padding-top: 56px; }
     </style>
 </head>
-<body>
+<body id="top">
 
+<div class="fixed-team-nav">
+    <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-secondary btn-sm">Back to Map</a>
 
-<div class="fixed-team-nav" >
-    <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-secondary btn-sm me-2">Back to Map</a>
+    <form method="get" class="d-inline-flex align-items-center gap-2 ms-2">
+        <select name="country" class="form-select form-select-sm" style="width:auto"
+                onchange="this.form.submit()">
+            <option value="">All countries</option>
+            {% for c in countries %}
+                <option value="{{ c }}" {% if c == selected_country %}selected{% endif %}>{{ c }}</option>
+            {% endfor %}
+        </select>
+    </form>
 
-    {% for key, section in tier_sections.items %}
-        {% if section.stadia %}
-            <a href="#{{ key }}" class="btn btn-outline-primary btn-sm me-2">
-                {{ section.title }} ({{ section.stadia|length }})
-            </a>
-        {% endif %}
+    {% for section in sections %}
+        <a href="#{{ section.anchor }}" class="btn btn-outline-primary btn-sm">
+            {{ section.league_label }} ({{ section.stadia|length }})
+        </a>
     {% endfor %}
 
-    <a href="#top" class="btn btn-outline-secondary btn-sm ms-2">Back to top</a>
+    <a href="#top" class="btn btn-outline-secondary btn-sm ms-auto">Top</a>
 </div>
 
 <div class="container mt-4">
 
-    <h1>Stadium List</h1>
+    <h1>Stadiums{% if selected_country %} — {{ selected_country }}{% endif %}</h1>
     <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-secondary mb-3">Back to Map</a>
 
-    <h2>Italian Stadiums</h2>
-    <p>
-        Explore stadiums across Italy, from iconic venues like San Siro to smaller regional grounds.
-    </p>
+    {% if not sections %}
+        <p class="text-muted">No stadiums found{% if selected_country %} for {{ selected_country }}{% endif %}.</p>
+    {% endif %}
 
-
-
-    {% for key, section in tier_sections.items %}
-        {% if section.stadia %}
-            <section id="{{ key }}" class="mb-5">
-                <div class="d-flex justify-content-between align-items-end mb-3">
-                    <div>
-                        <h2 class="mb-1">{{ section.title }}</h2>
-                        <p class="text-muted mb-0">
-                            Ordered by capacity, largest first.
-                        </p>
-                    </div>
-
-                    <a href="#top" class="btn btn-outline-secondary btn-sm">Back to top</a>
+    {% for section in sections %}
+        <section id="{{ section.anchor }}" class="mb-5">
+            <div class="d-flex justify-content-between align-items-end mb-3">
+                <div>
+                    <h2 class="mb-1">
+                        {{ section.league_label }}
+                        {% if section.league %}
+                            <small class="text-muted fs-6">({{ section.league.country.name }})</small>
+                        {% endif %}
+                    </h2>
+                    <p class="text-muted mb-0">Ordered by capacity, largest first.</p>
                 </div>
+                <a href="#top" class="btn btn-outline-secondary btn-sm">Back to top</a>
+            </div>
 
-                <div class="row">
-                    {% for stadium in section.stadia %}
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100 shadow-sm">
-                            {% if stadium.image_url %}
-                            <img src="{{ stadium.image_url }}" class="card-img-top" alt="{{ stadium.name }}">
-                            {% endif %}
+            <div class="row">
+                {% for stadium in section.stadia %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        {% if stadium.image_url %}
+                        <img src="{{ stadium.image_url }}" class="card-img-top" alt="{{ stadium.name }}">
+                        {% endif %}
 
-                            <div class="card-body">
-                                <h5 class="card-title">{{ stadium.name }}</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ stadium.name }}</h5>
 
-                                <p class="card-text">
-                                    {{ stadium.city }}<br>
+                            <p class="card-text">
+                                {{ stadium.city }}<br>
+                                {% if stadium.capacity %}
+                                    Capacity: {{ stadium.capacity }}
+                                {% else %}
+                                    Capacity: Unknown
+                                {% endif %}
+                            </p>
 
-                                    {% if stadium.capacity %}
-                                        Capacity: {{ stadium.capacity }}
-                                    {% else %}
-                                        Capacity: Unknown
-                                    {% endif %}
-                                </p>
-
-                                <a href="/stadium/{{ stadium.id }}/" class="btn btn-primary">
-                                    View details
-                                </a>
-                            </div>
+                            <a href="/stadium/{{ stadium.id }}/" class="btn btn-primary">
+                                View details
+                            </a>
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
-            </section>
-        {% endif %}
+                {% endfor %}
+            </div>
+        </section>
     {% endfor %}
 
 </div>
 </body>
-
 </html>

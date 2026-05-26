@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, JsonResponse
-from .models import City, Stadium, Team, StadiumDevelopment
+from .models import City, League, Stadium, Team, StadiumDevelopment
 
 
 def stadium_detail(request, id):
@@ -115,82 +115,144 @@ def stadiums_geojson(request):
 def index(request):
     return render(request, "index.html")
 
-def city_list(request):
-    cities = City.objects.all().order_by("-population", "name")
-    return render(request, 'city_list.html', {'cities': cities})
-
-def stadium_list(request):
-    stadia = (
-        Stadium.objects
-        .select_related("city")
-        .prefetch_related("teams")
-        .all()
+def _available_countries():
+    """Sorted list of country names that appear in the DB across leagues."""
+    return list(
+        League.objects
+        .select_related("country")
+        .values_list("country__name", flat=True)
+        .distinct()
+        .order_by("country__name")
     )
 
-    tier_sections = {
-        "serie-a": {
-            "title": "Serie A",
-            "stadia": [],
-        },
-        "serie-b": {
-            "title": "Serie B",
-            "stadia": [],
-        },
-        "serie-c": {
-            "title": "Serie C",
-            "stadia": [],
-        },
-    }
 
-    for stadium in stadia:
-        tiers = {team.tier for team in stadium.teams.all()}
-
-        if 1 in tiers:
-            tier_sections["serie-a"]["stadia"].append(stadium)
-        elif 2 in tiers:
-            tier_sections["serie-b"]["stadia"].append(stadium)
-        elif 3 in tiers:
-            tier_sections["serie-c"]["stadia"].append(stadium)
-
-    for section in tier_sections.values():
-        section["stadia"].sort(
-            key=lambda s: s.capacity or 0,
-            reverse=True
-        )
-
-    return render(request, "stadium_list.html", {
-        "tier_sections": tier_sections,
+def city_list(request):
+    selected_country = request.GET.get("country", "")
+    qs = City.objects.all().order_by("-population", "name")
+    if selected_country:
+        qs = qs.filter(country=selected_country)
+    countries = list(
+        City.objects.values_list("country", flat=True)
+        .exclude(country="")
+        .distinct()
+        .order_by("country")
+    )
+    return render(request, "city_list.html", {
+        "cities": qs,
+        "countries": countries,
+        "selected_country": selected_country,
     })
 
-def team_list(request):
-    teams = (
-        Team.objects
-        .select_related("city", "stadium")
-        .all()
+
+def stadium_list(request):
+    selected_country = request.GET.get("country", "")
+
+    stadia_qs = (
+        Stadium.objects
+        .select_related("city")
+        .prefetch_related("teams__league__country")
     )
 
-    tier_sections = {
-        "serie-a": {"title": "Serie A", "teams": []},
-        "serie-b": {"title": "Serie B", "teams": []},
-        "serie-c": {"title": "Serie C", "teams": []},
-    }
+    # Build ordered list of leagues to use as sections
+    leagues_qs = League.objects.select_related("country").order_by(
+        "country__name", "division_level"
+    )
+    if selected_country:
+        leagues_qs = leagues_qs.filter(country__name=selected_country)
 
-    for team in teams:
-        if team.tier == 1:
-            tier_sections["serie-a"]["teams"].append(team)
-        elif team.tier == 2:
-            tier_sections["serie-b"]["teams"].append(team)
-        elif team.tier == 3:
-            tier_sections["serie-c"]["teams"].append(team)
+    # Single pass: assign each stadium to its primary league bucket
+    league_map = {lg.id: lg for lg in leagues_qs}
+    buckets = {lg_id: [] for lg_id in league_map}
+    other_stadia = []
 
-    for section in tier_sections.values():
-        section["teams"].sort(
-            key=lambda t: t.average_attendance or 0,
-            reverse=True
-        )
+    for stadium in stadia_qs:
+        primary = _primary_league(stadium)
+        if primary and primary.id in league_map:
+            buckets[primary.id].append(stadium)
+        elif not selected_country:
+            other_stadia.append(stadium)
+
+    sections = []
+    for league in league_map.values():
+        stadia_in_section = sorted(buckets[league.id], key=lambda s: s.capacity or 0, reverse=True)
+        if stadia_in_section:
+            sections.append({
+                "league": league,
+                "league_label": league.name,
+                "anchor": f"league-{league.id}",
+                "stadia": stadia_in_section,
+            })
+
+    if other_stadia:
+        sections.append({
+            "league": None,
+            "league_label": "Other",
+            "anchor": "other",
+            "stadia": sorted(other_stadia, key=lambda s: s.capacity or 0, reverse=True),
+        })
+
+    return render(request, "stadium_list.html", {
+        "sections": sections,
+        "countries": _available_countries(),
+        "selected_country": selected_country,
+    })
+
+
+def _primary_league(stadium):
+    """Return the League with the lowest division_level among a stadium's teams."""
+    best = None
+    for team in stadium.teams.all():
+        if team.league and team.league.country:
+            if best is None or team.league.division_level < best.division_level:
+                best = team.league
+    return best
+
+
+def team_list(request):
+    selected_country = request.GET.get("country", "")
+
+    teams_qs = (
+        Team.objects
+        .select_related("city", "stadium", "league__country")
+    )
+
+    leagues_qs = League.objects.select_related("country").order_by(
+        "country__name", "division_level"
+    )
+    if selected_country:
+        leagues_qs = leagues_qs.filter(country__name=selected_country)
+
+    sections = []
+    assigned_ids = set()
+
+    for league in leagues_qs:
+        section_teams = [t for t in teams_qs if t.league_id == league.id]
+        section_teams.sort(key=lambda t: t.average_attendance or 0, reverse=True)
+        assigned_ids.update(t.id for t in section_teams)
+        if section_teams:
+            sections.append({
+                "league": league,
+                "league_label": league.name,
+                "anchor": f"league-{league.id}",
+                "teams": section_teams,
+            })
+
+    # Fallback: teams with no league FK
+    if not selected_country:
+        other_teams = [t for t in teams_qs if t.id not in assigned_ids]
+        other_teams.sort(key=lambda t: t.average_attendance or 0, reverse=True)
+        if other_teams:
+            sections.append({
+                "league": None,
+                "league_label": "Other",
+                "anchor": "other",
+                "teams": other_teams,
+            })
 
     return render(request, "team_list.html", {
-        "tier_sections": tier_sections,
+        "sections": sections,
+        "countries": _available_countries(),
+        "selected_country": selected_country,
     })
     
 

@@ -1,37 +1,136 @@
 import pytest
 from django.urls import reverse
 
+from italiastadiaapp.models import City, Country, League, Stadium, Team
+
 
 @pytest.mark.django_db
 def test_homepage_loads(client):
-
     response = client.get(reverse("italiastadiaapp:home"))
-
     assert response.status_code == 200
-
-
-from italiastadiaapp.models import City, Stadium
 
 
 @pytest.mark.django_db
 def test_stadium_detail_page_loads(client):
-
-    city = City.objects.create(
-        name="Rome",
-        population=2800000,
-        country="Italy",
-    )
-
+    city = City.objects.create(name="Rome", population=2800000, country="Italy")
     stadium = Stadium.objects.create(
-        name="Olimpico",
-        city=city,
-        latitude=41.9339,
-        longitude=12.4547,
-        ownership="PUBLIC",
+        name="Olimpico", city=city,
+        latitude=41.9339, longitude=12.4547, ownership="PUBLIC",
     )
-
-    response = client.get(
-        reverse("italiastadiaapp:stadium_detail", args=[stadium.id])
-    )
-
+    response = client.get(reverse("italiastadiaapp:stadium_detail", args=[stadium.id]))
     assert response.status_code == 200
+
+
+# ---------------------------------------------------------------------------
+# Fixtures
+# ---------------------------------------------------------------------------
+
+@pytest.fixture
+def two_country_data(db):
+    """Italy (Serie A) + Germany (Bundesliga) with one team + stadium each."""
+    it, _ = Country.objects.get_or_create(name="Italy", defaults={"code": "IT"})
+    de, _ = Country.objects.get_or_create(name="Germany", defaults={"code": "DE"})
+    serie_a, _ = League.objects.get_or_create(name="Serie A", country=it, defaults={"division_level": 1})
+    bundesliga, _ = League.objects.get_or_create(name="Bundesliga", country=de, defaults={"division_level": 1})
+
+    city_it, _ = City.objects.get_or_create(name="Milan", defaults={"country": "Italy", "population": 1400000})
+    city_de, _ = City.objects.get_or_create(name="Munich", defaults={"country": "Germany", "population": 1500000})
+
+    stad_it, _ = Stadium.objects.get_or_create(
+        name="San Siro", city=city_it,
+        defaults={"capacity": 75923, "latitude": 45.4781, "longitude": 9.1240, "ownership": "PUBLIC"},
+    )
+    stad_de, _ = Stadium.objects.get_or_create(
+        name="Allianz Arena", city=city_de,
+        defaults={"capacity": 75024, "latitude": 48.2188, "longitude": 11.6248, "ownership": "PRIVATE"},
+    )
+
+    Team.objects.get_or_create(name="Inter", defaults={"league": serie_a, "stadium": stad_it, "city": city_it, "tier": 1})
+    Team.objects.get_or_create(name="Bayern", defaults={"league": bundesliga, "stadium": stad_de, "city": city_de, "tier": 1})
+
+    return {"serie_a": serie_a, "bundesliga": bundesliga}
+
+
+# ---------------------------------------------------------------------------
+# stadium_list
+# ---------------------------------------------------------------------------
+
+@pytest.mark.django_db
+def test_stadium_list_all_countries(client, two_country_data):
+    response = client.get(reverse("italiastadiaapp:stadium_list"))
+    assert response.status_code == 200
+    sections = response.context["sections"]
+    league_labels = [s["league_label"] for s in sections]
+    assert "Serie A" in league_labels
+    assert "Bundesliga" in league_labels
+
+
+@pytest.mark.django_db
+def test_stadium_list_filter_germany(client, two_country_data):
+    response = client.get(reverse("italiastadiaapp:stadium_list") + "?country=Germany")
+    assert response.status_code == 200
+    sections = response.context["sections"]
+    assert all(s["league"].country.name == "Germany" for s in sections if s["league"])
+    stadia_names = [s.name for sec in sections for s in sec["stadia"]]
+    assert "Allianz Arena" in stadia_names
+    assert "San Siro" not in stadia_names
+
+
+@pytest.mark.django_db
+def test_stadium_list_filter_unknown_country(client, two_country_data):
+    response = client.get(reverse("italiastadiaapp:stadium_list") + "?country=Zzz")
+    assert response.status_code == 200
+    assert response.context["sections"] == []
+
+
+# ---------------------------------------------------------------------------
+# team_list
+# ---------------------------------------------------------------------------
+
+@pytest.mark.django_db
+def test_team_list_all_countries(client, two_country_data):
+    response = client.get(reverse("italiastadiaapp:team_list"))
+    assert response.status_code == 200
+    sections = response.context["sections"]
+    league_labels = [s["league_label"] for s in sections]
+    assert "Serie A" in league_labels
+    assert "Bundesliga" in league_labels
+
+
+@pytest.mark.django_db
+def test_team_list_filter_germany(client, two_country_data):
+    response = client.get(reverse("italiastadiaapp:team_list") + "?country=Germany")
+    assert response.status_code == 200
+    sections = response.context["sections"]
+    team_names = [t.name for sec in sections for t in sec["teams"]]
+    assert "Bayern" in team_names
+    assert "Inter" not in team_names
+
+
+# ---------------------------------------------------------------------------
+# city_list
+# ---------------------------------------------------------------------------
+
+@pytest.mark.django_db
+def test_city_list_all_countries(client, two_country_data):
+    response = client.get(reverse("italiastadiaapp:city_list"))
+    assert response.status_code == 200
+    city_names = [c.name for c in response.context["cities"]]
+    assert "Milan" in city_names
+    assert "Munich" in city_names
+
+
+@pytest.mark.django_db
+def test_city_list_filter_germany(client, two_country_data):
+    response = client.get(reverse("italiastadiaapp:city_list") + "?country=Germany")
+    assert response.status_code == 200
+    city_names = [c.name for c in response.context["cities"]]
+    assert "Munich" in city_names
+    assert "Milan" not in city_names
+
+
+@pytest.mark.django_db
+def test_city_list_filter_unknown_country(client, two_country_data):
+    response = client.get(reverse("italiastadiaapp:city_list") + "?country=Zzz")
+    assert response.status_code == 200
+    assert list(response.context["cities"]) == []
