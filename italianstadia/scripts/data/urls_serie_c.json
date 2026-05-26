@@ -1,0 +1,971 @@
+{
+  "league": {
+    "name": "Serie C",
+    "country": "Italy",
+    "country_code": "IT",
+    "division_level": 3,
+    "season": "24/25"
+  },
+  "teams": [
+    {
+      "name": "Inter U23",
+      "transfermarkt_url": "https://www.transfermarkt.com/inter-mailand-weitere/startseite/verein/41119",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/inter-mailand-weitere/besucherzahlenentwicklung/verein/41119",
+      "wikipedia_url": "https://it.wikipedia.org/wiki/Football_Club_Internazionale_Milano_U23",
+      "stadium": {
+        "name": "Stadio Brianteo",
+        "transfermarkt_url": "https://www.transfermarkt.com/inter-mailand-weitere/stadion/verein/41119/saison_id/2025",
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Stadio_Brianteo",
+        "city": {
+          "name": "Milan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Milan"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "LR Vicenza",
+      "transfermarkt_url": "https://www.transfermarkt.com/lr-vicenza-virtus/startseite/verein/2655",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/lr-vicenza-virtus/besucherzahlenentwicklung/verein/2655",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/LR_Vicenza",
+      "stadium": {
+        "name": "Stadio Romeo Menti",
+        "transfermarkt_url": "https://www.transfermarkt.com/lr-vicenza-virtus/stadion/verein/2655/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Romeo_Menti",
+        "city": {
+          "name": "Vicenza",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vicenza"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "Union Brescia",
+      "transfermarkt_url": "https://www.transfermarkt.com/union-brescia/startseite/verein/132806",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/union-brescia/besucherzahlenentwicklung/verein/132806",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Union_Brescia",
+      "stadium": {
+        "name": "Stadio Mario Rigamonti",
+        "transfermarkt_url": "https://www.transfermarkt.com/union-brescia/stadion/verein/132806/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Mario_Rigamonti",
+        "city": {
+          "name": "Brescia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Brescia"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "AS Cittadella",
+      "transfermarkt_url": "https://www.transfermarkt.com/as-cittadella/startseite/verein/4084",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/as-cittadella/besucherzahlenentwicklung/verein/4084",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AS_Cittadella",
+      "stadium": {
+        "name": "Stadio Pier Cesare Tombolato",
+        "transfermarkt_url": "https://www.transfermarkt.com/as-cittadella/stadion/verein/4084/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Pier_Cesare_Tombolato",
+        "city": {
+          "name": "Cittadella",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Cittadella"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "Calcio Lecco 1912",
+      "transfermarkt_url": "https://www.transfermarkt.com/calcio-lecco-1912/startseite/verein/5514",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/calcio-lecco-1912/besucherzahlenentwicklung/verein/5514",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Calcio_Lecco_1912",
+      "stadium": {
+        "name": "Stadio Rigamonti-Ceppi",
+        "transfermarkt_url": "https://www.transfermarkt.com/calcio-lecco-1912/stadion/verein/5514/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Rigamonti-Ceppi",
+        "city": {
+          "name": "Lecco",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lecco"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "AC Trento",
+      "transfermarkt_url": "https://www.transfermarkt.com/ac-trento/startseite/verein/4095",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ac-trento/besucherzahlenentwicklung/verein/4095",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AC_Trento_1921",
+      "stadium": {
+        "name": "Stadio Briamasco",
+        "transfermarkt_url": "https://www.transfermarkt.com/ac-trento/stadion/verein/4095/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Briamasco",
+        "city": {
+          "name": "Trento",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Trento"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "Dolomiti Bellunesi",
+      "transfermarkt_url": "https://www.transfermarkt.com/dolomiti-bellunesi/startseite/verein/91510",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dolomiti-bellunesi/besucherzahlenentwicklung/verein/91510",
+      "wikipedia_url": null,
+      "stadium": {
+        "name": null,
+        "transfermarkt_url": "https://www.transfermarkt.com/dolomiti-bellunesi/stadion/verein/91510/saison_id/2025",
+        "wikipedia_url": null,
+        "city": {
+          "name": "Belluno",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Belluno"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "Alcione Milano",
+      "transfermarkt_url": "https://www.transfermarkt.com/asd-alcione-milano/startseite/verein/52687",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/asd-alcione-milano/besucherzahlenentwicklung/verein/52687",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Alcione_Milano",
+      "stadium": {
+        "name": null,
+        "transfermarkt_url": "https://www.transfermarkt.com/asd-alcione-milano/stadion/verein/52687/saison_id/2025",
+        "wikipedia_url": null,
+        "city": {
+          "name": "Milan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Milan"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "Juventus Next Gen",
+      "transfermarkt_url": "https://www.transfermarkt.com/juventus-turin-u23/startseite/verein/41101",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/juventus-turin-u23/besucherzahlenentwicklung/verein/41101",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Juventus_Next_Gen",
+      "stadium": {
+        "name": "Stadio Giuseppe Moccagatta",
+        "transfermarkt_url": "https://www.transfermarkt.com/juventus-turin-u23/stadion/verein/41101/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Giuseppe_Moccagatta",
+        "city": {
+          "name": "Alessandria",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Alessandria"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "SS Arezzo",
+      "transfermarkt_url": "https://www.transfermarkt.com/ss-arezzo/startseite/verein/4255",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ss-arezzo/besucherzahlenentwicklung/verein/4255",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SS_Arezzo",
+      "stadium": {
+        "name": "Stadio Città di Arezzo",
+        "transfermarkt_url": "https://www.transfermarkt.com/ss-arezzo/stadion/verein/4255/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Citt%C3%A0_di_Arezzo",
+        "city": {
+          "name": "Arezzo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Arezzo"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "Ascoli Calcio",
+      "transfermarkt_url": "https://www.transfermarkt.com/ascoli-calcio/startseite/verein/408",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ascoli-calcio/besucherzahlenentwicklung/verein/408",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ascoli_Calcio_1898_FC",
+      "stadium": {
+        "name": "Stadio Cino e Lillo Del Duca",
+        "transfermarkt_url": "https://www.transfermarkt.com/ascoli-calcio/stadion/verein/408/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Cino_e_Lillo_Del_Duca",
+        "city": {
+          "name": "Ascoli Piceno",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ascoli_Piceno"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "Ternana Calcio",
+      "transfermarkt_url": "https://www.transfermarkt.com/ternana-calcio/startseite/verein/1103",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ternana-calcio/besucherzahlenentwicklung/verein/1103",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ternana_Calcio",
+      "stadium": {
+        "name": "Stadio Libero Liberati",
+        "transfermarkt_url": "https://www.transfermarkt.com/ternana-calcio/stadion/verein/1103/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Libero_Liberati",
+        "city": {
+          "name": "Terni",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Terni"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "Ravenna FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/ravenna-fc/startseite/verein/1105",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ravenna-fc/besucherzahlenentwicklung/verein/1105",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ravenna_FC",
+      "stadium": {
+        "name": "Stadio Bruno Benelli",
+        "transfermarkt_url": "https://www.transfermarkt.com/ravenna-fc/stadion/verein/1105/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Bruno_Benelli",
+        "city": {
+          "name": "Ravenna",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ravenna"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "AC Perugia Calcio",
+      "transfermarkt_url": "https://www.transfermarkt.com/ac-perugia-calcio/startseite/verein/839",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ac-perugia-calcio/besucherzahlenentwicklung/verein/839",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AC_Perugia_Calcio",
+      "stadium": {
+        "name": "Stadio Renato Curi",
+        "transfermarkt_url": "https://www.transfermarkt.com/ac-perugia-calcio/stadion/verein/839/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Renato_Curi",
+        "city": {
+          "name": "Perugia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Perugia"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "Forlì FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/forli-fc/startseite/verein/9816",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/forli-fc/besucherzahlenentwicklung/verein/9816",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Forl%C3%AC_FC",
+      "stadium": {
+        "name": "Stadio Tullo Morgagni",
+        "transfermarkt_url": "https://www.transfermarkt.com/forli-fc/stadion/verein/9816/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Tullo_Morgagni",
+        "city": {
+          "name": "Forlì",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Forl%C3%AC"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "US Città di Pontedera",
+      "transfermarkt_url": "https://www.transfermarkt.com/us-citta-di-pontedera/startseite/verein/14888",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/us-citta-di-pontedera/besucherzahlenentwicklung/verein/14888",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/US_Citt%C3%A0_di_Pontedera",
+      "stadium": {
+        "name": "Stadio Ettore Mannucci",
+        "transfermarkt_url": "https://www.transfermarkt.com/us-citta-di-pontedera/stadion/verein/14888/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Ettore_Mannucci",
+        "city": {
+          "name": "Pontedera",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pontedera"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "Atalanta U23",
+      "transfermarkt_url": "https://www.transfermarkt.com/atalanta-bergamo-weitere/startseite/verein/41110",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/atalanta-bergamo-weitere/besucherzahlenentwicklung/verein/41110",
+      "wikipedia_url": null,
+      "stadium": {
+        "name": "Stadio Comunale",
+        "transfermarkt_url": "https://www.transfermarkt.com/atalanta-bergamo-weitere/stadion/verein/41110/saison_id/2025",
+        "wikipedia_url": null,
+        "city": {
+          "name": "Caravaggio",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Caravaggio,_Lombardy"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "Benevento Calcio",
+      "transfermarkt_url": "https://www.transfermarkt.com/benevento-calcio/startseite/verein/4171",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/benevento-calcio/besucherzahlenentwicklung/verein/4171",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Benevento_Calcio",
+      "stadium": {
+        "name": "Stadio Ciro Vigorito",
+        "transfermarkt_url": "https://www.transfermarkt.com/benevento-calcio/stadion/verein/4171/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Ciro_Vigorito",
+        "city": {
+          "name": "Benevento",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Benevento"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "US Salernitana 1919",
+      "transfermarkt_url": "https://www.transfermarkt.com/us-salernitana-1919/startseite/verein/380",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/us-salernitana-1919/besucherzahlenentwicklung/verein/380",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/US_Salernitana_1919",
+      "stadium": {
+        "name": "Stadio Arechi",
+        "transfermarkt_url": "https://www.transfermarkt.com/us-salernitana-1919/stadion/verein/380/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Arechi",
+        "city": {
+          "name": "Salerno",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Salerno"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "Catania FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/catania-calcio/startseite/verein/1627",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/catania-calcio/besucherzahlenentwicklung/verein/1627",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Catania_FC",
+      "stadium": {
+        "name": "Stadio Angelo Massimino",
+        "transfermarkt_url": "https://www.transfermarkt.com/catania-calcio/stadion/verein/1627/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Angelo_Massimino",
+        "city": {
+          "name": "Catania",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Catania"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "Cosenza Calcio",
+      "transfermarkt_url": "https://www.transfermarkt.com/cosenza-calcio/startseite/verein/4031",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cosenza-calcio/besucherzahlenentwicklung/verein/4031",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Cosenza_Calcio",
+      "stadium": {
+        "name": "Stadio San Vito - Gigi Marulla",
+        "transfermarkt_url": "https://www.transfermarkt.com/cosenza-calcio/stadion/verein/4031/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_San_Vito-Gigi_Marulla",
+        "city": {
+          "name": "Cosenza",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Cosenza"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "Casertana FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/casertana-fc/startseite/verein/4106",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/casertana-fc/besucherzahlenentwicklung/verein/4106",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Casertana_FC",
+      "stadium": {
+        "name": "Stadio Alberto Pinto",
+        "transfermarkt_url": "https://www.transfermarkt.com/casertana-fc/stadion/verein/4106/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Alberto_Pinto",
+        "city": {
+          "name": "Caserta",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Caserta"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "Potenza Calcio",
+      "transfermarkt_url": "https://www.transfermarkt.com/potenza-calcio/startseite/verein/7197",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/potenza-calcio/besucherzahlenentwicklung/verein/7197",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Potenza_Calcio",
+      "stadium": {
+        "name": "Stadio Alfredo Viviani",
+        "transfermarkt_url": "https://www.transfermarkt.com/potenza-calcio/stadion/verein/7197/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Alfredo_Viviani",
+        "city": {
+          "name": "Potenza",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Potenza"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "Casarano Calcio",
+      "transfermarkt_url": "https://www.transfermarkt.com/casarano-calcio/startseite/verein/6089",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/casarano-calcio/besucherzahlenentwicklung/verein/6089",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Casarano_Calcio",
+      "stadium": {
+        "name": "Stadio Giuseppe Capozza",
+        "transfermarkt_url": "https://www.transfermarkt.com/casarano-calcio/stadion/verein/6089/saison_id/2025",
+        "wikipedia_url": null,
+        "city": {
+          "name": "Casarano",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Casarano"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "FC Crotone",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-crotone/startseite/verein/4083",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-crotone/besucherzahlenentwicklung/verein/4083",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Crotone",
+      "stadium": {
+        "name": "Stadio Ezio Scida",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-crotone/stadion/verein/4083/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Ezio_Scida",
+        "city": {
+          "name": "Crotone",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Crotone"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "Calcio Foggia 1920",
+      "transfermarkt_url": "https://www.transfermarkt.com/calcio-foggia-1920/startseite/verein/704",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/calcio-foggia-1920/besucherzahlenentwicklung/verein/704",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Calcio_Foggia_1920",
+      "stadium": {
+        "name": "Stadio Pino Zaccheria",
+        "transfermarkt_url": "https://www.transfermarkt.com/calcio-foggia-1920/stadion/verein/704/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Pino_Zaccheria",
+        "city": {
+          "name": "Foggia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Foggia"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "Giugliano Calcio 1928",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-giugliano-1928/startseite/verein/9818",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-giugliano-1928/besucherzahlenentwicklung/verein/9818",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Giugliano_Calcio_1928",
+      "stadium": {
+        "name": "Stadio Alberto De Cristofaro",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-giugliano-1928/stadion/verein/9818/saison_id/2025",
+        "wikipedia_url": null,
+        "city": {
+          "name": "Giugliano in Campania",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Giugliano_in_Campania"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "FC Trapani 1905",
+      "transfermarkt_url": "https://www.transfermarkt.com/trapani-calcio/startseite/verein/4331",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/trapani-calcio/besucherzahlenentwicklung/verein/4331",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Trapani_1905",
+      "stadium": {
+        "name": "Stadio Polisportivo Provinciale",
+        "transfermarkt_url": "https://www.transfermarkt.com/trapani-calcio/stadion/verein/4331/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Polisportivo_Provinciale",
+        "city": {
+          "name": "Trapani",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Trapani"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "Latina Calcio 1932",
+      "transfermarkt_url": "https://www.transfermarkt.com/latina-calcio-1932/startseite/verein/22045",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/latina-calcio-1932/besucherzahlenentwicklung/verein/22045",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Latina_Calcio_1932",
+      "stadium": {
+        "name": "Stadio Domenico Francioni",
+        "transfermarkt_url": "https://www.transfermarkt.com/latina-calcio-1932/stadion/verein/22045/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Domenico_Francioni",
+        "city": {
+          "name": "Latina",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Latina,_Lazio"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "SS Monopoli 1966",
+      "transfermarkt_url": "https://www.transfermarkt.com/ss-monopoli-1966/startseite/verein/33734",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ss-monopoli-1966/besucherzahlenentwicklung/verein/33734",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SS_Monopoli_1966",
+      "stadium": {
+        "name": "Stadio Vito Simone Veneziani",
+        "transfermarkt_url": "https://www.transfermarkt.com/ss-monopoli-1966/stadion/verein/33734/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Vito_Simone_Veneziani",
+        "city": {
+          "name": "Monopoli",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Monopoli"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "Audace Cerignola",
+      "transfermarkt_url": "https://www.transfermarkt.com/audace-cerignola/startseite/verein/22249",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/audace-cerignola/besucherzahlenentwicklung/verein/22249",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SS_Audace_Cerignola",
+      "stadium": {
+        "name": "Stadio Domenico Monterisi",
+        "transfermarkt_url": "https://www.transfermarkt.com/audace-cerignola/stadion/verein/22249/saison_id/2025",
+        "wikipedia_url": null,
+        "city": {
+          "name": "Cerignola",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Cerignola"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "ASD Team Altamura",
+      "transfermarkt_url": "https://www.transfermarkt.com/asd-team-altamura/startseite/verein/22408",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/asd-team-altamura/besucherzahlenentwicklung/verein/22408",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Team_Altamura",
+      "stadium": {
+        "name": "Stadio Tonino D'Angelo",
+        "transfermarkt_url": "https://www.transfermarkt.com/asd-team-altamura/stadion/verein/22408/saison_id/2025",
+        "wikipedia_url": null,
+        "city": {
+          "name": "Altamura",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Altamura"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "Cavese 1919",
+      "transfermarkt_url": "https://www.transfermarkt.com/cavese-1919/startseite/verein/6266",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cavese-1919/besucherzahlenentwicklung/verein/6266",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Cavese_1919",
+      "stadium": {
+        "name": "Stadio Simonetta Lamberti",
+        "transfermarkt_url": "https://www.transfermarkt.com/cavese-1919/stadion/verein/6266/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Simonetta_Lamberti",
+        "city": {
+          "name": "Cava de' Tirreni",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Cava_de%27_Tirreni"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "AZ Picerno",
+      "transfermarkt_url": "https://www.transfermarkt.com/az-picerno/startseite/verein/49430",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/az-picerno/besucherzahlenentwicklung/verein/49430",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AZ_Picerno",
+      "stadium": {
+        "name": "Stadio Donato Curcio",
+        "transfermarkt_url": "https://www.transfermarkt.com/az-picerno/stadion/verein/49430/saison_id/2025",
+        "wikipedia_url": null,
+        "city": {
+          "name": "Picerno",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Picerno"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "Sorrento 1945",
+      "transfermarkt_url": "https://www.transfermarkt.com/sorrento-1945/startseite/verein/10118",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sorrento-1945/besucherzahlenentwicklung/verein/10118",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sorrento_Calcio_1945",
+      "stadium": {
+        "name": "Stadio Italia",
+        "transfermarkt_url": "https://www.transfermarkt.com/sorrento-1945/stadion/verein/10118/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Italia",
+        "city": {
+          "name": "Sorrento",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sorrento"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "Siracusa Calcio",
+      "transfermarkt_url": "https://www.transfermarkt.com/siracusa-calcio/startseite/verein/8373",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/siracusa-calcio/besucherzahlenentwicklung/verein/8373",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Siracusa_Calcio",
+      "stadium": {
+        "name": "Stadio Nicola De Simone",
+        "transfermarkt_url": "https://www.transfermarkt.com/siracusa-calcio/stadion/verein/8373/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Nicola_De_Simone",
+        "city": {
+          "name": "Syracuse",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Syracuse,_Sicily"
+        }
+      },
+      "girone": "C"
+    },
+    {
+      "name": "FC Pro Vercelli 1892",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-pro-vercelli-1892/startseite/verein/26789",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-pro-vercelli-1892/besucherzahlenentwicklung/verein/26789",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Pro_Vercelli_1892",
+      "stadium": {
+        "name": "Stadio Silvio Piola",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-pro-vercelli-1892/stadion/verein/26789/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Silvio_Piola",
+        "city": {
+          "name": "Vercelli",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vercelli"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "Novara FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/novara-fc/startseite/verein/6692",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/novara-fc/besucherzahlenentwicklung/verein/6692",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Novara_FC",
+      "stadium": {
+        "name": "Stadio Silvio Piola",
+        "transfermarkt_url": "https://www.transfermarkt.com/novara-fc/stadion/verein/6692/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Silvio_Piola",
+        "city": {
+          "name": "Novara",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Novara"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "FC Lumezzane",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-lumezzane/startseite/verein/4103",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-lumezzane/besucherzahlenentwicklung/verein/4103",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Lumezzane",
+      "stadium": {
+        "name": "Stadio Tullio Saleri",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-lumezzane/stadion/verein/4103/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Tullio_Saleri",
+        "city": {
+          "name": "Lumezzane",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lumezzane"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "AC Renate",
+      "transfermarkt_url": "https://www.transfermarkt.com/ac-renate/startseite/verein/24898",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ac-renate/besucherzahlenentwicklung/verein/24898",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AC_Renate",
+      "stadium": {
+        "name": "Stadio Città di Meda",
+        "transfermarkt_url": "https://www.transfermarkt.com/ac-renate/stadion/verein/24898/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Citt%C3%A0_di_Meda",
+        "city": {
+          "name": "Meda",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Meda"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "Virtusvecomp Verona",
+      "transfermarkt_url": "https://www.transfermarkt.com/virtusvecomp-verona/startseite/verein/29251",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/virtusvecomp-verona/besucherzahlenentwicklung/verein/29251",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Virtusvecomp_Verona",
+      "stadium": {
+        "name": "Stadio Gavagnin Nocini",
+        "transfermarkt_url": "https://www.transfermarkt.com/virtusvecomp-verona/stadion/verein/29251/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Gavagnin_Nocini",
+        "city": {
+          "name": "Verona",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Verona"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "AS Giana Erminio",
+      "transfermarkt_url": "https://www.transfermarkt.com/as-giana-erminio/startseite/verein/44223",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/as-giana-erminio/besucherzahlenentwicklung/verein/44223",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AS_Giana_Erminio",
+      "stadium": {
+        "name": "Stadio Città di Gorgonzola",
+        "transfermarkt_url": "https://www.transfermarkt.com/as-giana-erminio/stadion/verein/44223/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Citt%C3%A0_di_Gorgonzola",
+        "city": {
+          "name": "Gorgonzola",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gorgonzola"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "UC AlbinoLeffe",
+      "transfermarkt_url": "https://www.transfermarkt.com/uc-albinoleffe/startseite/verein/4541",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/uc-albinoleffe/besucherzahlenentwicklung/verein/4541",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/UC_AlbinoLeffe",
+      "stadium": {
+        "name": "Stadio AlbinoLeffe",
+        "transfermarkt_url": "https://www.transfermarkt.com/uc-albinoleffe/stadion/verein/4541/saison_id/2025",
+        "wikipedia_url": "https://it.wikipedia.org/wiki/AlbinoLeffe_Stadium",
+        "city": {
+          "name": "Leffe",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Leffe,_Lombardy"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "Arzignano Valchiampo",
+      "transfermarkt_url": "https://www.transfermarkt.com/arzignano-valchiampo/startseite/verein/46619",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/arzignano-valchiampo/besucherzahlenentwicklung/verein/46619",
+      "wikipedia_url": "https://it.wikipedia.org/wiki/Football_Club_Arzignano_Valchiampo",
+      "stadium": {
+        "name": "Stadio Dal Molin",
+        "transfermarkt_url": "https://www.transfermarkt.com/arzignano-valchiampo/stadion/verein/46619/saison_id/2025",
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Stadio_Tommaso_Dal_Molin",
+        "city": {
+          "name": "Arzignano",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Arzignano"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "Aurora Pro Patria",
+      "transfermarkt_url": "https://www.transfermarkt.com/aurora-pro-patria/startseite/verein/4146",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/aurora-pro-patria/besucherzahlenentwicklung/verein/4146",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Aurora_Pro_Patria",
+      "stadium": {
+        "name": "Stadio Città di Busto Arsizio",
+        "transfermarkt_url": "https://www.transfermarkt.com/aurora-pro-patria/stadion/verein/4146/saison_id/2025",
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Stadio_Carlo_Speroni",
+        "city": {
+          "name": "Busto Arsizio",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Busto_Arsizio"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "CPR Ospitaletto",
+      "transfermarkt_url": "https://www.transfermarkt.com/cpr-ospitaletto/startseite/verein/5542",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cpr-ospitaletto/besucherzahlenentwicklung/verein/5542",
+      "wikipedia_url": "https://it.wikipedia.org/wiki/Associazione_Calcio_Ospitaletto_Franciacorta",
+      "stadium": {
+        "name": "Stadio Comunale",
+        "transfermarkt_url": "https://www.transfermarkt.com/cpr-ospitaletto/stadion/verein/5542/saison_id/2025",
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Stadio_Gino_Corioni",
+        "city": {
+          "name": "Ospitaletto",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ospitaletto"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "US Pergolettese 1932",
+      "transfermarkt_url": "https://www.transfermarkt.com/us-pergolettese-1932/startseite/verein/4553",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/us-pergolettese-1932/besucherzahlenentwicklung/verein/4553",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/US_Pergolettese_1932",
+      "stadium": {
+        "name": "Stadio Pergolettese",
+        "transfermarkt_url": "https://www.transfermarkt.com/us-pergolettese-1932/stadion/verein/4553/saison_id/2025",
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Stadio_Giuseppe_Voltini",
+        "city": {
+          "name": "Crema",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Crema,_Lombardy"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "US Triestina",
+      "transfermarkt_url": "https://www.transfermarkt.com/us-triestina/startseite/verein/4271",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/us-triestina/besucherzahlenentwicklung/verein/4271",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/US_Triestina",
+      "stadium": {
+        "name": "Stadio Nereo Rocco",
+        "transfermarkt_url": "https://www.transfermarkt.com/us-triestina/stadion/verein/4271/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Nereo_Rocco",
+        "city": {
+          "name": "Trieste",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Trieste"
+        }
+      },
+      "girone": "A"
+    },
+    {
+      "name": "US Livorno 1915",
+      "transfermarkt_url": "https://www.transfermarkt.com/us-livorno-1915/startseite/verein/1210",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/us-livorno-1915/besucherzahlenentwicklung/verein/1210",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/US_Livorno_1915",
+      "stadium": {
+        "name": "Stadio Armando Picchi",
+        "transfermarkt_url": "https://www.transfermarkt.com/us-livorno-1915/stadion/verein/1210/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Armando_Picchi",
+        "city": {
+          "name": "Livorno",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Livorno"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "Vis Pesaro 1898",
+      "transfermarkt_url": "https://www.transfermarkt.com/vis-pesaro-1898/startseite/verein/7030",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/vis-pesaro-1898/besucherzahlenentwicklung/verein/7030",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Vis_Pesaro_1898",
+      "stadium": {
+        "name": "Stadio Tonino Benelli",
+        "transfermarkt_url": "https://www.transfermarkt.com/vis-pesaro-1898/stadion/verein/7030/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Tonino_Benelli",
+        "city": {
+          "name": "Pesaro",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pesaro"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "Guidonia Montecelio 1937 FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/guidonia-montecelio-1937-fc/startseite/verein/45894",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/guidonia-montecelio-1937-fc/besucherzahlenentwicklung/verein/45894",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Guidonia_Montecelio_1937_FC",
+      "stadium": {
+        "name": "Stadio Citta' dell'Aria",
+        "transfermarkt_url": "https://www.transfermarkt.com/guidonia-montecelio-1937-fc/stadion/verein/45894/saison_id/2025",
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Stadio_Citt%C3%A0_dell%27Aria",
+        "city": {
+          "name": "Guidonia Montecelio",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Guidonia_Montecelio"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "US Sambenedettese",
+      "transfermarkt_url": "https://www.transfermarkt.com/us-sambenedettese/startseite/verein/4330",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/us-sambenedettese/besucherzahlenentwicklung/verein/4330",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/US_Sambenedettese",
+      "stadium": {
+        "name": "Stadio Riviera delle Palme",
+        "transfermarkt_url": "https://www.transfermarkt.com/us-sambenedettese/stadion/verein/4330/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Riviera_delle_Palme",
+        "city": {
+          "name": "San Benedetto del Tronto",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/San_Benedetto_del_Tronto"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "Pineto Calcio",
+      "transfermarkt_url": "https://www.transfermarkt.com/pineto-calcio/startseite/verein/46337",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/pineto-calcio/besucherzahlenentwicklung/verein/46337",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Pineto_Calcio",
+      "stadium": {
+        "name": "Stadio Mimmo Pavone-Alessandro Mariani",
+        "transfermarkt_url": "https://www.transfermarkt.com/pineto-calcio/stadion/verein/46337/saison_id/2025",
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Stadio_Mimmo_Pavone-Alessandro_Mariani",
+        "city": {
+          "name": "Pineto",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pineto"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "AS Gubbio 1910",
+      "transfermarkt_url": "https://www.transfermarkt.com/as-gubbio-1910/startseite/verein/4326",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/as-gubbio-1910/besucherzahlenentwicklung/verein/4326",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AS_Gubbio_1910",
+      "stadium": {
+        "name": "Stadio Pietro Barbetti",
+        "transfermarkt_url": "https://www.transfermarkt.com/as-gubbio-1910/stadion/verein/4326/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Pietro_Barbetti",
+        "city": {
+          "name": "Gubbio",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gubbio"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "Campobasso FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/campobasso-fc/startseite/verein/18642",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/campobasso-fc/besucherzahlenentwicklung/verein/18642",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Campobasso_FC",
+      "stadium": {
+        "name": "Stadio Nuovo Romagnoli",
+        "transfermarkt_url": "https://www.transfermarkt.com/campobasso-fc/stadion/verein/18642/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Nuovo_Romagnoli",
+        "city": {
+          "name": "Campobasso",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Campobasso"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "SEF Torres 1903",
+      "transfermarkt_url": "https://www.transfermarkt.com/sef-torres-1903/startseite/verein/2253",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sef-torres-1903/besucherzahlenentwicklung/verein/2253",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SEF_Torres_1903",
+      "stadium": {
+        "name": "Stadio Vanni Sanna",
+        "transfermarkt_url": "https://www.transfermarkt.com/sef-torres-1903/stadion/verein/2253/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Vanni_Sanna",
+        "city": {
+          "name": "Sassari",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sassari"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "AC Carpi",
+      "transfermarkt_url": "https://www.transfermarkt.com/ac-carpi/startseite/verein/4102",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ac-carpi/besucherzahlenentwicklung/verein/4102",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AC_Carpi",
+      "stadium": {
+        "name": "Stadio Sandro Cabassi",
+        "transfermarkt_url": "https://www.transfermarkt.com/ac-carpi/stadion/verein/4102/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Sandro_Cabassi",
+        "city": {
+          "name": "Carpi",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Carpi,_Emilia-Romagna"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "US Pianese",
+      "transfermarkt_url": "https://www.transfermarkt.com/us-pianese/startseite/verein/34499/",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/us-pianese/besucherzahlenentwicklung/verein/34499",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/US_Pianese",
+      "stadium": {
+        "name": "Stadio Olimpico Carlo Zecchini",
+        "transfermarkt_url": "https://www.transfermarkt.com/us-pianese/stadion/verein/34499/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Olimpico_Carlo_Zecchini",
+        "city": {
+          "name": "Grosseto",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Piancastagnaio"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "AC Bra",
+      "transfermarkt_url": "https://www.transfermarkt.com/ac-bra/startseite/verein/38322",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ac-bra/besucherzahlenentwicklung/verein/38322",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AC_Bra",
+      "stadium": {
+        "name": "Stadio Attilio Bravi",
+        "transfermarkt_url": "https://www.transfermarkt.com/ac-bra/stadion/verein/38322/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Attilio_Bravi",
+        "city": {
+          "name": "Bra",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bra,_Piedmont"
+        }
+      },
+      "girone": "B"
+    },
+    {
+      "name": "Rimini FC",
+      "transfermarkt_url": "https://www.transfermarkt.it/rimini-fc/startseite/verein/4111",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rimini-fc/besucherzahlenentwicklung/verein/4111",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Rimini_FC_1912",
+      "stadium": {
+        "name": "Stadio Romeo Neri",
+        "transfermarkt_url": "https://www.transfermarkt.com/rimini-fc/stadion/verein/4111/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Romeo_Neri",
+        "city": {
+          "name": "Rimini",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rimini"
+        }
+      },
+      "girone": "B"
+    }
+  ]
+}

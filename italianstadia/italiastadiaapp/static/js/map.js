@@ -49,7 +49,41 @@ legend.onAdd = function () {
 
 legend.addTo(map);
 
-const LEVEL_COLORS = { 1: "#00c853", 2: "#ffffff", 3: "#ff1744" };
+// Flag colors ordered by division_level (index 0 = top flight).
+// Colors follow the national flag top-to-bottom color order.
+// Near-black fills (Germany div-1) use dark grey so they're visible on the dark basemap.
+const COUNTRY_COLORS = {
+    "Italy":       ["#009246", "#ffffff", "#ce2b37"],  // green · white · red
+    "Germany":     ["#333333", "#dd0000", "#ffce00"],  // black* · red · gold
+    "England":     ["#cf081f", "#ffffff", "#003087"],  // red · white · blue
+    "France":      ["#002395", "#ffffff", "#ed2939"],  // blue · white · red
+    "Spain":       ["#aa151b", "#f1bf00"],              // red · yellow
+    "Netherlands": ["#ae1c28", "#ffffff", "#21468b"],  // red · white · blue
+    "Portugal":    ["#006600", "#ff0000"],              // green · red
+    "Scotland":    ["#005eb8", "#ffffff"],              // blue · white
+    "Turkey":      ["#e30a17", "#ffffff"],              // red · white
+    "Belgium":     ["#fdda24", "#000000", "#ef3340"],  // yellow · black · red
+};
+
+// Bounding boxes [[south, west], [north, east]] for country zoom
+const COUNTRY_BOUNDS = {
+    "Italy":       [[36.6,  6.6], [47.1, 18.5]],
+    "Germany":     [[47.3,  5.9], [55.1, 15.0]],
+    "England":     [[49.9, -5.7], [55.8,  1.8]],
+    "France":      [[41.3, -5.1], [51.1,  9.6]],
+    "Spain":       [[36.0, -9.3], [43.8,  4.3]],
+    "Netherlands": [[50.8,  3.4], [53.5,  7.2]],
+    "Portugal":    [[36.9, -9.5], [42.2, -6.2]],
+    "Scotland":    [[54.6, -7.6], [60.9, -0.7]],
+    "Turkey":      [[36.0, 26.0], [42.1, 44.8]],
+    "Belgium":     [[49.5,  2.5], [51.5,  6.4]],
+};
+
+// Natural Earth country name → our Country.name mapping
+const NE_NAME_MAP = {
+    "England": "United Kingdom",
+    "Scotland": "United Kingdom",
+};
 
 function updateLegend(mode) {
     if (!legendDiv) return;
@@ -89,7 +123,10 @@ function updateLegend(mode) {
     );
 
     const items = leagues.map(l => {
-        const color = LEVEL_COLORS[l.divisionLevel] || "#9e9e9e";
+        const colors = COUNTRY_COLORS[l.country];
+        const color = (colors && l.divisionLevel != null)
+            ? (colors[l.divisionLevel - 1] || "#9e9e9e")
+            : "#9e9e9e";
         return `<div class="legend-item">
                     <span class="legend-dot" style="background:${color};border:1px solid #555"></span>
                     ${l.name}
@@ -219,6 +256,7 @@ function applyFilters(updateStadiumDropdown = true) {
 
         if (countryMatches && leagueMatches && gironeMatches &&
                 ownershipMatches && stadiumMatches) {
+            marker.setStyle(getMarkerStyle(marker));
             marker.addTo(map);
             visibleMarkers.push(marker);
         } else {
@@ -238,24 +276,28 @@ function applyFilters(updateStadiumDropdown = true) {
 
 function getMarkerColor(marker) {
     const primary = marker.primaryLeague;
-    const level = primary ? primary.divisionLevel : null;
-    const isItaly = primary ? primary.country === "Italy" : false;
+    const level   = primary ? primary.divisionLevel : null;
+    const country = primary ? primary.country : null;
 
-    if (level === 1) return "#00c853";  // green  — top flight
+    // Grey out lower tiers when no country or league filter is active
+    const filterActive = countryFilter.value || leagueFilter.value;
+    if (!filterActive && level !== 1) return "#9e9e9e";
 
-    if (level === 2) return "#ffffff";  // white  — second tier
+    const colors = COUNTRY_COLORS[country];
+    if (colors && level != null) return colors[level - 1] || "#9e9e9e";
+    return "#9e9e9e";
+}
 
-    if (level === 3) {
-        if (isItaly) {
-            const girone = (marker.gironi || [])[0];
-            if (girone === "A") return "#ff8a80";
-            if (girone === "B") return "#ff5252";
-            if (girone === "C") return "#d50000";
-        }
-        return "#ff1744";              // generic third-tier red
-    }
-
-    return "#9e9e9e";                  // grey — unknown / unassigned
+function getMarkerStyle(marker) {
+    const fillColor = getMarkerColor(marker);
+    // Near-black fills need a bright stroke to stay visible on the dark basemap
+    const darkFills = ["#333333", "#000000"];
+    const primary = marker.primaryLeague;
+    const country = primary ? primary.country : null;
+    const strokeColor = darkFills.includes(fillColor)
+        ? (COUNTRY_COLORS[country]?.[2] || "#ffce00")
+        : "#111111";
+    return { fillColor, color: strokeColor };
 }
 
 function updateStadiumDropdownOptions(visibleMarkers) {
@@ -469,6 +511,57 @@ function populateLeagueFilter(country) {
     gironeFilter.value = "";
 }
 
+// --------------------------------------------------
+// Country zoom + flash (Feature C)
+// --------------------------------------------------
+
+let countryGeoJSON = null;
+let flashLayer = null;
+
+async function loadCountryGeoJSON() {
+    if (countryGeoJSON) return countryGeoJSON;
+    const url = document.getElementById("map").dataset.countriesUrl;
+    if (!url) return null;
+    try {
+        const res = await fetch(url);
+        countryGeoJSON = await res.json();
+    } catch (e) {
+        console.warn("Could not load country boundaries:", e);
+    }
+    return countryGeoJSON;
+}
+
+async function zoomToCountry(countryName) {
+    // 1. Zoom to bounding box immediately
+    const bounds = COUNTRY_BOUNDS[countryName];
+    if (bounds) map.fitBounds(bounds, { padding: [40, 40] });
+
+    // 2. Flash the border polygon
+    const geojson = await loadCountryGeoJSON();
+    if (!geojson) return;
+
+    const neName = NE_NAME_MAP[countryName] || countryName;
+    const feature = geojson.features.find(f => f.properties.name === neName);
+    if (!feature) return;
+
+    if (flashLayer) { map.removeLayer(flashLayer); flashLayer = null; }
+
+    flashLayer = L.geoJSON(feature, {
+        style: {
+            color: "#ffffff",
+            weight: 2.5,
+            opacity: 0.9,
+            fillColor: "#ffffff",
+            fillOpacity: 0.12,
+            dashArray: "6 4",
+        }
+    }).addTo(map);
+
+    setTimeout(() => {
+        if (flashLayer) { map.removeLayer(flashLayer); flashLayer = null; }
+    }, 1800);
+}
+
 fetch("/api/stadiums/")
   
     .then(res => res.json())
@@ -508,7 +601,7 @@ fetch("/api/stadiums/")
 
             marker.gironi = marker.teams.map(t => t.girone || "");
 
-            marker.setStyle({ fillColor: getMarkerColor(marker) });
+            marker.setStyle(getMarkerStyle(marker));
             marker.ownership = props.ownership ? String(props.ownership) : "UNKNOWN";
             marker.stadiumId = String(props.id);
             marker.stadiumName = props.name;
@@ -547,10 +640,7 @@ fetch("/api/stadiums/")
             });
 
             marker.on("mouseout", function () {
-                this.setStyle({
-                    radius: 7,
-                    fillColor: getMarkerColor(this)
-                });
+                this.setStyle({ radius: 7, ...getMarkerStyle(this) });
             });
 
             marker.addTo(map);
@@ -565,10 +655,17 @@ fetch("/api/stadiums/")
     });
 
 countryFilter.addEventListener("change", function () {
+    const country = this.value;
     stadiumFilter.value = "";
-    populateLeagueFilter(this.value);
+    populateLeagueFilter(country);
     updateLegend("operational");
     applyFilters();
+    if (country) {
+        zoomToCountry(country);
+    } else {
+        if (flashLayer) { map.removeLayer(flashLayer); flashLayer = null; }
+        map.setView([42.5, 12.5], 5);
+    }
 });
 
 leagueFilter.addEventListener("change", function () {

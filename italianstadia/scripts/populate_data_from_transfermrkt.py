@@ -118,7 +118,7 @@ sys.path.append(project_path)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "italianstadia.settings")
 django.setup()
 
-from italiastadiaapp.models import City, Stadium, Team
+from italiastadiaapp.models import City, Country, League, Stadium, Team
 
 
 # --------------------------------------------------
@@ -147,11 +147,21 @@ logging.basicConfig(
 
 
 # --------------------------------------------------
-# Load JSON
+# League resolution
 # --------------------------------------------------
 
-with open("transfermrkt_urls_with_girone.json", encoding="utf-8") as f:
-    data = json.load(f)
+def resolve_league(config):
+    """get_or_create Country and League from the JSON league config block."""
+    country, _ = Country.objects.get_or_create(
+        name=config["country"],
+        defaults={"code": config["country_code"]},
+    )
+    league, _ = League.objects.get_or_create(
+        name=config["name"],
+        country=country,
+        defaults={"division_level": config["division_level"]},
+    )
+    return league
 
 
 # --------------------------------------------------
@@ -490,7 +500,7 @@ def first_valid(*values):
     return None
 
 
-def scrape_city(city_data):
+def scrape_city(city_data, country="Unknown"):
     wikipedia_url = city_data.get("wikipedia_url")
     fallback_name = city_data.get("name")
 
@@ -504,7 +514,7 @@ def scrape_city(city_data):
     soup = get_soup(wikipedia_url)
 
     name = fallback_name
-    country = "Italy"
+    country_from_infobox = None
 
     if soup:
         try:
@@ -514,15 +524,12 @@ def scrape_city(city_data):
         except Exception:
             logging.info(f"City name not found, using fallback: {fallback_name}")
 
-        # Country from infobox (much safer than your previous approach)
-        country_value = get_infobox_value(soup, ["country"])
-        if country_value:
-            country = country_value
+        country_from_infobox = get_infobox_value(soup, ["country"])
 
     # 4. Merge values (priority logic)
     final_name = first_valid(name, fallback_name)
     final_population = wiki_data.get("population") or 0
-    final_country = first_valid(country, "Italy") or "Italy"
+    final_country = first_valid(country_from_infobox, country) or country
     log_field("City", final_name, "population", final_population, "Wikipedia")
     log_field("City", final_name, "image", wiki_data.get("image_url"), "Wikipedia")
 
@@ -797,7 +804,7 @@ def scrape_stadium(stadium_data, city):
 # Attendance
 # --------------------------------------------------
 
-def scrape_average_attendance(attendance_url):
+def scrape_average_attendance(attendance_url, season="24/25"):
     if not attendance_url:
         return None
 
@@ -810,7 +817,7 @@ def scrape_average_attendance(attendance_url):
         accept_consent_if_present(driver)
 
         attendance_row = WebDriverWait(driver, 15).until(
-            EC.presence_of_element_located((By.XPATH, "//tr[td[contains(text(), '24/25')]]"))
+            EC.presence_of_element_located((By.XPATH, f"//tr[td[contains(text(), '{season}')]]"))
         )
 
         attendance_text = driver.execute_script(
@@ -882,7 +889,7 @@ def parse_founded_date(value):
     return None
 
 
-def scrape_team(team_data, stadium, city):
+def scrape_team(team_data, stadium, city, league, season="24/25"):
     team_name = team_data.get("name")
     team_url = team_data.get("transfermarkt_url")
     attendance_url = team_data.get("transfermarkt_attendance_url")
@@ -892,12 +899,14 @@ def scrape_team(team_data, stadium, city):
     wiki_data = scrape_team_from_wikipedia(wikipedia_url) if wikipedia_url else {}
     wiki_meta = scrape_wikipedia_summary_and_image(wikipedia_url) if wikipedia_url else {}
 
-    # 2. Defaults from JSON / Wikipedia
+    # 2. Derive tier and girone from league (not from JSON)
     manager_name = wiki_data.get("manager")
     founded = parse_founded_date(wiki_data.get("founded_raw"))
-    tier = team_data.get("tier")
-    girone = team_data.get("girone")
-    italian_champion_titles = 0
+    tier = league.division_level
+    girone = None
+    if league.country.name == "Italy" and league.division_level == 3:
+        girone = team_data.get("girone")
+    num_of_titles = 0
 
     # 3. Transfermarkt scraping
     driver = create_driver()
@@ -908,15 +917,17 @@ def scrape_team(team_data, stadium, city):
 
         accept_consent_if_present(driver)
 
-        try:
-            italian_champion_element = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located(
-                    (By.XPATH, "//a[@title='Italian Champion']/span[@class='data-header__success-number']")
+        # Title scraping is Italy-specific ("Italian Champion" award)
+        if league.country.name == "Italy":
+            try:
+                italian_champion_element = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located(
+                        (By.XPATH, "//a[@title='Italian Champion']/span[@class='data-header__success-number']")
+                    )
                 )
-            )
-            italian_champion_titles = clean_int(italian_champion_element.text) or 0
-        except Exception:
-            italian_champion_titles = 0
+                num_of_titles = clean_int(italian_champion_element.text) or 0
+            except Exception:
+                num_of_titles = 0
 
         try:
             founded_element = driver.find_element(By.XPATH, "//span[@itemprop='foundingDate']")
@@ -926,58 +937,40 @@ def scrape_team(team_data, stadium, city):
         except Exception:
             logging.info(f"Founded date not found on Transfermarkt for {team_name}; using Wikipedia/JSON fallback")
 
-        try:
-            tier_element = driver.find_element(
-                By.XPATH,
-                "//span[@class='data-header__content']/a[contains(@href, '/wettbewerb/')]"
-            )
-            tier_text = tier_element.text.strip()
-
-            if "First Tier" in tier_text:
-                tier = 1
-            elif "Second Tier" in tier_text:
-                tier = 2
-            elif "Third Tier" in tier_text:
-                tier = 3
-
-        except Exception:
-            logging.info(f"Tier not found on Transfermarkt for {team_name}; using JSON tier: {tier}")
-
     except Exception as e:
         logging.error(f"Error scraping team {team_name}: {e}")
 
     finally:
         driver.quit()
 
-    # 4. Attendance
-    average_attendance = scrape_average_attendance(attendance_url) if attendance_url else None
+    # 4. Attendance (season string comes from league config)
+    average_attendance = scrape_average_attendance(attendance_url, season=season) if attendance_url else None
 
     # logging
+    log_field("Team", team_name, "league", league.name, "league config")
+    log_field("Team", team_name, "tier", tier, "league config")
+    log_field("Team", team_name, "girone", girone, "league config/JSON")
     log_field("Team", team_name, "founded", founded, "Transfermarkt/Wikipedia")
-    log_field("Team", team_name, "tier", tier, "Transfermarkt/Wikipedia")
-    log_field("Team", team_name, "girone", girone, "Wikipedia")
     log_field("Team", team_name, "stadium", stadium, "Wikipedia")
     log_field("Team", team_name, "manager", manager_name, "Wikipedia")
-    log_field("Team", team_name, "num_of_titles", italian_champion_titles, "Transfermarkt/Wikipedia")
+    log_field("Team", team_name, "num_of_titles", num_of_titles, "Transfermarkt")
     log_field("Team", team_name, "wikipedia_url", wiki_data.get("wikipedia_url"), "Wikipedia")
     log_field("Team", team_name, "transfermarkt_url", team_url, "Transfermarkt")
     log_field("Team", team_name, "average_attendance", average_attendance, "Transfermarkt")
     log_field("Team", team_name, "description", wiki_meta.get("description"), "Wikipedia")
     log_field("Team", team_name, "image_url", wiki_data.get("image_url"), "Wikipedia")
-    
-
-
 
     # 5. Save
     team, created = Team.objects.update_or_create(
         name=team_name,
         defaults={
             "founded": founded,
-            "tier": tier or 1,
+            "tier": tier,
             "girone": girone,
+            "league": league,
             "stadium": stadium,
             "manager": manager_name,
-            "num_of_titles": italian_champion_titles,
+            "num_of_titles": num_of_titles,
             "city": city,
             "average_attendance": average_attendance,
             "wikipedia_url": wikipedia_url,
@@ -992,9 +985,6 @@ def scrape_team(team_data, stadium, city):
             ),
         }
     )
-    log_field("Team", team_name, "manager", manager_name, "Wikipedia")
-    log_field("Team", team_name, "founded", founded, "Transfermarkt/Wikipedia")
-    log_field("Team", team_name, "tier", tier, "Transfermarkt/JSON")
     logging.info(f"{'Created' if created else 'Updated'} team: {team.name}")
     return team
 
@@ -1002,7 +992,19 @@ def scrape_team(team_data, stadium, city):
 # Main execution
 # --------------------------------------------------
 
-def run():
+def run(league_slug):
+    data_file = os.path.join(
+        os.path.dirname(__file__), "data", f"urls_{league_slug.replace('-', '_')}.json"
+    )
+    logging.info(f"Loading league data from {data_file}")
+    with open(data_file, encoding="utf-8") as f:
+        data = json.load(f)
+
+    league = resolve_league(data["league"])
+    country_name = data["league"]["country"]
+    season = data["league"]["season"]
+    logging.info(f"Scraping {league.name} ({country_name}), season {season}")
+
     for team_data in data["teams"]:
         logging.info("-----------------------------------------")
         logging.info(f"Processing team: {team_data.get('name')}")
@@ -1010,12 +1012,19 @@ def run():
         stadium_data = team_data.get("stadium", {})
         city_data = stadium_data.get("city", {})
 
-        city = scrape_city(city_data)
+        city = scrape_city(city_data, country=country_name)
         stadium = scrape_stadium(stadium_data, city)
-        team = scrape_team(team_data, stadium, city)
+        team = scrape_team(team_data, stadium, city, league=league, season=season)
 
         logging.info(f"Finished processing {team.name}")
 
 
 if __name__ == "__main__":
-    run()
+    import argparse
+    parser = argparse.ArgumentParser(description="Scrape Transfermarkt data for a league")
+    parser.add_argument(
+        "--league", required=True,
+        help="League slug matching scripts/data/urls_<slug>.json (e.g. serie-a, premier-league)"
+    )
+    args = parser.parse_args()
+    run(args.league)

@@ -1,0 +1,311 @@
+{
+  "league": {
+    "name": "Premier League",
+    "country": "England",
+    "country_code": "GB",
+    "division_level": 1,
+    "season": "24/25"
+  },
+  "teams": [
+    {
+      "name": "Arsenal",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-arsenal/startseite/verein/11",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-arsenal/besucherzahlenentwicklung/verein/11",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Arsenal_F.C.",
+      "stadium": {
+        "name": "Emirates Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/emirates-stadium/stadion/stadion/290",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Emirates_Stadium",
+        "city": {
+          "name": "London",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/London"
+        }
+      }
+    },
+    {
+      "name": "Chelsea",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-chelsea/startseite/verein/631",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-chelsea/besucherzahlenentwicklung/verein/631",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Chelsea_F.C.",
+      "stadium": {
+        "name": "Stamford Bridge",
+        "transfermarkt_url": "https://www.transfermarkt.com/stamford-bridge/stadion/stadion/163",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stamford_Bridge",
+        "city": {
+          "name": "London",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/London"
+        }
+      }
+    },
+    {
+      "name": "Liverpool",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-liverpool/startseite/verein/31",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-liverpool/besucherzahlenentwicklung/verein/31",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Liverpool_F.C.",
+      "stadium": {
+        "name": "Anfield",
+        "transfermarkt_url": "https://www.transfermarkt.com/anfield/stadion/stadion/67",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Anfield",
+        "city": {
+          "name": "Liverpool",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Liverpool"
+        }
+      }
+    },
+    {
+      "name": "Manchester City",
+      "transfermarkt_url": "https://www.transfermarkt.com/manchester-city/startseite/verein/281",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/manchester-city/besucherzahlenentwicklung/verein/281",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Manchester_City_F.C.",
+      "stadium": {
+        "name": "Etihad Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/etihad-stadium/stadion/stadion/254",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Etihad_Stadium",
+        "city": {
+          "name": "Manchester",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Manchester"
+        }
+      }
+    },
+    {
+      "name": "Manchester United",
+      "transfermarkt_url": "https://www.transfermarkt.com/manchester-united/startseite/verein/985",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/manchester-united/besucherzahlenentwicklung/verein/985",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Manchester_United_F.C.",
+      "stadium": {
+        "name": "Old Trafford",
+        "transfermarkt_url": "https://www.transfermarkt.com/old-trafford/stadion/stadion/72",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Old_Trafford",
+        "city": {
+          "name": "Manchester",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Manchester"
+        }
+      }
+    },
+    {
+      "name": "Tottenham Hotspur",
+      "transfermarkt_url": "https://www.transfermarkt.com/tottenham-hotspur/startseite/verein/148",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/tottenham-hotspur/besucherzahlenentwicklung/verein/148",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Tottenham_Hotspur_F.C.",
+      "stadium": {
+        "name": "Tottenham Hotspur Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/tottenham-hotspur-stadium/stadion/stadion/16700",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tottenham_Hotspur_Stadium",
+        "city": {
+          "name": "London",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/London"
+        }
+      }
+    },
+    {
+      "name": "Newcastle United",
+      "transfermarkt_url": "https://www.transfermarkt.com/newcastle-united/startseite/verein/762",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/newcastle-united/besucherzahlenentwicklung/verein/762",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Newcastle_United_F.C.",
+      "stadium": {
+        "name": "St. James' Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/st-james-park/stadion/stadion/70",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/St._James%27_Park",
+        "city": {
+          "name": "Newcastle upon Tyne",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Newcastle_upon_Tyne"
+        }
+      }
+    },
+    {
+      "name": "Aston Villa",
+      "transfermarkt_url": "https://www.transfermarkt.com/aston-villa/startseite/verein/405",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/aston-villa/besucherzahlenentwicklung/verein/405",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Aston_Villa_F.C.",
+      "stadium": {
+        "name": "Villa Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/villa-park/stadion/stadion/195",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Villa_Park",
+        "city": {
+          "name": "Birmingham",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Birmingham"
+        }
+      }
+    },
+    {
+      "name": "West Ham United",
+      "transfermarkt_url": "https://www.transfermarkt.com/west-ham-united/startseite/verein/379",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/west-ham-united/besucherzahlenentwicklung/verein/379",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/West_Ham_United_F.C.",
+      "stadium": {
+        "name": "London Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/london-stadium/stadion/stadion/14558",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/London_Stadium",
+        "city": {
+          "name": "London",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/London"
+        }
+      }
+    },
+    {
+      "name": "Brighton & Hove Albion",
+      "transfermarkt_url": "https://www.transfermarkt.com/brighton-amp-hove-albion/startseite/verein/1237",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/brighton-amp-hove-albion/besucherzahlenentwicklung/verein/1237",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Brighton_%26_Hove_Albion_F.C.",
+      "stadium": {
+        "name": "Amex Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/amex-stadium/stadion/stadion/9773",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Amex_Stadium",
+        "city": {
+          "name": "Brighton",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Brighton"
+        }
+      }
+    },
+    {
+      "name": "Fulham",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-fulham/startseite/verein/931",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-fulham/besucherzahlenentwicklung/verein/931",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Fulham_F.C.",
+      "stadium": {
+        "name": "Craven Cottage",
+        "transfermarkt_url": "https://www.transfermarkt.com/craven-cottage/stadion/stadion/145",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Craven_Cottage",
+        "city": {
+          "name": "London",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/London"
+        }
+      }
+    },
+    {
+      "name": "Wolverhampton Wanderers",
+      "transfermarkt_url": "https://www.transfermarkt.com/wolverhampton-wanderers/startseite/verein/543",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/wolverhampton-wanderers/besucherzahlenentwicklung/verein/543",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Wolverhampton_Wanderers_F.C.",
+      "stadium": {
+        "name": "Molineux Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/molineux-stadium/stadion/stadion/278",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Molineux_Stadium",
+        "city": {
+          "name": "Wolverhampton",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Wolverhampton"
+        }
+      }
+    },
+    {
+      "name": "Everton",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-everton/startseite/verein/29",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-everton/besucherzahlenentwicklung/verein/29",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Everton_F.C.",
+      "stadium": {
+        "name": "Goodison Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/goodison-park/stadion/stadion/62",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Goodison_Park",
+        "city": {
+          "name": "Liverpool",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Liverpool"
+        }
+      }
+    },
+    {
+      "name": "Brentford",
+      "transfermarkt_url": "https://www.transfermarkt.com/brentford-fc/startseite/verein/1148",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/brentford-fc/besucherzahlenentwicklung/verein/1148",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Brentford_F.C.",
+      "stadium": {
+        "name": "Gtech Community Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/gtech-community-stadium/stadion/stadion/17374",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gtech_Community_Stadium",
+        "city": {
+          "name": "London",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/London"
+        }
+      }
+    },
+    {
+      "name": "Crystal Palace",
+      "transfermarkt_url": "https://www.transfermarkt.com/crystal-palace/startseite/verein/873",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/crystal-palace/besucherzahlenentwicklung/verein/873",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Crystal_Palace_F.C.",
+      "stadium": {
+        "name": "Selhurst Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/selhurst-park/stadion/stadion/253",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Selhurst_Park",
+        "city": {
+          "name": "London",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/London"
+        }
+      }
+    },
+    {
+      "name": "Nottingham Forest",
+      "transfermarkt_url": "https://www.transfermarkt.com/nottingham-forest/startseite/verein/703",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nottingham-forest/besucherzahlenentwicklung/verein/703",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Nottingham_Forest_F.C.",
+      "stadium": {
+        "name": "City Ground",
+        "transfermarkt_url": "https://www.transfermarkt.com/city-ground/stadion/stadion/249",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/City_Ground",
+        "city": {
+          "name": "Nottingham",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Nottingham"
+        }
+      }
+    },
+    {
+      "name": "Bournemouth",
+      "transfermarkt_url": "https://www.transfermarkt.com/afc-bournemouth/startseite/verein/989",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/afc-bournemouth/besucherzahlenentwicklung/verein/989",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AFC_Bournemouth",
+      "stadium": {
+        "name": "Vitality Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/vitality-stadium/stadion/stadion/4990",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Vitality_Stadium",
+        "city": {
+          "name": "Bournemouth",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bournemouth"
+        }
+      }
+    },
+    {
+      "name": "Leicester City",
+      "transfermarkt_url": "https://www.transfermarkt.com/leicester-city/startseite/verein/1003",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/leicester-city/besucherzahlenentwicklung/verein/1003",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Leicester_City_F.C.",
+      "stadium": {
+        "name": "King Power Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/king-power-stadium/stadion/stadion/6397",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/King_Power_Stadium",
+        "city": {
+          "name": "Leicester",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Leicester"
+        }
+      }
+    },
+    {
+      "name": "Ipswich Town",
+      "transfermarkt_url": "https://www.transfermarkt.com/ipswich-town/startseite/verein/677",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ipswich-town/besucherzahlenentwicklung/verein/677",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ipswich_Town_F.C.",
+      "stadium": {
+        "name": "Portman Road",
+        "transfermarkt_url": "https://www.transfermarkt.com/portman-road/stadion/stadion/252",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Portman_Road",
+        "city": {
+          "name": "Ipswich",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ipswich"
+        }
+      }
+    },
+    {
+      "name": "Southampton",
+      "transfermarkt_url": "https://www.transfermarkt.com/southampton-fc/startseite/verein/180",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/southampton-fc/besucherzahlenentwicklung/verein/180",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Southampton_F.C.",
+      "stadium": {
+        "name": "St. Mary's Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/st-marys-stadium/stadion/stadion/140",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/St_Mary%27s_Stadium",
+        "city": {
+          "name": "Southampton",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Southampton"
+        }
+      }
+    }
+  ]
+}
