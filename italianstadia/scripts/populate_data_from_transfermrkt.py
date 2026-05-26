@@ -378,6 +378,15 @@ def parse_geohack_params(params):
     return lat, lon
 
 
+_BADGE_PATTERNS = (
+    "badge", "crest", "emblem", "logo", "wappen", "escudo", "shield", "blason",
+)
+
+def _is_badge_image(src):
+    src_lower = src.lower()
+    return any(p in src_lower for p in _BADGE_PATTERNS)
+
+
 def extract_wikipedia_image(soup, page_url):
     if not soup:
         logging.error("[Wikipedia] No soup provided for image extraction")
@@ -385,23 +394,24 @@ def extract_wikipedia_image(soup, page_url):
 
     infobox = get_infobox(soup)
 
-    # Method 1: image from infobox
+    # Method 1: image from infobox — skip badge/crest images
     if infobox:
-        img = infobox.find("img")
-        if img and img.get("src"):
-            src = img["src"]
-
+        for img in infobox.find_all("img"):
+            src = img.get("src", "")
+            if not src or _is_badge_image(src):
+                continue
             if src.startswith("//"):
                 return "https:" + src
-
             return urljoin(page_url, src)
     else:
         logging.info("[Wikipedia] No infobox found for image extraction")
 
-    # Method 2: Open Graph image
+    # Method 2: Open Graph image (usually a good photo)
     og_image = soup.find("meta", property="og:image")
     if og_image and og_image.get("content"):
-        return og_image["content"]
+        content = og_image["content"]
+        if not _is_badge_image(content):
+            return content
     else:
         logging.info("[Wikipedia] No Open Graph image found")
 
@@ -412,14 +422,14 @@ def extract_wikipedia_image(soup, page_url):
         if not src:
             continue
 
-        if "static/images" in src:
+        if "static/images" in src or _is_badge_image(src):
             continue
 
         if src.startswith("//"):
             return "https:" + src
 
         return urljoin(page_url, src)
-    
+
     logging.info("[Wikipedia] No useful images found")
     return None
 
@@ -617,38 +627,30 @@ def classify_ownership(owner_raw):
     text = owner_raw.lower()
 
     public_keywords = [
-        "city of",
-        "comune di",
-        "comune",
-        "municipality",
-        "municipal",
-        "council",
-        "government",
-        "region",
-        "province",
-        "provincia",
-        "metropolitan city",
-        "città metropolitana",
-        "Salute",
+        # English
+        "city of", "municipality", "municipal", "council", "government",
+        "region", "province", "metropolitan city", "district",
+        # Italian
+        "comune di", "comune", "provincia", "città metropolitana",
+        # German
+        "stadt ", "stadtwerke", "stadtverwaltung", "stadtgemeinde",
+        "gemeinde", "landkreis", "freistaat", "bundesland", "kommunal",
+        # French
+        "commune de", "mairie", "métropole",
+        # Spanish / Portuguese
+        "ayuntamiento", "município", "câmara municipal",
     ]
 
     private_keywords = [
-        "football club",
-        "fc ",
-        "ac ",
-        "as ",
-        "ss ",
-        "ssc ",
-        "us ",
-        "club",
-        "s.p.a",
-        "S.p.A.",
-        "spa",
-        "srl",
-        "s.r.l.",
-        "ltd",
-        "group",
-        "Calcio",
+        # Club patterns (multi-language)
+        "football club", "fussball", "fußball", "calcio",
+        "fc ", "ac ", "as ", "ss ", "ssc ", "us ", "club",
+        # Company suffixes
+        "s.p.a", "srl", "s.r.l.", "ltd", "llc", "group",
+        # German company forms
+        "gmbh", "g.m.b.h", " ag", " ag,", "e.v.", "e. v.",
+        # French / Spanish
+        "s.a.", "sarl",
     ]
 
     has_public = any(keyword in text for keyword in public_keywords)
@@ -911,21 +913,35 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
     # 3. Transfermarkt scraping
     driver = create_driver()
 
+    # Maps country name → nationality adjective used in Transfermarkt award titles
+    NATIONALITY_MAP = {
+        "Italy": "Italian",
+        "Germany": "German",
+        "England": "English",
+        "Spain": "Spanish",
+        "France": "French",
+        "Netherlands": "Dutch",
+        "Portugal": "Portuguese",
+        "Turkey": "Turkish",
+        "Scotland": "Scottish",
+        "Belgium": "Belgian",
+    }
+
     try:
         driver.get(team_url)
         time.sleep(2)
 
         accept_consent_if_present(driver)
 
-        # Title scraping is Italy-specific ("Italian Champion" award)
-        if league.country.name == "Italy":
+        nationality = NATIONALITY_MAP.get(league.country.name)
+        if nationality:
             try:
-                italian_champion_element = WebDriverWait(driver, 10).until(
+                champion_element = WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located(
-                        (By.XPATH, "//a[@title='Italian Champion']/span[@class='data-header__success-number']")
+                        (By.XPATH, f"//a[@title='{nationality} Champion']/span[@class='data-header__success-number']")
                     )
                 )
-                num_of_titles = clean_int(italian_champion_element.text) or 0
+                num_of_titles = clean_int(champion_element.text) or 0
             except Exception:
                 num_of_titles = 0
 
