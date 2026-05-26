@@ -992,7 +992,7 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
 # Main execution
 # --------------------------------------------------
 
-def run(league_slug):
+def run(league_slug, season_override=None):
     data_file = os.path.join(
         os.path.dirname(__file__), "data", f"urls_{league_slug.replace('-', '_')}.json"
     )
@@ -1002,7 +1002,7 @@ def run(league_slug):
 
     league = resolve_league(data["league"])
     country_name = data["league"]["country"]
-    season = data["league"]["season"]
+    season = season_override or data["league"]["season"]
     logging.info(f"Scraping {league.name} ({country_name}), season {season}")
 
     for team_data in data["teams"]:
