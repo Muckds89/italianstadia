@@ -256,7 +256,7 @@ function applyFilters(updateStadiumDropdown = true) {
 
         if (countryMatches && leagueMatches && gironeMatches &&
                 ownershipMatches && stadiumMatches) {
-            marker.setStyle(getMarkerStyle(marker));
+            marker.setStyle({ radius: 7, ...getMarkerStyle(marker) });
             marker.addTo(map);
             visibleMarkers.push(marker);
         } else {
@@ -601,7 +601,7 @@ fetch("/api/stadiums/")
 
             marker.gironi = marker.teams.map(t => t.girone || "");
 
-            marker.setStyle(getMarkerStyle(marker));
+            marker.setStyle({ radius: 7, ...getMarkerStyle(marker) });
             marker.ownership = props.ownership ? String(props.ownership) : "UNKNOWN";
             marker.stadiumId = String(props.id);
             marker.stadiumName = props.name;

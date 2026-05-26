@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from .models import City, League, Stadium, Team, StadiumDevelopment
 
 
@@ -131,15 +131,9 @@ def city_list(request):
     qs = City.objects.all().order_by("-population", "name")
     if selected_country:
         qs = qs.filter(country=selected_country)
-    countries = list(
-        City.objects.values_list("country", flat=True)
-        .exclude(country="")
-        .distinct()
-        .order_by("country")
-    )
     return render(request, "city_list.html", {
         "cities": qs,
-        "countries": countries,
+        "countries": _available_countries(),
         "selected_country": selected_country,
     })
 
@@ -152,6 +146,10 @@ def stadium_list(request):
         .select_related("city")
         .prefetch_related("teams__league__country")
     )
+    if selected_country:
+        stadia_qs = stadia_qs.filter(
+            teams__league__country__name=selected_country
+        ).distinct()
 
     # Build ordered list of leagues to use as sections
     leagues_qs = League.objects.select_related("country").order_by(
@@ -211,10 +209,9 @@ def _primary_league(stadium):
 def team_list(request):
     selected_country = request.GET.get("country", "")
 
-    teams_qs = (
-        Team.objects
-        .select_related("city", "stadium", "league__country")
-    )
+    teams_qs = Team.objects.select_related("city", "stadium", "league__country")
+    if selected_country:
+        teams_qs = teams_qs.filter(league__country__name=selected_country)
 
     leagues_qs = League.objects.select_related("country").order_by(
         "country__name", "division_level"

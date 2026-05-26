@@ -1,7 +1,6 @@
 import importlib.util
 import json
 import os
-import sys
 
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
@@ -81,7 +80,7 @@ class Command(BaseCommand):
     # ------------------------------------------------------------------
 
     def _dry_run(self, data, league_config, season):
-        from italiastadiaapp.models import Country, League, Stadium, Team
+        from italiastadiaapp.models import Country, League, Team
 
         self.stdout.write("-" * 50)
 
@@ -101,11 +100,15 @@ class Command(BaseCommand):
         )
 
         self.stdout.write("\nTeams:")
+        team_names = [t["name"] for t in data["teams"]]
+        existing_names = set(
+            Team.objects.filter(name__in=team_names).values_list("name", flat=True)
+        )
         creates = updates = 0
         for team_data in data["teams"]:
             name = team_data["name"]
             stadium_name = team_data.get("stadium", {}).get("name", "?")
-            team_exists = Team.objects.filter(name=name).exists()
+            team_exists = name in existing_names
             action = "UPDATE" if team_exists else "CREATE"
             color = self.style.SUCCESS if team_exists else self.style.WARNING
             self.stdout.write(f"  [{color(action)}] {name:<35} stadium: {stadium_name}")
