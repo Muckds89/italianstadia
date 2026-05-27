@@ -538,7 +538,7 @@ def scrape_city(city_data, country="Unknown"):
 
     # 4. Merge values (priority logic)
     final_name = first_valid(name, fallback_name)
-    final_population = wiki_data.get("population") or 0
+    final_population = wiki_data.get("population") or None
     final_country = first_valid(country_from_infobox, country) or country
     log_field("City", final_name, "population", final_population, "Wikipedia")
     log_field("City", final_name, "image", wiki_data.get("image_url"), "Wikipedia")

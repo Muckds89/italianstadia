@@ -27,7 +27,7 @@ class League(models.Model):
 
 class City(models.Model):
     name = models.CharField(max_length=255)
-    population = models.IntegerField()
+    population = models.IntegerField(null=True, blank=True)
     country = models.CharField(max_length=255)
     wikipedia_url = models.URLField(max_length=500, blank=True, null=True)
 
@@ -75,9 +75,10 @@ class Stadium(models.Model):
 
 class Team(models.Model):
     TIER_CHOICES = [
-        (1, 'Serie A'),
-        (2, 'Serie B'),
-        (3, 'Serie C')    ]
+        (1, 'First Division'),
+        (2, 'Second Division'),
+        (3, 'Third Division'),
+    ]
 
     GIRONE_CHOICES = [
     ("A", "Girone A"),
@@ -100,7 +101,7 @@ class Team(models.Model):
     manager = models.CharField(max_length=255, blank=True, null=True)
     num_of_titles = models.IntegerField(default=0)
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='teams')
-    average_attendance = models.FloatField(null=True, blank=True)
+    average_attendance = models.IntegerField(null=True, blank=True)
 
     wikipedia_url = models.URLField(max_length=500, blank=True, null=True)
     transfermarkt_url = models.URLField(max_length=500, blank=True, null=True)
@@ -159,8 +160,8 @@ class StadiumDevelopment(models.Model):
 
     estimated_opening = models.IntegerField(null=True, blank=True)
 
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
 
     architect = models.CharField(max_length=255, blank=True, null=True)
     developer = models.CharField(max_length=255, blank=True, null=True)
