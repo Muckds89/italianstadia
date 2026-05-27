@@ -382,23 +382,90 @@ _BADGE_PATTERNS = (
     "badge", "crest", "emblem", "logo", "wappen", "escudo", "shield", "blason",
 )
 
+_BAD_BADGE_PATTERNS = (
+    "placeholder", "flag", "arrow", "default", "no-picture", "no_picture",
+)
+
 def _is_badge_image(src):
     src_lower = src.lower()
     return any(p in src_lower for p in _BADGE_PATTERNS)
 
 
-def extract_wikipedia_image(soup, page_url):
+def _is_valid_badge_url(url):
+    """Return False for known placeholder/icon/fallback image URLs."""
+    if not url:
+        return False
+    url_lower = url.lower()
+    return not any(p in url_lower for p in _BAD_BADGE_PATTERNS)
+
+
+def extract_team_id_from_url(url):
+    """Extract numeric team ID from a Transfermarkt team URL (/verein/<id>)."""
+    match = re.search(r"/verein/(\d+)", url or "")
+    return match.group(1) if match else None
+
+
+def scrape_team_badge(team_url, driver):
+    """
+    Fetch the club crest from Transfermarkt.
+
+    Priority:
+      1. Akamai CDN wappen URL built from team_id (fast, no page parse needed)
+      2. .vereins-wappen img DOM element on already-open Selenium page
+      3. Any img whose data-src contains 'wappen'
+    Returns None if nothing valid found.
+    """
+    team_id = extract_team_id_from_url(team_url)
+
+    # Method 1: deterministic CDN URL
+    if team_id:
+        cdn_url = f"https://tmssl.akamaized.net/images/wappen/head/{team_id}.png"
+        try:
+            resp = requests.get(cdn_url, headers=HEADERS, timeout=10)
+            if resp.status_code == 200 and len(resp.content) >= 500 and _is_valid_badge_url(cdn_url):
+                logging.info(f"[Badge] CDN wappen OK: {cdn_url} ({len(resp.content)} bytes)")
+                return cdn_url
+            else:
+                logging.info(f"[Badge] CDN wappen skipped: status={resp.status_code} size={len(resp.content)}")
+        except Exception as e:
+            logging.info(f"[Badge] CDN wappen request failed: {e}")
+
+    # Method 2: .vereins-wappen img on the Transfermarkt page
+    try:
+        badge_img = driver.find_element(By.CSS_SELECTOR, ".vereins-wappen img")
+        src = badge_img.get_attribute("src") or badge_img.get_attribute("data-src") or ""
+        if src and _is_valid_badge_url(src):
+            logging.info(f"[Badge] DOM .vereins-wappen: {src}")
+            return src
+    except Exception:
+        pass
+
+    # Method 3: any img whose data-src references the wappen CDN
+    try:
+        badge_img = driver.find_element(By.CSS_SELECTOR, "img[data-src*='wappen']")
+        src = badge_img.get_attribute("data-src") or badge_img.get_attribute("src") or ""
+        if src and _is_valid_badge_url(src):
+            logging.info(f"[Badge] DOM data-src wappen: {src}")
+            return src
+    except Exception:
+        pass
+
+    logging.warning(f"[Badge] No valid badge found for team_url={team_url}")
+    return None
+
+
+def extract_wikipedia_image(soup, page_url, exclude_badges=False):
     if not soup:
         logging.error("[Wikipedia] No soup provided for image extraction")
         return None
 
     infobox = get_infobox(soup)
 
-    # Method 1: image from infobox — skip badge/crest images
+    # Method 1: image from infobox
     if infobox:
         for img in infobox.find_all("img"):
             src = img.get("src", "")
-            if not src or _is_badge_image(src):
+            if not src or (exclude_badges and _is_badge_image(src)):
                 continue
             if src.startswith("//"):
                 return "https:" + src
@@ -410,7 +477,7 @@ def extract_wikipedia_image(soup, page_url):
     og_image = soup.find("meta", property="og:image")
     if og_image and og_image.get("content"):
         content = og_image["content"]
-        if not _is_badge_image(content):
+        if not (exclude_badges and _is_badge_image(content)):
             return content
     else:
         logging.info("[Wikipedia] No Open Graph image found")
@@ -422,7 +489,7 @@ def extract_wikipedia_image(soup, page_url):
         if not src:
             continue
 
-        if "static/images" in src or _is_badge_image(src):
+        if "static/images" in src or (exclude_badges and _is_badge_image(src)):
             continue
 
         if src.startswith("//"):
@@ -584,7 +651,7 @@ def extract_best_stadium_image(
         return transfermarkt_image
 
     if wikipedia_soup and wikipedia_url:
-        return extract_wikipedia_image(wikipedia_soup, wikipedia_url)
+        return extract_wikipedia_image(wikipedia_soup, wikipedia_url, exclude_badges=True)
 
     return None
 
@@ -904,6 +971,7 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
     if league.country.name == "Italy" and league.division_level == 3:
         girone = team_data.get("girone")
     num_of_titles = 0
+    tm_badge = None
 
     # 3. Transfermarkt scraping
     driver = create_driver()
@@ -927,6 +995,9 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
         time.sleep(2)
 
         accept_consent_if_present(driver)
+
+        # Badge / club crest
+        tm_badge = scrape_team_badge(team_url, driver)
 
         nationality = NATIONALITY_MAP.get(league.country.name)
         if nationality:
@@ -969,7 +1040,8 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
     log_field("Team", team_name, "transfermarkt_url", team_url, "Transfermarkt")
     log_field("Team", team_name, "average_attendance", average_attendance, "Transfermarkt")
     log_field("Team", team_name, "description", wiki_meta.get("description"), "Wikipedia")
-    log_field("Team", team_name, "image_url", wiki_data.get("image_url"), "Wikipedia")
+    log_field("Team", team_name, "badge", tm_badge, "Transfermarkt")
+    log_field("Team", team_name, "image_url", wiki_data.get("image_url"), "Wikipedia fallback")
 
     # 5. Save
     team, created = Team.objects.update_or_create(
@@ -991,6 +1063,7 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
                 wiki_data.get("description")
             ),
             "image_url": first_valid(
+                tm_badge,
                 wiki_data.get("image_url"),
                 wiki_meta.get("image_url")
             ),
