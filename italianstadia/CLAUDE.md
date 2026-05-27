@@ -182,6 +182,35 @@ Stadium.objects.select_related("city").prefetch_related("teams")
 
 All URL names must use the `italiastadiaapp` namespace: `reverse("italiastadiaapp:stadiums_geojson")`. Even though the root urlconf uses `include('italiastadiaapp.urls')` without an explicit namespace kwarg, Django still applies the `app_name` from the included module as the namespace — bare names like `reverse("stadiums_geojson")` will raise `NoReverseMatch`.
 
+## Scraper data files (`scripts/data/urls_*.json`)
+
+Each league data file drives `python manage.py scrape_season --league <slug>`. The ownership merge priority is:
+
+```
+Wikipedia infobox owner → JSON stadium.owner_raw → UNKNOWN
+```
+
+**When to set `owner_raw` in the JSON**: When a stadium's Wikipedia article has no "Owner", "Operator", or "Operated by" infobox row, add it manually to prevent the stadium from landing as UNKNOWN:
+
+```json
+"stadium": {
+  "name": "Stade du Moustoir",
+  "owner_raw": "Ville de Lorient",
+  ...
+}
+```
+
+**Classification rules** (in `classify_ownership()`):
+- `owner_raw` empty/None → `UNKNOWN`
+- matches public keyword → `PUBLIC` (or `MIXED` if also matches private keyword)
+- non-empty, no public keyword match → `PRIVATE`
+
+Public keywords cover: English (`city of`, `municipality`, `council`, `government`, `town of`, `town council`, `agglomeration`), Italian (`comune di`, `comunale`), German (`stadt `, `gemeinde`), French (`commune de`, `mairie`, `métropole`, `ville de`, `ville d'`, `agglomération`, `communauté`), Spanish/Portuguese (`ayuntamiento`, `município`).
+
+Use the actual legal owner text (e.g. `"Ville de Lyon"`, `"City of Leeds"`, `"Comune di Roma"`) not a generic label — the classifier does substring matching.
+
+**`clean_int()` null contract**: returns `None` for empty, unparseable, or zero values. `0` is never a valid attendance or capacity — store `None` instead.
+
 ## What NOT to do
 
 - Do not put business logic in templates
@@ -220,3 +249,11 @@ The project is currently Italy-only (Serie A/B/C). Full roadmap in `italianstadi
 | Belgian Pro League | Belgium | 1 |
 
 Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 fixes) before expanding to multi-league.
+
+## Data quality rules
+
+- average_attendance must be NULL if not scraped — never 0 (0 means "stadium is empty", which is wrong)
+- Stadium coordinates must be non-null before saving — use OSM fallback if Wikipedia fails
+- ownership must never be UNKNOWN when owner_raw has a value — if no public keyword matches, classify as PRIVATE
+- All Wikipedia/Transfermarkt URLs in JSON configs must return HTTP 200 — validate with --dry-run before scraping
+- Stadium images must be non-null — use og:image fallback if infobox image not found
