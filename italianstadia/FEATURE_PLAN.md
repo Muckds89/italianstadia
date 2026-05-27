@@ -1,46 +1,46 @@
-# Feature Plan — Fix scraper: images, titles, girone filter, ownership
-_Created: 2026-05-26 | Branch: fix/scraper-multi-league_
+# Feature Plan — Data Quality Enforcement for Scraper Pipeline
+_Created: 2026-05-27 | Branch: feature/scraper-data-quality_
 
 ## Problem / Goal
 
-Four bugs emerged when running the scraper against non-Italian leagues (Bundesliga):
-
-1. **Wrong stadium images** — `extract_transfermarkt_stadium_image()` uses `requests.get()`, which returns 404 on Transfermarkt's JS-rendered stadium pages. The fallback `extract_wikipedia_image()` picks the first infobox `<img>`, which is often a club badge/crest rather than a stadium photo on German Wikipedia pages.
-
-2. **`num_of_titles = 0` for all non-Italian teams** — `scrape_team()` has an explicit `if league.country.name == "Italy":` guard before the title XPath query. All Bundesliga teams (Bayern, Dortmund, etc.) get 0 titles.
-
-3. **Girone filter shows for non-Italian division-3 leagues** — `map.js` reveals `#gironeFilter` whenever any third-division league is selected, regardless of country. Gironi (A/B/C) are an Italian Serie C concept only.
-
-4. **Ownership classified as UNKNOWN for German stadiums** — `classify_ownership()` only knows Italian-language public-sector keywords (`comune`, `provincia`, `città metropolitana`) and Italian company suffixes (`s.r.l.`, `s.p.a`). German forms like `GmbH`, `AG`, `Stadt`, `Gemeinde` are unrecognised.
-
-Success = Bundesliga teams have correct stadium photos, correct title counts, no girone filter visible when Germany is selected, and sensible PUBLIC/PRIVATE/MIXED ownership for all 18 stadiums.
+After each scrape run it is impossible to tell at a glance whether the data landed correctly. Silent failures go undetected: a missing badge URL looks like a successful team record, UNKNOWN ownership passes without warning, and a capacity of 0 is indistinguishable from a missing value. The goal is a post-scrape quality report printed to the console (and logged) that surfaces every data gap immediately, so the operator can fix the source data or JSON before the run is considered done.
 
 ---
 
 ## Scope
 
 **In scope:**
-- [ ] Filter badge/crest images out of `extract_wikipedia_image()` for stadiums
-- [ ] Generalise `num_of_titles` scraping to any country via a nationality map
-- [ ] Hide `#gironeFilter` unless the selected country is Italy (map.js)
-- [ ] Expand `classify_ownership()` with German (and common European) keywords
+- [ ] Post-scrape validation summary appended to `run()` — runs automatically after every scrape
+- [ ] Standalone management command `python manage.py validate_league_data --league <slug>` for re-checking without re-scraping
+- [ ] Checks: UNKNOWN ownership · missing badge (`image_url`) · missing coordinates · missing capacity · zero average attendance
 
 **Out of scope (do not touch):**
-- Stadium Transfermarkt pages still use `requests.get()` — not switching to Selenium (would double scrape time; Wikipedia is the authoritative source for coords/capacity anyway)
-- No model/migration changes
-- No new scraper data files
+- No model changes — validation reads existing fields only
+- No scraper logic changes — validation is read-only, post-fact
+- No frontend changes
+- No blocking/aborting the scrape on failure (warnings only)
+- No email / external alerting
 
 ---
 
 ## Design decisions
 
-1. **Badge filter uses URL path heuristics, not ML** | Alternative: image dimensions | Reason: src URLs for Wikipedia badge images reliably contain "badge", "crest", "emblem", "logo", "wappen", "escudo", "shield"; path checks are fast and zero-dependency.
+1. **Where to add validation**: Append `_validate_league(league)` call at end of `run()` — same process, same log session, zero extra invocation required. | Alternative: separate management command only | Reason: invisible quality gate is better than opt-in; command still added for ad-hoc re-checks.
+2. **Output format**: Plain-text table to `logging` (captured in `scraping_transfermarkt.log`) + `print()` to stdout so the operator sees it in the terminal immediately without grepping the log. | Alternative: JSON report file | Reason: log + stdout is already the pattern in this codebase; a file adds friction.
+3. **Severity levels**: `WARNING` for fixable gaps (UNKNOWN ownership, missing badge), `ERROR` for blocking gaps (missing lat/lng — marker won't appear on map). | Alternative: single level | Reason: helps triage: errors must be fixed before the data is usable.
+4. **Management command location**: `italiastadiaapp/management/commands/validate_league_data.py` | Alternative: standalone script | Reason: consistent with `scrape_season`; gets `python manage.py` discoverability for free.
 
-2. **Nationality map for title scraping** | Alternative: scrape all `data-header__success-number` elements | Reason: summing all honours would include cups/secondary trophies; the per-award XPath `//a[@title='{Nationality} Champion']` is precise. A small static dict covers all planned Phase 2 leagues.
+---
 
-3. **Girone filter hidden by country, not by league** | Alternative: hide by `division_level != 3` AND `country != Italy` | Reason: country check is simpler and already tracked in filter state; if we ever add an Italian Serie C league slot, it still works correctly.
+## Checks
 
-4. **Extend `classify_ownership()` in-place** | Alternative: external library / Wikidata lookup | Reason: the keyword list is small, self-contained, and easy to audit per-league; no extra dependency.
+| Check | Severity | Field(s) | Condition |
+|-------|----------|----------|-----------|
+| Missing badge | WARNING | `team.image_url` | None or empty |
+| UNKNOWN ownership | WARNING | `stadium.ownership` | `== "UNKNOWN"` |
+| Missing capacity | WARNING | `stadium.capacity` | None or 0 |
+| Missing coordinates | ERROR | `stadium.latitude`, `stadium.longitude` | Either None |
+| Zero avg attendance | WARNING | `team.average_attendance` | None or 0 |
 
 ---
 
@@ -48,45 +48,58 @@ Success = Bundesliga teams have correct stadium photos, correct title counts, no
 
 | File | Change type | Why |
 |------|-------------|-----|
-| `scripts/populate_data_from_transfermrkt.py` | Edit | Fix badge filter, title nationality map, ownership keywords |
-| `italiastadiaapp/static/js/map.js` | Edit | Hide girone filter when selected country ≠ Italy |
+| `scripts/populate_data_from_transfermrkt.py` | Edit | Add `_validate_league()` function; call it at end of `run()` |
+| `italiastadiaapp/management/commands/validate_league_data.py` | New | Standalone management command |
 
 ---
 
 ## Implementation steps
 
-1. [ ] **`classify_ownership()`** — add German public keywords (`stadt`, `gemeinde`, `landkreis`, `freistaat`, `kreis`, `stadtverwaltung`, `kommunal`) and private suffixes (`gmbh`, `ag`, `e.v.`); add common multi-language terms (`société`, `municipalité`, `ayuntamiento`) for future leagues
-2. [ ] **`extract_wikipedia_image()`** — add `_is_badge_image(src)` helper that returns `True` when src contains any of: `badge`, `crest`, `emblem`, `logo`, `wappen`, `escudo`, `shield`, `blason`; skip those images in all three extraction methods
-3. [ ] **`scrape_team()` — title scraping** — replace `if league.country.name == "Italy":` block with a `NATIONALITY_MAP` dict (`{"Italy": "Italian", "Germany": "German", "England": "English", ...}`) and dynamic XPath `//a[@title='{nationality} Champion']/span[@class='data-header__success-number']`; keep `num_of_titles = 0` as fallback when country not in map or element not found
-4. [ ] **`map.js` — girone filter** — in `applyFilters()` and wherever the league filter is populated, show `#gironeFilter` only when `selectedCountry === "Italy"` (or `selectedCountry === ""`); hide and reset value to `""` otherwise
+1. [ ] Write `_validate_league(league)` in `populate_data_from_transfermrkt.py`
+   - Query `Team.objects.filter(league=league).select_related("stadium")`
+   - For each team run all checks from the table above
+   - Print formatted summary: total teams, issue count per check, per-team detail lines for any failures
+   - Log same content at `WARNING` / `ERROR` level
+2. [ ] Call `_validate_league(league)` at end of `run()`, after the team loop
+3. [ ] Create `italiastadiaapp/management/commands/validate_league_data.py`
+   - Accepts `--league <slug>` argument
+   - Resolves the `League` object via `League.objects.get(...)`
+   - Calls `_validate_league(league)`
+4. [ ] Run `pytest italiastadiaapp/tests/ -v` — no regressions
+
+---
+
+## Expected console output (example)
+
+```
+=== Data Quality Report: Ligue 1 (18 teams) ===
+  UNKNOWN ownership  : 0
+  Missing badge      : 0
+  Missing capacity   : 0
+  Missing coordinates: 0
+  Zero avg attendance: 2  ← WARNING
+    - Paris FC          avg_attendance=0
+    - AJ Auxerre        avg_attendance=0
+
+Result: 2 warnings, 0 errors
+```
 
 ---
 
 ## PostgreSQL safety check
 
-No model changes — N/A.
+N/A — no model changes.
 
 ---
 
 ## Test plan
 
-**Automated (add to `test_views.py` or a new `test_scraper.py`):**
-- `classify_ownership("Stadt München")` → `"PUBLIC"`
-- `classify_ownership("Allianz Arena München Stadion GmbH")` → `"PRIVATE"`
-- `classify_ownership("Hamburger SV e.V.")` → `"PRIVATE"`
-- `classify_ownership("City of Frankfurt GmbH")` → public keyword wins unless private is also present → `"MIXED"`
-- Existing Italian ownership tests still pass
-
-**Manual (after scrape re-run):**
-- Open map → select Germany → confirm Girone filter is hidden
-- Open map → select Italy → confirm Girone filter is visible
-- After re-scrape: Bundesliga team pages show correct `num_of_titles` for Bayern (≥ 30), BVB (≥ 8)
-- After re-scrape: stadium detail pages show stadium photos, not club crests
+- `pytest italiastadiaapp/tests/ -v` — full suite must stay green
+- Manual: run `python manage.py scrape_season --league ligue-1 --year 2026` and confirm quality report prints at the end with 0 errors
+- Manual: run `python manage.py validate_league_data --league ligue-1` and confirm same report without re-scraping
 
 ---
 
 ## Rollback plan
 
-- Pure Python/JS changes; no migrations
-- `git revert` the single commit on `fix/scraper-multi-league`
-- Re-run scraper to restore previous DB values: `python manage.py scrape_season --league bundesliga --year 2025`
+Both changes are additive (new function + new command file). To undo: delete `validate_league_data.py` and remove the `_validate_league(league)` call and function from the scraper. No migration to reverse.

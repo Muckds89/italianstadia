@@ -1102,6 +1102,70 @@ def run(league_slug, season_override=None):
 
         logging.info(f"Finished processing {team.name}")
 
+    _validate_league(league)
+
+
+def _validate_league(league):
+    from italiastadiaapp.models import Team
+
+    teams = list(Team.objects.filter(league=league).select_related("stadium"))
+    total = len(teams)
+
+    issues = {
+        "missing_badge": [],
+        "unknown_ownership": [],
+        "missing_capacity": [],
+        "missing_coords": [],
+        "zero_attendance": [],
+    }
+
+    for team in teams:
+        if not team.image_url:
+            issues["missing_badge"].append(team.name)
+        if team.average_attendance is None or team.average_attendance == 0:
+            issues["zero_attendance"].append(team.name)
+        if team.stadium:
+            if team.stadium.ownership == "UNKNOWN":
+                issues["unknown_ownership"].append(team.name)
+            if not team.stadium.capacity:
+                issues["missing_capacity"].append(team.name)
+            if team.stadium.latitude is None or team.stadium.longitude is None:
+                issues["missing_coords"].append(team.name)
+
+    warnings = sum(
+        len(v) for k, v in issues.items() if k != "missing_coords"
+    )
+    errors = len(issues["missing_coords"])
+
+    lines = [
+        f"\n=== Data Quality Report: {league.name} ({total} teams) ===",
+        f"  UNKNOWN ownership  : {len(issues['unknown_ownership'])}",
+        f"  Missing badge      : {len(issues['missing_badge'])}",
+        f"  Missing capacity   : {len(issues['missing_capacity'])}",
+        f"  Missing coordinates: {len(issues['missing_coords'])}",
+        f"  Zero avg attendance: {len(issues['zero_attendance'])}",
+    ]
+
+    detail_map = {
+        "unknown_ownership": "ownership=UNKNOWN",
+        "missing_badge":     "badge missing",
+        "missing_capacity":  "capacity=0/None",
+        "missing_coords":    "coords missing",
+        "zero_attendance":   "avg_attendance=0",
+    }
+    for key, label in detail_map.items():
+        for name in issues[key]:
+            level = "ERROR" if key == "missing_coords" else "WARN "
+            lines.append(f"    [{level}] {name:<35} ({label})")
+
+    result_line = f"\nResult: {warnings} warning(s), {errors} error(s)"
+    lines.append(result_line)
+
+    report = "\n".join(lines)
+    print(report)
+    log_fn = logging.error if errors else logging.warning if warnings else logging.info
+    log_fn(report)
+
 
 if __name__ == "__main__":
     import argparse
