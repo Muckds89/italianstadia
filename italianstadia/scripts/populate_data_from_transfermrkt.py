@@ -631,7 +631,10 @@ def classify_ownership(owner_raw):
         "city of", "municipality", "municipal", "council", "government",
         "region", "province", "metropolitan city", "district",
         # Italian
-        "comune di", "comune", "provincia", "città metropolitana",
+        "comune di", "comune", "comunale", "provincia", "città metropolitana",
+        "sport e salute",  # Italian government sports agency (formerly CONI Servizi)
+        # English variants for Italian/French comune
+        "commune of", "commune di",
         # German
         "stadt ", "stadtwerke", "stadtverwaltung", "stadtgemeinde",
         "gemeinde", "landkreis", "freistaat", "bundesland", "kommunal",
@@ -655,22 +658,14 @@ def classify_ownership(owner_raw):
 
     has_public = any(keyword in text for keyword in public_keywords)
 
-    # If it explicitly says Comune/City/Municipality, treat as public
-    # unless there is also a clear club/company ownership in the same text.
     if has_public:
         has_private = any(keyword in text for keyword in private_keywords)
+        return "MIXED" if has_private else "PUBLIC"
 
-        if has_private:
-            return "MIXED"
-
-        return "PUBLIC"
-
-    has_private = any(keyword in text for keyword in private_keywords)
-
-    if has_private:
-        return "PRIVATE"
-
-    return "UNKNOWN"
+    # owner_raw has a value but no public keyword → private by definition
+    # (clubs owning their own stadium, unnamed holding companies, etc.)
+    # UNKNOWN is reserved for missing/empty owner_raw only.
+    return "PRIVATE"
 
 def scrape_stadium_data(wikipedia_url=None, transfermarkt_url=None):
     wikipedia_soup = get_soup(wikipedia_url) if wikipedia_url else None
