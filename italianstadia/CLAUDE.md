@@ -220,3 +220,27 @@ The project is currently Italy-only (Serie A/B/C). Full roadmap in `italianstadi
 | Belgian Pro League | Belgium | 1 |
 
 Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 fixes) before expanding to multi-league.
+
+## Known Transfermarkt XPath patterns (verified)
+- German clubs: @title = "German Champion"
+- Italian clubs: @title = "Italian Champion"
+- French clubs: @title = "French Champion"
+- Portuguese clubs: @title = "Portugese Champion"  ← TM typo, do not correct
+
+## Data quality rules
+
+- `average_attendance` must be NULL if not scraped — never 0 (`clean_int()` returns None for 0)
+- Stadium coordinates fall back to Nominatim (OSM) when Wikipedia has no geo data — logged at WARNING
+- `ownership` must never be UNKNOWN when `owner_raw` has a value — no public keyword match → PRIVATE
+- JSON `stadium.owner_raw` fires only when Wikipedia infobox has no owner/operator row; it does not override Wikipedia data
+
+## Scraper data files (`scripts/data/urls_*.json`)
+
+Ownership merge priority: **Wikipedia infobox owner → JSON `stadium.owner_raw` → UNKNOWN**
+
+Set `owner_raw` in JSON for stadiums where Wikipedia has no owner infobox row:
+```json
+"stadium": { "owner_raw": "Município de Braga", ... }
+```
+
+Public keywords cover: English (`city of`, `municipality`, `council`, `town of`, `agglomeration`), Italian (`comune di`, `comunale`), German (`stadt `, `gemeinde`), French (`commune de`, `mairie`, `métropole`, `ville de`, `ville d'`, `agglomération`, `communauté`), Spanish/Portuguese (`ayuntamiento`, `município`, `câmara municipal`).

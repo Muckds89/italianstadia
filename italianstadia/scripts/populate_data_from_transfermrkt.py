@@ -270,7 +270,10 @@ def clean_int(value):
         return None
 
     cleaned = re.sub(r"\D", "", value)
-    return int(cleaned) if cleaned else None
+    if not cleaned:
+        return None
+    result = int(cleaned)
+    return result if result else None
 
 def extract_coordinates_from_wikipedia(soup):
     if not soup:
@@ -772,6 +775,23 @@ def first_valid(*values):
     return None
 
 
+def _nominatim_lookup(stadium_name, city_name):
+    import urllib.parse
+    query = urllib.parse.quote(f"{stadium_name}, {city_name}")
+    url = f"https://nominatim.openstreetmap.org/search?q={query}&format=json&limit=1"
+    try:
+        time.sleep(1)  # OSM rate limit: 1 req/s
+        resp = requests.get(url, headers={"User-Agent": "ItalianStadia/1.0"}, timeout=10)
+        results = resp.json()
+        if results:
+            lat, lon = float(results[0]["lat"]), float(results[0]["lon"])
+            logging.warning(f"[Nominatim] Coords fallback for '{stadium_name}': {lat}, {lon}")
+            return lat, lon
+    except Exception as e:
+        logging.error(f"[Nominatim] Lookup failed for '{stadium_name}': {e}")
+    return None, None
+
+
 def scrape_stadium(stadium_data, city):
     transfermarkt_url = stadium_data.get("transfermarkt_url")
     wikipedia_url = stadium_data.get("wikipedia_url")
@@ -833,14 +853,23 @@ def scrape_stadium(stadium_data, city):
     final_latitude = wiki_data.get("latitude")
     final_longitude = wiki_data.get("longitude")
 
+    # Nominatim fallback when Wikipedia has no coordinates
+    if final_latitude is None or final_longitude is None:
+        final_latitude, final_longitude = _nominatim_lookup(final_name, city.name)
+
+    # JSON owner_raw is a last-resort fallback when Wikipedia has no owner infobox row.
+    # Set it in the data file as e.g. "Município de Braga" for known public stadiums.
+    final_owner_raw = first_valid(wiki_data.get("owner_raw"), stadium_data.get("owner_raw"))
+    final_ownership = classify_ownership(final_owner_raw)
+
     # logging
     log_field("Stadium", final_name, "capacity", final_capacity, "Transfermarkt/Wikipedia")
     log_field("Stadium", final_name, "year", final_year, "Transfermarkt/Wikipedia")
     log_field("Stadium", final_name, "latitude", final_latitude, "Wikipedia")
     log_field("Stadium", final_name, "longitude", final_longitude, "Wikipedia")
     log_field("Stadium", final_name, "image", wiki_data.get("image_url"), "Wikipedia")
-    log_field("Stadium", final_name, "owner_raw", wiki_data.get("owner_raw"), "Wikipedia")
-    log_field("Stadium", final_name, "ownership", wiki_data.get("ownership"), "Wikipedia")
+    log_field("Stadium", final_name, "owner_raw", final_owner_raw, "Wikipedia")
+    log_field("Stadium", final_name, "ownership", final_ownership, "Wikipedia")
 
     # 5. Save to DB
     stadium, created = Stadium.objects.update_or_create(
@@ -855,8 +884,8 @@ def scrape_stadium(stadium_data, city):
             "image_url": wiki_data.get("image_url"),
             "latitude": final_latitude,
             "longitude": final_longitude,
-            "owner_raw": wiki_data.get("owner_raw"),
-            "ownership": wiki_data.get("ownership") or "UNKNOWN",
+            "owner_raw": final_owner_raw,
+            "ownership": final_ownership,
         }
     )
 
@@ -984,7 +1013,7 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
         "Spain": "Spanish",
         "France": "French",
         "Netherlands": "Dutch",
-        "Portugal": "Portuguese",
+        "Portugal": "Portugese",  # TM uses this misspelling — do not correct
         "Turkey": "Turkish",
         "Scotland": "Scottish",
         "Belgium": "Belgian",
