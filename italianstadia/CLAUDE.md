@@ -245,3 +245,17 @@ Set `owner_raw` in JSON for stadiums where Wikipedia has no owner infobox row:
 ```
 
 Public keywords cover: English (`city of`, `municipality`, `council`, `town of`, `agglomeration`), Italian (`comune di`, `comunale`), German (`stadt `, `gemeinde`), French (`commune de`, `mairie`, `métropole`, `ville de`, `ville d'`, `agglomération`, `communauté`), Spanish/Portuguese (`ayuntamiento`, `município`, `câmara municipal`).
+
+
+## UI/UX conventions
+
+### Navigation
+- "← Map" back button lives in the sticky navbar via `{% block extra_nav %}` slot
+  — never as a standalone element in the page body
+- The navbar slot is filled only on detail pages (stadium_detail, team_detail, etc.)
+
+### Stadium detail hero
+- Full-width, 480px tall, object-fit: cover
+- Gallery carousel if multiple images exist; single image fallback
+- Stadium name overlaid on hero (bottom-left, white text, dark gradient)
+- JS in static/js/stadium-detail-gallery.js — no inline scripts

@@ -37,8 +37,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { passive: true });
 
     if (slides.length <= 1) {
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'none';
+        /* Single image: hide dots, keep arrows visible but dimmed.
+           Arrows become fully active once multiple images are scraped. */
         dotsEl.style.display = 'none';
+        prevBtn.style.opacity = '0.35';
+        nextBtn.style.opacity = '0.35';
+        prevBtn.style.pointerEvents = 'none';
+        nextBtn.style.pointerEvents = 'none';
     }
 });
