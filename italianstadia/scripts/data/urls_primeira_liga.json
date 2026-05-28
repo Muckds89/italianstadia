@@ -1,0 +1,293 @@
+{
+  "league": {
+    "name": "Primeira Liga",
+    "country": "Portugal",
+    "country_code": "PT",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "SL Benfica",
+      "transfermarkt_url": "https://www.transfermarkt.com/sl-benfica/startseite/verein/294",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sl-benfica/besucherzahlenentwicklung/verein/294",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/S.L._Benfica",
+      "stadium": {
+        "name": "Estádio da Luz",
+        "transfermarkt_url": "https://www.transfermarkt.com/sl-benfica/stadion/verein/294",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_da_Luz",
+        "city": {
+          "name": "Lisbon",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lisbon"
+        }
+      }
+    },
+    {
+      "name": "FC Porto",
+      "num_of_titles": 30,
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-porto/startseite/verein/720",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-porto/besucherzahlenentwicklung/verein/720",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/F.C._Porto",
+      "stadium": {
+        "name": "Estádio do Dragão",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-porto/stadion/verein/720",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_do_Drag%C3%A3o",
+        "city": {
+          "name": "Porto",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Porto"
+        }
+      }
+    },
+    {
+      "name": "Sporting CP",
+      "transfermarkt_url": "https://www.transfermarkt.com/sporting-cp/startseite/verein/336",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sporting-cp/besucherzahlenentwicklung/verein/336",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sporting_CP",
+      "stadium": {
+        "name": "Estádio José Alvalade",
+        "transfermarkt_url": "https://www.transfermarkt.com/sporting-cp/stadion/verein/336",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Jos%C3%A9_Alvalade",
+        "city": {
+          "name": "Lisbon",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lisbon"
+        }
+      }
+    },
+    {
+      "name": "SC Braga",
+      "transfermarkt_url": "https://www.transfermarkt.com/sc-braga/startseite/verein/1075",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sc-braga/besucherzahlenentwicklung/verein/1075",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/S.C._Braga",
+      "stadium": {
+        "name": "Estádio Municipal de Braga",
+        "transfermarkt_url": "https://www.transfermarkt.com/sc-braga/stadion/verein/1075",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Municipal_de_Braga",
+        "city": {
+          "name": "Braga",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Braga"
+        }
+      }
+    },
+    {
+      "name": "Vitória SC",
+      "transfermarkt_url": "https://www.transfermarkt.com/vitoria-sc/startseite/verein/2420",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/vitoria-sc/besucherzahlenentwicklung/verein/2420",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Vit%C3%B3ria_S.C.",
+      "stadium": {
+        "name": "Estádio D. Afonso Henriques",
+        "transfermarkt_url": "https://www.transfermarkt.com/vitoria-sc/stadion/verein/2420",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_D._Afonso_Henriques",
+        "city": {
+          "name": "Guimarães",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Guimar%C3%A3es"
+        }
+      }
+    },
+    {
+      "name": "GD Estoril Praia",
+      "transfermarkt_url": "https://www.transfermarkt.com/gd-estoril-praia/startseite/verein/1465",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gd-estoril-praia/besucherzahlenentwicklung/verein/1465",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/G.D._Estoril_Praia",
+      "stadium": {
+        "name": "Estádio António Coimbra da Mota",
+        "transfermarkt_url": "https://www.transfermarkt.com/gd-estoril-praia/stadion/verein/1465",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Ant%C3%B3nio_Coimbra_da_Mota",
+        "city": {
+          "name": "Estoril",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Estoril"
+        }
+      }
+    },
+    {
+      "name": "FC Famalicão",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-famalicao/startseite/verein/3664",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-famalicao/besucherzahlenentwicklung/verein/3664",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/F.C._Famalic%C3%A3o",
+      "stadium": {
+        "name": "Estádio Municipal de Famalicão",
+        "owner_raw": "Município de Famalicão",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-famalicao/stadion/verein/3664",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Municipal_de_Famalic%C3%A3o",
+        "city": {
+          "name": "Famalicão",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vila_Nova_de_Famalic%C3%A3o"
+        }
+      }
+    },
+    {
+      "name": "Gil Vicente FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/gil-vicente-fc/startseite/verein/37733",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gil-vicente-fc/besucherzahlenentwicklung/verein/37733",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Gil_Vicente_F.C.",
+      "stadium": {
+        "name": "Estádio Cidade de Barcelos",
+        "owner_raw": "Município de Barcelos",
+        "transfermarkt_url": "https://www.transfermarkt.com/gil-vicente-fc/stadion/verein/37733",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Cidade_de_Barcelos",
+        "city": {
+          "name": "Barcelos",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Barcelos"
+        }
+      }
+    },
+    {
+      "name": "Rio Ave FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/rio-ave-fc/startseite/verein/2425",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rio-ave-fc/besucherzahlenentwicklung/verein/2425",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Rio_Ave_F.C.",
+      "stadium": {
+        "name": "Estádio dos Arcos",
+        "owner_raw": "Município de Vila do Conde",
+        "transfermarkt_url": "https://www.transfermarkt.com/rio-ave-fc/stadion/verein/2425",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_dos_Arcos",
+        "city": {
+          "name": "Vila do Conde",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vila_do_Conde"
+        }
+      }
+    },
+    {
+      "name": "Moreirense FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/moreirense-fc/startseite/verein/979",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/moreirense-fc/besucherzahlenentwicklung/verein/979",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Moreirense_F.C.",
+      "stadium": {
+        "name": "Estádio Comendador Joaquim de Almeida Freitas",
+        "owner_raw": "Município de Guimarães",
+        "transfermarkt_url": "https://www.transfermarkt.com/moreirense-fc/stadion/verein/979",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Comendador_Joaquim_de_Almeida_Freitas",
+        "city": {
+          "name": "Moreira de Cónegos",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Moreira_de_C%C3%B3negos"
+        }
+      }
+    },
+    {
+      "name": "Casa Pia AC",
+      "transfermarkt_url": "https://www.transfermarkt.com/casa-pia-ac/startseite/verein/9607",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/casa-pia-ac/besucherzahlenentwicklung/verein/9607",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Casa_Pia_A.C.",
+      "stadium": {
+        "name": "Estádio Pina Manique",
+        "owner_raw": "Casa Pia de Lisboa",
+        "transfermarkt_url": "https://www.transfermarkt.com/casa-pia-ac/stadion/verein/9607",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Pina_Manique",
+        "city": {
+          "name": "Lisbon",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lisbon"
+        }
+      }
+    },
+    {
+      "name": "CD Santa Clara",
+      "transfermarkt_url": "https://www.transfermarkt.com/cd-santa-clara/startseite/verein/2423",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cd-santa-clara/besucherzahlenentwicklung/verein/2423",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/C.D._Santa_Clara",
+      "stadium": {
+        "name": "Estádio de São Miguel",
+        "owner_raw": "Azores Regional Government",
+        "transfermarkt_url": "https://www.transfermarkt.com/cd-santa-clara/stadion/verein/2423",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_de_S%C3%A3o_Miguel",
+        "city": {
+          "name": "Ponta Delgada",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ponta_Delgada"
+        }
+      }
+    },
+    {
+      "name": "FC Arouca",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-arouca/startseite/verein/8024",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-arouca/besucherzahlenentwicklung/verein/8024",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/F.C._Arouca",
+      "stadium": {
+        "name": "Estádio Municipal de Arouca",
+        "owner_raw": "Município de Arouca",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-arouca/stadion/verein/8024",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Municipal_de_Arouca",
+        "city": {
+          "name": "Arouca",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Arouca,_Portugal"
+        }
+      }
+    },
+    {
+      "name": "CD Nacional",
+      "transfermarkt_url": "https://www.transfermarkt.com/cd-nacional/startseite/verein/982",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cd-nacional/besucherzahlenentwicklung/verein/982",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/C.D._Nacional",
+      "stadium": {
+        "name": "Estádio da Madeira",
+        "transfermarkt_url": "https://www.transfermarkt.com/cd-nacional/stadion/verein/982",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_da_Madeira",
+        "city": {
+          "name": "Funchal",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Funchal"
+        }
+      }
+    },
+    {
+      "name": "CF Estrela Amadora",
+      "transfermarkt_url": "https://www.transfermarkt.com/cf-estrela-amadora/startseite/verein/2431",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cf-estrela-amadora/besucherzahlenentwicklung/verein/2431",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/C.F._Os_Belenenses",
+      "stadium": {
+        "name": "Estádio José Gomes",
+        "owner_raw": "Município de Amadora",
+        "transfermarkt_url": "https://www.transfermarkt.com/cf-estrela-amadora/stadion/verein/2431",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Jos%C3%A9_Gomes",
+        "city": {
+          "name": "Amadora",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Amadora"
+        }
+      }
+    },
+    {
+      "name": "CD Tondela",
+      "transfermarkt_url": "https://www.transfermarkt.com/cd-tondela/startseite/verein/7179",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cd-tondela/besucherzahlenentwicklung/verein/7179",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/C.D._Tondela",
+      "stadium": {
+        "name": "Estádio João Cardoso",
+        "owner_raw": "Município de Tondela",
+        "transfermarkt_url": "https://www.transfermarkt.com/cd-tondela/stadion/verein/7179",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Jo%C3%A3o_Cardoso",
+        "city": {
+          "name": "Tondela",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tondela"
+        }
+      }
+    },
+    {
+      "name": "FC Alverca",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-alverca/startseite/verein/2521",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-alverca/besucherzahlenentwicklung/verein/2521",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Alverca",
+      "stadium": {
+        "name": "Estádio Municipal de Alverca",
+        "owner_raw": "Município de Vila Franca de Xira",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-alverca/stadion/verein/2521",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Municipal_de_Alverca",
+        "city": {
+          "name": "Alverca do Ribatejo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Alverca_do_Ribatejo"
+        }
+      }
+    },
+    {
+      "name": "AVS Futebol SAD",
+      "transfermarkt_url": "https://www.transfermarkt.com/avs-futebol-sad/startseite/verein/110302",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/avs-futebol-sad/besucherzahlenentwicklung/verein/110302",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AVS_Futebol_SAD",
+      "stadium": {
+        "name": "Estádio do CD Aves",
+        "owner_raw": "Município de Vila do Conde",
+        "transfermarkt_url": "https://www.transfermarkt.com/avs-futebol-sad/stadion/verein/110302",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_do_CD_Aves",
+        "city": {
+          "name": "Vila do Conde",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vila_do_Conde"
+        }
+      }
+    }
+  ]
+}

@@ -1055,6 +1055,11 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
             except Exception:
                 num_of_titles = 0
 
+        # JSON fallback for clubs where TM uses a non-standard award label
+        if not num_of_titles and team_data.get("num_of_titles"):
+            num_of_titles = team_data["num_of_titles"]
+            logging.info(f"[Team: {team_name}] num_of_titles → {num_of_titles} (JSON fallback)")
+
         try:
             founded_element = driver.find_element(By.XPATH, "//span[@itemprop='foundingDate']")
             founded_text = founded_element.text.strip()
