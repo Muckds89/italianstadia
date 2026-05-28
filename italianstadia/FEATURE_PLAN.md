@@ -1,5 +1,5 @@
-# Feature Plan — Fix scraper: images, titles, girone filter, ownership
-_Created: 2026-05-26 | Branch: fix/scraper-multi-league_
+# Feature Plan — Scraper Data Quality: Full-Res Wikipedia Images
+_Created: 2026-05-28 | Branch: fix/scraper-data-quality-v2_
 
 ## Problem / Goal
 

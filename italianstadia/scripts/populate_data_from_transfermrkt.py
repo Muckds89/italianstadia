@@ -391,6 +391,18 @@ def _is_badge_image(src):
     return any(p in src_lower for p in _BADGE_PATTERNS)
 
 
+_WIKIMEDIA_THUMB_RE = re.compile(
+    r'^((?:https?:)?//upload\.wikimedia\.org/wikipedia/\w+)/thumb(/\w/\w{2}/.+?)/\d+px-[^/]+$'
+)
+
+def _wikimedia_fullres(url):
+    """Convert a Wikimedia thumbnail URL to its full-resolution equivalent."""
+    if not url:
+        return url
+    m = _WIKIMEDIA_THUMB_RE.match(url)
+    return (m.group(1) + m.group(2)) if m else url
+
+
 def _is_valid_badge_url(url):
     """Return False for known placeholder/icon/fallback image URLs."""
     if not url:
@@ -468,8 +480,8 @@ def extract_wikipedia_image(soup, page_url, exclude_badges=False):
             if not src or (exclude_badges and _is_badge_image(src)):
                 continue
             if src.startswith("//"):
-                return "https:" + src
-            return urljoin(page_url, src)
+                return _wikimedia_fullres("https:" + src)
+            return _wikimedia_fullres(urljoin(page_url, src))
     else:
         logging.info("[Wikipedia] No infobox found for image extraction")
 
@@ -478,7 +490,7 @@ def extract_wikipedia_image(soup, page_url, exclude_badges=False):
     if og_image and og_image.get("content"):
         content = og_image["content"]
         if not (exclude_badges and _is_badge_image(content)):
-            return content
+            return _wikimedia_fullres(content)
     else:
         logging.info("[Wikipedia] No Open Graph image found")
 
@@ -493,9 +505,9 @@ def extract_wikipedia_image(soup, page_url, exclude_badges=False):
             continue
 
         if src.startswith("//"):
-            return "https:" + src
+            return _wikimedia_fullres("https:" + src)
 
-        return urljoin(page_url, src)
+        return _wikimedia_fullres(urljoin(page_url, src))
 
     logging.info("[Wikipedia] No useful images found")
     return None
@@ -527,7 +539,7 @@ def scrape_wikipedia_summary_and_image(url):
         # Method 1: OpenGraph image, often easiest
         og_image = soup.find("meta", property="og:image")
         if og_image and og_image.get("content"):
-            image_url = og_image["content"]
+            image_url = _wikimedia_fullres(og_image["content"])
 
         # Method 2: infobox image fallback
         if not image_url:
@@ -538,6 +550,7 @@ def scrape_wikipedia_summary_and_image(url):
                     image_url = "https:" + image_url
                 elif image_url.startswith("/"):
                     image_url = "https://en.wikipedia.org" + image_url
+                image_url = _wikimedia_fullres(image_url)
 
         return {
             "description": description,
