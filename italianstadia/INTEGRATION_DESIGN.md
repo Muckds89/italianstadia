@@ -462,3 +462,13 @@ No model changes. No migrations.
 - Automatic discovery of team URLs (always manual curation)
 - Mobile-specific marker tap UX for the flash effect
 - Leagues beyond the 10 in `COUNTRY_COLORS` (add to dict one at a time as data is scraped)
+
+## Data contract (non-negotiable)
+| Field | Rule | Violation = |
+|-------|------|-------------|
+| `Stadium.latitude/longitude` | Must be non-null | Block save, log ERROR |
+| `Stadium.image_url` | Must be non-null | Log WARN, use og:image fallback |
+| `Team.average_attendance` | NULL if not found, never 0 | 0 → convert to NULL |
+| `Stadium.ownership` | Never UNKNOWN when owner_raw present | Classify as PRIVATE |
+| `City.population` | NULL if not found | Log WARN |
+| All JSON URLs | Must return HTTP 200 | Abort dry-run with list of 404s |

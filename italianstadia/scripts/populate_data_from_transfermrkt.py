@@ -700,6 +700,8 @@ def classify_ownership(owner_raw):
         # English
         "city of", "municipality", "municipal", "council", "government",
         "region", "province", "metropolitan city", "district",
+        "town of", "town council",
+        "agglomeration", "agglomération", "communauté", "communaute",
         # Italian
         "comune di", "comune", "comunale", "provincia", "città metropolitana",
         "sport e salute",  # Italian government sports agency (formerly CONI Servizi)

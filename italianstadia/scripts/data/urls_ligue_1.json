@@ -1,0 +1,287 @@
+{
+  "league": {
+    "name": "Ligue 1",
+    "country": "France",
+    "country_code": "FR",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Paris Saint-Germain",
+      "transfermarkt_url": "https://www.transfermarkt.com/paris-saint-germain/startseite/verein/583",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/paris-saint-germain/besucherzahlenentwicklung/verein/583",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Paris_Saint-Germain_F.C.",
+      "stadium": {
+        "name": "Parc des Princes",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-paris-saint-germain/stadion/verein/583",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Parc_des_Princes",
+        "city": {
+          "name": "Paris",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Paris"
+        }
+      }
+    },
+    {
+      "name": "Olympique de Marseille",
+      "transfermarkt_url": "https://www.transfermarkt.com/olympique-marseille/startseite/verein/244",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/olympique-marseille/besucherzahlenentwicklung/verein/244",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Olympique_de_Marseille",
+      "stadium": {
+        "name": "Stade Vélodrome",
+        "transfermarkt_url": "https://www.transfermarkt.com/olympique-marseille/stadion/verein/244",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_V%C3%A9lodrome",
+        "city": {
+          "name": "Marseille",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Marseille"
+        }
+      }
+    },
+    {
+      "name": "Olympique Lyonnais",
+      "transfermarkt_url": "https://www.transfermarkt.com/olympique-lyon/startseite/verein/1041",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/olympique-lyon/besucherzahlenentwicklung/verein/1041",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Olympique_Lyonnais",
+      "stadium": {
+        "name": "Groupama Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/olympique-lyon/stadion/verein/1041",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Groupama_Stadium",
+        "city": {
+          "name": "Lyon",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lyon"
+        }
+      }
+    },
+    {
+      "name": "AS Monaco",
+      "transfermarkt_url": "https://www.transfermarkt.com/as-monaco/startseite/verein/162",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/as-monaco/besucherzahlenentwicklung/verein/162",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AS_Monaco_FC",
+      "stadium": {
+        "name": "Stade Louis II",
+        "transfermarkt_url": "https://www.transfermarkt.com/as-monaco/stadion/verein/162",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Louis_II",
+        "city": {
+          "name": "Monaco",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Monaco"
+        }
+      }
+    },
+    {
+      "name": "LOSC Lille",
+      "transfermarkt_url": "https://www.transfermarkt.com/losc-lille/startseite/verein/1082",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/losc-lille/besucherzahlenentwicklung/verein/1082",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Lille_OSC",
+      "stadium": {
+        "name": "Stade Pierre-Mauroy",
+        "transfermarkt_url": "https://www.transfermarkt.com/losc-lille/stadion/verein/1082",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Pierre-Mauroy",
+        "city": {
+          "name": "Lille",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lille"
+        }
+      }
+    },
+    {
+      "name": "Stade Rennais FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/stade-rennais-fc/startseite/verein/273",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/stade-rennais-fc/besucherzahlenentwicklung/verein/273",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Rennais_F.C.",
+      "stadium": {
+        "name": "Roazhon Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-stade-rennes/stadion/verein/273",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Roazhon_Park",
+        "city": {
+          "name": "Rennes",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rennes"
+        }
+      }
+    },
+    {
+      "name": "RC Lens",
+      "transfermarkt_url": "https://www.transfermarkt.com/rc-lens/startseite/verein/826",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rc-lens/besucherzahlenentwicklung/verein/826",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/RC_Lens",
+      "stadium": {
+        "name": "Stade Bollaert-Delelis",
+        "owner_raw": "Ville de Lens",
+        "transfermarkt_url": "https://www.transfermarkt.com/rc-lens/stadion/verein/826",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Bollaert-Delelis",
+        "city": {
+          "name": "Lens",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lens,_Pas-de-Calais"
+        }
+      }
+    },
+    {
+      "name": "OGC Nice",
+      "transfermarkt_url": "https://www.transfermarkt.com/ogc-nice/startseite/verein/417",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ogc-nice/besucherzahlenentwicklung/verein/417",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/OGC_Nice",
+      "stadium": {
+        "name": "Allianz Riviera",
+        "transfermarkt_url": "https://www.transfermarkt.com/ogc-nizza/stadion/verein/417",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Allianz_Riviera",
+        "city": {
+          "name": "Nice",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Nice"
+        }
+      }
+    },
+    {
+      "name": "RC Strasbourg Alsace",
+      "transfermarkt_url": "https://www.transfermarkt.com/rc-strasbourg-alsace/startseite/verein/667",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rc-strasbourg-alsace/besucherzahlenentwicklung/verein/667",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/RC_Strasbourg_Alsace",
+      "stadium": {
+        "name": "Stade de la Meinau",
+        "transfermarkt_url": "https://www.transfermarkt.com/rc-strassburg-alsace/stadion/verein/667",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_la_Meinau",
+        "city": {
+          "name": "Strasbourg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Strasbourg"
+        }
+      }
+    },
+    {
+      "name": "Toulouse FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/toulouse-fc/startseite/verein/415",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/toulouse-fc/besucherzahlenentwicklung/verein/415",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Toulouse_FC",
+      "stadium": {
+        "name": "Stadium de Toulouse",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-toulouse/stadion/verein/415",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadium_de_Toulouse",
+        "city": {
+          "name": "Toulouse",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Toulouse"
+        }
+      }
+    },
+    {
+      "name": "Stade Brestois 29",
+      "transfermarkt_url": "https://www.transfermarkt.com/stade-brest-29/startseite/verein/3911",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/stade-brest-29/besucherzahlenentwicklung/verein/3911",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Brestois_29",
+      "stadium": {
+        "name": "Stade Francis-Le Blé",
+        "owner_raw": "Ville de Brest",
+        "transfermarkt_url": "https://www.transfermarkt.com/stade-brest-29/stadion/verein/3911",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Francis-Le_Bl%C3%A9",
+        "city": {
+          "name": "Brest",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Brest,_France"
+        }
+      }
+    },
+    {
+      "name": "FC Nantes",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-nantes/startseite/verein/995",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-nantes/besucherzahlenentwicklung/verein/995",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Nantes",
+      "stadium": {
+        "name": "Stade de la Beaujoire",
+        "owner_raw": "Nantes Métropole",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-nantes/stadion/verein/995",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_la_Beaujoire",
+        "city": {
+          "name": "Nantes",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Nantes"
+        }
+      }
+    },
+    {
+      "name": "Le Havre AC",
+      "transfermarkt_url": "https://www.transfermarkt.com/le-havre-ac/startseite/verein/738",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/le-havre-ac/besucherzahlenentwicklung/verein/738",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Le_Havre_AC",
+      "stadium": {
+        "name": "Stade Océane",
+        "transfermarkt_url": "https://www.transfermarkt.com/ac-le-havre/stadion/verein/738",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Oc%C3%A9ane",
+        "city": {
+          "name": "Le Havre",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Le_Havre"
+        }
+      }
+    },
+    {
+      "name": "AJ Auxerre",
+      "transfermarkt_url": "https://www.transfermarkt.com/aj-auxerre/startseite/verein/290",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/aj-auxerre/besucherzahlenentwicklung/verein/290",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AJ_Auxerre",
+      "stadium": {
+        "name": "Stade de l'Abbé-Deschamps",
+        "transfermarkt_url": "https://www.transfermarkt.com/aj-auxerre/stadion/verein/290",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_l%27Abb%C3%A9-Deschamps",
+        "city": {
+          "name": "Auxerre",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Auxerre"
+        }
+      }
+    },
+    {
+      "name": "Angers SCO",
+      "transfermarkt_url": "https://www.transfermarkt.com/angers-sco/startseite/verein/1420",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/angers-sco/besucherzahlenentwicklung/verein/1420",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Angers_SCO",
+      "stadium": {
+        "name": "Stade Raymond-Kopa",
+        "owner_raw": "Ville d'Angers",
+        "transfermarkt_url": "https://www.transfermarkt.com/sco-angers/stadion/verein/1420",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Raymond_Kopa",
+        "city": {
+          "name": "Angers",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Angers"
+        }
+      }
+    },
+    {
+      "name": "FC Lorient",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-lorient/startseite/verein/1158",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-lorient/besucherzahlenentwicklung/verein/1158",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Lorient",
+      "stadium": {
+        "name": "Stade du Moustoir",
+        "owner_raw": "Ville de Lorient",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-lorient/stadion/verein/1158",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_du_Moustoir",
+        "city": {
+          "name": "Lorient",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lorient"
+        }
+      }
+    },
+    {
+      "name": "Paris FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/paris-fc/startseite/verein/10004",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/paris-fc/besucherzahlenentwicklung/verein/10004",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Paris_FC",
+      "stadium": {
+        "name": "Stade Jean-Bouin",
+        "transfermarkt_url": "https://www.transfermarkt.com/paris-fc/stadion/verein/10004",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Jean-Bouin_(Paris)",
+        "city": {
+          "name": "Paris",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Paris"
+        }
+      }
+    },
+    {
+      "name": "FC Metz",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-metz/startseite/verein/347",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-metz/besucherzahlenentwicklung/verein/347",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Metz",
+      "stadium": {
+        "name": "Stade Saint-Symphorien",
+        "owner_raw": "Ville de Metz",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-metz/stadion/verein/347",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Saint-Symphorien",
+        "city": {
+          "name": "Metz",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Metz"
+        }
+      }
+    }
+  ]
+}
