@@ -31,24 +31,42 @@
     </div>
 </nav>
 
+<div class="stadium-hero">
+    {% if stadium.image_url %}
+    <img src="{{ stadium.image_url }}" alt="{{ stadium.name }}">
+    {% endif %}
+    <div class="stadium-hero-overlay">
+        <div class="container">
+            <div class="stadium-hero-title">{{ stadium.name }}</div>
+            <div class="stadium-hero-meta">
+                {{ stadium.city }}{% if stadium.capacity %} &middot; {{ stadium.capacity }} seats{% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% with teams=stadium.teams.all %}
+{% if teams %}
+<div class="stadium-badge-strip">
+    {% for team in teams %}
+    <div class="stadium-badge-item">
+        {% if team.image_url %}
+        <img class="stadium-badge-img" src="{{ team.image_url }}" alt="{{ team.name }}">
+        {% else %}
+        <div class="stadium-badge-placeholder">{{ team.name|slice:":2"|upper }}</div>
+        {% endif %}
+        <small>{{ team.name }}</small>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
 <div class="container my-5">
 
     <a href="/" class="btn btn-outline-secondary mb-4">← Back to map</a>
 
     <div class="card shadow-sm overflow-hidden">
-
-        {% if stadium.image_url %}
-        <img src="{{ stadium.image_url }}"
-             class="card-img-top stadium-hero-img"
-             alt="{{ stadium.name }}">
-        {% endif %}
-
-
-        {% if stadium.image_credit %}
-        <div class="image-credit">
-            Image © {{ stadium.image_credit }}
-        </div>
-        {% endif %}
 
         <div class="card-body p-4">
             <h1 class="card-title mb-3">{{ stadium.name }}</h1>
