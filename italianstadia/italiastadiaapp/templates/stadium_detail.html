@@ -25,16 +25,25 @@
 <div class="gallery-hero" id="galleryHero">
     <div class="gallery-track" id="galleryTrack">
         {% if stadium.image_url %}
-        <div class="gallery-slide">
+        <div class="gallery-slide" data-credit="{{ stadium.image_credit|default:'' }}">
             <img src="{{ stadium.image_url }}" alt="{{ stadium.name }}">
         </div>
         {% endif %}
+        {% for img in stadium.extra_images %}
+        <div class="gallery-slide" data-credit="{{ img.credit|default:'' }}">
+            <img src="{{ img.url }}" alt="{{ stadium.name }}">
+        </div>
+        {% endfor %}
     </div>
     <div class="gallery-name-overlay">{{ stadium.name }}</div>
     <button class="gallery-arrow gallery-arrow-prev" id="galleryPrev" aria-label="Previous">&#8249;</button>
     <button class="gallery-arrow gallery-arrow-next" id="galleryNext" aria-label="Next">&#8250;</button>
     <div class="gallery-dots" id="galleryDots"></div>
 </div>
+<p class="image-credit" id="galleryCredit"
+   {% if not stadium.image_credit %}style="display:none"{% endif %}>
+    {% if stadium.image_credit %}📷 {{ stadium.image_credit }}{% endif %}
+</p>
 
 <div class="container my-5">
 

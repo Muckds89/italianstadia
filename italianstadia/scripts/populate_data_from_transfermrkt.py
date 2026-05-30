@@ -414,6 +414,140 @@ def _is_valid_badge_url(url):
     return not any(p in url_lower for p in _BAD_BADGE_PATTERNS)
 
 
+# --------------------------------------------------
+# Wikimedia Commons multi-image fetch
+# --------------------------------------------------
+
+# File names containing these strings are decorative / non-photo and should be skipped
+_COMMONS_SKIP = (
+    "flag_of", "coat_of", "arms_of", "_logo", "badge", "crest", "emblem",
+    "icon", "commons-logo", "wikidata", "wikisource", "wikivoyage",
+    "mediawiki", "wikipedia-logo", "red_question", "question_book",
+    "ambox", "portal-", "stub", "pictogram", "silhouette",
+    "locator", "location", "map_of", "_map.", "carte_", "karte_",
+    "kit_", "_kit.", "jersey", "maillot",
+)
+
+_HTML_TAG_RE = re.compile(r"<[^>]+>")
+
+
+def _strip_html(text):
+    """Remove HTML tags from a string (used for Wikimedia attribution fields)."""
+    return _HTML_TAG_RE.sub("", text or "").strip()
+
+
+def _wiki_api_base(wikipedia_url):
+    """Return the Wikipedia API base URL for the language domain in the given URL."""
+    from urllib.parse import urlparse
+    host = urlparse(wikipedia_url).netloc  # e.g. en.wikipedia.org
+    return f"https://{host}/w/api.php"
+
+
+def _wiki_page_title(wikipedia_url):
+    """Extract the page title from a Wikipedia URL."""
+    from urllib.parse import urlparse, unquote
+    path = urlparse(wikipedia_url).path  # /wiki/Voith-Arena
+    return unquote(path.split("/wiki/")[-1])
+
+
+def fetch_commons_images(wikipedia_url, primary_image_url=None, max_images=4):
+    """
+    Query the Wikipedia API to find additional high-quality images for a stadium page.
+    Returns a list of {"url": str, "credit": str} dicts (up to max_images).
+
+    Strategy:
+      1. GET all File: entries listed on the Wikipedia page (prop=images).
+      2. Filter out decorative files (flags, logos, maps, SVG icons).
+      3. Fetch imageinfo (URL + author/license) for the survivors.
+      4. Skip images smaller than 80 KB (tiny icons).
+      5. Skip the file that is already stored as the primary image_url.
+    """
+    if not wikipedia_url:
+        return []
+
+    api = _wiki_api_base(wikipedia_url)
+    title = _wiki_page_title(wikipedia_url)
+    results = []
+
+    try:
+        # --- Step 1: get list of File: entries on the page ---
+        resp = requests.get(api, params={
+            "action": "query",
+            "titles": title,
+            "prop": "images",
+            "imlimit": 30,
+            "format": "json",
+        }, headers=HEADERS, timeout=15)
+        resp.raise_for_status()
+        data = resp.json()
+
+        pages = data.get("query", {}).get("pages", {})
+        file_names = []
+        for page in pages.values():
+            for img in page.get("images", []):
+                name = img.get("title", "")  # e.g. "File:Voith-Arena_Innen.jpg"
+                name_lower = name.lower()
+                # Skip SVG, GIF and known decorative patterns
+                if name_lower.endswith(".svg") or name_lower.endswith(".gif"):
+                    continue
+                if any(p in name_lower for p in _COMMONS_SKIP):
+                    continue
+                file_names.append(name)
+
+        if not file_names:
+            logging.info(f"[Commons] No candidate images for '{title}'")
+            return []
+
+        # --- Step 2: batch-fetch imageinfo (up to 50 titles per call) ---
+        time.sleep(0.5)  # be polite to the API
+        resp2 = requests.get(api, params={
+            "action": "query",
+            "titles": "|".join(file_names[:20]),  # API max 50, we take 20
+            "prop": "imageinfo",
+            "iiprop": "url|extmetadata|size",
+            "format": "json",
+        }, headers=HEADERS, timeout=20)
+        resp2.raise_for_status()
+        data2 = resp2.json()
+
+        # Build a set of the primary image filename for dedup
+        primary_fname = ""
+        if primary_image_url:
+            primary_fname = primary_image_url.split("/")[-1].lower()
+
+        for page in data2.get("query", {}).get("pages", {}).values():
+            if len(results) >= max_images:
+                break
+            ii = page.get("imageinfo", [{}])[0]
+            url = ii.get("url", "")
+            size = ii.get("size", 0)
+
+            if not url:
+                continue
+            # Skip tiny files (icons, watermarks)
+            if size and (size < 80_000 or size > 5_000_000):  # skip tiny icons and huge raw files
+                continue
+            # Skip if same file as primary image
+            if primary_fname and url.split("/")[-1].lower() == primary_fname:
+                continue
+
+            # Build credit string from extmetadata
+            meta = ii.get("extmetadata", {})
+            author = _strip_html(meta.get("Artist", {}).get("value", ""))
+            license_name = meta.get("LicenseShortName", {}).get("value", "")
+            credit_parts = [p for p in [author, "Wikimedia Commons", license_name] if p]
+            credit = " / ".join(credit_parts)
+
+            results.append({"url": _wikimedia_fullres(url), "credit": credit})
+            logging.info(f"[Commons] Added image: {url} ({size} bytes)")
+
+    except Exception as e:
+        logging.error(f"[Commons] fetch_commons_images failed for '{wikipedia_url}': {e}")
+
+    logging.info(f"[Commons] Found {len(results)} extra images for '{title}'")
+    return results
+
+
 def extract_team_id_from_url(url):
     """Extract numeric team ID from a Transfermarkt team URL (/verein/<id>)."""
     match = re.search(r"/verein/(\d+)", url or "")
@@ -877,16 +1011,21 @@ def scrape_stadium(stadium_data, city):
     final_owner_raw = first_valid(wiki_data.get("owner_raw"), stadium_data.get("owner_raw"))
     final_ownership = classify_ownership(final_owner_raw)
 
+    # 5. Fetch gallery images from Wikimedia Commons
+    final_image_url = wiki_data.get("image_url")
+    extra_images = fetch_commons_images(wikipedia_url, primary_image_url=final_image_url)
+
     # logging
     log_field("Stadium", final_name, "capacity", final_capacity, "Transfermarkt/Wikipedia")
     log_field("Stadium", final_name, "year", final_year, "Transfermarkt/Wikipedia")
     log_field("Stadium", final_name, "latitude", final_latitude, "Wikipedia")
     log_field("Stadium", final_name, "longitude", final_longitude, "Wikipedia")
-    log_field("Stadium", final_name, "image", wiki_data.get("image_url"), "Wikipedia")
+    log_field("Stadium", final_name, "image", final_image_url, "Wikipedia")
+    log_field("Stadium", final_name, "extra_images", len(extra_images), "Wikimedia Commons")
     log_field("Stadium", final_name, "owner_raw", final_owner_raw, "Wikipedia")
     log_field("Stadium", final_name, "ownership", final_ownership, "Wikipedia")
 
-    # 5. Save to DB
+    # 6. Save to DB
     stadium, created = Stadium.objects.update_or_create(
         name=final_name,
         city=city,
@@ -896,7 +1035,8 @@ def scrape_stadium(stadium_data, city):
             "year_of_construction": final_year,
             "wikipedia_url": wikipedia_url,
             "transfermarkt_url": transfermarkt_url,
-            "image_url": wiki_data.get("image_url"),
+            "image_url": final_image_url,
+            "extra_images": extra_images,
             "latitude": final_latitude,
             "longitude": final_longitude,
             "owner_raw": final_owner_raw,

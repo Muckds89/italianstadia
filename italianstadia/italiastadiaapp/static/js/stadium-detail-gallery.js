@@ -3,11 +3,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const prevBtn = document.getElementById('galleryPrev');
     const nextBtn = document.getElementById('galleryNext');
     const dotsEl = document.getElementById('galleryDots');
+    const creditEl = document.getElementById('galleryCredit');
     if (!track) return;
 
     const slides = track.querySelectorAll('.gallery-slide');
     let current = 0;
 
+    // Build dot indicators
     slides.forEach(function (_, i) {
         const dot = document.createElement('button');
         dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
@@ -26,13 +28,27 @@ document.addEventListener('DOMContentLoaded', function () {
         dotsEl.querySelectorAll('.gallery-dot').forEach(function (d, i) {
             d.classList.toggle('active', i === current);
         });
+        syncCredit();
+    }
+
+    function syncCredit() {
+        if (!creditEl) return;
+        var slide = slides[current];
+        var credit = slide ? (slide.dataset.credit || '') : '';
+        if (credit) {
+            creditEl.textContent = '📷 ' + credit;
+            creditEl.style.display = '';
+        } else {
+            creditEl.textContent = '';
+            creditEl.style.display = 'none';
+        }
     }
 
     prevBtn.addEventListener('click', function () { goTo(current - 1); });
     nextBtn.addEventListener('click', function () { goTo(current + 1); });
 
     track.addEventListener('scroll', function () {
-        const i = Math.round(track.scrollLeft / track.clientWidth);
+        var i = Math.round(track.scrollLeft / track.clientWidth);
         if (i !== current) { current = i; syncDots(); }
     }, { passive: true });
 
