@@ -67,6 +67,8 @@ class Stadium(models.Model):
 
     image_url = models.URLField(max_length=1000, blank=True, null=True)
     image_credit = models.TextField(blank=True, null=True)
+    # Gallery: list of {"url": str, "credit": str} dicts scraped from Wikimedia Commons
+    extra_images = models.JSONField(default=list, blank=True)
     description = models.TextField(blank=True, null=True)
 
     def __str__(self):
