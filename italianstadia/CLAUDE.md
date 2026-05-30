@@ -235,6 +235,29 @@ Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 f
 - JSON `stadium.owner_raw` fires only when Wikipedia infobox has no owner/operator row; it does not override Wikipedia data
 - Stadium images must be non-null — `og:image` is the fallback if infobox image not found; images stored at full resolution (no `/thumb/` in URL)
 
+## Ownership integrity contract (NON-NEGOTIABLE)
+
+Ownership is factual, legal information. Publishing incorrect ownership damages the credibility of the entire project. These rules are binding:
+
+**Two-source verification is mandatory on every scrape:**
+1. Wikipedia infobox `owner` / `operator` row  (primary — free-text, most specific)
+2. Wikidata `P127` (owned by) property         (secondary — structured, cross-check)
+3. JSON `stadium.owner_raw`                     (manual override for gaps in both above)
+
+**Decision rules:**
+- Both sources agree → use Wikipedia (more specific text), log INFO
+- Sources conflict → log WARNING with both values, use Wikipedia (more specific), flag for human review
+- Only one source → use it, log INFO that second source was absent
+- No source at all → `UNKNOWN`, log WARNING — this is the ONLY valid use of UNKNOWN
+
+**Strictly forbidden:**
+- Guessing ownership from team name (e.g. "FC Bayern" does not mean Bayern owns the stadium)
+- Inferring ownership from city name without an infobox/Wikidata entry
+- Silently defaulting to PRIVATE or PUBLIC without a source value
+- Publishing UNKNOWN when any source has data
+
+**After every scrape, grep the log for `[Ownership CONFLICT]` and `[Ownership UNKNOWN]` and resolve manually before considering the data clean.**
+
 ## Scraper data files (`scripts/data/urls_*.json`)
 
 Ownership merge priority: **Wikipedia infobox owner → JSON `stadium.owner_raw` → UNKNOWN**

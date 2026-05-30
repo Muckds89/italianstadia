@@ -415,6 +415,101 @@ def _is_valid_badge_url(url):
 
 
 # --------------------------------------------------
+# Wikidata ownership cross-check (second source)
+# --------------------------------------------------
+
+def fetch_wikidata_ownership(wikipedia_url):
+    """
+    Query Wikidata for the 'owned by' (P127) property of a stadium.
+    Uses the Wikipedia page to locate the Wikidata entity, then resolves P127 labels.
+
+    Returns the owner name string (English label) or None if not found.
+    This is used as a second-source cross-check against Wikipedia's infobox owner field.
+    """
+    if not wikipedia_url:
+        return None
+
+    try:
+        from urllib.parse import urlparse, unquote
+        host = urlparse(wikipedia_url).netloc        # e.g. en.wikipedia.org
+        path = urlparse(wikipedia_url).path          # /wiki/Allianz_Arena
+        title = unquote(path.split("/wiki/")[-1])
+        api = f"https://{host}/w/api.php"
+
+        # Step 1: get the Wikidata entity ID (Q-number) linked to this Wikipedia page
+        resp = requests.get(api, params={
+            "action": "query",
+            "titles": title,
+            "prop": "pageprops",
+            "ppprop": "wikibase_item",
+            "format": "json",
+        }, headers=HEADERS, timeout=15)
+        resp.raise_for_status()
+        pages = resp.json().get("query", {}).get("pages", {})
+        entity_id = None
+        for page in pages.values():
+            entity_id = page.get("pageprops", {}).get("wikibase_item")
+            break
+
+        if not entity_id:
+            logging.info(f"[Wikidata] No entity ID for '{title}'")
+            return None
+
+        # Step 2: fetch P127 (owned by) claims for the entity
+        time.sleep(0.3)
+        resp2 = requests.get("https://www.wikidata.org/w/api.php", params={
+            "action": "wbgetentities",
+            "ids": entity_id,
+            "props": "claims",
+            "format": "json",
+        }, headers=HEADERS, timeout=15)
+        resp2.raise_for_status()
+        entity = resp2.json().get("entities", {}).get(entity_id, {})
+        p127_claims = entity.get("claims", {}).get("P127", [])
+
+        if not p127_claims:
+            logging.info(f"[Wikidata] No P127 (owned by) for entity {entity_id} ('{title}')")
+            return None
+
+        # Step 3: resolve each owner entity to its English label
+        owner_ids = []
+        for claim in p127_claims:
+            snak = claim.get("mainsnak", {})
+            if snak.get("datatype") == "wikibase-item":
+                oid = snak.get("datavalue", {}).get("value", {}).get("id")
+                if oid:
+                    owner_ids.append(oid)
+
+        if not owner_ids:
+            return None
+
+        time.sleep(0.3)
+        resp3 = requests.get("https://www.wikidata.org/w/api.php", params={
+            "action": "wbgetentities",
+            "ids": "|".join(owner_ids[:5]),
+            "props": "labels",
+            "languages": "en",
+            "format": "json",
+        }, headers=HEADERS, timeout=15)
+        resp3.raise_for_status()
+        owner_labels = []
+        for oid in owner_ids:
+            oe = resp3.json().get("entities", {}).get(oid, {})
+            label = oe.get("labels", {}).get("en", {}).get("value", "")
+            if label:
+                owner_labels.append(label)
+
+        result = " / ".join(owner_labels) if owner_labels else None
+        if result:
+            logging.info(f"[Wikidata] Owner for '{title}': {result}")
+        return result
+
+    except Exception as e:
+        logging.error(f"[Wikidata] fetch_wikidata_ownership failed for '{wikipedia_url}': {e}")
+        return None
+
+
+# --------------------------------------------------
 # Wikimedia Commons multi-image fetch
 # --------------------------------------------------
 
@@ -1006,12 +1101,48 @@ def scrape_stadium(stadium_data, city):
     if final_latitude is None or final_longitude is None:
         final_latitude, final_longitude = _nominatim_lookup(final_name, city.name)
 
-    # JSON owner_raw is a last-resort fallback when Wikipedia has no owner infobox row.
-    # Set it in the data file as e.g. "Município de Braga" for known public stadiums.
-    final_owner_raw = first_valid(wiki_data.get("owner_raw"), stadium_data.get("owner_raw"))
+    # 5. Ownership — two-source verification (Wikipedia infobox + Wikidata P127)
+    #
+    #  Priority:
+    #    a) Wikipedia infobox owner  (most detailed, free-text)
+    #    b) JSON stadium.owner_raw   (manual override for stadiums Wikipedia doesn't cover)
+    #    c) Wikidata P127            (structured, used as fallback OR cross-check)
+    #
+    #  CONTRACT: ownership must NEVER be published as UNKNOWN when any source
+    #  has a value. Conflicting sources are logged as WARNING for human review.
+    #  Fabricating or guessing ownership is strictly forbidden — it
+    #  undermines the credibility of the entire project.
+
+    wiki_owner_raw = first_valid(wiki_data.get("owner_raw"), stadium_data.get("owner_raw"))
+    wikidata_owner = fetch_wikidata_ownership(wikipedia_url)
+
+    if wiki_owner_raw and wikidata_owner:
+        # Both sources have data — cross-check classifications
+        wiki_cls = classify_ownership(wiki_owner_raw)
+        wd_cls   = classify_ownership(wikidata_owner)
+        if wiki_cls != wd_cls:
+            logging.warning(
+                f"[Ownership CONFLICT] '{final_name}': "
+                f"Wikipedia='{wiki_owner_raw}' ({wiki_cls}) "
+                f"vs Wikidata='{wikidata_owner}' ({wd_cls}). "
+                f"Using Wikipedia (more specific)."
+            )
+        else:
+            logging.info(f"[Ownership OK] '{final_name}': both sources agree → {wiki_cls}")
+        final_owner_raw = wiki_owner_raw          # Wikipedia wins on specificity
+    elif wiki_owner_raw:
+        logging.info(f"[Ownership] '{final_name}': Wikipedia only → '{wiki_owner_raw}'")
+        final_owner_raw = wiki_owner_raw
+    elif wikidata_owner:
+        logging.info(f"[Ownership] '{final_name}': Wikidata fallback → '{wikidata_owner}'")
+        final_owner_raw = wikidata_owner
+    else:
+        logging.warning(f"[Ownership UNKNOWN] '{final_name}': no owner data from any source")
+        final_owner_raw = None
+
     final_ownership = classify_ownership(final_owner_raw)
 
-    # 5. Fetch gallery images from Wikimedia Commons
+    # 6. Fetch gallery images from Wikimedia Commons
     final_image_url = wiki_data.get("image_url")
     extra_images = fetch_commons_images(wikipedia_url, primary_image_url=final_image_url)
 
@@ -1022,8 +1153,8 @@ def scrape_stadium(stadium_data, city):
     log_field("Stadium", final_name, "longitude", final_longitude, "Wikipedia")
     log_field("Stadium", final_name, "image", final_image_url, "Wikipedia")
     log_field("Stadium", final_name, "extra_images", len(extra_images), "Wikimedia Commons")
-    log_field("Stadium", final_name, "owner_raw", final_owner_raw, "Wikipedia")
-    log_field("Stadium", final_name, "ownership", final_ownership, "Wikipedia")
+    log_field("Stadium", final_name, "owner_raw", final_owner_raw, "Wikipedia+Wikidata")
+    log_field("Stadium", final_name, "ownership", final_ownership, "Wikipedia+Wikidata")
 
     # 6. Save to DB
     stadium, created = Stadium.objects.update_or_create(
