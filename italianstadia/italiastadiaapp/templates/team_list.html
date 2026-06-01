@@ -105,6 +105,9 @@
 
                                 <strong>Founded:</strong>
                                 {% if team.founded %}{{ team.founded }}{% else %}Unknown{% endif %}
+
+                                {% if team.num_of_titles %}<br>
+                                <strong>Domestic League Titles:</strong> {{ team.num_of_titles }}{% endif %}
                             </p>
 
                             {% if team.wikipedia_url %}

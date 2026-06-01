@@ -222,8 +222,9 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/SS_Juve_Stabia",
       "stadium": {
         "name": "Stadio Romeo Menti",
+        "owner_raw": "Comune di Castellammare di Stabia",
         "transfermarkt_url": "https://www.transfermarkt.com/ss-juve-stabia/stadion/verein/5587/saison_id/2025",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Romeo_Menti_(Castellammare_di_Stabia)i",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Romeo_Menti_(Castellammare_di_Stabia)",
         "city": {
           "name": "Castellammare di Stabia",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Castellammare_di_Stabia"

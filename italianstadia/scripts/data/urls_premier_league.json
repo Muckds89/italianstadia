@@ -29,8 +29,8 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/Chelsea_F.C.",
       "stadium": {
         "name": "Stamford Bridge",
-        "transfermarkt_url": "https://www.transfermarkt.com/stamford-bridge/stadion/stadion/163",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Stamford_Bridge",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-chelsea/stadion/verein/631",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stamford_Bridge_(stadium)",
         "city": {
           "name": "London",
           "wikipedia_url": "https://en.wikipedia.org/wiki/London"
@@ -59,6 +59,7 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/Manchester_City_F.C.",
       "stadium": {
         "name": "Etihad Stadium",
+        "owner_raw": "Manchester City Council / Manchester City FC",
         "transfermarkt_url": "https://www.transfermarkt.com/etihad-stadium/stadion/stadion/254",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Etihad_Stadium",
         "city": {
@@ -104,6 +105,7 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/Newcastle_United_F.C.",
       "stadium": {
         "name": "St. James' Park",
+        "owner_raw": "Newcastle City Council / Newcastle United FC",
         "transfermarkt_url": "https://www.transfermarkt.com/st-james-park/stadion/stadion/70",
         "wikipedia_url": "https://en.wikipedia.org/wiki/St._James%27_Park",
         "city": {
@@ -179,6 +181,7 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/Wolverhampton_Wanderers_F.C.",
       "stadium": {
         "name": "Molineux Stadium",
+        "owner_raw": "Wolverhampton Council / Wolverhampton Wanderers FC",
         "transfermarkt_url": "https://www.transfermarkt.com/molineux-stadium/stadion/stadion/278",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Molineux_Stadium",
         "city": {
@@ -209,7 +212,8 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/Brentford_F.C.",
       "stadium": {
         "name": "Gtech Community Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/gtech-community-stadium/stadion/stadion/17374",
+        "owner_raw": "Brentford FC",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-brentford/stadion/verein/1148",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Gtech_Community_Stadium",
         "city": {
           "name": "London",

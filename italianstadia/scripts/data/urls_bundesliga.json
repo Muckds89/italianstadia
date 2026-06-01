@@ -104,6 +104,7 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/TSG_1899_Hoffenheim",
       "stadium": {
         "name": "PreZero Arena",
+        "owner_raw": "TSG 1899 Hoffenheim Fußball-Besitzgesellschaft mbH & Co. KG",
         "transfermarkt_url": "https://www.transfermarkt.com/prezero-arena/stadion/stadion/1089",
         "wikipedia_url": "https://en.wikipedia.org/wiki/PreZero_Arena",
         "city": {
@@ -194,8 +195,9 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/1._FSV_Mainz_05",
       "stadium": {
         "name": "MEWA Arena",
-        "transfermarkt_url": "https://www.transfermarkt.com/mewa-arena/stadion/stadion/39",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/MEWA_Arena",
+        "owner_raw": "Grundstücksverwaltungsgesellschaft der Stadt Mainz mbH",
+        "transfermarkt_url": "https://www.transfermarkt.com/1-fsv-mainz-05/stadion/verein/39",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Mewa_Arena",
         "city": {
           "name": "Mainz",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Mainz"
@@ -254,6 +256,7 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/Holstein_Kiel",
       "stadium": {
         "name": "Holstein-Stadion",
+        "owner_raw": "Landeshauptstadt Kiel",
         "transfermarkt_url": "https://www.transfermarkt.com/holstein-stadion/stadion/stadion/2302",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Holstein-Stadion",
         "city": {

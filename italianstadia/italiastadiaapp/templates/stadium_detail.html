@@ -155,6 +155,11 @@
                             <p class="card-text">
                                 <strong>Founded:</strong> {{ team.founded }}
                             </p>
+                            {% if team.num_of_titles %}
+                            <p class="card-text">
+                                <strong>Titles:</strong> {{ team.num_of_titles }}
+                            </p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
