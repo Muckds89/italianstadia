@@ -5,3 +5,14 @@ db.sqlite3
 .pytest_cache/
 staticfiles/
 media/
+
+# dev server logs
+*.log
+
+# verification artefacts
+verify_*.png
+verify_*.py
+
+# local planning docs
+italianstadia_CLAUDE.md
+italianstadia_ROADMAP.md
