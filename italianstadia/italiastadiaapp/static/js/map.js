@@ -569,6 +569,22 @@ async function zoomToCountry(countryName) {
     }, 1800);
 }
 
+/**
+ * Restore the map view to the most specific active context:
+ *   - Country selected → zoom to that country
+ *   - Nothing selected → reset to full default view
+ * Called when a more-specific filter (league or stadium) is cleared.
+ */
+function resetZoomToContext() {
+    const country = countryFilter.value;
+    if (country) {
+        zoomToCountry(country);
+    } else {
+        if (flashLayer) { map.removeLayer(flashLayer); flashLayer = null; }
+        map.setView([42.5, 12.5], 5);
+    }
+}
+
 fetch("/api/stadiums/")
   
     .then(res => res.json())
@@ -686,7 +702,13 @@ leagueFilter.addEventListener("change", function () {
     }
     stadiumFilter.value = "";
     applyFilters();
-    if (country) zoomToCountry(country);
+
+    if (country) {
+        zoomToCountry(country);
+    } else {
+        // League reset to "All leagues" — restore context: country zoom or full default
+        resetZoomToContext();
+    }
 });
 
 gironeFilter.addEventListener("change", function () {
@@ -700,7 +722,20 @@ ownershipFilter.addEventListener("change", function () {
 });
 
 stadiumFilter.addEventListener("change", function () {
+    const selectedId = this.value;
     applyFilters(false);
+
+    if (selectedId) {
+        // Zoom into the selected stadium
+        const target = markers.find(m => m.stadiumId === selectedId);
+        if (target) {
+            const latlng = target.getLatLng();
+            map.flyTo(latlng, Math.max(map.getZoom(), 13), { duration: 0.9 });
+        }
+    } else {
+        // Stadium reset to "All stadiums" — restore context: country/league zoom or default
+        resetZoomToContext();
+    }
 });
 
 mapModeToggle.addEventListener("change", function () {
