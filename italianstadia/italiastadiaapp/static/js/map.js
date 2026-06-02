@@ -782,5 +782,16 @@ developmentYearFilter.addEventListener("change", function () {
 });
 
 developmentStadiumFilter.addEventListener("change", function () {
+    const selectedId = this.value;
     applyDevelopmentFilters();
+
+    if (selectedId) {
+        const target = developmentMarkers.find(m => m.developmentId === selectedId);
+        if (target) {
+            map.flyTo(target.getLatLng(), Math.max(map.getZoom(), 13), { duration: 0.9 });
+        }
+    } else {
+        // Reset to default view — development mode has no country filter
+        map.setView([42.5, 12.5], 5);
+    }
 });
