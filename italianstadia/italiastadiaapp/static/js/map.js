@@ -648,7 +648,6 @@ fetch("/api/stadiums/")
                 .openOn(map);
 
                 activeMarker = marker;
-                map.flyTo([coords[1], coords[0]], Math.max(map.getZoom(), 13), { duration: 0.8 });
 
                 setTimeout(() => {
                     attachPopupTeamNavigation(props, coords);
