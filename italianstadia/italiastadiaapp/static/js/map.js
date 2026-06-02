@@ -16,6 +16,13 @@ L.control.zoom({
 let markers = [];
 let activeMarker = null;
 let activePopup = null;
+
+// Reset active state whenever a popup closes by any means (X button, map click, etc.)
+// Without this, clicking the same marker after closing its popup via X would not reopen it.
+map.on("popupclose", function () {
+    activeMarker = null;
+    activePopup = null;
+});
 let operationalMarkers = [];
 let developmentMarkers = [];
 let currentLayerMode = "operational";
@@ -85,7 +92,7 @@ const NE_NAME_MAP = {
     "Scotland": "United Kingdom",
 };
 
-function updateLegend(mode) {
+function updateLegend(mode, visibleMarkers = []) {
     if (!legendDiv) return;
 
     if (mode === "development") {
@@ -107,13 +114,11 @@ function updateLegend(mode) {
         return;
     }
 
-    // operational: build from loaded marker data for the current country selection
-    const country = countryFilter ? countryFilter.value : "";
+    // Build legend from exactly the markers currently visible on the map
     const seen = new Map();
-    markers.forEach(m => {
+    visibleMarkers.forEach(m => {
         m.leagues.forEach(l => {
             if (!l.id || seen.has(l.id)) return;
-            if (country && l.country !== country) return;
             seen.set(l.id, l);
         });
     });
@@ -271,7 +276,9 @@ function applyFilters(updateStadiumDropdown = true) {
         updateStadiumDropdownOptions(visibleMarkers);
     }
 
+    updateLegend("operational", visibleMarkers);
     closeActivePopup();
+    return visibleMarkers;
 }
 
 function getMarkerColor(marker) {
@@ -619,13 +626,13 @@ fetch("/api/stadiums/")
                     maxHeight: 320,
                     autoPan: true,
                     autoPanPadding: [40, 40],
-                    keepInView: true
                 })
                 .setLatLng([coords[1], coords[0]])
                 .setContent(buildPopupContent(props, 0))
                 .openOn(map);
 
                 activeMarker = marker;
+                map.flyTo([coords[1], coords[0]], Math.max(map.getZoom(), 13), { duration: 0.8 });
 
                 setTimeout(() => {
                     attachPopupTeamNavigation(props, coords);
@@ -650,7 +657,6 @@ fetch("/api/stadiums/")
 
         populateCountryFilter();
         populateLeagueFilter("");
-        updateLegend("operational");
         applyFilters();
     });
 
@@ -658,7 +664,6 @@ countryFilter.addEventListener("change", function () {
     const country = this.value;
     stadiumFilter.value = "";
     populateLeagueFilter(country);
-    updateLegend("operational");
     applyFilters();
     if (country) {
         zoomToCountry(country);
@@ -681,6 +686,7 @@ leagueFilter.addEventListener("change", function () {
     }
     stadiumFilter.value = "";
     applyFilters();
+    if (country) zoomToCountry(country);
 });
 
 gironeFilter.addEventListener("change", function () {
