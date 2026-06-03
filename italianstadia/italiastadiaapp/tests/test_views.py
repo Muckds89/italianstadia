@@ -52,6 +52,24 @@ def two_country_data(db):
 
 
 # ---------------------------------------------------------------------------
+# team_detail
+# ---------------------------------------------------------------------------
+
+@pytest.mark.django_db
+def test_team_detail_page_loads(client, two_country_data):
+    team = Team.objects.get(name="Inter")
+    response = client.get(reverse("italiastadiaapp:team_detail", args=[team.pk]))
+    assert response.status_code == 200
+    assert b"Inter" in response.content
+
+
+@pytest.mark.django_db
+def test_team_detail_404(client):
+    response = client.get(reverse("italiastadiaapp:team_detail", args=[99999]))
+    assert response.status_code == 404
+
+
+# ---------------------------------------------------------------------------
 # stadium_list
 # ---------------------------------------------------------------------------
 

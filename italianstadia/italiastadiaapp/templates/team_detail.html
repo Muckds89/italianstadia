@@ -1,0 +1,200 @@
+{% extends "base_detail.html" %}
+{% load static %}
+
+{% block title %}{{ team.name }}{% endblock %}
+
+{% block extra_nav %}
+    <a href="{% url 'italiastadiaapp:team_list' %}" class="btn btn-sm btn-outline-light ms-auto">
+        ← Back to teams
+    </a>
+{% endblock %}
+
+{% block content %}
+
+{% if team.image_url %}
+<div class="gallery-hero" style="height:320px; overflow:hidden; position:relative;">
+    <img src="{{ team.image_url }}"
+         alt="{{ team.name }}"
+         style="width:100%; height:100%; object-fit:contain; background:#111;">
+    <div class="gallery-name-overlay">{{ team.name }}</div>
+</div>
+{% if team.image_credit %}
+<p class="image-credit">Image © {{ team.image_credit }}</p>
+{% endif %}
+{% endif %}
+
+<div class="container my-5">
+    <div class="card shadow-sm overflow-hidden">
+        <div class="card-body p-4">
+
+            {% if not team.image_url %}
+            <h1 class="card-title mb-3">{{ team.name }}</h1>
+            {% endif %}
+
+            {% if team.description %}
+            <p class="lead">{{ team.description }}</p>
+            {% endif %}
+
+            <hr>
+
+            <div class="row">
+
+                {# ── Left column: club facts ────────────────────────────── #}
+                <div class="col-md-6">
+                    <h5>Club information</h5>
+                    <ul class="list-group list-group-flush mb-4">
+
+                        <li class="list-group-item">
+                            <strong>Full name:</strong> {{ team.name }}
+                        </li>
+
+                        {% if team.league %}
+                        <li class="list-group-item">
+                            <strong>League:</strong> {{ team.league.name }}
+                            {% if team.league.country %}
+                            <span class="text-muted">({{ team.league.country.name }})</span>
+                            {% endif %}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Division level:</strong> {{ team.league.division_level }}
+                        </li>
+                        {% else %}
+                        <li class="list-group-item">
+                            <strong>Division:</strong> {{ team.get_tier_display }}
+                        </li>
+                        {% endif %}
+
+                        {% if team.girone %}
+                        <li class="list-group-item">
+                            <strong>Girone:</strong> {{ team.get_girone_display }}
+                        </li>
+                        {% endif %}
+
+                        {% if team.founded %}
+                        <li class="list-group-item">
+                            <strong>Founded:</strong> {{ team.founded|date:"Y" }}
+                        </li>
+                        {% endif %}
+
+                        {% if team.city %}
+                        <li class="list-group-item">
+                            <strong>City:</strong> {{ team.city.name }}
+                        </li>
+                        {% endif %}
+
+                        {% if team.manager %}
+                        <li class="list-group-item">
+                            <strong>Manager:</strong> {{ team.manager }}
+                        </li>
+                        {% endif %}
+
+                        {% if team.num_of_titles %}
+                        <li class="list-group-item">
+                            <strong>League titles:</strong> {{ team.num_of_titles }}
+                        </li>
+                        {% endif %}
+
+                        {% if team.average_attendance %}
+                        <li class="list-group-item">
+                            <strong>Avg. attendance:</strong>
+                            {{ team.average_attendance }}
+                        </li>
+                        {% endif %}
+
+                    </ul>
+
+                    {# External links #}
+                    <div class="d-flex flex-wrap gap-2">
+                        {% if team.wikipedia_url %}
+                        <a href="{{ team.wikipedia_url }}" target="_blank"
+                           class="btn btn-primary">Wikipedia</a>
+                        {% endif %}
+                        {% if team.transfermarkt_url %}
+                        <a href="{{ team.transfermarkt_url }}" target="_blank"
+                           class="btn btn-success">Transfermarkt</a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {# ── Right column: stadium cards ───────────────────────── #}
+                <div class="col-md-6">
+
+                    {# Current stadium #}
+                    {% if team.stadium %}
+                    <h5>Current stadium</h5>
+                    <div class="card border-0 bg-light mb-4">
+                        <div class="card-body">
+                            {% if team.stadium.image_url %}
+                            <img src="{{ team.stadium.image_url }}"
+                                 alt="{{ team.stadium.name }}"
+                                 style="width:100%; height:160px; object-fit:cover; border-radius:6px;"
+                                 class="mb-3">
+                            {% endif %}
+                            <h6 class="card-title">{{ team.stadium.name }}</h6>
+                            <p class="card-text mb-1">
+                                <strong>City:</strong>
+                                {{ team.stadium.city.name|default:team.city.name }}
+                            </p>
+                            {% if team.stadium.capacity %}
+                            <p class="card-text mb-1">
+                                <strong>Capacity:</strong> {{ team.stadium.capacity }}
+                            </p>
+                            {% endif %}
+                            {% if team.stadium.year_of_construction %}
+                            <p class="card-text mb-2">
+                                <strong>Built:</strong> {{ team.stadium.year_of_construction }}
+                            </p>
+                            {% endif %}
+                            <a href="{% url 'italiastadiaapp:stadium_detail' team.stadium.id %}"
+                               class="btn btn-sm btn-outline-primary">View stadium</a>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {# Future / development stadium #}
+                    {% if team.under_development_stadium %}
+                    <h5>Future stadium</h5>
+                    <div class="card border-0 bg-light">
+                        <div class="card-body">
+                            {% if team.under_development_stadium.image_url %}
+                            <img src="{{ team.under_development_stadium.image_url }}"
+                                 alt="{{ team.under_development_stadium.name }}"
+                                 style="width:100%; height:140px; object-fit:cover; border-radius:6px;"
+                                 class="mb-3">
+                            {% endif %}
+                            <h6 class="card-title">{{ team.under_development_stadium.name }}</h6>
+                            <p class="card-text mb-1">
+                                <strong>Type:</strong>
+                                {{ team.under_development_stadium.get_project_type_display }}
+                            </p>
+                            <p class="card-text mb-1">
+                                <span class="badge bg-warning text-dark">
+                                    {{ team.under_development_stadium.get_status_display }}
+                                </span>
+                            </p>
+                            {% if team.under_development_stadium.future_capacity %}
+                            <p class="card-text mb-1">
+                                <strong>Future capacity:</strong>
+                                {{ team.under_development_stadium.future_capacity }}
+                            </p>
+                            {% endif %}
+                            {% if team.under_development_stadium.estimated_opening %}
+                            <p class="card-text mb-2">
+                                <strong>Est. opening:</strong>
+                                {{ team.under_development_stadium.estimated_opening }}
+                            </p>
+                            {% endif %}
+                            <a href="{% url 'italiastadiaapp:stadium_development_detail' team.under_development_stadium.pk %}"
+                               class="btn btn-sm btn-outline-warning">View project</a>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -206,6 +206,19 @@ def _primary_league(stadium):
     return best
 
 
+def team_detail(request, pk):
+    team = get_object_or_404(
+        Team.objects.select_related(
+            "city",
+            "stadium__city",
+            "league__country",
+            "under_development_stadium",
+        ),
+        pk=pk,
+    )
+    return render(request, "team_detail.html", {"team": team})
+
+
 def team_list(request):
     selected_country = request.GET.get("country", "")
 

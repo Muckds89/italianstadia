@@ -110,11 +110,18 @@
                                 <strong>Domestic League Titles:</strong> {{ team.num_of_titles }}{% endif %}
                             </p>
 
-                            {% if team.wikipedia_url %}
-                            <a href="{{ team.wikipedia_url }}" target="_blank" class="btn btn-primary">
-                                View on Wikipedia
-                            </a>
-                            {% endif %}
+                            <div class="d-flex flex-wrap gap-1">
+                                <a href="{% url 'italiastadiaapp:team_detail' team.pk %}"
+                                   class="btn btn-sm btn-outline-secondary">View team</a>
+                                {% if team.wikipedia_url %}
+                                <a href="{{ team.wikipedia_url }}" target="_blank"
+                                   class="btn btn-sm btn-primary">Wikipedia</a>
+                                {% endif %}
+                                {% if team.transfermarkt_url %}
+                                <a href="{{ team.transfermarkt_url }}" target="_blank"
+                                   class="btn btn-sm btn-success">Transfermarkt</a>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -118,9 +118,12 @@
                 {% for team in development.future_tenants.all %}
                 <div class="col-md-4 mb-3">
                     <div class="card h-100 border-0 bg-light">
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column">
                             {% if team.image_url %}
-                            <img src="{{ team.image_url }}" style="height:60px; object-fit:contain;" class="mb-2">
+                            <img src="{{ team.image_url }}"
+                                 alt="{{ team.name }}"
+                                 style="height:60px; object-fit:contain;"
+                                 class="mb-2 align-self-start">
                             {% endif %}
 
                             <h6 class="card-title">{{ team.name }}</h6>
@@ -129,9 +132,18 @@
                                 <strong>League:</strong> {{ team.get_tier_display }}
                             </p>
 
-                            <a href="/team/{{ team.id }}/" class="btn btn-sm btn-outline-primary">
-                                View team
-                            </a>
+                            <div class="mt-auto pt-2 d-flex flex-wrap gap-1">
+                                <a href="{% url 'italiastadiaapp:team_detail' team.pk %}"
+                                   class="btn btn-sm btn-outline-secondary">View team</a>
+                                {% if team.wikipedia_url %}
+                                <a href="{{ team.wikipedia_url }}" target="_blank"
+                                   class="btn btn-sm btn-outline-primary">Wikipedia</a>
+                                {% endif %}
+                                {% if team.transfermarkt_url %}
+                                <a href="{{ team.transfermarkt_url }}" target="_blank"
+                                   class="btn btn-sm btn-outline-success">Transfermarkt</a>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
