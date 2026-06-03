@@ -38,6 +38,7 @@ def stadium_developments_geojson(request):
             },
             "properties": {
                 "id": s.id,
+                "stadium_id": s.stadium_id,
                 "name": s.name,
                 "project_type": s.get_project_type_display(),
                 "status": s.get_status_display(),
