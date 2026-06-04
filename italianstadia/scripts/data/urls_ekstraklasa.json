@@ -1,0 +1,299 @@
+{
+  "league": {
+    "name": "Ekstraklasa",
+    "country": "Poland",
+    "country_code": "PL",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Legia Warsaw",
+      "transfermarkt_url": "https://www.transfermarkt.com/legia-warschau/startseite/verein/255",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/legia-warschau/besucherzahlenentwicklung/verein/255",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Legia_Warsaw",
+      "stadium": {
+        "name": "Polish Army Stadium",
+        "owner_raw": "Miasto Stołeczne Warszawa",
+        "transfermarkt_url": "https://www.transfermarkt.com/legia-warschau/stadion/verein/255",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Polish_Army_Stadium",
+        "city": {
+          "name": "Warsaw",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Warsaw"
+        }
+      }
+    },
+    {
+      "name": "Lech Poznań",
+      "transfermarkt_url": "https://www.transfermarkt.com/lech-posen/startseite/verein/238",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/lech-posen/besucherzahlenentwicklung/verein/238",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Lech_Pozna%C5%84",
+      "stadium": {
+        "name": "Enea Stadium",
+        "owner_raw": "Miasto Poznań",
+        "transfermarkt_url": "https://www.transfermarkt.com/lech-posen/stadion/verein/238",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Enea_Stadium",
+        "city": {
+          "name": "Poznań",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pozna%C5%84"
+        }
+      }
+    },
+    {
+      "name": "Raków Częstochowa",
+      "transfermarkt_url": "https://www.transfermarkt.com/rakow-czestochowa/startseite/verein/9644",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rakow-czestochowa/besucherzahlenentwicklung/verein/9644",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Rak%C3%B3w_Cz%C4%99stochowa",
+      "stadium": {
+        "name": "Miejski Stadion Piłkarski Raków",
+        "owner_raw": "Miasto Częstochowa",
+        "transfermarkt_url": "https://www.transfermarkt.com/rakow-czestochowa/stadion/verein/9644",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Miejski_Stadion_Pi%C5%82karski_Rak%C3%B3w",
+        "city": {
+          "name": "Częstochowa",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Cz%C4%99stochowa"
+        }
+      }
+    },
+    {
+      "name": "Jagiellonia Białystok",
+      "transfermarkt_url": "https://www.transfermarkt.com/jagiellonia-bialystok/startseite/verein/2300",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/jagiellonia-bialystok/besucherzahlenentwicklung/verein/2300",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Jagiellonia_Bia%C5%82ystok",
+      "stadium": {
+        "name": "Chorten Arena",
+        "owner_raw": "Miasto Białystok",
+        "transfermarkt_url": "https://www.transfermarkt.com/jagiellonia-bialystok/stadion/verein/2300",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bia%C5%82ystok_Municipal_Stadium",
+        "city": {
+          "name": "Białystok",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bia%C5%82ystok"
+        }
+      }
+    },
+    {
+      "name": "Pogoń Szczecin",
+      "transfermarkt_url": "https://www.transfermarkt.com/pogon-stettin/startseite/verein/324",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/pogon-stettin/besucherzahlenentwicklung/verein/324",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Pogo%C5%84_Szczecin",
+      "stadium": {
+        "name": "Florian Krygier Stadium",
+        "owner_raw": "Miasto Szczecin",
+        "transfermarkt_url": "https://www.transfermarkt.com/pogon-stettin/stadion/verein/324",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Florian_Krygier_Stadium",
+        "city": {
+          "name": "Szczecin",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Szczecin"
+        }
+      }
+    },
+    {
+      "name": "Górnik Zabrze",
+      "transfermarkt_url": "https://www.transfermarkt.com/gornik-zabrze/startseite/verein/428",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gornik-zabrze/besucherzahlenentwicklung/verein/428",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/G%C3%B3rnik_Zabrze",
+      "stadium": {
+        "name": "Ernest Pohl Stadium",
+        "owner_raw": "Miasto Zabrze",
+        "transfermarkt_url": "https://www.transfermarkt.com/gornik-zabrze/stadion/verein/428",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ernest_Pohl_Stadium",
+        "city": {
+          "name": "Zabrze",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Zabrze"
+        }
+      }
+    },
+    {
+      "name": "Lechia Gdańsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/lechia-gdansk/startseite/verein/4000",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/lechia-gdansk/besucherzahlenentwicklung/verein/4000",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Lechia_Gda%C5%84sk",
+      "stadium": {
+        "name": "Polsat Plus Arena Gdańsk",
+        "owner_raw": "Miasto Gdańsk",
+        "transfermarkt_url": "https://www.transfermarkt.com/lechia-gdansk/stadion/verein/4000",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Polsat_Plus_Arena_Gda%C5%84sk",
+        "city": {
+          "name": "Gdańsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gda%C5%84sk"
+        }
+      }
+    },
+    {
+      "name": "GKS Katowice",
+      "transfermarkt_url": "https://www.transfermarkt.com/gks-katowice/startseite/verein/6456",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gks-katowice/besucherzahlenentwicklung/verein/6456",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/GKS_Katowice",
+      "stadium": {
+        "name": "Arena Katowice",
+        "owner_raw": "Miasto Katowice",
+        "transfermarkt_url": "https://www.transfermarkt.com/gks-katowice/stadion/verein/6456",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Arena_Katowice",
+        "city": {
+          "name": "Katowice",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Katowice"
+        }
+      }
+    },
+    {
+      "name": "Zagłębie Lubin",
+      "transfermarkt_url": "https://www.transfermarkt.com/zaglebie-lubin/startseite/verein/168",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/zaglebie-lubin/besucherzahlenentwicklung/verein/168",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Zag%C5%82%C4%99bie_Lubin",
+      "stadium": {
+        "name": "KGHM Zagłębie Arena",
+        "owner_raw": "KGHM Polska Miedź",
+        "transfermarkt_url": "https://www.transfermarkt.com/zaglebie-lubin/stadion/verein/168",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/KGHM_Zag%C5%82%C4%99bie_Arena",
+        "city": {
+          "name": "Lubin",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lubin"
+        }
+      }
+    },
+    {
+      "name": "Widzew Łódź",
+      "transfermarkt_url": "https://www.transfermarkt.com/widzew-lodz/startseite/verein/88",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/widzew-lodz/besucherzahlenentwicklung/verein/88",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Widzew_%C5%81%C3%B3d%C5%BA",
+      "stadium": {
+        "name": "Widzew Łódź Stadium",
+        "owner_raw": "Miasto Łódź",
+        "transfermarkt_url": "https://www.transfermarkt.com/widzew-lodz/stadion/verein/88",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Widzewa_%C5%81%C3%B3d%C5%BA",
+        "city": {
+          "name": "Łódź",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%81%C3%B3d%C5%BA"
+        }
+      }
+    },
+    {
+      "name": "Piast Gliwice",
+      "transfermarkt_url": "https://www.transfermarkt.com/piast-gliwice/startseite/verein/6112",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/piast-gliwice/besucherzahlenentwicklung/verein/6112",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Piast_Gliwice",
+      "stadium": {
+        "name": "Piotr Wieczorek Stadium",
+        "owner_raw": "Miasto Gliwice",
+        "transfermarkt_url": "https://www.transfermarkt.com/piast-gliwice/stadion/verein/6112",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Miejski_w_Gliwicach",
+        "city": {
+          "name": "Gliwice",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gliwice"
+        }
+      }
+    },
+    {
+      "name": "Cracovia",
+      "transfermarkt_url": "https://www.transfermarkt.com/cracovia/startseite/verein/5689",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cracovia/besucherzahlenentwicklung/verein/5689",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Cracovia_(football_club)",
+      "stadium": {
+        "name": "Marshal Józef Piłsudski Stadium",
+        "owner_raw": "Miasto Kraków",
+        "transfermarkt_url": "https://www.transfermarkt.com/cracovia/stadion/verein/5689",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Marshal_J%C3%B3zef_Pi%C5%82sudski_Stadium",
+        "city": {
+          "name": "Kraków",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Krak%C3%B3w"
+        }
+      }
+    },
+    {
+      "name": "Motor Lublin",
+      "transfermarkt_url": "https://www.transfermarkt.com/motor-lublin/startseite/verein/3527",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/motor-lublin/besucherzahlenentwicklung/verein/3527",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Motor_Lublin",
+      "stadium": {
+        "name": "Motor Lublin Arena",
+        "owner_raw": "Miasto Lublin",
+        "transfermarkt_url": "https://www.transfermarkt.com/motor-lublin/stadion/verein/3527",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/PKO_BP_Motor_Lublin_Arena",
+        "city": {
+          "name": "Lublin",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lublin"
+        }
+      }
+    },
+    {
+      "name": "Wisła Płock",
+      "transfermarkt_url": "https://www.transfermarkt.com/wisla-plock/startseite/verein/2118",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/wisla-plock/besucherzahlenentwicklung/verein/2118",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Wis%C5%82a_P%C5%82ock",
+      "stadium": {
+        "name": "Kazimierz Górski Orlen Stadium",
+        "owner_raw": "Miasto Płock",
+        "transfermarkt_url": "https://www.transfermarkt.com/wisla-plock/stadion/verein/2118",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kazimierz_G%C3%B3rski_Stadium",
+        "city": {
+          "name": "Płock",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/P%C5%82ock"
+        }
+      }
+    },
+    {
+      "name": "Radomiak Radom",
+      "transfermarkt_url": "https://www.transfermarkt.com/radomiak-radom/startseite/verein/7154",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/radomiak-radom/besucherzahlenentwicklung/verein/7154",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Radomiak_Radom",
+      "stadium": {
+        "name": "Czachor Brothers Stadium",
+        "owner_raw": "Miasto Radom",
+        "transfermarkt_url": "https://www.transfermarkt.com/radomiak-radom/stadion/verein/7154",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bruk-Bet_Stadium_Radom",
+        "city": {
+          "name": "Radom",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Radom"
+        }
+      }
+    },
+    {
+      "name": "Korona Kielce",
+      "transfermarkt_url": "https://www.transfermarkt.com/korona-kielce/startseite/verein/6110",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/korona-kielce/besucherzahlenentwicklung/verein/6110",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Korona_Kielce",
+      "stadium": {
+        "name": "Exbud Arena",
+        "owner_raw": "Miasto Kielce",
+        "transfermarkt_url": "https://www.transfermarkt.com/korona-kielce/stadion/verein/6110",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Suzuki_Arena_Kielce",
+        "city": {
+          "name": "Kielce",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kielce"
+        }
+      }
+    },
+    {
+      "name": "Arka Gdynia",
+      "transfermarkt_url": "https://www.transfermarkt.com/arka-gdynia/startseite/verein/6107",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/arka-gdynia/besucherzahlenentwicklung/verein/6107",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Arka_Gdynia",
+      "stadium": {
+        "name": "GOSiR Stadium",
+        "owner_raw": "Miasto Gdynia",
+        "transfermarkt_url": "https://www.transfermarkt.com/arka-gdynia/stadion/verein/6107",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/GOSiR_Stadium,_Gdynia",
+        "city": {
+          "name": "Gdynia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gdynia"
+        }
+      }
+    },
+    {
+      "name": "Bruk-Bet Termalica Nieciecza",
+      "transfermarkt_url": "https://www.transfermarkt.com/bruk-bet-termalica-nieciecza/startseite/verein/15906",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/bruk-bet-termalica-nieciecza/besucherzahlenentwicklung/verein/15906",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Bruk-Bet_Termalica_Nieciecza",
+      "stadium": {
+        "name": "Bruk-Bet Stadium",
+        "owner_raw": "Bruk-Bet Termalica Nieciecza",
+        "transfermarkt_url": "https://www.transfermarkt.com/bruk-bet-termalica-nieciecza/stadion/verein/15906",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bruk-Bet_Stadium,_Nieciecza",
+        "city": {
+          "name": "Nieciecza",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Nieciecza"
+        }
+      }
+    }
+  ]
+}
