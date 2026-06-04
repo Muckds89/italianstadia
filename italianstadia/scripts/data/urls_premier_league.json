@@ -4,7 +4,7 @@
     "country": "England",
     "country_code": "GB",
     "division_level": 1,
-    "season": "24/25"
+    "season": "25/26"
   },
   "teams": [
     {
@@ -196,9 +196,9 @@
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-everton/besucherzahlenentwicklung/verein/29",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Everton_F.C.",
       "stadium": {
-        "name": "Goodison Park",
-        "transfermarkt_url": "https://www.transfermarkt.com/goodison-park/stadion/stadion/62",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Goodison_Park",
+        "name": "Hill Dickinson Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-everton/stadion/verein/29",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Hill_Dickinson_Stadium",
         "city": {
           "name": "Liverpool",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Liverpool"
@@ -267,47 +267,47 @@
       }
     },
     {
-      "name": "Leicester City",
-      "transfermarkt_url": "https://www.transfermarkt.com/leicester-city/startseite/verein/1003",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/leicester-city/besucherzahlenentwicklung/verein/1003",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Leicester_City_F.C.",
+      "name": "Leeds United",
+      "transfermarkt_url": "https://www.transfermarkt.com/leeds-united/startseite/verein/399",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/leeds-united/besucherzahlenentwicklung/verein/399",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Leeds_United_F.C.",
       "stadium": {
-        "name": "King Power Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/king-power-stadium/stadion/stadion/6397",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/King_Power_Stadium",
+        "name": "Elland Road",
+        "transfermarkt_url": "https://www.transfermarkt.com/leeds-united/stadion/verein/399",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Elland_Road",
         "city": {
-          "name": "Leicester",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Leicester"
+          "name": "Leeds",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Leeds"
         }
       }
     },
     {
-      "name": "Ipswich Town",
-      "transfermarkt_url": "https://www.transfermarkt.com/ipswich-town/startseite/verein/677",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ipswich-town/besucherzahlenentwicklung/verein/677",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Ipswich_Town_F.C.",
+      "name": "Burnley",
+      "transfermarkt_url": "https://www.transfermarkt.com/burnley-fc/startseite/verein/1132",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/burnley-fc/besucherzahlenentwicklung/verein/1132",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Burnley_F.C.",
       "stadium": {
-        "name": "Portman Road",
-        "transfermarkt_url": "https://www.transfermarkt.com/portman-road/stadion/stadion/252",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Portman_Road",
+        "name": "Turf Moor",
+        "transfermarkt_url": "https://www.transfermarkt.com/burnley-fc/stadion/verein/1132",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Turf_Moor",
         "city": {
-          "name": "Ipswich",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Ipswich"
+          "name": "Burnley",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Burnley"
         }
       }
     },
     {
-      "name": "Southampton",
-      "transfermarkt_url": "https://www.transfermarkt.com/southampton-fc/startseite/verein/180",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/southampton-fc/besucherzahlenentwicklung/verein/180",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Southampton_F.C.",
+      "name": "Sunderland",
+      "transfermarkt_url": "https://www.transfermarkt.com/sunderland-afc/startseite/verein/289",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sunderland-afc/besucherzahlenentwicklung/verein/289",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sunderland_A.F.C.",
       "stadium": {
-        "name": "St. Mary's Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/st-marys-stadium/stadion/stadion/140",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/St_Mary%27s_Stadium",
+        "name": "Stadium of Light",
+        "transfermarkt_url": "https://www.transfermarkt.com/sunderland-afc/stadion/verein/289",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadium_of_Light",
         "city": {
-          "name": "Southampton",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Southampton"
+          "name": "Sunderland",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sunderland,_Tyne_and_Wear"
         }
       }
     }
