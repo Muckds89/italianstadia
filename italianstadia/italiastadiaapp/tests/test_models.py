@@ -75,6 +75,21 @@ def test_country_and_league_str():
 
 
 @pytest.mark.django_db
+def test_country_uefa_rank_field():
+    country, _ = Country.objects.get_or_create(name="England", defaults={"code": "GB"})
+    country.uefa_rank = 1
+    country.save()
+    country.refresh_from_db()
+    assert country.uefa_rank == 1
+
+    # Null is valid (countries not yet ranked in our DB)
+    country.uefa_rank = None
+    country.save()
+    country.refresh_from_db()
+    assert country.uefa_rank is None
+
+
+@pytest.mark.django_db
 def test_league_ordering():
     # Use get_or_create — data migration may have already seeded these rows
     country, _ = Country.objects.get_or_create(name="Italy", defaults={"code": "IT"})

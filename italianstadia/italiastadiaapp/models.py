@@ -4,6 +4,7 @@ from django.db import models
 class Country(models.Model):
     name = models.CharField(max_length=255, unique=True)
     code = models.CharField(max_length=2, unique=True)  # ISO 3166-1 alpha-2
+    uefa_rank = models.IntegerField(null=True, blank=True)  # 5-year country coefficient rank
 
     def __str__(self):
         return self.name
