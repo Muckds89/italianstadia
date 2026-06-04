@@ -1,7 +1,33 @@
 import pytest
 from django.urls import reverse
 
-from italiastadiaapp.models import City, Country, League, Stadium, Team
+from italiastadiaapp.models import City, Country, League, Stadium, StadiumDevelopment, Team
+
+
+@pytest.mark.django_db
+def test_stadium_development_detail_loads(client):
+    dev = StadiumDevelopment.objects.create(
+        name="New Stadio",
+        project_type="NEW",
+        status="PLANNING",
+        future_capacity=35000,
+        estimated_opening=2027,
+        latitude=45.0,
+        longitude=9.0,
+    )
+    response = client.get(
+        reverse("italiastadiaapp:stadium_development_detail", args=[dev.pk])
+    )
+    assert response.status_code == 200
+    assert b"New Stadio" in response.content
+
+
+@pytest.mark.django_db
+def test_stadium_development_detail_404(client):
+    response = client.get(
+        reverse("italiastadiaapp:stadium_development_detail", args=[99999])
+    )
+    assert response.status_code == 404
 
 
 @pytest.mark.django_db
