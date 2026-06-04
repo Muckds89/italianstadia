@@ -116,13 +116,13 @@
     },
     {
       "name": "Gil Vicente FC",
-      "transfermarkt_url": "https://www.transfermarkt.com/gil-vicente-fc/startseite/verein/37733",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gil-vicente-fc/besucherzahlenentwicklung/verein/37733",
+      "transfermarkt_url": "https://www.transfermarkt.com/gil-vicente-fc/startseite/verein/2424",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gil-vicente-fc/besucherzahlenentwicklung/verein/2424",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Gil_Vicente_F.C.",
       "stadium": {
         "name": "Estádio Cidade de Barcelos",
         "owner_raw": "Município de Barcelos",
-        "transfermarkt_url": "https://www.transfermarkt.com/gil-vicente-fc/stadion/verein/37733",
+        "transfermarkt_url": "https://www.transfermarkt.com/gil-vicente-fc/stadion/verein/2424",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Cidade_de_Barcelos",
         "city": {
           "name": "Barcelos",
