@@ -1,6 +1,10 @@
+// Initial placeholder bounds — covers all planned football countries (Portugal → Turkey,
+// southern Spain → Scotland). Replaced immediately once the API data arrives.
+const EUROPE_FOOTBALL_BOUNDS = [[34, -12], [60, 40]];
+
 const map = L.map('map', {
     zoomControl: false
-}).setView([42.5, 12.5], 5);
+}).fitBounds(EUROPE_FOOTBALL_BOUNDS, { padding: [10, 10] });
 
 L.tileLayer(
     'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
@@ -16,6 +20,47 @@ L.control.zoom({
 let markers = [];
 let activeMarker = null;
 let activePopup = null;
+let lastVisibleMarkers = [];   // updated by applyFilters(); used by fitToVisibleMarkers()
+
+// Bounding box computed from ALL loaded markers after the API responds.
+// Replaces EUROPE_FOOTBALL_BOUNDS for every reset/fallback once data is available,
+// so adding new countries automatically expands the default view — no code changes needed.
+let allMarkersBounds = null;
+
+/**
+ * Fit the map to the bounding box of the given markers.
+ * Uses the full-dataset bounds (computed after load) as fallback,
+ * or the static EUROPE_FOOTBALL_BOUNDS before data has arrived.
+ */
+function fitToVisibleMarkers(visibleMarkers) {
+    if (!visibleMarkers || visibleMarkers.length === 0) {
+        const fallback = allMarkersBounds || EUROPE_FOOTBALL_BOUNDS;
+        map.fitBounds(fallback, { padding: [10, 10], animate: true });
+        return;
+    }
+    const group = L.featureGroup(visibleMarkers);
+    map.fitBounds(group.getBounds(), { padding: [20, 20], maxZoom: 8, animate: true });
+}
+
+// Populated from GeoJSON after /api/stadiums/ loads — no hardcoded constants.
+// Maps country name → UEFA 5-year coefficient rank (lower = better).
+const countryRankMap = {};
+
+// Badge DivIcon sizes per role
+const BADGE_SIZE = { active: "32", context2: "24", context3: "20" };
+
+function createBadgeIcon(imageUrl, sizePx) {
+    const inner = imageUrl
+        ? `<img src="${imageUrl}" alt="">`
+        : `<div class="badge-icon-fallback" style="background:#9e9e9e;"></div>`;
+    return L.divIcon({
+        html: `<div class="badge-icon-wrap badge-sz-${sizePx} badge-active">${inner}</div>`,
+        className: "",
+        iconSize: [parseInt(sizePx), parseInt(sizePx)],
+        iconAnchor: [parseInt(sizePx) / 2, parseInt(sizePx) / 2],
+        popupAnchor: [0, -parseInt(sizePx) / 2],
+    });
+}
 
 // Reset active state whenever a popup closes by any means (X button, map click, etc.)
 // Without this, clicking the same marker after closing its popup via X would not reopen it.
@@ -30,16 +75,51 @@ let legendDiv = null;
 
 
 
-const countryFilter  = document.getElementById("countryFilter");
-const leagueFilter   = document.getElementById("leagueFilter");
-const gironeFilter   = document.getElementById("gironeFilter");
+const countryFilter   = document.getElementById("countryFilter");
+const leagueFilter    = document.getElementById("leagueFilter");
+const gironeFilter    = document.getElementById("gironeFilter");
 const ownershipFilter = document.getElementById("ownershipFilter");
-const stadiumFilter  = document.getElementById("stadiumFilter");
-const stadiumCounter = document.getElementById("stadiumCounter");
+const stadiumFilter   = document.getElementById("stadiumFilter");
+const stadiumCounter  = document.getElementById("stadiumCounter");
+const clearFiltersBtn = document.getElementById("clearFiltersBtn");
 
 const mapModeToggle = document.getElementById("mapModeToggle");
 const operationalFilters = document.getElementById("operationalFilters");
 const developmentFilters = document.getElementById("developmentFilters");
+
+// Show the clear button only when at least one filter is active
+function updateClearButton() {
+    const operationalActive =
+        countryFilter.value || leagueFilter.value ||
+        gironeFilter.value  || ownershipFilter.value || stadiumFilter.value;
+    const developmentActive =
+        developmentStatusFilter?.value || developmentYearFilter?.value ||
+        developmentStadiumFilter?.value;
+    const active = currentLayerMode === "development" ? developmentActive : operationalActive;
+    clearFiltersBtn.style.display = active ? "inline-block" : "none";
+}
+
+clearFiltersBtn.addEventListener("click", function () {
+    if (currentLayerMode === "development") {
+        developmentStatusFilter.value  = "";
+        developmentYearFilter.value    = "";
+        developmentStadiumFilter.value = "";
+        applyDevelopmentFilters();
+    } else {
+        countryFilter.value   = "";
+        leagueFilter.value    = "";
+        gironeFilter.value    = "";
+        gironeFilter.style.display = "none";
+        ownershipFilter.value = "";
+        stadiumFilter.value   = "";
+        populateLeagueFilter("");
+        if (flashLayer) { map.removeLayer(flashLayer); flashLayer = null; }
+        applyFilters();
+        fitToVisibleMarkers(lastVisibleMarkers);
+        saveFilterState();
+    }
+    updateClearButton();
+});
 
 const developmentStatusFilter = document.getElementById("developmentStatusFilter");
 const developmentYearFilter = document.getElementById("developmentYearFilter");
@@ -92,10 +172,11 @@ const NE_NAME_MAP = {
     "Scotland": "United Kingdom",
 };
 
-function updateLegend(mode, visibleMarkers = []) {
+function updateLegend(mode) {
     if (!legendDiv) return;
 
     if (mode === "development") {
+        legendDiv.style.display = "";
         legendDiv.innerHTML = `
             <h6 class="legend-title">Status</h6>
             <div class="legend-item">
@@ -114,31 +195,9 @@ function updateLegend(mode, visibleMarkers = []) {
         return;
     }
 
-    // Build legend from exactly the markers currently visible on the map
-    const seen = new Map();
-    visibleMarkers.forEach(m => {
-        m.leagues.forEach(l => {
-            if (!l.id || seen.has(l.id)) return;
-            seen.set(l.id, l);
-        });
-    });
-
-    const leagues = [...seen.values()].sort(
-        (a, b) => (a.divisionLevel ?? 99) - (b.divisionLevel ?? 99)
-    );
-
-    const items = leagues.map(l => {
-        const colors = COUNTRY_COLORS[l.country];
-        const color = (colors && l.divisionLevel != null)
-            ? (colors[l.divisionLevel - 1] || "#9e9e9e")
-            : "#9e9e9e";
-        return `<div class="legend-item">
-                    <span class="legend-dot" style="background:${color};border:1px solid #555"></span>
-                    ${l.name}
-                </div>`;
-    }).join("");
-
-    legendDiv.innerHTML = `<h6 class="legend-title">Leagues</h6>${items || "<em style='font-size:11px;color:#aaa'>No leagues</em>"}`;
+    // Operational mode: badges speak for themselves — no legend needed
+    legendDiv.style.display = "none";
+    legendDiv.innerHTML = "";
 }
 
 function buildPopupContent(props, teamIndex = 0) {
@@ -241,32 +300,60 @@ function applyFilters(updateStadiumDropdown = true) {
     let visibleMarkers = [];
 
     markers.forEach(marker => {
-        const countryMatches =
-            !selectedCountry ||
+        const inSelectedCountry = selectedCountry &&
             marker.leagues.some(l => l.country === selectedCountry);
-
-        const leagueMatches =
-            !selectedLeague ||
+        const inSelectedLeague  = selectedLeague &&
             marker.leagues.some(l => l.id === selectedLeague);
-
-        const gironeMatches =
-            !selectedGirone ||
-            marker.gironi.includes(selectedGirone);
+        const isTopTier = marker.primaryLeague?.divisionLevel === 1;
 
         const ownershipMatches =
             !selectedOwnership || marker.ownership === selectedOwnership;
-
+        const gironeMatches =
+            !selectedGirone || marker.gironi.includes(selectedGirone);
         const stadiumMatches =
             !selectedStadium || marker.stadiumId === selectedStadium;
 
-        if (countryMatches && leagueMatches && gironeMatches &&
-                ownershipMatches && stadiumMatches) {
-            marker.setStyle({ radius: 7, ...getMarkerStyle(marker) });
-            marker.addTo(map);
-            visibleMarkers.push(marker);
+        // Determine visual role
+        let role; // "active" | "context-2" | "context-3" | "hidden"
+
+        if (!selectedCountry && !selectedLeague) {
+            // Default: show only tier-1 teams from all countries
+            role = isTopTier ? "active" : "hidden";
+        } else if (selectedLeague) {
+            // League selected: show ONLY that league — no context markers from other tiers
+            role = inSelectedLeague ? "active" : "hidden";
         } else {
-            map.removeLayer(marker);
+            // Country only: all tiers visible with hierarchy
+            if (!inSelectedCountry) {
+                role = "hidden";
+            } else if (isTopTier) {
+                role = "active";
+            } else {
+                role = (marker.primaryLeague?.divisionLevel ?? 99) <= 2 ? "context-2" : "context-3";
+            }
         }
+
+        // Additional filters (ownership, girone, stadium) override role to hidden
+        if (!ownershipMatches || !gironeMatches || !stadiumMatches) {
+            role = "hidden";
+        }
+
+        if (role === "hidden") {
+            map.removeLayer(marker);
+            return;
+        }
+
+        const cfg = {
+            "active":    { opacity: 1.0,  zOffset: 2000, size: BADGE_SIZE.active },
+            "context-2": { opacity: 0.65, zOffset: 500,  size: BADGE_SIZE.context2 },
+            "context-3": { opacity: 0.45, zOffset: 100,  size: BADGE_SIZE.context3 },
+        }[role];
+
+        marker.setOpacity(cfg.opacity);
+        marker.setZIndexOffset(cfg.zOffset);
+        marker.setIcon(createBadgeIcon(marker.primaryTeam?.image_url || null, cfg.size));
+        marker.addTo(map);
+        visibleMarkers.push(marker);
     });
 
     stadiumCounter.textContent =
@@ -276,7 +363,9 @@ function applyFilters(updateStadiumDropdown = true) {
         updateStadiumDropdownOptions(visibleMarkers);
     }
 
-    updateLegend("operational", visibleMarkers);
+    lastVisibleMarkers = visibleMarkers;
+    updateLegend("operational");
+    updateClearButton();
     closeActivePopup();
     return visibleMarkers;
 }
@@ -356,6 +445,28 @@ function loadDevelopmentStadiums() {
                 marker.estimatedOpening = props.estimated_opening
                     ? String(props.estimated_opening)
                     : "";
+
+                // Store base radius so mouseout can restore it exactly
+                const baseRadius = isMobile ? 13 : 7;
+                marker._baseRadius = baseRadius;
+
+                // Hover: expand circle and boost opacity for clear affordance
+                marker.on("mouseover", function () {
+                    this.setRadius(Math.round(this._baseRadius * 1.6));
+                    this.setStyle({ weight: isMobile ? 4 : 2.5, fillOpacity: 1 });
+                });
+                marker.on("mouseout", function () {
+                    this.setRadius(this._baseRadius);
+                    this.setStyle({ weight: isMobile ? 3 : 1.5, fillOpacity: 0.9 });
+                });
+
+                // Tooltip — same dark glass style as badge markers
+                marker.bindTooltip(props.name, {
+                    permanent: false,
+                    direction: "top",
+                    className: "badge-tooltip",
+                    offset: [0, -(baseRadius + 4)],
+                });
 
             const popupContent = `
                 <div class="stadium-popup development-popup">
@@ -477,12 +588,13 @@ function applyDevelopmentFilters() {
     });
 
     stadiumCounter.textContent = `${visibleMarkers.length} project${visibleMarkers.length === 1 ? "" : "s"}`;
+    updateClearButton();
 }
 
 function populateCountryFilter() {
     const countries = [...new Set(
         markers.flatMap(m => m.leagues.map(l => l.country)).filter(Boolean)
-    )].sort();
+    )].sort((a, b) => (countryRankMap[a] ?? 99) - (countryRankMap[b] ?? 99));
     countryFilter.innerHTML = `<option value="">All countries</option>`;
     countries.forEach(c => {
         const opt = document.createElement("option");
@@ -501,9 +613,10 @@ function populateLeagueFilter(country) {
             if (!seen.has(l.id)) seen.set(l.id, l);
         });
     });
-    const leagues = [...seen.values()].sort(
-        (a, b) => (a.divisionLevel ?? 99) - (b.divisionLevel ?? 99)
-    );
+    const leagues = [...seen.values()].sort((a, b) => {
+        const cr = (countryRankMap[a.country] ?? 99) - (countryRankMap[b.country] ?? 99);
+        return cr !== 0 ? cr : (a.divisionLevel ?? 99) - (b.divisionLevel ?? 99);
+    });
     leagueFilter.innerHTML = `<option value="">All leagues</option>`;
     leagues.forEach(l => {
         const opt = document.createElement("option");
@@ -581,7 +694,7 @@ function resetZoomToContext() {
         zoomToCountry(country);
     } else {
         if (flashLayer) { map.removeLayer(flashLayer); flashLayer = null; }
-        map.setView([42.5, 12.5], 5);
+        fitToVisibleMarkers(lastVisibleMarkers);
     }
 }
 
@@ -629,28 +742,39 @@ function restoreFilterState() {
         if (target) map.setView(target.getLatLng(), 13);   // instant, no animation on restore
     } else if (state.country) {
         zoomToCountry(state.country);
+    } else {
+        fitToVisibleMarkers(lastVisibleMarkers);
     }
+    return true;   // signals to caller that saved state was processed
 }
 
 fetch("/api/stadiums/")
-  
     .then(res => res.json())
     .then(data => {
+
+        // Build country→rank map from GeoJSON (no hardcoded constants needed)
+        data.features.forEach(f => {
+            f.properties.teams.forEach(t => {
+                if (t.country && t.country_rank != null)
+                    countryRankMap[t.country] = t.country_rank;
+            });
+        });
 
         data.features.forEach(feature => {
             const coords = feature.geometry.coordinates;
             const props = feature.properties;
 
+            // Determine primary team (lowest divisionLevel) for badge selection
+            const primaryTeam = (props.teams || []).reduce((best, t) => {
+                const lvl = t.division_level ?? 99;
+                return (!best || lvl < (best.division_level ?? 99)) ? t : best;
+            }, null);
 
-
-            const marker = L.circleMarker([coords[1], coords[0]], {
-                radius: 7,
-                fillColor: "#00e5ff",
-                color: "#111111",
-                weight: 1.5,
-                opacity: 1,
-                fillOpacity: 0.9
+            const marker = L.marker([coords[1], coords[0]], {
+                icon: createBadgeIcon(primaryTeam?.image_url || null, BADGE_SIZE.active),
+                zIndexOffset: 1000,
             });
+            marker.primaryTeam = primaryTeam;
 
             marker.teams = props.teams || [];
 
@@ -671,10 +795,20 @@ fetch("/api/stadiums/")
 
             marker.gironi = marker.teams.map(t => t.girone || "");
 
-            marker.setStyle({ radius: 7, ...getMarkerStyle(marker) });
             marker.ownership = props.ownership ? String(props.ownership) : "UNKNOWN";
             marker.stadiumId = String(props.id);
             marker.stadiumName = props.name;
+
+            // Hover tooltip — team name(s), styled for dark map
+            const tooltipLabel = marker.teams.length > 1
+                ? marker.teams.map(t => t.name).join(" · ")
+                : (marker.primaryTeam?.name || marker.stadiumName);
+            marker.bindTooltip(tooltipLabel, {
+                permanent: false,
+                direction: "top",
+                className: "badge-tooltip",
+                offset: [0, -18],
+            });
 
             marker.on("click", function () {
                 if (activeMarker === marker && activePopup) {
@@ -687,8 +821,6 @@ fetch("/api/stadiums/")
                 activePopup = L.popup({
                     maxWidth: 260,
                     maxHeight: 320,
-                    autoPan: true,
-                    autoPanPadding: [40, 40],
                 })
                 .setLatLng([coords[1], coords[0]])
                 .setContent(buildPopupContent(props, 0))
@@ -701,25 +833,23 @@ fetch("/api/stadiums/")
                 }, 0);
             });
 
-            marker.on("mouseover", function () {
-                this.setStyle({
-                    radius: 9,
-                    fillColor: "#ffd600"
-                });
-            });
-
-            marker.on("mouseout", function () {
-                this.setStyle({ radius: 7, ...getMarkerStyle(this) });
-            });
-
             marker.addTo(map);
             markers.push(marker);
             operationalMarkers.push(marker);
         });
 
+        // Derive the default view from the actual data — auto-expands as new countries are scraped
+        if (markers.length > 0) {
+            allMarkersBounds = L.featureGroup(markers).getBounds().pad(0.05);
+        }
+
         populateCountryFilter();
         populateLeagueFilter("");
-        restoreFilterState() || applyFilters();   // restore saved state or apply defaults
+        // Restore saved filters (returns true) or run defaults and fit to data bounds
+        if (!restoreFilterState()) {
+            const visible = applyFilters();
+            fitToVisibleMarkers(visible);
+        }
     });
 
 countryFilter.addEventListener("change", function () {
@@ -731,7 +861,7 @@ countryFilter.addEventListener("change", function () {
         zoomToCountry(country);
     } else {
         if (flashLayer) { map.removeLayer(flashLayer); flashLayer = null; }
-        map.setView([42.5, 12.5], 5);
+        fitToVisibleMarkers(lastVisibleMarkers);
     }
     saveFilterState();
 });
@@ -840,6 +970,7 @@ developmentStadiumFilter.addEventListener("change", function () {
         }
     } else {
         // Reset to default view — development mode has no country filter
-        map.setView([42.5, 12.5], 5);
+        const fallback = allMarkersBounds || EUROPE_FOOTBALL_BOUNDS;
+        map.fitBounds(fallback, { padding: [10, 10], animate: true });
     }
 });

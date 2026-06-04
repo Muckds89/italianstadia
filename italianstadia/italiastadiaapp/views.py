@@ -100,6 +100,12 @@ def stadiums_geojson(request):
                             if t.league and t.league.country
                             else city_country
                         ),
+                        "country_rank": (
+                            t.league.country.uefa_rank
+                            if t.league and t.league.country
+                            else None
+                        ),
+                        "image_url": t.image_url or "",
                         "wikipedia_url": t.wikipedia_url or "",
                         "transfermarkt_url": t.transfermarkt_url or "",
                     }
@@ -117,13 +123,13 @@ def index(request):
     return render(request, "index.html")
 
 def _available_countries():
-    """Sorted list of country names that appear in the DB across leagues."""
+    """Countries that appear in the DB, ordered by UEFA 5-year coefficient rank."""
     return list(
         League.objects
         .select_related("country")
         .values_list("country__name", flat=True)
         .distinct()
-        .order_by("country__name")
+        .order_by("country__uefa_rank", "country__name")
     )
 
 

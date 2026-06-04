@@ -13,6 +13,62 @@ html, body {
     background: #111;
 }
 
+/* ── Badge DivIcon markers ── */
+.badge-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.85);
+    box-shadow: 0 1px 5px rgba(0,0,0,0.7);
+    background: #222;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+}
+.badge-icon-wrap:hover {
+    transform: scale(1.3);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.9);
+}
+.badge-icon-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+/* Fallback when no badge image */
+.badge-icon-fallback {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+/* Size variants */
+.badge-sz-32 { width: 32px; height: 32px; }
+.badge-sz-24 { width: 24px; height: 24px; }
+.badge-sz-20 { width: 20px; height: 20px; }
+/* Active markers get a coloured border highlight */
+.badge-active { border-color: #fff; border-width: 2.5px; }
+
+/* ── Marker hover tooltip ── */
+.badge-tooltip {
+    background: rgba(8, 10, 22, 0.93) !important;
+    color: #e8eeff !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-radius: 6px !important;
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    padding: 4px 10px !important;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.7) !important;
+    white-space: nowrap !important;
+    backdrop-filter: blur(6px);
+    pointer-events: none;
+}
+/* Tip arrow inherits dark background */
+.badge-tooltip.leaflet-tooltip-top::before {
+    border-top-color: rgba(8, 10, 22, 0.93) !important;
+}
+
 .leaflet-popup-content {
     font-size: 14px;
 }
