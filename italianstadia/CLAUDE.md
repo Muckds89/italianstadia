@@ -114,6 +114,8 @@ Both endpoints return `[longitude, latitude]` coordinates (GeoJSON standard). Cu
         "tier": 1, "tier_name": "Serie A", "girone": "",
         "league_id": 1, "league_name": "Serie A",
         "division_level": 1, "country": "Italy",
+        "country_rank": 1,
+        "image_url": "https://...",
         "wikipedia_url": "...", "transfermarkt_url": "..."
       }]
     }

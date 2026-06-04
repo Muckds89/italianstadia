@@ -46,8 +46,8 @@ function fitToVisibleMarkers(visibleMarkers) {
 // Maps country name → UEFA 5-year coefficient rank (lower = better).
 const countryRankMap = {};
 
-// Badge DivIcon sizes per role
-const BADGE_SIZE = { active: "32", context2: "24", context3: "20" };
+// Badge DivIcon sizes (px) per role — use numbers, not strings
+const BADGE_SIZE = { active: 32, context2: 24, context3: 20 };
 
 function createBadgeIcon(imageUrl, sizePx) {
     const inner = imageUrl
@@ -56,9 +56,9 @@ function createBadgeIcon(imageUrl, sizePx) {
     return L.divIcon({
         html: `<div class="badge-icon-wrap badge-sz-${sizePx} badge-active">${inner}</div>`,
         className: "",
-        iconSize: [parseInt(sizePx), parseInt(sizePx)],
-        iconAnchor: [parseInt(sizePx) / 2, parseInt(sizePx) / 2],
-        popupAnchor: [0, -parseInt(sizePx) / 2],
+        iconSize: [sizePx, sizePx],
+        iconAnchor: [sizePx / 2, sizePx / 2],
+        popupAnchor: [0, -sizePx / 2],
     });
 }
 
@@ -105,6 +105,9 @@ clearFiltersBtn.addEventListener("click", function () {
         developmentYearFilter.value    = "";
         developmentStadiumFilter.value = "";
         applyDevelopmentFilters();
+        // Refit to full development dataset after clearing filters
+        const fallback = allMarkersBounds || EUROPE_FOOTBALL_BOUNDS;
+        map.fitBounds(fallback, { padding: [10, 10], animate: true });
     } else {
         countryFilter.value   = "";
         leagueFilter.value    = "";
@@ -419,16 +422,17 @@ function updateStadiumDropdownOptions(visibleMarkers) {
 
 function loadDevelopmentStadiums() {
     fetch("/api/stadium-developments/")
-        .then(res => res.json())
+        .then(res => { if (!res.ok) throw new Error(res.status); return res.json(); })
         .then(data => {
             developmentMarkers.forEach(marker => map.removeLayer(marker));
             developmentMarkers = [];
 
+            // Hoist isMobile — same value for every marker in this load
+            const isMobile = window.innerWidth <= 768;
+
             data.features.forEach(feature => {
                 const coords = feature.geometry.coordinates;
                 const props = feature.properties;
-
-                const isMobile = window.innerWidth <= 768;
 
                 const marker = L.circleMarker([coords[1], coords[0]], {
                     radius: isMobile ? 13 : 7,
@@ -528,6 +532,10 @@ function loadDevelopmentStadiums() {
 
             updateDevelopmentDropdownOptions();
             applyDevelopmentFilters();
+        })
+        .catch(err => {
+            console.error("Failed to load development stadiums:", err);
+            stadiumCounter.textContent = "⚠ Load failed";
         });
 }
 function getDevelopmentMarkerColor(status) {
@@ -748,8 +756,11 @@ function restoreFilterState() {
     return true;   // signals to caller that saved state was processed
 }
 
+// Show a loading hint while the API responds (clears once data is rendered)
+stadiumCounter.textContent = "Loading…";
+
 fetch("/api/stadiums/")
-    .then(res => res.json())
+    .then(res => { if (!res.ok) throw new Error(res.status); return res.json(); })
     .then(data => {
 
         // Build country→rank map from GeoJSON (no hardcoded constants needed)
@@ -850,6 +861,10 @@ fetch("/api/stadiums/")
             const visible = applyFilters();
             fitToVisibleMarkers(visible);
         }
+    })
+    .catch(err => {
+        console.error("Failed to load stadiums:", err);
+        stadiumCounter.textContent = "⚠ Load failed";
     });
 
 countryFilter.addEventListener("change", function () {

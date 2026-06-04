@@ -70,6 +70,7 @@ def test_stadiums_geojson_team_league_fields(client):
     assert t["division_level"] == 1
     assert t["country"] == "Italy"
     assert "country_rank" in t  # UEFA rank exposed in GeoJSON for map sorting
+    assert "image_url" in t     # required for badge marker rendering
 
 
 @pytest.mark.django_db
