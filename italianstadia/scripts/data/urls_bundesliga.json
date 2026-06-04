@@ -4,7 +4,7 @@
     "country": "Germany",
     "country_code": "DE",
     "division_level": 1,
-    "season": "24/25"
+    "season": "25/26"
   },
   "teams": [
     {
@@ -174,17 +174,17 @@
       }
     },
     {
-      "name": "VfL Bochum",
-      "transfermarkt_url": "https://www.transfermarkt.com/vfl-bochum/startseite/verein/80",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/vfl-bochum/besucherzahlenentwicklung/verein/80",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/VfL_Bochum",
+      "name": "Hamburger SV",
+      "transfermarkt_url": "https://www.transfermarkt.com/hamburger-sv/startseite/verein/41",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hamburger-sv/besucherzahlenentwicklung/verein/41",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Hamburger_SV",
       "stadium": {
-        "name": "Vonovia Ruhrstadion",
-        "transfermarkt_url": "https://www.transfermarkt.com/vonovia-ruhrstadion/stadion/stadion/8",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Vonovia_Ruhrstadion",
+        "name": "Volksparkstadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/hamburger-sv/stadion/verein/41",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Volksparkstadion",
         "city": {
-          "name": "Bochum",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Bochum"
+          "name": "Hamburg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Hamburg"
         }
       }
     },
@@ -250,18 +250,18 @@
       }
     },
     {
-      "name": "Holstein Kiel",
-      "transfermarkt_url": "https://www.transfermarkt.com/holstein-kiel/startseite/verein/273",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/holstein-kiel/besucherzahlenentwicklung/verein/273",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Holstein_Kiel",
+      "name": "1. FC Köln",
+      "transfermarkt_url": "https://www.transfermarkt.com/1-fc-koln/startseite/verein/3",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/1-fc-koln/besucherzahlenentwicklung/verein/3",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/1._FC_K%C3%B6ln",
       "stadium": {
-        "name": "Holstein-Stadion",
-        "owner_raw": "Landeshauptstadt Kiel",
-        "transfermarkt_url": "https://www.transfermarkt.com/holstein-stadion/stadion/stadion/2302",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Holstein-Stadion",
+        "name": "RheinEnergieStadion",
+        "owner_raw": "Stadt Köln",
+        "transfermarkt_url": "https://www.transfermarkt.com/1-fc-koln/stadion/verein/3",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/RheinEnergieStadion",
         "city": {
-          "name": "Kiel",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Kiel"
+          "name": "Cologne",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Cologne"
         }
       }
     },
