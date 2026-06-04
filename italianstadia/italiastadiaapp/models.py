@@ -173,7 +173,7 @@ class StadiumDevelopment(models.Model):
     source_url = models.URLField(max_length=500, blank=True, null=True)
 
 
-    notes = models.TextField(blank=True)
+    notes = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
