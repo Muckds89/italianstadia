@@ -105,6 +105,7 @@ def stadiums_geojson(request):
                             if t.league and t.league.country
                             else None
                         ),
+                        "image_url": t.image_url or "",
                         "wikipedia_url": t.wikipedia_url or "",
                         "transfermarkt_url": t.transfermarkt_url or "",
                     }

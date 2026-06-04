@@ -1,3 +1,163 @@
+# Feature Plan — Country → League combined picker
+_Created: 2026-06-04 | Branch: feature/country-league-picker_
+
+---
+
+## Problem / Goal
+
+The current filter bar has two independent `<select>` elements — "All countries" and
+"All leagues" — that sit side by side. This wastes space and the relationship between
+them is invisible to the user (you have to know to pick a country first). The goal is a
+single button that, when clicked, opens a panel listing countries; hovering (desktop) or
+tapping (mobile) a country reveals its leagues inline as a submenu. Selecting a league
+applies both filters at once and closes the panel. The UX should be clear enough that no
+tooltip or label is needed.
+
+Success: one compact button replaces two dropdowns; all existing filter, zoom, girone,
+sessionStorage, and clear-button behaviour is preserved unchanged.
+
+---
+
+## Scope
+
+**In scope:**
+- [ ] Custom `#countryLeaguePicker` visual component (button + panel + submenu)
+- [ ] Desktop: hover country row → leagues appear inline as a submenu
+- [ ] Mobile: tap country row → leagues toggle open below it
+- [ ] Clicking a country name alone applies country filter (no specific league)
+- [ ] Clicking a league applies country + league filters together
+- [ ] Picker label updates to reflect active selection ("Italy — Serie A")
+- [ ] Clear-filters button resets picker label back to "All countries"
+- [ ] sessionStorage save / restore updates picker label correctly
+- [ ] CSS consistent with dark navbar theme
+
+**Out of scope (do not touch):**
+- Girone filter (`#gironeFilter`) — stays as a standalone select, no change
+- Ownership filter — no change
+- Stadium filter — no change
+- Development mode filters — no change
+- `stadium-detail-map.js` — no change
+- Any model, view, or URL change
+
+---
+
+## Design decisions
+
+1. **Keep hidden `<select>` elements as the data model.**
+   All map.js logic reads `countryFilter.value`, `leagueFilter.value`, and listens for
+   `"change"` events on both. Rather than rewriting all those references, the hidden
+   selects stay in the DOM (`display:none`). The visual picker only syncs values and fires
+   `new Event("change")` on the target select. Zero changes to existing event-handler logic.
+   Alternative: replace selects with JS variables. Rejected: would require editing 15+
+   call sites in map.js, high risk of regression.
+
+2. **Picker reads from the hidden selects — no parallel data structure.**
+   `buildPickerUI()` iterates `countryFilter.options` to build country rows, and for each
+   country pre-fetches its leagues by temporarily calling `populateLeagueFilter(country)`.
+   This means the picker is always in sync with the same data driving filters.
+   Alternative: build a separate `countriesData` object. Rejected: duplication.
+
+3. **Submenu pattern: accordion (inline expand) for both desktop and mobile.**
+   A CSS side-panel (`position: absolute; left: 100%`) disappears off screen on mobile.
+   An accordion (tap country → leagues slide down below) works universally.
+   On wider viewports the panel is wide enough to show country + leagues side by side.
+   Alternative: pure hover submenu. Rejected: hover has no equivalent on touch devices.
+
+4. **Click-outside closes the panel.**
+   `document.addEventListener("click")` with a guard checking if the click target is
+   inside `#countryLeaguePicker`. Standard pattern; no library needed.
+
+5. **Picker label format:**
+   - No filter active: "All countries"
+   - Country only: "Italy"
+   - Country + league: "Italy — Serie A"
+
+---
+
+## Files that will change
+
+| File | Change type | Why |
+|------|-------------|-----|
+| `italiastadiaapp/templates/index.html` | Edit | Add picker markup; hide existing country/league selects |
+| `italiastadiaapp/static/css/styles.css` | Edit | Add `.clp-*` component styles |
+| `italiastadiaapp/static/js/map.js` | Edit | Add `buildPickerUI()`, `updatePickerLabel()`; hook into populate functions, `restoreFilterState()`, and `clearFiltersBtn` |
+
+---
+
+## Implementation steps
+
+1. [ ] **CSS** — add `.clp-wrap`, `.clp-trigger`, `.clp-panel`, `.clp-country-row`,
+   `.clp-league-row` styles. Panel: `position:absolute`, dark bg matching navbar,
+   `z-index:9999`. Country rows: hover highlight. League rows: indented + accent colour.
+   Mobile breakpoint (`≤768px`): full-width panel, accordion layout.
+
+2. [ ] **HTML** (`index.html`) — insert `<div id="countryLeaguePicker">` before the
+   existing selects. Add `style="display:none"` to `#countryFilter` and `#leagueFilter`.
+
+3. [ ] **`buildPickerUI()`** (`map.js`) — reads `countryFilter.options` to build country
+   rows; for each country fetches its leagues, then stores the data on row elements.
+   Attaches hover (desktop) and click (mobile) listeners. Calls `updatePickerLabel()`.
+
+4. [ ] **`updatePickerLabel()`** (`map.js`) — sets the button label from
+   `countryFilter.value` and `leagueFilter.value`.
+
+5. [ ] **Wire picker interactions** (`map.js`) — country click/hover: set `countryFilter.value`,
+   dispatch `change`; league click: set both selects, dispatch `change` on `leagueFilter`.
+   Click-outside listener closes panel.
+
+6. [ ] **Hook into `populateCountryFilter()`** (`map.js`) — call `buildPickerUI()` at the
+   end so the picker rebuilds whenever the country list changes.
+
+7. [ ] **Hook into `restoreFilterState()`** (`map.js`) — call `updatePickerLabel()` after
+   state is restored.
+
+8. [ ] **Hook into `clearFiltersBtn` handler** (`map.js`) — call `updatePickerLabel()`
+   after reset.
+
+9. [ ] **Smoke test** all combinations in the test plan.
+
+---
+
+## PostgreSQL safety check
+
+No model changes. Not applicable.
+
+---
+
+## Test plan
+
+**Manual smoke test:**
+
+| Action | Expected |
+|--------|----------|
+| Open map fresh | Picker shows "All countries", tier-1 badges from all countries |
+| Click picker button | Panel opens with country list |
+| Hover/tap "Italy" | Serie A / B / C appear |
+| Click "Italy" (country only) | Label → "Italy", map zooms to Italy, all tiers shown |
+| Click "Italy → Serie A" | Label → "Italy — Serie A", only Serie A badges |
+| Click "Italy → Serie C" | Girone filter appears, label → "Italy — Serie C" |
+| Click "Clear filters" | Label → "All countries", girone hidden, Europe bounds |
+| Navigate away and Back | Picker label matches saved filter state |
+| Change country while league active | League resets, label updates |
+
+**Automated:**
+- `pytest italiastadiaapp/tests/ -v` — all existing tests green (no model/view changes)
+- `python manage.py check` — 0 issues
+
+---
+
+## Rollback plan
+
+Frontend-only changes. No migration needed.
+
+```bash
+git checkout main -- italiastadiaapp/templates/index.html
+git checkout main -- italiastadiaapp/static/css/styles.css
+git checkout main -- italiastadiaapp/static/js/map.js
+```
+
+---
+
 # Feature Plan — Sprint 3: Badge markers, UEFA ordering, European rebrand
 _Created: 2026-06-03 | Branch: feature/badge-markers_
 
