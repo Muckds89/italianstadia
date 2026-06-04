@@ -171,11 +171,20 @@
         <!-- FILTER AREA — second row -->
         <div class="d-flex align-items-center flex-wrap gap-2 pb-1 w-100">
             <div id="operationalFilters" class="d-flex align-items-center flex-wrap gap-2">
-                <select id="countryFilter" class="form-select">
+
+                <!-- Country-League combined picker (visual component) -->
+                <div id="countryLeaguePicker" class="clp-wrap">
+                    <button class="form-select clp-trigger" id="clpTrigger" type="button">
+                        All countries
+                    </button>
+                    <div class="clp-panel" id="clpPanel" style="display:none"></div>
+                </div>
+
+                <!-- Hidden selects — data model, unchanged by this feature -->
+                <select id="countryFilter" class="form-select" style="display:none">
                     <option value="">All countries</option>
                 </select>
-
-                <select id="leagueFilter" class="form-select">
+                <select id="leagueFilter" class="form-select" style="display:none">
                     <option value="">All leagues</option>
                 </select>
 
@@ -229,6 +238,6 @@
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{% static 'js/map.js' %}?v=13"></script>
+<script src="{% static 'js/map.js' %}?v=14"></script>
 </body>
 </html>

@@ -635,3 +635,116 @@ html {
         line-height: 32px !important;
     }
 }
+
+/* ── Country-League Picker ───────────────────────────────────────────────── */
+.clp-wrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* The trigger button looks like a form-select but is a <button> */
+.clp-trigger {
+    cursor: pointer;
+    text-align: left;
+    width: clamp(160px, 18vw, 260px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* form-select already supplies bg-color, border, padding, caret arrow */
+}
+
+/* Dropdown panel */
+.clp-panel {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 200px;
+    max-height: 70vh;
+    overflow-y: auto;
+    background: rgba(23, 27, 31, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    padding: 4px 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+
+/* Country row */
+.clp-country-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    color: #ccd6ff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.12s;
+    gap: 8px;
+}
+
+.clp-country-row:hover,
+.clp-country-row.active {
+    background: rgba(255, 255, 255, 0.09);
+    color: #fff;
+}
+
+/* Chevron rotates when accordion is open */
+.clp-chevron {
+    font-size: 14px;
+    opacity: 0.45;
+    transition: transform 0.18s, opacity 0.18s;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.clp-country-row.open .clp-chevron {
+    transform: rotate(90deg);
+    opacity: 1;
+}
+
+/* League list — accordion: collapses via max-height */
+.clp-leagues {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.22s ease;
+}
+
+.clp-leagues.open {
+    max-height: 320px;
+}
+
+/* League row */
+.clp-league-row {
+    padding: 5px 14px 5px 30px;
+    color: #8ab4ff;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+    white-space: nowrap;
+}
+
+.clp-league-row:hover {
+    background: rgba(100, 160, 255, 0.12);
+    color: #fff;
+}
+
+.clp-league-row.active {
+    color: #fff;
+    font-weight: 700;
+}
+
+/* Mobile: full-width panel */
+@media (max-width: 768px) {
+    .clp-panel {
+        min-width: calc(100vw - 24px);
+        left: 0;
+    }
+    .clp-trigger {
+        width: clamp(140px, 40vw, 220px);
+    }
+}
