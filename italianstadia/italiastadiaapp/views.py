@@ -58,11 +58,42 @@ def stadium_developments_geojson(request):
     })
 
 def stadiums_geojson(request):
+    """
+    GeoJSON endpoint for operational stadiums.
+
+    Optional query parameters (all case-sensitive):
+      ?country=Italy          — include only stadiums whose teams play in that country
+      ?league=Serie+A         — include only stadiums whose teams play in that league
+      ?ownership=PUBLIC       — include only stadiums with that ownership value
+                                (PUBLIC | PRIVATE | MIXED | UNKNOWN)
+
+    All three can be combined. map.js fetches with no parameters and filters
+    client-side; these params are available for external API consumers and
+    future server-side optimisation as the dataset grows past ~500 stadiums.
+    """
+    param_country   = request.GET.get("country",   "").strip()
+    param_league    = request.GET.get("league",     "").strip()
+    param_ownership = request.GET.get("ownership",  "").strip().upper()
+
+    qs = Stadium.objects.select_related("city").prefetch_related(
+        "teams__league__country"
+    )
+
+    # Push ownership filter to the DB — it lives directly on Stadium
+    if param_ownership:
+        qs = qs.filter(ownership=param_ownership)
+
+    # Push league filter to the DB via team relationship
+    if param_league:
+        qs = qs.filter(teams__league__name=param_league).distinct()
+
+    # Push country filter to the DB via team → league → country
+    if param_country:
+        qs = qs.filter(teams__league__country__name=param_country).distinct()
+
     features = []
 
-    for s in Stadium.objects.select_related("city").prefetch_related(
-        "teams__league__country"
-    ):
+    for s in qs:
         if s.latitude is None or s.longitude is None:
             continue
 

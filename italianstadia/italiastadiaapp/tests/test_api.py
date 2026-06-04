@@ -73,6 +73,67 @@ def test_stadiums_geojson_team_league_fields(client):
     assert "image_url" in t     # required for badge marker rendering
 
 
+@pytest.fixture
+def two_league_data():
+    """Italy (Serie A) + Germany (Bundesliga) — two stadiums, one per country."""
+    it, _ = Country.objects.get_or_create(name="Italy",   defaults={"code": "IT"})
+    de, _ = Country.objects.get_or_create(name="Germany", defaults={"code": "DE"})
+    serie_a, _    = League.objects.get_or_create(name="Serie A",    country=it, defaults={"division_level": 1})
+    bundesliga, _ = League.objects.get_or_create(name="Bundesliga", country=de, defaults={"division_level": 1})
+
+    city_it = City.objects.create(name="Rome",   population=2800000, country="Italy")
+    city_de = City.objects.create(name="Munich", population=1400000, country="Germany")
+
+    st_it = Stadium.objects.create(name="Olimpico",    city=city_it, latitude=41.934, longitude=12.455, ownership="PUBLIC")
+    st_de = Stadium.objects.create(name="Allianz",     city=city_de, latitude=48.219, longitude=11.625, ownership="PRIVATE")
+
+    Team.objects.create(name="AS Roma",   city=city_it, stadium=st_it, tier=1, league=serie_a)
+    Team.objects.create(name="FC Bayern", city=city_de, stadium=st_de, tier=1, league=bundesliga)
+    return {"stadiums": [st_it, st_de]}
+
+
+@pytest.mark.django_db
+def test_server_filter_by_country(client, two_league_data):
+    url = reverse("italiastadiaapp:stadiums_geojson")
+    data = client.get(url + "?country=Italy").json()
+    assert len(data["features"]) == 1
+    assert data["features"][0]["properties"]["name"] == "Olimpico"
+
+
+@pytest.mark.django_db
+def test_server_filter_by_league(client, two_league_data):
+    url = reverse("italiastadiaapp:stadiums_geojson")
+    data = client.get(url + "?league=Bundesliga").json()
+    assert len(data["features"]) == 1
+    assert data["features"][0]["properties"]["name"] == "Allianz"
+
+
+@pytest.mark.django_db
+def test_server_filter_by_ownership(client, two_league_data):
+    url = reverse("italiastadiaapp:stadiums_geojson")
+    data = client.get(url + "?ownership=PUBLIC").json()
+    names = [f["properties"]["name"] for f in data["features"]]
+    assert "Olimpico" in names
+    assert "Allianz" not in names
+
+
+@pytest.mark.django_db
+def test_server_filter_nonexistent_league_returns_empty(client, two_league_data):
+    url = reverse("italiastadiaapp:stadiums_geojson")
+    data = client.get(url + "?league=NonExistentLeague").json()
+    assert data["type"] == "FeatureCollection"
+    assert data["features"] == []
+
+
+@pytest.mark.django_db
+def test_server_filter_combined(client, two_league_data):
+    """country + ownership together — only Italian public stadiums."""
+    url = reverse("italiastadiaapp:stadiums_geojson")
+    data = client.get(url + "?country=Italy&ownership=PUBLIC").json()
+    assert len(data["features"]) == 1
+    assert data["features"][0]["properties"]["name"] == "Olimpico"
+
+
 @pytest.mark.django_db
 def test_stadium_developments_geojson(client):
 

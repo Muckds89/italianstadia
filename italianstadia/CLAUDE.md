@@ -125,6 +125,20 @@ Both endpoints return `[longitude, latitude]` coordinates (GeoJSON standard). Cu
 
 The `stadiums_geojson` view uses `select_related("city").prefetch_related("teams__league__country")`. `DecimalField` coordinates are cast to `float()` before serialisation so they come out as JSON numbers, not strings.
 
+### Server-side filter parameters (stadiums endpoint)
+
+`GET /api/stadiums/?country=Italy&league=Serie+A&ownership=PUBLIC`
+
+| Param | Filters on | Example |
+|-------|-----------|---------|
+| `country` | `teams__league__country__name` | `Italy` |
+| `league` | `teams__league__name` | `Serie+A` |
+| `ownership` | `Stadium.ownership` (uppercased) | `PUBLIC` |
+
+`map.js` fetches with **no parameters** and filters client-side (fast for ≤500 stadiums). Server-side params exist for external consumers and for the Phase 2 scale-up.
+
+**Performance threshold:** ~173ms at 170 stadiums (SQLite). When the dataset reaches ~500+ stadiums (Phase 2 multi-league), re-benchmark — if response time exceeds 500ms, switch `map.js` to use server-side params and drop the client-side filter loop.
+
 ## Frontend (map.js)
 
 All filter state and map logic lives in `map.js` as a single file. Filter DOM elements are grabbed at top-level; the map supports two modes: `"operational"` (default, shows Stadium markers) and `"development"` (shows StadiumDevelopment markers). `currentLayerMode` tracks this.
