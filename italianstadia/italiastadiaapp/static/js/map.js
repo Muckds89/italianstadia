@@ -933,6 +933,7 @@ stadiumFilter.addEventListener("change", function () {
 
 mapModeToggle.addEventListener("change", function () {
     if (this.checked) {
+        currentLayerMode = "development";
         markers.forEach(marker => map.removeLayer(marker));
         closeActivePopup();
 
@@ -949,6 +950,7 @@ mapModeToggle.addEventListener("change", function () {
         developmentLabel.classList.add("active");
 
     } else {
+        currentLayerMode = "operational";
         developmentMarkers.forEach(marker => map.removeLayer(marker));
 
         developmentFilters.classList.add("d-none");
@@ -959,6 +961,7 @@ mapModeToggle.addEventListener("change", function () {
 
         applyFilters();
         updateLegend("operational");
+        updateClearButton();
 
         developmentLabel.classList.remove("active");
         operationalLabel.classList.add("active");
