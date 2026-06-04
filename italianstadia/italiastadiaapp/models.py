@@ -29,7 +29,7 @@ class League(models.Model):
 class City(models.Model):
     name = models.CharField(max_length=255)
     population = models.IntegerField(null=True, blank=True)
-    country = models.CharField(max_length=255)
+    country = models.CharField(max_length=255, db_index=True)
     wikipedia_url = models.URLField(max_length=500, blank=True, null=True)
 
     image_url = models.URLField(max_length=1000, blank=True, null=True)  
@@ -102,7 +102,7 @@ class Team(models.Model):
     )
     stadium = models.ForeignKey(Stadium, on_delete=models.CASCADE, related_name='teams')
     manager = models.CharField(max_length=255, blank=True, null=True)
-    num_of_titles = models.IntegerField(default=0)
+    num_of_titles = models.IntegerField(null=True, blank=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='teams')
     average_attendance = models.IntegerField(null=True, blank=True)
 

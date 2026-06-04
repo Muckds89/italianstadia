@@ -119,6 +119,7 @@ clearFiltersBtn.addEventListener("click", function () {
         if (flashLayer) { map.removeLayer(flashLayer); flashLayer = null; }
         applyFilters();
         fitToVisibleMarkers(lastVisibleMarkers);
+        updatePickerLabel();
         saveFilterState();
     }
     updateClearButton();
@@ -127,6 +128,168 @@ clearFiltersBtn.addEventListener("click", function () {
 const developmentStatusFilter = document.getElementById("developmentStatusFilter");
 const developmentYearFilter = document.getElementById("developmentYearFilter");
 const developmentStadiumFilter = document.getElementById("developmentStadiumFilter");
+
+// ── Country-League Picker ─────────────────────────────────────────────────
+const clpTrigger = document.getElementById("clpTrigger");
+const clpPanel   = document.getElementById("clpPanel");
+
+/** Update the trigger button label to reflect the current filter state. */
+function updatePickerLabel() {
+    const country    = countryFilter.value;
+    const leagueOpt  = leagueFilter.options[leagueFilter.selectedIndex];
+    const leagueName = (leagueFilter.value && leagueOpt) ? leagueOpt.textContent : "";
+
+    if (!country) {
+        clpTrigger.textContent = "All countries";
+    } else if (!leagueName) {
+        clpTrigger.textContent = country;
+    } else {
+        clpTrigger.textContent = `${country} — ${leagueName}`;
+    }
+}
+
+/** Close the picker panel. */
+function closePicker() {
+    clpPanel.style.display = "none";
+}
+
+/**
+ * Build (or rebuild) the picker panel from the current markers data.
+ * Called once after the API loads and whenever the panel is opened.
+ */
+function buildPickerUI() {
+    clpPanel.innerHTML = "";
+
+    // Gather country → league map directly from marker data
+    const countryLeagues = new Map();
+    markers.forEach(marker => {
+        marker.leagues.forEach(l => {
+            if (!l.country || !l.id) return;
+            if (!countryLeagues.has(l.country)) countryLeagues.set(l.country, new Map());
+            if (!countryLeagues.get(l.country).has(l.id))
+                countryLeagues.get(l.country).set(l.id, l);
+        });
+    });
+
+    // Sort countries by UEFA rank (same order as the dropdown)
+    const countries = [...countryLeagues.keys()].sort(
+        (a, b) => (countryRankMap[a] ?? 99) - (countryRankMap[b] ?? 99)
+    );
+
+    const activeCountry = countryFilter.value;
+    const activeLeague  = leagueFilter.value;
+
+    countries.forEach(country => {
+        const leagues = [...countryLeagues.get(country).values()].sort(
+            (a, b) => (a.divisionLevel ?? 99) - (b.divisionLevel ?? 99)
+        );
+
+        // ── Country row ──────────────────────────────────────────────────
+        const countryRow = document.createElement("div");
+        countryRow.className = "clp-country-row";
+        if (country === activeCountry) countryRow.classList.add("active");
+
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "clp-country-name";
+        nameSpan.textContent = country;
+
+        const chevron = document.createElement("span");
+        chevron.className = "clp-chevron";
+        chevron.textContent = "›";
+
+        countryRow.appendChild(nameSpan);
+        countryRow.appendChild(chevron);
+
+        // ── Leagues accordion ─────────────────────────────────────────────
+        const leaguesDiv = document.createElement("div");
+        leaguesDiv.className = "clp-leagues";
+
+        // Pre-open accordion for the active country
+        if (country === activeCountry) {
+            countryRow.classList.add("open");
+            leaguesDiv.classList.add("open");
+        }
+
+        leagues.forEach(l => {
+            const leagueRow = document.createElement("div");
+            leagueRow.className = "clp-league-row";
+            if (String(l.id) === activeLeague) leagueRow.classList.add("active");
+            leagueRow.textContent = l.name;
+
+            leagueRow.addEventListener("click", function (e) {
+                e.stopPropagation();
+                // Set hidden selects then fire change so existing map.js logic runs
+                countryFilter.value = country;
+                populateLeagueFilter(country);
+                leagueFilter.value = String(l.id);
+                leagueFilter.dispatchEvent(new Event("change"));
+                updatePickerLabel();
+                closePicker();
+            });
+
+            leaguesDiv.appendChild(leagueRow);
+        });
+
+        // Clicking the country name applies country filter only
+        nameSpan.addEventListener("click", function (e) {
+            e.stopPropagation();
+            countryFilter.value = country;
+            leagueFilter.value  = "";
+            countryFilter.dispatchEvent(new Event("change"));
+            updatePickerLabel();
+            closePicker();
+        });
+
+        // Clicking the chevron toggles the accordion (without changing filter)
+        chevron.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const isOpen = leaguesDiv.classList.contains("open");
+            // Collapse all other open accordions
+            clpPanel.querySelectorAll(".clp-leagues.open").forEach(el => {
+                el.classList.remove("open");
+                el.previousElementSibling?.classList.remove("open");
+            });
+            if (!isOpen) {
+                leaguesDiv.classList.add("open");
+                countryRow.classList.add("open");
+            }
+        });
+
+        // Desktop hover: auto-expand accordion
+        countryRow.addEventListener("mouseenter", function () {
+            if (window.innerWidth > 768) {
+                clpPanel.querySelectorAll(".clp-leagues.open").forEach(el => {
+                    el.classList.remove("open");
+                    el.previousElementSibling?.classList.remove("open");
+                });
+                leaguesDiv.classList.add("open");
+                countryRow.classList.add("open");
+            }
+        });
+
+        clpPanel.appendChild(countryRow);
+        clpPanel.appendChild(leaguesDiv);
+    });
+}
+
+// Toggle picker open/close
+clpTrigger.addEventListener("click", function (e) {
+    e.stopPropagation();
+    if (clpPanel.style.display !== "none") {
+        closePicker();
+    } else {
+        buildPickerUI();   // rebuild to reflect active state
+        clpPanel.style.display = "block";
+    }
+});
+
+// Click outside closes the picker
+document.addEventListener("click", function (e) {
+    if (!document.getElementById("countryLeaguePicker").contains(e.target)) {
+        closePicker();
+    }
+});
+// ─────────────────────────────────────────────────────────────────────────
 
 const legend = L.control({ position: "bottomleft" });
 
@@ -610,6 +773,8 @@ function populateCountryFilter() {
         opt.textContent = c;
         countryFilter.appendChild(opt);
     });
+    // Build the visual picker now that the country list is ready
+    buildPickerUI();
 }
 
 function populateLeagueFilter(country) {
@@ -753,6 +918,7 @@ function restoreFilterState() {
     } else {
         fitToVisibleMarkers(lastVisibleMarkers);
     }
+    updatePickerLabel();
     return true;   // signals to caller that saved state was processed
 }
 
@@ -878,6 +1044,7 @@ countryFilter.addEventListener("change", function () {
         if (flashLayer) { map.removeLayer(flashLayer); flashLayer = null; }
         fitToVisibleMarkers(lastVisibleMarkers);
     }
+    updatePickerLabel();
     saveFilterState();
 });
 
@@ -900,6 +1067,7 @@ leagueFilter.addEventListener("change", function () {
     } else {
         resetZoomToContext();
     }
+    updatePickerLabel();
     saveFilterState();
 });
 
@@ -943,6 +1111,7 @@ mapModeToggle.addEventListener("change", function () {
         developmentFilters.classList.remove("d-none");
         developmentFilters.classList.add("d-flex");
 
+        stadiumCounter.textContent = "Loading…";
         loadDevelopmentStadiums();
         updateLegend("development");
 

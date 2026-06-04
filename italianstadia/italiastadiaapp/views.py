@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 from django.shortcuts import get_object_or_404, render
 from django.http import JsonResponse
 from .models import City, League, Stadium, Team, StadiumDevelopment
@@ -202,7 +204,7 @@ def stadium_list(request):
     other_stadia = []
 
     for stadium in stadia_qs:
-        primary = _primary_league(stadium)
+        primary = _primary_league(stadium.teams.all())
         if primary and primary.id in league_map:
             buckets[primary.id].append(stadium)
         elif not selected_country:
@@ -234,10 +236,10 @@ def stadium_list(request):
     })
 
 
-def _primary_league(stadium):
-    """Return the League with the lowest division_level among a stadium's teams."""
+def _primary_league(teams):
+    """Return the League with the lowest division_level among the given teams."""
     best = None
-    for team in stadium.teams.all():
+    for team in teams:
         if team.league and team.league.country:
             if best is None or team.league.division_level < best.division_level:
                 best = team.league
@@ -270,13 +272,18 @@ def team_list(request):
     if selected_country:
         leagues_qs = leagues_qs.filter(country__name=selected_country)
 
+    team_by_league: dict = defaultdict(list)
+    for t in teams_qs:
+        team_by_league[t.league_id].append(t)
+
     sections = []
-    assigned_ids = set()
 
     for league in leagues_qs:
-        section_teams = [t for t in teams_qs if t.league_id == league.id]
-        section_teams.sort(key=lambda t: t.average_attendance or 0, reverse=True)
-        assigned_ids.update(t.id for t in section_teams)
+        section_teams = sorted(
+            team_by_league.get(league.id, []),
+            key=lambda t: t.average_attendance or 0,
+            reverse=True,
+        )
         if section_teams:
             sections.append({
                 "league": league,
@@ -287,8 +294,11 @@ def team_list(request):
 
     # Fallback: teams with no league FK
     if not selected_country:
-        other_teams = [t for t in teams_qs if t.id not in assigned_ids]
-        other_teams.sort(key=lambda t: t.average_attendance or 0, reverse=True)
+        other_teams = sorted(
+            team_by_league.get(None, []),
+            key=lambda t: t.average_attendance or 0,
+            reverse=True,
+        )
         if other_teams:
             sections.append({
                 "league": None,
