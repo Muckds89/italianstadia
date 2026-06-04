@@ -222,18 +222,20 @@ The project is currently Italy-only (Serie A/B/C). Full roadmap in `italianstadi
 
 **Phase 2 leagues (priority order):**
 
-| League | Country | Division |
-|--------|---------|----------|
-| Serie A/B/C | Italy | 1–3 ✓ live |
-| Premier League | England | 1 |
-| Bundesliga / 2. Bundesliga | Germany | 1–2 |
-| La Liga / Segunda | Spain | 1–2 |
-| Ligue 1 / Ligue 2 | France | 1–2 |
-| Eredivisie | Netherlands | 1 |
-| Primeira Liga | Portugal | 1 |
-| Süper Lig | Turkey | 1 |
-| Scottish Premiership | Scotland | 1 |
-| Belgian Pro League | Belgium | 1 |
+| League | Country | Division | Status |
+|--------|---------|----------|--------|
+| Serie A/B/C | Italy | 1–3 | ✓ live |
+| Premier League | England | 1 | JSON ready (25/26) |
+| Bundesliga | Germany | 1 | JSON ready (25/26) |
+| Primeira Liga | Portugal | 1 | JSON ready (25/26) |
+| Ekstraklasa | Poland | 1 | JSON ready (25/26) |
+| La Liga / Segunda | Spain | 1–2 | planned |
+| Ligue 1 / Ligue 2 | France | 1–2 | planned |
+| 2. Bundesliga | Germany | 2 | planned |
+| Eredivisie | Netherlands | 1 | planned |
+| Süper Lig | Turkey | 1 | planned |
+| Scottish Premiership | Scotland | 1 | planned |
+| Belgian Pro League | Belgium | 1 | planned |
 
 Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 fixes) before expanding to multi-league.
 
@@ -283,7 +285,27 @@ Set `owner_raw` in JSON for stadiums where Wikipedia has no owner infobox row:
 "stadium": { "owner_raw": "Município de Braga", ... }
 ```
 
-Public keywords cover: English (`city of`, `municipality`, `council`, `town of`, `agglomeration`), Italian (`comune di`, `comunale`), German (`stadt `, `gemeinde`), French (`commune de`, `mairie`, `métropole`, `ville de`, `ville d'`, `agglomération`, `communauté`), Spanish/Portuguese (`ayuntamiento`, `município`, `câmara municipal`).
+Public keywords cover ~15 European language families:
+
+| Language(s) | Sample keywords |
+|-------------|----------------|
+| English | `city of`, `municipality`, `council`, `town of`, `agglomeration` |
+| Italian | `comune di`, `comunale`, `provincia`, `città metropolitana`, `sport e salute` |
+| German (DE/AT/CH) | `stadt `, `gemeinde`, `landkreis`, `freie und hansestadt`, `bezirksamt` |
+| French (FR/BE/CH) | `commune de`, `mairie`, `métropole`, `ville de`, `agglomération`, `communauté` |
+| Spanish | `ayuntamiento`, `municipio`, `diputación`, `generalitat`, `junta de ` |
+| Portuguese | `município`, `câmara municipal`, `junta de freguesia`, `autarquia` |
+| Polish | `miasto `, `miasto stołeczne`, `gmina `, `województwo`, `skarb państwa` |
+| Dutch/Belgian | `gemeente `, `stad `, `provincie `, `gewest ` |
+| Turkish | `belediye`, `büyükşehir`, `il özel idaresi` |
+| Norwegian/Danish | `kommune`, `fylke`, `amt ` |
+| Swedish | `stadsförvaltning`, `stadsfastigheter`, `landsting` |
+| Finnish | `kaupunki`, `kunta ` |
+| Czech/Slovak | `město `, `statutární město`, `obec `, `kraj ` |
+| Romanian | `primăria`, `consiliu local`, `județ`, `municipiu` |
+| Croatian/Serbian/Bosnian | `grad `, `gradska `, `općina `, `skupština` |
+| Hungarian | `város `, `önkormányzat`, `fővárosi` |
+| Greek (transliterated) | `dimos `, `dimou` |
 
 
 ## UI/UX conventions
