@@ -939,35 +939,121 @@ def classify_ownership(owner_raw):
     text = owner_raw.lower()
 
     public_keywords = [
-        # English
+        # ── English ──────────────────────────────────────────────────────────
         "city of", "municipality", "municipal", "council", "government",
         "region", "province", "metropolitan city", "district",
         "town of", "town council",
-        "agglomeration", "agglomération", "communauté", "communaute",
-        # Italian
+        "city council", "county council", "district council",
+        "metropolitan borough", "london borough", "royal borough",
+        "public authority", "public body", "national sports",
+        "sports authority", "stadium authority",
+        "agglomeration",
+        # ── Italian ──────────────────────────────────────────────────────────
         "comune di", "comune", "comunale", "provincia", "città metropolitana",
-        "sport e salute",  # Italian government sports agency (formerly CONI Servizi)
-        # English variants for Italian/French comune
+        "regione ", "ministero", "ente pubblico",
+        "sport e salute",          # Italian government sports agency
         "commune of", "commune di",
-        # German
+        # ── German (Germany / Austria / Switzerland) ─────────────────────────
         "stadt ", "stadtwerke", "stadtverwaltung", "stadtgemeinde",
         "gemeinde", "landkreis", "freistaat", "bundesland", "kommunal",
-        # French
+        "freie und hansestadt", "freie hansestadt", "hansestadt",
+        "landeshauptstadt", "bezirksamt", "bezirk ", "regionalverband",
+        # ── French (France / Belgium / Switzerland) ──────────────────────────
         "commune de", "mairie", "métropole",
-        # Spanish / Portuguese
-        "ayuntamiento", "município", "câmara municipal",
+        "ville de ", "ville d'",
+        "agglomération", "agglomeration",
+        "communauté", "communaute",
+        "département", "région", "conseil général", "conseil régional",
+        "grand paris", "grand lyon",
+        # ── Spanish ──────────────────────────────────────────────────────────
+        "ayuntamiento", "municipio", "diputación", "patronato municipal",
+        "generalitat", "junta de ", "comunidad de", "consell",
+        "consejo municipal",
+        # ── Portuguese ───────────────────────────────────────────────────────
+        "município", "câmara municipal", "câmara ", "câmara de",
+        "junta de freguesia", "autarquia",
+        "governo regional", "região autónoma",
+        # ── Polish ───────────────────────────────────────────────────────────
+        "miasto ",                 # miasto Warszawa, miasto Kraków …
+        "miasto stołeczne",        # Miasto Stołeczne Warszawa
+        "gmina ",                  # Gmina Miejska Kraków
+        "urząd miejski",           # Urząd Miejski w …
+        "województwo",             # voivodeship
+        "powiat ",                 # county
+        "skarb państwa",           # State Treasury
+        # ── Dutch / Belgian (Flemish) ────────────────────────────────────────
+        "gemeente ",               # Gemeente Amsterdam / Rotterdam
+        "stad ",                   # Stad Gent / Stad Brugge (trailing space)
+        " stad",                   # Göteborgs Stad / Antwerpse Stad (leading space)
+        "stadsbestuur", "stadsgewest", "stadseigendom",
+        "provinciaal", "provincie ",
+        "gewest ",                 # Brussels Hoofdstedelijk Gewest
+        # ── Turkish ──────────────────────────────────────────────────────────
+        "belediye",                # municipality (all forms: büyükşehir belediyesi …)
+        "büyükşehir",              # metropolitan municipality
+        "il özel idaresi",         # special provincial administration
+        "devlet ",                 # state (Turkish)
+        # ── Nordic: Norwegian / Danish ───────────────────────────────────────
+        "kommune",                 # Oslo Kommune / Københavns Kommune
+        "fylke",                   # Norwegian county
+        "amt ",                    # Danish county (historical, still used)
+        # ── Swedish ──────────────────────────────────────────────────────────
+        "stadsförvaltning", "stadsfastigheter",
+        "landstinget", "landsting",
+        "stockholms stad", "göteborgs stad", "malmö stad",  # explicit major cities
+        # ── Finnish ──────────────────────────────────────────────────────────
+        "kaupunki",                # city (Helsinki kaupunki …)
+        "kunta ",                  # municipality
+        # ── Czech / Slovak ───────────────────────────────────────────────────
+        "město ",                  # Město Brno, Město Praha
+        "statutární město",        # Statutární město Brno
+        "obec ",                   # commune / village municipality
+        "kraj ",                   # region (Jihomoravský kraj …)
+        "krajský",
+        # ── Romanian ─────────────────────────────────────────────────────────
+        "primăria", "primărie",    # mayor's office / city hall
+        "consiliu local",          # local council
+        "județ",                   # county
+        "municipiu",               # municipality
+        # ── Croatian / Serbian / Bosnian ─────────────────────────────────────
+        "grad ",                   # Grad Zagreb / Grad Beograd
+        "gradska ",                # gradska skupština (city assembly) …
+        "općina ",                 # municipality (Croatian)
+        "skupština",               # assembly
+        "kantona",                 # canton (Bosnia)
+        # ── Hungarian ────────────────────────────────────────────────────────
+        "város ",                  # Miskolc Város Önkormányzata …
+        "önkormányzat",            # local government / municipality
+        "fővárosi",                # Budapest metropolitan
+        # ── Greek (transliterated) ───────────────────────────────────────────
+        "dimos ",                  # δήμος → dimos (municipality)
+        "dimou",                   # genitive form
     ]
 
     private_keywords = [
-        # Club patterns (multi-language)
+        # ── Club / sport entity patterns (multi-language) ────────────────────
         "football club", "fussball", "fußball", "calcio",
         "fc ", "ac ", "as ", "ss ", "ssc ", "us ", "club",
-        # Company suffixes
+        # ── Generic company suffixes ─────────────────────────────────────────
         "s.p.a", "srl", "s.r.l.", "ltd", "llc", "group",
-        # German company forms
-        "gmbh", "g.m.b.h", " ag", " ag,", "e.v.", "e. v.",
-        # French / Spanish
+        "holding", "invest ", "property", "asset",
+        # ── German company forms ─────────────────────────────────────────────
+        "gmbh", "g.m.b.h", " ag,", "e.v.", "e. v.",
+        # ── French / Spanish ─────────────────────────────────────────────────
         "s.a.", "sarl",
+        # ── Spanish / Portuguese sports company ──────────────────────────────
+        "s.a.d.", " sad,", "sociedad anónima",
+        " lda.", " lda,",
+        # ── Polish company forms ─────────────────────────────────────────────
+        "sp. z o.o.", "spółka akcyjna",
+        # ── Dutch company forms ──────────────────────────────────────────────
+        " b.v.", " n.v.", " b.v,", " n.v,",
+        # ── Nordic company forms ─────────────────────────────────────────────
+        " ab ", " ab,", " oy ", " oy,", " a/s", " asa ",
+        # ── Czech / Slovak company forms ─────────────────────────────────────
+        " a.s.", " s.r.o.",
+        # ── Belgian company forms ────────────────────────────────────────────
+        " bvba", " cvba",
     ]
 
     has_public = any(keyword in text for keyword in public_keywords)
