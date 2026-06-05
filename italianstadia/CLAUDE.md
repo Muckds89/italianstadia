@@ -264,6 +264,8 @@ Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 f
 - Italian clubs: @title = "Italian Champion"
 - French clubs: @title = "French Champion"
 - Portuguese clubs: @title = "Portugese Champion"  ← TM typo, do not correct
+- Swedish clubs: @title = "Swedish Champion"
+- Polish clubs: @title = "Polish Champion"
 
 ## Data quality rules
 

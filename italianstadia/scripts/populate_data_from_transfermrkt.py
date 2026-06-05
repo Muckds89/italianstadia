@@ -241,28 +241,64 @@ def extract_city_population(soup):
     return None
 
 def accept_consent_if_present(driver):
+    """Handle Transfermarkt's Sourcepoint consent dialog.
+
+    Strategy:
+    1. Check at page level first (fast — no iframe switch).
+    2. If not found, scan the first 5 iframes only (consent frame is
+       always near the top; skipping the rest avoids 50-100 s delays on
+       ad-heavy pages).
+    3. After any successful click, switch back robustly and return
+       immediately — never continue iterating because the consent click
+       often navigates the page and invalidates the window handle.
+    """
+    CONSENT_XPATH = "//button[contains(text(), 'Accept & continue')]"
+
+    # 1. Page-level check (no iframe needed)
     try:
-        iframes = driver.find_elements(By.TAG_NAME, "iframe")
+        btn = WebDriverWait(driver, 3).until(
+            EC.element_to_be_clickable((By.XPATH, CONSENT_XPATH))
+        )
+        btn.click()
+        logging.info("Accepted consent popup (page level).")
+        time.sleep(2)
+        return
+    except Exception:
+        pass
 
-        for iframe in iframes:
+    # 2. Iframe scan — cap at 5 iframes, 2 s timeout each
+    try:
+        iframes = driver.find_elements(By.TAG_NAME, "iframe")[:5]
+    except Exception:
+        return
+
+    for iframe in iframes:
+        # Switch into this iframe (skip if handle is stale)
+        try:
             driver.switch_to.frame(iframe)
+        except Exception:
+            continue
 
+        clicked = False
+        try:
+            btn = WebDriverWait(driver, 2).until(
+                EC.element_to_be_clickable((By.XPATH, CONSENT_XPATH))
+            )
+            btn.click()
+            clicked = True
+            logging.info("Accepted consent popup (iframe).")
+        except Exception:
+            pass
+        finally:
+            # Guard: page may have navigated on click → switch_to can throw
             try:
-                accept_button = WebDriverWait(driver, 5).until(
-                    EC.element_to_be_clickable(
-                        (By.XPATH, "//button[contains(text(), 'Accept & continue')]")
-                    )
-                )
-                accept_button.click()
-                logging.info("Accepted consent popup.")
                 driver.switch_to.default_content()
-                time.sleep(2)
-                return
             except Exception:
-                driver.switch_to.default_content()
+                pass
 
-    except Exception as e:
-        logging.info(f"No consent popup handled: {e}")
+        if clicked:
+            time.sleep(2)
+            return  # Never iterate further after a successful click
 
 
 def clean_int(value):
@@ -1280,6 +1316,7 @@ def scrape_average_attendance(attendance_url, season="24/25"):
         time.sleep(3)
 
         accept_consent_if_present(driver)
+        time.sleep(2)  # Let the page settle after potential consent-driven navigation
 
         attendance_row = WebDriverWait(driver, 15).until(
             EC.presence_of_element_located((By.XPATH, f"//tr[td[contains(text(), '{season}')]]"))
@@ -1389,6 +1426,8 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
         "Turkey": "Turkish",
         "Scotland": "Scottish",
         "Belgium": "Belgian",
+        "Poland": "Polish",
+        "Sweden": "Swedish",
     }
 
     try:
@@ -1401,6 +1440,8 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
         tm_badge = scrape_team_badge(team_url, driver)
 
         nationality = NATIONALITY_MAP.get(league.country.name)
+        if not nationality:
+            logging.warning(f"[Team: {team_name}] No nationality mapping for country '{league.country.name}' — num_of_titles will be 0. Add it to NATIONALITY_MAP.")
         if nationality:
             try:
                 champion_element = WebDriverWait(driver, 10).until(
