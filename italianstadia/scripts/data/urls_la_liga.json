@@ -1,0 +1,318 @@
+{
+  "league": {
+    "name": "La Liga",
+    "country": "Spain",
+    "country_code": "ES",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Real Madrid",
+      "transfermarkt_url": "https://www.transfermarkt.com/real-madrid/startseite/verein/418",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/real-madrid/besucherzahlenentwicklung/verein/418",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Real_Madrid_CF",
+      "stadium": {
+        "name": "Santiago Bernabéu",
+        "transfermarkt_url": "https://www.transfermarkt.com/real-madrid/stadion/verein/418",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Santiago_Bernab%C3%A9u_Stadium",
+        "city": {
+          "name": "Madrid",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Madrid"
+        }
+      }
+    },
+    {
+      "name": "FC Barcelona",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-barcelona/startseite/verein/131",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-barcelona/besucherzahlenentwicklung/verein/131",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Barcelona",
+      "stadium": {
+        "name": "Spotify Camp Nou",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-barcelona/stadion/verein/131",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Camp_Nou",
+        "city": {
+          "name": "Barcelona",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Barcelona"
+        }
+      }
+    },
+    {
+      "name": "Atlético de Madrid",
+      "transfermarkt_url": "https://www.transfermarkt.com/atletico-de-madrid/startseite/verein/13",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/atletico-de-madrid/besucherzahlenentwicklung/verein/13",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Atl%C3%A9tico_Madrid",
+      "stadium": {
+        "name": "Riyadh Air Metropolitano",
+        "transfermarkt_url": "https://www.transfermarkt.com/atletico-de-madrid/stadion/verein/13",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Riyadh_Air_Metropolitano",
+        "city": {
+          "name": "Madrid",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Madrid"
+        }
+      }
+    },
+    {
+      "name": "Athletic Club",
+      "transfermarkt_url": "https://www.transfermarkt.com/athletic-bilbao/startseite/verein/621",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/athletic-bilbao/besucherzahlenentwicklung/verein/621",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Athletic_Club",
+      "stadium": {
+        "name": "San Mamés",
+        "transfermarkt_url": "https://www.transfermarkt.com/athletic-bilbao/stadion/verein/621",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/San_Mam%C3%A9s_Stadium",
+        "city": {
+          "name": "Bilbao",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bilbao"
+        }
+      }
+    },
+    {
+      "name": "Villarreal CF",
+      "transfermarkt_url": "https://www.transfermarkt.com/villarreal-cf/startseite/verein/1050",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/villarreal-cf/besucherzahlenentwicklung/verein/1050",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Villarreal_CF",
+      "stadium": {
+        "name": "Estadio de la Cerámica",
+        "transfermarkt_url": "https://www.transfermarkt.com/villarreal-cf/stadion/verein/1050",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_de_la_Cer%C3%A1mica",
+        "city": {
+          "name": "Villarreal",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vila-real"
+        }
+      }
+    },
+    {
+      "name": "Real Betis",
+      "transfermarkt_url": "https://www.transfermarkt.com/real-betis-balompie/startseite/verein/150",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/real-betis-balompie/besucherzahlenentwicklung/verein/150",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Real_Betis",
+      "stadium": {
+        "name": "Estadio Benito Villamarín",
+        "transfermarkt_url": "https://www.transfermarkt.com/real-betis-balompie/stadion/verein/150",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Benito_Villamar%C3%ADn",
+        "city": {
+          "name": "Seville",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Seville"
+        }
+      }
+    },
+    {
+      "name": "Real Sociedad",
+      "transfermarkt_url": "https://www.transfermarkt.com/real-sociedad-de-futbol/startseite/verein/681",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/real-sociedad-de-futbol/besucherzahlenentwicklung/verein/681",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Real_Sociedad",
+      "stadium": {
+        "name": "Reale Arena",
+        "owner_raw": "Gipuzkoa Kirolak",
+        "transfermarkt_url": "https://www.transfermarkt.com/real-sociedad-de-futbol/stadion/verein/681",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Reale_Arena",
+        "city": {
+          "name": "San Sebastián",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/San_Sebasti%C3%A1n"
+        }
+      }
+    },
+    {
+      "name": "RC Celta de Vigo",
+      "transfermarkt_url": "https://www.transfermarkt.com/rc-celta/startseite/verein/940",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rc-celta/besucherzahlenentwicklung/verein/940",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/RC_Celta_de_Vigo",
+      "stadium": {
+        "name": "Estadio Abanca-Balaídos",
+        "owner_raw": "Concello de Vigo",
+        "transfermarkt_url": "https://www.transfermarkt.com/rc-celta/stadion/verein/940",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Abanca-Bala%C3%ADdos",
+        "city": {
+          "name": "Vigo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vigo"
+        }
+      }
+    },
+    {
+      "name": "Sevilla FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-sevilla/startseite/verein/368",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-sevilla/besucherzahlenentwicklung/verein/368",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sevilla_FC",
+      "stadium": {
+        "name": "Estadio Ramón Sánchez-Pizjuán",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-sevilla/stadion/verein/368",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Ram%C3%B3n_S%C3%A1nchez-Pizju%C3%A1n",
+        "city": {
+          "name": "Seville",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Seville"
+        }
+      }
+    },
+    {
+      "name": "Rayo Vallecano",
+      "transfermarkt_url": "https://www.transfermarkt.com/rayo-vallecano/startseite/verein/367",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rayo-vallecano/besucherzahlenentwicklung/verein/367",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Rayo_Vallecano",
+      "stadium": {
+        "name": "Estadio de Vallecas",
+        "owner_raw": "Ayuntamiento de Madrid",
+        "transfermarkt_url": "https://www.transfermarkt.com/rayo-vallecano/stadion/verein/367",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_de_Vallecas",
+        "city": {
+          "name": "Madrid",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Madrid"
+        }
+      }
+    },
+    {
+      "name": "Getafe CF",
+      "transfermarkt_url": "https://www.transfermarkt.com/getafe-cf/startseite/verein/3709",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/getafe-cf/besucherzahlenentwicklung/verein/3709",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Getafe_CF",
+      "stadium": {
+        "name": "Coliseum Alfonso Pérez",
+        "owner_raw": "Ayuntamiento de Getafe",
+        "transfermarkt_url": "https://www.transfermarkt.com/getafe-cf/stadion/verein/3709",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Coliseum_Alfonso_P%C3%A9rez",
+        "city": {
+          "name": "Getafe",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Getafe"
+        }
+      }
+    },
+    {
+      "name": "CA Osasuna",
+      "transfermarkt_url": "https://www.transfermarkt.com/ca-osasuna/startseite/verein/331",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ca-osasuna/besucherzahlenentwicklung/verein/331",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/CA_Osasuna",
+      "stadium": {
+        "name": "Estadio El Sadar",
+        "transfermarkt_url": "https://www.transfermarkt.com/ca-osasuna/stadion/verein/331",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_El_Sadar",
+        "city": {
+          "name": "Pamplona",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pamplona"
+        }
+      }
+    },
+    {
+      "name": "Valencia CF",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-valencia/startseite/verein/1049",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-valencia/besucherzahlenentwicklung/verein/1049",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Valencia_CF",
+      "stadium": {
+        "name": "Mestalla",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-valencia/stadion/verein/1049",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Mestalla",
+        "city": {
+          "name": "Valencia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Valencia"
+        }
+      }
+    },
+    {
+      "name": "RCD Mallorca",
+      "transfermarkt_url": "https://www.transfermarkt.com/rcd-mallorca/startseite/verein/237",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rcd-mallorca/besucherzahlenentwicklung/verein/237",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/RCD_Mallorca",
+      "stadium": {
+        "name": "Visit Mallorca Estadi",
+        "owner_raw": "Ajuntament de Palma",
+        "transfermarkt_url": "https://www.transfermarkt.com/rcd-mallorca/stadion/verein/237",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Visit_Mallorca_Estadi",
+        "city": {
+          "name": "Palma",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Palma,_Mallorca"
+        }
+      }
+    },
+    {
+      "name": "Girona FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/girona-fc/startseite/verein/12321",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/girona-fc/besucherzahlenentwicklung/verein/12321",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Girona_FC",
+      "stadium": {
+        "name": "Estadi Municipal de Montilivi",
+        "owner_raw": "Ajuntament de Girona",
+        "transfermarkt_url": "https://www.transfermarkt.com/girona-fc/stadion/verein/12321",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadi_Montilivi",
+        "city": {
+          "name": "Girona",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Girona"
+        }
+      }
+    },
+    {
+      "name": "Deportivo Alavés",
+      "transfermarkt_url": "https://www.transfermarkt.com/deportivo-alaves/startseite/verein/1108",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/deportivo-alaves/besucherzahlenentwicklung/verein/1108",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Deportivo_Alav%C3%A9s",
+      "stadium": {
+        "name": "Estadio de Mendizorroza",
+        "owner_raw": "Ayuntamiento de Vitoria-Gasteiz",
+        "transfermarkt_url": "https://www.transfermarkt.com/deportivo-alaves/stadion/verein/1108",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_de_Mendizorroza",
+        "city": {
+          "name": "Vitoria-Gasteiz",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vitoria-Gasteiz"
+        }
+      }
+    },
+    {
+      "name": "RCD Espanyol",
+      "transfermarkt_url": "https://www.transfermarkt.com/rcd-espanyol/startseite/verein/714",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rcd-espanyol/besucherzahlenentwicklung/verein/714",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/RCD_Espanyol",
+      "stadium": {
+        "name": "RCDE Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/rcd-espanyol/stadion/verein/714",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/RCDE_Stadium",
+        "city": {
+          "name": "Cornellà de Llobregat",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Cornell%C3%A0_de_Llobregat"
+        }
+      }
+    },
+    {
+      "name": "Levante UD",
+      "transfermarkt_url": "https://www.transfermarkt.com/ud-levante/startseite/verein/3368",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ud-levante/besucherzahlenentwicklung/verein/3368",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Levante_UD",
+      "stadium": {
+        "name": "Estadio Ciudad de Valencia",
+        "transfermarkt_url": "https://www.transfermarkt.com/ud-levante/stadion/verein/3368",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadi_Ciudad_de_Val%C3%A8ncia",
+        "city": {
+          "name": "Valencia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Valencia"
+        }
+      }
+    },
+    {
+      "name": "Elche CF",
+      "transfermarkt_url": "https://www.transfermarkt.com/elche-cf/startseite/verein/1531",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/elche-cf/besucherzahlenentwicklung/verein/1531",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Elche_CF",
+      "stadium": {
+        "name": "Estadio Manuel Martínez Valero",
+        "transfermarkt_url": "https://www.transfermarkt.com/elche-cf/stadion/verein/1531",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Manuel_Mart%C3%ADnez_Valero",
+        "city": {
+          "name": "Elche",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Elche"
+        }
+      }
+    },
+    {
+      "name": "Real Oviedo",
+      "transfermarkt_url": "https://www.transfermarkt.com/real-oviedo/startseite/verein/2497",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/real-oviedo/besucherzahlenentwicklung/verein/2497",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Real_Oviedo",
+      "stadium": {
+        "name": "Estadio Carlos Tartiere",
+        "transfermarkt_url": "https://www.transfermarkt.com/real-oviedo/stadion/verein/2497",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Carlos_Tartiere",
+        "city": {
+          "name": "Oviedo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Oviedo"
+        }
+      }
+    }
+  ]
+}
