@@ -318,18 +318,62 @@ const COUNTRY_COLORS = {
     "Belgium":     ["#fdda24", "#000000", "#ef3340"],  // yellow · black · red
 };
 
-// Bounding boxes [[south, west], [north, east]] for country zoom
+// Fallback bounding boxes [[south, west], [north, east]] for country zoom.
+// ONLY used when no markers exist for a country yet (e.g. the scraper
+// hasn't run). Primary zoom is derived dynamically from actual marker
+// positions in zoomToCountry() — new countries never need to be added here.
 const COUNTRY_BOUNDS = {
-    "Italy":       [[36.6,  6.6], [47.1, 18.5]],
-    "Germany":     [[47.3,  5.9], [55.1, 15.0]],
-    "England":     [[49.9, -5.7], [55.8,  1.8]],
-    "France":      [[41.3, -5.1], [51.1,  9.6]],
-    "Spain":       [[36.0, -9.3], [43.8,  4.3]],
-    "Netherlands": [[50.8,  3.4], [53.5,  7.2]],
-    "Portugal":    [[36.9, -9.5], [42.2, -6.2]],
-    "Scotland":    [[54.6, -7.6], [60.9, -0.7]],
-    "Turkey":      [[36.0, 26.0], [42.1, 44.8]],
-    "Belgium":     [[49.5,  2.5], [51.5,  6.4]],
+    "Albania":                [[39.6, 19.3], [42.7, 21.1]],
+    "Andorra":                [[42.4,  1.4], [42.7,  1.8]],
+    "Armenia":                [[38.8, 43.4], [41.3, 46.6]],
+    "Austria":                [[46.4,  9.5], [49.0, 17.2]],
+    "Azerbaijan":             [[38.4, 44.8], [41.9, 50.4]],
+    "Belarus":                [[51.3, 23.2], [56.2, 32.8]],
+    "Belgium":                [[49.5,  2.5], [51.5,  6.4]],
+    "Bosnia and Herzegovina": [[42.6, 15.7], [45.3, 19.6]],
+    "Bulgaria":               [[41.2, 22.4], [44.2, 28.6]],
+    "Croatia":                [[42.4, 13.5], [46.6, 19.4]],
+    "Cyprus":                 [[34.5, 32.3], [35.7, 34.6]],
+    "Czech Republic":         [[48.6, 12.1], [51.1, 18.9]],
+    "Denmark":                [[54.6,  8.1], [57.8, 15.2]],
+    "England":                [[49.9, -5.7], [55.8,  1.8]],
+    "Estonia":                [[57.5, 21.8], [59.7, 28.2]],
+    "Finland":                [[59.8, 20.0], [70.1, 31.6]],
+    "France":                 [[41.3, -5.1], [51.1,  9.6]],
+    "Georgia":                [[41.0, 40.0], [43.6, 46.7]],
+    "Germany":                [[47.3,  5.9], [55.1, 15.0]],
+    "Greece":                 [[34.8, 20.0], [41.8, 26.6]],
+    "Hungary":                [[45.7, 16.1], [48.6, 22.9]],
+    "Iceland":                [[63.4,-24.5], [66.5,-13.5]],
+    "Ireland":                [[51.4, -10.5],[55.4, -6.0]],
+    "Italy":                  [[36.6,  6.6], [47.1, 18.5]],
+    "Kosovo":                 [[41.9, 20.0], [43.3, 21.8]],
+    "Latvia":                 [[55.7, 20.9], [58.1, 28.2]],
+    "Liechtenstein":          [[47.0,  9.5], [47.3,  9.7]],
+    "Lithuania":              [[53.9, 21.0], [56.4, 26.8]],
+    "Luxembourg":             [[49.4,  5.7], [50.2,  6.5]],
+    "Malta":                  [[35.8, 14.2], [36.1, 14.6]],
+    "Moldova":                [[45.5, 26.6], [48.5, 30.2]],
+    "Monaco":                 [[43.7,  7.4], [43.8,  7.5]],
+    "Montenegro":             [[41.9, 18.5], [43.6, 20.4]],
+    "Netherlands":            [[50.8,  3.4], [53.5,  7.2]],
+    "North Macedonia":        [[40.9, 20.5], [42.4, 23.0]],
+    "Norway":                 [[57.9,  4.5], [71.2, 31.1]],
+    "Poland":                 [[49.0, 14.1], [54.9, 24.1]],
+    "Portugal":               [[36.9, -9.5], [42.2, -6.2]],
+    "Romania":                [[43.6, 20.3], [48.3, 29.7]],
+    "Russia":                 [[41.2, 27.3], [55.8, 60.0]],
+    "San Marino":             [[43.9, 12.4], [44.0, 12.5]],
+    "Scotland":               [[54.6, -7.6], [60.9, -0.7]],
+    "Serbia":                 [[42.2, 19.0], [46.2, 23.0]],
+    "Slovakia":               [[47.7, 16.8], [49.6, 22.6]],
+    "Slovenia":               [[45.4, 13.4], [46.9, 16.6]],
+    "Spain":                  [[36.0, -9.3], [43.8,  4.3]],
+    "Sweden":                 [[55.3, 11.1], [69.1, 24.2]],
+    "Switzerland":            [[45.8,  5.9], [47.8, 10.5]],
+    "Turkey":                 [[36.0, 26.0], [42.1, 44.8]],
+    "Ukraine":                [[44.4, 22.1], [52.4, 40.2]],
+    "Wales":                  [[51.3, -5.4], [53.5, -2.7]],
 };
 
 // Natural Earth country name → our Country.name mapping
@@ -825,9 +869,19 @@ async function loadCountryGeoJSON() {
 }
 
 async function zoomToCountry(countryName) {
-    // 1. Zoom to bounding box immediately
-    const bounds = COUNTRY_BOUNDS[countryName];
-    if (bounds) map.fitBounds(bounds, { padding: [40, 40] });
+    // 1. Zoom using actual marker positions — works for every country
+    //    automatically, no hardcoded list ever needs updating.
+    const countryMarkers = markers.filter(m => m.country === countryName);
+    if (countryMarkers.length > 0) {
+        map.fitBounds(
+            L.featureGroup(countryMarkers).getBounds(),
+            { padding: [60, 60], maxZoom: 8, animate: true }
+        );
+    } else {
+        // Fallback: hardcoded box for countries whose scraper hasn't run yet
+        const bounds = COUNTRY_BOUNDS[countryName];
+        if (bounds) map.fitBounds(bounds, { padding: [40, 40], animate: true });
+    }
 
     // 2. Flash the border polygon
     const geojson = await loadCountryGeoJSON();
