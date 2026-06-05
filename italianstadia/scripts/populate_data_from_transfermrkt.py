@@ -1306,6 +1306,16 @@ def scrape_stadium(stadium_data, city):
 # --------------------------------------------------
 
 def scrape_average_attendance(attendance_url, season="24/25"):
+    """Scrape average attendance for a given season from Transfermarkt.
+
+    Fallback strategy (in order):
+    1. Match the season string anywhere in a <td>'s descendant text.
+       CRITICAL: XPath uses contains(., season) NOT contains(text(), season).
+       TM wraps the season year in an <a> tag so text() returns nothing —
+       only the dot operator includes descendant text.
+    2. If season string not found (format mismatch), take the first data row
+       (most recent season).
+    """
     if not attendance_url:
         return None
 
@@ -1318,9 +1328,34 @@ def scrape_average_attendance(attendance_url, season="24/25"):
         accept_consent_if_present(driver)
         time.sleep(2)  # Let the page settle after potential consent-driven navigation
 
-        attendance_row = WebDriverWait(driver, 15).until(
-            EC.presence_of_element_located((By.XPATH, f"//tr[td[contains(text(), '{season}')]]"))
+        # Wait for the attendance table to be present at all
+        WebDriverWait(driver, 15).until(
+            EC.presence_of_element_located((By.XPATH, "//table[contains(@class,'items')]"))
         )
+
+        # Strategy 1: row whose season cell's full text contains the season string
+        attendance_row = None
+        try:
+            attendance_row = driver.find_element(
+                By.XPATH, f"//tr[td[contains(., '{season}')]]"
+            )
+        except Exception:
+            pass
+
+        # Strategy 2: fall back to first data row (most recent season)
+        if attendance_row is None:
+            logging.warning(
+                f"Season '{season}' not found in attendance table at {attendance_url}; "
+                f"falling back to first data row (most recent season)."
+            )
+            try:
+                attendance_row = driver.find_element(
+                    By.XPATH,
+                    "(//table[contains(@class,'items')]//tr[@class='odd' or @class='even'])[1]"
+                )
+            except Exception:
+                logging.error(f"No attendance data rows found at {attendance_url}")
+                return None
 
         attendance_text = driver.execute_script(
             """
@@ -1332,7 +1367,6 @@ def scrape_average_attendance(attendance_url, season="24/25"):
         ).strip()
 
         average_attendance = clean_int(attendance_text)
-
         logging.info(f"Average attendance extracted: {average_attendance}")
         return average_attendance
 
