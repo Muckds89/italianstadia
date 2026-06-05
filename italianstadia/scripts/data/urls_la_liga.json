@@ -14,6 +14,7 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/Real_Madrid_CF",
       "stadium": {
         "name": "Santiago Bernabéu",
+        "owner_raw": "Real Madrid CF",
         "transfermarkt_url": "https://www.transfermarkt.com/real-madrid/stadion/verein/418",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Santiago_Bernab%C3%A9u_Stadium",
         "city": {
@@ -199,6 +200,7 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/Valencia_CF",
       "stadium": {
         "name": "Mestalla",
+        "owner_raw": "Valencia CF",
         "transfermarkt_url": "https://www.transfermarkt.com/fc-valencia/stadion/verein/1049",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Mestalla",
         "city": {
