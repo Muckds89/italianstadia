@@ -32,7 +32,7 @@
         "name": "Enea Stadium",
         "owner_raw": "Miasto Poznań",
         "transfermarkt_url": "https://www.transfermarkt.com/lech-posen/stadion/verein/238",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Enea_Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Pozna%C5%84_Stadium",
         "city": {
           "name": "Poznań",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Pozna%C5%84"
@@ -144,7 +144,7 @@
         "name": "KGHM Zagłębie Arena",
         "owner_raw": "KGHM Polska Miedź",
         "transfermarkt_url": "https://www.transfermarkt.com/zaglebie-lubin/stadion/verein/168",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/KGHM_Zag%C5%82%C4%99bie_Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Lubin_Stadium",
         "city": {
           "name": "Lubin",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Lubin"
@@ -176,7 +176,7 @@
         "name": "Piotr Wieczorek Stadium",
         "owner_raw": "Miasto Gliwice",
         "transfermarkt_url": "https://www.transfermarkt.com/piast-gliwice/stadion/verein/6112",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Miejski_w_Gliwicach",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Piotr_Wieczorek_Municipal_Stadium",
         "city": {
           "name": "Gliwice",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Gliwice"
@@ -192,7 +192,7 @@
         "name": "Marshal Józef Piłsudski Stadium",
         "owner_raw": "Miasto Kraków",
         "transfermarkt_url": "https://www.transfermarkt.com/cracovia/stadion/verein/5689",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Marshal_J%C3%B3zef_Pi%C5%82sudski_Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/J%C3%B3zef_Pi%C5%82sudski_Cracovia_Stadium",
         "city": {
           "name": "Kraków",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Krak%C3%B3w"
@@ -208,7 +208,7 @@
         "name": "Motor Lublin Arena",
         "owner_raw": "Miasto Lublin",
         "transfermarkt_url": "https://www.transfermarkt.com/motor-lublin/stadion/verein/3527",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/PKO_BP_Motor_Lublin_Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Arena_Lublin",
         "city": {
           "name": "Lublin",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Lublin"
@@ -240,7 +240,7 @@
         "name": "Czachor Brothers Stadium",
         "owner_raw": "Miasto Radom",
         "transfermarkt_url": "https://www.transfermarkt.com/radomiak-radom/stadion/verein/7154",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Bruk-Bet_Stadium_Radom",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_im._Braci_Czachor%C3%B3w",
         "city": {
           "name": "Radom",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Radom"
@@ -256,7 +256,7 @@
         "name": "Exbud Arena",
         "owner_raw": "Miasto Kielce",
         "transfermarkt_url": "https://www.transfermarkt.com/korona-kielce/stadion/verein/6110",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Suzuki_Arena_Kielce",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Miejski_(Kielce)",
         "city": {
           "name": "Kielce",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Kielce"
@@ -272,7 +272,7 @@
         "name": "GOSiR Stadium",
         "owner_raw": "Miasto Gdynia",
         "transfermarkt_url": "https://www.transfermarkt.com/arka-gdynia/stadion/verein/6107",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/GOSiR_Stadium,_Gdynia",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Miejski_(Gdynia)",
         "city": {
           "name": "Gdynia",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Gdynia"
@@ -288,7 +288,7 @@
         "name": "Bruk-Bet Stadium",
         "owner_raw": "Bruk-Bet Termalica Nieciecza",
         "transfermarkt_url": "https://www.transfermarkt.com/bruk-bet-termalica-nieciecza/stadion/verein/15906",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Bruk-Bet_Stadium,_Nieciecza",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Sportowy_Bruk-Bet_Termalica",
         "city": {
           "name": "Nieciecza",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Nieciecza"

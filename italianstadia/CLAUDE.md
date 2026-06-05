@@ -33,6 +33,10 @@ python manage.py collectstatic --noinput
 # Populate data from scripts (not management commands)
 python scripts/populate_data.py
 python scripts/populate_data_from_transfermrkt.py
+
+# Validate Wikipedia URLs in a league JSON file before scraping
+python -X utf8 scripts/validate_wiki_urls.py scripts/data/urls_<league>.json --skip-cities
+# Exit 0 = all OK; exit 1 = broken URLs found (do NOT run the scraper until fixed)
 ```
 
 ## Architecture
@@ -208,8 +212,11 @@ Scraping a new country requires **zero JS changes**. The map auto-adapts:
 
 The only required steps when adding a league:
 1. Create `scripts/data/urls_<slug>.json` with the correct `country_code` (ISO-2)
-2. Run `python scripts/populate_data_from_transfermrkt.py --league <slug>`
-3. Verify no `[Ownership UNKNOWN]` warnings in the scrape log
+2. **Validate all Wikipedia URLs first:** `python -X utf8 scripts/validate_wiki_urls.py scripts/data/urls_<slug>.json --skip-cities`
+   - Exit 0 = all URLs OK → safe to scrape
+   - Exit 1 = broken URLs → fix JSON, re-validate, then scrape
+3. Run `python scripts/populate_data_from_transfermrkt.py --league <slug>`
+4. Verify no `[Ownership UNKNOWN]` warnings in the scrape log
 
 ## What NOT to do
 
