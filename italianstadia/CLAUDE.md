@@ -198,6 +198,19 @@ Stadium.objects.select_related("city").prefetch_related("teams")
 
 All URL names must use the `italiastadiaapp` namespace: `reverse("italiastadiaapp:stadiums_geojson")`. Even though the root urlconf uses `include('italiastadiaapp.urls')` without an explicit namespace kwarg, Django still applies the `app_name` from the included module as the namespace — bare names like `reverse("stadiums_geojson")` will raise `NoReverseMatch`.
 
+## Adding a new country / league
+
+Scraping a new country requires **zero JS changes**. The map auto-adapts:
+
+- Country zoom uses marker positions dynamically (`L.featureGroup(countryMarkers).getBounds()`) — no entry needed in `COUNTRY_BOUNDS`
+- Country filter is built from the GeoJSON response, not a hardcoded list
+- `COUNTRY_BOUNDS` in `map.js` is a fallback-only table (covers all 51 UEFA nations) used only when no markers exist for a country yet — do not add new entries to it
+
+The only required steps when adding a league:
+1. Create `scripts/data/urls_<slug>.json` with the correct `country_code` (ISO-2)
+2. Run `python scripts/populate_data_from_transfermrkt.py --league <slug>`
+3. Verify no `[Ownership UNKNOWN]` warnings in the scrape log
+
 ## What NOT to do
 
 - Do not put business logic in templates
