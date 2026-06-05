@@ -1,0 +1,257 @@
+{
+  "league": {
+    "name": "Allsvenskan",
+    "country": "Sweden",
+    "country_code": "SE",
+    "division_level": 1,
+    "season": "2025"
+  },
+  "teams": [
+    {
+      "name": "AIK",
+      "transfermarkt_url": "https://www.transfermarkt.com/aik/startseite/verein/272",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/aik/besucherzahlenentwicklung/verein/272",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AIK_Fotboll",
+      "stadium": {
+        "name": "Strawberry Arena",
+        "owner_raw": "Solna Municipality, Jernhusen AB, Peab AB, Fabege AB, Folksam, Svenska Fotbollförbundet",
+        "transfermarkt_url": "https://www.transfermarkt.com/aik/stadion/verein/272",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Nationalarenan_f%C3%B6r_fotboll",
+        "city": {
+          "name": "Solna",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Solna,_Sweden"
+        }
+      }
+    },
+    {
+      "name": "BK Häcken",
+      "transfermarkt_url": "https://www.transfermarkt.com/bk-hacken/startseite/verein/1109",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/bk-hacken/besucherzahlenentwicklung/verein/1109",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/BK_H%C3%A4cken",
+      "stadium": {
+        "name": "Nordic Wellness Arena",
+        "owner_raw": "Göteborgs Stad",
+        "transfermarkt_url": "https://www.transfermarkt.com/bk-hacken/stadion/verein/1109",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Nordic_Wellness_Arena",
+        "city": {
+          "name": "Gothenburg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gothenburg"
+        }
+      }
+    },
+    {
+      "name": "Degerfors IF",
+      "transfermarkt_url": "https://www.transfermarkt.com/degerfors-if/startseite/verein/3641",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/degerfors-if/besucherzahlenentwicklung/verein/3641",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Degerfors_IF",
+      "stadium": {
+        "name": "Stora Valla",
+        "transfermarkt_url": "https://www.transfermarkt.com/degerfors-if/stadion/verein/3641",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stora_Valla",
+        "city": {
+          "name": "Degerfors",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Degerfors"
+        }
+      }
+    },
+    {
+      "name": "Djurgårdens IF",
+      "transfermarkt_url": "https://www.transfermarkt.com/djurgardens-if/startseite/verein/1044",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/djurgardens-if/besucherzahlenentwicklung/verein/1044",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Djurg%C3%A5rdens_IF_Fotboll",
+      "stadium": {
+        "name": "3Arena",
+        "owner_raw": "Stockholms stad",
+        "transfermarkt_url": "https://www.transfermarkt.com/djurgardens-if/stadion/verein/1044",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/3Arena_(Stockholm)",
+        "city": {
+          "name": "Stockholm",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Stockholm"
+        }
+      }
+    },
+    {
+      "name": "GAIS",
+      "transfermarkt_url": "https://www.transfermarkt.com/gais/startseite/verein/7009",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gais/besucherzahlenentwicklung/verein/7009",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/GAIS",
+      "stadium": {
+        "name": "Gamla Ullevi",
+        "owner_raw": "Göteborgs Stad",
+        "transfermarkt_url": "https://www.transfermarkt.com/gais/stadion/verein/7009",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gamla_Ullevi",
+        "city": {
+          "name": "Gothenburg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gothenburg"
+        }
+      }
+    },
+    {
+      "name": "Halmstads BK",
+      "transfermarkt_url": "https://www.transfermarkt.com/halmstads-bk/startseite/verein/1011",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/halmstads-bk/besucherzahlenentwicklung/verein/1011",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Halmstads_BK",
+      "stadium": {
+        "name": "Örjans Vall",
+        "transfermarkt_url": "https://www.transfermarkt.com/halmstads-bk/stadion/verein/1011",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/%C3%96rjans_Vall",
+        "city": {
+          "name": "Halmstad",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Halmstad"
+        }
+      }
+    },
+    {
+      "name": "Hammarby IF",
+      "transfermarkt_url": "https://www.transfermarkt.com/hammarby-if/startseite/verein/1059",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hammarby-if/besucherzahlenentwicklung/verein/1059",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Hammarby_Fotboll",
+      "stadium": {
+        "name": "3Arena",
+        "owner_raw": "Stockholms stad",
+        "transfermarkt_url": "https://www.transfermarkt.com/hammarby-if/stadion/verein/1059",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/3Arena_(Stockholm)",
+        "city": {
+          "name": "Stockholm",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Stockholm"
+        }
+      }
+    },
+    {
+      "name": "IF Brommapojkarna",
+      "transfermarkt_url": "https://www.transfermarkt.com/if-brommapojkarna/startseite/verein/1092",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/if-brommapojkarna/besucherzahlenentwicklung/verein/1092",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/IF_Brommapojkarna",
+      "stadium": {
+        "name": "Grimsta IP",
+        "transfermarkt_url": "https://www.transfermarkt.com/if-brommapojkarna/stadion/verein/1092",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Grimsta_IP",
+        "city": {
+          "name": "Stockholm",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Stockholm"
+        }
+      }
+    },
+    {
+      "name": "IF Elfsborg",
+      "transfermarkt_url": "https://www.transfermarkt.com/if-elfsborg/startseite/verein/1101",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/if-elfsborg/besucherzahlenentwicklung/verein/1101",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/IF_Elfsborg",
+      "stadium": {
+        "name": "Borås Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/if-elfsborg/stadion/verein/1101",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bor%C3%A5s_Arena",
+        "city": {
+          "name": "Borås",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bor%C3%A5s"
+        }
+      }
+    },
+    {
+      "name": "IFK Göteborg",
+      "transfermarkt_url": "https://www.transfermarkt.com/ifk-goteborg/startseite/verein/801",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ifk-goteborg/besucherzahlenentwicklung/verein/801",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/IFK_G%C3%B6teborg",
+      "stadium": {
+        "name": "Gamla Ullevi",
+        "owner_raw": "Göteborgs Stad",
+        "transfermarkt_url": "https://www.transfermarkt.com/ifk-goteborg/stadion/verein/801",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gamla_Ullevi",
+        "city": {
+          "name": "Gothenburg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gothenburg"
+        }
+      }
+    },
+    {
+      "name": "IFK Norrköping",
+      "transfermarkt_url": "https://www.transfermarkt.com/ifk-norrkoping/startseite/verein/2844",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ifk-norrkoping/besucherzahlenentwicklung/verein/2844",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/IFK_Norrk%C3%B6ping",
+      "stadium": {
+        "name": "Nya Parken",
+        "transfermarkt_url": "https://www.transfermarkt.com/ifk-norrkoping/stadion/verein/2844",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Nya_Parken",
+        "city": {
+          "name": "Norrköping",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Norrk%C3%B6ping"
+        }
+      }
+    },
+    {
+      "name": "IFK Värnamo",
+      "transfermarkt_url": "https://www.transfermarkt.com/ifk-varnamo/startseite/verein/3622",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ifk-varnamo/besucherzahlenentwicklung/verein/3622",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/IFK_V%C3%A4rnamo",
+      "stadium": {
+        "name": "Finnvedsvallen",
+        "transfermarkt_url": "https://www.transfermarkt.com/ifk-varnamo/stadion/verein/3622",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Finnvedsvallen",
+        "city": {
+          "name": "Värnamo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/V%C3%A4rnamo"
+        }
+      }
+    },
+    {
+      "name": "IK Sirius",
+      "transfermarkt_url": "https://www.transfermarkt.com/ik-sirius-fk/startseite/verein/7945",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ik-sirius-fk/besucherzahlenentwicklung/verein/7945",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/IK_Sirius_FK",
+      "stadium": {
+        "name": "Studenternas IP",
+        "transfermarkt_url": "https://www.transfermarkt.com/ik-sirius-fk/stadion/verein/7945",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Studenternas_IP",
+        "city": {
+          "name": "Uppsala",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Uppsala"
+        }
+      }
+    },
+    {
+      "name": "Malmö FF",
+      "transfermarkt_url": "https://www.transfermarkt.com/malmo-ff/startseite/verein/496",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/malmo-ff/besucherzahlenentwicklung/verein/496",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Malm%C3%B6_FF",
+      "stadium": {
+        "name": "Eleda Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/malmo-ff/stadion/verein/496",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Eleda_Stadion",
+        "city": {
+          "name": "Malmö",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Malm%C3%B6"
+        }
+      }
+    },
+    {
+      "name": "Mjällby AIF",
+      "transfermarkt_url": "https://www.transfermarkt.com/mjallby-aif/startseite/verein/2719",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/mjallby-aif/besucherzahlenentwicklung/verein/2719",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Mj%C3%A4llby_AIF",
+      "stadium": {
+        "name": "Strandvallen",
+        "transfermarkt_url": "https://www.transfermarkt.com/mjallby-aif/stadion/verein/2719",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Strandvallen",
+        "city": {
+          "name": "Hällevik",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/H%C3%A4llevik"
+        }
+      }
+    },
+    {
+      "name": "Östers IF",
+      "transfermarkt_url": "https://www.transfermarkt.com/osters-if/startseite/verein/1236",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/osters-if/besucherzahlenentwicklung/verein/1236",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/%C3%96sters_IF",
+      "stadium": {
+        "name": "Spiris Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/osters-if/stadion/verein/1236",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Spiris_Arena",
+        "city": {
+          "name": "Växjö",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/V%C3%A4xj%C3%B6"
+        }
+      }
+    }
+  ]
+}
