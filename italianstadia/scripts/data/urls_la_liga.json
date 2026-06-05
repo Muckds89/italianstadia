@@ -44,6 +44,7 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/Atl%C3%A9tico_Madrid",
       "stadium": {
         "name": "Riyadh Air Metropolitano",
+        "owner_raw": "Atlético de Madrid",
         "transfermarkt_url": "https://www.transfermarkt.com/atletico-de-madrid/stadion/verein/13",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Riyadh_Air_Metropolitano",
         "city": {
@@ -122,7 +123,7 @@
         "name": "Estadio Abanca-Balaídos",
         "owner_raw": "Concello de Vigo",
         "transfermarkt_url": "https://www.transfermarkt.com/rc-celta/stadion/verein/940",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Abanca-Bala%C3%ADdos",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bala%C3%ADdos_Stadium",
         "city": {
           "name": "Vigo",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Vigo"
@@ -137,7 +138,7 @@
       "stadium": {
         "name": "Estadio Ramón Sánchez-Pizjuán",
         "transfermarkt_url": "https://www.transfermarkt.com/fc-sevilla/stadion/verein/368",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Ram%C3%B3n_S%C3%A1nchez-Pizju%C3%A1n",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ram%C3%B3n_S%C3%A1nchez-Pizju%C3%A1n_Stadium",
         "city": {
           "name": "Seville",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Seville"
@@ -153,7 +154,7 @@
         "name": "Estadio de Vallecas",
         "owner_raw": "Ayuntamiento de Madrid",
         "transfermarkt_url": "https://www.transfermarkt.com/rayo-vallecano/stadion/verein/367",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_de_Vallecas",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Vallecas_Stadium",
         "city": {
           "name": "Madrid",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Madrid"
@@ -215,7 +216,7 @@
         "name": "Visit Mallorca Estadi",
         "owner_raw": "Ajuntament de Palma",
         "transfermarkt_url": "https://www.transfermarkt.com/rcd-mallorca/stadion/verein/237",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Visit_Mallorca_Estadi",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadi_Mallorca_Son_Moix",
         "city": {
           "name": "Palma",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Palma,_Mallorca"
@@ -277,7 +278,7 @@
       "stadium": {
         "name": "Estadio Ciudad de Valencia",
         "transfermarkt_url": "https://www.transfermarkt.com/ud-levante/stadion/verein/3368",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadi_Ciudad_de_Val%C3%A8ncia",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadi_Ciutat_de_Val%C3%A8ncia",
         "city": {
           "name": "Valencia",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Valencia"
@@ -307,7 +308,7 @@
       "stadium": {
         "name": "Estadio Carlos Tartiere",
         "transfermarkt_url": "https://www.transfermarkt.com/real-oviedo/stadion/verein/2497",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Carlos_Tartiere",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Carlos_Tartiere",
         "city": {
           "name": "Oviedo",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Oviedo"
