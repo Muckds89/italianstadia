@@ -869,14 +869,13 @@ async function loadCountryGeoJSON() {
 }
 
 async function zoomToCountry(countryName) {
-    // 1. Zoom using actual marker positions — works for every country
-    //    automatically, no hardcoded list ever needs updating.
-    const countryMarkers = markers.filter(m => m.country === countryName);
-    if (countryMarkers.length > 0) {
-        map.fitBounds(
-            L.featureGroup(countryMarkers).getBounds(),
-            { padding: [60, 60], maxZoom: 8, animate: true }
-        );
+    // 1. Zoom to the visible markers that applyFilters() just computed.
+    //    applyFilters() always runs immediately before zoomToCountry() in
+    //    every change handler, so lastVisibleMarkers already contains exactly
+    //    the right set (the selected country's or league's stadiums).
+    //    This works for every country/league automatically — no hardcoded list needed.
+    if (lastVisibleMarkers.length > 0) {
+        fitToVisibleMarkers(lastVisibleMarkers);
     } else {
         // Fallback: hardcoded box for countries whose scraper hasn't run yet
         const bounds = COUNTRY_BOUNDS[countryName];
