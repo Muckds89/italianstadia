@@ -1,0 +1,192 @@
+{
+  "league": {
+    "name": "Scottish Premiership",
+    "country": "Scotland",
+    "country_code": "GB-SCT",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Aberdeen FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/aberdeen-fc/startseite/verein/370",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/aberdeen-fc/besucherzahlenentwicklung/verein/370",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Aberdeen_F.C.",
+      "stadium": {
+        "name": "Pittodrie Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/aberdeen-fc/stadion/verein/370",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Pittodrie_Stadium",
+        "city": {
+          "name": "Aberdeen",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Aberdeen"
+        }
+      }
+    },
+    {
+      "name": "Celtic FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/celtic-glasgow/startseite/verein/371",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/celtic-glasgow/besucherzahlenentwicklung/verein/371",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Celtic_F.C.",
+      "stadium": {
+        "name": "Celtic Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/celtic-glasgow/stadion/verein/371",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Celtic_Park",
+        "city": {
+          "name": "Glasgow",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Glasgow"
+        }
+      }
+    },
+    {
+      "name": "Dundee FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/dundee-fc/startseite/verein/511",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dundee-fc/besucherzahlenentwicklung/verein/511",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Dundee_F.C.",
+      "stadium": {
+        "name": "Dens Park",
+        "owner_raw": "Dundee FC",
+        "transfermarkt_url": "https://www.transfermarkt.com/dundee-fc/stadion/verein/511",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Dens_Park",
+        "city": {
+          "name": "Dundee",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Dundee"
+        }
+      }
+    },
+    {
+      "name": "Dundee United FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/dundee-united/startseite/verein/1519",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dundee-united/besucherzahlenentwicklung/verein/1519",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Dundee_United_F.C.",
+      "stadium": {
+        "name": "Tannadice Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/dundee-united/stadion/verein/1519",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tannadice_Park",
+        "city": {
+          "name": "Dundee",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Dundee"
+        }
+      }
+    },
+    {
+      "name": "Falkirk FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/falkirk-fc/startseite/verein/1191",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/falkirk-fc/besucherzahlenentwicklung/verein/1191",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Falkirk_F.C.",
+      "stadium": {
+        "name": "Falkirk Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/falkirk-fc/stadion/verein/1191",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Falkirk_Stadium",
+        "city": {
+          "name": "Falkirk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Falkirk"
+        }
+      }
+    },
+    {
+      "name": "Heart of Midlothian FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/heart-of-midlothian/startseite/verein/43",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/heart-of-midlothian/besucherzahlenentwicklung/verein/43",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Heart_of_Midlothian_F.C.",
+      "stadium": {
+        "name": "Tynecastle Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/heart-of-midlothian/stadion/verein/43",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tynecastle_Park",
+        "city": {
+          "name": "Edinburgh",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Edinburgh"
+        }
+      }
+    },
+    {
+      "name": "Hibernian FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/hibernian-fc/startseite/verein/903",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hibernian-fc/besucherzahlenentwicklung/verein/903",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Hibernian_F.C.",
+      "stadium": {
+        "name": "Easter Road",
+        "transfermarkt_url": "https://www.transfermarkt.com/hibernian-fc/stadion/verein/903",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Easter_Road",
+        "city": {
+          "name": "Edinburgh",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Edinburgh"
+        }
+      }
+    },
+    {
+      "name": "Kilmarnock FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/kilmarnock-fc/startseite/verein/2553",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kilmarnock-fc/besucherzahlenentwicklung/verein/2553",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Kilmarnock_F.C.",
+      "stadium": {
+        "name": "Rugby Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/kilmarnock-fc/stadion/verein/2553",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Rugby_Park",
+        "city": {
+          "name": "Kilmarnock",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kilmarnock"
+        }
+      }
+    },
+    {
+      "name": "Livingston FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/livingston-fc/startseite/verein/1241",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/livingston-fc/besucherzahlenentwicklung/verein/1241",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Livingston_F.C.",
+      "stadium": {
+        "name": "Almondvale Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/livingston-fc/stadion/verein/1241",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Almondvale_Stadium",
+        "city": {
+          "name": "Livingston",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Livingston,_West_Lothian"
+        }
+      }
+    },
+    {
+      "name": "Motherwell FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/motherwell-fc/startseite/verein/987",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/motherwell-fc/besucherzahlenentwicklung/verein/987",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Motherwell_F.C.",
+      "stadium": {
+        "name": "Fir Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/motherwell-fc/stadion/verein/987",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Fir_Park",
+        "city": {
+          "name": "Motherwell",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Motherwell"
+        }
+      }
+    },
+    {
+      "name": "Rangers FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/rangers-glasgow/startseite/verein/124",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rangers-glasgow/besucherzahlenentwicklung/verein/124",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Rangers_F.C.",
+      "stadium": {
+        "name": "Ibrox Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/rangers-glasgow/stadion/verein/124",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ibrox_Stadium",
+        "city": {
+          "name": "Glasgow",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Glasgow"
+        }
+      }
+    },
+    {
+      "name": "St Mirren FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/st-mirren/startseite/verein/465",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/st-mirren/besucherzahlenentwicklung/verein/465",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/St_Mirren_F.C.",
+      "stadium": {
+        "name": "The SMISA Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/st-mirren/stadion/verein/465",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/St_Mirren_Park",
+        "city": {
+          "name": "Paisley",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Paisley,_Renfrewshire"
+        }
+      }
+    }
+  ]
+}
