@@ -1,0 +1,255 @@
+{
+  "league": {
+    "name": "Eliteserien",
+    "country": "Norway",
+    "country_code": "NO",
+    "division_level": 1,
+    "season": "2025"
+  },
+  "teams": [
+    {
+      "name": "FK Bodø/Glimt",
+      "transfermarkt_url": "https://www.transfermarkt.com/bodo-glimt/startseite/verein/501",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/bodo-glimt/besucherzahlenentwicklung/verein/501",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Bod%C3%B8/Glimt",
+      "stadium": {
+        "name": "Aspmyra Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/bodo-glimt/stadion/verein/501",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Aspmyra_Stadion",
+        "city": {
+          "name": "Bodø",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bod%C3%B8"
+        }
+      }
+    },
+    {
+      "name": "SK Brann",
+      "transfermarkt_url": "https://www.transfermarkt.com/sk-brann/startseite/verein/1100",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sk-brann/besucherzahlenentwicklung/verein/1100",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SK_Brann",
+      "stadium": {
+        "name": "Brann Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/sk-brann/stadion/verein/1100",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Brann_Stadion",
+        "city": {
+          "name": "Bergen",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bergen"
+        }
+      }
+    },
+    {
+      "name": "Bryne FK",
+      "transfermarkt_url": "https://www.transfermarkt.com/bryne-fk/startseite/verein/1057",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/bryne-fk/besucherzahlenentwicklung/verein/1057",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Bryne_FK",
+      "stadium": {
+        "name": "Bryne Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/bryne-fk/stadion/verein/1057",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bryne_Stadion",
+        "city": {
+          "name": "Bryne",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bryne"
+        }
+      }
+    },
+    {
+      "name": "Fredrikstad FK",
+      "transfermarkt_url": "https://www.transfermarkt.com/fredrikstad-fk/startseite/verein/3837",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fredrikstad-fk/besucherzahlenentwicklung/verein/3837",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Fredrikstad_FK",
+      "stadium": {
+        "name": "Fredrikstad Stadion",
+        "owner_raw": "Fredrikstad Municipality",
+        "transfermarkt_url": "https://www.transfermarkt.com/fredrikstad-fk/stadion/verein/3837",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Fredrikstad_Stadion",
+        "city": {
+          "name": "Fredrikstad",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Fredrikstad"
+        }
+      }
+    },
+    {
+      "name": "Hamarkameratene",
+      "transfermarkt_url": "https://www.transfermarkt.com/hamarkameratene/startseite/verein/4309",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hamarkameratene/besucherzahlenentwicklung/verein/4309",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Hamarkameratene",
+      "stadium": {
+        "name": "Briskeby Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/hamarkameratene/stadion/verein/4309",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Briskeby_Stadion",
+        "city": {
+          "name": "Hamar",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Hamar"
+        }
+      }
+    },
+    {
+      "name": "FK Haugesund",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-haugesund/startseite/verein/2761",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-haugesund/besucherzahlenentwicklung/verein/2761",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Haugesund",
+      "stadium": {
+        "name": "Haugesund Sparebank Arena",
+        "owner_raw": "FKH AS (60%), Haugesund Kommune (40%)",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-haugesund/stadion/verein/2761",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Haugesund_Stadion",
+        "city": {
+          "name": "Haugesund",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Haugesund"
+        }
+      }
+    },
+    {
+      "name": "KFUM-Kameratene Oslo",
+      "transfermarkt_url": "https://www.transfermarkt.com/kfum-oslo/startseite/verein/23184",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kfum-oslo/besucherzahlenentwicklung/verein/23184",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KFUM-Kameratene_Oslo",
+      "stadium": {
+        "name": "KFUM Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/kfum-oslo/stadion/verein/23184",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/KFUM_Arena",
+        "city": {
+          "name": "Oslo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Oslo"
+        }
+      }
+    },
+    {
+      "name": "Kristiansund BK",
+      "transfermarkt_url": "https://www.transfermarkt.com/kristiansund-bk/startseite/verein/21101",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kristiansund-bk/besucherzahlenentwicklung/verein/21101",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Kristiansund_BK",
+      "stadium": {
+        "name": "Nordmøre Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/kristiansund-bk/stadion/verein/21101",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kristiansund_Stadion",
+        "city": {
+          "name": "Kristiansund",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kristiansund"
+        }
+      }
+    },
+    {
+      "name": "Molde FK",
+      "transfermarkt_url": "https://www.transfermarkt.com/molde-fk/startseite/verein/687",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/molde-fk/besucherzahlenentwicklung/verein/687",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Molde_FK",
+      "stadium": {
+        "name": "Aker Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/molde-fk/stadion/verein/687",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Aker_Stadion",
+        "city": {
+          "name": "Molde",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Molde"
+        }
+      }
+    },
+    {
+      "name": "Rosenborg BK",
+      "transfermarkt_url": "https://www.transfermarkt.com/rosenborg-bk/startseite/verein/195",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rosenborg-bk/besucherzahlenentwicklung/verein/195",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Rosenborg_BK",
+      "stadium": {
+        "name": "Lerkendal Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/rosenborg-bk/stadion/verein/195",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Lerkendal_Stadion",
+        "city": {
+          "name": "Trondheim",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Trondheim"
+        }
+      }
+    },
+    {
+      "name": "Sandefjord Fotball",
+      "transfermarkt_url": "https://www.transfermarkt.com/sandefjord-fotball/startseite/verein/6399",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sandefjord-fotball/besucherzahlenentwicklung/verein/6399",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sandefjord_Fotball",
+      "stadium": {
+        "name": "Jotun Arena",
+        "owner_raw": "Pindsle Property AS",
+        "transfermarkt_url": "https://www.transfermarkt.com/sandefjord-fotball/stadion/verein/6399",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sandefjord_Arena",
+        "city": {
+          "name": "Sandefjord",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sandefjord"
+        }
+      }
+    },
+    {
+      "name": "Sarpsborg 08 FF",
+      "transfermarkt_url": "https://www.transfermarkt.com/sarpsborg-08-ff/startseite/verein/10217",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sarpsborg-08-ff/besucherzahlenentwicklung/verein/10217",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sarpsborg_08_FF",
+      "stadium": {
+        "name": "Sarpsborg Stadion",
+        "owner_raw": "Sarpsborg Municipality",
+        "transfermarkt_url": "https://www.transfermarkt.com/sarpsborg-08-ff/stadion/verein/10217",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sarpsborg_Stadion",
+        "city": {
+          "name": "Sarpsborg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sarpsborg"
+        }
+      }
+    },
+    {
+      "name": "Strømsgodset Toppfotball",
+      "transfermarkt_url": "https://www.transfermarkt.com/stromsgodset-toppfotball/startseite/verein/2817",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/stromsgodset-toppfotball/besucherzahlenentwicklung/verein/2817",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Str%C3%B8msgodset_Toppfotball",
+      "stadium": {
+        "name": "Marienlyst Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/stromsgodset-toppfotball/stadion/verein/2817",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Marienlyst_Stadion",
+        "city": {
+          "name": "Drammen",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Drammen"
+        }
+      }
+    },
+    {
+      "name": "Tromsø IL",
+      "transfermarkt_url": "https://www.transfermarkt.com/tromso-il/startseite/verein/1293",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/tromso-il/besucherzahlenentwicklung/verein/1293",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Troms%C3%B8_IL",
+      "stadium": {
+        "name": "Romssa Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/tromso-il/stadion/verein/1293",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Romssa_Arena",
+        "city": {
+          "name": "Tromsø",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Troms%C3%B8"
+        }
+      }
+    },
+    {
+      "name": "Viking FK",
+      "transfermarkt_url": "https://www.transfermarkt.com/viking-fk/startseite/verein/239",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/viking-fk/besucherzahlenentwicklung/verein/239",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Viking_FK",
+      "stadium": {
+        "name": "Lyse Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/viking-fk/stadion/verein/239",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Viking_Stadion",
+        "city": {
+          "name": "Stavanger",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Stavanger"
+        }
+      }
+    },
+    {
+      "name": "Vålerenga Fotball",
+      "transfermarkt_url": "https://www.transfermarkt.com/valerenga-fotball/startseite/verein/76",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/valerenga-fotball/besucherzahlenentwicklung/verein/76",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/V%C3%A5lerenga_Fotball",
+      "stadium": {
+        "name": "Intility Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/valerenga-fotball/stadion/verein/76",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Intility_Arena",
+        "city": {
+          "name": "Oslo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Oslo"
+        }
+      }
+    }
+  ]
+}
