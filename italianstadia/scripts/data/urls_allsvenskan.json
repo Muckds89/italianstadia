@@ -124,6 +124,7 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/IF_Brommapojkarna",
       "stadium": {
         "name": "Grimsta IP",
+        "owner_raw": "Stockholms stad",
         "transfermarkt_url": "https://www.transfermarkt.com/if-brommapojkarna/stadion/verein/1092",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Grimsta_IP",
         "city": {
@@ -185,6 +186,7 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/IFK_V%C3%A4rnamo",
       "stadium": {
         "name": "Finnvedsvallen",
+        "owner_raw": "Värnamo Municipality",
         "transfermarkt_url": "https://www.transfermarkt.com/ifk-varnamo/stadion/verein/3622",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Finnvedsvallen",
         "city": {
