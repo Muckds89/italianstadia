@@ -1308,13 +1308,21 @@ def scrape_stadium(stadium_data, city):
 def scrape_average_attendance(attendance_url, season="24/25"):
     """Scrape average attendance for a given season from Transfermarkt.
 
-    Fallback strategy (in order):
-    1. Match the season string anywhere in a <td>'s descendant text.
-       CRITICAL: XPath uses contains(., season) NOT contains(text(), season).
-       TM wraps the season year in an <a> tag so text() returns nothing —
-       only the dot operator includes descendant text.
-    2. If season string not found (format mismatch), take the first data row
-       (most recent season).
+    Three-tier fallback strategy:
+
+    1. Season XPath — find the row whose <td> descendant text contains the
+       season string.  Uses contains(., season) NOT contains(text(), season):
+       TM wraps the year in an <a> tag so text() returns nothing.
+
+    2. First odd/even row — if the season string doesn't appear (format
+       mismatch), grab the first data row.
+       Uses contains(@class, 'odd') NOT @class='odd': TM sometimes adds
+       extra classes (e.g. "odd highlighted") that break an exact match.
+
+    3. JavaScript table scan — ultimate fallback when XPath finds no rows at
+       all (e.g. TM changed the HTML structure).  Iterates every <tr> in
+       the items table and returns the last .rechts cell of the first row
+       that actually has .rechts cells.
     """
     if not attendance_url:
         return None
@@ -1333,7 +1341,7 @@ def scrape_average_attendance(attendance_url, season="24/25"):
             EC.presence_of_element_located((By.XPATH, "//table[contains(@class,'items')]"))
         )
 
-        # Strategy 1: row whose season cell's full text contains the season string
+        # ── Strategy 1: exact season row ────────────────────────────────────
         attendance_row = None
         try:
             attendance_row = driver.find_element(
@@ -1342,21 +1350,43 @@ def scrape_average_attendance(attendance_url, season="24/25"):
         except Exception:
             pass
 
-        # Strategy 2: fall back to first data row (most recent season)
+        # ── Strategy 2: first data row (contains-based class match) ─────────
         if attendance_row is None:
             logging.warning(
                 f"Season '{season}' not found in attendance table at {attendance_url}; "
-                f"falling back to first data row (most recent season)."
+                f"falling back to first data row."
             )
             try:
+                # contains(@class,'odd') handles "odd", "odd highlighted", etc.
                 attendance_row = driver.find_element(
                     By.XPATH,
-                    "(//table[contains(@class,'items')]//tr[@class='odd' or @class='even'])[1]"
+                    "(//table[contains(@class,'items')]"
+                    "//tr[contains(@class,'odd') or contains(@class,'even')])[1]"
                 )
             except Exception:
-                logging.error(f"No attendance data rows found at {attendance_url}")
-                return None
+                pass
 
+        # ── Strategy 3: JavaScript table scan ───────────────────────────────
+        if attendance_row is None:
+            logging.warning(
+                f"XPath row match failed at {attendance_url}; trying JS table scan."
+            )
+            js_text = driver.execute_script("""
+                const table = document.querySelector('table.items');
+                if (!table) return '';
+                for (const row of table.querySelectorAll('tr')) {
+                    const cells = row.querySelectorAll('.rechts');
+                    if (cells.length) {
+                        return cells[cells.length - 1].textContent.trim();
+                    }
+                }
+                return '';
+            """)
+            average_attendance = clean_int(js_text) if js_text else None
+            logging.info(f"Average attendance (JS fallback): {average_attendance}")
+            return average_attendance
+
+        # ── Extract .rechts value from whichever row was found ───────────────
         attendance_text = driver.execute_script(
             """
             const cells = arguments[0].querySelectorAll('.rechts');
