@@ -255,7 +255,7 @@ The project is currently Italy-only (Serie A/B/C). Full roadmap in `italianstadi
 | Eredivisie | Netherlands | 1 | JSON ready (25/26) |
 | Süper Lig | Turkey | 1 | JSON ready (25/26) |
 | Scottish Premiership | Scotland | 1 | planned |
-| Belgian Pro League | Belgium | 1 | planned |
+| Belgian Pro League | Belgium | 1 | JSON ready (25/26) |
 
 Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 fixes) before expanding to multi-league.
 

@@ -1,0 +1,262 @@
+{
+  "league": {
+    "name": "Belgian Pro League",
+    "country": "Belgium",
+    "country_code": "BE",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Cercle Brugge KSV",
+      "transfermarkt_url": "https://www.transfermarkt.com/cercle-brugge/startseite/verein/520",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cercle-brugge/besucherzahlenentwicklung/verein/520",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Cercle_Brugge_K.S.V.",
+      "stadium": {
+        "name": "Jan Breydel Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/cercle-brugge/stadion/verein/520",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Jan_Breydel_Stadium",
+        "city": {
+          "name": "Bruges",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bruges"
+        }
+      }
+    },
+    {
+      "name": "Club Brugge KV",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-brugge/startseite/verein/2282",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-brugge/besucherzahlenentwicklung/verein/2282",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Club_Brugge_KV",
+      "stadium": {
+        "name": "Jan Breydel Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-brugge/stadion/verein/2282",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Jan_Breydel_Stadium",
+        "city": {
+          "name": "Bruges",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bruges"
+        }
+      }
+    },
+    {
+      "name": "FCV Dender EH",
+      "transfermarkt_url": "https://www.transfermarkt.com/fcv-dender-eh/startseite/verein/9010",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fcv-dender-eh/besucherzahlenentwicklung/verein/9010",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FCV_Dender_EH",
+      "stadium": {
+        "name": "Van Roystadion",
+        "owner_raw": "FCV Dender EH",
+        "transfermarkt_url": "https://www.transfermarkt.com/fcv-dender-eh/stadion/verein/9010",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Van_Roystadion",
+        "city": {
+          "name": "Denderleeuw",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Denderleeuw"
+        }
+      }
+    },
+    {
+      "name": "KAA Gent",
+      "transfermarkt_url": "https://www.transfermarkt.com/kaa-gent/startseite/verein/157",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kaa-gent/besucherzahlenentwicklung/verein/157",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KAA_Gent",
+      "stadium": {
+        "name": "Planet Group Arena",
+        "owner_raw": "KAA Gent",
+        "transfermarkt_url": "https://www.transfermarkt.com/kaa-gent/stadion/verein/157",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Planet_Group_Arena",
+        "city": {
+          "name": "Ghent",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ghent"
+        }
+      }
+    },
+    {
+      "name": "KRC Genk",
+      "transfermarkt_url": "https://www.transfermarkt.com/krc-genk/startseite/verein/1184",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/krc-genk/besucherzahlenentwicklung/verein/1184",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KRC_Genk",
+      "stadium": {
+        "name": "Cegeka Arena",
+        "owner_raw": "KRC Genk",
+        "transfermarkt_url": "https://www.transfermarkt.com/krc-genk/stadion/verein/1184",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Cegeka_Arena",
+        "city": {
+          "name": "Genk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Genk"
+        }
+      }
+    },
+    {
+      "name": "KV Mechelen",
+      "transfermarkt_url": "https://www.transfermarkt.com/kv-mechelen/startseite/verein/354",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kv-mechelen/besucherzahlenentwicklung/verein/354",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KV_Mechelen",
+      "stadium": {
+        "name": "Achter de Kazerne",
+        "owner_raw": "Stad Mechelen",
+        "transfermarkt_url": "https://www.transfermarkt.com/kv-mechelen/stadion/verein/354",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Achter_de_Kazerne",
+        "city": {
+          "name": "Mechelen",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Mechelen"
+        }
+      }
+    },
+    {
+      "name": "KVC Westerlo",
+      "transfermarkt_url": "https://www.transfermarkt.com/kvc-westerlo/startseite/verein/968",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kvc-westerlo/besucherzahlenentwicklung/verein/968",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KVC_Westerlo",
+      "stadium": {
+        "name": "Het Kuipje",
+        "owner_raw": "Gemeente Westerlo",
+        "transfermarkt_url": "https://www.transfermarkt.com/kvc-westerlo/stadion/verein/968",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Het_Kuipje",
+        "city": {
+          "name": "Westerlo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Westerlo"
+        }
+      }
+    },
+    {
+      "name": "Oud-Heverlee Leuven",
+      "transfermarkt_url": "https://www.transfermarkt.com/oud-heverlee-leuven/startseite/verein/2727",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/oud-heverlee-leuven/besucherzahlenentwicklung/verein/2727",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Oud-Heverlee_Leuven",
+      "stadium": {
+        "name": "Den Dreef",
+        "owner_raw": "Oud-Heverlee Leuven",
+        "transfermarkt_url": "https://www.transfermarkt.com/oud-heverlee-leuven/stadion/verein/2727",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Den_Dreef",
+        "city": {
+          "name": "Leuven",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Leuven"
+        }
+      }
+    },
+    {
+      "name": "RAAL La Louvière",
+      "transfermarkt_url": "https://www.transfermarkt.com/raal-la-louviere/startseite/verein/3901",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/raal-la-louviere/besucherzahlenentwicklung/verein/3901",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/RAAL_La_Louvi%C3%A8re",
+      "stadium": {
+        "name": "Easi Arena",
+        "owner_raw": "RAAL La Louvière",
+        "transfermarkt_url": "https://www.transfermarkt.com/raal-la-louviere/stadion/verein/3901",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Easi_Arena",
+        "city": {
+          "name": "La Louvière",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/La_Louvi%C3%A8re"
+        }
+      }
+    },
+    {
+      "name": "Royal Antwerp FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/royal-antwerpen-fc/startseite/verein/1096",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/royal-antwerpen-fc/besucherzahlenentwicklung/verein/1096",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Royal_Antwerp_FC",
+      "stadium": {
+        "name": "Bosuilstadion",
+        "owner_raw": "Royal Antwerp FC",
+        "transfermarkt_url": "https://www.transfermarkt.com/royal-antwerpen-fc/stadion/verein/1096",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bosuilstadion",
+        "city": {
+          "name": "Antwerp",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Antwerp"
+        }
+      }
+    },
+    {
+      "name": "Royal Charleroi SC",
+      "transfermarkt_url": "https://www.transfermarkt.com/rsc-charleroi/startseite/verein/172",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rsc-charleroi/besucherzahlenentwicklung/verein/172",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Royal_Charleroi_SC",
+      "stadium": {
+        "name": "Stade du Pays de Charleroi",
+        "transfermarkt_url": "https://www.transfermarkt.com/rsc-charleroi/stadion/verein/172",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_du_Pays_de_Charleroi",
+        "city": {
+          "name": "Charleroi",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Charleroi"
+        }
+      }
+    },
+    {
+      "name": "Royale Union Saint-Gilloise",
+      "transfermarkt_url": "https://www.transfermarkt.com/royale-union-saint-gilloise/startseite/verein/3948",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/royale-union-saint-gilloise/besucherzahlenentwicklung/verein/3948",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Royale_Union_Saint-Gilloise",
+      "stadium": {
+        "name": "Joseph Marien Stadium",
+        "owner_raw": "Royal Trust",
+        "transfermarkt_url": "https://www.transfermarkt.com/royale-union-saint-gilloise/stadion/verein/3948",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Joseph_Marien_Stadium",
+        "city": {
+          "name": "Forest",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Forest,_Belgium"
+        }
+      }
+    },
+    {
+      "name": "RSC Anderlecht",
+      "transfermarkt_url": "https://www.transfermarkt.com/rsc-anderlecht/startseite/verein/58",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rsc-anderlecht/besucherzahlenentwicklung/verein/58",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/RSC_Anderlecht",
+      "stadium": {
+        "name": "Lotto Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/rsc-anderlecht/stadion/verein/58",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Constant_Vanden_Stock_Stadium",
+        "city": {
+          "name": "Anderlecht",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Anderlecht"
+        }
+      }
+    },
+    {
+      "name": "Sint-Truidense VV",
+      "transfermarkt_url": "https://www.transfermarkt.com/vv-st-truiden/startseite/verein/475",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/vv-st-truiden/besucherzahlenentwicklung/verein/475",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sint-Truidense_V.V.",
+      "stadium": {
+        "name": "Daio Wasabi Stayen Stadium",
+        "owner_raw": "NV Stayen",
+        "transfermarkt_url": "https://www.transfermarkt.com/vv-st-truiden/stadion/verein/475",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stayen",
+        "city": {
+          "name": "Sint-Truiden",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sint-Truiden"
+        }
+      }
+    },
+    {
+      "name": "Standard Liège",
+      "transfermarkt_url": "https://www.transfermarkt.com/standard-liege/startseite/verein/3057",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/standard-liege/besucherzahlenentwicklung/verein/3057",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Standard_Li%C3%A8ge",
+      "stadium": {
+        "name": "Stade Maurice Dufrasne",
+        "transfermarkt_url": "https://www.transfermarkt.com/standard-liege/stadion/verein/3057",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Maurice_Dufrasne",
+        "city": {
+          "name": "Liège",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Li%C3%A8ge"
+        }
+      }
+    },
+    {
+      "name": "SV Zulte Waregem",
+      "transfermarkt_url": "https://www.transfermarkt.com/sv-zulte-waregem/startseite/verein/3508",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sv-zulte-waregem/besucherzahlenentwicklung/verein/3508",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SV_Zulte_Waregem",
+      "stadium": {
+        "name": "Elindus Arena",
+        "owner_raw": "Stad Waregem",
+        "transfermarkt_url": "https://www.transfermarkt.com/sv-zulte-waregem/stadion/verein/3508",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Elindus_Arena",
+        "city": {
+          "name": "Waregem",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Waregem"
+        }
+      }
+    }
+  ]
+}
