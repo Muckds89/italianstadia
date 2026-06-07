@@ -9,13 +9,13 @@
   "teams": [
     {
       "name": "CFR Cluj",
-      "transfermarkt_url": "https://www.transfermarkt.com/cfr-1907-cluj/startseite/verein/3200",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cfr-1907-cluj/besucherzahlenentwicklung/verein/3200",
+      "transfermarkt_url": "https://www.transfermarkt.com/cfr-cluj/startseite/verein/7769",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cfr-cluj/besucherzahlenentwicklung/verein/7769",
       "wikipedia_url": "https://en.wikipedia.org/wiki/CFR_Cluj",
       "stadium": {
         "name": "Cluj Arena",
         "owner_raw": "Consiliul Județean Cluj",
-        "transfermarkt_url": "https://www.transfermarkt.com/cfr-1907-cluj/stadion/verein/3200",
+        "transfermarkt_url": "https://www.transfermarkt.com/cfr-cluj/stadion/verein/7769",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Cluj_Arena",
         "city": {
           "name": "Cluj-Napoca",
@@ -25,13 +25,13 @@
     },
     {
       "name": "FCSB",
-      "transfermarkt_url": "https://www.transfermarkt.com/fcsb/startseite/verein/35",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fcsb/besucherzahlenentwicklung/verein/35",
+      "transfermarkt_url": "https://www.transfermarkt.com/steaua-bucharest/startseite/verein/301",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/steaua-bucharest/besucherzahlenentwicklung/verein/301",
       "wikipedia_url": "https://en.wikipedia.org/wiki/FCSB",
       "stadium": {
         "name": "Arena Națională",
         "owner_raw": "Ministerul Tineretului și Sportului",
-        "transfermarkt_url": "https://www.transfermarkt.com/fcsb/stadion/verein/35",
+        "transfermarkt_url": "https://www.transfermarkt.com/steaua-bucharest/stadion/verein/301",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Arena_Na%C8%9Bional%C4%83",
         "city": {
           "name": "Bucharest",
@@ -41,13 +41,13 @@
     },
     {
       "name": "Universitatea Cluj",
-      "transfermarkt_url": "https://www.transfermarkt.com/universitatea-cluj/startseite/verein/34406",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/universitatea-cluj/besucherzahlenentwicklung/verein/34406",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-universitatea-cluj/startseite/verein/6429",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-universitatea-cluj/besucherzahlenentwicklung/verein/6429",
       "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Universitatea_Cluj",
       "stadium": {
         "name": "Cluj Arena",
         "owner_raw": "Consiliul Județean Cluj",
-        "transfermarkt_url": "https://www.transfermarkt.com/universitatea-cluj/stadion/verein/34406",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-universitatea-cluj/stadion/verein/6429",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Cluj_Arena",
         "city": {
           "name": "Cluj-Napoca",
@@ -57,13 +57,13 @@
     },
     {
       "name": "Rapid București",
-      "transfermarkt_url": "https://www.transfermarkt.com/fc-rapid-1923/startseite/verein/2418",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-rapid-1923/besucherzahlenentwicklung/verein/2418",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-rapid-1923/startseite/verein/455",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-rapid-1923/besucherzahlenentwicklung/verein/455",
       "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Rapid_Bucure%C8%99ti",
       "stadium": {
         "name": "Stadionul Giulești",
         "owner_raw": "Ministerul Transporturilor",
-        "transfermarkt_url": "https://www.transfermarkt.com/fc-rapid-1923/stadion/verein/2418",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-rapid-1923/stadion/verein/455",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Stadionul_Giule%C8%99ti",
         "city": {
           "name": "Bucharest",
@@ -73,13 +73,13 @@
     },
     {
       "name": "Dinamo București",
-      "transfermarkt_url": "https://www.transfermarkt.com/dinamo-bukarest/startseite/verein/2414",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dinamo-bukarest/besucherzahlenentwicklung/verein/2414",
+      "transfermarkt_url": "https://www.transfermarkt.com/dinamo-bukarest/startseite/verein/312",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dinamo-bukarest/besucherzahlenentwicklung/verein/312",
       "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dinamo_Bucure%C8%99ti",
       "stadium": {
         "name": "Stadionul Dinamo",
         "owner_raw": "Ministerul Tineretului și Sportului",
-        "transfermarkt_url": "https://www.transfermarkt.com/dinamo-bukarest/stadion/verein/2414",
+        "transfermarkt_url": "https://www.transfermarkt.com/dinamo-bukarest/stadion/verein/312",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Stadionul_Dinamo",
         "city": {
           "name": "Bucharest",
@@ -89,13 +89,13 @@
     },
     {
       "name": "Universitatea Craiova",
-      "transfermarkt_url": "https://www.transfermarkt.com/universitatea-craiova/startseite/verein/37626",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/universitatea-craiova/besucherzahlenentwicklung/verein/37626",
+      "transfermarkt_url": "https://www.transfermarkt.com/cs-u-craiova/startseite/verein/40812",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cs-u-craiova/besucherzahlenentwicklung/verein/40812",
       "wikipedia_url": "https://en.wikipedia.org/wiki/CS_Universitatea_Craiova",
       "stadium": {
         "name": "Ion Oblemenco Stadium",
         "owner_raw": "Consiliul Județean Dolj",
-        "transfermarkt_url": "https://www.transfermarkt.com/universitatea-craiova/stadion/verein/37626",
+        "transfermarkt_url": "https://www.transfermarkt.com/cs-u-craiova/stadion/verein/40812",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Ion_Oblemenco_Stadium",
         "city": {
           "name": "Craiova",
@@ -105,13 +105,13 @@
     },
     {
       "name": "Sepsi OSK",
-      "transfermarkt_url": "https://www.transfermarkt.com/sepsi-osk/startseite/verein/27882",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sepsi-osk/besucherzahlenentwicklung/verein/27882",
+      "transfermarkt_url": "https://www.transfermarkt.com/sepsi-osk-sfantu-gheorghe/startseite/verein/54585",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sepsi-osk-sfantu-gheorghe/besucherzahlenentwicklung/verein/54585",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Sepsi_OSK",
       "stadium": {
         "name": "Sepsi Arena",
         "owner_raw": "Municipiul Sfântu Gheorghe",
-        "transfermarkt_url": "https://www.transfermarkt.com/sepsi-osk/stadion/verein/27882",
+        "transfermarkt_url": "https://www.transfermarkt.com/sepsi-osk-sfantu-gheorghe/stadion/verein/54585",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Sepsi_Arena",
         "city": {
           "name": "Sfântu Gheorghe",
@@ -121,13 +121,13 @@
     },
     {
       "name": "Farul Constanța",
-      "transfermarkt_url": "https://www.transfermarkt.com/farul-constanta/startseite/verein/10033",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/farul-constanta/besucherzahlenentwicklung/verein/10033",
+      "transfermarkt_url": "https://www.transfermarkt.com/fcv-farul-constanta/startseite/verein/29831",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fcv-farul-constanta/besucherzahlenentwicklung/verein/29831",
       "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Farul_Constan%C8%9Ba",
       "stadium": {
         "name": "Stadionul Central",
         "owner_raw": "Primăria Ovidiu",
-        "transfermarkt_url": "https://www.transfermarkt.com/farul-constanta/stadion/verein/10033",
+        "transfermarkt_url": "https://www.transfermarkt.com/fcv-farul-constanta/stadion/verein/29831",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Central_Stadium_(Gheorghe_Hagi_Academy)",
         "city": {
           "name": "Ovidiu",
@@ -137,13 +137,13 @@
     },
     {
       "name": "Petrolul Ploiești",
-      "transfermarkt_url": "https://www.transfermarkt.com/petrolul-ploiesti/startseite/verein/5024",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/petrolul-ploiesti/besucherzahlenentwicklung/verein/5024",
+      "transfermarkt_url": "https://www.transfermarkt.com/petrolul-ploiesti/startseite/verein/9465",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/petrolul-ploiesti/besucherzahlenentwicklung/verein/9465",
       "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Petrolul_Ploie%C8%99ti",
       "stadium": {
         "name": "Stadionul Ilie Oană",
         "owner_raw": "Consiliul Județean Prahova",
-        "transfermarkt_url": "https://www.transfermarkt.com/petrolul-ploiesti/stadion/verein/5024",
+        "transfermarkt_url": "https://www.transfermarkt.com/petrolul-ploiesti/stadion/verein/9465",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Stadionul_Ilie_Oan%C4%83",
         "city": {
           "name": "Ploiești",
@@ -153,13 +153,13 @@
     },
     {
       "name": "FC Botoșani",
-      "transfermarkt_url": "https://www.transfermarkt.com/fc-botosani/startseite/verein/14527",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-botosani/besucherzahlenentwicklung/verein/14527",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-botosani/startseite/verein/8818",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-botosani/besucherzahlenentwicklung/verein/8818",
       "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Boto%C8%99ani",
       "stadium": {
         "name": "Municipal Stadium Botoșani",
         "owner_raw": "Municipiul Botoșani",
-        "transfermarkt_url": "https://www.transfermarkt.com/fc-botosani/stadion/verein/14527",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-botosani/stadion/verein/8818",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Boto%C8%99ani_Municipal_Stadium",
         "city": {
           "name": "Botoșani",
@@ -169,13 +169,13 @@
     },
     {
       "name": "FC Hermannstadt",
-      "transfermarkt_url": "https://www.transfermarkt.com/fc-hermannstadt/startseite/verein/38478",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-hermannstadt/besucherzahlenentwicklung/verein/38478",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-hermannstadt/startseite/verein/58049",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-hermannstadt/besucherzahlenentwicklung/verein/58049",
       "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Hermannstadt",
       "stadium": {
         "name": "Stadionul Municipal Sibiu",
         "owner_raw": "Municipiul Sibiu",
-        "transfermarkt_url": "https://www.transfermarkt.com/fc-hermannstadt/stadion/verein/38478",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-hermannstadt/stadion/verein/58049",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Sibiu_Municipal_Stadium",
         "city": {
           "name": "Sibiu",
@@ -185,13 +185,13 @@
     },
     {
       "name": "FC Argeș",
-      "transfermarkt_url": "https://www.transfermarkt.com/fc-arges-pitesti/startseite/verein/8278",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-arges-pitesti/besucherzahlenentwicklung/verein/8278",
+      "transfermarkt_url": "https://www.transfermarkt.com/acsc-fc-arges/startseite/verein/41278",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/acsc-fc-arges/besucherzahlenentwicklung/verein/41278",
       "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Arge%C8%99_Pite%C8%99ti",
       "stadium": {
         "name": "Stadionul Mioveni",
         "owner_raw": "Primăria Mioveni",
-        "transfermarkt_url": "https://www.transfermarkt.com/fc-arges-pitesti/stadion/verein/8278",
+        "transfermarkt_url": "https://www.transfermarkt.com/acsc-fc-arges/stadion/verein/41278",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Or%C4%83%C8%99enesc_Stadium_(Mioveni)",
         "city": {
           "name": "Mioveni",
@@ -201,13 +201,13 @@
     },
     {
       "name": "FC Voluntari",
-      "transfermarkt_url": "https://www.transfermarkt.com/fc-voluntari/startseite/verein/23088",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-voluntari/besucherzahlenentwicklung/verein/23088",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-voluntari/startseite/verein/40843",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-voluntari/besucherzahlenentwicklung/verein/40843",
       "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Voluntari",
       "stadium": {
         "name": "Stadionul Anghel Iordănescu",
         "owner_raw": "Orașul Voluntari",
-        "transfermarkt_url": "https://www.transfermarkt.com/fc-voluntari/stadion/verein/23088",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-voluntari/stadion/verein/40843",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Stadionul_Anghel_Iord%C4%83nescu",
         "city": {
           "name": "Voluntari",
@@ -217,13 +217,13 @@
     },
     {
       "name": "Gloria Buzău",
-      "transfermarkt_url": "https://www.transfermarkt.com/fc-gloria-buzau/startseite/verein/6428",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-gloria-buzau/besucherzahlenentwicklung/verein/6428",
+      "transfermarkt_url": "https://www.transfermarkt.com/gloria-buzau/startseite/verein/11380",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gloria-buzau/besucherzahlenentwicklung/verein/11380",
       "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Gloria_Buz%C4%83u",
       "stadium": {
         "name": "Municipal Stadium Buzău",
         "owner_raw": "Municipiul Buzău",
-        "transfermarkt_url": "https://www.transfermarkt.com/fc-gloria-buzau/stadion/verein/6428",
+        "transfermarkt_url": "https://www.transfermarkt.com/gloria-buzau/stadion/verein/11380",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Buz%C4%83u_Municipal_Stadium_(Cr%C3%A2ng_Stadium)",
         "city": {
           "name": "Buzău",
@@ -233,13 +233,13 @@
     },
     {
       "name": "Metaloglobus București",
-      "transfermarkt_url": "https://www.transfermarkt.com/metaloglobus-bucuresti/startseite/verein/93462",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/metaloglobus-bucuresti/besucherzahlenentwicklung/verein/93462",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-metaloglobus-bukarest/startseite/verein/37624",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-metaloglobus-bukarest/besucherzahlenentwicklung/verein/37624",
       "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Metaloglobus_Bucure%C8%99ti",
       "stadium": {
         "name": "Stadionul Clinceni",
         "owner_raw": "Primăria Clinceni",
-        "transfermarkt_url": "https://www.transfermarkt.com/metaloglobus-bucuresti/stadion/verein/93462",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-metaloglobus-bukarest/stadion/verein/37624",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Stadionul_Clinceni",
         "city": {
           "name": "Clinceni",
@@ -249,13 +249,13 @@
     },
     {
       "name": "Poli Iași",
-      "transfermarkt_url": "https://www.transfermarkt.com/politehnica-iasi/startseite/verein/5748",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/politehnica-iasi/besucherzahlenentwicklung/verein/5748",
+      "transfermarkt_url": "https://www.transfermarkt.com/acsm-politehnica-iasi/startseite/verein/33966",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/acsm-politehnica-iasi/besucherzahlenentwicklung/verein/33966",
       "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Politehnica_Ia%C8%99i",
       "stadium": {
         "name": "Stadionul Emil Alexandrescu",
         "owner_raw": "Municipiul Iași",
-        "transfermarkt_url": "https://www.transfermarkt.com/politehnica-iasi/stadion/verein/5748",
+        "transfermarkt_url": "https://www.transfermarkt.com/acsm-politehnica-iasi/stadion/verein/33966",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Stadionul_Emil_Alexandrescu",
         "city": {
           "name": "Iași",
