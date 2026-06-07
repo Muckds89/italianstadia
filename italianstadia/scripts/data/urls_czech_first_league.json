@@ -1,0 +1,264 @@
+{
+  "league": {
+    "name": "Czech First League",
+    "country": "Czechia",
+    "country_code": "CZ",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "AC Sparta Prague",
+      "transfermarkt_url": "https://www.transfermarkt.com/ac-sparta-prag/startseite/verein/197",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ac-sparta-prag/besucherzahlenentwicklung/verein/197",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AC_Sparta_Prague",
+      "stadium": {
+        "name": "epet ARENA",
+        "transfermarkt_url": "https://www.transfermarkt.com/ac-sparta-prag/stadion/verein/197",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Letn%C3%A1",
+        "city": {
+          "name": "Prague",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Prague"
+        }
+      }
+    },
+    {
+      "name": "SK Slavia Prague",
+      "transfermarkt_url": "https://www.transfermarkt.com/sk-slavia-prague/startseite/verein/62",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sk-slavia-prague/besucherzahlenentwicklung/verein/62",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SK_Slavia_Prague",
+      "stadium": {
+        "name": "Fortuna Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/sk-slavia-prague/stadion/verein/62",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Fortuna_Arena",
+        "city": {
+          "name": "Prague",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Prague"
+        }
+      }
+    },
+    {
+      "name": "FC Viktoria Plzeň",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-viktoria-pilsen/startseite/verein/941",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-viktoria-pilsen/besucherzahlenentwicklung/verein/941",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Viktoria_Plze%C5%88",
+      "stadium": {
+        "name": "Doosan Arena",
+        "owner_raw": "Statutární město Plzeň",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-viktoria-pilsen/stadion/verein/941",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Doosan_Arena",
+        "city": {
+          "name": "Plzeň",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Plze%C5%88"
+        }
+      }
+    },
+    {
+      "name": "FC Baník Ostrava",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-banik-ostrava/startseite/verein/377",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-banik-ostrava/besucherzahlenentwicklung/verein/377",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ban%C3%ADk_Ostrava",
+      "stadium": {
+        "name": "Městský stadion Ostrava",
+        "owner_raw": "Statutární město Ostrava",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-banik-ostrava/stadion/verein/377",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/M%C4%9Bstsk%C3%BD_stadion_(Ostrava)",
+        "city": {
+          "name": "Ostrava",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ostrava"
+        }
+      }
+    },
+    {
+      "name": "FK Mladá Boleslav",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-mlada-boleslav/startseite/verein/5546",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-mlada-boleslav/besucherzahlenentwicklung/verein/5546",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Mlad%C3%A1_Boleslav",
+      "stadium": {
+        "name": "Lokotrans Aréna",
+        "owner_raw": "Město Mladá Boleslav",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-mlada-boleslav/stadion/verein/5546",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Lokotrans_Ar%C3%A9na",
+        "city": {
+          "name": "Mladá Boleslav",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Mlad%C3%A1_Boleslav"
+        }
+      }
+    },
+    {
+      "name": "SK Sigma Olomouc",
+      "transfermarkt_url": "https://www.transfermarkt.com/sk-sigma-olomouc/startseite/verein/2311",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sk-sigma-olomouc/besucherzahlenentwicklung/verein/2311",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SK_Sigma_Olomouc",
+      "stadium": {
+        "name": "Andrův stadion",
+        "owner_raw": "SK Sigma Olomouc",
+        "transfermarkt_url": "https://www.transfermarkt.com/sk-sigma-olomouc/stadion/verein/2311",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Andr%C5%AFv_stadion",
+        "city": {
+          "name": "Olomouc",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Olomouc"
+        }
+      }
+    },
+    {
+      "name": "FC Slovan Liberec",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-slovan-liberec/startseite/verein/697",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-slovan-liberec/besucherzahlenentwicklung/verein/697",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Slovan_Liberec",
+      "stadium": {
+        "name": "Stadion u Nisy",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-slovan-liberec/stadion/verein/697",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_u_Nisy",
+        "city": {
+          "name": "Liberec",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Liberec"
+        }
+      }
+    },
+    {
+      "name": "FK Jablonec",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-jablonec/startseite/verein/1322",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-jablonec/besucherzahlenentwicklung/verein/1322",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Jablonec",
+      "stadium": {
+        "name": "Stadion Střelnice",
+        "owner_raw": "Město Jablonec nad Nisou",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-jablonec/stadion/verein/1322",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_St%C5%99elnice",
+        "city": {
+          "name": "Jablonec nad Nisou",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Jablonec_nad_Nisou"
+        }
+      }
+    },
+    {
+      "name": "FK Teplice",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-teplice/startseite/verein/814",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-teplice/besucherzahlenentwicklung/verein/814",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Teplice",
+      "stadium": {
+        "name": "Stadion Na Stínadlech",
+        "owner_raw": "Accolade Holding",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-teplice/stadion/verein/814",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Na_St%C3%ADnadlech",
+        "city": {
+          "name": "Teplice",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Teplice"
+        }
+      }
+    },
+    {
+      "name": "Bohemians 1905",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-bohemians-prag-1905/startseite/verein/715",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-bohemians-prag-1905/besucherzahlenentwicklung/verein/715",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Bohemians_1905",
+      "stadium": {
+        "name": "Ďolíček",
+        "owner_raw": "Hlavní město Praha",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-bohemians-prag-1905/stadion/verein/715",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/%C4%8Eol%C3%AD%C4%8Dek",
+        "city": {
+          "name": "Prague",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Prague"
+        }
+      }
+    },
+    {
+      "name": "FK Dukla Prague",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-dukla-prag/startseite/verein/450",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-dukla-prag/besucherzahlenentwicklung/verein/450",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Dukla_Prague",
+      "stadium": {
+        "name": "Stadion Juliska",
+        "owner_raw": "Ministerstvo obrany České republiky",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-dukla-prag/stadion/verein/450",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Juliska",
+        "city": {
+          "name": "Prague",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Prague"
+        }
+      }
+    },
+    {
+      "name": "FC Hradec Králové",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-hradec-kralove/startseite/verein/1897",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-hradec-kralove/besucherzahlenentwicklung/verein/1897",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Hradec_Kr%C3%A1lov%C3%A9",
+      "stadium": {
+        "name": "Malšovická aréna",
+        "owner_raw": "Statutární město Hradec Králové",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-hradec-kralove/stadion/verein/1897",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Mal%C5%A1ovick%C3%A1_ar%C3%A9na",
+        "city": {
+          "name": "Hradec Králové",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Hradec_Kr%C3%A1lov%C3%A9"
+        }
+      }
+    },
+    {
+      "name": "MFK Karviná",
+      "transfermarkt_url": "https://www.transfermarkt.com/mfk-karvina/startseite/verein/13726",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/mfk-karvina/besucherzahlenentwicklung/verein/13726",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/MFK_Karvin%C3%A1",
+      "stadium": {
+        "name": "Městský stadion Karviná",
+        "owner_raw": "Město Karviná",
+        "transfermarkt_url": "https://www.transfermarkt.com/mfk-karvina/stadion/verein/13726",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/M%C4%9Bstsk%C3%BD_stadion_(Karvin%C3%A1)",
+        "city": {
+          "name": "Karviná",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Karvin%C3%A1"
+        }
+      }
+    },
+    {
+      "name": "FK Pardubice",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-pardubice/startseite/verein/1496",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-pardubice/besucherzahlenentwicklung/verein/1496",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Pardubice",
+      "stadium": {
+        "name": "Stadion Arnošta Košťála",
+        "owner_raw": "Statutární město Pardubice",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-pardubice/stadion/verein/1496",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Arno%C5%A1ta_Ko%C5%A1%C5%A5%C3%A1la",
+        "city": {
+          "name": "Pardubice",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pardubice"
+        }
+      }
+    },
+    {
+      "name": "1. FC Slovácko",
+      "transfermarkt_url": "https://www.transfermarkt.com/1-fc-slovacko/startseite/verein/5544",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/1-fc-slovacko/besucherzahlenentwicklung/verein/5544",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/1._FC_Slov%C3%A1cko",
+      "stadium": {
+        "name": "Městský fotbalový stadion Miroslava Valenty",
+        "owner_raw": "Město Uherské Hradiště",
+        "transfermarkt_url": "https://www.transfermarkt.com/1-fc-slovacko/stadion/verein/5544",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/M%C4%9Bstsk%C3%BD_fotbalov%C3%BD_stadion_Miroslava_Valenty",
+        "city": {
+          "name": "Uherské Hradiště",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Uhersk%C3%A9_Hradi%C5%A1t%C4%9B"
+        }
+      }
+    },
+    {
+      "name": "FC Zlín",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-fastav-zlin/startseite/verein/5545",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-fastav-zlin/besucherzahlenentwicklung/verein/5545",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Zl%C3%ADn",
+      "stadium": {
+        "name": "Letná Stadion Zlín",
+        "owner_raw": "Statutární město Zlín",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-fastav-zlin/stadion/verein/5545",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Letn%C3%A1_Stadion_(Zl%C3%ADn)",
+        "city": {
+          "name": "Zlín",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Zl%C3%ADn"
+        }
+      }
+    }
+  ]
+}

@@ -1048,6 +1048,7 @@ def classify_ownership(owner_raw):
         "obec ",                   # commune / village municipality
         "kraj ",                   # region (Jihomoravský kraj …)
         "krajský",
+        "ministerstvo",            # ministry (Ministerstvo obrany ČR, Ministerstvo školství …)
         # ── Romanian ─────────────────────────────────────────────────────────
         "primăria", "primărie",    # mayor's office / city hall
         "consiliu local",          # local council
@@ -1118,7 +1119,7 @@ def scrape_stadium_data(wikipedia_url=None, transfermarkt_url=None):
     capacity_raw = get_infobox_value(wikipedia_soup, ["capacity"])
     opened_raw = get_infobox_value(wikipedia_soup, ["opened", "built", "construction", "opened on"])
     address = get_infobox_value(wikipedia_soup, ["address", "location"])
-    owner_raw = get_infobox_value(wikipedia_soup, ["owner"])
+    owner_raw = get_infobox_value(wikipedia_soup, ["owner", "operator"])
 
     return {
         "wikipedia_url": wikipedia_url,
@@ -1503,6 +1504,7 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
         "Sweden": "Swedish",
         "Norway": "Norwegian",
         "Romania": "Romanian",
+        "Czechia": "Czech",
     }
 
     try:
