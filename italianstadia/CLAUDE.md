@@ -252,8 +252,8 @@ The project is currently Italy-only (Serie A/B/C). Full roadmap in `italianstadi
 | La Liga / Segunda | Spain | 1–2 | planned |
 | Ligue 1 / Ligue 2 | France | 1–2 | planned |
 | 2. Bundesliga | Germany | 2 | planned |
-| Eredivisie | Netherlands | 1 | planned |
-| Süper Lig | Turkey | 1 | planned |
+| Eredivisie | Netherlands | 1 | JSON ready (25/26) |
+| Süper Lig | Turkey | 1 | JSON ready (25/26) |
 | Scottish Premiership | Scotland | 1 | planned |
 | Belgian Pro League | Belgium | 1 | planned |
 
@@ -267,6 +267,12 @@ Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 f
 - Swedish clubs: @title = "Swedish Champion"
 - Polish clubs: @title = "Polish Champion"
 - Norwegian clubs: @title = "Norwegian Champion"
+- Dutch clubs: @title = "Dutch Champion"
+- English clubs: @title = "English Champion"
+- Spanish clubs: @title = "Spanish Champion"
+- Turkish clubs: @title = "Turkish Champion"
+- Scottish clubs: @title = "Scottish Champion"
+- Belgian clubs: @title = "Belgian Champion"
 
 ## Data quality rules
 

@@ -1,0 +1,291 @@
+{
+  "league": {
+    "name": "Eredivisie",
+    "country": "Netherlands",
+    "country_code": "NL",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "AFC Ajax",
+      "transfermarkt_url": "https://www.transfermarkt.com/ajax-amsterdam/startseite/verein/610",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ajax-amsterdam/besucherzahlenentwicklung/verein/610",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AFC_Ajax",
+      "stadium": {
+        "name": "Johan Cruyff Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/ajax-amsterdam/stadion/verein/610",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Johan_Cruyff_Arena",
+        "city": {
+          "name": "Amsterdam",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Amsterdam"
+        }
+      }
+    },
+    {
+      "name": "AZ Alkmaar",
+      "transfermarkt_url": "https://www.transfermarkt.com/az-alkmaar/startseite/verein/1090",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/az-alkmaar/besucherzahlenentwicklung/verein/1090",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AZ_Alkmaar",
+      "stadium": {
+        "name": "AFAS Stadion",
+        "owner_raw": "AZ Alkmaar",
+        "transfermarkt_url": "https://www.transfermarkt.com/az-alkmaar/stadion/verein/1090",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/AFAS_Stadion",
+        "city": {
+          "name": "Alkmaar",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Alkmaar"
+        }
+      }
+    },
+    {
+      "name": "Excelsior Rotterdam",
+      "transfermarkt_url": "https://www.transfermarkt.com/sbv-excelsior-rotterdam/startseite/verein/798",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sbv-excelsior-rotterdam/besucherzahlenentwicklung/verein/798",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Excelsior_Rotterdam",
+      "stadium": {
+        "name": "Stadion Woudestein",
+        "owner_raw": "SBV Excelsior Rotterdam",
+        "transfermarkt_url": "https://www.transfermarkt.com/sbv-excelsior-rotterdam/stadion/verein/798",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Van_Donge_%26_De_Roo_Stadion",
+        "city": {
+          "name": "Rotterdam",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rotterdam"
+        }
+      }
+    },
+    {
+      "name": "FC Groningen",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-groningen/startseite/verein/202",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-groningen/besucherzahlenentwicklung/verein/202",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Groningen",
+      "stadium": {
+        "name": "Euroborg",
+        "owner_raw": "FC Groningen",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-groningen/stadion/verein/202",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Euroborg",
+        "city": {
+          "name": "Groningen",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Groningen"
+        }
+      }
+    },
+    {
+      "name": "FC Twente",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-twente-enschede/startseite/verein/317",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-twente-enschede/besucherzahlenentwicklung/verein/317",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Twente",
+      "stadium": {
+        "name": "De Grolsch Veste",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-twente-enschede/stadion/verein/317",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/De_Grolsch_Veste",
+        "city": {
+          "name": "Enschede",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Enschede"
+        }
+      }
+    },
+    {
+      "name": "FC Utrecht",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-utrecht/startseite/verein/200",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-utrecht/besucherzahlenentwicklung/verein/200",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Utrecht",
+      "stadium": {
+        "name": "Stadion Galgenwaard",
+        "owner_raw": "FC Utrecht",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-utrecht/stadion/verein/200",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Galgenwaard",
+        "city": {
+          "name": "Utrecht",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Utrecht"
+        }
+      }
+    },
+    {
+      "name": "Feyenoord",
+      "transfermarkt_url": "https://www.transfermarkt.com/feyenoord-rotterdam/startseite/verein/234",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/feyenoord-rotterdam/besucherzahlenentwicklung/verein/234",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Feyenoord",
+      "stadium": {
+        "name": "De Kuip",
+        "transfermarkt_url": "https://www.transfermarkt.com/feyenoord-rotterdam/stadion/verein/234",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/De_Kuip",
+        "city": {
+          "name": "Rotterdam",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rotterdam"
+        }
+      }
+    },
+    {
+      "name": "Fortuna Sittard",
+      "transfermarkt_url": "https://www.transfermarkt.com/fortuna-sittard/startseite/verein/385",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fortuna-sittard/besucherzahlenentwicklung/verein/385",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Fortuna_Sittard",
+      "stadium": {
+        "name": "Fortuna Sittard Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/fortuna-sittard/stadion/verein/385",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Fortuna_Sittard_Stadion",
+        "city": {
+          "name": "Sittard",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sittard"
+        }
+      }
+    },
+    {
+      "name": "Go Ahead Eagles",
+      "transfermarkt_url": "https://www.transfermarkt.com/go-ahead-eagles/startseite/verein/1435",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/go-ahead-eagles/besucherzahlenentwicklung/verein/1435",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Go_Ahead_Eagles",
+      "stadium": {
+        "name": "De Adelaarshorst",
+        "owner_raw": "Go Ahead Eagles",
+        "transfermarkt_url": "https://www.transfermarkt.com/go-ahead-eagles/stadion/verein/1435",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/De_Adelaarshorst",
+        "city": {
+          "name": "Deventer",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Deventer"
+        }
+      }
+    },
+    {
+      "name": "Heracles Almelo",
+      "transfermarkt_url": "https://www.transfermarkt.com/heracles-almelo/startseite/verein/1304",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/heracles-almelo/besucherzahlenentwicklung/verein/1304",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Heracles_Almelo",
+      "stadium": {
+        "name": "Asito Stadion",
+        "owner_raw": "Heracles Almelo",
+        "transfermarkt_url": "https://www.transfermarkt.com/heracles-almelo/stadion/verein/1304",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Asito_Stadion",
+        "city": {
+          "name": "Almelo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Almelo"
+        }
+      }
+    },
+    {
+      "name": "NAC Breda",
+      "transfermarkt_url": "https://www.transfermarkt.com/nac-breda/startseite/verein/132",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nac-breda/besucherzahlenentwicklung/verein/132",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NAC_Breda",
+      "stadium": {
+        "name": "Rat Verlegh Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/nac-breda/stadion/verein/132",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Rat_Verlegh_Stadion",
+        "city": {
+          "name": "Breda",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Breda"
+        }
+      }
+    },
+    {
+      "name": "NEC Nijmegen",
+      "transfermarkt_url": "https://www.transfermarkt.com/nec-nijmegen/startseite/verein/467",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nec-nijmegen/besucherzahlenentwicklung/verein/467",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NEC_Nijmegen",
+      "stadium": {
+        "name": "Goffertstadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/nec-nijmegen/stadion/verein/467",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Goffertstadion",
+        "city": {
+          "name": "Nijmegen",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Nijmegen"
+        }
+      }
+    },
+    {
+      "name": "PEC Zwolle",
+      "transfermarkt_url": "https://www.transfermarkt.com/pec-zwolle/startseite/verein/1269",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/pec-zwolle/besucherzahlenentwicklung/verein/1269",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/PEC_Zwolle",
+      "stadium": {
+        "name": "MAC3PARK Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/pec-zwolle/stadion/verein/1269",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/MAC3PARK_Stadion",
+        "city": {
+          "name": "Zwolle",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Zwolle"
+        }
+      }
+    },
+    {
+      "name": "PSV Eindhoven",
+      "transfermarkt_url": "https://www.transfermarkt.com/psv-eindhoven/startseite/verein/383",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/psv-eindhoven/besucherzahlenentwicklung/verein/383",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/PSV_Eindhoven",
+      "stadium": {
+        "name": "Philips Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/psv-eindhoven/stadion/verein/383",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Philips_Stadion",
+        "city": {
+          "name": "Eindhoven",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Eindhoven"
+        }
+      }
+    },
+    {
+      "name": "RKC Waalwijk",
+      "transfermarkt_url": "https://www.transfermarkt.com/rkc-waalwijk/startseite/verein/235",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rkc-waalwijk/besucherzahlenentwicklung/verein/235",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/RKC_Waalwijk",
+      "stadium": {
+        "name": "Mandemakers Stadion",
+        "owner_raw": "Mandemakers Groep",
+        "transfermarkt_url": "https://www.transfermarkt.com/rkc-waalwijk/stadion/verein/235",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Mandemakers_Stadion",
+        "city": {
+          "name": "Waalwijk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Waalwijk"
+        }
+      }
+    },
+    {
+      "name": "SC Heerenveen",
+      "transfermarkt_url": "https://www.transfermarkt.com/sc-heerenveen/startseite/verein/306",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sc-heerenveen/besucherzahlenentwicklung/verein/306",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Heerenveen",
+      "stadium": {
+        "name": "Abe Lenstra Stadion",
+        "owner_raw": "Sportstad Heerenveen",
+        "transfermarkt_url": "https://www.transfermarkt.com/sc-heerenveen/stadion/verein/306",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Abe_Lenstra_Stadion",
+        "city": {
+          "name": "Heerenveen",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Heerenveen"
+        }
+      }
+    },
+    {
+      "name": "SC Telstar",
+      "transfermarkt_url": "https://www.transfermarkt.com/sc-telstar/startseite/verein/1434",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sc-telstar/besucherzahlenentwicklung/verein/1434",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Telstar",
+      "stadium": {
+        "name": "BUKO Stadion",
+        "owner_raw": "Gemeente Velsen",
+        "transfermarkt_url": "https://www.transfermarkt.com/sc-telstar/stadion/verein/1434",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sportpark_Schoonenberg",
+        "city": {
+          "name": "Velsen-Zuid",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Velsen-Zuid"
+        }
+      }
+    },
+    {
+      "name": "Sparta Rotterdam",
+      "transfermarkt_url": "https://www.transfermarkt.com/sparta-rotterdam/startseite/verein/468",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sparta-rotterdam/besucherzahlenentwicklung/verein/468",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sparta_Rotterdam",
+      "stadium": {
+        "name": "Sparta Stadion Het Kasteel",
+        "owner_raw": "Sparta Rotterdam",
+        "transfermarkt_url": "https://www.transfermarkt.com/sparta-rotterdam/stadion/verein/468",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sparta_Stadion_Het_Kasteel",
+        "city": {
+          "name": "Rotterdam",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rotterdam"
+        }
+      }
+    }
+  ]
+}
