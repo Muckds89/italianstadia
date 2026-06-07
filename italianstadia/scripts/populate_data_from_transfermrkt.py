@@ -977,6 +977,7 @@ def classify_ownership(owner_raw):
     public_keywords = [
         # ── English ──────────────────────────────────────────────────────────
         "city of", "municipality", "municipal", "council", "government",
+        "ministry",                # Ministry of Youth and Sports, etc.
         "region", "province", "metropolitan city", "district",
         "town of", "town council",
         "city council", "county council", "district council",
@@ -1029,6 +1030,7 @@ def classify_ownership(owner_raw):
         "büyükşehir",              # metropolitan municipality
         "il özel idaresi",         # special provincial administration
         "devlet ",                 # state (Turkish)
+        "bakanlı",                 # ministry (bakanlık/bakanlığı — covers all inflected forms)
         # ── Nordic: Norwegian / Danish ───────────────────────────────────────
         "kommune",                 # Oslo Kommune / Københavns Kommune
         "fylke",                   # Norwegian county

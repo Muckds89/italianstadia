@@ -312,7 +312,7 @@ Public keywords cover ~15 European language families:
 
 | Language(s) | Sample keywords |
 |-------------|----------------|
-| English | `city of`, `municipality`, `council`, `town of`, `agglomeration` |
+| English | `city of`, `municipality`, `council`, `town of`, `agglomeration`, `ministry`, `government` |
 | Italian | `comune di`, `comunale`, `provincia`, `città metropolitana`, `sport e salute` |
 | German (DE/AT/CH) | `stadt `, `gemeinde`, `landkreis`, `freie und hansestadt`, `bezirksamt` |
 | French (FR/BE/CH) | `commune de`, `mairie`, `métropole`, `ville de`, `agglomération`, `communauté` |
@@ -320,7 +320,7 @@ Public keywords cover ~15 European language families:
 | Portuguese | `município`, `câmara municipal`, `junta de freguesia`, `autarquia` |
 | Polish | `miasto `, `miasto stołeczne`, `gmina `, `województwo`, `skarb państwa` |
 | Dutch/Belgian | `gemeente `, `stad `, `provincie `, `gewest ` |
-| Turkish | `belediye`, `büyükşehir`, `il özel idaresi` |
+| Turkish | `belediye`, `büyükşehir`, `il özel idaresi`, `devlet`, `bakanlı` (ministry — covers bakanlık/bakanlığı) |
 | Norwegian/Danish | `kommune`, `fylke`, `amt ` |
 | Swedish | `stadsförvaltning`, `stadsfastigheter`, `landsting` |
 | Finnish | `kaupunki`, `kunta ` |
