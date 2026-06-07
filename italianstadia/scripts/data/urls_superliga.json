@@ -111,6 +111,8 @@
       "stadium": {
         "name": "Sepsi Arena",
         "owner_raw": "Municipiul Sfântu Gheorghe",
+        "latitude": 45.8813164,
+        "longitude": 25.8083825,
         "transfermarkt_url": "https://www.transfermarkt.com/sepsi-osk-sfantu-gheorghe/stadion/verein/54585",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Sepsi_Arena",
         "city": {

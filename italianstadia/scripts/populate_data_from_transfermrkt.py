@@ -1233,6 +1233,29 @@ def scrape_stadium(stadium_data, city):
     if final_latitude is None or final_longitude is None:
         final_latitude, final_longitude = _nominatim_lookup(final_name, city.name)
 
+    # JSON hardcoded fallback — last resort when both Wikipedia and Nominatim fail.
+    # Set "latitude"/"longitude" in the stadium JSON entry for stadiums where:
+    #   - Wikipedia has no geo markup (e.g. Sepsi Arena — Wikipedia maintenance
+    #     category "Articles missing coordinates without coordinates on Wikidata")
+    #   - Nominatim has a transient failure or doesn't recognise the name
+    # Source values from OpenStreetMap (way ID) or Google Maps — always verify.
+    if final_latitude is None or final_longitude is None:
+        json_lat = stadium_data.get("latitude")
+        json_lon = stadium_data.get("longitude")
+        if json_lat is not None and json_lon is not None:
+            final_latitude  = json_lat
+            final_longitude = json_lon
+            logging.info(
+                f"[Coords] '{final_name}': Wikipedia + Nominatim both failed; "
+                f"using JSON hardcoded coords ({final_latitude}, {final_longitude})"
+            )
+        else:
+            logging.error(
+                f"[Coords MISSING] '{final_name}': all three coordinate sources failed "
+                f"(Wikipedia, Nominatim, JSON). Add 'latitude'/'longitude' to the "
+                f"stadium entry in the JSON file to fix this."
+            )
+
     # 5. Ownership — two-source verification (Wikipedia infobox + Wikidata P127)
     #
     #  Priority:
