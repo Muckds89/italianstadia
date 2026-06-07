@@ -234,6 +234,7 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/Standard_Li%C3%A8ge",
       "stadium": {
         "name": "Stade Maurice Dufrasne",
+        "owner_raw": "Standard de Liège",
         "transfermarkt_url": "https://www.transfermarkt.com/standard-liege/stadion/verein/3057",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Maurice_Dufrasne",
         "city": {
@@ -246,6 +247,7 @@
       "name": "SV Zulte Waregem",
       "transfermarkt_url": "https://www.transfermarkt.com/sv-zulte-waregem/startseite/verein/3508",
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/sv-zulte-waregem/besucherzahlenentwicklung/verein/3508",
+      "average_attendance": 8000,
       "wikipedia_url": "https://en.wikipedia.org/wiki/SV_Zulte_Waregem",
       "stadium": {
         "name": "Elindus Arena",

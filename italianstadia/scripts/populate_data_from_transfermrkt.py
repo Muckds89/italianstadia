@@ -1375,12 +1375,18 @@ def scrape_average_attendance(attendance_url, season="24/25"):
                 f"XPath row match failed at {attendance_url}; trying JS table scan."
             )
             js_text = driver.execute_script("""
+                // Iterate ALL rows; return the first .rechts cell that holds a
+                // parseable positive integer.  Rows with '-', '0' or empty cells
+                // (common for promoted/relegated clubs' transition seasons) are
+                // skipped so Strategy 3 isn't defeated by a single bad row.
                 const table = document.querySelector('table.items');
                 if (!table) return '';
                 for (const row of table.querySelectorAll('tr')) {
                     const cells = row.querySelectorAll('.rechts');
                     if (cells.length) {
-                        return cells[cells.length - 1].textContent.trim();
+                        const text = cells[cells.length - 1].textContent.trim();
+                        const digits = text.replace(/\\D/g, '');
+                        if (digits && parseInt(digits, 10) > 0) return text;
                     }
                 }
                 return '';
@@ -1543,6 +1549,16 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
 
     # 4. Attendance (season string comes from league config)
     average_attendance = scrape_average_attendance(attendance_url, season=season) if attendance_url else None
+
+    # JSON fallback for attendance when TM scraping returns nothing
+    # (e.g. newly-promoted clubs whose 25/26 TM page shows '-' for that season,
+    #  or clubs that TM hasn't yet populated with current-season data).
+    # Set "average_attendance" in the team's JSON entry as a last-resort override.
+    if average_attendance is None and team_data.get("average_attendance"):
+        average_attendance = team_data["average_attendance"]
+        logging.info(
+            f"[Team: {team_name}] average_attendance → {average_attendance} (JSON fallback)"
+        )
 
     # logging
     log_field("Team", team_name, "league", league.name, "league config")
