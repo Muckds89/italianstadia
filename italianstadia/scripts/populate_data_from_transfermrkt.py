@@ -151,10 +151,16 @@ logging.basicConfig(
 # --------------------------------------------------
 
 def resolve_league(config):
-    """get_or_create Country and League from the JSON league config block."""
-    country, _ = Country.objects.get_or_create(
-        name=config["country"],
-        defaults={"code": config["country_code"]},
+    """Resolve Country and League from the JSON league config block.
+
+    Country lookup uses the ISO-2 code as the stable key — names vary
+    ("Czech Republic" vs "Czechia", "Netherlands" vs "Holland", …).
+    update_or_create ensures the canonical name from the JSON wins even when
+    the DB row was seeded under an older name (e.g. from initial_data.json).
+    """
+    country, _ = Country.objects.update_or_create(
+        code=config["country_code"],
+        defaults={"name": config["country"]},
     )
     league, _ = League.objects.get_or_create(
         name=config["name"],
