@@ -1053,6 +1053,7 @@ def classify_ownership(owner_raw):
         "consiliu local",          # local council
         "județ",                   # county
         "municipiu",               # municipality
+        "ministerul",              # ministry (Ministerul Transporturilor, Ministerul Tineretului …)
         # ── Croatian / Serbian / Bosnian ─────────────────────────────────────
         "grad ",                   # Grad Zagreb / Grad Beograd
         "gradska ",                # gradska skupština (city assembly) …
@@ -1495,6 +1496,7 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
         "Poland": "Polish",
         "Sweden": "Swedish",
         "Norway": "Norwegian",
+        "Romania": "Romanian",
     }
 
     try:

@@ -254,6 +254,7 @@ The project is currently Italy-only (Serie A/B/C). Full roadmap in `italianstadi
 | 2. Bundesliga | Germany | 2 | planned |
 | Eredivisie | Netherlands | 1 | JSON ready (25/26) |
 | Süper Lig | Turkey | 1 | JSON ready (25/26) |
+| SuperLiga | Romania | 1 | JSON ready (25/26) |
 | Scottish Premiership | Scotland | 1 | planned |
 | Belgian Pro League | Belgium | 1 | JSON ready (25/26) |
 
@@ -273,6 +274,7 @@ Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 f
 - Turkish clubs: @title = "Turkish Champion"
 - Scottish clubs: @title = "Scottish Champion"
 - Belgian clubs: @title = "Belgian Champion"
+- Romanian clubs: @title = "Romanian Champion"
 
 ## Data quality rules
 
@@ -331,7 +333,7 @@ Public keywords cover ~15 European language families:
 | Swedish | `stadsförvaltning`, `stadsfastigheter`, `landsting` |
 | Finnish | `kaupunki`, `kunta ` |
 | Czech/Slovak | `město `, `statutární město`, `obec `, `kraj ` |
-| Romanian | `primăria`, `consiliu local`, `județ`, `municipiu` |
+| Romanian | `primăria`, `primărie`, `consiliu local`, `județ`, `municipiu`, `ministerul` |
 | Croatian/Serbian/Bosnian | `grad `, `gradska `, `općina `, `skupština` |
 | Hungarian | `város `, `önkormányzat`, `fővárosi` |
 | Greek (transliterated) | `dimos `, `dimou` |
