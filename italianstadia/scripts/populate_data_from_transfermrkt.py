@@ -1001,6 +1001,7 @@ def classify_ownership(owner_raw):
         "gemeinde", "landkreis", "freistaat", "bundesland", "kommunal",
         "freie und hansestadt", "freie hansestadt", "hansestadt",
         "landeshauptstadt", "bezirksamt", "bezirk ", "regionalverband",
+        "land ",                  # Land Salzburg, Land Tirol, Land Steiermark (Austrian federal states)
         # ── French (France / Belgium / Switzerland) ──────────────────────────
         "commune de", "mairie", "métropole",
         "ville de ", "ville d'",
@@ -1534,6 +1535,7 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
         "Norway": "Norwegian",
         "Romania": "Romanian",
         "Czechia": "Czech",
+        "Austria": "Austrian",
     }
 
     try:

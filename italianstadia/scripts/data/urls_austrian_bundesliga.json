@@ -1,0 +1,199 @@
+{
+  "league": {
+    "name": "Austrian Football Bundesliga",
+    "country": "Austria",
+    "country_code": "AT",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "FK Austria Wien",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-austria-wien/startseite/verein/14",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-austria-wien/besucherzahlenentwicklung/verein/14",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Austria_Wien",
+      "stadium": {
+        "name": "Generali Arena",
+        "owner_raw": "Stadt Wien",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-austria-wien/stadion/verein/14",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Franz_Horr_Stadium",
+        "city": {
+          "name": "Vienna",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vienna"
+        }
+      }
+    },
+    {
+      "name": "FC Blau-Weiß Linz",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-blau-weiss-linz/startseite/verein/2157",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-blau-weiss-linz/besucherzahlenentwicklung/verein/2157",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Blau-Wei%C3%9F_Linz",
+      "stadium": {
+        "name": "Hofmann Personal Stadion",
+        "owner_raw": "Stadt Linz",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-blau-weiss-linz/stadion/verein/2157",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Donauparkstadion",
+        "city": {
+          "name": "Linz",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Linz"
+        }
+      }
+    },
+    {
+      "name": "Grazer AK 1902",
+      "transfermarkt_url": "https://www.transfermarkt.com/grazer-ak-1902/startseite/verein/316",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/grazer-ak-1902/besucherzahlenentwicklung/verein/316",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Grazer_AK",
+      "stadium": {
+        "name": "Merkur-Arena",
+        "owner_raw": "Stadt Graz",
+        "transfermarkt_url": "https://www.transfermarkt.com/grazer-ak-1902/stadion/verein/316",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Liebenauer_Stadium",
+        "city": {
+          "name": "Graz",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Graz"
+        }
+      }
+    },
+    {
+      "name": "TSV Hartberg",
+      "transfermarkt_url": "https://www.transfermarkt.com/tsv-hartberg/startseite/verein/4467",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/tsv-hartberg/besucherzahlenentwicklung/verein/4467",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/TSV_Hartberg",
+      "stadium": {
+        "name": "Profertil Arena Hartberg",
+        "owner_raw": "Stadtgemeinde Hartberg",
+        "transfermarkt_url": "https://www.transfermarkt.com/tsv-hartberg/stadion/verein/4467",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Hartberg",
+        "city": {
+          "name": "Hartberg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Hartberg"
+        }
+      }
+    },
+    {
+      "name": "LASK",
+      "transfermarkt_url": "https://www.transfermarkt.com/lask/startseite/verein/413",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/lask/besucherzahlenentwicklung/verein/413",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/LASK",
+      "stadium": {
+        "name": "Raiffeisen Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/lask/stadion/verein/413",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Raiffeisen_Arena_(Linz)",
+        "city": {
+          "name": "Pasching",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pasching"
+        }
+      }
+    },
+    {
+      "name": "SK Rapid Wien",
+      "transfermarkt_url": "https://www.transfermarkt.com/sk-rapid-wien/startseite/verein/170",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sk-rapid-wien/besucherzahlenentwicklung/verein/170",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SK_Rapid_Vienna",
+      "stadium": {
+        "name": "Allianz Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/sk-rapid-wien/stadion/verein/170",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Allianz_Stadion",
+        "city": {
+          "name": "Vienna",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vienna"
+        }
+      }
+    },
+    {
+      "name": "FC Red Bull Salzburg",
+      "transfermarkt_url": "https://www.transfermarkt.com/red-bull-salzburg/startseite/verein/409",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/red-bull-salzburg/besucherzahlenentwicklung/verein/409",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Red_Bull_Salzburg",
+      "stadium": {
+        "name": "Red Bull Arena",
+        "owner_raw": "Land Salzburg",
+        "transfermarkt_url": "https://www.transfermarkt.com/red-bull-salzburg/stadion/verein/409",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Red_Bull_Arena_(Salzburg)",
+        "city": {
+          "name": "Wals-Siezenheim",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Wals-Siezenheim"
+        }
+      }
+    },
+    {
+      "name": "SCR Altach",
+      "transfermarkt_url": "https://www.transfermarkt.com/scr-altach/startseite/verein/3551",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/scr-altach/besucherzahlenentwicklung/verein/3551",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SCR_Altach",
+      "stadium": {
+        "name": "CASHPOINT Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/scr-altach/stadion/verein/3551",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Schnabelholz",
+        "city": {
+          "name": "Altach",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Altach"
+        }
+      }
+    },
+    {
+      "name": "SV Ried",
+      "transfermarkt_url": "https://www.transfermarkt.com/sv-ried/startseite/verein/266",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sv-ried/besucherzahlenentwicklung/verein/266",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SV_Ried",
+      "stadium": {
+        "name": "BWT X Oberösterreichische Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/sv-ried/stadion/verein/266",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Keine_Sorgen_Arena",
+        "city": {
+          "name": "Ried im Innkreis",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ried_im_Innkreis"
+        }
+      }
+    },
+    {
+      "name": "SK Sturm Graz",
+      "transfermarkt_url": "https://www.transfermarkt.com/sk-sturm-graz/startseite/verein/122",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sk-sturm-graz/besucherzahlenentwicklung/verein/122",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SK_Sturm_Graz",
+      "stadium": {
+        "name": "Merkur-Arena",
+        "owner_raw": "Stadt Graz",
+        "transfermarkt_url": "https://www.transfermarkt.com/sk-sturm-graz/stadion/verein/122",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Liebenauer_Stadium",
+        "city": {
+          "name": "Graz",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Graz"
+        }
+      }
+    },
+    {
+      "name": "WSG Tirol",
+      "transfermarkt_url": "https://www.transfermarkt.com/wsg-tirol/startseite/verein/2446",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/wsg-tirol/besucherzahlenentwicklung/verein/2446",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/WSG_Tirol",
+      "stadium": {
+        "name": "Tivoli Stadion Tirol",
+        "owner_raw": "Stadt Innsbruck",
+        "transfermarkt_url": "https://www.transfermarkt.com/wsg-tirol/stadion/verein/2446",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tivoli_Stadion_Tirol",
+        "city": {
+          "name": "Innsbruck",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Innsbruck"
+        }
+      }
+    },
+    {
+      "name": "Wolfsberger AC",
+      "transfermarkt_url": "https://www.transfermarkt.com/wolfsberger-ac/startseite/verein/4441",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/wolfsberger-ac/besucherzahlenentwicklung/verein/4441",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Wolfsberger_AC",
+      "stadium": {
+        "name": "Lavanttal-Arena",
+        "owner_raw": "Stadtgemeinde Wolfsberg",
+        "transfermarkt_url": "https://www.transfermarkt.com/wolfsberger-ac/stadion/verein/4441",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Lavanttal-Arena",
+        "city": {
+          "name": "Wolfsberg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Wolfsberg,_Carinthia"
+        }
+      }
+    }
+  ]
+}
