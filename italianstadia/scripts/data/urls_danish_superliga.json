@@ -1,0 +1,201 @@
+{
+  "league": {
+    "name": "Danish Superliga",
+    "country": "Denmark",
+    "country_code": "DK",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Aarhus Gymnastikforening",
+      "transfermarkt_url": "https://www.transfermarkt.com/aarhus-gf/startseite/verein/678",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/aarhus-gf/besucherzahlenentwicklung/verein/678",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Aarhus_Gymnastikforening",
+      "stadium": {
+        "name": "Ceres Park Vejlby",
+        "owner_raw": "Aarhus Kommune",
+        "transfermarkt_url": "https://www.transfermarkt.com/aarhus-gf/stadion/verein/678",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Vejlby_Stadium",
+        "city": {
+          "name": "Aarhus",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Aarhus"
+        }
+      }
+    },
+    {
+      "name": "Brøndby IF",
+      "transfermarkt_url": "https://www.transfermarkt.com/brondby-if/startseite/verein/206",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/brondby-if/besucherzahlenentwicklung/verein/206",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Br%C3%B8ndby_IF",
+      "stadium": {
+        "name": "Brøndby Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/brondby-if/stadion/verein/206",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Br%C3%B8ndby_Stadium",
+        "city": {
+          "name": "Brøndby",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Br%C3%B8ndby_Municipality"
+        }
+      }
+    },
+    {
+      "name": "F.C. Copenhagen",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-kopenhagen/startseite/verein/190",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-kopenhagen/besucherzahlenentwicklung/verein/190",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/F.C._Copenhagen",
+      "stadium": {
+        "name": "Parken",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-kopenhagen/stadion/verein/190",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Parken_Stadium",
+        "city": {
+          "name": "Copenhagen",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Copenhagen"
+        }
+      }
+    },
+    {
+      "name": "FC Fredericia",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-fredericia/startseite/verein/5776",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-fredericia/besucherzahlenentwicklung/verein/5776",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Fredericia",
+      "stadium": {
+        "name": "Monjasa Park",
+        "owner_raw": "Fredericia Kommune",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-fredericia/stadion/verein/5776",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Fredericia_Stadium",
+        "city": {
+          "name": "Fredericia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Fredericia"
+        }
+      }
+    },
+    {
+      "name": "FC Midtjylland",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-midtjylland/startseite/verein/865",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-midtjylland/besucherzahlenentwicklung/verein/865",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Midtjylland",
+      "stadium": {
+        "name": "MCH Arena",
+        "owner_raw": "MCH Group A/S",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-midtjylland/stadion/verein/865",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/MCH_Arena",
+        "city": {
+          "name": "Herning",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Herning"
+        }
+      }
+    },
+    {
+      "name": "FC Nordsjælland",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-nordsjaelland/startseite/verein/2778",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-nordsjaelland/besucherzahlenentwicklung/verein/2778",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Nordsj%C3%A6lland",
+      "stadium": {
+        "name": "Right to Dream Park",
+        "owner_raw": "Furesø Kommune",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-nordsjaelland/stadion/verein/2778",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Right_to_Dream_Park",
+        "city": {
+          "name": "Farum",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Farum"
+        }
+      }
+    },
+    {
+      "name": "Odense Boldklub",
+      "transfermarkt_url": "https://www.transfermarkt.com/odense-boldklub/startseite/verein/173",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/odense-boldklub/besucherzahlenentwicklung/verein/173",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Odense_Boldklub",
+      "stadium": {
+        "name": "Nature Energy Park",
+        "owner_raw": "Odense Kommune",
+        "transfermarkt_url": "https://www.transfermarkt.com/odense-boldklub/stadion/verein/173",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Odense_Stadium",
+        "city": {
+          "name": "Odense",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Odense"
+        }
+      }
+    },
+    {
+      "name": "Randers FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/randers-fc/startseite/verein/5724",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/randers-fc/besucherzahlenentwicklung/verein/5724",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Randers_FC",
+      "stadium": {
+        "name": "Cepheus Park Randers",
+        "owner_raw": "Randers Kommune",
+        "transfermarkt_url": "https://www.transfermarkt.com/randers-fc/stadion/verein/5724",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Randers_Stadium",
+        "city": {
+          "name": "Randers",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Randers"
+        }
+      }
+    },
+    {
+      "name": "Silkeborg IF",
+      "transfermarkt_url": "https://www.transfermarkt.com/silkeborg-if/startseite/verein/1177",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/silkeborg-if/besucherzahlenentwicklung/verein/1177",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Silkeborg_IF",
+      "stadium": {
+        "name": "JYSK Park",
+        "owner_raw": "Silkeborg Kommune",
+        "transfermarkt_url": "https://www.transfermarkt.com/silkeborg-if/stadion/verein/1177",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/JYSK_Park",
+        "city": {
+          "name": "Silkeborg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Silkeborg"
+        }
+      }
+    },
+    {
+      "name": "Sønderjyske Fodbold",
+      "transfermarkt_url": "https://www.transfermarkt.com/sonderjyske/startseite/verein/5817",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sonderjyske/besucherzahlenentwicklung/verein/5817",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/S%C3%B8nderjyske_Fodbold",
+      "stadium": {
+        "name": "Sydbank Park",
+        "owner_raw": "Haderslev Kommune",
+        "transfermarkt_url": "https://www.transfermarkt.com/sonderjyske/stadion/verein/5817",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Haderslev_Football_Stadium",
+        "city": {
+          "name": "Haderslev",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Haderslev"
+        }
+      }
+    },
+    {
+      "name": "Vejle Boldklub",
+      "transfermarkt_url": "https://www.transfermarkt.com/vejle-boldklub/startseite/verein/443",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/vejle-boldklub/besucherzahlenentwicklung/verein/443",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Vejle_Boldklub",
+      "stadium": {
+        "name": "Vejle Stadium",
+        "owner_raw": "Vejle Kommune",
+        "transfermarkt_url": "https://www.transfermarkt.com/vejle-boldklub/stadion/verein/443",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Vejle_Stadium",
+        "city": {
+          "name": "Vejle",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vejle"
+        }
+      }
+    },
+    {
+      "name": "Viborg FF",
+      "transfermarkt_url": "https://www.transfermarkt.com/viborg-ff/startseite/verein/1063",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/viborg-ff/besucherzahlenentwicklung/verein/1063",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Viborg_FF",
+      "stadium": {
+        "name": "Energi Viborg Arena",
+        "owner_raw": "Viborg Kommune",
+        "transfermarkt_url": "https://www.transfermarkt.com/viborg-ff/stadion/verein/1063",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Viborg_Stadium",
+        "city": {
+          "name": "Viborg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Viborg,_Denmark"
+        }
+      }
+    }
+  ]
+}
