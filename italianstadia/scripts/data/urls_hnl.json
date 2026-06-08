@@ -1,0 +1,171 @@
+{
+  "league": {
+    "name": "HNL",
+    "country": "Croatia",
+    "country_code": "HR",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "GNK Dinamo Zagreb",
+      "transfermarkt_url": "https://www.transfermarkt.com/gnk-dinamo-zagreb/startseite/verein/419",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gnk-dinamo-zagreb/besucherzahlenentwicklung/verein/419",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/GNK_Dinamo_Zagreb",
+      "stadium": {
+        "name": "Stadion Maksimir",
+        "owner_raw": "City of Zagreb",
+        "transfermarkt_url": "https://www.transfermarkt.com/gnk-dinamo-zagreb/stadion/verein/419",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Maksimir",
+        "city": {
+          "name": "Zagreb",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Zagreb"
+        }
+      }
+    },
+    {
+      "name": "HNK Hajduk Split",
+      "transfermarkt_url": "https://www.transfermarkt.com/hnk-hajduk-split/startseite/verein/447",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hnk-hajduk-split/besucherzahlenentwicklung/verein/447",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/HNK_Hajduk_Split",
+      "stadium": {
+        "name": "Stadion Poljud",
+        "owner_raw": "City of Split",
+        "transfermarkt_url": "https://www.transfermarkt.com/hnk-hajduk-split/stadion/verein/447",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Poljud",
+        "city": {
+          "name": "Split",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Split,_Croatia"
+        }
+      }
+    },
+    {
+      "name": "HNK Rijeka",
+      "transfermarkt_url": "https://www.transfermarkt.com/hnk-rijeka/startseite/verein/144",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hnk-rijeka/besucherzahlenentwicklung/verein/144",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/HNK_Rijeka",
+      "stadium": {
+        "name": "Stadion HNK Rijeka",
+        "owner_raw": "HNK Rijeka",
+        "transfermarkt_url": "https://www.transfermarkt.com/hnk-rijeka/stadion/verein/144",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Rujevica",
+        "city": {
+          "name": "Rijeka",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rijeka"
+        }
+      }
+    },
+    {
+      "name": "NK Osijek",
+      "transfermarkt_url": "https://www.transfermarkt.com/nk-osijek/startseite/verein/327",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nk-osijek/besucherzahlenentwicklung/verein/327",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NK_Osijek",
+      "stadium": {
+        "name": "Opus Arena",
+        "owner_raw": "NK Osijek",
+        "transfermarkt_url": "https://www.transfermarkt.com/nk-osijek/stadion/verein/327",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Opus_Arena",
+        "city": {
+          "name": "Osijek",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Osijek"
+        }
+      }
+    },
+    {
+      "name": "NK Lokomotiva Zagreb",
+      "transfermarkt_url": "https://www.transfermarkt.com/nk-lokomotiva-zagreb/startseite/verein/11194",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nk-lokomotiva-zagreb/besucherzahlenentwicklung/verein/11194",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NK_Lokomotiva_Zagreb",
+      "stadium": {
+        "name": "Stadion Kranjčevićeva",
+        "owner_raw": "City of Zagreb",
+        "transfermarkt_url": "https://www.transfermarkt.com/nk-lokomotiva-zagreb/stadion/verein/11194",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Kranj%C4%8Devi%C4%87eva",
+        "city": {
+          "name": "Zagreb",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Zagreb"
+        }
+      }
+    },
+    {
+      "name": "NK Istra 1961",
+      "transfermarkt_url": "https://www.transfermarkt.com/nk-istra-1961/startseite/verein/999",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nk-istra-1961/besucherzahlenentwicklung/verein/999",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NK_Istra_1961",
+      "stadium": {
+        "name": "Stadion Aldo Drosina",
+        "owner_raw": "City of Pula",
+        "transfermarkt_url": "https://www.transfermarkt.com/nk-istra-1961/stadion/verein/999",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Aldo_Drosina",
+        "city": {
+          "name": "Pula",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pula"
+        }
+      }
+    },
+    {
+      "name": "HNK Gorica",
+      "transfermarkt_url": "https://www.transfermarkt.com/hnk-gorica/startseite/verein/24575",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hnk-gorica/besucherzahlenentwicklung/verein/24575",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/HNK_Gorica",
+      "stadium": {
+        "name": "Gradski stadion Velika Gorica",
+        "owner_raw": "City of Velika Gorica",
+        "transfermarkt_url": "https://www.transfermarkt.com/hnk-gorica/stadion/verein/24575",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Radnik",
+        "city": {
+          "name": "Velika Gorica",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Velika_Gorica"
+        }
+      }
+    },
+    {
+      "name": "NK Slaven Belupo",
+      "transfermarkt_url": "https://www.transfermarkt.com/slaven-belupo-koprivnica/startseite/verein/2362",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/slaven-belupo-koprivnica/besucherzahlenentwicklung/verein/2362",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NK_Slaven_Belupo",
+      "stadium": {
+        "name": "Gradski stadion Ivan Kušek Apaš",
+        "owner_raw": "City of Koprivnica",
+        "transfermarkt_url": "https://www.transfermarkt.com/slaven-belupo-koprivnica/stadion/verein/2362",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gradski_stadion_(Koprivnica)",
+        "city": {
+          "name": "Koprivnica",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Koprivnica"
+        }
+      }
+    },
+    {
+      "name": "NK Varaždin",
+      "transfermarkt_url": "https://www.transfermarkt.com/nk-varazdin/startseite/verein/599",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nk-varazdin/besucherzahlenentwicklung/verein/599",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NK_Vara%C5%BEdin_(2012)",
+      "stadium": {
+        "name": "Stadion Varteks",
+        "owner_raw": "City of Varaždin",
+        "transfermarkt_url": "https://www.transfermarkt.com/nk-varazdin/stadion/verein/599",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Varteks",
+        "city": {
+          "name": "Varaždin",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vara%C5%BEdin"
+        }
+      }
+    },
+    {
+      "name": "HNK Vukovar 1991",
+      "transfermarkt_url": "https://www.transfermarkt.com/hnk-vukovar-1991/startseite/verein/456",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hnk-vukovar-1991/besucherzahlenentwicklung/verein/456",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/HNK_Vukovar_1991",
+      "stadium": {
+        "name": "Stadion HNK Cibalia",
+        "owner_raw": "City of Vinkovci",
+        "transfermarkt_url": "https://www.transfermarkt.com/hnk-vukovar-1991/stadion/verein/456",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_HNK_Cibalia",
+        "city": {
+          "name": "Vinkovci",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vinkovci"
+        }
+      }
+    }
+  ]
+}
