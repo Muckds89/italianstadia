@@ -1,0 +1,237 @@
+{
+  "league": {
+    "name": "Super League Greece 1",
+    "country": "Greece",
+    "country_code": "GR",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Olympiacos FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/olympiakos-piraus/startseite/verein/683",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/olympiakos-piraus/besucherzahlenentwicklung/verein/683",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Olympiacos_FC",
+      "stadium": {
+        "name": "Karaiskakis Stadium",
+        "owner_raw": "Hellenic Olympic Committee",
+        "transfermarkt_url": "https://www.transfermarkt.com/olympiakos-piraus/stadion/verein/683",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Karaiskakis_Stadium",
+        "city": {
+          "name": "Piraeus",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Piraeus"
+        }
+      }
+    },
+    {
+      "name": "Panathinaikos FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/panathinaikos-athen/startseite/verein/265",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/panathinaikos-athen/besucherzahlenentwicklung/verein/265",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Panathinaikos_F.C.",
+      "stadium": {
+        "name": "Apostolos Nikolaidis Stadium",
+        "owner_raw": "Panathinaikos Athletic Club",
+        "transfermarkt_url": "https://www.transfermarkt.com/panathinaikos-athen/stadion/verein/265",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Leoforos_Alexandras_Stadium",
+        "city": {
+          "name": "Athens",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Athens"
+        }
+      }
+    },
+    {
+      "name": "PAOK FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/paok-thessaloniki/startseite/verein/1091",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/paok-thessaloniki/besucherzahlenentwicklung/verein/1091",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/PAOK_FC",
+      "stadium": {
+        "name": "Toumba Stadium",
+        "owner_raw": "PAOK FC",
+        "transfermarkt_url": "https://www.transfermarkt.com/paok-thessaloniki/stadion/verein/1091",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Toumba_Stadium",
+        "city": {
+          "name": "Thessaloniki",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Thessaloniki"
+        }
+      }
+    },
+    {
+      "name": "AEK Athens FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/aek-athen/startseite/verein/2441",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/aek-athen/besucherzahlenentwicklung/verein/2441",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AEK_Athens_F.C.",
+      "stadium": {
+        "name": "Allwyn Arena",
+        "owner_raw": "AEK Athens FC",
+        "transfermarkt_url": "https://www.transfermarkt.com/aek-athen/stadion/verein/2441",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Agia_Sophia_Stadium",
+        "city": {
+          "name": "Nea Filadelfeia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Nea_Filadelfeia"
+        }
+      }
+    },
+    {
+      "name": "Aris Thessaloniki FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/aris-thessaloniki/startseite/verein/605",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/aris-thessaloniki/besucherzahlenentwicklung/verein/605",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Aris_Thessaloniki_F.C.",
+      "stadium": {
+        "name": "Kleanthis Vikelidis Stadium",
+        "owner_raw": "Aris Thessaloniki FC",
+        "transfermarkt_url": "https://www.transfermarkt.com/aris-thessaloniki/stadion/verein/605",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kleanthis_Vikelidis_Stadium",
+        "city": {
+          "name": "Thessaloniki",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Thessaloniki"
+        }
+      }
+    },
+    {
+      "name": "Atromitos FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/atromitos-athen/startseite/verein/3060",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/atromitos-athen/besucherzahlenentwicklung/verein/3060",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Atromitos_F.C.",
+      "stadium": {
+        "name": "Peristeri Stadium",
+        "owner_raw": "Municipality of Peristeri",
+        "transfermarkt_url": "https://www.transfermarkt.com/atromitos-athen/stadion/verein/3060",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Peristeri_Stadium",
+        "city": {
+          "name": "Peristeri",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Peristeri,_Athens"
+        }
+      }
+    },
+    {
+      "name": "OFI Crete FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/ofi-kreta/startseite/verein/653",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ofi-kreta/besucherzahlenentwicklung/verein/653",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/OFI_Crete_F.C.",
+      "stadium": {
+        "name": "Pankritio Stadium",
+        "owner_raw": "Municipality of Heraklion",
+        "transfermarkt_url": "https://www.transfermarkt.com/ofi-kreta/stadion/verein/653",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Pankritio_Stadium",
+        "city": {
+          "name": "Heraklion",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Heraklion"
+        }
+      }
+    },
+    {
+      "name": "Asteras Tripolis FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/asteras-tripolis/startseite/verein/6676",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/asteras-tripolis/besucherzahlenentwicklung/verein/6676",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Asteras_Tripolis_F.C.",
+      "stadium": {
+        "name": "Theodoros Kolokotronis Stadium",
+        "owner_raw": "Asteras Tripolis FC",
+        "transfermarkt_url": "https://www.transfermarkt.com/asteras-tripolis/stadion/verein/6676",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Theodoros_Kolokotronis_Stadium",
+        "city": {
+          "name": "Tripoli",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tripoli,_Greece"
+        }
+      }
+    },
+    {
+      "name": "Panetolikos GFS",
+      "transfermarkt_url": "https://www.transfermarkt.com/panetolikos-gfs/startseite/verein/6418",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/panetolikos-gfs/besucherzahlenentwicklung/verein/6418",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Panetolikos_F.C.",
+      "stadium": {
+        "name": "Panetolikos Stadium",
+        "owner_raw": "Panetolikos FC",
+        "transfermarkt_url": "https://www.transfermarkt.com/panetolikos-gfs/stadion/verein/6418",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Panetolikos_Stadium",
+        "city": {
+          "name": "Agrinio",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Agrinio"
+        }
+      }
+    },
+    {
+      "name": "Panserraikos FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/panserraikos/startseite/verein/3385",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/panserraikos/besucherzahlenentwicklung/verein/3385",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Panserraikos_F.C.",
+      "stadium": {
+        "name": "Serres Municipal Stadium",
+        "owner_raw": "Municipality of Serres",
+        "transfermarkt_url": "https://www.transfermarkt.com/panserraikos/stadion/verein/3385",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Serres_Municipal_Stadium",
+        "city": {
+          "name": "Serres",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Serres,_Greece"
+        }
+      }
+    },
+    {
+      "name": "Volos NFC",
+      "transfermarkt_url": "https://www.transfermarkt.com/volos-nfc/startseite/verein/60949",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/volos-nfc/besucherzahlenentwicklung/verein/60949",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Volos_FC",
+      "stadium": {
+        "name": "Panthessaliko Stadium",
+        "owner_raw": "Municipality of Volos",
+        "transfermarkt_url": "https://www.transfermarkt.com/volos-nfc/stadion/verein/60949",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Panthessaliko_Stadium",
+        "city": {
+          "name": "Volos",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Volos"
+        }
+      }
+    },
+    {
+      "name": "Levadiakos FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/apo-levadiakos/startseite/verein/2672",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/apo-levadiakos/besucherzahlenentwicklung/verein/2672",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Levadiakos_F.C.",
+      "stadium": {
+        "name": "Levadia Municipal Stadium",
+        "owner_raw": "Municipality of Livadeia",
+        "transfermarkt_url": "https://www.transfermarkt.com/apo-levadiakos/stadion/verein/2672",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Levadia_Municipal_Stadium",
+        "city": {
+          "name": "Livadeia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Livadeia"
+        }
+      }
+    },
+    {
+      "name": "AEL Larissa FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/ae-larisa/startseite/verein/4603",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ae-larisa/besucherzahlenentwicklung/verein/4603",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Athlitiki_Enosi_Larissa_F.C.",
+      "stadium": {
+        "name": "AEL FC Arena",
+        "owner_raw": "Gipedo Larissa AE",
+        "transfermarkt_url": "https://www.transfermarkt.com/ae-larisa/stadion/verein/4603",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/AEL_FC_Arena",
+        "city": {
+          "name": "Larissa",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Larissa"
+        }
+      }
+    },
+    {
+      "name": "A.E. Kifisia FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/ae-kifisias/startseite/verein/30120",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ae-kifisias/besucherzahlenentwicklung/verein/30120",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/A.E._Kifisia_F.C.",
+      "stadium": {
+        "name": "Zirineio",
+        "owner_raw": "Municipality of Kifissia",
+        "transfermarkt_url": "https://www.transfermarkt.com/ae-kifisias/stadion/verein/30120",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/A.E._Kifisia_F.C.",
+        "latitude": 38.0674,
+        "longitude": 23.8114,
+        "city": {
+          "name": "Kifissia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kifissia"
+        }
+      }
+    }
+  ]
+}
