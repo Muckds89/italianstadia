@@ -124,6 +124,7 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/SCR_Altach",
       "stadium": {
         "name": "CASHPOINT Arena",
+        "owner_raw": "Gemeinde Altach",
         "transfermarkt_url": "https://www.transfermarkt.com/scr-altach/stadion/verein/3551",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Schnabelholz",
         "city": {
@@ -139,6 +140,7 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/SV_Ried",
       "stadium": {
         "name": "BWT X Oberösterreichische Arena",
+        "owner_raw": "SV Ried",
         "transfermarkt_url": "https://www.transfermarkt.com/sv-ried/stadion/verein/266",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Keine_Sorgen_Arena",
         "city": {
