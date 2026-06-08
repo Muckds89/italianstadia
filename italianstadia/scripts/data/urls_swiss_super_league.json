@@ -1,0 +1,201 @@
+{
+  "league": {
+    "name": "Swiss Super League",
+    "country": "Switzerland",
+    "country_code": "CH",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "FC Basel 1893",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-basel-1893/startseite/verein/26",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-basel-1893/besucherzahlenentwicklung/verein/26",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Basel",
+      "stadium": {
+        "name": "St. Jakob-Park",
+        "owner_raw": "Genossenschaft Stadion St. Jakob-Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-basel-1893/stadion/verein/26",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/St._Jakob-Park",
+        "city": {
+          "name": "Basel",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Basel"
+        }
+      }
+    },
+    {
+      "name": "BSC Young Boys",
+      "transfermarkt_url": "https://www.transfermarkt.com/bsc-young-boys/startseite/verein/452",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/bsc-young-boys/besucherzahlenentwicklung/verein/452",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/BSC_Young_Boys",
+      "stadium": {
+        "name": "Stadion Wankdorf",
+        "owner_raw": "Stade de Suisse Wankdorf Nationalstadion AG",
+        "transfermarkt_url": "https://www.transfermarkt.com/bsc-young-boys/stadion/verein/452",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Wankdorf",
+        "city": {
+          "name": "Bern",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bern"
+        }
+      }
+    },
+    {
+      "name": "FC Zürich",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-zurich/startseite/verein/260",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-zurich/besucherzahlenentwicklung/verein/260",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Z%C3%BCrich",
+      "stadium": {
+        "name": "Letzigrund",
+        "owner_raw": "Stadt Zürich",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-zurich/stadion/verein/260",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Letzigrund",
+        "city": {
+          "name": "Zurich",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Zurich"
+        }
+      }
+    },
+    {
+      "name": "Servette FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/servette-fc/startseite/verein/61",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/servette-fc/besucherzahlenentwicklung/verein/61",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Servette_FC",
+      "stadium": {
+        "name": "Stade de Genève",
+        "owner_raw": "Fondation du Stade de Genève",
+        "transfermarkt_url": "https://www.transfermarkt.com/servette-fc/stadion/verein/61",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_Gen%C3%A8ve",
+        "city": {
+          "name": "Lancy",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lancy"
+        }
+      }
+    },
+    {
+      "name": "FC Lugano",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-lugano/startseite/verein/2790",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-lugano/besucherzahlenentwicklung/verein/2790",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Lugano",
+      "stadium": {
+        "name": "Cornaredo Stadium",
+        "owner_raw": "City of Lugano",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-lugano/stadion/verein/2790",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Cornaredo_Stadium",
+        "city": {
+          "name": "Lugano",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lugano"
+        }
+      }
+    },
+    {
+      "name": "FC Luzern",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-luzern/startseite/verein/434",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-luzern/besucherzahlenentwicklung/verein/434",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Luzern",
+      "stadium": {
+        "name": "Thermoplanarena",
+        "owner_raw": "Stadion Luzern AG",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-luzern/stadion/verein/434",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Thermoplanarena",
+        "city": {
+          "name": "Lucerne",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lucerne"
+        }
+      }
+    },
+    {
+      "name": "FC St. Gallen 1879",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-st-gallen-1879/startseite/verein/257",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-st-gallen-1879/besucherzahlenentwicklung/verein/257",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_St._Gallen",
+      "stadium": {
+        "name": "Kybunpark",
+        "owner_raw": "Stadion St.Gallen AG",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-st-gallen-1879/stadion/verein/257",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kybunpark",
+        "city": {
+          "name": "St. Gallen",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/St._Gallen"
+        }
+      }
+    },
+    {
+      "name": "FC Sion",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-sion/startseite/verein/321",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-sion/besucherzahlenentwicklung/verein/321",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Sion",
+      "stadium": {
+        "name": "Stade de Tourbillon",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-sion/stadion/verein/321",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_Tourbillon",
+        "city": {
+          "name": "Sion",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sion,_Switzerland"
+        }
+      }
+    },
+    {
+      "name": "Grasshopper Club Zürich",
+      "transfermarkt_url": "https://www.transfermarkt.com/grasshopper-club-zurich/startseite/verein/504",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/grasshopper-club-zurich/besucherzahlenentwicklung/verein/504",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Grasshopper_Club_Zurich",
+      "stadium": {
+        "name": "Letzigrund",
+        "owner_raw": "Stadt Zürich",
+        "transfermarkt_url": "https://www.transfermarkt.com/grasshopper-club-zurich/stadion/verein/504",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Letzigrund",
+        "city": {
+          "name": "Zurich",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Zurich"
+        }
+      }
+    },
+    {
+      "name": "FC Winterthur",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-winterthur/startseite/verein/242",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-winterthur/besucherzahlenentwicklung/verein/242",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Winterthur",
+      "stadium": {
+        "name": "Stadion Schützenwiese",
+        "owner_raw": "City of Winterthur",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-winterthur/stadion/verein/242",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Sch%C3%BCtzenwiese",
+        "city": {
+          "name": "Winterthur",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Winterthur"
+        }
+      }
+    },
+    {
+      "name": "FC Lausanne-Sport",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-lausanne-sport/startseite/verein/527",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-lausanne-sport/besucherzahlenentwicklung/verein/527",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Lausanne-Sport",
+      "stadium": {
+        "name": "Stade de la Tuilière",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-lausanne-sport/stadion/verein/527",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_la_Tuili%C3%A8re",
+        "city": {
+          "name": "Lausanne",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lausanne"
+        }
+      }
+    },
+    {
+      "name": "FC Thun",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-thun/startseite/verein/938",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-thun/besucherzahlenentwicklung/verein/938",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Thun",
+      "stadium": {
+        "name": "Stockhorn Arena",
+        "owner_raw": "Genossenschaft Arena Thun GNAT",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-thun/stadion/verein/938",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stockhorn_Arena",
+        "city": {
+          "name": "Thun",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Thun"
+        }
+      }
+    }
+  ]
+}

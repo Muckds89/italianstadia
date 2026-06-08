@@ -1536,6 +1536,7 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
         "Romania": "Romanian",
         "Czechia": "Czech",
         "Austria": "Austrian",
+        "Switzerland": "Swiss",
     }
 
     try:
