@@ -1,0 +1,235 @@
+{
+  "league": {
+    "name": "Cypriot First Division",
+    "country": "Cyprus",
+    "country_code": "CY",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "APOEL FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/apoel-nikosia/startseite/verein/2784",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/apoel-nikosia/besucherzahlenentwicklung/verein/2784",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/APOEL_FC",
+      "stadium": {
+        "name": "GSP Stadium",
+        "owner_raw": "Pancyprian Gymnastic Association",
+        "transfermarkt_url": "https://www.transfermarkt.com/apoel-nikosia/stadion/verein/2784",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/GSP_Stadium",
+        "city": {
+          "name": "Nicosia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Nicosia"
+        }
+      }
+    },
+    {
+      "name": "AC Omonia",
+      "transfermarkt_url": "https://www.transfermarkt.com/omonia-nikosia/startseite/verein/829",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/omonia-nikosia/besucherzahlenentwicklung/verein/829",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Omonia_Nicosia",
+      "stadium": {
+        "name": "GSP Stadium",
+        "owner_raw": "Pancyprian Gymnastic Association",
+        "transfermarkt_url": "https://www.transfermarkt.com/omonia-nikosia/stadion/verein/829",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/GSP_Stadium",
+        "city": {
+          "name": "Nicosia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Nicosia"
+        }
+      }
+    },
+    {
+      "name": "Olympiakos Nicosia",
+      "transfermarkt_url": "https://www.transfermarkt.com/olympiakos-nikosia/startseite/verein/1402",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/olympiakos-nikosia/besucherzahlenentwicklung/verein/1402",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Olympiakos_Nicosia",
+      "stadium": {
+        "name": "GSP Stadium",
+        "owner_raw": "Pancyprian Gymnastic Association",
+        "transfermarkt_url": "https://www.transfermarkt.com/olympiakos-nikosia/stadion/verein/1402",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/GSP_Stadium",
+        "city": {
+          "name": "Nicosia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Nicosia"
+        }
+      }
+    },
+    {
+      "name": "AEL Limassol",
+      "transfermarkt_url": "https://www.transfermarkt.com/ael-limassol/startseite/verein/786",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ael-limassol/besucherzahlenentwicklung/verein/786",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AEL_Limassol",
+      "stadium": {
+        "name": "Alphamega Stadium",
+        "owner_raw": "Cyprus Sports Organisation",
+        "transfermarkt_url": "https://www.transfermarkt.com/ael-limassol/stadion/verein/786",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Alphamega_Stadium",
+        "city": {
+          "name": "Limassol",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Limassol"
+        }
+      }
+    },
+    {
+      "name": "Apollon Limassol FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/apollon-limassol/startseite/verein/429",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/apollon-limassol/besucherzahlenentwicklung/verein/429",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Apollon_Limassol_FC",
+      "stadium": {
+        "name": "Alphamega Stadium",
+        "owner_raw": "Cyprus Sports Organisation",
+        "transfermarkt_url": "https://www.transfermarkt.com/apollon-limassol/stadion/verein/429",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Alphamega_Stadium",
+        "city": {
+          "name": "Limassol",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Limassol"
+        }
+      }
+    },
+    {
+      "name": "Aris Limassol FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/aris-limassol/startseite/verein/10586",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/aris-limassol/besucherzahlenentwicklung/verein/10586",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Aris_Limassol_FC",
+      "stadium": {
+        "name": "Alphamega Stadium",
+        "owner_raw": "Cyprus Sports Organisation",
+        "transfermarkt_url": "https://www.transfermarkt.com/aris-limassol/stadion/verein/10586",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Alphamega_Stadium",
+        "city": {
+          "name": "Limassol",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Limassol"
+        }
+      }
+    },
+    {
+      "name": "AEK Larnaca FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/aek-larnaka/startseite/verein/2156",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/aek-larnaka/besucherzahlenentwicklung/verein/2156",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AEK_Larnaca_FC",
+      "stadium": {
+        "name": "AEK Arena – Georgios Karapatakis",
+        "owner_raw": "AEK Larnaca FC",
+        "transfermarkt_url": "https://www.transfermarkt.com/aek-larnaka/stadion/verein/2156",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/AEK_Arena_%E2%80%93_Georgios_Karapatakis",
+        "city": {
+          "name": "Aradippou",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Aradippou"
+        }
+      }
+    },
+    {
+      "name": "Anorthosis Famagusta FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/anorthosis-famagusta/startseite/verein/3899",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/anorthosis-famagusta/besucherzahlenentwicklung/verein/3899",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Anorthosis_Famagusta_FC",
+      "stadium": {
+        "name": "Antonis Papadopoulos Stadium",
+        "owner_raw": "Anorthosis Famagusta FC",
+        "transfermarkt_url": "https://www.transfermarkt.com/anorthosis-famagusta/stadion/verein/3899",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Antonis_Papadopoulos_Stadium",
+        "city": {
+          "name": "Larnaca",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Larnaca"
+        }
+      }
+    },
+    {
+      "name": "Omonia Aradippou",
+      "transfermarkt_url": "https://www.transfermarkt.com/omonia-aradippou/startseite/verein/16024",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/omonia-aradippou/besucherzahlenentwicklung/verein/16024",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Omonia_Aradippou",
+      "stadium": {
+        "name": "Antonis Papadopoulos Stadium",
+        "owner_raw": "Anorthosis Famagusta FC",
+        "transfermarkt_url": "https://www.transfermarkt.com/omonia-aradippou/stadion/verein/16024",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Antonis_Papadopoulos_Stadium",
+        "city": {
+          "name": "Aradippou",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Aradippou"
+        }
+      }
+    },
+    {
+      "name": "Pafos FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/pafos-fc/startseite/verein/45457",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/pafos-fc/besucherzahlenentwicklung/verein/45457",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Pafos_FC",
+      "stadium": {
+        "name": "Stelios Kyriakides Stadium",
+        "owner_raw": "Cyprus Sports Organisation",
+        "transfermarkt_url": "https://www.transfermarkt.com/pafos-fc/stadion/verein/45457",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stelios_Kyriakides_Stadium",
+        "city": {
+          "name": "Paphos",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Paphos"
+        }
+      }
+    },
+    {
+      "name": "Akritas Chlorakas",
+      "transfermarkt_url": "https://www.transfermarkt.com/akritas-chlorakas/startseite/verein/31010",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/akritas-chlorakas/besucherzahlenentwicklung/verein/31010",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Akritas_Chlorakas",
+      "stadium": {
+        "name": "Stelios Kyriakides Stadium",
+        "owner_raw": "Cyprus Sports Organisation",
+        "transfermarkt_url": "https://www.transfermarkt.com/akritas-chlorakas/stadion/verein/31010",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stelios_Kyriakides_Stadium",
+        "city": {
+          "name": "Chloraka",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Chloraka"
+        }
+      }
+    },
+    {
+      "name": "Krasava ENY Ypsonas",
+      "transfermarkt_url": "https://www.transfermarkt.com/ypsonas-fc/startseite/verein/57870",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ypsonas-fc/besucherzahlenentwicklung/verein/57870",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Krasava_ENY_Ypsonas_FC",
+      "stadium": {
+        "name": "Ammochostos Epistrofi Stadium",
+        "owner_raw": "Nea Salamis Famagusta FC",
+        "transfermarkt_url": "https://www.transfermarkt.com/ypsonas-fc/stadion/verein/57870",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ammochostos_Epistrofi_Stadium",
+        "city": {
+          "name": "Larnaca",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Larnaca"
+        }
+      }
+    },
+    {
+      "name": "Ethnikos Achna FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/ethnikos-achnas/startseite/verein/4590",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ethnikos-achnas/besucherzahlenentwicklung/verein/4590",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ethnikos_Achna_FC",
+      "stadium": {
+        "name": "Dasaki Stadium",
+        "owner_raw": "Ethnikos Achna FC",
+        "transfermarkt_url": "https://www.transfermarkt.com/ethnikos-achnas/stadion/verein/4590",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Dasaki_Stadium",
+        "city": {
+          "name": "Dasaki Achnas",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Dasaki_Achnas"
+        }
+      }
+    },
+    {
+      "name": "Enosis Neon Paralimni FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/enosis-neon-paralimniou/startseite/verein/840",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/enosis-neon-paralimniou/besucherzahlenentwicklung/verein/840",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Enosis_Neon_Paralimni_FC",
+      "stadium": {
+        "name": "Tasos Markou Stadium",
+        "owner_raw": "Paralimni Municipality",
+        "transfermarkt_url": "https://www.transfermarkt.com/enosis-neon-paralimniou/stadion/verein/840",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tasos_Markou_Stadium",
+        "city": {
+          "name": "Paralimni",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Paralimni"
+        }
+      }
+    }
+  ]
+}

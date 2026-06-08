@@ -990,6 +990,7 @@ def classify_ownership(owner_raw):
         "metropolitan borough", "london borough", "royal borough",
         "public authority", "public body", "national sports",
         "sports authority", "stadium authority",
+        "sports organ",                # sports organisation / sports organization (e.g. Cyprus Sports Organisation)
         "olympic committee",           # Hellenic Olympic Committee (Karaiskakis Stadium)
         "agglomeration",
         # ── Italian ──────────────────────────────────────────────────────────
@@ -1543,6 +1544,7 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
         "Denmark": "Danish",
         "Greece": "Greek",
         "Croatia": "Croatian",
+        "Cyprus": "Cypriot",
     }
 
     try:

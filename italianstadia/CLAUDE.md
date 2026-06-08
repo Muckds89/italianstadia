@@ -265,6 +265,7 @@ The project is currently Italy-only (Serie A/B/C). Full roadmap in `italianstadi
 | Danish Superliga | Denmark | 1 | JSON ready (25/26) |
 | Super League Greece 1 | Greece | 1 | JSON ready (25/26) |
 | HNL | Croatia | 1 | JSON ready (25/26) |
+| Cypriot First Division | Cyprus | 1 | JSON ready (25/26) |
 
 Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 fixes) before expanding to multi-league.
 
@@ -289,6 +290,7 @@ Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 f
 - Danish clubs: @title = "Danish Champion"
 - Greek clubs: @title = "Greek Champion"
 - Croatian clubs: @title = "Croatian Champion"
+- Cypriot clubs: @title = "Cypriot Champion"
 
 ## Data quality rules
 
