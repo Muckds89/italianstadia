@@ -137,7 +137,13 @@ def log_field(entity, name, field, value, source=None, reason=None):
 log_file = "scraping_transfermarkt.log"
 
 if os.path.exists(log_file):
-    os.remove(log_file)
+    try:
+        os.remove(log_file)
+    except PermissionError:
+        # On Windows the file may still be held open by a previous run.
+        # Truncate in-place so the next run starts with a clean log.
+        with open(log_file, "w"):
+            pass
 
 logging.basicConfig(
     filename=log_file,

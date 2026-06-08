@@ -107,7 +107,7 @@
         "name": "Estádio Municipal de Famalicão",
         "owner_raw": "Município de Famalicão",
         "transfermarkt_url": "https://www.transfermarkt.com/fc-famalicao/stadion/verein/3664",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Municipal_de_Famalic%C3%A3o",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Municipal_22_de_Junho",
         "city": {
           "name": "Famalicão",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Vila_Nova_de_Famalic%C3%A3o"
@@ -170,7 +170,9 @@
         "name": "Estádio Pina Manique",
         "owner_raw": "Casa Pia de Lisboa",
         "transfermarkt_url": "https://www.transfermarkt.com/casa-pia-ac/stadion/verein/9607",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Pina_Manique",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Casa_Pia_A.C.",
+        "latitude": 38.7375,
+        "longitude": -9.2039,
         "city": {
           "name": "Lisbon",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Lisbon"
@@ -186,7 +188,7 @@
         "name": "Estádio de São Miguel",
         "owner_raw": "Azores Regional Government",
         "transfermarkt_url": "https://www.transfermarkt.com/cd-santa-clara/stadion/verein/2423",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_de_S%C3%A3o_Miguel",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_de_S%C3%A3o_Miguel_(Ponta_Delgada)",
         "city": {
           "name": "Ponta Delgada",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Ponta_Delgada"
@@ -265,7 +267,9 @@
         "name": "Estádio Municipal de Alverca",
         "owner_raw": "Município de Vila Franca de Xira",
         "transfermarkt_url": "https://www.transfermarkt.com/fc-alverca/stadion/verein/2521",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Municipal_de_Alverca",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Alverca",
+        "latitude": 38.898811,
+        "longitude": -9.036763,
         "city": {
           "name": "Alverca do Ribatejo",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Alverca_do_Ribatejo"
