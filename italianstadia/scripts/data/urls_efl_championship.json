@@ -1,0 +1,373 @@
+{
+  "league": {
+    "name": "EFL Championship",
+    "country": "England",
+    "country_code": "GB",
+    "division_level": 2,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Birmingham City F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/birmingham-city/startseite/verein/337",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/birmingham-city/besucherzahlenentwicklung/verein/337",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Birmingham_City_F.C.",
+      "stadium": {
+        "name": "St. Andrew's @ Knighthead Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/birmingham-city/stadion/verein/337",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/St_Andrew%27s_(stadium)",
+        "city": {
+          "name": "Birmingham",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Birmingham"
+        }
+      }
+    },
+    {
+      "name": "Blackburn Rovers F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/blackburn-rovers/startseite/verein/164",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/blackburn-rovers/besucherzahlenentwicklung/verein/164",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Blackburn_Rovers_F.C.",
+      "stadium": {
+        "name": "Ewood Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/blackburn-rovers/stadion/verein/164",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ewood_Park",
+        "city": {
+          "name": "Blackburn",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Blackburn"
+        }
+      }
+    },
+    {
+      "name": "Bristol City F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/bristol-city/startseite/verein/698",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/bristol-city/besucherzahlenentwicklung/verein/698",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Bristol_City_F.C.",
+      "stadium": {
+        "name": "Ashton Gate Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/bristol-city/stadion/verein/698",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ashton_Gate_(stadium)",
+        "city": {
+          "name": "Bristol",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bristol"
+        }
+      }
+    },
+    {
+      "name": "Charlton Athletic F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/charlton-athletic/startseite/verein/358",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/charlton-athletic/besucherzahlenentwicklung/verein/358",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Charlton_Athletic_F.C.",
+      "stadium": {
+        "name": "The Valley",
+        "transfermarkt_url": "https://www.transfermarkt.com/charlton-athletic/stadion/verein/358",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/The_Valley_(stadium)",
+        "city": {
+          "name": "London",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/London"
+        }
+      }
+    },
+    {
+      "name": "Coventry City F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/coventry-city/startseite/verein/990",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/coventry-city/besucherzahlenentwicklung/verein/990",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Coventry_City_F.C.",
+      "stadium": {
+        "name": "Coventry Building Society Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/coventry-city/stadion/verein/990",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Coventry_Building_Society_Arena",
+        "city": {
+          "name": "Coventry",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Coventry"
+        }
+      }
+    },
+    {
+      "name": "Derby County F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/derby-county/startseite/verein/22",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/derby-county/besucherzahlenentwicklung/verein/22",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Derby_County_F.C.",
+      "stadium": {
+        "name": "Pride Park Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/derby-county/stadion/verein/22",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Pride_Park_Stadium",
+        "city": {
+          "name": "Derby",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Derby"
+        }
+      }
+    },
+    {
+      "name": "Hull City A.F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/hull-city/startseite/verein/3008",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hull-city/besucherzahlenentwicklung/verein/3008",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Hull_City_A.F.C.",
+      "stadium": {
+        "name": "MKM Stadium",
+        "owner_raw": "Hull City Council",
+        "transfermarkt_url": "https://www.transfermarkt.com/hull-city/stadion/verein/3008",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/MKM_Stadium",
+        "city": {
+          "name": "Kingston upon Hull",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kingston_upon_Hull"
+        }
+      }
+    },
+    {
+      "name": "Ipswich Town F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/ipswich-town/startseite/verein/677",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ipswich-town/besucherzahlenentwicklung/verein/677",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ipswich_Town_F.C.",
+      "stadium": {
+        "name": "Portman Road",
+        "transfermarkt_url": "https://www.transfermarkt.com/ipswich-town/stadion/verein/677",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Portman_Road",
+        "city": {
+          "name": "Ipswich",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ipswich"
+        }
+      }
+    },
+    {
+      "name": "Leicester City F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/leicester-city/startseite/verein/1003",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/leicester-city/besucherzahlenentwicklung/verein/1003",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Leicester_City_F.C.",
+      "stadium": {
+        "name": "King Power Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/leicester-city/stadion/verein/1003",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/King_Power_Stadium",
+        "city": {
+          "name": "Leicester",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Leicester"
+        }
+      }
+    },
+    {
+      "name": "Middlesbrough F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-middlesbrough/startseite/verein/641",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-middlesbrough/besucherzahlenentwicklung/verein/641",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Middlesbrough_F.C.",
+      "stadium": {
+        "name": "Riverside Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-middlesbrough/stadion/verein/641",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Riverside_Stadium",
+        "city": {
+          "name": "Middlesbrough",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Middlesbrough"
+        }
+      }
+    },
+    {
+      "name": "Millwall F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-millwall/startseite/verein/1028",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-millwall/besucherzahlenentwicklung/verein/1028",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Millwall_F.C.",
+      "stadium": {
+        "name": "The Den",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-millwall/stadion/verein/1028",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/The_Den",
+        "city": {
+          "name": "London",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/London"
+        }
+      }
+    },
+    {
+      "name": "Norwich City F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/norwich-city/startseite/verein/1123",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/norwich-city/besucherzahlenentwicklung/verein/1123",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Norwich_City_F.C.",
+      "stadium": {
+        "name": "Carrow Road",
+        "transfermarkt_url": "https://www.transfermarkt.com/norwich-city/stadion/verein/1123",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Carrow_Road",
+        "city": {
+          "name": "Norwich",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Norwich"
+        }
+      }
+    },
+    {
+      "name": "Oxford United F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/oxford-united/startseite/verein/988",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/oxford-united/besucherzahlenentwicklung/verein/988",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Oxford_United_F.C.",
+      "stadium": {
+        "name": "Kassam Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/oxford-united/stadion/verein/988",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kassam_Stadium",
+        "city": {
+          "name": "Oxford",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Oxford"
+        }
+      }
+    },
+    {
+      "name": "Portsmouth F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-portsmouth/startseite/verein/1020",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-portsmouth/besucherzahlenentwicklung/verein/1020",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Portsmouth_F.C.",
+      "stadium": {
+        "name": "Fratton Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-portsmouth/stadion/verein/1020",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Fratton_Park",
+        "city": {
+          "name": "Portsmouth",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Portsmouth"
+        }
+      }
+    },
+    {
+      "name": "Preston North End F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/preston-north-end/startseite/verein/466",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/preston-north-end/besucherzahlenentwicklung/verein/466",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Preston_North_End_F.C.",
+      "stadium": {
+        "name": "Deepdale",
+        "transfermarkt_url": "https://www.transfermarkt.com/preston-north-end/stadion/verein/466",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Deepdale",
+        "city": {
+          "name": "Preston",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Preston,_Lancashire"
+        }
+      }
+    },
+    {
+      "name": "Queens Park Rangers F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/queens-park-rangers/startseite/verein/1039",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/queens-park-rangers/besucherzahlenentwicklung/verein/1039",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Queens_Park_Rangers_F.C.",
+      "stadium": {
+        "name": "Loftus Road",
+        "transfermarkt_url": "https://www.transfermarkt.com/queens-park-rangers/stadion/verein/1039",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Loftus_Road",
+        "city": {
+          "name": "London",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/London"
+        }
+      }
+    },
+    {
+      "name": "Sheffield United F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/sheffield-united/startseite/verein/350",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sheffield-united/besucherzahlenentwicklung/verein/350",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sheffield_United_F.C.",
+      "stadium": {
+        "name": "Bramall Lane",
+        "transfermarkt_url": "https://www.transfermarkt.com/sheffield-united/stadion/verein/350",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bramall_Lane",
+        "city": {
+          "name": "Sheffield",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sheffield"
+        }
+      }
+    },
+    {
+      "name": "Sheffield Wednesday F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/sheffield-wednesday/startseite/verein/1035",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sheffield-wednesday/besucherzahlenentwicklung/verein/1035",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sheffield_Wednesday_F.C.",
+      "stadium": {
+        "name": "Hillsborough Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/sheffield-wednesday/stadion/verein/1035",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Hillsborough_Stadium",
+        "city": {
+          "name": "Sheffield",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sheffield"
+        }
+      }
+    },
+    {
+      "name": "Southampton F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-southampton/startseite/verein/180",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-southampton/besucherzahlenentwicklung/verein/180",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Southampton_F.C.",
+      "stadium": {
+        "name": "St Mary's Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-southampton/stadion/verein/180",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/St_Mary%27s_Stadium",
+        "city": {
+          "name": "Southampton",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Southampton"
+        }
+      }
+    },
+    {
+      "name": "Stoke City F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/stoke-city/startseite/verein/512",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/stoke-city/besucherzahlenentwicklung/verein/512",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Stoke_City_F.C.",
+      "stadium": {
+        "name": "bet365 Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/stoke-city/stadion/verein/512",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bet365_Stadium",
+        "city": {
+          "name": "Stoke-on-Trent",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Stoke-on-Trent"
+        }
+      }
+    },
+    {
+      "name": "Swansea City A.F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/swansea-city/startseite/verein/2288",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/swansea-city/besucherzahlenentwicklung/verein/2288",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Swansea_City_A.F.C.",
+      "stadium": {
+        "name": "Swansea.com Stadium",
+        "owner_raw": "City and County of Swansea",
+        "transfermarkt_url": "https://www.transfermarkt.com/swansea-city/stadion/verein/2288",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Swansea.com_Stadium",
+        "city": {
+          "name": "Swansea",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Swansea"
+        }
+      }
+    },
+    {
+      "name": "Watford F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-watford/startseite/verein/1010",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-watford/besucherzahlenentwicklung/verein/1010",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Watford_F.C.",
+      "stadium": {
+        "name": "Vicarage Road",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-watford/stadion/verein/1010",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Vicarage_Road",
+        "city": {
+          "name": "Watford",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Watford"
+        }
+      }
+    },
+    {
+      "name": "West Bromwich Albion F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/west-bromwich-albion/startseite/verein/984",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/west-bromwich-albion/besucherzahlenentwicklung/verein/984",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/West_Bromwich_Albion_F.C.",
+      "stadium": {
+        "name": "The Hawthorns",
+        "transfermarkt_url": "https://www.transfermarkt.com/west-bromwich-albion/stadion/verein/984",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/The_Hawthorns",
+        "city": {
+          "name": "West Bromwich",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/West_Bromwich"
+        }
+      }
+    },
+    {
+      "name": "Wrexham A.F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/afc-wrexham/startseite/verein/1112",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/afc-wrexham/besucherzahlenentwicklung/verein/1112",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Wrexham_A.F.C.",
+      "stadium": {
+        "name": "STōK Cae Ras",
+        "transfermarkt_url": "https://www.transfermarkt.com/afc-wrexham/stadion/verein/1112",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Racecourse_Ground",
+        "city": {
+          "name": "Wrexham",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Wrexham"
+        }
+      }
+    }
+  ]
+}
