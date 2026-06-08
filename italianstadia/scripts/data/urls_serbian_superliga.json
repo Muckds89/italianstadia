@@ -1,0 +1,267 @@
+{
+  "league": {
+    "name": "Serbian SuperLiga",
+    "country": "Serbia",
+    "country_code": "RS",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "FK Red Star Belgrade",
+      "transfermarkt_url": "https://www.transfermarkt.com/roter-stern-belgrad/startseite/verein/159",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/roter-stern-belgrad/besucherzahlenentwicklung/verein/159",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Red_Star_Belgrade",
+      "stadium": {
+        "name": "Rajko Mitić Stadium",
+        "owner_raw": "FK Red Star Belgrade",
+        "transfermarkt_url": "https://www.transfermarkt.com/roter-stern-belgrad/stadion/verein/159",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Red_Star_Stadium",
+        "city": {
+          "name": "Belgrade",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Belgrade"
+        }
+      }
+    },
+    {
+      "name": "FK Partizan",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-partizan-belgrad/startseite/verein/669",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-partizan-belgrad/besucherzahlenentwicklung/verein/669",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Partizan",
+      "stadium": {
+        "name": "Partizan Stadium",
+        "owner_raw": "FK Partizan",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-partizan-belgrad/stadion/verein/669",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Partizan_Stadium",
+        "city": {
+          "name": "Belgrade",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Belgrade"
+        }
+      }
+    },
+    {
+      "name": "FK Vojvodina",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-vojvodina-novi-sad/startseite/verein/448",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-vojvodina-novi-sad/besucherzahlenentwicklung/verein/448",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Vojvodina",
+      "stadium": {
+        "name": "Karađorđe Stadium",
+        "owner_raw": "FK Vojvodina",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-vojvodina-novi-sad/stadion/verein/448",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kara%C4%91or%C4%91e_Stadium",
+        "city": {
+          "name": "Novi Sad",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Novi_Sad"
+        }
+      }
+    },
+    {
+      "name": "FK Čukarički",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-cukaricki/startseite/verein/6621",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-cukaricki/besucherzahlenentwicklung/verein/6621",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_%C4%8Cukari%C4%8Dki",
+      "stadium": {
+        "name": "Čukarički Stadium",
+        "owner_raw": "SD Čukarički",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-cukaricki/stadion/verein/6621",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/%C4%8Cukari%C4%8Dki_Stadium",
+        "city": {
+          "name": "Belgrade",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Belgrade"
+        }
+      }
+    },
+    {
+      "name": "FK TSC Bačka Topola",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-tsc-backa-topola/startseite/verein/3137",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-tsc-backa-topola/besucherzahlenentwicklung/verein/3137",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_TSC",
+      "stadium": {
+        "name": "TSC Arena",
+        "owner_raw": "FK TSC",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-tsc-backa-topola/stadion/verein/3137",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/TSC_Arena",
+        "city": {
+          "name": "Bačka Topola",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ba%C4%8Dka_Topola"
+        }
+      }
+    },
+    {
+      "name": "FK Spartak Subotica",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-spartak-subotica/startseite/verein/15276",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-spartak-subotica/besucherzahlenentwicklung/verein/15276",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Spartak_Subotica",
+      "stadium": {
+        "name": "Subotica City Stadium",
+        "owner_raw": "City of Subotica",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-spartak-subotica/stadion/verein/15276",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Subotica_City_Stadium",
+        "city": {
+          "name": "Subotica",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Subotica"
+        }
+      }
+    },
+    {
+      "name": "FK Radnički Niš",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-radnicki-nis/startseite/verein/7567",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-radnicki-nis/besucherzahlenentwicklung/verein/7567",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Radni%C4%8Dki_Ni%C5%A1",
+      "stadium": {
+        "name": "Čair Stadium",
+        "owner_raw": "City of Niš",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-radnicki-nis/stadion/verein/7567",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/%C4%8Cair_Stadium",
+        "city": {
+          "name": "Niš",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ni%C5%A1"
+        }
+      }
+    },
+    {
+      "name": "FK Novi Pazar",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-novi-pazar/startseite/verein/4633",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-novi-pazar/besucherzahlenentwicklung/verein/4633",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Novi_Pazar",
+      "stadium": {
+        "name": "Novi Pazar City Stadium",
+        "owner_raw": "City of Novi Pazar",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-novi-pazar/stadion/verein/4633",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Novi_Pazar_City_Stadium",
+        "city": {
+          "name": "Novi Pazar",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Novi_Pazar"
+        }
+      }
+    },
+    {
+      "name": "FK Mladost Lučani",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-mladost-lucani/startseite/verein/6622",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-mladost-lucani/besucherzahlenentwicklung/verein/6622",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Mladost_Lu%C4%8Dani",
+      "stadium": {
+        "name": "SRC Mr Radoš Milovanović",
+        "owner_raw": "Municipality of Lučani",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-mladost-lucani/stadion/verein/6622",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Mladost_Stadium_(Lu%C4%8Dani)",
+        "city": {
+          "name": "Lučani",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lu%C4%8Dani"
+        }
+      }
+    },
+    {
+      "name": "FK Napredak Kruševac",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-napredak-krusevac/startseite/verein/788",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-napredak-krusevac/besucherzahlenentwicklung/verein/788",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Napredak_Kru%C5%A1evac",
+      "stadium": {
+        "name": "Mladost Stadium",
+        "owner_raw": "FK Napredak Kruševac",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-napredak-krusevac/stadion/verein/788",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Mladost_Stadium_(Kru%C5%A1evac)",
+        "city": {
+          "name": "Kruševac",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kru%C5%A1evac"
+        }
+      }
+    },
+    {
+      "name": "FK Radnički 1923",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-radnicki-1923-kragujevac/startseite/verein/4645",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-radnicki-1923-kragujevac/besucherzahlenentwicklung/verein/4645",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Radni%C4%8Dki_1923",
+      "stadium": {
+        "name": "Čika Dača Stadium",
+        "owner_raw": "City of Kragujevac",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-radnicki-1923-kragujevac/stadion/verein/4645",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/%C4%8Cika_Da%C4%8Da_Stadium",
+        "city": {
+          "name": "Kragujevac",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kragujevac"
+        }
+      }
+    },
+    {
+      "name": "FK Javor-Matis Ivanjica",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-javor-matis-ivanjica/startseite/verein/8819",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-javor-matis-ivanjica/besucherzahlenentwicklung/verein/8819",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Javor_Ivanjica",
+      "stadium": {
+        "name": "Javor Stadium",
+        "owner_raw": "FK Javor Ivanjica",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-javor-matis-ivanjica/stadion/verein/8819",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Javor_Stadium",
+        "city": {
+          "name": "Ivanjica",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ivanjica"
+        }
+      }
+    },
+    {
+      "name": "FK Železničar Pančevo",
+      "transfermarkt_url": "https://www.transfermarkt.com/zeleznicar-pancevo/startseite/verein/59358",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/zeleznicar-pancevo/besucherzahlenentwicklung/verein/59358",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_%C5%BDelezni%C4%8Dar_Pan%C4%8Devo",
+      "stadium": {
+        "name": "SRC Mladost",
+        "owner_raw": "City of Pančevo",
+        "transfermarkt_url": "https://www.transfermarkt.com/zeleznicar-pancevo/stadion/verein/59358",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/SRC_Mladost_Pan%C4%8Devo",
+        "city": {
+          "name": "Pančevo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pan%C4%8Devo"
+        }
+      }
+    },
+    {
+      "name": "FK IMT",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-imt-belgrad/startseite/verein/32113",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-imt-belgrad/besucherzahlenentwicklung/verein/32113",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_IMT",
+      "stadium": {
+        "name": "Lagator Stadium",
+        "owner_raw": "City of Loznica",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-imt-belgrad/stadion/verein/32113",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Lagator_Stadium",
+        "city": {
+          "name": "Loznica",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Loznica"
+        }
+      }
+    },
+    {
+      "name": "FK Radnik Surdulica",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-radnik-surdulica/startseite/verein/33328",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-radnik-surdulica/besucherzahlenentwicklung/verein/33328",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Radnik_Surdulica",
+      "stadium": {
+        "name": "Surdulica City Stadium",
+        "owner_raw": "City of Surdulica",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-radnik-surdulica/stadion/verein/33328",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Surdulica_City_Stadium",
+        "city": {
+          "name": "Surdulica",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Surdulica"
+        }
+      }
+    },
+    {
+      "name": "OFK Beograd",
+      "transfermarkt_url": "https://www.transfermarkt.com/ofk-beograd/startseite/verein/53",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ofk-beograd/besucherzahlenentwicklung/verein/53",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/OFK_Beograd",
+      "stadium": {
+        "name": "Omladinski Stadium",
+        "owner_raw": "OFK Beograd",
+        "transfermarkt_url": "https://www.transfermarkt.com/ofk-beograd/stadion/verein/53",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Omladinski_Stadium",
+        "city": {
+          "name": "Belgrade",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Belgrade"
+        }
+      }
+    }
+  ]
+}
