@@ -1013,6 +1013,8 @@ def classify_ownership(owner_raw):
         "ayuntamiento", "municipio", "diputación", "patronato municipal",
         "generalitat", "junta de ", "comunidad de", "consell",
         "consejo municipal",
+        "concello ",                # Galician city council (Concello de A Coruña, etc.)
+        "cabildo ",                 # Canary Islands island council (Cabildo de Gran Canaria, etc.)
         # ── Portuguese ───────────────────────────────────────────────────────
         "município", "câmara municipal", "câmara ", "câmara de",
         "junta de freguesia", "autarquia",

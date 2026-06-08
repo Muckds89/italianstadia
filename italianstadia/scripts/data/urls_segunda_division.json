@@ -1,0 +1,346 @@
+{
+  "league": {
+    "name": "Segunda División",
+    "country": "Spain",
+    "country_code": "ES",
+    "division_level": 2,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Albacete Balompié",
+      "transfermarkt_url": "https://www.transfermarkt.com/albacete-balompie/startseite/verein/1532",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/albacete-balompie/besucherzahlenentwicklung/verein/1532",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Albacete_Balompi%C3%A9",
+      "stadium": {
+        "name": "Estadio Carlos Belmonte",
+        "transfermarkt_url": "https://www.transfermarkt.com/albacete-balompie/stadion/verein/1532",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Carlos_Belmonte",
+        "city": {
+          "name": "Albacete",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Albacete"
+        }
+      }
+    },
+    {
+      "name": "UD Almería",
+      "transfermarkt_url": "https://www.transfermarkt.com/ud-almeria/startseite/verein/3302",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ud-almeria/besucherzahlenentwicklung/verein/3302",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/UD_Almer%C3%ADa",
+      "stadium": {
+        "name": "Estadio de los Juegos Mediterráneos",
+        "transfermarkt_url": "https://www.transfermarkt.com/ud-almeria/stadion/verein/3302",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Power_Horse_Stadium",
+        "city": {
+          "name": "Almería",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Almer%C3%ADa"
+        }
+      }
+    },
+    {
+      "name": "FC Andorra",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-andorra/startseite/verein/10718",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-andorra/besucherzahlenentwicklung/verein/10718",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Andorra",
+      "stadium": {
+        "name": "Estadi de la FAF",
+        "owner_raw": "Federació Andorrana de Futbol",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-andorra/stadion/verein/10718",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadi_de_la_FAF",
+        "city": {
+          "name": "Encamp",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Encamp"
+        }
+      }
+    },
+    {
+      "name": "Burgos CF",
+      "transfermarkt_url": "https://www.transfermarkt.com/burgos-cf/startseite/verein/1536",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/burgos-cf/besucherzahlenentwicklung/verein/1536",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Burgos_CF",
+      "stadium": {
+        "name": "Estadio Municipal El Plantío",
+        "transfermarkt_url": "https://www.transfermarkt.com/burgos-cf/stadion/verein/1536",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_El_Plant%C3%ADo",
+        "city": {
+          "name": "Burgos",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Burgos"
+        }
+      }
+    },
+    {
+      "name": "Cádiz CF",
+      "transfermarkt_url": "https://www.transfermarkt.com/cadiz-cf/startseite/verein/2687",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cadiz-cf/besucherzahlenentwicklung/verein/2687",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/C%C3%A1diz_CF",
+      "stadium": {
+        "name": "Estadio Nuevo Mirandilla",
+        "transfermarkt_url": "https://www.transfermarkt.com/cadiz-cf/stadion/verein/2687",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Nuevo_Mirandilla",
+        "city": {
+          "name": "Cádiz",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/C%C3%A1diz"
+        }
+      }
+    },
+    {
+      "name": "CD Castellón",
+      "transfermarkt_url": "https://www.transfermarkt.com/cd-castellon/startseite/verein/2502",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cd-castellon/besucherzahlenentwicklung/verein/2502",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/CD_Castell%C3%B3n",
+      "stadium": {
+        "name": "Estadio Castalia",
+        "transfermarkt_url": "https://www.transfermarkt.com/cd-castellon/stadion/verein/2502",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Nou_Estadi_Cast%C3%A0lia",
+        "city": {
+          "name": "Castellón de la Plana",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Castell%C3%B3n_de_la_Plana"
+        }
+      }
+    },
+    {
+      "name": "AD Ceuta FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/ad-ceuta/startseite/verein/8568",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ad-ceuta/besucherzahlenentwicklung/verein/8568",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AD_Ceuta_FC",
+      "stadium": {
+        "name": "Estadio Alfonso Murube",
+        "transfermarkt_url": "https://www.transfermarkt.com/ad-ceuta/stadion/verein/8568",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Alfonso_Murube",
+        "city": {
+          "name": "Ceuta",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ceuta"
+        }
+      }
+    },
+    {
+      "name": "Córdoba CF",
+      "transfermarkt_url": "https://www.transfermarkt.com/cordoba-cf/startseite/verein/993",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cordoba-cf/besucherzahlenentwicklung/verein/993",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/C%C3%B3rdoba_CF",
+      "stadium": {
+        "name": "Estadio Nuevo Arcángel",
+        "transfermarkt_url": "https://www.transfermarkt.com/cordoba-cf/stadion/verein/993",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Nuevo_Arc%C3%A1ngel",
+        "city": {
+          "name": "Córdoba",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/C%C3%B3rdoba,_Spain"
+        }
+      }
+    },
+    {
+      "name": "Cultural y Deportiva Leonesa",
+      "transfermarkt_url": "https://www.transfermarkt.com/cultural-leonesa/startseite/verein/4542",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cultural-leonesa/besucherzahlenentwicklung/verein/4542",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Cultural_y_Deportiva_Leonesa",
+      "stadium": {
+        "name": "Estadio Municipal Reino de León",
+        "transfermarkt_url": "https://www.transfermarkt.com/cultural-leonesa/stadion/verein/4542",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Reino_de_Le%C3%B3n",
+        "city": {
+          "name": "León",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Le%C3%B3n,_Spain"
+        }
+      }
+    },
+    {
+      "name": "Deportivo de La Coruña",
+      "transfermarkt_url": "https://www.transfermarkt.com/deportivo-la-coruna/startseite/verein/897",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/deportivo-la-coruna/besucherzahlenentwicklung/verein/897",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Deportivo_de_La_Coru%C3%B1a",
+      "stadium": {
+        "name": "Estadio Riazor",
+        "owner_raw": "Concello de A Coruña",
+        "transfermarkt_url": "https://www.transfermarkt.com/deportivo-la-coruna/stadion/verein/897",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Riazor",
+        "city": {
+          "name": "A Coruña",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/A_Coru%C3%B1a"
+        }
+      }
+    },
+    {
+      "name": "SD Eibar",
+      "transfermarkt_url": "https://www.transfermarkt.com/sd-eibar/startseite/verein/1533",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sd-eibar/besucherzahlenentwicklung/verein/1533",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SD_Eibar",
+      "stadium": {
+        "name": "Ipurua Municipal Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/sd-eibar/stadion/verein/1533",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Municipal_de_Ipurua",
+        "city": {
+          "name": "Eibar",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Eibar"
+        }
+      }
+    },
+    {
+      "name": "Granada CF",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-granada/startseite/verein/16795",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-granada/besucherzahlenentwicklung/verein/16795",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Granada_CF",
+      "stadium": {
+        "name": "Nuevo Estadio de Los Cármenes",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-granada/stadion/verein/16795",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Nuevo_Estadio_de_Los_C%C3%A1rmenes",
+        "city": {
+          "name": "Granada",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Granada"
+        }
+      }
+    },
+    {
+      "name": "SD Huesca",
+      "transfermarkt_url": "https://www.transfermarkt.com/sd-huesca/startseite/verein/5358",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sd-huesca/besucherzahlenentwicklung/verein/5358",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SD_Huesca",
+      "stadium": {
+        "name": "Estadio El Alcoraz",
+        "transfermarkt_url": "https://www.transfermarkt.com/sd-huesca/stadion/verein/5358",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_El_Alcoraz",
+        "city": {
+          "name": "Huesca",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Huesca"
+        }
+      }
+    },
+    {
+      "name": "UD Las Palmas",
+      "transfermarkt_url": "https://www.transfermarkt.com/ud-las-palmas/startseite/verein/472",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ud-las-palmas/besucherzahlenentwicklung/verein/472",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/UD_Las_Palmas",
+      "stadium": {
+        "name": "Estadio de Gran Canaria",
+        "owner_raw": "Cabildo de Gran Canaria",
+        "transfermarkt_url": "https://www.transfermarkt.com/ud-las-palmas/stadion/verein/472",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gran_Canaria_Stadium",
+        "city": {
+          "name": "Las Palmas de Gran Canaria",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Las_Palmas_de_Gran_Canaria"
+        }
+      }
+    },
+    {
+      "name": "CD Leganés",
+      "transfermarkt_url": "https://www.transfermarkt.com/cd-leganes/startseite/verein/1244",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cd-leganes/besucherzahlenentwicklung/verein/1244",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/CD_Legan%C3%A9s",
+      "stadium": {
+        "name": "Estadio Municipal de Butarque",
+        "transfermarkt_url": "https://www.transfermarkt.com/cd-leganes/stadion/verein/1244",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Municipal_Butarque",
+        "city": {
+          "name": "Leganés",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Legan%C3%A9s"
+        }
+      }
+    },
+    {
+      "name": "Málaga CF",
+      "transfermarkt_url": "https://www.transfermarkt.com/malaga-cf/startseite/verein/1084",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/malaga-cf/besucherzahlenentwicklung/verein/1084",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/M%C3%A1laga_CF",
+      "stadium": {
+        "name": "Estadio La Rosaleda",
+        "transfermarkt_url": "https://www.transfermarkt.com/malaga-cf/stadion/verein/1084",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/La_Rosaleda_Stadium",
+        "city": {
+          "name": "Málaga",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/M%C3%A1laga"
+        }
+      }
+    },
+    {
+      "name": "CD Mirandés",
+      "transfermarkt_url": "https://www.transfermarkt.com/cd-mirandes/startseite/verein/13222",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cd-mirandes/besucherzahlenentwicklung/verein/13222",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/CD_Mirand%C3%A9s",
+      "stadium": {
+        "name": "Estadio Municipal de Anduva",
+        "transfermarkt_url": "https://www.transfermarkt.com/cd-mirandes/stadion/verein/13222",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Municipal_de_Anduva",
+        "city": {
+          "name": "Miranda de Ebro",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Miranda_de_Ebro"
+        }
+      }
+    },
+    {
+      "name": "Racing de Santander",
+      "transfermarkt_url": "https://www.transfermarkt.com/racing-santander/startseite/verein/630",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/racing-santander/besucherzahlenentwicklung/verein/630",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Racing_de_Santander",
+      "stadium": {
+        "name": "Estadio El Sardinero",
+        "transfermarkt_url": "https://www.transfermarkt.com/racing-santander/stadion/verein/630",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Campos_de_Sport_de_El_Sardinero",
+        "city": {
+          "name": "Santander",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Santander,_Spain"
+        }
+      }
+    },
+    {
+      "name": "Real Sociedad B",
+      "transfermarkt_url": "https://www.transfermarkt.com/real-sociedad-b/startseite/verein/9899",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/real-sociedad-b/besucherzahlenentwicklung/verein/9899",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Real_Sociedad_B",
+      "stadium": {
+        "name": "Zubieta Stadium",
+        "owner_raw": "Real Sociedad",
+        "transfermarkt_url": "https://www.transfermarkt.com/real-sociedad-b/stadion/verein/9899",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Zubieta_Facilities",
+        "city": {
+          "name": "San Sebastián",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/San_Sebasti%C3%A1n"
+        }
+      }
+    },
+    {
+      "name": "Sporting de Gijón",
+      "transfermarkt_url": "https://www.transfermarkt.com/sporting-gijon/startseite/verein/2448",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sporting-gijon/besucherzahlenentwicklung/verein/2448",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sporting_de_Gij%C3%B3n",
+      "stadium": {
+        "name": "Estadio El Molinón",
+        "transfermarkt_url": "https://www.transfermarkt.com/sporting-gijon/stadion/verein/2448",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/El_Molinon",
+        "city": {
+          "name": "Gijón",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gij%C3%B3n"
+        }
+      }
+    },
+    {
+      "name": "Real Valladolid",
+      "transfermarkt_url": "https://www.transfermarkt.com/real-valladolid/startseite/verein/366",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/real-valladolid/besucherzahlenentwicklung/verein/366",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Real_Valladolid",
+      "stadium": {
+        "name": "Estadio Municipal José Zorrilla",
+        "transfermarkt_url": "https://www.transfermarkt.com/real-valladolid/stadion/verein/366",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_Jos%C3%A9_Zorrilla",
+        "city": {
+          "name": "Valladolid",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Valladolid"
+        }
+      }
+    },
+    {
+      "name": "Real Zaragoza",
+      "transfermarkt_url": "https://www.transfermarkt.com/real-saragossa/startseite/verein/142",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/real-saragossa/besucherzahlenentwicklung/verein/142",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Real_Zaragoza",
+      "stadium": {
+        "name": "Ibercaja Estadio",
+        "owner_raw": "Gobierno de Aragón",
+        "transfermarkt_url": "https://www.transfermarkt.com/real-saragossa/stadion/verein/142",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ibercaja_Stadium",
+        "city": {
+          "name": "Zaragoza",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Zaragoza"
+        }
+      }
+    }
+  ]
+}

@@ -251,7 +251,8 @@ The project is currently Italy-only (Serie A/B/C). Full roadmap in `italianstadi
 | 2. Bundesliga | Germany | 2 | JSON ready (25/26) |
 | Primeira Liga | Portugal | 1 | JSON ready (25/26) |
 | Ekstraklasa | Poland | 1 | JSON ready (25/26) |
-| La Liga / Segunda | Spain | 1–2 | planned |
+| La Liga | Spain | 1 | JSON ready (25/26) |
+| Segunda División | Spain | 2 | JSON ready (25/26) |
 | Ligue 1 / Ligue 2 | France | 1–2 | planned |
 | 2. Bundesliga | Germany | 2 | planned |
 | Eredivisie | Netherlands | 1 | JSON ready (25/26) |
@@ -333,7 +334,7 @@ Public keywords cover ~15 European language families:
 | Italian | `comune di`, `comunale`, `provincia`, `città metropolitana`, `sport e salute` |
 | German (DE/AT/CH) | `stadt `, `gemeinde`, `landkreis`, `freie und hansestadt`, `bezirksamt`, `land ` (Austrian federal states: Land Salzburg, Land Tirol …) |
 | French (FR/BE/CH) | `commune de`, `mairie`, `métropole`, `ville de`, `agglomération`, `communauté` |
-| Spanish | `ayuntamiento`, `municipio`, `diputación`, `generalitat`, `junta de ` |
+| Spanish | `ayuntamiento`, `municipio`, `diputación`, `generalitat`, `junta de `, `concello ` (Galician city council), `cabildo ` (Canary Islands island council) |
 | Portuguese | `município`, `câmara municipal`, `junta de freguesia`, `autarquia` |
 | Polish | `miasto `, `miasto stołeczne`, `gmina `, `województwo`, `skarb państwa` |
 | Dutch/Belgian | `gemeente `, `stad `, `provincie `, `gewest ` |
