@@ -1,0 +1,203 @@
+{
+  "league": {
+    "name": "Nemzeti Bajnokság I",
+    "country": "Hungary",
+    "country_code": "HU",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Ferencvárosi TC",
+      "transfermarkt_url": "https://www.transfermarkt.com/ferencvaros-budapest/startseite/verein/279",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ferencvaros-budapest/besucherzahlenentwicklung/verein/279",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ferencv%C3%A1rosi_TC",
+      "stadium": {
+        "name": "Groupama Aréna",
+        "owner_raw": "Government of Hungary",
+        "transfermarkt_url": "https://www.transfermarkt.com/ferencvaros-budapest/stadion/verein/279",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ferencv%C3%A1ros_Stadion",
+        "city": {
+          "name": "Budapest",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Budapest"
+        }
+      }
+    },
+    {
+      "name": "ETO FC Győr",
+      "transfermarkt_url": "https://www.transfermarkt.com/eto-fc-gyor/startseite/verein/6055",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/eto-fc-gyor/besucherzahlenentwicklung/verein/6055",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Gy%C5%91ri_ETO_FC",
+      "stadium": {
+        "name": "ETO Park",
+        "owner_raw": "Private owner",
+        "transfermarkt_url": "https://www.transfermarkt.com/eto-fc-gyor/stadion/verein/6055",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/ETO_Park",
+        "city": {
+          "name": "Győr",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gy%C5%91r"
+        }
+      }
+    },
+    {
+      "name": "Újpest FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/ujpest-fc/startseite/verein/708",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ujpest-fc/besucherzahlenentwicklung/verein/708",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/%C3%9Ajpest_FC",
+      "stadium": {
+        "name": "Szusza Ferenc Stadion",
+        "owner_raw": "Government of Hungary",
+        "transfermarkt_url": "https://www.transfermarkt.com/ujpest-fc/stadion/verein/708",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Szusza_Ferenc_Stadion",
+        "city": {
+          "name": "Budapest",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Budapest"
+        }
+      }
+    },
+    {
+      "name": "MTK Budapest FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/mtk-budapest/startseite/verein/634",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/mtk-budapest/besucherzahlenentwicklung/verein/634",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/MTK_Budapest_FC",
+      "stadium": {
+        "name": "Hidegkuti Nándor Stadion",
+        "owner_raw": "Government of Hungary",
+        "transfermarkt_url": "https://www.transfermarkt.com/mtk-budapest/stadion/verein/634",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Hidegkuti_N%C3%A1ndor_Stadion",
+        "city": {
+          "name": "Budapest",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Budapest"
+        }
+      }
+    },
+    {
+      "name": "Puskás Akadémia FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/puskas-akademia-fc/startseite/verein/37169",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/puskas-akademia-fc/besucherzahlenentwicklung/verein/37169",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Pusk%C3%A1s_Akad%C3%A9mia_FC",
+      "stadium": {
+        "name": "Pancho Aréna",
+        "owner_raw": "Felcsúti Utánpótlás Neveléséért Alapítvány",
+        "transfermarkt_url": "https://www.transfermarkt.com/puskas-akademia-fc/stadion/verein/37169",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Pancho_Ar%C3%A9na",
+        "city": {
+          "name": "Felcsút",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Felcs%C3%BAt"
+        }
+      }
+    },
+    {
+      "name": "Debreceni VSC",
+      "transfermarkt_url": "https://www.transfermarkt.com/debreceni-vsc/startseite/verein/84",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/debreceni-vsc/besucherzahlenentwicklung/verein/84",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Debreceni_VSC",
+      "stadium": {
+        "name": "Nagyerdei Stadion",
+        "owner_raw": "City of Debrecen",
+        "transfermarkt_url": "https://www.transfermarkt.com/debreceni-vsc/stadion/verein/84",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Nagyerdei_Stadion",
+        "city": {
+          "name": "Debrecen",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Debrecen"
+        }
+      }
+    },
+    {
+      "name": "Zalaegerszegi TE FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/zalaegerszegi-te-fc/startseite/verein/1391",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/zalaegerszegi-te-fc/besucherzahlenentwicklung/verein/1391",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Zalaegerszegi_TE",
+      "stadium": {
+        "name": "ZTE Aréna",
+        "owner_raw": "City of Zalaegerszeg",
+        "transfermarkt_url": "https://www.transfermarkt.com/zalaegerszegi-te-fc/stadion/verein/1391",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/ZTE_Arena",
+        "city": {
+          "name": "Zalaegerszeg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Zalaegerszeg"
+        }
+      }
+    },
+    {
+      "name": "Nyíregyháza Spartacus FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/nyiregyhaza-spartacus/startseite/verein/6058",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nyiregyhaza-spartacus/besucherzahlenentwicklung/verein/6058",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ny%C3%ADregyh%C3%A1za_Spartacus_FC",
+      "stadium": {
+        "name": "Városi Stadion",
+        "owner_raw": "City of Nyíregyháza",
+        "transfermarkt_url": "https://www.transfermarkt.com/nyiregyhaza-spartacus/stadion/verein/6058",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/V%C3%A1rosi_Stadion_(Ny%C3%ADregyh%C3%A1za)",
+        "city": {
+          "name": "Nyíregyháza",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ny%C3%ADregyh%C3%A1za"
+        }
+      }
+    },
+    {
+      "name": "Paksi FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/paksi-fc/startseite/verein/12163",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/paksi-fc/besucherzahlenentwicklung/verein/12163",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Paksi_FC",
+      "stadium": {
+        "name": "Fehérvári úti Stadion",
+        "owner_raw": "Paksi FC",
+        "transfermarkt_url": "https://www.transfermarkt.com/paksi-fc/stadion/verein/12163",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Feh%C3%A9rv%C3%A1ri_%C3%BAti_Stadion",
+        "city": {
+          "name": "Paks",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Paks"
+        }
+      }
+    },
+    {
+      "name": "Kisvárda FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/kisvarda-fc/startseite/verein/30613",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kisvarda-fc/besucherzahlenentwicklung/verein/30613",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Kisv%C3%A1rda_FC",
+      "stadium": {
+        "name": "Várkerti Stadion",
+        "owner_raw": "Kisvárda FC",
+        "transfermarkt_url": "https://www.transfermarkt.com/kisvarda-fc/stadion/verein/30613",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/V%C3%A1rkerti_Stadion",
+        "city": {
+          "name": "Kisvárda",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kisv%C3%A1rda"
+        }
+      }
+    },
+    {
+      "name": "Diósgyőri VTK",
+      "transfermarkt_url": "https://www.transfermarkt.com/diosgyori-vtk/startseite/verein/9241",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/diosgyori-vtk/besucherzahlenentwicklung/verein/9241",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Di%C3%B3sgy%C5%91ri_VTK",
+      "stadium": {
+        "name": "DVTK Stadion",
+        "owner_raw": "City of Miskolc",
+        "transfermarkt_url": "https://www.transfermarkt.com/diosgyori-vtk/stadion/verein/9241",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Di%C3%B3sgy%C5%91ri_Stadion",
+        "city": {
+          "name": "Miskolc",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Miskolc"
+        }
+      }
+    },
+    {
+      "name": "Kazincbarcikai SC",
+      "transfermarkt_url": "https://www.transfermarkt.com/kazincbarcikai-sc/startseite/verein/24031",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kazincbarcikai-sc/besucherzahlenentwicklung/verein/24031",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Kazincbarcikai_SC",
+      "stadium": {
+        "name": "Kolorcity Aréna",
+        "owner_raw": "City of Kazincbarcika",
+        "transfermarkt_url": "https://www.transfermarkt.com/kazincbarcikai-sc/stadion/verein/24031",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kolorcity_Ar%C3%A9na",
+        "city": {
+          "name": "Kazincbarcika",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kazincbarcika"
+        }
+      }
+    }
+  ]
+}
