@@ -248,6 +248,7 @@ The project is currently Italy-only (Serie A/B/C). Full roadmap in `italianstadi
 | Premier League | England | 1 | JSON ready (25/26) |
 | EFL Championship | England | 2 | JSON ready (25/26) |
 | Bundesliga | Germany | 1 | JSON ready (25/26) |
+| 2. Bundesliga | Germany | 2 | JSON ready (25/26) |
 | Primeira Liga | Portugal | 1 | JSON ready (25/26) |
 | Ekstraklasa | Poland | 1 | JSON ready (25/26) |
 | La Liga / Segunda | Spain | 1–2 | planned |
