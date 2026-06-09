@@ -997,6 +997,7 @@ def classify_ownership(owner_raw):
         "public authority", "public body", "national sports",
         "sports authority", "stadium authority",
         "sports organ",                # sports organisation / sports organization (e.g. Cyprus Sports Organisation)
+        "sport organ",                 # sport organisation / sport organization (singular — e.g. Cyprus Sport Organisation)
         "olympic committee",           # Hellenic Olympic Committee (Karaiskakis Stadium)
         "agglomeration",
         # ── Italian ──────────────────────────────────────────────────────────
@@ -1323,6 +1324,21 @@ def scrape_stadium(stadium_data, city):
     log_field("Stadium", final_name, "ownership", final_ownership, "Wikipedia+Wikidata")
 
     # 6. Save to DB
+    # Shared-venue deduplication: if another team already produced a Stadium row
+    # with the same Wikipedia URL in the same city (e.g. Jan Breydel, Stelios
+    # Kyriakides, Arena Națională), reuse that row instead of creating a duplicate.
+    # Only the transfermarkt_url column is overwritten — all scraped data stays intact.
+    if wikipedia_url:
+        shared = Stadium.objects.filter(wikipedia_url=wikipedia_url, city=city).first()
+        if shared:
+            shared.transfermarkt_url = transfermarkt_url
+            shared.save(update_fields=["transfermarkt_url"])
+            logging.info(
+                f"Shared stadium — reused existing '{shared.name}' "
+                f"(Wikipedia: {wikipedia_url})"
+            )
+            return shared
+
     stadium, created = Stadium.objects.update_or_create(
         name=final_name,
         city=city,

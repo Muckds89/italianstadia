@@ -77,10 +77,10 @@
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/dinamo-bukarest/besucherzahlenentwicklung/verein/312",
       "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dinamo_Bucure%C8%99ti",
       "stadium": {
-        "name": "Stadionul Dinamo",
+        "name": "Arena Națională",
         "owner_raw": "Ministerul Tineretului și Sportului",
         "transfermarkt_url": "https://www.transfermarkt.com/dinamo-bukarest/stadion/verein/312",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadionul_Dinamo",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Arena_Na%C8%9Bional%C4%83",
         "city": {
           "name": "Bucharest",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Bucharest"
