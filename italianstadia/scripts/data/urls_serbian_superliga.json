@@ -145,6 +145,8 @@
         "owner_raw": "Municipality of Lučani",
         "transfermarkt_url": "https://www.transfermarkt.com/fk-mladost-lucani/stadion/verein/6622",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Mladost_Stadium_(Lu%C4%8Dani)",
+        "latitude": 43.860000,
+        "longitude": 20.132600,
         "city": {
           "name": "Lučani",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Lu%C4%8Dani"
@@ -241,6 +243,8 @@
         "owner_raw": "City of Surdulica",
         "transfermarkt_url": "https://www.transfermarkt.com/fk-radnik-surdulica/stadion/verein/33328",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Surdulica_City_Stadium",
+        "latitude": 42.692211,
+        "longitude": 22.165300,
         "city": {
           "name": "Surdulica",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Surdulica"
