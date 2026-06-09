@@ -1,0 +1,171 @@
+{
+  "league": {
+    "name": "League of Ireland Premier Division",
+    "country": "Ireland",
+    "country_code": "IE",
+    "division_level": 1,
+    "season": "2025"
+  },
+  "teams": [
+    {
+      "name": "Shamrock Rovers",
+      "transfermarkt_url": "https://www.transfermarkt.com/shamrock-rovers/startseite/verein/3258",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/shamrock-rovers/besucherzahlenentwicklung/verein/3258",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Shamrock_Rovers_F.C.",
+      "stadium": {
+        "name": "Tallaght Stadium",
+        "owner_raw": "South Dublin County Council",
+        "transfermarkt_url": "https://www.transfermarkt.com/shamrock-rovers/stadion/verein/3258",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tallaght_Stadium",
+        "city": {
+          "name": "Tallaght",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tallaght"
+        }
+      }
+    },
+    {
+      "name": "Shelbourne FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/shelbourne-fc/startseite/verein/3909",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/shelbourne-fc/besucherzahlenentwicklung/verein/3909",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Shelbourne_F.C.",
+      "stadium": {
+        "name": "Tolka Park",
+        "owner_raw": "Dublin City Council",
+        "transfermarkt_url": "https://www.transfermarkt.com/shelbourne-fc/stadion/verein/3909",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tolka_Park",
+        "city": {
+          "name": "Dublin",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Dublin"
+        }
+      }
+    },
+    {
+      "name": "Bohemian FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/bohemian-football-club-dublin/startseite/verein/9211",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/bohemian-football-club-dublin/besucherzahlenentwicklung/verein/9211",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Bohemian_F.C.",
+      "stadium": {
+        "name": "Dalymount Park",
+        "owner_raw": "Dublin City Council",
+        "transfermarkt_url": "https://www.transfermarkt.com/bohemian-football-club-dublin/stadion/verein/9211",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Dalymount_Park",
+        "city": {
+          "name": "Dublin",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Dublin"
+        }
+      }
+    },
+    {
+      "name": "St Patrick's Athletic",
+      "transfermarkt_url": "https://www.transfermarkt.com/st-patricks-athletic/startseite/verein/1189",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/st-patricks-athletic/besucherzahlenentwicklung/verein/1189",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/St_Patrick%27s_Athletic_F.C.",
+      "stadium": {
+        "name": "Richmond Park",
+        "owner_raw": "St Patrick's Athletic F.C.",
+        "transfermarkt_url": "https://www.transfermarkt.com/st-patricks-athletic/stadion/verein/1189",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Richmond_Park_(football_ground)",
+        "city": {
+          "name": "Dublin",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Dublin"
+        }
+      }
+    },
+    {
+      "name": "Derry City",
+      "transfermarkt_url": "https://www.transfermarkt.com/derry-city/startseite/verein/920",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/derry-city/besucherzahlenentwicklung/verein/920",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Derry_City_F.C.",
+      "stadium": {
+        "name": "Ryan McBride Brandywell Stadium",
+        "owner_raw": "Derry City and Strabane District Council",
+        "transfermarkt_url": "https://www.transfermarkt.com/derry-city/stadion/verein/920",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ryan_McBride_Brandywell_Stadium",
+        "city": {
+          "name": "Derry",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Derry"
+        }
+      }
+    },
+    {
+      "name": "Drogheda United",
+      "transfermarkt_url": "https://www.transfermarkt.com/drogheda-united-fc/startseite/verein/4277",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/drogheda-united-fc/besucherzahlenentwicklung/verein/4277",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Drogheda_United_F.C.",
+      "stadium": {
+        "name": "United Park",
+        "owner_raw": "Drogheda United F.C.",
+        "transfermarkt_url": "https://www.transfermarkt.com/drogheda-united-fc/stadion/verein/4277",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/United_Park",
+        "city": {
+          "name": "Drogheda",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Drogheda"
+        }
+      }
+    },
+    {
+      "name": "Galway United",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-galway-united/startseite/verein/42394",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-galway-united/besucherzahlenentwicklung/verein/42394",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Galway_United_F.C.",
+      "stadium": {
+        "name": "Eamonn Deacy Park",
+        "owner_raw": "Galway Football Association",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-galway-united/stadion/verein/42394",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Eamonn_Deacy_Park",
+        "city": {
+          "name": "Galway",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Galway"
+        }
+      }
+    },
+    {
+      "name": "Sligo Rovers",
+      "transfermarkt_url": "https://www.transfermarkt.com/sligo-rovers/startseite/verein/8780",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sligo-rovers/besucherzahlenentwicklung/verein/8780",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sligo_Rovers_F.C.",
+      "stadium": {
+        "name": "The Showgrounds",
+        "owner_raw": "Showgrounds Trust Foundation",
+        "transfermarkt_url": "https://www.transfermarkt.com/sligo-rovers/stadion/verein/8780",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/The_Showgrounds,_Sligo",
+        "city": {
+          "name": "Sligo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sligo"
+        }
+      }
+    },
+    {
+      "name": "Cork City",
+      "transfermarkt_url": "https://www.transfermarkt.com/cork-city-fc/startseite/verein/27774",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cork-city-fc/besucherzahlenentwicklung/verein/27774",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Cork_City_F.C.",
+      "stadium": {
+        "name": "Turner's Cross",
+        "owner_raw": "Munster Football Association",
+        "transfermarkt_url": "https://www.transfermarkt.com/cork-city-fc/stadion/verein/27774",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Turners_Cross_(stadium)",
+        "city": {
+          "name": "Cork",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Cork_(city)"
+        }
+      }
+    },
+    {
+      "name": "Waterford FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-waterford/startseite/verein/7609",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-waterford/besucherzahlenentwicklung/verein/7609",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Waterford_F.C.",
+      "stadium": {
+        "name": "Waterford Regional Sports Centre",
+        "owner_raw": "Waterford City and County Council",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-waterford/stadion/verein/7609",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Waterford_Regional_Sports_Centre",
+        "city": {
+          "name": "Waterford",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Waterford"
+        }
+      }
+    }
+  ]
+}
