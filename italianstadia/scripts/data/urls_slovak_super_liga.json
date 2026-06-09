@@ -1,0 +1,203 @@
+{
+  "league": {
+    "name": "Slovak Super Liga",
+    "country": "Slovakia",
+    "country_code": "SK",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "ŠK Slovan Bratislava",
+      "transfermarkt_url": "https://www.transfermarkt.com/slovan-bratislava/startseite/verein/540",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/slovan-bratislava/besucherzahlenentwicklung/verein/540",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%A0K_Slovan_Bratislava",
+      "stadium": {
+        "name": "Tehelné pole",
+        "owner_raw": "ŠK Slovan Bratislava",
+        "transfermarkt_url": "https://www.transfermarkt.com/slovan-bratislava/stadion/verein/540",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Teheln%C3%A9_pole",
+        "city": {
+          "name": "Bratislava",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bratislava"
+        }
+      }
+    },
+    {
+      "name": "FC DAC 1904 Dunajská Streda",
+      "transfermarkt_url": "https://www.transfermarkt.com/dac-dunajska-streda/startseite/verein/4529",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dac-dunajska-streda/besucherzahlenentwicklung/verein/4529",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_DAC_1904_Dunajsk%C3%A1_Streda",
+      "stadium": {
+        "name": "DAC Aréna",
+        "owner_raw": "EHCS Group",
+        "transfermarkt_url": "https://www.transfermarkt.com/dac-dunajska-streda/stadion/verein/4529",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/DAC_Ar%C3%A9na",
+        "city": {
+          "name": "Dunajská Streda",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Dunajsk%C3%A1_Streda"
+        }
+      }
+    },
+    {
+      "name": "FC Spartak Trnava",
+      "transfermarkt_url": "https://www.transfermarkt.com/spartak-trnava/startseite/verein/365",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/spartak-trnava/besucherzahlenentwicklung/verein/365",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Spartak_Trnava",
+      "stadium": {
+        "name": "Anton Malatinský Stadium",
+        "owner_raw": "City of Trnava",
+        "transfermarkt_url": "https://www.transfermarkt.com/spartak-trnava/stadion/verein/365",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Anton_Malatinsk%C3%BD_Stadium",
+        "city": {
+          "name": "Trnava",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Trnava"
+        }
+      }
+    },
+    {
+      "name": "AS Trenčín",
+      "transfermarkt_url": "https://www.transfermarkt.com/as-trencin/startseite/verein/7918",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/as-trencin/besucherzahlenentwicklung/verein/7918",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AS_Tren%C4%8D%C3%ADn",
+      "stadium": {
+        "name": "Štadión Sihoť",
+        "owner_raw": "City of Trenčín",
+        "transfermarkt_url": "https://www.transfermarkt.com/as-trencin/stadion/verein/7918",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%A0tadi%C3%B3n_Siho%C5%A5",
+        "city": {
+          "name": "Trenčín",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tren%C4%8D%C3%ADn"
+        }
+      }
+    },
+    {
+      "name": "MŠK Žilina",
+      "transfermarkt_url": "https://www.transfermarkt.com/msk-zilina/startseite/verein/1443",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/msk-zilina/besucherzahlenentwicklung/verein/1443",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/M%C5%A0K_%C5%BDilina",
+      "stadium": {
+        "name": "Štadión pod Dubňom",
+        "owner_raw": "City of Žilina",
+        "transfermarkt_url": "https://www.transfermarkt.com/msk-zilina/stadion/verein/1443",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%A0tadi%C3%B3n_pod_Dub%C5%88om",
+        "city": {
+          "name": "Žilina",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%BDilina"
+        }
+      }
+    },
+    {
+      "name": "MFK Ružomberok",
+      "transfermarkt_url": "https://www.transfermarkt.com/mfk-ruzomberok/startseite/verein/7087",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/mfk-ruzomberok/besucherzahlenentwicklung/verein/7087",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/MFK_Ru%C5%BEomberok",
+      "stadium": {
+        "name": "Štadión pod Čebraťom",
+        "owner_raw": "MFK Ružomberok",
+        "transfermarkt_url": "https://www.transfermarkt.com/mfk-ruzomberok/stadion/verein/7087",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%A0tadi%C3%B3n_pod_%C4%8Cebra%C5%A5om",
+        "city": {
+          "name": "Ružomberok",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ru%C5%BEomberok"
+        }
+      }
+    },
+    {
+      "name": "FC Košice",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-kosice/startseite/verein/51316",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-kosice/besucherzahlenentwicklung/verein/51316",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ko%C5%A1ice",
+      "stadium": {
+        "name": "Košická futbalová aréna",
+        "owner_raw": "City of Košice",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-kosice/stadion/verein/51316",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ko%C5%A1ick%C3%A1_futbalov%C3%A1_ar%C3%A9na",
+        "city": {
+          "name": "Košice",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ko%C5%A1ice"
+        }
+      }
+    },
+    {
+      "name": "1. FC Tatran Prešov",
+      "transfermarkt_url": "https://www.transfermarkt.com/1-fc-tatran-presov/startseite/verein/4531",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/1-fc-tatran-presov/besucherzahlenentwicklung/verein/4531",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/1._FC_Tatran_Pre%C5%A1ov",
+      "stadium": {
+        "name": "Futbal Tatran Arena",
+        "owner_raw": "City of Prešov",
+        "transfermarkt_url": "https://www.transfermarkt.com/1-fc-tatran-presov/stadion/verein/4531",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Futbal_Tatran_Arena",
+        "city": {
+          "name": "Prešov",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pre%C5%A1ov"
+        }
+      }
+    },
+    {
+      "name": "FK Železiarne Podbrezová",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-zeleziarne-podbrezova/startseite/verein/20063",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-zeleziarne-podbrezova/besucherzahlenentwicklung/verein/20063",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_%C5%BDeleziarne_Podbrezov%C3%A1",
+      "stadium": {
+        "name": "ZELPO Aréna",
+        "owner_raw": "Železiarne Podbrezová a.s.",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-zeleziarne-podbrezova/stadion/verein/20063",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/ZELPO_Ar%C3%A9na",
+        "city": {
+          "name": "Podbrezová",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Podbrezov%C3%A1"
+        }
+      }
+    },
+    {
+      "name": "MFK Zemplín Michalovce",
+      "transfermarkt_url": "https://www.transfermarkt.com/mfk-zemplin-michalovce/startseite/verein/13744",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/mfk-zemplin-michalovce/besucherzahlenentwicklung/verein/13744",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/MFK_Zempl%C3%ADn_Michalovce",
+      "stadium": {
+        "name": "Mestský futbalový štadión",
+        "owner_raw": "City of Michalovce",
+        "transfermarkt_url": "https://www.transfermarkt.com/mfk-zemplin-michalovce/stadion/verein/13744",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Mestsk%C3%BD_futbalov%C3%BD_%C5%A1tadi%C3%B3n",
+        "city": {
+          "name": "Michalovce",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Michalovce"
+        }
+      }
+    },
+    {
+      "name": "MFK Skalica",
+      "transfermarkt_url": "https://www.transfermarkt.com/mfk-skalica/startseite/verein/35488",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/mfk-skalica/besucherzahlenentwicklung/verein/35488",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/MFK_Skalica",
+      "stadium": {
+        "name": "Mestský štadión Skalica",
+        "owner_raw": "City of Skalica",
+        "transfermarkt_url": "https://www.transfermarkt.com/mfk-skalica/stadion/verein/35488",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Mestsk%C3%BD_%C5%A1tadi%C3%B3n_Skalica",
+        "city": {
+          "name": "Skalica",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Skalica,_Slovakia"
+        }
+      }
+    },
+    {
+      "name": "KFC Komárno",
+      "transfermarkt_url": "https://www.transfermarkt.com/kfc-komarno/startseite/verein/32314",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kfc-komarno/besucherzahlenentwicklung/verein/32314",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KFC_Kom%C3%A1rno",
+      "stadium": {
+        "name": "Mestský štadión Komárno",
+        "owner_raw": "City of Komárno",
+        "transfermarkt_url": "https://www.transfermarkt.com/kfc-komarno/stadion/verein/32314",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Mestsk%C3%BD_%C5%A1tadi%C3%B3n_Kom%C3%A1rno",
+        "city": {
+          "name": "Komárno",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kom%C3%A1rno"
+        }
+      }
+    }
+  ]
+}

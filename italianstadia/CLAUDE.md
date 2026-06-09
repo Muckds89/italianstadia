@@ -269,6 +269,7 @@ The project is currently Italy-only (Serie A/B/C). Full roadmap in `italianstadi
 | Serbian SuperLiga | Serbia | 1 | JSON ready (25/26) |
 | Nemzeti Bajnokság I | Hungary | 1 | JSON ready (25/26) |
 | First Professional Football League | Bulgaria | 1 | JSON ready (25/26) |
+| Slovak Super Liga | Slovakia | 1 | JSON ready (25/26) |
 
 Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 fixes) before expanding to multi-league.
 
@@ -297,6 +298,7 @@ Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 f
 - Serbian clubs: @title = "Serbian Champion"
 - Hungarian clubs: @title = "Hungarian Champion"
 - Bulgarian clubs: @title = "Bulgarian Champion"
+- Slovak clubs: @title = "Slovak Champion"
 
 ## Data quality rules
 
