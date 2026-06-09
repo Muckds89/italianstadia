@@ -1,0 +1,267 @@
+{
+  "league": {
+    "name": "First Professional Football League",
+    "country": "Bulgaria",
+    "country_code": "BG",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "FC Arda Kardzhali",
+      "transfermarkt_url": "https://www.transfermarkt.com/pfc-arda-kardzhali/startseite/verein/40604",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/pfc-arda-kardzhali/besucherzahlenentwicklung/verein/40604",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Arda_Kardzhali",
+      "stadium": {
+        "name": "Arena Arda",
+        "owner_raw": "Kardzhali Municipality",
+        "transfermarkt_url": "https://www.transfermarkt.com/pfc-arda-kardzhali/stadion/verein/40604",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Arena_Arda",
+        "city": {
+          "name": "Kardzhali",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kardzhali"
+        }
+      }
+    },
+    {
+      "name": "PFC Beroe Stara Zagora",
+      "transfermarkt_url": "https://www.transfermarkt.com/pfc-beroe-stara-zagora/startseite/verein/6764",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/pfc-beroe-stara-zagora/besucherzahlenentwicklung/verein/6764",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/PFC_Beroe_Stara_Zagora",
+      "stadium": {
+        "name": "Stadion Beroe",
+        "owner_raw": "Stara Zagora Municipality",
+        "transfermarkt_url": "https://www.transfermarkt.com/pfc-beroe-stara-zagora/stadion/verein/6764",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Beroe",
+        "city": {
+          "name": "Stara Zagora",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Stara_Zagora"
+        }
+      }
+    },
+    {
+      "name": "Botev Plovdiv",
+      "transfermarkt_url": "https://www.transfermarkt.com/botev-plovdiv/startseite/verein/2531",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/botev-plovdiv/besucherzahlenentwicklung/verein/2531",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Botev_Plovdiv",
+      "stadium": {
+        "name": "Stadion Hristo Botev",
+        "owner_raw": "Plovdiv Municipality",
+        "transfermarkt_url": "https://www.transfermarkt.com/botev-plovdiv/stadion/verein/2531",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Hristo_Botev_(Plovdiv)",
+        "city": {
+          "name": "Plovdiv",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Plovdiv"
+        }
+      }
+    },
+    {
+      "name": "POFC Botev Vratsa",
+      "transfermarkt_url": "https://www.transfermarkt.com/pofk-botev-vratsa/startseite/verein/26462",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/pofk-botev-vratsa/besucherzahlenentwicklung/verein/26462",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/POFC_Botev_Vratsa",
+      "stadium": {
+        "name": "Stadion Hristo Botev",
+        "owner_raw": "Vratsa Municipality",
+        "transfermarkt_url": "https://www.transfermarkt.com/pofk-botev-vratsa/stadion/verein/26462",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Hristo_Botev_(Vratsa)",
+        "city": {
+          "name": "Vratsa",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vratsa"
+        }
+      }
+    },
+    {
+      "name": "PFC Cherno More Varna",
+      "transfermarkt_url": "https://www.transfermarkt.com/cherno-more-varna/startseite/verein/967",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cherno-more-varna/besucherzahlenentwicklung/verein/967",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/PFC_Cherno_More_Varna",
+      "stadium": {
+        "name": "Stadion Ticha",
+        "owner_raw": "Varna Municipality",
+        "transfermarkt_url": "https://www.transfermarkt.com/cherno-more-varna/stadion/verein/967",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Ticha",
+        "city": {
+          "name": "Varna",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Varna,_Bulgaria"
+        }
+      }
+    },
+    {
+      "name": "FC CSKA 1948 Sofia",
+      "transfermarkt_url": "https://www.transfermarkt.com/cska-1948/startseite/verein/61955",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cska-1948/besucherzahlenentwicklung/verein/61955",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_CSKA_1948_Sofia",
+      "stadium": {
+        "name": "Stadion Bistritsa",
+        "owner_raw": "Sofia Municipality",
+        "transfermarkt_url": "https://www.transfermarkt.com/cska-1948/stadion/verein/61955",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Bistritsa",
+        "city": {
+          "name": "Bistritsa",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bistritsa,_Sofia"
+        }
+      }
+    },
+    {
+      "name": "PFC CSKA Sofia",
+      "transfermarkt_url": "https://www.transfermarkt.com/zska-sofia/startseite/verein/208",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/zska-sofia/besucherzahlenentwicklung/verein/208",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/PFC_CSKA_Sofia",
+      "stadium": {
+        "name": "Vasil Levski National Stadium",
+        "owner_raw": "Ministry of Physical Education and Sport of Bulgaria",
+        "transfermarkt_url": "https://www.transfermarkt.com/zska-sofia/stadion/verein/208",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Vasil_Levski_National_Stadium",
+        "city": {
+          "name": "Sofia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sofia"
+        }
+      }
+    },
+    {
+      "name": "FC Dobrudzha Dobrich",
+      "transfermarkt_url": "https://www.transfermarkt.com/pfk-dobrudzha-dobrich/startseite/verein/4362",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/pfk-dobrudzha-dobrich/besucherzahlenentwicklung/verein/4362",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dobrudzha_Dobrich",
+      "stadium": {
+        "name": "Stadion Druzhba",
+        "owner_raw": "Dobrich Municipality",
+        "transfermarkt_url": "https://www.transfermarkt.com/pfk-dobrudzha-dobrich/stadion/verein/4362",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Druzhba_(Dobrich)",
+        "city": {
+          "name": "Dobrich",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Dobrich"
+        }
+      }
+    },
+    {
+      "name": "PFC Levski Sofia",
+      "transfermarkt_url": "https://www.transfermarkt.com/levski-sofia/startseite/verein/156",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/levski-sofia/besucherzahlenentwicklung/verein/156",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/PFC_Levski_Sofia",
+      "stadium": {
+        "name": "Stadion Georgi Asparuhov",
+        "owner_raw": "Sofia Municipality",
+        "transfermarkt_url": "https://www.transfermarkt.com/levski-sofia/stadion/verein/156",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Georgi_Asparuhov",
+        "city": {
+          "name": "Sofia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sofia"
+        }
+      }
+    },
+    {
+      "name": "PFC Lokomotiv Plovdiv",
+      "transfermarkt_url": "https://www.transfermarkt.com/lokomotive-plovdiv/startseite/verein/2259",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/lokomotive-plovdiv/besucherzahlenentwicklung/verein/2259",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/PFC_Lokomotiv_Plovdiv",
+      "stadium": {
+        "name": "Stadion Lokomotiv",
+        "owner_raw": "Plovdiv Municipality",
+        "transfermarkt_url": "https://www.transfermarkt.com/lokomotive-plovdiv/stadion/verein/2259",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Lokomotiv_(Plovdiv)",
+        "city": {
+          "name": "Plovdiv",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Plovdiv"
+        }
+      }
+    },
+    {
+      "name": "FC Lokomotiv 1929 Sofia",
+      "transfermarkt_url": "https://www.transfermarkt.com/lokomotiv-sofia/startseite/verein/730",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/lokomotiv-sofia/besucherzahlenentwicklung/verein/730",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Lokomotiv_1929_Sofia",
+      "stadium": {
+        "name": "Stadion Lokomotiv",
+        "owner_raw": "Ministry of Physical Education and Sport of Bulgaria",
+        "transfermarkt_url": "https://www.transfermarkt.com/lokomotiv-sofia/stadion/verein/730",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Lokomotiv_(Sofia)",
+        "city": {
+          "name": "Sofia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sofia"
+        }
+      }
+    },
+    {
+      "name": "PFC Ludogorets Razgrad",
+      "transfermarkt_url": "https://www.transfermarkt.com/pfk-ludogorets-razgrad/startseite/verein/31614",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/pfk-ludogorets-razgrad/besucherzahlenentwicklung/verein/31614",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/PFC_Ludogorets_Razgrad",
+      "stadium": {
+        "name": "Huvepharma Arena",
+        "owner_raw": "PFC Ludogorets Razgrad",
+        "transfermarkt_url": "https://www.transfermarkt.com/pfk-ludogorets-razgrad/stadion/verein/31614",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Huvepharma_Arena",
+        "city": {
+          "name": "Razgrad",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Razgrad"
+        }
+      }
+    },
+    {
+      "name": "PFC Montana",
+      "transfermarkt_url": "https://www.transfermarkt.com/pfc-montana/startseite/verein/24078",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/pfc-montana/besucherzahlenentwicklung/verein/24078",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/PFC_Montana",
+      "stadium": {
+        "name": "Stadion Ogosta",
+        "owner_raw": "Montana Municipality",
+        "transfermarkt_url": "https://www.transfermarkt.com/pfc-montana/stadion/verein/24078",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Ogosta",
+        "city": {
+          "name": "Montana",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Montana,_Bulgaria"
+        }
+      }
+    },
+    {
+      "name": "PFC Septemvri Sofia",
+      "transfermarkt_url": "https://www.transfermarkt.com/septemvri-sofia/startseite/verein/40416",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/septemvri-sofia/besucherzahlenentwicklung/verein/40416",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/PFC_Septemvri_Sofia",
+      "stadium": {
+        "name": "Stadion Lokomotiv",
+        "owner_raw": "Ministry of Physical Education and Sport of Bulgaria",
+        "transfermarkt_url": "https://www.transfermarkt.com/septemvri-sofia/stadion/verein/40416",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Lokomotiv_(Sofia)",
+        "city": {
+          "name": "Sofia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sofia"
+        }
+      }
+    },
+    {
+      "name": "PFC Slavia Sofia",
+      "transfermarkt_url": "https://www.transfermarkt.com/slavia-sofia/startseite/verein/675",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/slavia-sofia/besucherzahlenentwicklung/verein/675",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/PFC_Slavia_Sofia",
+      "stadium": {
+        "name": "Stadion Aleksandar Shalamanov",
+        "owner_raw": "PFC Slavia Sofia",
+        "transfermarkt_url": "https://www.transfermarkt.com/slavia-sofia/stadion/verein/675",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Aleksandar_Shalamanov",
+        "city": {
+          "name": "Sofia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sofia"
+        }
+      }
+    },
+    {
+      "name": "FC Spartak Varna",
+      "transfermarkt_url": "https://www.transfermarkt.com/spartak-varna/startseite/verein/9599",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/spartak-varna/besucherzahlenentwicklung/verein/9599",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Spartak_Varna",
+      "stadium": {
+        "name": "Stadion Spartak",
+        "owner_raw": "Varna Municipality",
+        "transfermarkt_url": "https://www.transfermarkt.com/spartak-varna/stadion/verein/9599",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Spartak_(Varna)",
+        "city": {
+          "name": "Varna",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Varna,_Bulgaria"
+        }
+      }
+    }
+  ]
+}
