@@ -1,0 +1,395 @@
+{
+  "league": {
+    "name": "EFL League One",
+    "country": "England",
+    "country_code": "GB",
+    "division_level": 3,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "AFC Wimbledon",
+      "transfermarkt_url": "https://www.transfermarkt.com/afc-wimbledon/startseite/verein/3884",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/afc-wimbledon/besucherzahlenentwicklung/verein/3884",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AFC_Wimbledon",
+      "stadium": {
+        "name": "Plough Lane",
+        "owner_raw": "AFC Wimbledon Football Club",
+        "transfermarkt_url": "https://www.transfermarkt.com/afc-wimbledon/stadion/verein/3884",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Plough_Lane",
+        "city": {
+          "name": "London",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Wimbledon,_London"
+        }
+      }
+    },
+    {
+      "name": "Barnsley FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-barnsley/startseite/verein/349",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-barnsley/besucherzahlenentwicklung/verein/349",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Barnsley_F.C.",
+      "stadium": {
+        "name": "Oakwell",
+        "owner_raw": "Barnsley Metropolitan Borough Council",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-barnsley/stadion/verein/349",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Oakwell",
+        "city": {
+          "name": "Barnsley",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Barnsley"
+        }
+      }
+    },
+    {
+      "name": "Blackpool FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-blackpool/startseite/verein/1181",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-blackpool/besucherzahlenentwicklung/verein/1181",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Blackpool_F.C.",
+      "stadium": {
+        "name": "Bloomfield Road",
+        "owner_raw": "Blackpool Football Club",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-blackpool/stadion/verein/1181",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bloomfield_Road",
+        "city": {
+          "name": "Blackpool",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Blackpool"
+        }
+      }
+    },
+    {
+      "name": "Bolton Wanderers",
+      "transfermarkt_url": "https://www.transfermarkt.com/bolton-wanderers/startseite/verein/355",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/bolton-wanderers/besucherzahlenentwicklung/verein/355",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Bolton_Wanderers_F.C.",
+      "stadium": {
+        "name": "Toughsheet Community Stadium",
+        "owner_raw": "Bolton Wanderers Football Club",
+        "transfermarkt_url": "https://www.transfermarkt.com/bolton-wanderers/stadion/verein/355",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Toughsheet_Community_Stadium",
+        "city": {
+          "name": "Horwich",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Horwich"
+        }
+      }
+    },
+    {
+      "name": "Bradford City",
+      "transfermarkt_url": "https://www.transfermarkt.com/bradford-city/startseite/verein/1027",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/bradford-city/besucherzahlenentwicklung/verein/1027",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Bradford_City_A.F.C.",
+      "stadium": {
+        "name": "Valley Parade",
+        "owner_raw": "Gordon Gibb Pension Fund",
+        "transfermarkt_url": "https://www.transfermarkt.com/bradford-city/stadion/verein/1027",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Valley_Parade",
+        "city": {
+          "name": "Bradford",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bradford"
+        }
+      }
+    },
+    {
+      "name": "Burton Albion",
+      "transfermarkt_url": "https://www.transfermarkt.com/burton-albion/startseite/verein/2963",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/burton-albion/besucherzahlenentwicklung/verein/2963",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Burton_Albion_F.C.",
+      "stadium": {
+        "name": "Pirelli Stadium",
+        "owner_raw": "Burton Albion Football Club",
+        "transfermarkt_url": "https://www.transfermarkt.com/burton-albion/stadion/verein/2963",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Pirelli_Stadium",
+        "city": {
+          "name": "Burton upon Trent",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Burton_upon_Trent"
+        }
+      }
+    },
+    {
+      "name": "Cardiff City",
+      "transfermarkt_url": "https://www.transfermarkt.com/cardiff-city/startseite/verein/603",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cardiff-city/besucherzahlenentwicklung/verein/603",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Cardiff_City_F.C.",
+      "stadium": {
+        "name": "Cardiff City Stadium",
+        "owner_raw": "Cardiff City Football Club",
+        "transfermarkt_url": "https://www.transfermarkt.com/cardiff-city/stadion/verein/603",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Cardiff_City_Stadium",
+        "city": {
+          "name": "Cardiff",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Cardiff"
+        }
+      }
+    },
+    {
+      "name": "Doncaster Rovers",
+      "transfermarkt_url": "https://www.transfermarkt.com/doncaster-rovers/startseite/verein/2454",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/doncaster-rovers/besucherzahlenentwicklung/verein/2454",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Doncaster_Rovers_F.C.",
+      "stadium": {
+        "name": "Eco-Power Stadium",
+        "owner_raw": "Doncaster Metropolitan Borough Council",
+        "transfermarkt_url": "https://www.transfermarkt.com/doncaster-rovers/stadion/verein/2454",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Eco-Power_Stadium",
+        "city": {
+          "name": "Doncaster",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Doncaster"
+        }
+      }
+    },
+    {
+      "name": "Exeter City",
+      "transfermarkt_url": "https://www.transfermarkt.com/exeter-city/startseite/verein/6699",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/exeter-city/besucherzahlenentwicklung/verein/6699",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Exeter_City_F.C.",
+      "stadium": {
+        "name": "St James Park",
+        "owner_raw": "Exeter City Council",
+        "transfermarkt_url": "https://www.transfermarkt.com/exeter-city/stadion/verein/6699",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/St_James_Park_(Exeter)",
+        "city": {
+          "name": "Exeter",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Exeter"
+        }
+      }
+    },
+    {
+      "name": "Huddersfield Town",
+      "transfermarkt_url": "https://www.transfermarkt.com/huddersfield-town/startseite/verein/1110",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/huddersfield-town/besucherzahlenentwicklung/verein/1110",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Huddersfield_Town_A.F.C.",
+      "stadium": {
+        "name": "Kirklees Stadium",
+        "owner_raw": "Kirklees Council",
+        "transfermarkt_url": "https://www.transfermarkt.com/huddersfield-town/stadion/verein/1110",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kirklees_Stadium",
+        "city": {
+          "name": "Huddersfield",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Huddersfield"
+        }
+      }
+    },
+    {
+      "name": "Leyton Orient",
+      "transfermarkt_url": "https://www.transfermarkt.com/leyton-orient/startseite/verein/1150",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/leyton-orient/besucherzahlenentwicklung/verein/1150",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Leyton_Orient_F.C.",
+      "stadium": {
+        "name": "Brisbane Road",
+        "owner_raw": "Waltham Forest Council",
+        "transfermarkt_url": "https://www.transfermarkt.com/leyton-orient/stadion/verein/1150",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Brisbane_Road",
+        "city": {
+          "name": "London",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Leyton"
+        }
+      }
+    },
+    {
+      "name": "Lincoln City",
+      "transfermarkt_url": "https://www.transfermarkt.com/lincoln-city/startseite/verein/1198",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/lincoln-city/besucherzahlenentwicklung/verein/1198",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Lincoln_City_F.C.",
+      "stadium": {
+        "name": "Sincil Bank",
+        "owner_raw": "Lincoln City Football Club",
+        "transfermarkt_url": "https://www.transfermarkt.com/lincoln-city/stadion/verein/1198",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sincil_Bank",
+        "city": {
+          "name": "Lincoln",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lincoln,_England"
+        }
+      }
+    },
+    {
+      "name": "Luton Town",
+      "transfermarkt_url": "https://www.transfermarkt.com/luton-town/startseite/verein/1031",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/luton-town/besucherzahlenentwicklung/verein/1031",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Luton_Town_F.C.",
+      "stadium": {
+        "name": "Kenilworth Road",
+        "owner_raw": "Luton Borough Council",
+        "transfermarkt_url": "https://www.transfermarkt.com/luton-town/stadion/verein/1031",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kenilworth_Road",
+        "city": {
+          "name": "Luton",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Luton"
+        }
+      }
+    },
+    {
+      "name": "Mansfield Town",
+      "transfermarkt_url": "https://www.transfermarkt.com/mansfield-town/startseite/verein/3820",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/mansfield-town/besucherzahlenentwicklung/verein/3820",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Mansfield_Town_F.C.",
+      "stadium": {
+        "name": "Field Mill",
+        "owner_raw": "Mansfield Town Football Club",
+        "transfermarkt_url": "https://www.transfermarkt.com/mansfield-town/stadion/verein/3820",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Field_Mill",
+        "city": {
+          "name": "Mansfield",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Mansfield"
+        }
+      }
+    },
+    {
+      "name": "Northampton Town",
+      "transfermarkt_url": "https://www.transfermarkt.com/northampton-town/startseite/verein/1302",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/northampton-town/besucherzahlenentwicklung/verein/1302",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Northampton_Town_F.C.",
+      "stadium": {
+        "name": "Sixfields Stadium",
+        "owner_raw": "Northampton Town Football Club",
+        "transfermarkt_url": "https://www.transfermarkt.com/northampton-town/stadion/verein/1302",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sixfields_Stadium",
+        "city": {
+          "name": "Northampton",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Northampton"
+        }
+      }
+    },
+    {
+      "name": "Peterborough United",
+      "transfermarkt_url": "https://www.transfermarkt.com/peterborough-united/startseite/verein/1072",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/peterborough-united/besucherzahlenentwicklung/verein/1072",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Peterborough_United_F.C.",
+      "stadium": {
+        "name": "London Road Stadium",
+        "owner_raw": "London Road Peterborough Properties Ltd",
+        "transfermarkt_url": "https://www.transfermarkt.com/peterborough-united/stadion/verein/1072",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/London_Road_Stadium",
+        "city": {
+          "name": "Peterborough",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Peterborough"
+        }
+      }
+    },
+    {
+      "name": "Plymouth Argyle",
+      "transfermarkt_url": "https://www.transfermarkt.com/plymouth-argyle/startseite/verein/2262",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/plymouth-argyle/besucherzahlenentwicklung/verein/2262",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Plymouth_Argyle_F.C.",
+      "stadium": {
+        "name": "Home Park",
+        "owner_raw": "Plymouth Argyle Football Club",
+        "transfermarkt_url": "https://www.transfermarkt.com/plymouth-argyle/stadion/verein/2262",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Home_Park",
+        "city": {
+          "name": "Plymouth",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Plymouth"
+        }
+      }
+    },
+    {
+      "name": "Port Vale",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-port-vale/startseite/verein/1211",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-port-vale/besucherzahlenentwicklung/verein/1211",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Port_Vale_F.C.",
+      "stadium": {
+        "name": "Vale Park",
+        "owner_raw": "Port Vale Football Club",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-port-vale/stadion/verein/1211",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Vale_Park",
+        "city": {
+          "name": "Burslem",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Burslem"
+        }
+      }
+    },
+    {
+      "name": "Reading FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-reading/startseite/verein/1032",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-reading/besucherzahlenentwicklung/verein/1032",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Reading_F.C.",
+      "stadium": {
+        "name": "Madejski Stadium",
+        "owner_raw": "Redwood Holdings",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-reading/stadion/verein/1032",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Madejski_Stadium",
+        "city": {
+          "name": "Reading",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Reading,_Berkshire"
+        }
+      }
+    },
+    {
+      "name": "Rotherham United",
+      "transfermarkt_url": "https://www.transfermarkt.com/rotherham-united/startseite/verein/1194",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rotherham-united/besucherzahlenentwicklung/verein/1194",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Rotherham_United_F.C.",
+      "stadium": {
+        "name": "New York Stadium",
+        "owner_raw": "R U Estates Limited",
+        "transfermarkt_url": "https://www.transfermarkt.com/rotherham-united/stadion/verein/1194",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/New_York_Stadium",
+        "city": {
+          "name": "Rotherham",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rotherham"
+        }
+      }
+    },
+    {
+      "name": "Stevenage FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-stevenage/startseite/verein/3684",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-stevenage/besucherzahlenentwicklung/verein/3684",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Stevenage_F.C.",
+      "stadium": {
+        "name": "Broadhall Way",
+        "owner_raw": "Stevenage Football Club",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-stevenage/stadion/verein/3684",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Broadhall_Way",
+        "city": {
+          "name": "Stevenage",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Stevenage"
+        }
+      }
+    },
+    {
+      "name": "Stockport County",
+      "transfermarkt_url": "https://www.transfermarkt.com/stockport-county/startseite/verein/1098",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/stockport-county/besucherzahlenentwicklung/verein/1098",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Stockport_County_F.C.",
+      "stadium": {
+        "name": "Edgeley Park",
+        "owner_raw": "Stockport Metropolitan Borough Council",
+        "transfermarkt_url": "https://www.transfermarkt.com/stockport-county/stadion/verein/1098",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Edgeley_Park",
+        "city": {
+          "name": "Stockport",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Stockport"
+        }
+      }
+    },
+    {
+      "name": "Wigan Athletic",
+      "transfermarkt_url": "https://www.transfermarkt.com/wigan-athletic/startseite/verein/1071",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/wigan-athletic/besucherzahlenentwicklung/verein/1071",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Wigan_Athletic_F.C.",
+      "stadium": {
+        "name": "Brick Community Stadium",
+        "owner_raw": "Wigan Athletic Football Club",
+        "transfermarkt_url": "https://www.transfermarkt.com/wigan-athletic/stadion/verein/1071",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Brick_Community_Stadium",
+        "city": {
+          "name": "Wigan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Wigan"
+        }
+      }
+    },
+    {
+      "name": "Wycombe Wanderers",
+      "transfermarkt_url": "https://www.transfermarkt.com/wycombe-wanderers/startseite/verein/2805",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/wycombe-wanderers/besucherzahlenentwicklung/verein/2805",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Wycombe_Wanderers_F.C.",
+      "stadium": {
+        "name": "Adams Park",
+        "owner_raw": "Wycombe Wanderers Supporters Trust",
+        "transfermarkt_url": "https://www.transfermarkt.com/wycombe-wanderers/stadion/verein/2805",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Adams_Park",
+        "city": {
+          "name": "High Wycombe",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/High_Wycombe"
+        }
+      }
+    }
+  ]
+}
