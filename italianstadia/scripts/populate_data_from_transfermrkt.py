@@ -1079,6 +1079,10 @@ def classify_ownership(owner_raw):
         "općina ",                 # municipality (Croatian)
         "skupština",               # assembly
         "kantona",                 # canton (Bosnia)
+        # ── Slovenian ────────────────────────────────────────────────────────
+        "mestna občina",           # city municipality (e.g. Mestna občina Ljubljana)
+        "občina ",                 # municipality (e.g. Občina Domžale, Občina Ajdovščina)
+        "javni zavod",             # public institution (e.g. Javni zavod Šport Ljubljana)
         # ── Hungarian ────────────────────────────────────────────────────────
         "város ",                  # Miskolc Város Önkormányzata …
         "önkormányzat",            # local government / municipality
@@ -1571,6 +1575,7 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
         "Hungary": "Hungarian",
         "Bulgaria": "Bulgarian",
         "Slovakia": "Slovak",
+        "Slovenia": "Slovenian",
     }
 
     try:

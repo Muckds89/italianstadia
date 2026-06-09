@@ -1,0 +1,171 @@
+{
+  "league": {
+    "name": "Prva liga",
+    "country": "Slovenia",
+    "country_code": "SI",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "NK Olimpija Ljubljana",
+      "transfermarkt_url": "https://www.transfermarkt.com/nk-olimpija-ljubljana/startseite/verein/4772",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nk-olimpija-ljubljana/besucherzahlenentwicklung/verein/4772",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NK_Olimpija_Ljubljana",
+      "stadium": {
+        "name": "Stožice Stadium",
+        "owner_raw": "City Municipality of Ljubljana",
+        "transfermarkt_url": "https://www.transfermarkt.com/nk-olimpija-ljubljana/stadion/verein/4772",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sto%C5%BEice_Stadium",
+        "city": {
+          "name": "Ljubljana",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ljubljana"
+        }
+      }
+    },
+    {
+      "name": "NK Maribor",
+      "transfermarkt_url": "https://www.transfermarkt.com/nk-maribor/startseite/verein/790",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nk-maribor/besucherzahlenentwicklung/verein/790",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NK_Maribor",
+      "stadium": {
+        "name": "Ljudski vrt",
+        "owner_raw": "City Municipality of Maribor",
+        "transfermarkt_url": "https://www.transfermarkt.com/nk-maribor/stadion/verein/790",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ljudski_vrt",
+        "city": {
+          "name": "Maribor",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Maribor"
+        }
+      }
+    },
+    {
+      "name": "NK Celje",
+      "transfermarkt_url": "https://www.transfermarkt.com/nk-celje/startseite/verein/710",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nk-celje/besucherzahlenentwicklung/verein/710",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NK_Celje",
+      "stadium": {
+        "name": "Stadion Z'dežele",
+        "owner_raw": "City Municipality of Celje",
+        "transfermarkt_url": "https://www.transfermarkt.com/nk-celje/stadion/verein/710",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Z%27de%C5%BEele",
+        "city": {
+          "name": "Celje",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Celje"
+        }
+      }
+    },
+    {
+      "name": "FC Koper",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-koper/startseite/verein/433",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-koper/besucherzahlenentwicklung/verein/433",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Koper",
+      "stadium": {
+        "name": "Bonifika Stadium",
+        "owner_raw": "Municipality of Koper",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-koper/stadion/verein/433",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bonifika_Stadium",
+        "city": {
+          "name": "Koper",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Koper"
+        }
+      }
+    },
+    {
+      "name": "NK Bravo",
+      "transfermarkt_url": "https://www.transfermarkt.com/nk-bravo/startseite/verein/26985",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nk-bravo/besucherzahlenentwicklung/verein/26985",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NK_Bravo",
+      "stadium": {
+        "name": "Šiška Sports Park",
+        "owner_raw": "City Municipality of Ljubljana",
+        "transfermarkt_url": "https://www.transfermarkt.com/nk-bravo/stadion/verein/26985",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%A0i%C5%A1ka_Sports_Park",
+        "city": {
+          "name": "Ljubljana",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ljubljana"
+        }
+      }
+    },
+    {
+      "name": "NŠ Mura",
+      "transfermarkt_url": "https://www.transfermarkt.com/ns-mura/startseite/verein/4059",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ns-mura/besucherzahlenentwicklung/verein/4059",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/N%C5%A0_Mura",
+      "stadium": {
+        "name": "Fazanerija City Stadium",
+        "owner_raw": "City Municipality of Murska Sobota",
+        "transfermarkt_url": "https://www.transfermarkt.com/ns-mura/stadion/verein/4059",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Fazanerija_City_Stadium",
+        "city": {
+          "name": "Murska Sobota",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Murska_Sobota"
+        }
+      }
+    },
+    {
+      "name": "NK Aluminij",
+      "transfermarkt_url": "https://www.transfermarkt.com/nk-aluminij-kidricevo/startseite/verein/11033",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nk-aluminij-kidricevo/besucherzahlenentwicklung/verein/11033",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NK_Aluminij",
+      "stadium": {
+        "name": "Aluminij Sports Park",
+        "owner_raw": "NK Aluminij",
+        "transfermarkt_url": "https://www.transfermarkt.com/nk-aluminij-kidricevo/stadion/verein/11033",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Aluminij_Sports_Park",
+        "city": {
+          "name": "Kidričevo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kidri%C4%8Devo"
+        }
+      }
+    },
+    {
+      "name": "ND Primorje",
+      "transfermarkt_url": "https://www.transfermarkt.com/nd-primorje/startseite/verein/4507",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nd-primorje/besucherzahlenentwicklung/verein/4507",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/ND_Primorje",
+      "stadium": {
+        "name": "Ajdovščina Stadium",
+        "owner_raw": "Municipality of Ajdovščina",
+        "transfermarkt_url": "https://www.transfermarkt.com/nd-primorje/stadion/verein/4507",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ajdov%C5%A1%C4%8Dina_Stadium",
+        "city": {
+          "name": "Ajdovščina",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ajdov%C5%A1%C4%8Dina"
+        }
+      }
+    },
+    {
+      "name": "NK Radomlje",
+      "transfermarkt_url": "https://www.transfermarkt.com/nk-radomlje/startseite/verein/21460",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nk-radomlje/besucherzahlenentwicklung/verein/21460",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NK_Radomlje",
+      "stadium": {
+        "name": "Domžale Sports Park",
+        "owner_raw": "Municipality of Domžale",
+        "transfermarkt_url": "https://www.transfermarkt.com/nk-radomlje/stadion/verein/21460",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Dom%C5%BEale_Sports_Park",
+        "city": {
+          "name": "Domžale",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Dom%C5%BEale"
+        }
+      }
+    },
+    {
+      "name": "NK Domžale",
+      "transfermarkt_url": "https://www.transfermarkt.com/nk-domzale/startseite/verein/6248",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nk-domzale/besucherzahlenentwicklung/verein/6248",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NK_Dom%C5%BEale",
+      "stadium": {
+        "name": "Domžale Sports Park",
+        "owner_raw": "Municipality of Domžale",
+        "transfermarkt_url": "https://www.transfermarkt.com/nk-domzale/stadion/verein/6248",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Dom%C5%BEale_Sports_Park",
+        "city": {
+          "name": "Domžale",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Dom%C5%BEale"
+        }
+      }
+    }
+  ]
+}

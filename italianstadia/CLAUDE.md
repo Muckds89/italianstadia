@@ -270,6 +270,7 @@ The project is currently Italy-only (Serie A/B/C). Full roadmap in `italianstadi
 | Nemzeti Bajnokság I | Hungary | 1 | JSON ready (25/26) |
 | First Professional Football League | Bulgaria | 1 | JSON ready (25/26) |
 | Slovak Super Liga | Slovakia | 1 | JSON ready (25/26) |
+| Prva liga | Slovenia | 1 | JSON ready (25/26) |
 
 Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 fixes) before expanding to multi-league.
 
@@ -299,6 +300,7 @@ Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 f
 - Hungarian clubs: @title = "Hungarian Champion"
 - Bulgarian clubs: @title = "Bulgarian Champion"
 - Slovak clubs: @title = "Slovak Champion"
+- Slovenian clubs: @title = "Slovenian Champion"
 
 ## Data quality rules
 
@@ -360,6 +362,7 @@ Public keywords cover ~15 European language families:
 | Czech/Slovak | `město `, `statutární město`, `obec `, `kraj `, `ministerstvo` |
 | Romanian | `primăria`, `primărie`, `consiliu local`, `județ`, `municipiu`, `ministerul` |
 | Croatian/Serbian/Bosnian | `grad `, `gradska `, `općina `, `skupština` |
+| Slovenian | `mestna občina`, `občina `, `javni zavod` |
 | Hungarian | `város `, `önkormányzat`, `fővárosi` |
 | Greek (transliterated) | `dimos `, `dimou` |
 
