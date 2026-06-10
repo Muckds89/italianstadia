@@ -4,6 +4,7 @@ from collections import defaultdict
 from django.db.models import F
 from django.shortcuts import get_object_or_404, render
 from django.http import JsonResponse
+from django.views.decorators.cache import cache_page
 from .models import City, League, Stadium, Team, StadiumDevelopment
 
 
@@ -78,6 +79,7 @@ def stadium_developments_geojson(request):
         "features": features
     })
 
+@cache_page(60 * 5)  # 5-minute in-process cache; busted on server restart / redeploy
 def stadiums_geojson(request):
     """
     GeoJSON endpoint for operational stadiums.

@@ -643,32 +643,6 @@ function applyFilters(updateStadiumDropdown = true) {
     return visibleMarkers;
 }
 
-function getMarkerColor(marker) {
-    const primary = marker.primaryLeague;
-    const level   = primary ? primary.divisionLevel : null;
-    const country = primary ? primary.country : null;
-
-    // Grey out lower tiers when no country or league filter is active
-    const filterActive = countryFilter.value || leagueFilter.value;
-    if (!filterActive && level !== 1) return "#9e9e9e";
-
-    const colors = COUNTRY_COLORS[country];
-    if (colors && level != null) return colors[level - 1] || "#9e9e9e";
-    return "#9e9e9e";
-}
-
-function getMarkerStyle(marker) {
-    const fillColor = getMarkerColor(marker);
-    // Near-black fills need a bright stroke to stay visible on the dark basemap
-    const darkFills = ["#333333", "#000000"];
-    const primary = marker.primaryLeague;
-    const country = primary ? primary.country : null;
-    const strokeColor = darkFills.includes(fillColor)
-        ? (COUNTRY_COLORS[country]?.[2] || "#ffce00")
-        : "#111111";
-    return { fillColor, color: strokeColor };
-}
-
 function updateStadiumDropdownOptions(visibleMarkers) {
     const currentValue = stadiumFilter.value;
 
@@ -691,6 +665,11 @@ function updateStadiumDropdownOptions(visibleMarkers) {
 }
 
 function loadDevelopmentStadiums() {
+    if (developmentMarkers.length > 0) {
+        applyDevelopmentFilters();
+        updateLegend("development");
+        return;
+    }
     fetch("/api/stadium-developments/")
         .then(res => { if (!res.ok) throw new Error(res.status); return res.json(); })
         .then(data => {
@@ -1038,6 +1017,11 @@ function restoreFilterState() {
     return true;   // signals to caller that saved state was processed
 }
 
+// Detect if we were redirected here from a development detail page so we can
+// auto-activate dev mode after the initial fetch completes (avoids a flash of
+// operational markers before the switch fires).
+const autoDevMode = new URLSearchParams(window.location.search).get("mode") === "development";
+
 // Show a loading hint while the API responds (clears once data is rendered)
 stadiumCounter.textContent = "Loading…";
 
@@ -1139,10 +1123,19 @@ fetch("/api/stadiums/")
         populateCountryFilter();
         populateLeagueFilter("");
         wireSearch();
-        // Restore saved filters (returns true) or run defaults and fit to data bounds
-        if (!restoreFilterState()) {
-            const visible = applyFilters();
-            fitToVisibleMarkers(visible);
+
+        if (autoDevMode) {
+            // Coming back from a development detail page — skip operational view entirely,
+            // activate dev mode, and clean the URL so a refresh shows the normal map.
+            mapModeToggle.checked = true;
+            mapModeToggle.dispatchEvent(new Event("change"));
+            history.replaceState(null, "", window.location.pathname);
+        } else {
+            // Restore saved filters (returns true) or run defaults and fit to data bounds
+            if (!restoreFilterState()) {
+                const visible = applyFilters();
+                fitToVisibleMarkers(visible);
+            }
         }
     })
     .catch(err => {
