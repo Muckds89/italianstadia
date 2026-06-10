@@ -1,3 +1,387 @@
+# Feature Plan — Sprint 5: Stadium Discovery & Rankings
+_Created: 2026-06-10 | Branch: feature/sprint-5_
+
+## Problem / Goal
+
+The site has strong per-stadium detail pages and a filtered map, but no way to **discover** stadiums by size or era, and no way to cross-compare capacities at a glance. Sprint 5 adds three focused improvements using data already in the DB:
+
+1. **Rankings page** — `/stadiums/rankings/` lists all stadiums sorted by capacity with a visual bar, filterable by country/league. "Largest stadium in Europe" is a question every football fan has.
+2. **Era filter on main map** — lets users filter markers by construction decade (Historic / Classic / Modern / Contemporary). `year_of_construction` exists on every scraped stadium but is never exposed to the map frontend.
+3. **Street View link on stadium detail** — a "Street View" button alongside "Open in Google Maps", using a free Google Maps deep-link (no API key). One-click exploration of the stadium surroundings.
+
+Success: a user can open `/stadiums/rankings/`, see Wembley and Camp Nou at the top, click through to a detail page, tap "Street View" to walk around the ground, and come back to the map filtering to "Historic (pre-1950)" to find the oldest stadiums in Europe.
+
+---
+
+## Scope
+
+**In scope:**
+- [ ] WS1 — New `/stadiums/rankings/` page: view, URL, template, capacity bar, country/league filter
+- [ ] WS2 — Era filter on main map: `year_of_construction` added to GeoJSON; era `<select>` in filter bar; `applyFilters()` logic; sessionStorage save/restore
+- [ ] WS3 — Street View link button on `stadium_detail.html` (free deep-link, no API key)
+
+**Out of scope (do not touch):**
+- Historical capacity data (no DB field exists for it — capacity chart deferred)
+- `TeamSeasonRecord` model or season-based filtering (Phase 3 scope)
+- Wikipedia summary scraping (description field is already populated by the scraper)
+- Development mode markers / `stadium_development_detail.html`
+- `stadium-detail-map.js` — no JS changes there
+
+---
+
+## Design decisions
+
+1. **Rankings page: server-side sort, client-side JS filter via HTMX-free approach** | Alt: AJAX | Reason: dataset is ≤ 2 000 stadiums; a full table load is < 100 KB; no JS framework needed. Country/league filters submit as GET params (same pattern as `stadium_list`). No model changes needed.
+
+2. **Capacity bar: CSS width as percentage of max capacity in the queryset** | Alt: Chart.js | Reason: Pure CSS is zero-dependency, renders instantly, scales to mobile. Width = `(capacity / max_capacity) * 100`%; computed in the view and passed as a template variable per row.
+
+3. **Era filter: 4 buckets, not a free year range** | Alt: `<input type="range">` | Reason: Buckets map to meaningful football history eras (pre-WWII / post-war / UEFA expansion / modern). A range slider has UX complexity with no clear break-points. Buckets also map to a simple `if` in `applyFilters()` — no need for min/max comparison UI.
+
+4. **Era filter data: add `year_of_construction` to GeoJSON** | Alt: separate endpoint | Reason: The GeoJSON fetch already loads all stadium properties; adding one integer field is < 1 KB overhead for 500 stadiums. No second fetch needed.
+
+5. **Street View link: free Google Maps deep-link** | Alt: Maps Embed API (needs API key) | Reason: `https://maps.google.com/maps?q=&layer=c&cbll=LAT,LNG` opens Street View at the exact coordinates in a new tab, zero cost, zero API key, works on all devices.
+
+---
+
+## Files that will change
+
+| File | Change type | Why |
+|------|-------------|-----|
+| `italiastadiaapp/views.py` | Edit | Add `stadium_rankings` view; add `year_of_construction` to `stadiums_geojson` |
+| `italiastadiaapp/urls.py` | Edit | Add `/stadiums/rankings/` URL |
+| `italiastadiaapp/templates/stadium_rankings.html` | New | Rankings table template |
+| `italiastadiaapp/templates/stadium_detail.html` | Edit | Add Street View link button |
+| `italiastadiaapp/templates/index.html` | Edit | Add era filter `<select>` to `#operationalFilters` |
+| `italiastadiaapp/static/js/map.js` | Edit | Era filter read in `applyFilters()`, save/restore in sessionStorage |
+| `italiastadiaapp/static/css/styles.css` | Edit | `.capacity-bar` styles for rankings page |
+
+---
+
+## Implementation steps
+
+### WS3 — Street View link (smallest, quickest win — do first)
+
+1. [ ] **`stadium_detail.html`** — in the card footer that already has "Open in Google Maps", add a second button immediately after it:
+   ```html
+   <a
+       href="https://maps.google.com/maps?q=&layer=c&cbll={{ stadium.latitude }},{{ stadium.longitude }}"
+       target="_blank"
+       class="btn btn-outline-secondary btn-sm"
+   >
+       Street View
+   </a>
+   ```
+   This button already sits inside the `{% if has_coords %}` guard so it only renders when coordinates exist.
+
+---
+
+### WS2 — Era filter on main map
+
+2. [ ] **`views.py` — `stadiums_geojson`**: add `year_of_construction` to the feature properties dict:
+   ```python
+   "properties": {
+       "id": s.id,
+       "name": s.name,
+       "year_of_construction": s.year_of_construction,   # ← new (int or None)
+       # ... existing fields unchanged ...
+   }
+   ```
+   No queryset change needed — `year_of_construction` is a field on `Stadium`, already fetched.
+
+3. [ ] **`index.html`** — add the era select immediately after the `#stadiumFilter` select inside `#operationalFilters`:
+   ```html
+   <select id="eraFilter" class="form-select form-select-sm">
+       <option value="">All eras</option>
+       <option value="historic">Historic (pre-1950)</option>
+       <option value="classic">Classic (1950–1989)</option>
+       <option value="modern">Modern (1990–2009)</option>
+       <option value="contemporary">Contemporary (2010+)</option>
+   </select>
+   ```
+
+4. [ ] **`map.js`** — grab the element at the top of the file alongside the other filter references:
+   ```js
+   const eraFilter = document.getElementById("eraFilter");
+   ```
+   Wire its `change` event to call `applyFilters()` (same pattern as all other filters):
+   ```js
+   eraFilter.addEventListener("change", () => { applyFilters(); updateClearButton(); });
+   ```
+
+5. [ ] **`map.js` — `applyFilters()`** — add era filtering after the existing ownership check. Read `year_of_construction` from `props` (stored on the marker at creation: `marker.yearBuilt = props.year_of_construction`):
+   ```js
+   // Store at marker creation (in the GeoJSON fetch callback):
+   marker.yearBuilt = props.year_of_construction || null;
+
+   // In applyFilters(), after existing filter checks:
+   const era = eraFilter.value;
+   if (era && marker.yearBuilt != null) {
+       const y = marker.yearBuilt;
+       const eraMatch =
+           (era === "historic"     && y < 1950) ||
+           (era === "classic"      && y >= 1950 && y < 1990) ||
+           (era === "modern"       && y >= 1990 && y < 2010) ||
+           (era === "contemporary" && y >= 2010);
+       if (!eraMatch) { /* exclude marker */ continue; }
+   }
+   // If era is set but marker.yearBuilt is null, include the marker (unknown era)
+   ```
+
+6. [ ] **`map.js` — `saveFilterState()` / `restoreFilterState()`** — add `eraFilter` to the state object (same pattern as `ownershipFilter`):
+   ```js
+   // saveFilterState():
+   state.era = eraFilter.value;
+
+   // restoreFilterState():
+   if (state.era !== undefined) eraFilter.value = state.era;
+   ```
+
+7. [ ] **`map.js` — `updateClearButton()`** — include `eraFilter.value` in the "any filter active" check so the Clear button appears when an era is selected.
+
+8. [ ] **`map.js` — `clearFiltersBtn` handler** — reset `eraFilter.value = ""` alongside the other resets.
+
+9. [ ] **Smoke test**: Select "Historic (pre-1950)" — verify only pre-1950 stadiums appear. Select "Contemporary (2010+)" — verify the newest stadiums appear. Combine with country filter. Clear filters — era resets, all markers return.
+
+---
+
+### WS1 — Rankings page
+
+10. [ ] **`views.py` — `stadium_rankings` view**:
+    ```python
+    def stadium_rankings(request):
+        selected_country = request.GET.get("country", "")
+        selected_league  = request.GET.get("league",  "")
+
+        qs = (
+            Stadium.objects
+            .select_related("city")
+            .prefetch_related("teams__league__country")
+            .filter(capacity__isnull=False)
+            .order_by("-capacity")
+        )
+        if selected_country:
+            qs = qs.filter(teams__league__country__name=selected_country).distinct()
+        if selected_league:
+            qs = qs.filter(teams__league__name=selected_league).distinct()
+
+        stadia = list(qs)
+        max_cap = stadia[0].capacity if stadia else 1
+
+        rows = []
+        for rank, s in enumerate(stadia, start=1):
+            rows.append({
+                "rank":        rank,
+                "stadium":     s,
+                "bar_pct":     round(s.capacity / max_cap * 100, 1),
+                "primary_league": _primary_league(s.teams.all()),
+            })
+
+        # Build league choices filtered by country
+        leagues_qs = League.objects.select_related("country").order_by(
+            F("country__uefa_rank").asc(nulls_last=True),
+            "country__name",
+            "division_level",
+        )
+        if selected_country:
+            leagues_qs = leagues_qs.filter(country__name=selected_country)
+
+        return render(request, "stadium_rankings.html", {
+            "rows":             rows,
+            "countries":        _available_countries(),
+            "leagues":          list(leagues_qs),
+            "selected_country": selected_country,
+            "selected_league":  selected_league,
+        })
+    ```
+
+11. [ ] **`urls.py`** — add before the existing `stadiums_geojson` pattern:
+    ```python
+    from .views import (
+        city_list, stadium_developments_geojson, stadium_list, team_list,
+        stadium_detail, stadiums_geojson, stadium_development_detail, team_detail,
+        stadium_rankings,
+    )
+    # ...
+    path("stadiums/rankings/", stadium_rankings, name="stadium_rankings"),
+    ```
+
+12. [ ] **`stadium_rankings.html`** — new template:
+    ```html
+    {% extends "base_detail.html" %}
+    {% load static %}
+
+    {% block title %}Stadium Rankings — Stadiums of Europe{% endblock %}
+
+    {% block extra_nav %}
+        <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-sm btn-outline-light ms-auto">
+            ← Map
+        </a>
+    {% endblock %}
+
+    {% block content %}
+    <div class="container my-5">
+        <h1 class="mb-1">Stadium Rankings</h1>
+        <p class="text-muted mb-4">Sorted by capacity — {{ rows|length }} stadium{{ rows|length|pluralize }}</p>
+
+        <!-- Filter bar -->
+        <form method="get" class="d-flex flex-wrap gap-2 mb-4 align-items-end">
+            <div>
+                <label class="form-label small mb-1">Country</label>
+                <select name="country" class="form-select form-select-sm" onchange="this.form.submit()">
+                    <option value="">All countries</option>
+                    {% for c in countries %}
+                    <option value="{{ c }}" {% if c == selected_country %}selected{% endif %}>{{ c }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label class="form-label small mb-1">League</label>
+                <select name="league" class="form-select form-select-sm" onchange="this.form.submit()">
+                    <option value="">All leagues</option>
+                    {% for lg in leagues %}
+                    <option value="{{ lg.name }}" {% if lg.name == selected_league %}selected{% endif %}>{{ lg.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% if selected_country or selected_league %}
+            <a href="{% url 'italiastadiaapp:stadium_rankings' %}" class="btn btn-sm btn-outline-secondary">Clear</a>
+            {% endif %}
+        </form>
+
+        <!-- Rankings table -->
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th style="width:3rem">#</th>
+                        <th>Stadium</th>
+                        <th>City</th>
+                        <th>League</th>
+                        <th>Built</th>
+                        <th>Capacity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                    <tr>
+                        <td class="text-muted">{{ row.rank }}</td>
+                        <td>
+                            <a href="{% url 'italiastadiaapp:stadium_detail' row.stadium.id %}" class="fw-semibold text-decoration-none">
+                                {{ row.stadium.name }}
+                            </a>
+                        </td>
+                        <td class="text-muted small">{{ row.stadium.city }}</td>
+                        <td class="small">{{ row.primary_league.name|default:"—" }}</td>
+                        <td class="text-muted small">{{ row.stadium.year_of_construction|default:"—" }}</td>
+                        <td style="min-width:160px">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="capacity-bar-wrap flex-grow-1">
+                                    <div class="capacity-bar" style="width:{{ row.bar_pct }}%"></div>
+                                </div>
+                                <span class="small text-nowrap">{{ row.stadium.capacity|default:"—" }}</span>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="6" class="text-center text-muted py-4">No stadiums match the selected filters.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endblock %}
+    ```
+
+13. [ ] **`styles.css`** — add capacity bar styles:
+    ```css
+    /* ── Stadium rankings capacity bar ──────────────────────────── */
+    .capacity-bar-wrap {
+        height: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    .capacity-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #1565c0, #42a5f5);
+        border-radius: 4px;
+        transition: width 0.3s ease;
+        min-width: 2px;
+    }
+    ```
+
+14. [ ] **Add "Rankings" link to navbar** — in `base_detail.html` (or wherever the top nav is defined), add a link to the rankings page so users can discover it. Check `base_detail.html` for the nav structure first.
+
+15. [ ] **Smoke test**: Open `/stadiums/rankings/` — largest stadium is first, capacity bars visible. Filter by "England" — only English stadiums shown. Click a stadium name — opens detail page. Click "← Map" — returns to main map.
+
+---
+
+## PostgreSQL safety check
+
+No model changes in this sprint.
+- `year_of_construction` is already `IntegerField(null=True, blank=True)` — safe ✓
+- `capacity` is already `IntegerField(null=True, blank=True)` — safe ✓
+- New view uses `filter(capacity__isnull=False)` to skip NULL-capacity stadiums cleanly ✓
+
+---
+
+## Test plan
+
+**Automated:**
+```bash
+pytest italiastadiaapp/tests/ -v --tb=short    # all existing tests must still pass
+python manage.py check                          # 0 issues
+```
+
+**Manual — WS3 Street View:**
+| Action | Expected |
+|--------|----------|
+| Open any stadium with coordinates | "Street View" button appears next to "Open in Google Maps" |
+| Click "Street View" | New tab opens in Google Street View at the stadium's coordinates |
+| Stadium with no coordinates | Street View button does not render (inside `has_coords` guard) |
+
+**Manual — WS2 Era filter:**
+| Action | Expected |
+|--------|----------|
+| Select "Historic (pre-1950)" | Only pre-1950 stadiums shown; Wembley (1923), San Siro (1926) visible |
+| Select "Contemporary (2010+)" | Only 2010+ stadiums shown; new-build grounds visible |
+| Combine "Germany" + "Classic (1950–1989)" | Only German stadiums built in 1950–1989 |
+| Clear filters | Era select resets, all markers return |
+| Navigate away and back | Era filter restored from sessionStorage |
+| Stadium with no year data | Shown regardless of era filter (unknown era passes through) |
+
+**Manual — WS1 Rankings page:**
+| Action | Expected |
+|--------|----------|
+| Open `/stadiums/rankings/` | Full list, sorted by capacity descending, bars visible |
+| Largest stadium has 100% bar width | Correct |
+| Filter to "Italy" | Only Italian stadiums; top is San Siro (~75 923) |
+| Filter to "England" + "Premier League" | Only PL grounds; top is Wembley (~90 000) |
+| Clear filter | Full list returns |
+| Click a stadium name | Opens stadium detail page |
+| "← Map" button | Returns to main map |
+| 0 results (nonsense filter) | "No stadiums match" row shown |
+
+---
+
+## Rollback plan
+
+Frontend and view-only changes. No migration needed.
+
+```bash
+# Revert all Sprint 5 changes:
+git checkout main -- italiastadiaapp/views.py
+git checkout main -- italiastadiaapp/urls.py
+git checkout main -- italiastadiaapp/templates/stadium_detail.html
+git checkout main -- italiastadiaapp/templates/index.html
+git checkout main -- italiastadiaapp/static/js/map.js
+git checkout main -- italiastadiaapp/static/css/styles.css
+# Delete the new template:
+del italiastadiaapp\templates\stadium_rankings.html
+```
+
+---
+
 # Feature Plan — 3D Building Explorer Map on Stadium Detail Page
 _Created: 2026-06-10 | Branch: feature/3d-building-explorer_
 
