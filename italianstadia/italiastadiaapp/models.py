@@ -52,7 +52,7 @@ class Stadium(models.Model):
     capacity = models.IntegerField(null=True, blank=True)
     address = models.CharField(max_length=500, blank=True, null=True)
     year_of_construction = models.IntegerField(null=True, blank=True)
-    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='stadiums')
+    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='stadiums', db_index=True)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
 
@@ -100,10 +100,10 @@ class Team(models.Model):
     blank=True,
     null=True
     )
-    stadium = models.ForeignKey(Stadium, on_delete=models.CASCADE, related_name='teams')
+    stadium = models.ForeignKey(Stadium, on_delete=models.CASCADE, related_name='teams', db_index=True)
     manager = models.CharField(max_length=255, blank=True, null=True)
     num_of_titles = models.IntegerField(null=True, blank=True)
-    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='teams')
+    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='teams', db_index=True)
     average_attendance = models.IntegerField(null=True, blank=True)
 
     wikipedia_url = models.URLField(max_length=500, blank=True, null=True)
@@ -127,7 +127,8 @@ class Team(models.Model):
     on_delete=models.SET_NULL,
     null=True,
     blank=True,
-    related_name='future_tenants'
+    related_name='future_tenants',
+    db_index=True,
     )
 
     uefa_coefficient = models.FloatField(null=True, blank=True)
@@ -137,7 +138,7 @@ class Team(models.Model):
         return self.name
 
 class StadiumDevelopment(models.Model):
-    stadium = models.ForeignKey(Stadium, on_delete=models.CASCADE, null=True, blank=True)
+    stadium = models.ForeignKey(Stadium, on_delete=models.CASCADE, null=True, blank=True, db_index=True)
 
     name = models.CharField(max_length=255)
 

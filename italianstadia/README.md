@@ -1,8 +1,8 @@
-# ItalianStadia
+# EuropeanStadia
 
-ItalianStadia is a Django project for collecting, storing, and presenting information about Italian football stadiums.
+EuropeanStadia is a Django project for collecting, storing, and presenting information about European football stadiums.
 
-The intended final product is a website with stadium resources, including an interactive map where users can explore Italian stadiums and view details gathered from public web sources such as Wikipedia and Transfermarkt.
+The intended final product is a website with stadium resources, including an interactive map where users can explore European stadiums and view details gathered from public web sources such as Wikipedia and Transfermarkt.
 
 ## Project purpose
 
@@ -19,8 +19,8 @@ The main data sources appear to be:
 ## Project structure
 
 ```text
-ITALIANSTADIA/
-├── italianstadia/                 # Main Django project configuration package
+EuropeanSTADIA/
+├── Europeanstadia/                 # Main Django project configuration package
 │   ├── __init__.py
 │   ├── asgi.py                    # ASGI entry point
 │   ├── settings.py                # Django settings

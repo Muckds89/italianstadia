@@ -555,6 +555,7 @@ Success: on a 375 px phone the map fills the screen; tapping "Filters" slides up
 - [x] WS7 — Map ordering: asymmetric zoom padding `paddingTopLeft:[30,110]` / `paddingBottomRight:[30,40]` across all `fitBounds` calls
 - [x] WS8 — Team list: `leagues_qs` ordered by `country__uefa_rank`; flag emoji helper in views.py; `{% regroup %}` in template creates country dropdown navbar with flags
 - [x] WS9 — Unknown ownership: extract `classify_ownership()` + `PUBLIC_KEYWORDS` to `italiastadiaapp/ownership.py`; new `fix_unknown_ownership` management command
+- [ ] WS10 — Multi-tenant stadium logos: split-circle badge marker when a stadium has 2+ tenants (e.g. Meazza showing Inter + AC Milan side-by-side); popup redesigned to show all tenant team logos simultaneously in a horizontal logo strip (replacing ← / → one-at-a-time navigation)
 
 **Out of scope (do not touch):**
 - Development mode marker clustering (circles stay as direct `map.addLayer`)
@@ -1187,6 +1188,223 @@ Steps are ordered bottom-up (model → backend → frontend). Complete each work
 
 ---
 
+### WS10 — Multi-tenant stadium logos (split badge + logo strip popup)
+
+**Problem:** Stadiums with multiple tenant clubs (e.g. Stadio Meazza = Inter Milan + AC Milan) only show a single logo on the map marker and cycle through teams one at a time via ← / → navigation in the popup. The user has no visual cue that the stadium is shared, and seeing both clubs at a glance is impossible.
+
+**Goal:** When a stadium has 2+ tenants, the map badge shows a split circle with both logos side-by-side. The popup replaces the ← / → navigation with a horizontal logo strip at the top — all tenant logos are visible simultaneously; clicking a logo selects that team's info section below. No model, view, or URL changes are required — `props.teams[]` already contains all tenant data including `image_url`.
+
+**Design decisions:**
+1. **Split badge for exactly 2 tenants; "+N" overlay for 3+.** Splitting a circle into thirds or more is visually unreadable at 40 px. Show the top-2 tenants (sorted by `division_level` asc, i.e. highest tier first) and a `+N` mini-counter for any extras.
+2. **No new `createBadgeIcon` API change.** Add a new `createMultiBadgeIcon(teams, sizePx)` function. When `teams.length === 1` it delegates to the existing `createBadgeIcon(teams[0].image_url, sizePx)` — zero regression risk.
+3. **Logo strip replaces ← / → pagination.** The old navigation is opaque — users don't know how many teams exist. Logos are self-documenting and tappable on mobile. The active logo gets a coloured ring so the selected team is clear.
+4. **Single-team popup gains a logo too.** Currently the popup is text-only. Adding the team logo improves visual identity and makes the single / multi cases feel consistent.
+
+35. [ ] **CSS** — add to `italiastadiaapp/static/css/styles.css`:
+
+    ```css
+    /* ── Split badge for multi-tenant stadiums ─────────────────── */
+    .badge-split {
+        display: flex;
+        overflow: hidden;   /* border-radius is set by .badge-icon-wrap */
+    }
+    .badge-split .badge-half {
+        flex: 1;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .badge-split .badge-half-fallback {
+        background: #9e9e9e;
+        flex: 1;
+    }
+    .badge-split .badge-half:not(:last-child) {
+        border-right: 1.5px solid rgba(255, 255, 255, 0.55);
+    }
+    /* "+N" mini-counter for 3+ tenants */
+    .badge-extra-count {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        font-size: 8px;
+        font-weight: 700;
+        line-height: 14px;
+        width: 14px;
+        height: 14px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.75);
+        color: #fff;
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    /* ── Multi-tenant popup logo strip ─────────────────────────── */
+    .popup-tenant-strip {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        margin-bottom: 10px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .popup-tenant-logo-btn {
+        background: none;
+        border: 2px solid transparent;
+        border-radius: 50%;
+        padding: 2px;
+        cursor: pointer;
+        transition: border-color 0.15s;
+        flex-shrink: 0;
+    }
+    .popup-tenant-logo-btn.active,
+    .popup-tenant-logo-btn:hover {
+        border-color: #4fc3f7;
+    }
+    .popup-tenant-logo-btn img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+    }
+    .popup-tenant-logo-btn .btn-logo-fallback {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #555;
+        display: block;
+    }
+    /* Team info panels — only the active one is shown */
+    .popup-tenant-panel {
+        display: none;
+    }
+    .popup-tenant-panel.active {
+        display: block;
+    }
+    /* Single-team popup logo */
+    .popup-single-logo {
+        display: block;
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        margin: 0 auto 6px;
+    }
+    ```
+
+36. [ ] **`createMultiBadgeIcon(teams, sizePx)`** — add immediately below the existing `createBadgeIcon` function in `map.js`:
+
+    ```js
+    /**
+     * Badge icon for multi-tenant stadiums (2+ teams sharing one ground).
+     * - 1 team  → delegates to createBadgeIcon (backward compatible)
+     * - 2 teams → split circle, left = team[0], right = team[1]
+     * - 3+ teams → split circle of first two + "+N" mini-counter
+     *
+     * Teams are expected sorted highest-tier-first (lowest division_level first).
+     */
+    function createMultiBadgeIcon(teams, sizePx) {
+        if (!teams || teams.length <= 1) {
+            return createBadgeIcon(teams?.[0]?.image_url || null, sizePx);
+        }
+        const [t1, t2] = teams;
+        const half1 = t1?.image_url
+            ? `<img src="${t1.image_url}" alt="${t1.name}" class="badge-half">`
+            : `<div class="badge-half badge-half-fallback"></div>`;
+        const half2 = t2?.image_url
+            ? `<img src="${t2.image_url}" alt="${t2.name}" class="badge-half">`
+            : `<div class="badge-half badge-half-fallback"></div>`;
+        const extra = teams.length > 2
+            ? `<span class="badge-extra-count">+${teams.length - 2}</span>`
+            : "";
+        return L.divIcon({
+            html: `<div class="badge-icon-wrap badge-sz-${sizePx} badge-active badge-split">${half1}${half2}${extra}</div>`,
+            className: "",
+            iconSize: [sizePx, sizePx],
+            iconAnchor: [sizePx / 2, sizePx / 2],
+            popupAnchor: [0, -sizePx / 2],
+        });
+    }
+    ```
+
+37. [ ] **Update marker creation** in `map.js` — the line that reads:
+    ```js
+    icon: createBadgeIcon(primaryTeam?.image_url || null, BADGE_SIZE.active),
+    ```
+    Change to:
+    ```js
+    icon: createMultiBadgeIcon(props.teams || [], BADGE_SIZE.active),
+    ```
+    _(The `props.teams` array is already sorted highest-tier-first by the GeoJSON endpoint, which orders by `division_level` ascending.)_
+
+38. [ ] **Update icon-resize calls inside `applyFilters()`** — anywhere `createBadgeIcon` is called to resize a marker icon (active vs. inactive size), replace with `createMultiBadgeIcon(m.teams || [], size)`. The `m.teams` array is stored on the marker object at creation time (currently as `marker.teams`).
+
+39. [ ] **Redesign `buildPopupContent(props, teamIndex = 0)`** for the multi-tenant case. When `teams.length > 1`, the popup renders:
+
+    ```
+    ┌───────────────────────────────────┐
+    │  Stadio Giuseppe Meazza           │  ← stadium name
+    │  Milan  |  Capacity: 75,923       │
+    │  Ownership: PUBLIC                │
+    │  ─────────────────────────────── │
+    │   [Inter logo]  [AC Milan logo]   │  ← logo strip (WS10)
+    │  ─────────────────────────────── │
+    │  [active team info panel]         │  ← shows whichever logo is selected
+    │    Name / League / View team      │
+    │  ─────────────────────────────── │
+    │  View stadium  |  Wikipedia        │
+    └───────────────────────────────────┘
+    ```
+
+    Implementation sketch (add inside `buildPopupContent`):
+    ```js
+    if (teams.length > 1) {
+        const logoStrip = teams.map((t, i) => `
+            <button class="popup-tenant-logo-btn${i === teamIndex ? " active" : ""}"
+                    data-team-idx="${i}" title="${t.name}">
+                ${t.image_url
+                    ? `<img src="${t.image_url}" alt="${t.name}">`
+                    : `<span class="btn-logo-fallback"></span>`}
+            </button>
+        `).join("");
+
+        const panels = teams.map((t, i) => `
+            <div class="popup-tenant-panel${i === teamIndex ? " active" : ""}" data-team-idx="${i}">
+                <strong>${t.name}</strong><br>
+                <small>${t.league_name || t.tier_name || ""}</small><br>
+                <a href="/team/${t.id}/" style="font-size:0.75rem">View team →</a>
+            </div>
+        `).join("");
+
+        // ... assemble full popup HTML with strip + panels ...
+    }
+    ```
+
+40. [ ] **Wire logo strip interaction** — in `attachPopupTeamNavigation()` (or inline in `buildPopupContent`), attach `click` handlers to each `.popup-tenant-logo-btn`:
+    ```js
+    popup.getElement()?.querySelectorAll(".popup-tenant-logo-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const idx = Number(btn.dataset.teamIdx);
+            // Swap active classes on buttons
+            btn.closest(".popup-tenant-strip")
+               .querySelectorAll(".popup-tenant-logo-btn")
+               .forEach(b => b.classList.toggle("active", b === btn));
+            // Swap active class on panels
+            btn.closest(".leaflet-popup-content")
+               .querySelectorAll(".popup-tenant-panel")
+               .forEach((p, i) => p.classList.toggle("active", i === idx));
+        });
+    });
+    ```
+    _(The existing ← / → `attachPopupTeamNavigation` logic can be retired once WS10 is live — keep it as a fallback under a guard `if teams.length > 1 && !stripPresent` during transition.)_
+
+41. [ ] **Smoke test:** Open the map, find Stadio Meazza (Milan). Verify:
+    - Badge marker shows two logos side-by-side in a split circle
+    - Clicking the marker opens the popup with Inter + AC Milan logos in a horizontal strip
+    - Clicking each logo swaps the team info section below (name, league, "View team")
+    - The ← / → navigation buttons are gone from the popup
+
+---
+
 ## PostgreSQL safety check
 
 - [x] `Team.uefa_coefficient` is `FloatField(null=True, blank=True)` — safe nullable add, no default needed
@@ -1307,6 +1525,19 @@ def test_team_uefa_coefficient_field():
 | Visit Arsenal or Man City team detail page | "UEFA coefficient: 87.5" row visible |
 | Visit a Serie B team detail page | No coefficient row shown (null suppressed by template guard) |
 
+**Manual — multi-tenant stadium logos (WS10):**
+
+| Action | Expected |
+|--------|----------|
+| Open map, zoom to Milan | Stadio Meazza badge shows a vertically split circle: left half = Inter Milan badge, right half = AC Milan badge |
+| Click Meazza badge | Popup opens; two logos appear side-by-side in the header strip; no ← / → buttons |
+| Click the Inter Milan logo in the strip | Inter logo gets a blue ring; info section below updates to Inter's name, league ("Serie A"), and "View team" link |
+| Click the AC Milan logo in the strip | AC Milan logo gets the blue ring; info section updates accordingly |
+| Open any single-tenant stadium popup | Popup shows that team's logo at the top; no strip, no navigation buttons |
+| Stadium with 3 tenants (hypothetical) | Badge shows first two logos + "+1" overlay; popup strip shows all three logo buttons |
+| Apply country/league filter that excludes Meazza | Meazza marker disappears normally (split badge has no effect on filter logic) |
+| Resize browser window to 375 px (mobile) | Split badge, logo strip, and info panels all render correctly at small viewport width |
+
 ---
 
 ## Rollback plan
@@ -1320,4 +1551,8 @@ git checkout main -- italiastadiaapp/templates/index.html
 git checkout main -- italiastadiaapp/static/css/styles.css
 git checkout main -- italiastadiaapp/static/js/map.js
 git checkout main -- italiastadiaapp/templates/team_detail.html
+
+# WS10 only (no model changes — pure JS/CSS rollback):
+git checkout main -- italiastadiaapp/static/js/map.js
+git checkout main -- italiastadiaapp/static/css/styles.css
 ```
