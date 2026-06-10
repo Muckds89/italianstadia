@@ -43,20 +43,23 @@
     {% regroup sections by league.country.name as country_sections %}
     {% for country_group in country_sections %}
         {% if country_group.list|length == 1 %}
-            <a href="#{{ country_group.list.0.anchor }}" class="btn btn-outline-primary btn-sm">
+            {# Single-league country: filter to that country #}
+            <a href="?country={{ country_group.grouper|urlencode }}"
+               class="btn btn-outline-primary btn-sm{% if country_group.grouper == selected_country %} active{% endif %}">
                 {% if country_group.list.0.flag_code %}<span class="fi fi-{{ country_group.list.0.flag_code }}"></span> {% endif %}{{ country_group.list.0.league_label }}
                 ({{ country_group.list.0.teams|length }})
             </a>
         {% else %}
+            {# Multi-league country: dropdown; each item filters + scrolls to that league #}
             <div class="dropdown d-inline-block">
-                <button class="btn btn-outline-primary btn-sm dropdown-toggle"
+                <button class="btn btn-outline-primary btn-sm dropdown-toggle{% if country_group.grouper == selected_country %} active{% endif %}"
                         data-bs-toggle="dropdown" type="button">
                     {% if country_group.list.0.flag_code %}<span class="fi fi-{{ country_group.list.0.flag_code }}"></span> {% endif %}{{ country_group.grouper }}
                 </button>
                 <ul class="dropdown-menu">
                     {% for section in country_group.list %}
                     <li>
-                        <a class="dropdown-item" href="#{{ section.anchor }}">
+                        <a class="dropdown-item" href="?country={{ country_group.grouper|urlencode }}#{{ section.anchor }}">
                             {{ section.league_label }} ({{ section.teams|length }})
                         </a>
                     </li>
