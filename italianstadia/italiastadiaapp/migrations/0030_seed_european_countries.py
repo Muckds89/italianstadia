@@ -42,7 +42,7 @@ EUROPEAN_COUNTRIES = [
     ("Romania", "RO"),
     ("Russia", "RU"),
     ("San Marino", "SM"),
-    ("Scotland", "GB-SCT"),
+    ("Scotland", "SC"),
     ("Serbia", "RS"),
     ("Slovakia", "SK"),
     ("Slovenia", "SI"),
@@ -51,7 +51,7 @@ EUROPEAN_COUNTRIES = [
     ("Switzerland", "CH"),
     ("Turkey", "TR"),
     ("Ukraine", "UA"),
-    ("Wales", "GB-WLS"),
+    ("Wales", "WL"),
 ]
 
 
