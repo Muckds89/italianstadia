@@ -246,6 +246,16 @@ def _primary_league(teams):
     return best
 
 
+def _country_flag_emoji(code: str) -> str:
+    """Convert ISO-2 country code to flag emoji. England uses tagged flag, not UK flag."""
+    OVERRIDES = {"GB": "\U0001F3F4\U000E0067\U000E0062\U000E0065\U000E006E\U000E0067\U000E007F"}
+    if code in OVERRIDES:
+        return OVERRIDES[code]
+    if len(code) == 2:
+        return chr(0x1F1E0 + ord(code[0].upper()) - 65) + chr(0x1F1E0 + ord(code[1].upper()) - 65)
+    return ""
+
+
 def team_detail(request, pk):
     team = get_object_or_404(
         Team.objects.select_related(
@@ -256,7 +266,13 @@ def team_detail(request, pk):
         ),
         pk=pk,
     )
-    return render(request, "team_detail.html", {"team": team})
+    from_list    = request.GET.get("from_list", None)
+    back_country = from_list if from_list else ""
+    return render(request, "team_detail.html", {
+        "team": team,
+        "from_list": from_list is not None,
+        "back_country": back_country,
+    })
 
 
 def team_list(request):
@@ -267,7 +283,7 @@ def team_list(request):
         teams_qs = teams_qs.filter(league__country__name=selected_country)
 
     leagues_qs = League.objects.select_related("country").order_by(
-        "country__name", "division_level"
+        "country__uefa_rank", "country__name", "division_level"
     )
     if selected_country:
         leagues_qs = leagues_qs.filter(country__name=selected_country)
@@ -290,6 +306,7 @@ def team_list(request):
                 "league_label": league.name,
                 "anchor": f"league-{league.id}",
                 "teams": section_teams,
+                "flag": _country_flag_emoji(league.country.code) if league.country else "",
             })
 
     # Fallback: teams with no league FK

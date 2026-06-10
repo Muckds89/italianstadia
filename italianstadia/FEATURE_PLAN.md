@@ -524,3 +524,800 @@ git checkout main -- italiastadiaapp/static/css/styles.css
 git checkout main -- italiastadiaapp/templates/index.html
 git checkout main -- italiastadiaapp/views.py
 ```
+
+---
+
+# Feature Plan — Sprint 4: Mobile UI, Live Search, Marker Clustering, Club Coefficients
+_Created: 2026-06-09 | Branch: feature/sprint-4_
+
+## Problem / Goal
+
+Four enhancements to improve usability and data depth:
+
+1. **Mobile-first UI**: The navbar filter row overflows awkwardly on phones. On ≤768px the filter controls should collapse behind a "Filters" toggle button that opens a full-width slide-up drawer. The map should fill the full viewport height. Leaflet popups should anchor as a bottom sheet rather than a floating callout.
+2. **Live search**: There is no way to jump directly to a team or stadium by name; users must know which country/league to filter first. A search box should let users type any name and fly the map to the matching marker.
+3. **Marker clustering**: At low zoom levels the European map shows 400+ overlapping badges. A cluster layer should collapse nearby markers into a count bubble at zoom ≤5.
+4. **UEFA club coefficients** (explicitly deferred from Sprint 3): `Team.uefa_coefficient` field, `update_club_coefficients` management command, and display on the team detail page.
+
+Success: on a 375 px phone the map fills the screen; tapping "Filters" slides up a drawer with all controls; typing "Arsenal" in the search box flies the map to the Emirates and opens its popup; zooming out to level 3 shows count bubbles; Arsenal's team detail page shows "UEFA coefficient: 87.5".
+
+---
+
+## Scope
+
+**In scope:**
+- [x] WS1 — Mobile drawer: `#filterToggleBtn` in navbar; `#filterDrawer` wrapping the filter row; slides up on mobile; map fills full viewport height (`100dvh`); Leaflet popup → bottom sheet on ≤768px
+- [x] WS2 — Live search input in the filter area; results dropdown (max 5 entries); fly-to + open popup on selection; searches `marker.stadiumName` and `marker.primaryTeam.name` / all `marker.teams[*].name`
+- [x] WS3 — Leaflet.markercluster CDN; `L.markerClusterGroup` replacing direct `map.addLayer` calls in `applyFilters()`; `disableClusteringAtZoom: 6`
+- [x] WS4 — `Team.uefa_coefficient FloatField`; migration; `update_club_coefficients` management command; `{% if team.uefa_coefficient %}` block in `team_detail.html`
+- [x] WS5 — Back navigation: `team_list.html` appends `?from_list=<country>` to team links; `team_detail` view reads it; `team_detail.html` renders "← Back to team list (Country)" when present, plain "← Back to teams" otherwise
+- [x] WS6 — CLP: fix tap dead zones on touch devices (add fallback `countryRow.click`); replace `window.innerWidth` hover guard with `matchMedia("(hover: hover)")`; stronger `.active` CSS (left-border accent); visible-select highlight class `filter-has-value`
+- [x] WS7 — Map ordering: asymmetric zoom padding `paddingTopLeft:[30,110]` / `paddingBottomRight:[30,40]` across all `fitBounds` calls
+- [x] WS8 — Team list: `leagues_qs` ordered by `country__uefa_rank`; flag emoji helper in views.py; `{% regroup %}` in template creates country dropdown navbar with flags
+- [x] WS9 — Unknown ownership: extract `classify_ownership()` + `PUBLIC_KEYWORDS` to `italiastadiaapp/ownership.py`; new `fix_unknown_ownership` management command
+
+**Out of scope (do not touch):**
+- Development mode marker clustering (circles stay as direct `map.addLayer`)
+- `stadium-detail-map.js`
+- Any scraper / JSON data file changes
+- Server-side search endpoint (client-side over already-loaded GeoJSON is sufficient)
+- `average_attendance` ranking on map markers — not changing z-index / ordering logic
+
+---
+
+## Design decisions
+
+1. **Mobile drawer: wrap existing filter row, don't move DOM nodes.**
+   Option A (rejected): hide the filter row on mobile; clone nodes into a separate drawer div. Breaks: sessionStorage restore reads element IDs that must be in a single DOM location; cloning duplicates IDs.
+   Option B (chosen): add `id="filterDrawer"` to the existing `<div class="d-flex … w-100">` filter row. On desktop, `#filterDrawer` is `display: flex` (inline, as today). On ≤768px, `#filterDrawer` is `display: none` by default; a toggle button shows it as a `position: fixed` bottom panel. One set of IDs, zero sessionStorage impact, zero JS structural changes to applyFilters().
+
+2. **Live search: client-side over `operationalMarkers` array.**
+   All GeoJSON is loaded once at page load. Searching `operationalMarkers` (~400 entries) in-memory is instant. A server-side endpoint adds a Django view + URL + JS round-trip for zero benefit at current data size. Re-evaluate when stadiums exceed ~5000.
+
+3. **Search matches stadium name AND all team names at a marker.**
+   `marker.stadiumName` (set at map.js:1030) and every `marker.teams[i].name` (set at map.js:1009) are searched. Multi-tenant stadiums (e.g. Olimpico, shared by Roma and Lazio) return a single result regardless of which team name was typed.
+
+4. **Search lives inside the filter row / drawer.**
+   On desktop it sits at the start of the second navbar row. On mobile it is inside the drawer — the user opens the drawer to search. Alternative: keep search always-visible in the top navbar row on mobile. Rejected: the top row is already tight (brand + mode switch); the extra input would force wrapping or tiny font sizes. Acceptable trade-off: search-heavy users on mobile use the drawer.
+
+5. **Cluster group: `disableClusteringAtZoom: 6`.**
+   At zoom ≥6 (city level) individual club badges appear; below 6, clusters. At Europe zoom (3–5), city clusters are clean count bubbles. `maxClusterRadius: 60` keeps city-level clusters from merging stadiums that are geographically separate.
+   Alternative: threshold at 5. Rejected: at zoom 5 many country capitals already show 2–4 clubs within cluster radius — individual badges are more useful there.
+
+6. **Cluster group operational-only.**
+   Development markers (< 100 records, always low density) keep direct `map.addLayer`. Avoids adding cluster state to the development mode path.
+
+7. **`applyFilters()` rebuild strategy with cluster group.**
+   Current `applyFilters()` calls `map.removeLayer(marker)` / `marker.addTo(map)` per marker. With the cluster group, replace all those calls with `clusterGroup.clearLayers()` at the top of `applyFilters()`, then rebuild with `clusterGroup.addLayer(marker)` for each visible marker. Simpler than per-marker add/remove on the cluster group, and avoids stale layer state.
+
+8. **UEFA coefficient source: Wikipedia, same page as `update_uefa_ranking`.**
+   `https://en.wikipedia.org/wiki/UEFA_coefficient` already has a "Club coefficients" section. Same `requests` + `bs4` pattern, no new dependency. Match Wikipedia club names to `Team.name` case-insensitively; log `WARNING` for unmatched rows. Coefficient is shown on team_detail only when non-null (Sprint 3 deferred section describes the use-case in detail).
+
+---
+
+## Files that will change
+
+| File | Change type | Why |
+|------|-------------|-----|
+| `italiastadiaapp/models.py` | Edit | Add `Team.uefa_coefficient` FloatField |
+| `italiastadiaapp/migrations/` | New | Migration for `Team.uefa_coefficient` |
+| `italiastadiaapp/management/commands/update_club_coefficients.py` | New | Scrape + save club coefficients |
+| `italiastadiaapp/templates/team_detail.html` | Edit | Display coefficient when non-null |
+| `italiastadiaapp/templates/index.html` | Edit | Add `#filterToggleBtn`, `id="filterDrawer"`, search input markup, markercluster CDN links |
+| `italiastadiaapp/templates/team_list.html` | Edit | Append `?from_list=…` to each "View team" link; grouped country dropdown navbar with flags |
+| `italiastadiaapp/views.py` | Edit | `team_detail`: `from_list` param; `team_list`: order by `uefa_rank`, add `flag` to sections; `_country_flag_emoji()` helper |
+| `italiastadiaapp/templates/team_detail.html` | Edit | Conditional back-link in `{% block extra_nav %}` |
+| `italiastadiaapp/static/css/styles.css` | Edit | Stronger CLP `.active` styles; `select.filter-has-value` highlight |
+| `italiastadiaapp/static/js/map.js` | Edit | CLP fallback click handler; `matchMedia` hover guard; `data-rank` on options; CLP order from DOM; asymmetric zoom padding; `countryFlagEmoji()`; `country_code` in league objects |
+| `italiastadiaapp/ownership.py` | New | Extracted `classify_ownership()` + `PUBLIC_KEYWORDS` |
+| `italiastadiaapp/management/commands/fix_unknown_ownership.py` | New | Re-classify UNKNOWN stadiums with `owner_raw` set |
+| `italiastadiaapp/static/css/styles.css` | Edit | Mobile drawer, bottom-sheet popup, search dropdown styles |
+| `italiastadiaapp/static/js/map.js` | Edit | `clusterGroup` init, `applyFilters()` cluster calls, live search logic, drawer toggle |
+
+---
+
+## Implementation steps
+
+Steps are ordered bottom-up (model → backend → frontend). Complete each workstream in sequence.
+
+### WS4 — UEFA club coefficients
+
+1. [ ] **Model** — in `italiastadiaapp/models.py`, add to `Team`:
+   ```python
+   uefa_coefficient = models.FloatField(null=True, blank=True)
+   ```
+
+2. [ ] **Migration** — run `python manage.py makemigrations && python manage.py migrate`.
+   Safe: nullable float, existing rows get NULL automatically.
+
+3. [ ] **Management command** — create `italiastadiaapp/management/commands/update_club_coefficients.py`:
+   ```python
+   from django.core.management.base import BaseCommand
+   import requests
+   from bs4 import BeautifulSoup
+   from italiastadiaapp.models import Team
+
+   class Command(BaseCommand):
+       help = "Fetch UEFA 5-year club coefficients from Wikipedia and update Team.uefa_coefficient"
+
+       def handle(self, *args, **options):
+           url = "https://en.wikipedia.org/wiki/UEFA_coefficient"
+           soup = BeautifulSoup(requests.get(url, timeout=15).text, "html.parser")
+           # The "Club coefficients" section is the second wikitable on the page.
+           # Parse rank, club name, coefficient (Points column).
+           # For each row: Team.objects.filter(name__iexact=club_name).update(uefa_coefficient=value)
+           # Log WARNING for unmatched rows.
+   ```
+   Usage: `python manage.py update_club_coefficients`
+
+4. [ ] **team_detail.html** — add inside the existing stats/info section (find a `<dl>` or similar block):
+   ```html
+   {% if team.uefa_coefficient %}
+   <dt>UEFA coefficient</dt>
+   <dd>{{ team.uefa_coefficient|floatformat:1 }}</dd>
+   {% endif %}
+   ```
+
+### WS3 — Marker clustering
+
+5. [ ] **index.html** — add Leaflet.markercluster CDN links immediately after the existing Leaflet lines (before `styles.css`):
+   ```html
+   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css"/>
+   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css"/>
+   ```
+   And after the Leaflet JS `<script>` tag:
+   ```html
+   <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+   ```
+
+6. [ ] **map.js** — immediately after `const map = L.map(...)` is initialised (top of file), create the cluster group and add it to the map:
+   ```js
+   const clusterGroup = L.markerClusterGroup({
+       maxClusterRadius: 60,
+       disableClusteringAtZoom: 6,
+       chunkedLoading: true,
+   });
+   map.addLayer(clusterGroup);
+   ```
+
+7. [ ] **map.js — `applyFilters()`** — at the very start of the function, replace the per-marker removal loop with a single clear:
+   ```js
+   clusterGroup.clearLayers();   // ← replaces the forEach map.removeLayer loop
+   ```
+   Then for each visible marker replace `marker.addTo(map)` → `clusterGroup.addLayer(marker)`.
+   Remove the `map.removeLayer(marker)` calls inside the loop (clearLayers already handled them).
+
+8. [ ] **map.js — initial load** — the final `marker.addTo(map)` at map.js:1066 (where each marker is first placed) should also become `clusterGroup.addLayer(marker)`. This ensures the initial render goes through the cluster group.
+
+9. [ ] **Smoke test**: zoom to 3 — verify count bubbles appear. Click a bubble — verify it zooms and splits. Zoom to 7 — verify individual badges appear.
+
+### WS2 — Live search
+
+10. [ ] **index.html** — add the search input at the very start of the `#filterDrawer` div (before `#operationalFilters`):
+    ```html
+    <div id="searchWrap" class="search-wrap">
+        <input type="search" id="liveSearch" class="form-control form-control-sm"
+               placeholder="Search team or stadium…" autocomplete="off">
+        <ul id="searchResults" class="search-results" style="display:none"></ul>
+    </div>
+    ```
+
+11. [ ] **styles.css** — add search component styles (outside any @media block, so they apply on all sizes):
+    ```css
+    .search-wrap {
+        position: relative;
+        flex-shrink: 0;
+        width: clamp(160px, 18vw, 300px);
+    }
+    .search-results {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        background: #1a1a1a;
+        border: 1px solid #555;
+        border-top: none;
+        border-radius: 0 0 6px 6px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        max-height: 220px;
+        overflow-y: auto;
+    }
+    .search-results li {
+        padding: 8px 12px;
+        color: #ddd;
+        cursor: pointer;
+        font-size: 13px;
+    }
+    .search-results li:hover { background: #333; }
+    ```
+    Inside the `@media (max-width: 768px)` block: `.search-wrap { width: 100%; }`.
+
+12. [ ] **map.js** — after the `operationalMarkers.push(marker)` call (end of the GeoJSON fetch `.then` block), wire up live search. Add after `populateCountryFilter()` is called:
+    ```js
+    wireSearch();
+    ```
+    Add the `wireSearch()` function near the top of the JS module (alongside other utility functions):
+    ```js
+    function wireSearch() {
+        const input   = document.getElementById("liveSearch");
+        const results = document.getElementById("searchResults");
+        if (!input) return;
+        let debounce;
+
+        input.addEventListener("input", () => {
+            clearTimeout(debounce);
+            debounce = setTimeout(() => {
+                const q = input.value.trim().toLowerCase();
+                results.innerHTML = "";
+                if (q.length < 2) { results.style.display = "none"; return; }
+
+                const hits = operationalMarkers.filter(m => {
+                    if (m.stadiumName?.toLowerCase().includes(q)) return true;
+                    return (m.teams || []).some(t => t.name?.toLowerCase().includes(q));
+                }).slice(0, 5);
+
+                if (!hits.length) { results.style.display = "none"; return; }
+
+                hits.forEach(m => {
+                    const label = m.primaryTeam?.name
+                        ? `${m.primaryTeam.name} — ${m.stadiumName}`
+                        : m.stadiumName;
+                    const li = document.createElement("li");
+                    li.textContent = label;
+                    li.addEventListener("click", () => {
+                        map.flyTo(m.getLatLng(), 12, { duration: 1.2 });
+                        setTimeout(() => m.openPopup(), 1300);
+                        input.value = "";
+                        results.style.display = "none";
+                    });
+                    results.appendChild(li);
+                });
+                results.style.display = "block";
+            }, 250);
+        });
+
+        document.addEventListener("click", e => {
+            if (!e.target.closest("#searchWrap")) results.style.display = "none";
+        });
+    }
+    ```
+
+13. [ ] Confirm `m.openPopup()` works on a badge marker — it's an `L.marker`, so `.openPopup()` opens the bound popup if any. Since popups are created on click (not pre-bound via `marker.bindPopup()`), calling `m.openPopup()` directly won't work. Instead, simulate a programmatic click: `m.fire("click")`. Update step 12 accordingly:
+    ```js
+    // Replace: setTimeout(() => m.openPopup(), 1300);
+    // With:
+    setTimeout(() => m.fire("click"), 1300);
+    ```
+
+### WS5 — Team list back navigation & filter persistence
+
+18. [ ] **team_list.html** — append `?from_list={{ selected_country|urlencode }}` to each team card link (line 114). The parameter is an empty string when "All countries" is selected — that is fine, the view handles it:
+    ```html
+    <a href="{% url 'italiastadiaapp:team_detail' team.pk %}?from_list={{ selected_country|urlencode }}"
+       class="btn btn-sm btn-outline-secondary">View team</a>
+    ```
+    This passes the active country filter through to the detail page without any JS.
+
+19. [ ] **views.py — `team_detail`** — read the `from_list` param and pass context vars. Find the `team_detail` view function and add after the `team = get_object_or_404(...)` line:
+    ```python
+    from_list   = request.GET.get("from_list", None)   # None = not from list; "" = all countries
+    back_country = from_list if from_list else ""
+    context = {
+        "team": team,
+        "from_list": from_list is not None,    # True iff we came from the team list
+        "back_country": back_country,
+    }
+    ```
+
+20. [ ] **team_detail.html — `{% block extra_nav %}`** — use the context vars to render the appropriate back link:
+    ```html
+    {% block extra_nav %}
+    {% if from_list %}
+        <a href="{% url 'italiastadiaapp:team_list' %}{% if back_country %}?country={{ back_country }}{% endif %}"
+           class="btn btn-sm btn-outline-light ms-auto">
+            ← Back to team list{% if back_country %} ({{ back_country }}){% endif %}
+        </a>
+    {% else %}
+        <a href="{% url 'italiastadiaapp:team_list' %}" class="btn btn-sm btn-outline-light ms-auto">
+            ← Back to teams
+        </a>
+    {% endif %}
+    {% endblock %}
+    ```
+    When the user navigates from map popup → team_detail (no `from_list` param), they see the plain "← Back to teams" link. When they navigate from a filtered team list, they see "← Back to team list (England)" and land on the same filtered view.
+
+---
+
+### WS1 — Mobile-first UI
+
+14. [ ] **index.html** — three changes:
+    a. Add `id="filterDrawer"` to the existing `<div class="d-flex align-items-center flex-wrap gap-2 pb-1 w-100">` filter row. Keep all child elements unchanged.
+    b. Add `<button id="filterToggleBtn">` to the first row of the navbar, between the mode-switch and the `<div class="w-100">` flex break:
+       ```html
+       <button id="filterToggleBtn" class="btn btn-sm btn-outline-light" style="display:none;">
+           ☰ Filters
+       </button>
+       ```
+    c. On mobile the search input (added in step 10) is already inside `#filterDrawer`, so no extra placement needed.
+
+15. [ ] **styles.css — mobile section** — add inside / extend the `@media (max-width: 768px)` block:
+    ```css
+    @media (max-width: 768px) {
+        /* Show filter toggle button */
+        #filterToggleBtn { display: inline-flex !important; }
+
+        /* Hide the filter row by default; it becomes a fixed drawer */
+        #filterDrawer {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #212529;
+            padding: 16px 16px 24px;   /* extra bottom padding for home-bar */
+            z-index: 10000;
+            border-top: 2px solid #444;
+            border-radius: 16px 16px 0 0;
+            max-height: 72vh;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 10px;
+        }
+        #filterDrawer.open { display: flex; }
+
+        /* Map fills full viewport height on mobile */
+        #map {
+            height: 100dvh;
+            margin-top: 0;
+        }
+
+        /* Leaflet popup → bottom sheet */
+        .leaflet-popup {
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            top: auto !important;
+            margin: 0 !important;
+            transform: none !important;
+        }
+        .leaflet-popup-tip-container { display: none; }
+        .leaflet-popup-content-wrapper {
+            border-radius: 16px 16px 0 0;
+            width: 100% !important;
+            max-height: 55vh;
+            overflow-y: auto;
+            box-shadow: 0 -4px 24px rgba(0,0,0,0.6);
+        }
+        .leaflet-popup-close-button {
+            top: 12px !important;
+            right: 12px !important;
+        }
+    }
+    ```
+
+16. [ ] **map.js** — add drawer toggle logic (can be placed near the CLP picker open/close block):
+    ```js
+    const filterToggleBtn = document.getElementById("filterToggleBtn");
+    const filterDrawer    = document.getElementById("filterDrawer");
+    if (filterToggleBtn && filterDrawer) {
+        filterToggleBtn.addEventListener("click", e => {
+            e.stopPropagation();
+            filterDrawer.classList.toggle("open");
+            filterToggleBtn.textContent = filterDrawer.classList.contains("open")
+                ? "✕ Close"
+                : "☰ Filters";
+        });
+        // Tapping the map closes the drawer
+        map.on("click", () => {
+            filterDrawer.classList.remove("open");
+            filterToggleBtn.textContent = "☰ Filters";
+        });
+    }
+    ```
+
+17. [ ] **Smoke test on Chrome DevTools — iPhone SE (375 × 667)**:
+    - Map fills screen; first navbar row shows brand + mode switch + "☰ Filters" button
+    - Filter row (second navbar row) is hidden
+    - Tap "☰ Filters" → drawer slides up from bottom with search input + all filter controls
+    - Apply a country filter inside drawer → map updates, drawer stays open
+    - Tap a badge marker → popup anchors to screen bottom (not at marker position)
+    - Tap map → drawer closes
+    - Rotate to landscape → drawer and bottom-sheet popup still usable
+
+---
+
+### WS6 — CLP responsiveness fix + filter active-state highlighting
+
+21. [ ] **map.js — CLP click handling**: The `countryRow` container has no click handler — only the child `nameSpan` and `chevron` do. On touch devices, tapping between or slightly outside them hits the container div and nothing fires. Fix: add a click handler directly on `countryRow` that applies the country filter, duplicating the `nameSpan` handler as a fallback:
+    ```js
+    // After the existing nameSpan and chevron listeners are attached:
+    countryRow.addEventListener("click", function (e) {
+        // Only fire if neither the nameSpan nor chevron handled it
+        // (they stopPropagation — if we reach here it's a gap tap)
+        countryFilter.value = country;
+        leagueFilter.value  = "";
+        countryFilter.dispatchEvent(new Event("change"));
+        updatePickerLabel();
+        closePicker();
+    });
+    ```
+    Keep `e.stopPropagation()` on both `nameSpan` and `chevron` handlers so the `countryRow` fallback only fires for gap taps.
+
+22. [ ] **map.js — CLP mobile: disable mouseenter auto-expand on touch**. Currently `mouseenter` auto-expands the accordion on desktop (width > 768). On some tablets/hybrids, `mouseenter` fires on first touch, opening the accordion; the user must tap again to actually select. Tighten the guard: use `window.matchMedia("(hover: hover)")` instead of `window.innerWidth > 768`:
+    ```js
+    countryRow.addEventListener("mouseenter", function () {
+        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+            // genuine mouse hover — expand accordion
+            ...
+        }
+    });
+    ```
+
+23. [ ] **styles.css — stronger active-state visual for CLP rows**. Replace the current `.clp-league-row.active` (font-weight only) and `.clp-country-row.active` (faint background) with a more visible indicator:
+    ```css
+    .clp-country-row.active {
+        background: rgba(100, 160, 255, 0.18);
+        color: #fff;
+        border-left: 3px solid #4a9eff;
+    }
+    .clp-league-row.active {
+        background: rgba(100, 160, 255, 0.14);
+        color: #fff;
+        font-weight: 700;
+        border-left: 3px solid #4a9eff;
+        padding-left: 27px;   /* compensate for 3px border */
+    }
+    /* Also tighten hover vs. active distinction */
+    .clp-country-row:hover:not(.active) {
+        background: rgba(255, 255, 255, 0.07);
+    }
+    ```
+
+24. [ ] **map.js + styles.css — active-state highlight on visible filter selects**. The `ownershipFilter` and `stadiumFilter` selects have no visual indicator when a non-default value is selected. Add a JS function that adds/removes a CSS class and call it after every filter change:
+    ```js
+    function updateSelectHighlights() {
+        [ownershipFilter, stadiumFilter].forEach(sel => {
+            sel.classList.toggle("filter-has-value", sel.value !== "");
+        });
+    }
+    ```
+    Call `updateSelectHighlights()` inside `updateClearButton()` (which is already called after every filter change).
+    In `styles.css`:
+    ```css
+    select.filter-has-value {
+        border-color: #4a9eff !important;
+        box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.25);
+        color: #fff;
+    }
+    ```
+
+---
+
+### WS7 — Map country ordering fix + zoom padding
+
+25. [ ] **views.py — expose `country_rank` reliably in GeoJSON**. Verify `stadiums_geojson` already returns `country_rank` for every team (it does, via `t.league.country.uefa_rank`). Ensure `update_uefa_ranking` is run against all 55 UEFA member countries so NULLs don't exist. Add a note to `CLAUDE.md`: _"Run `update_uefa_ranking` whenever a new Country is added so `countryRankMap` in map.js is complete."_
+
+26. [ ] **map.js — `populateCountryFilter()`: add `data-rank` attribute to each `<option>` so the JS sort can use it even if `countryRankMap` is incomplete at call time**:
+    ```js
+    function populateCountryFilter() {
+        const countries = [...new Set(
+            markers.flatMap(m => m.leagues.map(l => l.country)).filter(Boolean)
+        )].sort((a, b) => (countryRankMap[a] ?? 999) - (countryRankMap[b] ?? 999));
+        countryFilter.innerHTML = `<option value="">All countries</option>`;
+        countries.forEach(c => {
+            const opt = document.createElement("option");
+            opt.value = c;
+            opt.textContent = c;
+            opt.dataset.rank = countryRankMap[c] ?? 999;  // ← new: written to DOM
+            countryFilter.appendChild(opt);
+        });
+        buildPickerUI();
+    }
+    ```
+    In `buildPickerUI()`, derive the sort order from the `countryFilter.options` array directly (already in order) instead of re-sorting from `countryRankMap`:
+    ```js
+    // Replace the existing sort block in buildPickerUI():
+    const orderedCountries = [...countryFilter.options]
+        .filter(o => o.value !== "")
+        .map(o => o.value);
+    // Then iterate orderedCountries instead of the manually-sorted set
+    ```
+    This guarantees the CLP panel order exactly matches the hidden select order.
+
+27. [ ] **map.js — `fitToVisibleMarkers()`: fix navbar clip by using asymmetric padding**. Replace the single `padding: [20, 20]` call:
+    ```js
+    function fitToVisibleMarkers(visibleMarkers) {
+        if (!visibleMarkers || visibleMarkers.length === 0) {
+            const fallback = allMarkersBounds || EUROPE_FOOTBALL_BOUNDS;
+            map.fitBounds(fallback, { paddingTopLeft: [30, 110], paddingBottomRight: [30, 30], animate: true });
+            return;
+        }
+        const group = L.featureGroup(visibleMarkers);
+        map.fitBounds(group.getBounds(), {
+            paddingTopLeft:     [30, 110],   // [left, top] — 110px clears the fixed navbar
+            paddingBottomRight: [30, 40],    // generous bottom for mobile home bar
+            maxZoom: 12,
+            animate: true
+        });
+    }
+    ```
+    Also update the two `fitBounds` calls in `zoomToCountry()` fallback path and in `clearFiltersBtn` handler to use the same asymmetric padding.
+
+---
+
+### WS8 — Team list: UEFA ordering + navbar flags + league hierarchy
+
+28. [ ] **views.py — `team_list`: order by `country__uefa_rank`, not `country__name`**. Change line 269–271:
+    ```python
+    # Before:
+    leagues_qs = League.objects.select_related("country").order_by(
+        "country__name", "division_level"
+    )
+    # After:
+    leagues_qs = League.objects.select_related("country").order_by(
+        "country__uefa_rank", "country__name", "division_level"
+    )
+    ```
+    `country__name` as secondary sort handles ties and NULL ranks gracefully (same pattern as `_available_countries()`).
+
+29. [ ] **views.py — `team_list`: pass country flag to template context**. Add a helper function:
+    ```python
+    def _country_flag_emoji(code: str) -> str:
+        """Convert ISO-2 country code to flag emoji. Handles GB→England special case."""
+        OVERRIDES = {"GB": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"}   # England flag, not UK flag
+        if code in OVERRIDES:
+            return OVERRIDES[code]
+        if len(code) == 2:
+            return chr(0x1F1E0 + ord(code[0].upper()) - 65) + chr(0x1F1E0 + ord(code[1].upper()) - 65)
+        return ""
+    ```
+    In `team_list`, add `flag` to each section:
+    ```python
+    sections.append({
+        "league": league,
+        "league_label": league.name,
+        "anchor": f"league-{league.id}",
+        "teams": section_teams,
+        "flag": _country_flag_emoji(league.country.code) if league.country else "",
+    })
+    ```
+
+30. [ ] **team_list.html — grouped navbar with flags + division submenu**. Replace the flat league button row with a Bootstrap dropdown grouped by country. Each country with multiple leagues gets a single dropdown:
+    ```html
+    <!-- Build a country→leagues map in the template -->
+    {% regroup sections by league.country.name as country_sections %}
+    {% for country_group in country_sections %}
+        {% if country_group.list|length == 1 %}
+            <!-- Single league: plain link with flag -->
+            <a href="#{{ country_group.list.0.anchor }}"
+               class="btn btn-outline-primary btn-sm">
+                {{ country_group.list.0.flag }} {{ country_group.list.0.league_label }}
+                ({{ country_group.list.0.teams|length }})
+            </a>
+        {% else %}
+            <!-- Multiple leagues: Bootstrap dropdown -->
+            <div class="dropdown d-inline-block">
+                <button class="btn btn-outline-primary btn-sm dropdown-toggle"
+                        data-bs-toggle="dropdown">
+                    {{ country_group.list.0.flag }} {{ country_group.grouper }}
+                </button>
+                <ul class="dropdown-menu">
+                    {% for section in country_group.list %}
+                    <li>
+                        <a class="dropdown-item" href="#{{ section.anchor }}">
+                            {{ section.league_label }} ({{ section.teams|length }})
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endfor %}
+    ```
+    Requires Bootstrap JS bundle (already loaded on all pages). This groups Italy into one "🇮🇹 Italy" dropdown listing [Serie A, Serie B, Serie C], England into "🏴󠁧󠁢󠁥󠁮󠁧󠁿 England" → [Premier League, Championship, League One]. Countries with only one league (most of them) show as a plain link.
+
+31. [ ] **CLP panel — add flag emoji to country rows**. In `buildPickerUI()`, when building each `nameSpan`, prepend the flag. Need to pass flag data through the GeoJSON or derive it client-side. Since the GeoJSON already has `country` name and the markers have `marker.leagues[].country`, add a `country_code` to the GeoJSON team properties:
+    - **views.py**: add `"country_code": t.league.country.code if t.league and t.league.country else ""` to each team dict in `stadiums_geojson`
+    - **map.js**: in the marker-building loop, capture `country_code` per league: `code: t.country_code || ""`
+    - **map.js — `buildPickerUI()`**: derive emoji from code client-side:
+    ```js
+    function countryFlagEmoji(code) {
+        const overrides = { "GB": "🏴󠁧󠁢󠁥󠁮󠁧󠁿" };
+        if (overrides[code]) return overrides[code];
+        if (code.length === 2)
+            return String.fromCodePoint(0x1F1E0 + code.charCodeAt(0) - 65)
+                 + String.fromCodePoint(0x1F1E0 + code.charCodeAt(1) - 65);
+        return "";
+    }
+    // In nameSpan construction:
+    nameSpan.textContent = `${countryFlagEmoji(countryCode)} ${country}`;
+    ```
+
+---
+
+### WS9 — Unknown ownership cleanup
+
+32. [ ] **Refactor `classify_ownership()` to `italiastadiaapp/ownership.py`**. Currently the function and `PUBLIC_KEYWORDS` list live only in `scripts/populate_data_from_transfermrkt.py`. Extract them to a shared location so both the scraper and a management command can import it:
+    - Create `italiastadiaapp/ownership.py` containing the `PUBLIC_KEYWORDS` list and `classify_ownership(owner_raw: str) -> str` function
+    - Update `scripts/populate_data_from_transfermrkt.py` to import from `italiastadiaapp.ownership` (requires that the Django project root is on sys.path — it already is when called from the project root)
+
+33. [ ] **Management command `fix_unknown_ownership`** — `italiastadiaapp/management/commands/fix_unknown_ownership.py`:
+    ```python
+    from django.core.management.base import BaseCommand
+    from italiastadiaapp.models import Stadium
+    from italiastadiaapp.ownership import classify_ownership
+
+    class Command(BaseCommand):
+        help = "Re-classify UNKNOWN ownership stadiums where owner_raw has a value"
+
+        def add_arguments(self, parser):
+            parser.add_argument("--dry-run", action="store_true",
+                                help="Show what would change without writing to DB")
+
+        def handle(self, *args, **options):
+            dry_run = options["dry_run"]
+            unknown_qs = Stadium.objects.filter(ownership="UNKNOWN").exclude(owner_raw="")
+            self.stdout.write(f"Found {unknown_qs.count()} UNKNOWN stadiums with owner_raw set")
+            changed = 0
+            for s in unknown_qs:
+                new_ownership = classify_ownership(s.owner_raw)
+                if new_ownership == "UNKNOWN":
+                    new_ownership = "PRIVATE"   # owner name present but no public keyword → private
+                self.stdout.write(f"  {s.name}: '{s.owner_raw}' → {new_ownership}")
+                if not dry_run:
+                    s.ownership = new_ownership
+                    s.save(update_fields=["ownership"])
+                    changed += 1
+            self.stdout.write(f"Updated {changed} stadiums.")
+    ```
+    Usage:
+    - `python manage.py fix_unknown_ownership --dry-run` — preview changes
+    - `python manage.py fix_unknown_ownership` — apply
+
+34. [ ] **Run the command** after it's written:
+    ```bash
+    python manage.py fix_unknown_ownership --dry-run    # review
+    python manage.py fix_unknown_ownership              # apply
+    ```
+    After running: `Stadium.objects.filter(ownership="UNKNOWN", owner_raw!="").count()` should be 0.
+
+---
+
+## PostgreSQL safety check
+
+- [x] `Team.uefa_coefficient` is `FloatField(null=True, blank=True)` — safe nullable add, no default needed
+- [x] No `SmallIntegerField` — float handles coefficient values (typically 0–200)
+- [x] No scraped CharField length change
+- [x] No new FK fields requiring `db_index`
+
+---
+
+## Test plan
+
+**Automated:**
+```bash
+pytest italiastadiaapp/tests/ -v --tb=short    # all existing tests must pass
+python manage.py makemigrations --check         # must exit 0 (no pending migrations)
+python manage.py check                          # 0 issues
+```
+
+**New test** in `test_models.py`:
+```python
+def test_team_uefa_coefficient_field():
+    from italiastadiaapp.models import Team
+    import django.db.models as m
+    field = Team._meta.get_field("uefa_coefficient")
+    assert isinstance(field, m.FloatField)
+    assert field.null is True
+    assert field.blank is True
+```
+
+**Manual — clustering:**
+
+| Action | Expected |
+|--------|----------|
+| Zoom to level 3 (Europe overview) | Overlapping badges collapse into count bubbles |
+| Click a cluster bubble | Map zooms in, bubble splits into smaller clusters or badges |
+| Zoom to level 7 | All individual badge markers visible, no clusters |
+| Apply country filter, then zoom out | Only that country's clusters appear |
+
+**Manual — live search:**
+
+| Action | Expected |
+|--------|----------|
+| Type "Arsenal" (≥2 chars) | Dropdown shows "Arsenal — Emirates Stadium" |
+| Click the result | Map flies to London at zoom 12; Emirates popup opens after ~1.3 s |
+| Type "emi" | All teams/stadiums matching "emi" appear (max 5) |
+| Type "xyz" | Dropdown hidden (no results) |
+| Click anywhere outside search | Dropdown closes |
+| Dev mode active, type "Arsenal" | Search still matches (searches `operationalMarkers`) |
+
+**Manual — mobile drawer (Chrome DevTools iPhone SE 375 px):**
+
+| Action | Expected |
+|--------|----------|
+| Page load | Map fills 100 dvh; navbar shows brand + mode switch + "☰ Filters" |
+| Tap "☰ Filters" | Drawer slides up; button label → "✕ Close" |
+| Apply ownership filter inside drawer | Marker count updates; drawer stays open |
+| Tap badge marker | Bottom-sheet popup anchors to screen bottom |
+| Tap map background | Drawer closes |
+| Rotate to landscape | Drawer max-height 72 vh prevents overflow |
+
+**Manual — CLP responsiveness & highlighting (WS6):**
+
+| Action | Expected |
+|--------|----------|
+| On mobile (≤768px): tap between country name and chevron | Country filter applies (fallback handler fires) |
+| On hybrid touch/mouse device: touch a country row | Accordion does NOT auto-expand on first touch (matchMedia guard) |
+| Select "Italy → Serie A" | Country row has blue left-border + white text; Serie A row has blue left-border + bold white text |
+| Open picker while "Italy" is selected | Italy row is visually highlighted; its leagues pre-expanded |
+| Select a value in Ownership dropdown | Dropdown gets blue border highlight (`filter-has-value` class) |
+| Clear filters | Ownership and Stadium dropdowns lose blue border |
+
+**Manual — country ordering & zoom (WS7):**
+
+| Action | Expected |
+|--------|----------|
+| Open CLP panel | England first, Italy second, Germany third (follows UEFA rank) |
+| Run `python manage.py update_uefa_ranking` | All countries get a rank; re-open CLP — no countries stuck at the bottom alphabetically |
+| Select "England" → zoom to England | All English stadiums visible; none clipped behind navbar at top |
+| Select "Norway" (northern country with stadiums near top edge) | All stadiums visible with ≥110px top margin |
+| On mobile, zoom to Italy | Bottom markers visible; not hidden behind home-bar area |
+
+**Manual — team list order & navbar (WS8):**
+
+| Action | Expected |
+|--------|----------|
+| Open `/teams/` | First section is the highest-UEFA-ranked country with scraped teams (England or Italy) |
+| Navbar shows Italy (multi-league) | Single "🇮🇹 Italy" dropdown button; clicking opens [Serie A, Serie B, Serie C] |
+| Navbar shows Norway (single league) | Single "🇳🇴 Eliteserien (N)" plain link |
+| England dropdown | "🏴󠁧󠁢󠁥󠁮󠁧󠁿 England" with England flag (not 🇬🇧 UK flag) |
+| CLP panel on map | "🇮🇹 Italy", "🏴󠁧󠁢󠁥󠁮󠁧󠁿 England" etc. next to each country name |
+
+**Manual — unknown ownership (WS9):**
+
+| Action | Expected |
+|--------|----------|
+| `python manage.py fix_unknown_ownership --dry-run` | Prints each UNKNOWN stadium + proposed new ownership; no DB write |
+| Check proposed changes look correct | Stadiums with "City of…" or "Municipality" in owner_raw → PUBLIC; named clubs → PRIVATE |
+| `python manage.py fix_unknown_ownership` | Updates DB; stdout shows count updated |
+| After running: `Stadium.objects.filter(ownership="UNKNOWN").exclude(owner_raw="")` | Returns empty queryset |
+
+**Manual — back navigation:**
+
+| Action | Expected |
+|--------|----------|
+| Open team list, filter to "England", click "View team" on Arsenal | URL becomes `/team/42/?from_list=England` |
+| On team detail: check back button | Shows "← Back to team list (England)" |
+| Click back button | Lands on `/teams/?country=England` — filtered to England |
+| Open team list with "All countries", click "View team" | URL has `?from_list=` (empty) |
+| On team detail: check back button | Shows "← Back to team list" (no country suffix) |
+| Click back button | Lands on `/teams/` — unfiltered |
+| Navigate to team detail directly from map popup | Back button shows "← Back to teams" (no from_list param) |
+
+**Manual — UEFA coefficient:**
+
+| Action | Expected |
+|--------|----------|
+| `python manage.py update_club_coefficients` | Runs without error; logs INFO for matched teams |
+| Visit Arsenal or Man City team detail page | "UEFA coefficient: 87.5" row visible |
+| Visit a Serie B team detail page | No coefficient row shown (null suppressed by template guard) |
+
+---
+
+## Rollback plan
+
+```bash
+# WS4 model only:
+python manage.py migrate italiastadiaapp <previous_migration_label>
+
+# All frontend changes (JS + CSS + templates):
+git checkout main -- italiastadiaapp/templates/index.html
+git checkout main -- italiastadiaapp/static/css/styles.css
+git checkout main -- italiastadiaapp/static/js/map.js
+git checkout main -- italiastadiaapp/templates/team_detail.html
+```

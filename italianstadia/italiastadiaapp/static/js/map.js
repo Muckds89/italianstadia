@@ -17,6 +17,13 @@ L.control.zoom({
     position: 'bottomright'
 }).addTo(map);
 
+const clusterGroup = L.markerClusterGroup({
+    maxClusterRadius: 60,
+    disableClusteringAtZoom: 6,
+    chunkedLoading: true,
+});
+map.addLayer(clusterGroup);
+
 let markers = [];
 let activeMarker = null;
 let activePopup = null;
@@ -35,11 +42,16 @@ let allMarkersBounds = null;
 function fitToVisibleMarkers(visibleMarkers) {
     if (!visibleMarkers || visibleMarkers.length === 0) {
         const fallback = allMarkersBounds || EUROPE_FOOTBALL_BOUNDS;
-        map.fitBounds(fallback, { padding: [10, 10], animate: true });
+        map.fitBounds(fallback, { paddingTopLeft: [30, 110], paddingBottomRight: [30, 30], animate: true });
         return;
     }
     const group = L.featureGroup(visibleMarkers);
-    map.fitBounds(group.getBounds(), { padding: [20, 20], maxZoom: 8, animate: true });
+    map.fitBounds(group.getBounds(), {
+        paddingTopLeft:     [30, 110],
+        paddingBottomRight: [30, 40],
+        maxZoom: 12,
+        animate: true,
+    });
 }
 
 // Populated from GeoJSON after /api/stadiums/ loads — no hardcoded constants.
@@ -87,6 +99,12 @@ const mapModeToggle = document.getElementById("mapModeToggle");
 const operationalFilters = document.getElementById("operationalFilters");
 const developmentFilters = document.getElementById("developmentFilters");
 
+function updateSelectHighlights() {
+    [ownershipFilter, stadiumFilter].forEach(sel => {
+        sel.classList.toggle("filter-has-value", sel.value !== "");
+    });
+}
+
 // Show the clear button only when at least one filter is active
 function updateClearButton() {
     const operationalActive =
@@ -97,6 +115,7 @@ function updateClearButton() {
         developmentStadiumFilter?.value;
     const active = currentLayerMode === "development" ? developmentActive : operationalActive;
     clearFiltersBtn.style.display = active ? "inline-block" : "none";
+    updateSelectHighlights();
 }
 
 clearFiltersBtn.addEventListener("click", function () {
@@ -255,9 +274,9 @@ function buildPickerUI() {
             }
         });
 
-        // Desktop hover: auto-expand accordion
+        // Desktop hover: auto-expand accordion (hover:hover guard prevents touch-device misfires)
         countryRow.addEventListener("mouseenter", function () {
-            if (window.innerWidth > 768) {
+            if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
                 clpPanel.querySelectorAll(".clp-leagues.open").forEach(el => {
                     el.classList.remove("open");
                     el.previousElementSibling?.classList.remove("open");
@@ -265,6 +284,15 @@ function buildPickerUI() {
                 leaguesDiv.classList.add("open");
                 countryRow.classList.add("open");
             }
+        });
+
+        // Fallback: tapping the container gap (not nameSpan or chevron) still applies country filter
+        countryRow.addEventListener("click", function () {
+            countryFilter.value = country;
+            leagueFilter.value  = "";
+            countryFilter.dispatchEvent(new Event("change"));
+            updatePickerLabel();
+            closePicker();
         });
 
         clpPanel.appendChild(countryRow);
@@ -507,6 +535,7 @@ function applyFilters(updateStadiumDropdown = true) {
     const selectedOwnership = ownershipFilter.value;
     const selectedStadium  = stadiumFilter.value;
 
+    clusterGroup.clearLayers();
     let visibleMarkers = [];
 
     markers.forEach(marker => {
@@ -549,7 +578,6 @@ function applyFilters(updateStadiumDropdown = true) {
         }
 
         if (role === "hidden") {
-            map.removeLayer(marker);
             return;
         }
 
@@ -562,7 +590,7 @@ function applyFilters(updateStadiumDropdown = true) {
         marker.setOpacity(cfg.opacity);
         marker.setZIndexOffset(cfg.zOffset);
         marker.setIcon(createBadgeIcon(marker.primaryTeam?.image_url || null, cfg.size));
-        marker.addTo(map);
+        clusterGroup.addLayer(marker);
         visibleMarkers.push(marker);
     });
 
@@ -879,7 +907,7 @@ async function zoomToCountry(countryName) {
     } else {
         // Fallback: hardcoded box for countries whose scraper hasn't run yet
         const bounds = COUNTRY_BOUNDS[countryName];
-        if (bounds) map.fitBounds(bounds, { padding: [40, 40], animate: true });
+        if (bounds) map.fitBounds(bounds, { paddingTopLeft: [30, 110], paddingBottomRight: [30, 40], animate: true });
     }
 
     // 2. Flash the border polygon
@@ -1063,7 +1091,7 @@ fetch("/api/stadiums/")
                 }, 0);
             });
 
-            marker.addTo(map);
+            clusterGroup.addLayer(marker);
             markers.push(marker);
             operationalMarkers.push(marker);
         });
@@ -1075,6 +1103,7 @@ fetch("/api/stadiums/")
 
         populateCountryFilter();
         populateLeagueFilter("");
+        wireSearch();
         // Restore saved filters (returns true) or run defaults and fit to data bounds
         if (!restoreFilterState()) {
             const visible = applyFilters();
@@ -1155,7 +1184,7 @@ stadiumFilter.addEventListener("change", function () {
 mapModeToggle.addEventListener("change", function () {
     if (this.checked) {
         currentLayerMode = "development";
-        markers.forEach(marker => map.removeLayer(marker));
+        map.removeLayer(clusterGroup);
         closeActivePopup();
 
         operationalFilters.classList.add("d-none");
@@ -1181,6 +1210,7 @@ mapModeToggle.addEventListener("change", function () {
         operationalFilters.classList.remove("d-none");
         operationalFilters.classList.add("d-flex");
 
+        map.addLayer(clusterGroup);
         applyFilters();
         updateLegend("operational");
         updateClearButton();
@@ -1211,6 +1241,67 @@ developmentStadiumFilter.addEventListener("change", function () {
     } else {
         // Reset to default view — development mode has no country filter
         const fallback = allMarkersBounds || EUROPE_FOOTBALL_BOUNDS;
-        map.fitBounds(fallback, { padding: [10, 10], animate: true });
+        map.fitBounds(fallback, { paddingTopLeft: [30, 110], paddingBottomRight: [30, 30], animate: true });
     }
 });
+
+// ── Mobile drawer toggle (WS1) ────────────────────────────────────────────
+const filterToggleBtn = document.getElementById("filterToggleBtn");
+const filterDrawer    = document.getElementById("filterDrawer");
+if (filterToggleBtn && filterDrawer) {
+    filterToggleBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        filterDrawer.classList.toggle("open");
+        filterToggleBtn.textContent = filterDrawer.classList.contains("open")
+            ? "✕ Close"
+            : "☰ Filters";
+    });
+    map.on("click", function () {
+        filterDrawer.classList.remove("open");
+        filterToggleBtn.textContent = "☰ Filters";
+    });
+}
+
+// ── Live search (WS2) ────────────────────────────────────────────────────
+function wireSearch() {
+    const input   = document.getElementById("liveSearch");
+    const results = document.getElementById("searchResults");
+    if (!input) return;
+    let debounce;
+
+    input.addEventListener("input", function () {
+        clearTimeout(debounce);
+        debounce = setTimeout(function () {
+            const q = input.value.trim().toLowerCase();
+            results.innerHTML = "";
+            if (q.length < 2) { results.style.display = "none"; return; }
+
+            const hits = operationalMarkers.filter(function (m) {
+                if (m.stadiumName?.toLowerCase().includes(q)) return true;
+                return (m.teams || []).some(t => t.name?.toLowerCase().includes(q));
+            }).slice(0, 5);
+
+            if (!hits.length) { results.style.display = "none"; return; }
+
+            hits.forEach(function (m) {
+                const label = m.primaryTeam?.name
+                    ? `${m.primaryTeam.name} — ${m.stadiumName}`
+                    : m.stadiumName;
+                const li = document.createElement("li");
+                li.textContent = label;
+                li.addEventListener("click", function () {
+                    map.flyTo(m.getLatLng(), 12, { duration: 1.2 });
+                    setTimeout(function () { m.fire("click"); }, 1300);
+                    input.value = "";
+                    results.style.display = "none";
+                });
+                results.appendChild(li);
+            });
+            results.style.display = "block";
+        }, 250);
+    });
+
+    document.addEventListener("click", function (e) {
+        if (!e.target.closest("#searchWrap")) results.style.display = "none";
+    });
+}

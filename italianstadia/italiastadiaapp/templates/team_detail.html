@@ -4,9 +4,16 @@
 {% block title %}{{ team.name }}{% endblock %}
 
 {% block extra_nav %}
+{% if from_list %}
+    <a href="{% url 'italiastadiaapp:team_list' %}{% if back_country %}?country={{ back_country }}{% endif %}"
+       class="btn btn-sm btn-outline-light ms-auto">
+        ← Back to team list{% if back_country %} ({{ back_country }}){% endif %}
+    </a>
+{% else %}
     <a href="{% url 'italiastadiaapp:team_list' %}" class="btn btn-sm btn-outline-light ms-auto">
         ← Back to teams
     </a>
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -98,6 +105,13 @@
                         <li class="list-group-item">
                             <strong>Avg. attendance:</strong>
                             {{ team.average_attendance }}
+                        </li>
+                        {% endif %}
+
+                        {% if team.uefa_coefficient %}
+                        <li class="list-group-item">
+                            <strong>UEFA coefficient:</strong>
+                            {{ team.uefa_coefficient|floatformat:1 }}
                         </li>
                         {% endif %}
 

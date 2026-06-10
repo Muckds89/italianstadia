@@ -748,3 +748,109 @@ html {
         width: clamp(140px, 40vw, 220px);
     }
 }
+
+/* ── CLP active-state (stronger visual) ── */
+.clp-country-row.active {
+    background: rgba(100, 160, 255, 0.18);
+    color: #fff;
+    border-left: 3px solid #4a9eff;
+}
+.clp-league-row.active {
+    background: rgba(100, 160, 255, 0.14);
+    color: #fff;
+    font-weight: 700;
+    border-left: 3px solid #4a9eff;
+    padding-left: 27px;
+}
+.clp-country-row:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+/* ── Filter active-state highlight (ownership, stadium selects) ── */
+select.filter-has-value {
+    border-color: #4a9eff !important;
+    box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.25);
+    color: #fff;
+}
+
+/* ── Live search ── */
+.search-wrap {
+    position: relative;
+    flex-shrink: 0;
+    width: clamp(160px, 18vw, 300px);
+}
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: #1a1a1a;
+    border: 1px solid #555;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 220px;
+    overflow-y: auto;
+}
+.search-results li {
+    padding: 8px 12px;
+    color: #ddd;
+    cursor: pointer;
+    font-size: 13px;
+}
+.search-results li:hover { background: #333; }
+
+/* ── Mobile drawer & bottom-sheet popup ── */
+@media (max-width: 768px) {
+    #filterToggleBtn { display: inline-flex !important; }
+
+    #filterDrawer {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #212529;
+        padding: 16px 16px 24px;
+        z-index: 10000;
+        border-top: 2px solid #444;
+        border-radius: 16px 16px 0 0;
+        max-height: 72vh;
+        overflow-y: auto;
+        flex-direction: column;
+        gap: 10px;
+    }
+    #filterDrawer.open { display: flex; }
+
+    #map {
+        height: 100dvh;
+        padding-top: 56px;
+    }
+
+    .search-wrap { width: 100%; }
+
+    .leaflet-popup {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: auto !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+    .leaflet-popup-tip-container { display: none; }
+    .leaflet-popup-content-wrapper {
+        border-radius: 16px 16px 0 0;
+        width: 100% !important;
+        max-height: 55vh;
+        overflow-y: auto;
+        box-shadow: 0 -4px 24px rgba(0,0,0,0.6);
+    }
+    .leaflet-popup-close-button {
+        top: 12px !important;
+        right: 12px !important;
+    }
+}

@@ -130,6 +130,8 @@ class Team(models.Model):
     related_name='future_tenants'
     )
 
+    uefa_coefficient = models.FloatField(null=True, blank=True)
+
 
     def __str__(self):
         return self.name

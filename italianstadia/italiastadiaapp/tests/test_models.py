@@ -152,6 +152,15 @@ def test_country_code_values():
 
 
 @pytest.mark.django_db
+def test_team_uefa_coefficient_field():
+    import django.db.models as m
+    field = Team._meta.get_field("uefa_coefficient")
+    assert isinstance(field, m.FloatField)
+    assert field.null is True
+    assert field.blank is True
+
+
+@pytest.mark.django_db
 def test_league_ordering():
     # Use get_or_create — data migration may have already seeded these rows
     country, _ = Country.objects.get_or_create(name="Italy", defaults={"code": "IT"})
