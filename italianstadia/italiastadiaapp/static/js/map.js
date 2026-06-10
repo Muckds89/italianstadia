@@ -74,6 +74,43 @@ function createBadgeIcon(imageUrl, sizePx) {
     });
 }
 
+/**
+ * Badge icon for stadiums with multiple tenant clubs (WS10).
+ *
+ *  1 team  → delegates to createBadgeIcon (zero regression risk)
+ *  2 teams → split circle: left half = team[0], right half = team[1]
+ *  3+ teams → split of top-2 + "+N" mini-counter
+ *
+ * Teams are sorted by division_level ascending (highest tier first) so
+ * the most prominent club always occupies the left half.
+ */
+function createMultiBadgeIcon(teams, sizePx) {
+    if (!teams || teams.length <= 1) {
+        return createBadgeIcon(teams?.[0]?.image_url || null, sizePx);
+    }
+
+    const sorted = [...teams].sort(
+        (a, b) => (a.division_level ?? 99) - (b.division_level ?? 99)
+    );
+    const [t1, t2] = sorted;
+
+    const half = (t) => t?.image_url
+        ? `<img src="${t.image_url}" alt="${t.name || ""}" class="badge-half">`
+        : `<div class="badge-half badge-half-fallback"></div>`;
+
+    const extra = teams.length > 2
+        ? `<span class="badge-extra-count">+${teams.length - 2}</span>`
+        : "";
+
+    return L.divIcon({
+        html: `<div class="badge-icon-wrap badge-sz-${sizePx} badge-active badge-split">${half(t1)}${half(t2)}${extra}</div>`,
+        className: "",
+        iconSize:    [sizePx, sizePx],
+        iconAnchor:  [sizePx / 2, sizePx / 2],
+        popupAnchor: [0, -sizePx / 2],
+    });
+}
+
 // Reset active state whenever a popup closes by any means (X button, map click, etc.)
 // Without this, clicking the same marker after closing its popup via X would not reopen it.
 map.on("popupclose", function () {
@@ -438,86 +475,84 @@ function updateLegend(mode) {
     legendDiv.innerHTML = "";
 }
 
-function buildPopupContent(props, teamIndex = 0) {
+function buildPopupContent(props) {
     const teams = props.teams || [];
-    const team = teams[teamIndex];
-    const hasMultipleTeams = teams.length > 1;
+    const hasMultiple = teams.length > 1;
+
+    // ── Logo strip — only for multi-tenant stadiums ─────────────────
+    const logoStrip = hasMultiple ? `
+        <div class="popup-tenant-strip">
+            ${teams.map((t, i) => `
+                <button class="popup-tenant-logo-btn${i === 0 ? " active" : ""}"
+                        data-idx="${i}" title="${t.name}">
+                    ${t.image_url
+                        ? `<img src="${t.image_url}" alt="${t.name}">`
+                        : `<div class="btn-logo-fallback"></div>`}
+                </button>
+            `).join("")}
+        </div>
+    ` : "";
+
+    // ── Per-team info panels (all rendered, only active one is shown) ─
+    const teamPanels = teams.length > 0
+        ? teams.map((t, i) => `
+            <div class="popup-tenant-panel${i === 0 ? " active" : ""}" data-idx="${i}">
+                ${!hasMultiple && t.image_url
+                    ? `<img src="${t.image_url}" alt="${t.name}" class="popup-single-logo">`
+                    : ""}
+                <strong>${t.name}</strong><br>
+                <span style="font-size:0.8em">${t.league_name || t.tier_name || "Unknown"}${t.girone ? ` — Girone ${t.girone}` : ""}</span><br>
+                ${t.wikipedia_url    ? `<a href="${t.wikipedia_url}" target="_blank" style="font-size:0.8em">Team Wikipedia</a><br>` : ""}
+                ${t.transfermarkt_url ? `<a href="${t.transfermarkt_url}" target="_blank" style="font-size:0.8em">Team Transfermarkt</a><br>` : ""}
+            </div>
+          `).join("")
+        : `<em>No team linked</em>`;
 
     return `
-        <div style="min-width:180px; max-width:240px;">
+        <div style="min-width:185px; max-width:250px;">
             <strong>${props.name}</strong><br>
             ${props.city}<br>
             <strong>Capacity:</strong> ${props.capacity || "Unknown"}<br>
             <strong>Ownership:</strong> ${props.ownership || "Unknown"}<br>
             ${props.owner_raw ? `<small>Owner: ${props.owner_raw}</small><br>` : ""}
-            <hr>
-
-            ${
-                team
-                ? `
-                    <strong>Team:</strong> ${team.name}<br>
-                    <strong>League:</strong> ${team.league_name || team.tier_name || "Unknown"}${team.girone ? ` - Girone ${team.girone}` : ""}<br>
-                    ${team.wikipedia_url ? `<a href="${team.wikipedia_url}" target="_blank">Team Wikipedia</a><br>` : ""}
-                    ${team.transfermarkt_url ? `<a href="${team.transfermarkt_url}" target="_blank">Team Transfermarkt</a><br>` : ""}
-                `
-                : `<em>No team linked</em><br>`
-            }
-
-            <br>
-            ${hasMultipleTeams ? `
-                <button class="popup-team-prev" data-index="${teamIndex}">←</button>
-                <span>${teamIndex + 1} / ${teams.length}</span>
-                <button class="popup-team-next" data-index="${teamIndex}">→</button>
-                <br><br>
-            ` : ""}
-
+            <hr style="margin:6px 0">
+            ${logoStrip}
+            ${teamPanels}
+            <hr style="margin:6px 0">
             <a href="/stadium/${props.id}/">View stadium details</a>
-            ${props.wikipedia_url ? `<br><a href="${props.wikipedia_url}" target="_blank">Stadium Wikipedia</a>` : ""}
+            ${props.wikipedia_url    ? `<br><a href="${props.wikipedia_url}" target="_blank">Stadium Wikipedia</a>` : ""}
             ${props.transfermarkt_url ? `<br><a href="${props.transfermarkt_url}" target="_blank">Stadium Transfermarkt</a>` : ""}
         </div>
     `;
 }
 
-function attachPopupTeamNavigation(props, coords) {
-    const prevButton = document.querySelector(".popup-team-prev");
-    const nextButton = document.querySelector(".popup-team-next");
+/**
+ * Wire the logo-strip click handlers for multi-tenant popups.
+ * Clicking a team logo button toggles .active on buttons and panels
+ * without re-rendering the popup (no flicker, no latLng reset needed).
+ */
+function attachPopupLogoStrip() {
+    const strip = document.querySelector(".popup-tenant-strip");
+    if (!strip) return;   // single-team popup — nothing to wire
 
-    if (!prevButton && !nextButton) {
-        return;
-    }
-
-    const teams = props.teams || [];
-
-    function updatePopup(newIndex) {
-        activePopup.setContent(buildPopupContent(props, newIndex));
-        activePopup.setLatLng([coords[1], coords[0]]);
-
-        setTimeout(() => {
-            attachPopupTeamNavigation(props, coords);
-        }, 0);
-    }
-
-    if (prevButton) {
-        prevButton.addEventListener("click", function (e) {
+    strip.querySelectorAll(".popup-tenant-logo-btn").forEach(btn => {
+        btn.addEventListener("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
+            const idx = Number(this.dataset.idx);
 
-            const currentIndex = Number(this.dataset.index);
-            const newIndex = (currentIndex - 1 + teams.length) % teams.length;
-            updatePopup(newIndex);
+            // Highlight the clicked logo button
+            strip.querySelectorAll(".popup-tenant-logo-btn").forEach(b => {
+                b.classList.toggle("active", b === this);
+            });
+
+            // Show only the matching team info panel
+            const container = strip.parentNode;
+            container.querySelectorAll(".popup-tenant-panel").forEach((p, i) => {
+                p.classList.toggle("active", i === idx);
+            });
         });
-    }
-
-    if (nextButton) {
-        nextButton.addEventListener("click", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            const currentIndex = Number(this.dataset.index);
-            const newIndex = (currentIndex + 1) % teams.length;
-            updatePopup(newIndex);
-        });
-    }
+    });
 }
 
 function closeActivePopup() {
@@ -589,7 +624,7 @@ function applyFilters(updateStadiumDropdown = true) {
 
         marker.setOpacity(cfg.opacity);
         marker.setZIndexOffset(cfg.zOffset);
-        marker.setIcon(createBadgeIcon(marker.primaryTeam?.image_url || null, cfg.size));
+        marker.setIcon(createMultiBadgeIcon(marker.teams, cfg.size));
         clusterGroup.addLayer(marker);
         visibleMarkers.push(marker);
     });
@@ -1029,7 +1064,7 @@ fetch("/api/stadiums/")
             }, null);
 
             const marker = L.marker([coords[1], coords[0]], {
-                icon: createBadgeIcon(primaryTeam?.image_url || null, BADGE_SIZE.active),
+                icon: createMultiBadgeIcon(props.teams || [], BADGE_SIZE.active),
                 zIndexOffset: 1000,
             });
             marker.primaryTeam = primaryTeam;
@@ -1077,17 +1112,17 @@ fetch("/api/stadiums/")
                 closeActivePopup();
 
                 activePopup = L.popup({
-                    maxWidth: 260,
-                    maxHeight: 320,
+                    maxWidth: 270,
+                    maxHeight: 360,
                 })
                 .setLatLng([coords[1], coords[0]])
-                .setContent(buildPopupContent(props, 0))
+                .setContent(buildPopupContent(props))
                 .openOn(map);
 
                 activeMarker = marker;
 
                 setTimeout(() => {
-                    attachPopupTeamNavigation(props, coords);
+                    attachPopupLogoStrip();
                 }, 0);
             });
 

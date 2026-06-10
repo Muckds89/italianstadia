@@ -48,6 +48,79 @@ html, body {
 /* Active markers get a coloured border highlight */
 .badge-active { border-color: #fff; border-width: 2.5px; }
 
+/* ── Multi-tenant split badge ─────────────────────────────────────────────── */
+/* .badge-icon-wrap needs relative so the +N counter can be positioned inside */
+.badge-icon-wrap { position: relative; }
+
+/* Override the centering flex so the two halves can fill the full height */
+.badge-split { align-items: stretch; }
+
+.badge-split .badge-half {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    object-fit: cover;   /* img */
+    display: block;
+    width: 100%;         /* div fallback */
+}
+.badge-split .badge-half-fallback { background: #9e9e9e; }
+.badge-split .badge-half:first-child:not(:last-child) {
+    border-right: 1.5px solid rgba(255,255,255,0.5);
+}
+
+/* "+N" mini-counter shown when a stadium has 3+ tenants */
+.badge-extra-count {
+    position: absolute;
+    bottom: 1px; right: 1px;
+    font-size: 7px; font-weight: 700;
+    line-height: 12px;
+    width: 12px; height: 12px;
+    text-align: center;
+    background: rgba(0,0,0,0.82);
+    color: #fff;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* ── Multi-tenant popup logo strip ───────────────────────────────────────── */
+.popup-tenant-strip {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+.popup-tenant-logo-btn {
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    padding: 2px;
+    cursor: pointer;
+    transition: border-color 0.12s;
+    flex-shrink: 0;
+}
+.popup-tenant-logo-btn.active,
+.popup-tenant-logo-btn:hover { border-color: #4fc3f7; }
+.popup-tenant-logo-btn img,
+.popup-tenant-logo-btn .btn-logo-fallback {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+.popup-tenant-logo-btn .btn-logo-fallback { background: #555; }
+
+/* Only the active panel is visible */
+.popup-tenant-panel          { display: none; }
+.popup-tenant-panel.active   { display: block; }
+
+/* Single-team popup: small logo above the team name */
+.popup-single-logo {
+    display: block;
+    width: 34px; height: 34px;
+    object-fit: contain;
+    margin-bottom: 3px;
+}
+
 /* ── Marker hover tooltip ── */
 .badge-tooltip {
     background: rgba(8, 10, 22, 0.93) !important;
