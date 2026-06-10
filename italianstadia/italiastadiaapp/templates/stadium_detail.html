@@ -15,9 +15,23 @@
 {% endblock %}
 
 {% block extra_nav %}
+{% if from_team_list %}
+    {# Arrived via: team list → team detail → stadium detail #}
+    <a href="{% url 'italiastadiaapp:team_list' %}{% if back_country %}?country={{ back_country }}{% endif %}"
+       class="btn btn-sm btn-outline-light ms-auto">
+        ← Back to team list{% if back_country %} ({{ back_country }}){% endif %}
+    </a>
+{% elif from_list %}
+    {# Arrived directly from stadium list #}
+    <a href="{% url 'italiastadiaapp:stadium_list' %}{% if back_country %}?country={{ back_country }}{% endif %}"
+       class="btn btn-sm btn-outline-light ms-auto">
+        ← Back to stadiums{% if back_country %} ({{ back_country }}){% endif %}
+    </a>
+{% else %}
     <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-sm btn-outline-light ms-auto">
         ← Back to map
     </a>
+{% endif %}
 {% endblock %}
 
 {% block content %}

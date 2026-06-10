@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Stadium List</title>
+    <title>Stadiums — Stadiums of Europe</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <style>
     .fixed-team-nav {
@@ -28,7 +29,7 @@
 <body id="top">
 
 <div class="fixed-team-nav">
-    <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-secondary btn-sm">Back to Map</a>
+    <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-secondary btn-sm">← Map</a>
 
     <form method="get" class="d-inline-flex align-items-center gap-2 ms-2">
         <select name="country" class="form-select form-select-sm" style="width:auto"
@@ -40,10 +41,32 @@
         </select>
     </form>
 
-    {% for section in sections %}
-        <a href="#{{ section.anchor }}" class="btn btn-outline-primary btn-sm">
-            {{ section.league_label }} ({{ section.stadia|length }})
-        </a>
+    {% regroup sections by league.country.name as country_sections %}
+    {% for country_group in country_sections %}
+        {% if country_group.grouper %}  {# skip the "Other" bucket which has no country #}
+            {% if country_group.list|length == 1 %}
+                <a href="#{{ country_group.list.0.anchor }}" class="btn btn-outline-primary btn-sm">
+                    {% if country_group.list.0.flag_code %}<span class="fi fi-{{ country_group.list.0.flag_code }}"></span> {% endif %}{{ country_group.list.0.league_label }}
+                    ({{ country_group.list.0.stadia|length }})
+                </a>
+            {% else %}
+                <div class="dropdown d-inline-block">
+                    <button class="btn btn-outline-primary btn-sm dropdown-toggle"
+                            data-bs-toggle="dropdown" type="button">
+                        {% if country_group.list.0.flag_code %}<span class="fi fi-{{ country_group.list.0.flag_code }}"></span> {% endif %}{{ country_group.grouper }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        {% for section in country_group.list %}
+                        <li>
+                            <a class="dropdown-item" href="#{{ section.anchor }}">
+                                {{ section.league_label }} ({{ section.stadia|length }})
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endif %}
     {% endfor %}
 
     <a href="#top" class="btn btn-outline-secondary btn-sm ms-auto">Top</a>
@@ -52,7 +75,7 @@
 <div class="container mt-4">
 
     <h1>Stadiums{% if selected_country %} — {{ selected_country }}{% endif %}</h1>
-    <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-secondary mb-3">Back to Map</a>
+    <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-secondary mb-3">← Map</a>
 
     {% if not sections %}
         <p class="text-muted">No stadiums found{% if selected_country %} for {{ selected_country }}{% endif %}.</p>
@@ -63,7 +86,7 @@
             <div class="d-flex justify-content-between align-items-end mb-3">
                 <div>
                     <h2 class="mb-1">
-                        {{ section.league_label }}
+                        {% if section.flag_code %}<span class="fi fi-{{ section.flag_code }}"></span> {% endif %}{{ section.league_label }}
                         {% if section.league %}
                             <small class="text-muted fs-6">({{ section.league.country.name }})</small>
                         {% endif %}
@@ -78,24 +101,21 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 shadow-sm">
                         {% if stadium.image_url %}
-                        <img src="{{ stadium.image_url }}" class="card-img-top" alt="{{ stadium.name }}">
+                        <img src="{{ stadium.image_url }}" class="card-img-top" alt="{{ stadium.name }}"
+                             style="height:180px; object-fit:cover;">
                         {% endif %}
 
                         <div class="card-body">
                             <h5 class="card-title">{{ stadium.name }}</h5>
 
-                            <p class="card-text">
-                                {{ stadium.city }}<br>
-                                {% if stadium.capacity %}
-                                    Capacity: {{ stadium.capacity }}
-                                {% else %}
-                                    Capacity: Unknown
-                                {% endif %}
+                            <p class="card-text mb-3">
+                                {% if stadium.city %}<strong>City:</strong> {{ stadium.city.name }}<br>{% endif %}
+                                <strong>Capacity:</strong>
+                                {% if stadium.capacity %}{{ stadium.capacity }}{% else %}Unknown{% endif %}
                             </p>
 
-                            <a href="/stadium/{{ stadium.id }}/" class="btn btn-primary">
-                                View details
-                            </a>
+                            <a href="{% url 'italiastadiaapp:stadium_detail' stadium.id %}?from_list={{ selected_country|urlencode }}"
+                               class="btn btn-primary btn-sm">View details</a>
                         </div>
                     </div>
                 </div>
@@ -105,5 +125,7 @@
     {% endfor %}
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

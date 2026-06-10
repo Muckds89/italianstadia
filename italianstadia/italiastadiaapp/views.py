@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+from django.db.models import F
 from django.shortcuts import get_object_or_404, render
 from django.http import JsonResponse
 from .models import City, League, Stadium, Team, StadiumDevelopment
@@ -10,9 +11,18 @@ def stadium_detail(request, id):
         Stadium.objects.select_related("city").prefetch_related("teams"),
         id=id,
     )
+    # Back-navigation: ?from_list=<country> when coming from stadium_list,
+    # or ?from_list=<country>&from_team_list=1 when coming via team_detail.
+    from_list    = request.GET.get("from_list", None)
+    back_country = from_list.strip() if from_list else ""
+    from_teams   = request.GET.get("from_team_list", "")   # "1" when routed via team_detail
+
     return render(request, "stadium_detail.html", {
         "stadium": stadium,
         "has_coords": stadium.latitude is not None and stadium.longitude is not None,
+        "from_list": from_list is not None,
+        "back_country": back_country,
+        "from_team_list": bool(from_teams),
     })
 
 def stadium_development_detail(request, pk):
@@ -156,14 +166,37 @@ def index(request):
     return render(request, "index.html")
 
 def _available_countries():
-    """Countries that appear in the DB, ordered by UEFA 5-year coefficient rank."""
+    """Countries that appear in the DB, ordered by UEFA 5-year coefficient rank.
+
+    Uses NULLS LAST so that unranked countries sort after ranked ones on both
+    SQLite (which sorts NULLs first by default) and PostgreSQL.
+    """
     return list(
         League.objects
         .select_related("country")
         .values_list("country__name", flat=True)
         .distinct()
-        .order_by("country__uefa_rank", "country__name")
+        .order_by(
+            F("country__uefa_rank").asc(nulls_last=True),
+            "country__name",
+        )
     )
+
+
+# ── Flag icon helpers ────────────────────────────────────────────────────────
+
+# Map ISO-2 DB codes to flag-icons CSS class suffixes (fi-<code>).
+# Standard ISO codes lower-case to "fi-at"; exceptions listed here.
+_FLAG_CODE_OVERRIDES = {
+    "GB": "gb-eng",   # England uses GB-ENG subdivision flag
+    "SC": "gb-sct",   # Scotland
+    "WL": "gb-wls",   # Wales
+}
+
+
+def _country_flag_code(code: str) -> str:
+    """Return the flag-icons CSS suffix for use as class="fi fi-<result>"."""
+    return _FLAG_CODE_OVERRIDES.get(code.upper(), code.lower())
 
 
 def city_list(request):
@@ -191,9 +224,12 @@ def stadium_list(request):
             teams__league__country__name=selected_country
         ).distinct()
 
-    # Build ordered list of leagues to use as sections
+    # Build ordered list of leagues to use as sections — ranked countries first,
+    # unranked countries last (nulls_last), then alphabetically within each group.
     leagues_qs = League.objects.select_related("country").order_by(
-        "country__name", "division_level"
+        F("country__uefa_rank").asc(nulls_last=True),
+        "country__name",
+        "division_level",
     )
     if selected_country:
         leagues_qs = leagues_qs.filter(country__name=selected_country)
@@ -219,6 +255,10 @@ def stadium_list(request):
                 "league_label": league.name,
                 "anchor": f"league-{league.id}",
                 "stadia": stadia_in_section,
+                "flag_code": (
+                    _country_flag_code(league.country.code)
+                    if league.country else ""
+                ),
             })
 
     if other_stadia:
@@ -283,7 +323,9 @@ def team_list(request):
         teams_qs = teams_qs.filter(league__country__name=selected_country)
 
     leagues_qs = League.objects.select_related("country").order_by(
-        "country__uefa_rank", "country__name", "division_level"
+        F("country__uefa_rank").asc(nulls_last=True),
+        "country__name",
+        "division_level",
     )
     if selected_country:
         leagues_qs = leagues_qs.filter(country__name=selected_country)
@@ -307,6 +349,10 @@ def team_list(request):
                 "anchor": f"league-{league.id}",
                 "teams": section_teams,
                 "flag": _country_flag_emoji(league.country.code) if league.country else "",
+                "flag_code": (
+                    _country_flag_code(league.country.code)
+                    if league.country else ""
+                ),
             })
 
     # Fallback: teams with no league FK

@@ -159,7 +159,7 @@
                                 <strong>Built:</strong> {{ team.stadium.year_of_construction }}
                             </p>
                             {% endif %}
-                            <a href="{% url 'italiastadiaapp:stadium_detail' team.stadium.id %}"
+                            <a href="{% url 'italiastadiaapp:stadium_detail' team.stadium.id %}?from_team_list=1{% if back_country %}&country={{ back_country }}{% endif %}"
                                class="btn btn-sm btn-outline-primary">View stadium</a>
                         </div>
                     </div>
