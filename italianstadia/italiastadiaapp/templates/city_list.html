@@ -38,6 +38,9 @@
             {% endfor %}
         </select>
     </form>
+    {% if selected_country %}
+        <a href="{% url 'italiastadiaapp:city_list' %}" class="btn btn-outline-danger btn-sm">✕ Clear</a>
+    {% endif %}
 
     <a href="#top" class="btn btn-outline-secondary btn-sm ms-auto">Top</a>
 </div>

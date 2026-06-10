@@ -40,6 +40,9 @@
             {% endfor %}
         </select>
     </form>
+    {% if selected_country %}
+        <a href="{% url 'italiastadiaapp:stadium_list' %}" class="btn btn-outline-danger btn-sm">✕ Clear</a>
+    {% endif %}
 
     {% regroup sections by league.country.name as country_sections %}
     {% for country_group in country_sections %}
