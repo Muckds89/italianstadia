@@ -456,6 +456,11 @@ html {
     width: 100%;
 }
 
+#stadium-3d-map {
+    height: 480px !important;
+    width: 100% !important;
+}
+
 .stadium-logo-marker {
     width: 64px !important;
     height: 64px !important;

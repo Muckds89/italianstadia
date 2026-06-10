@@ -1,3 +1,4 @@
+import json
 from collections import defaultdict
 
 from django.db.models import F
@@ -17,12 +18,20 @@ def stadium_detail(request, id):
     back_country = from_list.strip() if from_list else ""
     from_teams   = request.GET.get("from_team_list", "")   # "1" when routed via team_detail
 
+    # Build a JSON-safe logos array for the mini-map split badge
+    team_logos = [
+        {"url": t.image_url, "name": t.name}
+        for t in stadium.teams.all()
+        if t.image_url
+    ]
+
     return render(request, "stadium_detail.html", {
         "stadium": stadium,
         "has_coords": stadium.latitude is not None and stadium.longitude is not None,
         "from_list": from_list is not None,
         "back_country": back_country,
         "from_team_list": bool(from_teams),
+        "team_logos_json": json.dumps(team_logos),
     })
 
 def stadium_development_detail(request, pk):

@@ -112,11 +112,7 @@
                                     data-lat="{{ stadium.latitude }}"
                                     data-lng="{{ stadium.longitude }}"
                                     data-name="{{ stadium.name|escapejs }}"
-                                    {% with first_team=teams.0 %}
-                                    {% if first_team and first_team.image_url %}
-                                    data-logo="{{ first_team.image_url }}"
-                                    {% endif %}
-                                    {% endwith %}
+                                    data-logos='{{ team_logos_json }}'
                                 ></div>
                             </div>
 
@@ -151,6 +147,29 @@
                     </div>
                 </div>
             </div>
+
+            {% if has_coords %}
+            <hr>
+            <div class="card shadow-sm mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <strong>🏟 3D Explorer</strong>
+                    <button id="reset-3d-view" class="btn btn-outline-secondary btn-sm">Reset ↺</button>
+                </div>
+                <div class="card-body p-0">
+                    <div
+                        id="stadium-3d-map"
+                        data-lat="{{ stadium.latitude }}"
+                        data-lng="{{ stadium.longitude }}"
+                        data-name="{{ stadium.name|escapejs }}"
+                        data-logos='{{ team_logos_json }}'
+                    ></div>
+                </div>
+                <div class="card-footer text-muted small d-flex justify-content-between">
+                    <span>Drag to rotate &middot; Scroll to zoom &middot; Right-click drag to tilt</span>
+                    <span>&copy; OpenMapTiles &copy; OpenStreetMap contributors</span>
+                </div>
+            </div>
+            {% endif %}
 
             {% if teams %}
             <hr>
@@ -208,6 +227,6 @@
 
 {% block extra_scripts %}
     <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-    <script src="{% static 'js/stadium-detail-map.js' %}"></script>
+    <script src="{% static 'js/stadium-detail-map.js' %}?v=3"></script>
     <script src="{% static 'js/stadium-detail-gallery.js' %}"></script>
 {% endblock %}

@@ -1,3 +1,56 @@
+# Feature Plan — 3D Building Explorer Map on Stadium Detail Page
+_Created: 2026-06-10 | Branch: feature/3d-building-explorer_
+
+## Problem / Goal
+The stadium detail page has a satellite mini-map with an animated fly-in, but it is read-only — the user cannot freely explore the stadium's 3D shape. We want to add a second, interactive 3D map card below the stats section that uses OpenFreeMap vector tiles with OSM building extrusions, letting the user orbit, zoom and tilt the stadium structure at will. The existing satellite map stays unchanged.
+
+## Scope
+**In scope:**
+- [x] `stadium-detail-map.js` — extract shared `buildLogoMarker()` helper, add second MapLibre instance with OpenFreeMap vector tiles + `fill-extrusion` building layer + reset button
+- [ ] `stadium_detail.html` — insert full-width 3D Explorer card between stats row and teams section
+- [ ] `styles.css` — add `#stadium-3d-map` height rule
+
+**Out of scope (do not touch):**
+- The satellite map animation, replay button, or its data attributes
+- `views.py` — no model or context changes (reuses `team_logos_json` already in context)
+- Any map on the main Leaflet index page
+- Sprint 5 / Sprint 6 work
+
+## Design decisions
+1. **Tile source: OpenFreeMap** | Alt: MapTiler/Mapbox | Reason: No API key, free, OpenMapTiles schema, building height data for all major European stadiums.
+2. **Layout: full-width card below stats** | Alt: tab switcher / side-by-side | Reason: Works on all screen sizes; satellite stays in context; 3D gets enough height to be dramatic.
+3. **Pitch 60° on load** | Alt: start flat | Reason: Buildings visible immediately, no gesture needed.
+4. **Height-based colour ramp (light→navy blue)** | Alt: uniform colour | Reason: Taller stadium structure naturally pops brighter than low surroundings.
+5. **Auto-detect vector source name** | Alt: hardcode `"openmaptiles"` | Reason: Future-proof if OpenFreeMap renames their source.
+
+## Files that will change
+| File | Change type | Why |
+|------|-------------|-----|
+| `italiastadiaapp/static/js/stadium-detail-map.js` | Edit | Extract `buildLogoMarker()`, add 3D map init + building layer + reset button |
+| `italiastadiaapp/templates/stadium_detail.html` | Edit | Insert 3D Explorer card HTML |
+| `italiastadiaapp/static/css/styles.css` | Edit | Add `#stadium-3d-map { height: 480px }` rule |
+
+## Implementation steps
+1. [x] `stadium-detail-map.js` — refactor to shared helper + add 3D map section
+2. [ ] `stadium_detail.html` — insert 3D Explorer card HTML between stats row and teams section
+3. [ ] `styles.css` — add `#stadium-3d-map` height rule
+4. [ ] Manual test on San Siro / Benfica / Allianz Arena
+
+## PostgreSQL safety check
+_No model changes — N/A._
+
+## Test plan
+- Satellite map: animation fires on scroll, replay button works, logo(s) show ✓
+- 3D map: buildings visible at pitch 60°, drag rotates bearing, scroll zooms
+- Reset button: map smoothly returns to zoom 16 / pitch 60° / bearing -20°
+- Multi-tenant (Meazza): split badge on BOTH maps
+- No coordinates: neither map card renders (`has_coords` guard works)
+
+## Rollback plan
+Frontend-only changes. Revert `stadium-detail-map.js`, delete the 3D card block from the template, remove the `#stadium-3d-map` CSS rule.
+
+---
+
 # Feature Plan — Country → League combined picker
 _Created: 2026-06-04 | Branch: feature/country-league-picker_
 
