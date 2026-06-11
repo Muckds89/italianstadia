@@ -43,6 +43,8 @@
         <a href="{% url 'italiastadiaapp:team_list' %}" class="btn btn-outline-danger btn-sm">✕ Clear</a>
     {% endif %}
 
+    {# Jump buttons: hidden on mobile to prevent multi-row nav wrap. Visible on md+. #}
+    <div class="d-none d-md-flex flex-wrap align-items-center gap-1">
     {% regroup sections by league.country.name as country_sections %}
     {% for country_group in country_sections %}
         {% if country_group.list|length == 1 %}
@@ -71,6 +73,7 @@
             </div>
         {% endif %}
     {% endfor %}
+    </div>
 
     <a href="#top" class="btn btn-outline-secondary btn-sm ms-auto">Top</a>
 </div>

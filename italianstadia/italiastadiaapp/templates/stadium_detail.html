@@ -3,6 +3,24 @@
 
 {% block title %}{{ stadium.name }}{% endblock %}
 
+{% block meta %}
+{% with desc=stadium.description|default:"Explore capacity, ownership, location and 3D view for this stadium." %}
+<meta name="description" content="{{ desc|truncatechars:155 }}">
+<meta property="og:title" content="{{ stadium.name }} — Stadiums of Europe">
+<meta property="og:description" content="{{ desc|truncatechars:200 }}">
+<meta property="og:type" content="place">
+<meta property="og:site_name" content="Stadiums of Europe">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+{% if stadium.image_url %}
+<meta property="og:image" content="{{ stadium.image_url }}">
+<meta name="twitter:image" content="{{ stadium.image_url }}">
+{% endif %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ stadium.name }}">
+<meta name="twitter:description" content="{{ desc|truncatechars:200 }}">
+{% endwith %}
+{% endblock %}
+
 {% block extra_head %}
     <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
     <style>
@@ -229,4 +247,24 @@
     <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
     <script src="{% static 'js/stadium-detail-map.js' %}?v=3"></script>
     <script src="{% static 'js/stadium-detail-gallery.js' %}"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "StadiumOrArena",
+      "name": "{{ stadium.name|escapejs }}"{% if stadium.city %},
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "{{ stadium.city.name|escapejs }}"{% if stadium.city.country %},
+        "addressCountry": "{{ stadium.city.country|escapejs }}"{% endif %}
+      }{% endif %}{% if has_coords %},
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": {{ stadium.latitude }},
+        "longitude": {{ stadium.longitude }}
+      }{% endif %}{% if stadium.capacity %},
+      "maximumAttendeeCapacity": {{ stadium.capacity }}{% endif %}{% if stadium.image_url %},
+      "image": "{{ stadium.image_url|escapejs }}"{% endif %}{% if stadium.wikipedia_url %},
+      "sameAs": "{{ stadium.wikipedia_url|escapejs }}"{% endif %}
+    }
+    </script>
 {% endblock %}

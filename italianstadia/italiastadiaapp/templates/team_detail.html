@@ -3,6 +3,23 @@
 
 {% block title %}{{ team.name }}{% endblock %}
 
+{% block meta %}
+{% with desc=team.name|add:" — "|add:team.get_tier_display %}
+<meta name="description" content="{{ desc }}. View stadium, league, and season data on Stadiums of Europe.">
+<meta property="og:title" content="{{ team.name }} — Stadiums of Europe">
+<meta property="og:description" content="{{ team.name }} play in {{ team.get_tier_display }}{% if team.stadium %} at {{ team.stadium.name }}{% endif %}.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Stadiums of Europe">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+{% if team.image_url %}
+<meta property="og:image" content="{{ team.image_url }}">
+<meta name="twitter:image" content="{{ team.image_url }}">
+{% endif %}
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ team.name }}">
+{% endwith %}
+{% endblock %}
+
 {% block extra_nav %}
 {% if from_list %}
     <a href="{% url 'italiastadiaapp:team_list' %}{% if back_country %}?country={{ back_country }}{% endif %}"
@@ -211,4 +228,25 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block extra_scripts %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsTeam",
+  "name": "{{ team.name|escapejs }}",
+  "sport": "Soccer"{% if team.image_url %},
+  "logo": "{{ team.image_url|escapejs }}"{% endif %}{% if team.wikipedia_url %},
+  "sameAs": "{{ team.wikipedia_url|escapejs }}"{% endif %}{% if team.stadium %},
+  "homeLocation": {
+    "@type": "StadiumOrArena",
+    "name": "{{ team.stadium.name|escapejs }}"
+  }{% endif %}{% if team.league %},
+  "memberOf": {
+    "@type": "SportsOrganization",
+    "name": "{{ team.league.name|escapejs }}"
+  }{% endif %}
+}
+</script>
 {% endblock %}

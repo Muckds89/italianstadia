@@ -212,7 +212,7 @@ def _country_flag_code(code: str) -> str:
 
 def city_list(request):
     selected_country = request.GET.get("country", "")
-    qs = City.objects.all().order_by("-population", "name")
+    qs = City.objects.prefetch_related("teams").order_by("-population", "name")
     if selected_country:
         qs = qs.filter(country=selected_country)
     return render(request, "city_list.html", {

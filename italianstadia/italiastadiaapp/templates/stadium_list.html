@@ -44,6 +44,8 @@
         <a href="{% url 'italiastadiaapp:stadium_list' %}" class="btn btn-outline-danger btn-sm">✕ Clear</a>
     {% endif %}
 
+    {# Jump buttons: hidden on mobile to prevent multi-row nav wrap. Visible on md+. #}
+    <div class="d-none d-md-flex flex-wrap align-items-center gap-1">
     {% regroup sections by league.country.name as country_sections %}
     {% for country_group in country_sections %}
         {% if country_group.grouper %}  {# skip the "Other" bucket which has no country #}
@@ -74,6 +76,7 @@
             {% endif %}
         {% endif %}
     {% endfor %}
+    </div>
 
     <a href="#top" class="btn btn-outline-secondary btn-sm ms-auto">Top</a>
 </div>
@@ -108,7 +111,7 @@
                     <div class="card h-100 shadow-sm">
                         {% if stadium.image_url %}
                         <img src="{{ stadium.image_url }}" class="card-img-top" alt="{{ stadium.name }}"
-                             style="height:180px; object-fit:cover;">
+                             loading="lazy" style="height:180px; object-fit:cover;">
                         {% endif %}
 
                         <div class="card-body">
