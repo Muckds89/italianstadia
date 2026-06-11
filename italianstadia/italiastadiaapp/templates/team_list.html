@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Teams — Stadiums of Europe</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
@@ -22,6 +24,18 @@
         box-shadow: 0 2px 6px rgba(0,0,0,0.12);
     }
     body { padding-top: 56px; }
+
+    /* Mobile: bigger tap targets, 2-row nav, extra body offset */
+    @media (max-width: 767px) {
+        html { scroll-behavior: smooth; scroll-padding-top: 112px; }
+        body { padding-top: 108px; }
+        .fixed-team-nav { gap: 8px; padding: 8px 12px; }
+        .fixed-team-nav .btn,
+        .fixed-team-nav .form-select { font-size: 15px; min-height: 40px; }
+    }
+    @media (min-width: 768px) {
+        html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+    }
     </style>
 </head>
 
@@ -43,19 +57,17 @@
         <a href="{% url 'italiastadiaapp:team_list' %}" class="btn btn-outline-danger btn-sm">✕ Clear</a>
     {% endif %}
 
-    {# Jump buttons: hidden on mobile to prevent multi-row nav wrap. Visible on md+. #}
+    {# Desktop jump buttons: hidden on mobile to prevent multi-row overflow #}
     <div class="d-none d-md-flex flex-wrap align-items-center gap-1">
     {% regroup sections by league.country.name as country_sections %}
     {% for country_group in country_sections %}
         {% if country_group.list|length == 1 %}
-            {# Single-league country: filter to that country #}
             <a href="?country={{ country_group.grouper|urlencode }}"
                class="btn btn-outline-primary btn-sm{% if country_group.grouper == selected_country %} active{% endif %}">
                 {% if country_group.list.0.flag_code %}<span class="fi fi-{{ country_group.list.0.flag_code }}"></span> {% endif %}{{ country_group.list.0.league_label }}
                 ({{ country_group.list.0.teams|length }})
             </a>
         {% else %}
-            {# Multi-league country: dropdown; each item filters + scrolls to that league #}
             <div class="dropdown d-inline-block">
                 <button class="btn btn-outline-primary btn-sm dropdown-toggle{% if country_group.grouper == selected_country %} active{% endif %}"
                         data-bs-toggle="dropdown" type="button">
@@ -74,6 +86,17 @@
         {% endif %}
     {% endfor %}
     </div>
+
+    {# Mobile league jump: single select that scrolls to the section #}
+    {% if sections %}
+    <select class="form-select form-select-sm d-md-none" style="width:auto; max-width:190px;"
+            onchange="if(this.value){window.location.hash=this.value; this.selectedIndex=0}">
+        <option value="">Jump to league…</option>
+        {% for section in sections %}
+        <option value="#{{ section.anchor }}">{{ section.league_label }}</option>
+        {% endfor %}
+    </select>
+    {% endif %}
 
     <a href="#top" class="btn btn-outline-secondary btn-sm ms-auto">Top</a>
 </div>
@@ -103,11 +126,11 @@
 
             <div class="row">
                 {% for team in section.teams %}
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
                     <div class="card h-100 shadow-sm team-card">
                         <div class="team-logo-wrap">
                             {% if team.image_url %}
-                                <img src="{{ team.image_url }}" class="team-logo" alt="{{ team.name }}">
+                                <img src="{{ team.image_url }}" class="team-logo" alt="{{ team.name }}" loading="lazy">
                             {% else %}
                                 <div class="team-logo-placeholder">
                                     {{ team.name|slice:":2" }}

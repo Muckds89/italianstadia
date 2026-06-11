@@ -1020,7 +1020,7 @@
   "pk": 47,
   "fields": {
     "name": "Reggio Calabria",
-    "population": 0,
+    "population": 166977,
     "country": "Italy",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Reggio_Calabria",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Reggio_Calabria-Gallico_Marina%2C.jpg/330px-Reggio_Calabria-Gallico_Marina%2C.jpg",
@@ -1696,7 +1696,7 @@
   "pk": 99,
   "fields": {
     "name": "Meda",
-    "population": null,
+    "population": 23370,
     "country": "Italy",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Meda",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
@@ -1709,7 +1709,7 @@
   "pk": 100,
   "fields": {
     "name": "Gorgonzola",
-    "population": null,
+    "population": 19402,
     "country": "Italy",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Gorgonzola",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/A_Gongonzola_from_Baci.jpg",
@@ -1839,7 +1839,7 @@
   "pk": 110,
   "fields": {
     "name": "San Benedetto del Tronto",
-    "population": null,
+    "population": 47004,
     "country": "Italy",
     "wikipedia_url": "https://en.wikipedia.org/wiki/San_Benedetto_del_Tronto",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Sanbenedettodeltronto02.jpg",
@@ -2242,7 +2242,7 @@
   "pk": 141,
   "fields": {
     "name": "Monaco",
-    "population": null,
+    "population": 36297,
     "country": "France",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Monaco",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Flag_of_Monaco.svg",
@@ -2476,7 +2476,7 @@
   "pk": 159,
   "fields": {
     "name": "Estoril",
-    "population": null,
+    "population": 6185,
     "country": "Portugal",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Estoril",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Linha_de_Cascais_DSC_0241_%2817296423451%29.jpg",
@@ -2502,7 +2502,7 @@
   "pk": 161,
   "fields": {
     "name": "Barcelos",
-    "population": null,
+    "population": 120391,
     "country": "Portugal",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Barcelos",
     "image_url": "https://upload.wikimedia.org/wikipedia/en/5/5f/Disambig_gray.svg",
@@ -3048,7 +3048,7 @@
   "pk": 203,
   "fields": {
     "name": "Nieciecza",
-    "population": null,
+    "population": 750,
     "country": "Poland",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Nieciecza",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Stadion_KS_Nieciecza.jpg",
@@ -3750,7 +3750,7 @@
   "pk": 257,
   "fields": {
     "name": "Antalya",
-    "population": null,
+    "population": 2619832,
     "country": "Turkey",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Antalya",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Falezlerden_Antalya_Konyaalt%C4%B1_Plaj%C4%B1na_do%C4%9Fru_bir_g%C3%B6r%C3%BCn%C3%BCm.jpg",
@@ -3763,7 +3763,7 @@
   "pk": 258,
   "fields": {
     "name": "Istanbul",
-    "population": null,
+    "population": 15840900,
     "country": "Turkey",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Istanbul",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Historical_peninsula_and_modern_skyline_of_Istanbul.jpg",
@@ -3789,7 +3789,7 @@
   "pk": 260,
   "fields": {
     "name": "Gaziantep",
-    "population": null,
+    "population": 2130000,
     "country": "Turkey",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Gaziantep",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/AntepKale2_%28cropped%29.jpg",
@@ -3802,7 +3802,7 @@
   "pk": 261,
   "fields": {
     "name": "Ankara",
-    "population": null,
+    "population": 5747325,
     "country": "Turkey",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Ankara",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/44/Ankara_from_bus_station.jpg",
@@ -3815,7 +3815,7 @@
   "pk": 262,
   "fields": {
     "name": "İzmir",
-    "population": null,
+    "population": 4394694,
     "country": "Turkey",
     "wikipedia_url": "https://en.wikipedia.org/wiki/%C4%B0zmir",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/59/A_panoramic_view_of_the_Alsancak_quarter_in_Izmir.jpg",
@@ -3828,7 +3828,7 @@
   "pk": 263,
   "fields": {
     "name": "Kayseri",
-    "population": null,
+    "population": 1416831,
     "country": "Turkey",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Kayseri",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Mount_Erciyes_%28Argaeus%29%2C_Turkey_%2831870998063%29.jpg",
@@ -3854,7 +3854,7 @@
   "pk": 265,
   "fields": {
     "name": "Konya",
-    "population": null,
+    "population": 2286493,
     "country": "Turkey",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Konya",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Konyaaltincarsi.jpg",
@@ -3867,7 +3867,7 @@
   "pk": 266,
   "fields": {
     "name": "Samsun",
-    "population": null,
+    "population": 1341000,
     "country": "Turkey",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Samsun",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Samsun_kolaj_%282018%2C_2%29.png",
@@ -3880,7 +3880,7 @@
   "pk": 267,
   "fields": {
     "name": "Trabzon",
-    "population": null,
+    "population": 818024,
     "country": "Turkey",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Trabzon",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Trebisonda%2C_ex-chiesa_della_panagia_Chrysokephalos%2C_oggi_moschea_fatih%2C_esterno_01.jpg",
@@ -4348,7 +4348,7 @@
   "pk": 303,
   "fields": {
     "name": "Ovidiu",
-    "population": null,
+    "population": 13968,
     "country": "Romania",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Ovidiu,_Constan%C8%9Ba",
     "image_url": null,
@@ -4647,7 +4647,7 @@
   "pk": 326,
   "fields": {
     "name": "Linz",
-    "population": null,
+    "population": 214064,
     "country": "Austria",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Linz",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Linz_Blick_von_Freinbergstrasse_32-2_%28cropped%29.jpg",
@@ -4790,7 +4790,7 @@
   "pk": 337,
   "fields": {
     "name": "Coventry",
-    "population": null,
+    "population": 371521,
     "country": "England",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Coventry",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Coventry_City_Centre_%282020%29_cropped_a_bit.jpg",
@@ -4829,7 +4829,7 @@
   "pk": 340,
   "fields": {
     "name": "Middlesbrough",
-    "population": null,
+    "population": 146728,
     "country": "England",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Middlesbrough",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Middlesborough_Town_Hall_image_by_Robert_Eva.jpg",
@@ -4933,7 +4933,7 @@
   "pk": 348,
   "fields": {
     "name": "Watford",
-    "population": null,
+    "population": 100100,
     "country": "England",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Watford",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Watford%2C_Market_Street_and_High_Street_-_geograph.org.uk_-_116645.jpg",
@@ -5440,7 +5440,7 @@
   "pk": 387,
   "fields": {
     "name": "Aarhus",
-    "population": null,
+    "population": 349979,
     "country": "Denmark",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Aarhus",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/05/Drone_photo_of_Dokk1_in_Aarhus%2C_Denmark.jpg",
@@ -5505,7 +5505,7 @@
   "pk": 392,
   "fields": {
     "name": "Farum",
-    "population": null,
+    "population": 20369,
     "country": "Denmark",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Farum",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Farum_Kirke_fra_nord%C3%B8st.jpg",
@@ -5531,7 +5531,7 @@
   "pk": 394,
   "fields": {
     "name": "Randers",
-    "population": null,
+    "population": 64057,
     "country": "Denmark",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Randers",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/80/2016-06-19-det-gamle-raadhus-i-randers.jpg",
@@ -5544,7 +5544,7 @@
   "pk": 395,
   "fields": {
     "name": "Silkeborg",
-    "population": null,
+    "population": 53058,
     "country": "Denmark",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Silkeborg",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/76/Silkeborgkirke.jpg",
@@ -5557,7 +5557,7 @@
   "pk": 396,
   "fields": {
     "name": "Haderslev",
-    "population": null,
+    "population": 22405,
     "country": "Denmark",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Haderslev",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/44/Haderslev_Domkirke1.JPG",
@@ -5570,7 +5570,7 @@
   "pk": 397,
   "fields": {
     "name": "Vejle",
-    "population": null,
+    "population": 65888,
     "country": "Denmark",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Vejle",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/96/B%C3%B8lgen%2C_Vejle_2022.jpg",
@@ -5583,7 +5583,7 @@
   "pk": 398,
   "fields": {
     "name": "Viborg, Denmark",
-    "population": null,
+    "population": 40000,
     "country": "Denmark",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Viborg,_Denmark",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Viborg_fra_Norreso.jpeg",
@@ -5635,7 +5635,7 @@
   "pk": 402,
   "fields": {
     "name": "Nea Filadelfeia",
-    "population": null,
+    "population": 25198,
     "country": "Greece",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Nea_Filadelfeia",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Nea_Filadelfia_main_street.JPG",
@@ -6324,7 +6324,7 @@
   "pk": 455,
   "fields": {
     "name": "Novi Pazar",
-    "population": null,
+    "population": 71000,
     "country": "Serbia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Novi_Pazar",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Novi_Pazar_-_noc.jpg",
@@ -6350,7 +6350,7 @@
   "pk": 457,
   "fields": {
     "name": "Kruševac",
-    "population": null,
+    "population": 68000,
     "country": "Serbia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Kru%C5%A1evac",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Krusevac_panorama1.jpg",
@@ -6363,7 +6363,7 @@
   "pk": 458,
   "fields": {
     "name": "Kragujevac",
-    "population": null,
+    "population": 169000,
     "country": "Serbia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Kragujevac",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/92/View_on_the_city_of_Kragujevac.jpg",
@@ -6402,7 +6402,7 @@
   "pk": 461,
   "fields": {
     "name": "Loznica",
-    "population": null,
+    "population": 72062,
     "country": "Serbia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Loznica",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/54/Loznicapanoramaf.jpg",
@@ -6805,7 +6805,7 @@
   "pk": 492,
   "fields": {
     "name": "Domžale",
-    "population": null,
+    "population": 37700,
     "country": "Slovenia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Dom%C5%BEale",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Srednjevalovni_oddajnik_Dom%C5%BEale_in_stavbe_RTVSLO.jpg",
@@ -7156,7 +7156,7 @@
   "pk": 519,
   "fields": {
     "name": "Reading, Berkshire",
-    "population": null,
+    "population": 229625,
     "country": "England",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Reading,_Berkshire",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Reading_roofscape_on_2023-08-19_16.05.01.jpg",

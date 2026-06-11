@@ -1273,23 +1273,6 @@ developmentStadiumFilter.addEventListener("change", function () {
     }
 });
 
-// ── Mobile drawer toggle (WS1) ────────────────────────────────────────────
-const filterToggleBtn = document.getElementById("filterToggleBtn");
-const filterDrawer    = document.getElementById("filterDrawer");
-if (filterToggleBtn && filterDrawer) {
-    filterToggleBtn.addEventListener("click", function (e) {
-        e.stopPropagation();
-        filterDrawer.classList.toggle("open");
-        filterToggleBtn.textContent = filterDrawer.classList.contains("open")
-            ? "✕ Close"
-            : "☰ Filters";
-    });
-    map.on("click", function () {
-        filterDrawer.classList.remove("open");
-        filterToggleBtn.textContent = "☰ Filters";
-    });
-}
-
 // ── Live search (WS2) ────────────────────────────────────────────────────
 function wireSearch() {
     const input   = document.getElementById("liveSearch");
@@ -1304,17 +1287,26 @@ function wireSearch() {
             results.innerHTML = "";
             if (q.length < 2) { results.style.display = "none"; return; }
 
-            const hits = operationalMarkers.filter(function (m) {
-                if (m.stadiumName?.toLowerCase().includes(q)) return true;
-                return (m.teams || []).some(t => t.name?.toLowerCase().includes(q));
-            }).slice(0, 5);
+            let hits;
+            if (currentLayerMode === "development") {
+                hits = developmentMarkers.filter(function (m) {
+                    return m.developmentName?.toLowerCase().includes(q);
+                }).slice(0, 5);
+            } else {
+                hits = operationalMarkers.filter(function (m) {
+                    if (m.stadiumName?.toLowerCase().includes(q)) return true;
+                    return (m.teams || []).some(t => t.name?.toLowerCase().includes(q));
+                }).slice(0, 5);
+            }
 
             if (!hits.length) { results.style.display = "none"; return; }
 
             hits.forEach(function (m) {
-                const label = m.primaryTeam?.name
-                    ? `${m.primaryTeam.name} — ${m.stadiumName}`
-                    : m.stadiumName;
+                const label = currentLayerMode === "development"
+                    ? m.developmentName
+                    : (m.primaryTeam?.name
+                        ? `${m.primaryTeam.name} — ${m.stadiumName}`
+                        : m.stadiumName);
                 const li = document.createElement("li");
                 li.textContent = label;
                 li.addEventListener("click", function () {
