@@ -28,6 +28,7 @@ let markers = [];
 let activeMarker = null;
 let activePopup = null;
 let lastVisibleMarkers = [];   // updated by applyFilters(); used by fitToVisibleMarkers()
+let searchTempMarker  = null;  // marker temporarily shown on map after a search for a hidden (lower-tier) stadium
 
 // Bounding box computed from ALL loaded markers after the API responds.
 // Replaces EUROPE_FOOTBALL_BOUNDS for every reset/fallback once data is available,
@@ -581,6 +582,8 @@ function closeMobileSheet() {
 }
 
 function applyFilters(updateStadiumDropdown = true) {
+    if (searchTempMarker) { map.removeLayer(searchTempMarker); searchTempMarker = null; }
+
     const selectedCountry  = countryFilter.value;
     const selectedLeague   = leagueFilter.value;   // league ID string or ""
     const selectedGirone   = gironeFilter.value;
@@ -1317,14 +1320,34 @@ function wireSearch() {
             if (!hits.length) { results.style.display = "none"; return; }
 
             hits.forEach(function (m) {
+                // Bug 1 fix: prefer the team that actually matches the query over primaryTeam,
+                // so typing "Inter" shows "Inter Milan — Giuseppe Meazza" not "AC Milan — …"
                 const label = currentLayerMode === "development"
                     ? m.developmentName
-                    : (m.primaryTeam?.name
-                        ? `${m.primaryTeam.name} — ${m.stadiumName}`
-                        : m.stadiumName);
+                    : (function () {
+                        const matchingTeam = (m.teams || []).find(
+                            function (t) { return t.name?.toLowerCase().includes(q); }
+                        );
+                        const display = matchingTeam || m.primaryTeam;
+                        return display?.name
+                            ? display.name + " — " + m.stadiumName
+                            : m.stadiumName;
+                    }());
                 const li = document.createElement("li");
                 li.textContent = label;
                 li.addEventListener("click", function () {
+                    // Bug 2 fix: if marker is filtered out (lower-tier in default view),
+                    // add it directly to the map so the pin is visible alongside the popup.
+                    if (currentLayerMode !== "development" && !clusterGroup.hasLayer(m)) {
+                        if (searchTempMarker && searchTempMarker !== m) {
+                            map.removeLayer(searchTempMarker);
+                        }
+                        m.setOpacity(1.0);
+                        m.setZIndexOffset(2000);
+                        m.setIcon(createMultiBadgeIcon(m.teams, BADGE_SIZE.active));
+                        m.addTo(map);
+                        searchTempMarker = m;
+                    }
                     map.flyTo(m.getLatLng(), 12, { duration: 1.2 });
                     setTimeout(function () { m.fire("click"); }, 1300);
                     input.value = "";
