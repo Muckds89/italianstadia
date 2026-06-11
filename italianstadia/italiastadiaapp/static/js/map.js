@@ -121,6 +121,7 @@ let operationalMarkers = [];
 let developmentMarkers = [];
 let currentLayerMode = "operational";
 let legendDiv = null;
+const isMobile = window.innerWidth <= 768;
 
 
 
@@ -135,6 +136,8 @@ const clearFiltersBtn = document.getElementById("clearFiltersBtn");
 const mapModeToggle = document.getElementById("mapModeToggle");
 const operationalFilters = document.getElementById("operationalFilters");
 const developmentFilters = document.getElementById("developmentFilters");
+const operationalLabel = document.getElementById("operationalLabel");
+const developmentLabel = document.getElementById("developmentLabel");
 
 function updateSelectHighlights() {
     [ownershipFilter, stadiumFilter].forEach(sel => {
@@ -558,9 +561,23 @@ function attachPopupLogoStrip() {
 function closeActivePopup() {
     if (activePopup) {
         map.closePopup(activePopup);
-        activeMarker = null;
         activePopup = null;
     }
+    closeMobileSheet();
+    activeMarker = null;
+}
+
+function openMobileSheet(html) {
+    const sheet = document.getElementById("mobileSheet");
+    if (!sheet) return;
+    document.getElementById("mobileSheetContent").innerHTML = html;
+    sheet.classList.add("open");
+}
+
+function closeMobileSheet() {
+    const sheet = document.getElementById("mobileSheet");
+    if (!sheet) return;
+    sheet.classList.remove("open");
 }
 
 function applyFilters(updateStadiumDropdown = true) {
@@ -670,14 +687,12 @@ function loadDevelopmentStadiums() {
         updateLegend("development");
         return;
     }
-    fetch("/api/stadium-developments/")
+    fetch(document.getElementById("map").dataset.developmentsUrl)
         .then(res => { if (!res.ok) throw new Error(res.status); return res.json(); })
         .then(data => {
             developmentMarkers.forEach(marker => map.removeLayer(marker));
             developmentMarkers = [];
 
-            // Hoist isMobile — same value for every marker in this load
-            const isMobile = window.innerWidth <= 768;
 
             data.features.forEach(feature => {
                 const coords = feature.geometry.coordinates;
@@ -767,13 +782,17 @@ function loadDevelopmentStadiums() {
                 </div>
             `;                
 
-                marker.bindPopup(popupContent, {
-                    maxWidth: isMobile ? 340 : 260,
-                    minWidth: isMobile ? 300 : 220,
-                    autoPan: true,
-                    autoPanPadding: isMobile ? [30, 120] : [20, 20],
-                    closeButton: true
-                });
+                if (isMobile) {
+                    marker.on("click", function () { openMobileSheet(popupContent); });
+                } else {
+                    marker.bindPopup(popupContent, {
+                        maxWidth: 260,
+                        minWidth: 220,
+                        autoPan: true,
+                        autoPanPadding: [20, 20],
+                        closeButton: true
+                    });
+                }
 
                 marker.addTo(map);
                 developmentMarkers.push(marker);
@@ -1025,7 +1044,7 @@ const autoDevMode = new URLSearchParams(window.location.search).get("mode") === 
 // Show a loading hint while the API responds (clears once data is rendered)
 stadiumCounter.textContent = "Loading…";
 
-fetch("/api/stadiums/")
+fetch(document.getElementById("map").dataset.stadiumsUrl)
     .then(res => { if (!res.ok) throw new Error(res.status); return res.json(); })
     .then(data => {
 
@@ -1088,26 +1107,22 @@ fetch("/api/stadiums/")
             });
 
             marker.on("click", function () {
-                if (activeMarker === marker && activePopup) {
-                    closeActivePopup();
-                    return;
-                }
-
+                const alreadyOpen = activeMarker === marker;
                 closeActivePopup();
+                if (alreadyOpen) return;
 
-                activePopup = L.popup({
-                    maxWidth: 270,
-                    maxHeight: 360,
-                })
-                .setLatLng([coords[1], coords[0]])
-                .setContent(buildPopupContent(props))
-                .openOn(map);
-
-                activeMarker = marker;
-
-                setTimeout(() => {
-                    attachPopupLogoStrip();
-                }, 0);
+                if (isMobile) {
+                    openMobileSheet(buildPopupContent(props));
+                    activeMarker = marker;
+                    setTimeout(() => { attachPopupLogoStrip(); }, 0);
+                } else {
+                    activePopup = L.popup({ maxWidth: 270, maxHeight: 360 })
+                        .setLatLng([coords[1], coords[0]])
+                        .setContent(buildPopupContent(props))
+                        .openOn(map);
+                    activeMarker = marker;
+                    setTimeout(() => { attachPopupLogoStrip(); }, 0);
+                }
             });
 
             clusterGroup.addLayer(marker);
@@ -1325,3 +1340,20 @@ function wireSearch() {
         if (!e.target.closest("#searchWrap")) results.style.display = "none";
     });
 }
+
+// ── Mobile sheet wiring ───────────────────────────────────────────────────
+const mobileSheetClose = document.getElementById("mobileSheetClose");
+if (mobileSheetClose) {
+    mobileSheetClose.addEventListener("click", function () {
+        closeMobileSheet();
+        activeMarker = null;
+    });
+}
+
+// Tapping the map background dismisses the sheet
+map.on("click", function () {
+    if (isMobile) {
+        closeMobileSheet();
+        activeMarker = null;
+    }
+});

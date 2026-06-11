@@ -286,11 +286,22 @@
         </div>
     </div>
 </nav>
-<div id="map" data-countries-url="{% static 'data/ne_110m_admin_0_countries.geojson' %}"></div>
+<div id="map"
+     data-countries-url="{% static 'data/ne_110m_admin_0_countries.geojson' %}"
+     data-stadiums-url="{% url 'italiastadiaapp:stadiums_geojson' %}"
+     data-developments-url="{% url 'italiastadiaapp:stadium_developments_geojson' %}"></div>
+
+<!-- Mobile bottom sheet — must be outside #map to avoid Leaflet's CSS transform stacking context -->
+<div id="mobileSheet" role="dialog" aria-modal="true">
+    <button id="mobileSheetClose" aria-label="Close">✕</button>
+    <div id="mobileSheetInner">
+        <div id="mobileSheetContent"></div>
+    </div>
+</div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{% static 'js/map.js' %}?v=15"></script>
+<script src="{% static 'js/map.js' %}?v=16"></script>
 </body>
 </html>
