@@ -39,6 +39,10 @@
         html { scroll-behavior: smooth; scroll-padding-top: 60px; }
     }
     </style>
+    {% if adsense_client %}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ adsense_client }}"
+            crossorigin="anonymous"></script>
+    {% endif %}
 </head>
 <body id="top">
 
@@ -107,6 +111,7 @@
 <div class="container mt-4">
 
     <h1>Stadiums{% if selected_country %} — {{ selected_country }}{% endif %}</h1>
+    {% include "adsense_unit.html" %}
     <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-secondary mb-3">← Map</a>
 
     {% if not sections %}

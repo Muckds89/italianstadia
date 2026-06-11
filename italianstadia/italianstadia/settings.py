@@ -26,6 +26,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "True") == "True"
 
+# Google AdSense publisher ID — set in Render env vars when account is approved.
+# Empty string means no ads are rendered anywhere (safe default for dev/staging).
+# Both vars must be set in Render env for ads to appear.
+# GOOGLE_ADSENSE_CLIENT  e.g. ca-pub-1234567890123456
+# GOOGLE_ADSENSE_SLOT    e.g. 1234567890  (from the AdSense "Ad units" dashboard)
+GOOGLE_ADSENSE_CLIENT = os.environ.get("GOOGLE_ADSENSE_CLIENT", "")
+GOOGLE_ADSENSE_SLOT   = os.environ.get("GOOGLE_ADSENSE_SLOT", "")
+
 SECRET_KEY = os.environ.get(
     "SECRET_KEY",
     "django-insecure-local-dev-key"
@@ -77,6 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'italiastadiaapp.context_processors.adsense',
             ],
         },
     },

@@ -1,11 +1,13 @@
+import csv
 import json
 from collections import defaultdict
 
+from django.conf import settings
 from django.db.models import F
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
-from django.http import JsonResponse
 from django.views.decorators.cache import cache_page
-from .models import City, League, Stadium, Team, StadiumDevelopment
+from .models import City, LastRefresh, League, Stadium, Team, StadiumDevelopment
 
 
 def stadium_detail(request, id):
@@ -386,6 +388,91 @@ def team_list(request):
         "countries": _available_countries(),
         "selected_country": selected_country,
     })
-    
 
 
+# ── Export API ────────────────────────────────────────────────────────────────
+
+_EXPORT_FIELDS = [
+    "id", "name", "city", "country", "league",
+    "capacity", "ownership", "owner_raw",
+    "latitude", "longitude", "year_of_construction", "wikipedia_url",
+]
+
+
+def _stadium_to_row(stadium):
+    """Return a dict with the exported fields for one stadium."""
+    primary_team = next(iter(stadium.teams.all()), None)
+    return {
+        "id": stadium.id,
+        "name": stadium.name,
+        "city": stadium.city.name if stadium.city else "",
+        "country": (
+            primary_team.league.country.name
+            if primary_team and primary_team.league and primary_team.league.country
+            else ""
+        ),
+        "league": (
+            primary_team.league.name
+            if primary_team and primary_team.league
+            else ""
+        ),
+        "capacity": stadium.capacity or "",
+        "ownership": stadium.ownership,
+        "owner_raw": stadium.owner_raw or "",
+        "latitude": float(stadium.latitude) if stadium.latitude else "",
+        "longitude": float(stadium.longitude) if stadium.longitude else "",
+        "year_of_construction": stadium.year_of_construction or "",
+        "wikipedia_url": stadium.wikipedia_url or "",
+    }
+
+
+def export_stadiums(request):
+    fmt = request.GET.get("format", "json").lower()
+    if fmt not in ("csv", "json"):
+        return JsonResponse({"error": "Invalid format. Use csv or json."}, status=400)
+
+    qs = Stadium.objects.select_related("city").prefetch_related(
+        "teams__league__country"
+    )
+
+    country = request.GET.get("country", "").strip()
+    league = request.GET.get("league", "").strip()
+    ownership = request.GET.get("ownership", "").strip().upper()
+
+    if country:
+        qs = qs.filter(teams__league__country__name=country)
+    if league:
+        qs = qs.filter(teams__league__name=league)
+    if ownership:
+        qs = qs.filter(ownership=ownership)
+
+    qs = qs.distinct()
+    rows = [_stadium_to_row(s) for s in qs]
+
+    if fmt == "csv":
+        response = HttpResponse(content_type="text/csv")
+        response["Content-Disposition"] = 'attachment; filename="stadiums.csv"'
+        writer = csv.DictWriter(response, fieldnames=_EXPORT_FIELDS)
+        writer.writeheader()
+        writer.writerows(rows)
+        return response
+
+    return JsonResponse(rows, safe=False)
+
+
+# ── Status API ────────────────────────────────────────────────────────────────
+
+def privacy(request):
+    return render(request, "privacy.html", {
+        "adsense_client": settings.GOOGLE_ADSENSE_CLIENT,
+    })
+
+
+def api_status(request):
+    refresh = LastRefresh.objects.filter(pk=1).first()
+    return JsonResponse({
+        "stadium_count": Stadium.objects.count(),
+        "last_refresh": refresh.ran_at.isoformat() if refresh and refresh.ran_at else None,
+        "last_refresh_status": refresh.status if refresh else None,
+        "last_refresh_detail": refresh.detail if refresh else None,
+    })

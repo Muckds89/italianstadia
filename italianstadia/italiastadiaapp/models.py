@@ -181,3 +181,21 @@ class StadiumDevelopment(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class LastRefresh(models.Model):
+    """Single-row table (pk=1) tracking the last automated season refresh run."""
+    ran_at = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(
+        max_length=20,
+        choices=[("SUCCESS", "Success"), ("FAILED", "Failed")],
+        blank=True,
+    )
+    detail = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name = "Last Refresh"
+        verbose_name_plural = "Last Refresh"
+
+    def __str__(self):
+        return f"{self.status} @ {self.ran_at}" if self.ran_at else "Never run"

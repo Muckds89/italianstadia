@@ -65,7 +65,7 @@ class TeamAdmin(admin.ModelAdmin):
     search_fields = ("name", "city__name", "stadium__name")
     list_filter = ("league", "tier", "city")
 
-from .models import StadiumDevelopment
+from .models import StadiumDevelopment, LastRefresh
 
 @admin.register(StadiumDevelopment)
 class StadiumDevelopmentAdmin(admin.ModelAdmin):
@@ -86,3 +86,9 @@ class StadiumDevelopmentAdmin(admin.ModelAdmin):
     )
     list_filter = ("project_type", "status")
     search_fields = ("name", "notes", "architect", "developer")
+
+
+@admin.register(LastRefresh)
+class LastRefreshAdmin(admin.ModelAdmin):
+    list_display = ("status", "ran_at", "detail")
+    readonly_fields = ("status", "ran_at", "detail")

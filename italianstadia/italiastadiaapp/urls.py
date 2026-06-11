@@ -1,7 +1,8 @@
 from django.urls import path
 from . import views
 from .views import (
-    city_list, stadium_developments_geojson, stadium_list, team_list,
+    api_status, city_list, export_stadiums,
+    stadium_developments_geojson, stadium_list, team_list,
     stadium_detail, stadiums_geojson, stadium_development_detail, team_detail,
 )
 
@@ -15,5 +16,8 @@ urlpatterns = [
     path("stadium/<int:id>/", stadium_detail, name="stadium_detail"),
     path("api/stadiums/", stadiums_geojson, name="stadiums_geojson"),
     path("api/stadium-developments/", stadium_developments_geojson, name="stadium_developments_geojson"),
+    path("api/export/stadiums/", export_stadiums, name="export_stadiums"),
+    path("api/status/", api_status, name="api_status"),
     path("stadium-development/<int:pk>/", stadium_development_detail, name="stadium_development_detail"),
+    path("privacy/", views.privacy, name="privacy"),
 ]

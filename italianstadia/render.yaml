@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: italianstadia
+    env: python
+    buildCommand: ./build.sh
+    startCommand: gunicorn italianstadia.wsgi:application
+    envVarGroups:
+      - italianstadia-env
+
+  # Automated season refresh — runs every Monday at 05:00 UTC.
+  # Uses the same env group as the web service so DATABASE_URL and other
+  # secrets are automatically available. No DB migrations run here;
+  # they run in build.sh on the web service deploy.
+  - type: cron
+    name: season-refresh
+    env: python
+    schedule: "0 5 * * 1"
+    buildCommand: pip install -r requirements.txt
+    startCommand: python manage.py update_all_leagues
+    envVarGroups:
+      - italianstadia-env

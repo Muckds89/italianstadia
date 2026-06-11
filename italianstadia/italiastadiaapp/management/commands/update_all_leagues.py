@@ -71,6 +71,9 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+        from django.utils import timezone
+        from italiastadiaapp.models import LastRefresh
+
         slugs     = options["leagues"] or _all_league_slugs()
         dry_run   = options["dry_run"]
         skip_meta = options["skip_meta"]
@@ -82,36 +85,58 @@ class Command(BaseCommand):
 
         ok = failed = 0
 
-        for slug in slugs:
-            self.stdout.write(f"\n{'-' * 60}")
-            self.stdout.write(self.style.HTTP_INFO(f"  [{ok + failed + 1}/{len(slugs)}] {slug}"))
-            try:
-                kwargs = {"league": slug}
-                if dry_run:
-                    kwargs["dry_run"] = True
-                call_command("scrape_season", **kwargs)
-                ok += 1
-            except Exception as exc:
-                self.stdout.write(self.style.ERROR(f"  FAILED: {exc}"))
-                failed += 1
-                # Continue to the next league — don't abort the whole run
+        try:
+            for slug in slugs:
+                self.stdout.write(f"\n{'-' * 60}")
+                self.stdout.write(self.style.HTTP_INFO(f"  [{ok + failed + 1}/{len(slugs)}] {slug}"))
+                try:
+                    kwargs = {"league": slug}
+                    if dry_run:
+                        kwargs["dry_run"] = True
+                    call_command("scrape_season", **kwargs)
+                    ok += 1
+                except Exception as exc:
+                    self.stdout.write(self.style.ERROR(f"  FAILED: {exc}"))
+                    failed += 1
 
-        self.stdout.write(f"\n{'=' * 60}")
-        self.stdout.write(self.style.SUCCESS(f"  Leagues OK:     {ok}"))
-        if failed:
-            self.stdout.write(self.style.ERROR(f"  Leagues FAILED: {failed}"))
+            self.stdout.write(f"\n{'=' * 60}")
+            self.stdout.write(self.style.SUCCESS(f"  Leagues OK:     {ok}"))
+            if failed:
+                self.stdout.write(self.style.ERROR(f"  Leagues FAILED: {failed}"))
 
-        if not dry_run and not skip_meta:
-            self.stdout.write(self.style.HTTP_INFO("\nUpdating UEFA country rankings…"))
-            try:
-                call_command("update_uefa_ranking")
-            except Exception as exc:
-                self.stdout.write(self.style.ERROR(f"  update_uefa_ranking failed: {exc}"))
+            if not dry_run and not skip_meta:
+                self.stdout.write(self.style.HTTP_INFO("\nUpdating UEFA country rankings…"))
+                try:
+                    call_command("update_uefa_ranking")
+                except Exception as exc:
+                    self.stdout.write(self.style.ERROR(f"  update_uefa_ranking failed: {exc}"))
 
-            self.stdout.write(self.style.HTTP_INFO("Updating UEFA club coefficients…"))
-            try:
-                call_command("update_club_coefficients")
-            except Exception as exc:
-                self.stdout.write(self.style.ERROR(f"  update_club_coefficients failed: {exc}"))
+                self.stdout.write(self.style.HTTP_INFO("Updating UEFA club coefficients…"))
+                try:
+                    call_command("update_club_coefficients")
+                except Exception as exc:
+                    self.stdout.write(self.style.ERROR(f"  update_club_coefficients failed: {exc}"))
+
+            if not dry_run:
+                status = "FAILED" if failed == len(slugs) else "SUCCESS"
+                detail = f"{ok}/{len(slugs)} leagues OK"
+                if failed:
+                    detail += f", {failed} failed"
+                LastRefresh.objects.update_or_create(
+                    pk=1,
+                    defaults={"ran_at": timezone.now(), "status": status, "detail": detail},
+                )
+
+        except Exception as exc:
+            if not dry_run:
+                LastRefresh.objects.update_or_create(
+                    pk=1,
+                    defaults={
+                        "ran_at": timezone.now(),
+                        "status": "FAILED",
+                        "detail": str(exc)[:500],
+                    },
+                )
+            raise
 
         self.stdout.write(self.style.SUCCESS("\nDone.\n"))

@@ -1,9 +1,13 @@
+import csv
+import io
+
 import pytest
 from django.urls import reverse
 
 from italiastadiaapp.models import (
     City,
     Country,
+    LastRefresh,
     League,
     Stadium,
     StadiumDevelopment,
@@ -155,3 +159,117 @@ def test_stadium_developments_geojson(client):
 
     assert data["type"] == "FeatureCollection"
     assert len(data["features"]) == 1
+
+
+# ---------------------------------------------------------------------------
+# Export API (/api/export/stadiums/)
+# ---------------------------------------------------------------------------
+
+@pytest.fixture
+def export_data(db):
+    it, _ = Country.objects.get_or_create(name="Italy", defaults={"code": "IT"})
+    de, _ = Country.objects.get_or_create(name="Germany", defaults={"code": "DE"})
+    serie_a, _ = League.objects.get_or_create(name="Serie A", country=it, defaults={"division_level": 1})
+    bundesliga, _ = League.objects.get_or_create(name="Bundesliga", country=de, defaults={"division_level": 1})
+
+    city_it = City.objects.create(name="Rome",   population=2800000, country="Italy")
+    city_de = City.objects.create(name="Munich", population=1400000, country="Germany")
+
+    st_it = Stadium.objects.create(name="Olimpico", city=city_it, latitude=41.934, longitude=12.455, ownership="PUBLIC",  capacity=72000)
+    st_de = Stadium.objects.create(name="Allianz",  city=city_de, latitude=48.219, longitude=11.625, ownership="PRIVATE", capacity=75000)
+
+    Team.objects.create(name="AS Roma",   city=city_it, stadium=st_it, tier=1, league=serie_a)
+    Team.objects.create(name="FC Bayern", city=city_de, stadium=st_de, tier=1, league=bundesliga)
+    return {"st_it": st_it, "st_de": st_de}
+
+
+@pytest.mark.django_db
+def test_export_json_returns_list(client, export_data):
+    url = reverse("italiastadiaapp:export_stadiums")
+    response = client.get(url + "?format=json")
+    assert response.status_code == 200
+    assert response["Content-Type"] == "application/json"
+    rows = response.json()
+    assert isinstance(rows, list)
+    assert len(rows) == 2
+    keys = set(rows[0].keys())
+    for field in ("id", "name", "city", "country", "league", "capacity", "ownership", "latitude", "longitude"):
+        assert field in keys, f"missing field: {field}"
+
+
+@pytest.mark.django_db
+def test_export_csv_returns_valid_csv(client, export_data):
+    url = reverse("italiastadiaapp:export_stadiums")
+    response = client.get(url + "?format=csv")
+    assert response.status_code == 200
+    assert "text/csv" in response["Content-Type"]
+    reader = csv.DictReader(io.StringIO(response.content.decode("utf-8")))
+    rows = list(reader)
+    assert len(rows) == 2
+    assert "name" in rows[0]
+    assert "capacity" in rows[0]
+
+
+@pytest.mark.django_db
+def test_export_filter_by_country(client, export_data):
+    url = reverse("italiastadiaapp:export_stadiums")
+    rows = client.get(url + "?format=json&country=Italy").json()
+    assert len(rows) == 1
+    assert rows[0]["name"] == "Olimpico"
+
+
+@pytest.mark.django_db
+def test_export_filter_by_league(client, export_data):
+    url = reverse("italiastadiaapp:export_stadiums")
+    rows = client.get(url + "?format=json&league=Bundesliga").json()
+    assert len(rows) == 1
+    assert rows[0]["name"] == "Allianz"
+
+
+@pytest.mark.django_db
+def test_export_filter_by_ownership(client, export_data):
+    url = reverse("italiastadiaapp:export_stadiums")
+    rows = client.get(url + "?format=json&ownership=PUBLIC").json()
+    assert all(r["ownership"] == "PUBLIC" for r in rows)
+    names = [r["name"] for r in rows]
+    assert "Olimpico" in names
+    assert "Allianz" not in names
+
+
+@pytest.mark.django_db
+def test_export_invalid_format_returns_400(client):
+    url = reverse("italiastadiaapp:export_stadiums")
+    response = client.get(url + "?format=xml")
+    assert response.status_code == 400
+    assert "error" in response.json()
+
+
+# ---------------------------------------------------------------------------
+# Status API (/api/status/)
+# ---------------------------------------------------------------------------
+
+@pytest.mark.django_db
+def test_api_status_no_refresh(client):
+    url = reverse("italiastadiaapp:api_status")
+    response = client.get(url)
+    assert response.status_code == 200
+    data = response.json()
+    assert "stadium_count" in data
+    assert data["last_refresh"] is None
+    assert data["last_refresh_status"] is None
+
+
+@pytest.mark.django_db
+def test_api_status_with_refresh(client):
+    from django.utils import timezone
+    LastRefresh.objects.update_or_create(
+        pk=1,
+        defaults={"ran_at": timezone.now(), "status": "SUCCESS", "detail": "3/3 leagues OK"},
+    )
+    url = reverse("italiastadiaapp:api_status")
+    response = client.get(url)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["last_refresh"] is not None
+    assert data["last_refresh_status"] == "SUCCESS"
+    assert data["last_refresh_detail"] == "3/3 leagues OK"
