@@ -107,6 +107,10 @@
 
 <div class="container mt-4">
     <h1>Teams{% if selected_country %} — {{ selected_country }}{% endif %}</h1>
+    <p class="text-muted mb-3">
+        Explore professional football clubs across Europe's top leagues — Serie A, Bundesliga, Premier League and more.
+        Each team page includes stadium details, league information, and attendance data.
+    </p>
     {% include "adsense_unit.html" %}
     <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-secondary mb-3">← Map</a>
 
