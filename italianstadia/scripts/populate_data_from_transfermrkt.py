@@ -233,7 +233,8 @@ def extract_city_population(soup):
 
         # City populations should usually be at least 1,000 and never exceed 50M
         # (values above 50M are scraping artefacts — e.g. area codes, GDP figures)
-        if number < 1000 or number > 50_000_000:
+        # Values in the year range 1800-2100 are census/founding years, not populations
+        if number < 1000 or number > 50_000_000 or 1800 <= number <= 2100:
             continue
 
         # Best case: explicit population row

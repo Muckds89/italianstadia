@@ -5605,7 +5605,7 @@
   "pk": 390,
   "fields": {
     "name": "Fredericia",
-    "population": 1970,
+    "population": 41761,
     "country": "Denmark",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Fredericia",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/64/Landsoldaten_-_panoramio.jpg",
@@ -6684,7 +6684,7 @@
   "pk": 473,
   "fields": {
     "name": "Bratislava",
-    "population": 2026,
+    "population": 480902,
     "country": "Slovakia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Bratislava",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Slovakia_bratislava.jpg",
@@ -6970,7 +6970,7 @@
   "pk": 495,
   "fields": {
     "name": "Derry",
-    "population": 2021,
+    "population": 85279,
     "country": "Northern Ireland",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Derry",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/DerryMontage3.JPG",
@@ -7256,7 +7256,7 @@
   "pk": 517,
   "fields": {
     "name": "Plymouth",
-    "population": 1928,
+    "population": 272067,
     "country": "England",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Plymouth",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Plymouth_City.JPG",
@@ -8140,7 +8140,7 @@
   "pk": 585,
   "fields": {
     "name": "Podgorica",
-    "population": 1992,
+    "population": 173024,
     "country": "Montenegro",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Podgorica",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/P064720-426794_-_Panoramic_view_of_Podgorica.jpg",
@@ -8621,7 +8621,7 @@
   "pk": 622,
   "fields": {
     "name": "Daugavpils",
-    "population": 857673000,
+    "population": 78126,
     "country": "Latvia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Daugavpils",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/88/Daugavpils_luter%C4%81%C5%86u_bazn%C4%ABca_01.JPG",
@@ -8634,7 +8634,7 @@
   "pk": 623,
   "fields": {
     "name": "Jelgava",
-    "population": 740034000,
+    "population": 54834,
     "country": "Latvia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Jelgava",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/42/Jelgava_winter.jpg",
@@ -8673,7 +8673,7 @@
   "pk": 626,
   "fields": {
     "name": "Ogre, Latvia",
-    "population": 212786000,
+    "population": 22757,
     "country": "Latvia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Ogre,_Latvia",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Ogre3.jpg",
