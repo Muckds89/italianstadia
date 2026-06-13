@@ -65,6 +65,7 @@
         "name": "Paide linnastaadion",
         "transfermarkt_url": "https://www.transfermarkt.com/paide-linnameeskond/stadion/verein/23371/saison_id/2025",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Paide_linnastaadion",
+        "capacity": 768,
         "owner_raw": "Paide City Municipality",
         "city": {
           "name": "Paide",
