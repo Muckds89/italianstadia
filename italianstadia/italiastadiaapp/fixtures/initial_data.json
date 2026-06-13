@@ -8348,7 +8348,7 @@
   "pk": 601,
   "fields": {
     "name": "Bascharage",
-    "population": null,
+    "population": 5721,
     "country": "Luxembourg",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Bascharage",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Bascharage.JPG",
@@ -8491,7 +8491,7 @@
   "pk": 612,
   "fields": {
     "name": "Ta' Qali",
-    "population": null,
+    "population": 12268,
     "country": "Malta",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Sudika_Ta%27_Qali_National_Park.jpg",
