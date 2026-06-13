@@ -8595,7 +8595,7 @@
   "pk": 620,
   "fields": {
     "name": "Riga",
-    "population": 20791431000,
+    "population": null,
     "country": "Latvia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Riga",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Riga_%2833844464828%29.jpg",
@@ -8608,7 +8608,7 @@
   "pk": 621,
   "fields": {
     "name": "Liepāja",
-    "population": 1052312000,
+    "population": null,
     "country": "Latvia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Liep%C4%81ja",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Liepajas_Sveta_Jazepa_Romas_katolu_katedrale_2.jpg",
