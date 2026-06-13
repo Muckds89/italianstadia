@@ -81,50 +81,22 @@ def stadium_developments_geojson(request):
         "features": features
     })
 
-@cache_page(60 * 5)  # 5-minute in-process cache; busted on server restart / redeploy
-def stadiums_geojson(request):
+def _build_stadium_features(qs=None):
+    """Serialize a Stadium queryset into a list of GeoJSON Feature dicts.
+
+    Shared by stadiums_geojson (HTTP view) and generate_stadiums_json (management
+    command that writes the pre-built static file served by WhiteNoise).
     """
-    GeoJSON endpoint for operational stadiums.
-
-    Optional query parameters (all case-sensitive):
-      ?country=Italy          — include only stadiums whose teams play in that country
-      ?league=Serie+A         — include only stadiums whose teams play in that league
-      ?ownership=PUBLIC       — include only stadiums with that ownership value
-                                (PUBLIC | PRIVATE | MIXED | UNKNOWN)
-
-    All three can be combined. map.js fetches with no parameters and filters
-    client-side; these params are available for external API consumers and
-    future server-side optimisation as the dataset grows past ~500 stadiums.
-    """
-    param_country   = request.GET.get("country",   "").strip()
-    param_league    = request.GET.get("league",     "").strip()
-    param_ownership = request.GET.get("ownership",  "").strip().upper()
-
-    qs = Stadium.objects.select_related("city").prefetch_related(
-        "teams__league__country"
-    )
-
-    # Push ownership filter to the DB — it lives directly on Stadium
-    if param_ownership:
-        qs = qs.filter(ownership=param_ownership)
-
-    # Push league filter to the DB via team relationship
-    if param_league:
-        qs = qs.filter(teams__league__name=param_league).distinct()
-
-    # Push country filter to the DB via team → league → country
-    if param_country:
-        qs = qs.filter(teams__league__country__name=param_country).distinct()
-
+    if qs is None:
+        qs = Stadium.objects.select_related("city").prefetch_related(
+            "teams__league__country"
+        )
     features = []
-
     for s in qs:
         if s.latitude is None or s.longitude is None:
             continue
-
         teams = list(s.teams.all())
         city_country = s.city.country if s.city else ""
-
         features.append({
             "type": "Feature",
             "geometry": {
@@ -166,13 +138,43 @@ def stadiums_geojson(request):
                         "transfermarkt_url": t.transfermarkt_url or "",
                     }
                     for t in teams
-                ]
-            }
+                ],
+            },
         })
+    return features
+
+
+@cache_page(60 * 60)  # 1-hour cache — data changes only when scraper runs
+def stadiums_geojson(request):
+    """
+    GeoJSON endpoint for operational stadiums (server-side filtered queries).
+
+    Optional query parameters (all case-sensitive):
+      ?country=Italy          — include only stadiums whose teams play in that country
+      ?league=Serie+A         — include only stadiums whose teams play in that league
+      ?ownership=PUBLIC       — include only stadiums with that ownership value
+
+    map.js does NOT call this endpoint for the initial map load — it fetches
+    the pre-built static file (data/stadiums_map.json) served by WhiteNoise.
+    These params are available for external API consumers only.
+    """
+    param_country   = request.GET.get("country",   "").strip()
+    param_league    = request.GET.get("league",     "").strip()
+    param_ownership = request.GET.get("ownership",  "").strip().upper()
+
+    qs = Stadium.objects.select_related("city").prefetch_related(
+        "teams__league__country"
+    )
+    if param_ownership:
+        qs = qs.filter(ownership=param_ownership)
+    if param_league:
+        qs = qs.filter(teams__league__name=param_league).distinct()
+    if param_country:
+        qs = qs.filter(teams__league__country__name=param_country).distinct()
 
     return JsonResponse({
         "type": "FeatureCollection",
-        "features": features
+        "features": _build_stadium_features(qs),
     })
 
 def index(request):
