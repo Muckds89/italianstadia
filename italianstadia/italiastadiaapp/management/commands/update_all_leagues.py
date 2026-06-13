@@ -117,6 +117,12 @@ class Command(BaseCommand):
                 except Exception as exc:
                     self.stdout.write(self.style.ERROR(f"  update_club_coefficients failed: {exc}"))
 
+                self.stdout.write(self.style.HTTP_INFO("Rebuilding stadiums_map.json…"))
+                try:
+                    call_command("generate_stadiums_json")
+                except Exception as exc:
+                    self.stdout.write(self.style.ERROR(f"  generate_stadiums_json failed: {exc}"))
+
             if not dry_run:
                 status = "FAILED" if failed == len(slugs) else "SUCCESS"
                 detail = f"{ok}/{len(slugs)} leagues OK"

@@ -9,6 +9,8 @@ PUBLIC_KEYWORDS = [
     "region", "province", "metropolitan city", "district",
     "town of", "town council",
     "city council", "county council", "district council",
+    " county",                 # administrative county (e.g. Klaipėda County, County Dublin)
+    " parish",                 # rural municipality in Baltic/Nordic countries (e.g. Saue Parish)
     "metropolitan borough", "london borough", "royal borough",
     "public authority", "public body", "national sports",
     "sports authority", "stadium authority",
@@ -106,6 +108,15 @@ PUBLIC_KEYWORDS = [
     # ── Greek (transliterated) ───────────────────────────────────────────
     "dimos ",
     "dimou",
+    # ── Lithuanian ───────────────────────────────────────────────────────
+    "savivaldybė",             # municipality (e.g. Šiaulių miesto savivaldybė)
+    "savivaldybes",            # genitive form
+    "miesto savivaldybė",      # city municipality
+    "rajono savivaldybė",      # district municipality
+    # ── Albanian ─────────────────────────────────────────────────────────
+    "bashkia ",                # municipality (Bashkia Vlorë, Bashkia Tiranë …)
+    "bashkie",                 # genitive / other forms
+    "komuna ",                 # commune / municipality
 ]
 
 PRIVATE_KEYWORDS = [
