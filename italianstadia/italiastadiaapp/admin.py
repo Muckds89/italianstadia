@@ -33,17 +33,39 @@ class StadiumAdmin(admin.ModelAdmin):
         "city",
         "capacity",
         "year_of_construction",
+        "stadium_type",
+        "surface",
+        "architect",
+        "ownership",
+        "slug",
         "latitude",
         "longitude",
-        "wikipedia_url",
-        "transfermarkt_url",
-        "image_url",
-        "ownership",
-        "owner_raw",
     )
 
-    list_filter = ("ownership", "city")
-    search_fields = ("name", "city__name", "owner_raw")
+    list_filter = ("ownership", "stadium_type", "surface", "city")
+    search_fields = ("name", "city__name", "owner_raw", "architect", "slug")
+    prepopulated_fields = {"slug": ("name",)}
+    fieldsets = (
+        (None, {
+            "fields": ("name", "slug", "city", "address"),
+        }),
+        ("Capacity & Construction", {
+            "fields": ("capacity", "year_of_construction", "stadium_type", "surface", "architect"),
+        }),
+        ("Ownership", {
+            "fields": ("ownership", "owner_raw"),
+        }),
+        ("Location", {
+            "fields": ("latitude", "longitude"),
+        }),
+        ("Tournaments", {
+            "fields": ("tournaments",),
+            "description": 'JSON list: [{"tournament": "UEFA Euro 2028", "year": 2028, "status": "CONFIRMED", "matches": 5}]',
+        }),
+        ("Media & Links", {
+            "fields": ("image_url", "image_credit", "extra_images", "wikipedia_url", "transfermarkt_url", "description"),
+        }),
+    )
 
 
 @admin.register(Team)

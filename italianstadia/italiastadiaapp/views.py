@@ -3,17 +3,17 @@ import json
 from collections import defaultdict
 
 from django.conf import settings
-from django.db.models import F
+from django.db.models import Avg, Count, F, Max, Sum
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.cache import cache_page
 from .models import City, LastRefresh, League, Stadium, Team, StadiumDevelopment
 
 
-def stadium_detail(request, id):
+def stadium_detail(request, slug):
     stadium = get_object_or_404(
         Stadium.objects.select_related("city").prefetch_related("teams"),
-        id=id,
+        slug=slug,
     )
     # Back-navigation: ?from_list=<country> when coming from stadium_list,
     # or ?from_list=<country>&from_team_list=1 when coming via team_detail.
@@ -35,6 +35,65 @@ def stadium_detail(request, id):
         "back_country": back_country,
         "from_team_list": bool(from_teams),
         "team_logos_json": json.dumps(team_logos),
+    })
+
+
+def stadium_detail_redirect(request, id):
+    stadium = get_object_or_404(Stadium, pk=id)
+    return redirect("italiastadiaapp:stadium_detail", slug=stadium.slug, permanent=True)
+
+
+def country_stats(request, country_name):
+    stadiums = (
+        Stadium.objects
+        .select_related("city")
+        .prefetch_related("teams__league__country")
+        .filter(city__country__iexact=country_name)
+    )
+    agg = stadiums.filter(capacity__isnull=False).aggregate(
+        total_stadiums=Count("id"),
+        total_seats=Sum("capacity"),
+        avg_capacity=Avg("capacity"),
+        max_capacity=Max("capacity"),
+    )
+    total_stadiums_all = stadiums.count()
+    top10 = (
+        stadiums
+        .filter(capacity__isnull=False)
+        .order_by("-capacity")[:10]
+    )
+    leagues = (
+        League.objects
+        .select_related("country")
+        .filter(country__name__iexact=country_name)
+        .order_by("division_level")
+    )
+    # GeoJSON for mini-map
+    map_features = []
+    for s in stadiums:
+        if s.latitude is None or s.longitude is None:
+            continue
+        map_features.append({
+            "type": "Feature",
+            "geometry": {"type": "Point", "coordinates": [float(s.longitude), float(s.latitude)]},
+            "properties": {
+                "id": s.id,
+                "slug": s.slug or str(s.id),
+                "name": s.name,
+                "capacity": s.capacity,
+            },
+        })
+    geojson = json.dumps({"type": "FeatureCollection", "features": map_features})
+
+    return render(request, "country_stats.html", {
+        "country_name": country_name,
+        "total_stadiums": total_stadiums_all,
+        "total_seats": agg.get("total_seats") or 0,
+        "avg_capacity": int(agg.get("avg_capacity") or 0),
+        "max_capacity": agg.get("max_capacity") or 0,
+        "top10": top10,
+        "leagues": leagues,
+        "geojson": geojson,
     })
 
 def stadium_development_detail(request, pk):
@@ -121,10 +180,15 @@ def _build_stadium_features(qs=None):
             },
             "properties": {
                 "id": s.id,
+                "slug": s.slug or str(s.id),
                 "name": s.name,
                 "city": s.city.name if s.city else "",
                 "country": city_country,
                 "capacity": s.capacity,
+                "year_of_construction": s.year_of_construction,
+                "stadium_type": s.get_stadium_type_display() if s.stadium_type else "",
+                "surface": s.get_surface_display() if s.surface else "",
+                "architect": s.architect or "",
                 "ownership": s.ownership,
                 "owner_raw": s.owner_raw or "",
                 "wikipedia_url": s.wikipedia_url or "",

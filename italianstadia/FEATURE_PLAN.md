@@ -1,83 +1,84 @@
-# Feature Plan — Development Stadiums: Country Filter, GeoJSON Fix, Mobile Bugs
-_Created: 2026-06-13 | Branch: feature/dev-stadiums-country-filter_
+# Feature Plan — Competitor Gap: Quick Wins + Medium Effort
+_Created: 2026-06-13 | Branch: feature/stadium-metadata-and-slug_
 
 ## Problem / Goal
 
-The "Under Development" map mode works for Italy but has four outstanding gaps:
+Comparison with worldstadiumsmap.com revealed several gaps. This plan closes
+all quick wins and medium effort items deferred from that analysis:
 
-1. **No country in GeoJSON** — `stadium_developments_geojson` returns no `country` or `city`
-   field, so the frontend has no data to build a country filter from.
-2. **No country filter in development mode** — once we add European development records,
-   users can't narrow to a country the way they can in operational mode.
-3. **Mobile popup silent** — tapping a development marker on mobile does nothing. The
-   `isMobile` constant is evaluated once at page-load (`window.innerWidth <= 768`). If the
-   device loads at a slightly wider viewport the `openMobileSheet` branch is skipped and
-   `bindPopup` fires instead — but Leaflet's desktop popup is invisible on touch without a
-   map pan. Fix: check viewport width at click-time, not page-load time.
-4. **Mobile mode switch has no labels** — the CSS at `@media (max-width: 991px)` hides both
-   `.mode-label` spans entirely (`display: none`), so the toggle is a mystery slider. Users
-   don't know they're switching between Operational and Under Development.
+- **Slug URLs** — `/stadium/123/` leaks internal IDs; `/stadium/san-siro/` is
+  SEO-friendly and shareable. External links survive DB resets.
+- **Stadium type & surface** — "Open stadium", "Grass" are common reference
+  data competitors show; we store neither.
+- **Year opened in popup** — `year_of_construction` exists in the model but
+  isn't in the GeoJSON or popup, so users have to click through to see it.
+- **Architect field on Stadium** — already on `StadiumDevelopment`; the main
+  `Stadium` model has no equivalent despite Wikipedia having it.
+- **Tournament history** — which major events were hosted is a high-value fact
+  (World Cup groups, Euro finals) that competitors surface; we have nowhere to
+  store it.
+- **Country stats page** — `/country/Italy/` style pages with aggregated totals
+  (stadiums, seats, avg capacity, leagues) improve SEO and discoverability.
 
-Success = development markers expose country in GeoJSON → country filter is populated and
-works → tapping a dev marker on mobile opens the bottom sheet → the mode toggle on mobile
-shows abbreviated labels so the user always knows which mode they are in.
+Success = every stadium has richer metadata visible in the popup and detail
+page; slug URLs are live with redirects from old numeric URLs; a country stats
+page exists for every country with data.
 
 ---
 
 ## Scope
 
 **In scope:**
-- [ ] Add `country` CharField to `StadiumDevelopment` model + migration
-- [ ] Backfill existing 10 Italian records: `country = "Italy"` via data migration
-- [ ] Fix `stadium_developments_geojson`: add `select_related` + `prefetch_related`,
-      expose `country`, `city`, `future_tenants` in properties
-- [ ] Add country filter `<select id="developmentCountryFilter">` to `#developmentFilters`
-      in `index.html`
-- [ ] `map.js` — `updateDevelopmentDropdownOptions()`: populate country dropdown from markers
-- [ ] `map.js` — `applyDevelopmentFilters()`: filter by selected country
-- [ ] `map.js` — store `marker.country` / `marker.city` on each development marker
-- [ ] Fix mobile popup: change per-marker click binding to check `window.innerWidth` at
-      click-time (always `bindPopup`, open sheet inside click handler on mobile)
-- [ ] Fix mobile mode switch: show short labels via `data-short` attribute +
-      CSS `content: attr(data-short)` — "Ops" / "Dev" visible at ≤ 991 px
-- [ ] Clear filters button also resets `developmentCountryFilter`
-- [ ] Update `admin.py` to expose `country` field on `StadiumDevelopment`
-- [ ] Add API test: GeoJSON includes `country` and `future_tenants` in properties
+- [ ] Add `slug`, `stadium_type`, `surface`, `architect`, `tournaments`
+      fields to `Stadium` (one migration, 0041)
+- [ ] Migration RunPython: auto-generate slugs from name, deduplicate
+- [ ] Expose `slug`, `year_of_construction`, `stadium_type`, `surface`,
+      `architect` in GeoJSON (`_build_stadium_features` + static JSON regen)
+- [ ] Add year, type, surface to `buildPopupContent` in map.js; update
+      popup link `/stadium/${props.id}/` → `/stadium/${props.slug}/`
+- [ ] New URL `stadium/<slug:slug>/` + redirect view for old `stadium/<int:id>/`
+- [ ] Update `stadium_detail` view to look up by slug
+- [ ] Update ALL template links that point to stadium_detail
+- [ ] Country stats view + URL + template
+- [ ] Link country headers in `stadium_list.html` to country stats page
+- [ ] Admin: expose new fields on StadiumAdmin
+- [ ] Tests: GeoJSON includes new fields; slug URL resolves; redirect works;
+      country stats page loads
 
-**Out of scope (do not touch):**
-- Entering European development data (separate task)
-- Changes to operational stadiums GeoJSON or filters
-- `StadiumDevelopment` scraper / JSON data pipeline
-- Mobile layout of the filter bar itself
+**Out of scope:**
+- Scraping `stadium_type`, `surface`, `architect` (data entry via admin only for now)
+- `tournaments` data entry (field added, filled manually via admin)
+- Global scope (non-European leagues)
+- Stadium list filter by type or surface (separate feature)
 
 ---
 
 ## Design decisions
 
-1. **`country` as a plain CharField on `StadiumDevelopment`, not derived from `stadium.city.country`**
-   | Alternative: derive from stadium FK → stadium.city.country
-   | Reason: ~40% of development records are NEW builds with no existing stadium FK. A direct
-     `country` field covers all cases and lets us fill it from JSON data files for future records.
-     Nullable so migration is safe.
+1. **Slug on Stadium only** | Alternative: slug on City/League too |
+   Reason: Stadium detail is the only page with a numeric-ID URL that needs
+   fixing now. City and League pages don't have detail URLs yet.
 
-2. **Click-time viewport check (`window.innerWidth <= 768`) instead of `isMobile` constant**
-   | Alternative: re-evaluate `isMobile` with a ResizeObserver
-   | Reason: simpler one-line fix, same pattern operational markers already use at line 1117.
-     ResizeObserver is overkill for a map that rarely resizes mid-session.
+2. **Slug generation: `slugify(name)`, deduplicate with suffix `-2`, `-3`** |
+   Alternative: `slugify(name + "-" + city)` | Reason: shorter URLs; city
+   suffix only added on collision (rare — most stadium names are unique).
 
-3. **`bindPopup` always; decide sheet vs popup inside the click handler**
-   | Alternative: only bind one or the other based on viewport at creation time
-   | Reason: ensures desktop fallback (Leaflet popup) is always wired even if width changes;
-     keeps the code symmetric with how operational markers work.
+3. **Keep `stadium/<int:id>/` as permanent redirect (301)** | Alternative:
+   remove old URL | Reason: external links, Transfermarkt backlinks, and any
+   bookmarks all reference numeric IDs. Redirect costs nothing.
 
-4. **`data-short` attribute + CSS `::before` for abbreviated mobile labels**
-   | Alternative: JavaScript that swaps label text on resize
-   | Reason: pure CSS, no JS, no layout shift. "Ops" and "Dev" fit on any phone navbar.
+4. **`stadium_type` and `surface` as CharField with choices, null=True** |
+   Alternative: separate lookup tables | Reason: the set of valid values is
+   small and stable; CharField choices avoids an extra join and model.
 
-5. **Expose `future_tenants` as array of `{id, name, image_url}` in GeoJSON**
-   | Alternative: comma-separated team name string
-   | Reason: popup can render team badge images with minimal extra effort, consistent with
-     the richness of the operational mode popup.
+5. **`tournaments` as JSONField `[{tournament, year, status, matches}]`** |
+   Alternative: M2M to a Tournament model | Reason: data is sparse; JSONField
+   lets admin fill it freely. Status values: `"CONFIRMED"` or `"CANDIDATE"`.
+   Primary use-case: UEFA Euro 2028 and 2032 hosting bids/confirmations.
+
+6. **Country stats at `/country/<country_name>/`** | Alternative:
+   `/stats/country/<country_name>/` | Reason: mirrors worldstadiumsmap.com
+   `/country/se` pattern; shorter, more discoverable.
 
 ---
 
@@ -85,135 +86,157 @@ shows abbreviated labels so the user always knows which mode they are in.
 
 | File | Change type | Why |
 |------|-------------|-----|
-| `italiastadiaapp/models.py` | Edit | Add `country` CharField to `StadiumDevelopment` |
-| `italiastadiaapp/migrations/0039_…py` | New | Migration for new field + backfill data |
-| `italiastadiaapp/views.py` | Edit | Fix geojson: select_related, new properties |
-| `italiastadiaapp/admin.py` | Edit | Expose `country` in admin list/form |
-| `italiastadiaapp/templates/index.html` | Edit | Country filter select + mobile label fix |
-| `italiastadiaapp/static/js/map.js` | Edit | Country filter logic + mobile popup fix |
-| `italiastadiaapp/tests/test_api.py` | Edit | Assert new GeoJSON properties |
+| `italiastadiaapp/models.py` | Edit | Add slug, stadium_type, surface, architect, tournaments |
+| `italiastadiaapp/migrations/0041_…py` | New | Migration + RunPython slug backfill |
+| `italiastadiaapp/views.py` | Edit | slug lookup; new country_stats + redirect views |
+| `italiastadiaapp/urls.py` | Edit | Slug URL, redirect URL, country stats URL |
+| `italiastadiaapp/admin.py` | Edit | Expose new Stadium fields |
+| `italiastadiaapp/static/js/map.js` | Edit | Popup year/type/surface; link uses slug |
+| `italiastadiaapp/templates/stadium_detail.html` | Edit | Show architect, type, surface, tournaments |
+| `italiastadiaapp/templates/stadium_list.html` | Edit | Country headers → /country/X/ links |
+| `italiastadiaapp/templates/country_stats.html` | New | Country aggregated stats page |
+| `italiastadiaapp/tests/test_api.py` | Edit | New GeoJSON fields; slug URL; redirect |
+| `italiastadiaapp/tests/test_views.py` | Edit | Country stats page loads |
 
 ---
 
 ## Implementation steps
 
-1. [ ] **Model** — add `country = models.CharField(max_length=255, null=True, blank=True)`
-       to `StadiumDevelopment` in `models.py`
+### Phase A — Model & migration
+1. [ ] `models.py`: add to `Stadium`:
+   ```python
+   slug         = models.SlugField(max_length=255, unique=True, blank=True)
+   stadium_type = models.CharField(max_length=30, null=True, blank=True,
+                    choices=[("OPEN","Open"),("CLOSED","Closed"),
+                             ("RETRACTABLE","Retractable roof"),("INDOOR","Indoor")])
+   surface      = models.CharField(max_length=20, null=True, blank=True,
+                    choices=[("GRASS","Grass"),("ARTIFICIAL","Artificial"),("HYBRID","Hybrid")])
+   architect    = models.CharField(max_length=255, null=True, blank=True)
+   tournaments  = models.JSONField(default=list, blank=True)
+   ```
 
-2. [ ] **Migration** — `python manage.py makemigrations` → auto-generates field addition;
-       add a `RunPython` step in the same migration to backfill `country = "Italy"` on all
-       10 existing records (pk 1–10)
+2. [ ] `python manage.py makemigrations --name add_stadium_metadata_and_slug`
 
-3. [ ] **Admin** — add `country` to `list_display` and fieldset in `admin.py`
+3. [ ] Patch migration with RunPython slug backfill:
+   ```python
+   from django.utils.text import slugify
+   def backfill_slugs(apps, schema_editor):
+       Stadium = apps.get_model("italiastadiaapp", "Stadium")
+       seen = {}
+       for s in Stadium.objects.order_by("id"):
+           base = slugify(s.name) or f"stadium-{s.id}"
+           slug, n = base, 2
+           while slug in seen:
+               slug = f"{base}-{n}"; n += 1
+           seen[slug] = True
+           s.slug = slug
+           s.save(update_fields=["slug"])
+   ```
 
-4. [ ] **GeoJSON view** — update `stadium_developments_geojson` in `views.py`:
-       - Query: `StadiumDevelopment.objects.select_related("stadium__city").prefetch_related("future_tenants")`
-       - Derive country: `s.country or (s.stadium.city.country if s.stadium and s.stadium.city else "")`
-       - Derive city name: `(s.stadium.city.name if s.stadium and s.stadium.city else "")`
-       - Add to properties: `country`, `city`,
-         `future_tenants: [{"id": t.id, "name": t.name, "image_url": t.image_url or ""} for t in s.future_tenants.all()]`
+### Phase B — Admin
+4. [ ] `admin.py`: add `slug`, `stadium_type`, `surface`, `architect`,
+       `tournaments` to `StadiumAdmin`; set
+       `prepopulated_fields = {"slug": ("name",)}`.
 
-5. [ ] **Template — country filter** — add inside `#developmentFilters` in `index.html`:
-       ```html
-       <select id="developmentCountryFilter" class="form-select form-select-sm">
-           <option value="">All countries</option>
-       </select>
-       ```
+### Phase C — GeoJSON
+5. [ ] `views.py` `_build_stadium_features`: add to properties:
+   ```python
+   "slug":                 s.slug or str(s.id),
+   "year_of_construction": s.year_of_construction,
+   "stadium_type":         s.get_stadium_type_display() if s.stadium_type else "",
+   "surface":              s.get_surface_display() if s.surface else "",
+   "architect":            s.architect or "",
+   ```
+   (The static JSON command re-uses `_build_stadium_features` so it picks
+   up these additions automatically — verify, no separate edit needed.)
 
-6. [ ] **Template — mobile labels** — add `data-short` attributes to `.mode-label` spans:
-       ```html
-       <span id="operationalLabel" class="mode-label active" data-short="Ops">Operational</span>
-       <span id="developmentLabel" class="mode-label" data-short="Dev">Under Development</span>
-       ```
-       Replace the existing `@media (max-width: 991px)` label rule with:
-       ```css
-       .mode-switch-wrap .mode-label { font-size: 0; }
-       .mode-switch-wrap .mode-label::before {
-           content: attr(data-short);
-           font-size: 12px;
-       }
-       ```
+### Phase D — Popup (map.js)
+6. [ ] `buildPopupContent` (line 517): add after `Capacity` line:
+   ```javascript
+   ${props.year_of_construction ? `<strong>Opened:</strong> ${props.year_of_construction}<br>` : ""}
+   ${props.stadium_type         ? `<strong>Type:</strong> ${props.stadium_type}<br>` : ""}
+   ${props.surface              ? `<strong>Surface:</strong> ${props.surface}<br>` : ""}
+   ```
+7. [ ] Change popup `href` (line 528):
+   `"/stadium/${props.id}/"` → `"/stadium/${props.slug || props.id}/"`
 
-7. [ ] **map.js — grab DOM ref** — add at top-level with other filter refs:
-       ```javascript
-       const developmentCountryFilter = document.getElementById("developmentCountryFilter");
-       ```
+### Phase E — URLs & views
+8. [ ] `urls.py`: replace old numeric URL, add slug + redirect + country stats:
+   ```python
+   path("stadium/<slug:slug>/",  stadium_detail,          name="stadium_detail"),
+   path("stadium/<int:id>/",     stadium_detail_redirect,  name="stadium_detail_by_id"),
+   path("country/<str:country_name>/", country_stats,     name="country_stats"),
+   ```
 
-8. [ ] **map.js — marker data** — in `data.features.forEach`, store on each marker:
-       ```javascript
-       marker.country = props.country || "";
-       marker.city    = props.city    || "";
-       ```
+9. [ ] `views.py` — change `stadium_detail` lookup to `slug=slug`.
 
-9. [ ] **map.js — mobile popup fix** — replace the `if (isMobile) { … } else { … }` block
-       for development markers with:
-       ```javascript
-       marker.bindPopup(popupContent, {
-           maxWidth: 260, minWidth: 220,
-           autoPan: true, autoPanPadding: [20, 20], closeButton: true
-       });
-       marker.on("click", function () {
-           if (window.innerWidth <= 768) openMobileSheet(popupContent);
-       });
-       ```
+10. [ ] `views.py` — add `stadium_detail_redirect`:
+    ```python
+    def stadium_detail_redirect(request, id):
+        s = get_object_or_404(Stadium, pk=id)
+        return redirect("italiastadiaapp:stadium_detail", slug=s.slug, permanent=True)
+    ```
 
-10. [ ] **map.js — `updateDevelopmentDropdownOptions()`** — populate country dropdown:
-        ```javascript
-        const countries = [...new Set(
-            developmentMarkers.map(m => m.country).filter(Boolean)
-        )].sort();
-        developmentCountryFilter.innerHTML = `<option value="">All countries</option>`;
-        countries.forEach(c => {
-            const opt = document.createElement("option");
-            opt.value = opt.textContent = c;
-            developmentCountryFilter.appendChild(opt);
-        });
-        ```
+11. [ ] `views.py` — add `country_stats` view: aggregate total stadiums,
+        total seats (sum of capacity), avg capacity, max capacity, leagues
+        present, top 10 by capacity for that country.
 
-11. [ ] **map.js — `applyDevelopmentFilters()`** — add country matching:
-        ```javascript
-        const selectedCountry = developmentCountryFilter.value;
-        // inside the forEach on developmentMarkers:
-        const countryMatches = !selectedCountry || marker.country === selectedCountry;
-        // include countryMatches in the combined visible check
-        ```
+### Phase F — Templates
+12. [ ] `stadium_detail.html`: add architect, type, surface row to the
+        existing data table; add tournaments section below (hidden when empty).
 
-12. [ ] **map.js — clear filters** — reset `developmentCountryFilter.value = ""`
-        in the clear-filters handler (alongside status/year/stadium resets)
+13. [ ] `stadium_list.html`: wrap each country `<h2>` in
+        `<a href="{% url 'italiastadiaapp:country_stats' section.league.country.name %}">`.
 
-13. [ ] **map.js — filter event listener** — add:
-        ```javascript
-        developmentCountryFilter.addEventListener("change", applyDevelopmentFilters);
-        ```
+14. [ ] `country_stats.html` (new): country name + flag, 4 stat cards
+        (stadiums, total seats, avg capacity, max capacity), mini Leaflet map
+        of that country's stadiums (reuses stadium coordinates from GeoJSON),
+        top-10 table by capacity, leagues list, back-to-map link.
 
-14. [ ] **Tests** — in `test_api.py`, add assertions to the development GeoJSON test:
-        - response features[0].properties contains `country`, `city`, `future_tenants`
-        - `future_tenants` is a list (can be empty)
+15. [ ] Update any other template links (`team_detail.html`,
+        `team_list.html`, `stadium_development_detail.html`) that use
+        `{% url 'italiastadiaapp:stadium_detail' stadium.id %}` →
+        `{% url 'italiastadiaapp:stadium_detail' stadium.slug %}`.
+
+### Phase G — Tests
+16. [ ] `test_api.py`:
+        - GeoJSON features contain `slug`, `year_of_construction`,
+          `stadium_type`, `surface`, `architect`
+        - `GET /stadium/<slug>/` → 200
+        - `GET /stadium/<int:id>/` → 301, Location header contains slug URL
+
+17. [ ] `test_views.py`:
+        - `GET /country/Italy/` → 200
+        - Response context contains `total_stadiums`, `total_seats`
 
 ---
 
 ## PostgreSQL safety check
 
-- [x] `country` CharField max_length=255 — adequate for any country name
+- [x] `slug` SlugField(max_length=255), unique=True — safe, implicit index
+- [x] `stadium_type` CharField(max_length=30) — adequate for choice labels
+- [x] `surface` CharField(max_length=20) — adequate
+- [x] `architect` CharField(max_length=255) — adequate for scraped names
+- [x] `tournaments` JSONField(default=list) — no size limit, no IntegrityError
+- [x] All new fields null=True or have default — no IntegrityError on migrate
 - [x] No SmallIntegerField introduced
-- [x] New field is `null=True, blank=True` — safe, no default required, existing rows get NULL then backfilled
-- [x] No new FK fields
 
 ---
 
 ## Test plan
 
-- `pytest italiastadiaapp/tests/test_api.py -v -k development` — new assertions pass
-- Manual desktop: switch to dev mode → click marker → Leaflet popup appears with project info
-- Manual mobile (DevTools ≤ 768 px): switch to dev mode → tap marker → bottom sheet opens
-- Manual mobile: look at navbar toggle → see "Ops" and "Dev" labels on each side
-- Manual: select "Italy" in country filter → all 10 markers remain; clear filter → all back
-- Manual: check clear-filters button resets the country dropdown
+- `pytest italiastadiaapp/tests/ -v` — full suite green (currently 39 tests)
+- Manual: `/stadium/san-siro/` loads the stadium detail page
+- Manual: old `/stadium/1/` → 301 redirect to `/stadium/san-siro/`
+- Manual: map popup shows "Opened: 1926" for San Siro
+- Manual: `/country/Italy/` shows aggregated stats with correct counts
+- Manual: country header in stadium list is now a clickable link
 
 ---
 
 ## Rollback plan
 
-- Migration rollback: `python manage.py migrate italiastadiaapp 0038_add_lastrefresh`
-  (removes the `country` column; safe — nullable with no dependent FKs)
-- JS/template rollback: `git revert` the single commit — no DB changes involved
+- Migration: `python manage.py migrate italiastadiaapp 0040_alter_league_name_…`
+  (removes slug + all metadata columns; safe — all nullable or have default)
+- JS: `git revert` the popup commit — no DB changes
+- URLs: restore old `path("stadium/<int:id>/", stadium_detail, ...)` pattern

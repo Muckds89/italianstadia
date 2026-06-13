@@ -1,0 +1,161 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ country_name }} Stadiums — Stadiums of Europe</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+    body { padding-top: 56px; }
+    .stat-card { border-left: 4px solid #0d6efd; }
+    #country-map { height: 420px; width: 100%; border-radius: 8px; }
+    @media (max-width: 767px) { #country-map { height: 260px; } }
+    .top-rank { font-size: 0.8em; color: #6c757d; width: 28px; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-light bg-white shadow-sm fixed-top px-3">
+    <a href="{% url 'italiastadiaapp:stadium_list' %}?country={{ country_name|urlencode }}" class="btn btn-secondary btn-sm">← Stadiums</a>
+    <span class="navbar-brand mb-0 ms-2 h6">{{ country_name }}</span>
+    <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-outline-secondary btn-sm ms-auto">Map</a>
+</nav>
+
+<div class="container mt-4">
+
+    <h1 class="mb-1">{{ country_name }}</h1>
+    <p class="text-muted mb-4">Football stadium statistics</p>
+
+    <!-- Stat cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+            <div class="card stat-card h-100 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small">Stadiums</div>
+                    <div class="fs-3 fw-bold">{{ total_stadiums }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card stat-card h-100 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small">Total seats</div>
+                    <div class="fs-3 fw-bold">{{ total_seats|floatformat:"0" }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card stat-card h-100 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small">Avg capacity</div>
+                    <div class="fs-3 fw-bold">{{ avg_capacity|floatformat:"0" }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card stat-card h-100 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small">Largest stadium</div>
+                    <div class="fs-3 fw-bold">{{ max_capacity|floatformat:"0" }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mini map -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header"><strong>Stadiums map</strong></div>
+        <div class="card-body p-0">
+            <div id="country-map"></div>
+        </div>
+    </div>
+
+    <!-- Top 10 table -->
+    {% if top10 %}
+    <div class="card shadow-sm mb-4">
+        <div class="card-header"><strong>Largest stadiums</strong></div>
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="top-rank">#</th>
+                        <th>Stadium</th>
+                        <th>City</th>
+                        <th class="text-end">Capacity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in top10 %}
+                    <tr>
+                        <td class="top-rank text-muted">{{ forloop.counter }}</td>
+                        <td><a href="{% url 'italiastadiaapp:stadium_detail' s.slug %}">{{ s.name }}</a></td>
+                        <td class="text-muted">{{ s.city.name }}</td>
+                        <td class="text-end">{{ s.capacity|floatformat:"0" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Leagues -->
+    {% if leagues %}
+    <div class="card shadow-sm mb-4">
+        <div class="card-header"><strong>Leagues</strong></div>
+        <ul class="list-group list-group-flush">
+            {% for league in leagues %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ league.name }}
+                <span class="badge bg-secondary">Div {{ league.division_level }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+    const geojson = {{ geojson|safe }};
+    const map = L.map("country-map");
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap contributors",
+        maxZoom: 18,
+    }).addTo(map);
+
+    const bounds = [];
+    geojson.features.forEach(function (f) {
+        const [lng, lat] = f.geometry.coordinates;
+        const props = f.properties;
+        const circle = L.circleMarker([lat, lng], {
+            radius: 6,
+            color: "#0d6efd",
+            fillColor: "#0d6efd",
+            fillOpacity: 0.7,
+            weight: 1.5,
+        }).addTo(map);
+        circle.bindTooltip(props.name, { permanent: false, direction: "top" });
+        circle.on("click", function () {
+            window.location.href = "/stadium/" + props.slug + "/";
+        });
+        bounds.push([lat, lng]);
+    });
+
+    if (bounds.length > 0) {
+        map.fitBounds(bounds, { padding: [20, 20] });
+    } else {
+        map.setView([48, 15], 4);
+    }
+})();
+</script>
+</body>
+</html>

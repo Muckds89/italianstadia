@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 
 class Country(models.Model):
@@ -64,6 +65,29 @@ class Stadium(models.Model):
         default="UNKNOWN"
     )
 
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
+
+    stadium_type = models.CharField(
+        max_length=30, null=True, blank=True,
+        choices=[
+            ("OPEN", "Open"),
+            ("CLOSED", "Closed"),
+            ("RETRACTABLE", "Retractable roof"),
+            ("INDOOR", "Indoor"),
+        ],
+    )
+    surface = models.CharField(
+        max_length=20, null=True, blank=True,
+        choices=[
+            ("GRASS", "Grass"),
+            ("ARTIFICIAL", "Artificial"),
+            ("HYBRID", "Hybrid"),
+        ],
+    )
+    architect = models.CharField(max_length=255, null=True, blank=True)
+    # List of {tournament, year, status["CONFIRMED"|"CANDIDATE"], matches}
+    tournaments = models.JSONField(default=list, blank=True)
+
     wikipedia_url = models.URLField(max_length=500, blank=True, null=True)
     transfermarkt_url = models.URLField(max_length=500, blank=True, null=True)
 
@@ -72,6 +96,17 @@ class Stadium(models.Model):
     # Gallery: list of {"url": str, "credit": str} dicts scraped from Wikimedia Commons
     extra_images = models.JSONField(default=list, blank=True)
     description = models.TextField(blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base = slugify(self.name) or f"stadium-{self.pk or 0}"
+            slug = base
+            n = 2
+            while Stadium.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base}-{n}"
+                n += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name

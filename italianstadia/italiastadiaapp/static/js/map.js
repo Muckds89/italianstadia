@@ -519,13 +519,16 @@ function buildPopupContent(props) {
             <strong>${props.name}</strong><br>
             ${props.city}<br>
             <strong>Capacity:</strong> ${props.capacity || "Unknown"}<br>
+            ${props.year_of_construction ? `<strong>Opened:</strong> ${props.year_of_construction}<br>` : ""}
+            ${props.stadium_type         ? `<strong>Type:</strong> ${props.stadium_type}<br>` : ""}
+            ${props.surface              ? `<strong>Surface:</strong> ${props.surface}<br>` : ""}
             <strong>Ownership:</strong> ${props.ownership || "Unknown"}<br>
             ${props.owner_raw ? `<small>Owner: ${props.owner_raw}</small><br>` : ""}
             <hr style="margin:6px 0">
             ${logoStrip}
             ${teamPanels}
             <hr style="margin:6px 0">
-            <a href="/stadium/${props.id}/">View stadium details</a>
+            <a href="/stadium/${props.slug || props.id}/">View stadium details</a>
             ${props.wikipedia_url    ? `<br><a href="${props.wikipedia_url}" target="_blank">Stadium Wikipedia</a>` : ""}
             ${props.transfermarkt_url ? `<br><a href="${props.transfermarkt_url}" target="_blank">Stadium Transfermarkt</a>` : ""}
         </div>

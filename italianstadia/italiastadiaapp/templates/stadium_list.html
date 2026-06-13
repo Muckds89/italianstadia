@@ -129,7 +129,9 @@
                     <h2 class="mb-1">
                         {% if section.flag_code %}<span class="fi fi-{{ section.flag_code }}"></span> {% endif %}{{ section.league_label }}
                         {% if section.league %}
-                            <small class="text-muted fs-6">({{ section.league.country.name }})</small>
+                            <small class="text-muted fs-6">
+                                (<a href="{% url 'italiastadiaapp:country_stats' section.league.country.name %}" class="text-muted">{{ section.league.country.name }}</a>)
+                            </small>
                         {% endif %}
                     </h2>
                     <p class="text-muted mb-0">Ordered by capacity, largest first.</p>
@@ -155,7 +157,7 @@
                                 {% if stadium.capacity %}{{ stadium.capacity }}{% else %}Unknown{% endif %}
                             </p>
 
-                            <a href="{% url 'italiastadiaapp:stadium_detail' stadium.id %}?from_list={{ selected_country|urlencode }}"
+                            <a href="{% url 'italiastadiaapp:stadium_detail' stadium.slug %}?from_list={{ selected_country|urlencode }}"
                                class="btn btn-primary btn-sm">View details</a>
                         </div>
                     </div>
