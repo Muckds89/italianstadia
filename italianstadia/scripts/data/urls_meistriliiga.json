@@ -1,0 +1,177 @@
+{
+  "league": {
+    "name": "Meistriliiga",
+    "country": "Estonia",
+    "country_code": "EE",
+    "division_level": 1,
+    "season": "2025"
+  },
+  "teams": [
+    {
+      "name": "FCI Levadia",
+      "transfermarkt_url": "https://www.transfermarkt.com/fci-levadia/startseite/verein/5771",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fci-levadia/besucherzahlenentwicklung/verein/5771",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FCI_Levadia",
+      "stadium": {
+        "name": "A. Le Coq Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/fci-levadia/stadion/verein/5771/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/A._Le_Coq_Arena",
+        "city": {
+          "name": "Tallinn",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tallinn"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Flora Tallinn",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-flora-tallinn/startseite/verein/1002",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-flora-tallinn/besucherzahlenentwicklung/verein/1002",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Flora_Tallinn",
+      "stadium": {
+        "name": "A. Le Coq Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-flora-tallinn/stadion/verein/1002/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/A._Le_Coq_Arena",
+        "city": {
+          "name": "Tallinn",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tallinn"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Kalju FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/kalju-fc/startseite/verein/22783",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kalju-fc/besucherzahlenentwicklung/verein/22783",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/N%C3%B5mme_Kalju_FC",
+      "stadium": {
+        "name": "Hiiu Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/kalju-fc/stadion/verein/22783/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Hiiu_Stadium",
+        "owner_raw": "Tallinn City Municipality",
+        "city": {
+          "name": "Tallinn",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tallinn"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Paide Linnameeskond",
+      "transfermarkt_url": "https://www.transfermarkt.com/paide-linnameeskond/startseite/verein/23371",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/paide-linnameeskond/besucherzahlenentwicklung/verein/23371",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Paide_Linnameeskond",
+      "stadium": {
+        "name": "Paide linnastaadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/paide-linnameeskond/stadion/verein/23371/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Paide_linnastaadion",
+        "owner_raw": "Paide City Municipality",
+        "city": {
+          "name": "Paide",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Paide"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Pärnu JK Vaprus",
+      "transfermarkt_url": "https://www.transfermarkt.com/parnu-jk-vaprus/startseite/verein/33579",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/parnu-jk-vaprus/besucherzahlenentwicklung/verein/33579",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/P%C3%A4rnu_JK_Vaprus",
+      "stadium": {
+        "name": "Pärnu Rannastaadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/parnu-jk-vaprus/stadion/verein/33579/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/P%C3%A4rnu",
+        "owner_raw": "Pärnu City Municipality",
+        "city": {
+          "name": "Pärnu",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/P%C3%A4rnu"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "JK Narva Trans",
+      "transfermarkt_url": "https://www.transfermarkt.com/jk-trans-narva/startseite/verein/7130",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/jk-trans-narva/besucherzahlenentwicklung/verein/7130",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/JK_Narva_Trans",
+      "stadium": {
+        "name": "Narva Kalev-Fama Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/jk-trans-narva/stadion/verein/7130/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Narva_Kalev-Fama_Stadium",
+        "city": {
+          "name": "Narva",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Narva"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Harju JK Laagri",
+      "transfermarkt_url": "https://www.transfermarkt.com/harju-jk-laagri/startseite/verein/48277",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/harju-jk-laagri/besucherzahlenentwicklung/verein/48277",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Harju_JK_Laagri",
+      "stadium": {
+        "name": "Laagri Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/harju-jk-laagri/stadion/verein/48277/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Laagri_Stadium",
+        "city": {
+          "name": "Laagri",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Laagri"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Jalgpallikool Tammeka",
+      "transfermarkt_url": "https://www.transfermarkt.com/jalgpallikool-tammeka/startseite/verein/43214",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/jalgpallikool-tammeka/besucherzahlenentwicklung/verein/43214",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Tartu_JK_Tammeka",
+      "stadium": {
+        "name": "Tamme Staadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/jalgpallikool-tammeka/stadion/verein/43214/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tartu",
+        "owner_raw": "Tartu City Municipality",
+        "city": {
+          "name": "Tartu",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tartu"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Kalev Tallinn",
+      "transfermarkt_url": "https://www.transfermarkt.com/kalev-tallinn/startseite/verein/23370",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kalev-tallinn/besucherzahlenentwicklung/verein/23370",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/JK_Tallinna_Kalev",
+      "stadium": {
+        "name": "Kadrioru Staadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/kalev-tallinn/stadion/verein/23370/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kadriorg_Stadium",
+        "owner_raw": "Tallinn City Municipality",
+        "city": {
+          "name": "Tallinn",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tallinn"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Kuressaare",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-kuressaare/startseite/verein/23368",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-kuressaare/besucherzahlenentwicklung/verein/23368",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Kuressaare",
+      "stadium": {
+        "name": "Kuressaare linnastaadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-kuressaare/stadion/verein/23368/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kuressaare_linnastaadion",
+        "owner_raw": "Saaremaa Municipality",
+        "city": {
+          "name": "Kuressaare",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kuressaare"
+        }
+      },
+      "girone": null
+    }
+  ]
+}

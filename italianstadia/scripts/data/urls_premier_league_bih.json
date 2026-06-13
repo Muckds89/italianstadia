@@ -1,0 +1,171 @@
+{
+  "league": {
+    "name": "Premier League of Bosnia and Herzegovina",
+    "country": "Bosnia and Herzegovina",
+    "country_code": "BA",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "FK Sarajevo",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-sarajevo/startseite/verein/282",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-sarajevo/besucherzahlenentwicklung/verein/282",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Sarajevo",
+      "stadium": {
+        "name": "Koševo City Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-sarajevo/stadion/verein/282/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ko%C5%A1evo_City_Stadium",
+        "city": {
+          "name": "Sarajevo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sarajevo"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Željezničar Sarajevo",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-zeljeznicar-sarajevo/startseite/verein/2573",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-zeljeznicar-sarajevo/besucherzahlenentwicklung/verein/2573",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_%C5%BDeljezni%C4%8Dar_Sarajevo",
+      "stadium": {
+        "name": "Stadion Grbavica",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-zeljeznicar-sarajevo/stadion/verein/2573/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Grbavica",
+        "city": {
+          "name": "Sarajevo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sarajevo"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "HŠK Zrinjski Mostar",
+      "transfermarkt_url": "https://www.transfermarkt.com/hsk-zrinjski-mostar/startseite/verein/6808",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hsk-zrinjski-mostar/besucherzahlenentwicklung/verein/6808",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/H%C5%A0K_Zrinjski_Mostar",
+      "stadium": {
+        "name": "Stadion pod Bijelim Brijegom",
+        "transfermarkt_url": "https://www.transfermarkt.com/hsk-zrinjski-mostar/stadion/verein/6808/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_pod_Bijelim_Brijegom",
+        "city": {
+          "name": "Mostar",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Mostar"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Velež Mostar",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-velez-mostar/startseite/verein/628",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-velez-mostar/besucherzahlenentwicklung/verein/628",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Vele%C5%BE_Mostar",
+      "stadium": {
+        "name": "Stadion Rođeni",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-velez-mostar/stadion/verein/628/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Ro%C4%91eni",
+        "city": {
+          "name": "Mostar",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Mostar"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "NK Široki Brijeg",
+      "transfermarkt_url": "https://www.transfermarkt.com/nk-siroki-brijeg/startseite/verein/1242",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nk-siroki-brijeg/besucherzahlenentwicklung/verein/1242",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NK_%C5%A0iroki_Brijeg",
+      "stadium": {
+        "name": "Stadion Pecara",
+        "transfermarkt_url": "https://www.transfermarkt.com/nk-siroki-brijeg/stadion/verein/1242/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Pecara",
+        "city": {
+          "name": "Široki Brijeg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%A0iroki_Brijeg"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Borac Banja Luka",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-borac-banja-luka/startseite/verein/3900",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-borac-banja-luka/besucherzahlenentwicklung/verein/3900",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Borac_Banja_Luka",
+      "stadium": {
+        "name": "Banja Luka City Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-borac-banja-luka/stadion/verein/3900/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Banja_Luka_City_Stadium",
+        "city": {
+          "name": "Banja Luka",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Banja_Luka"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Radnik Bijeljina",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-radnik-bijeljina/startseite/verein/11040",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-radnik-bijeljina/besucherzahlenentwicklung/verein/11040",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Radnik_Bijeljina",
+      "stadium": {
+        "name": "Bijeljina City Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-radnik-bijeljina/stadion/verein/11040/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bijeljina_City_Stadium",
+        "city": {
+          "name": "Bijeljina",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bijeljina"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Rudar Prijedor",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-rudar-prijedor/startseite/verein/24197",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-rudar-prijedor/besucherzahlenentwicklung/verein/24197",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Rudar_Prijedor",
+      "stadium": {
+        "name": "Gradski stadion Prijedor",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-rudar-prijedor/stadion/verein/24197/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gradski_stadion_(Prijedor)",
+        "city": {
+          "name": "Prijedor",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Prijedor"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "HŠK Posušje",
+      "transfermarkt_url": "https://www.transfermarkt.com/hsk-posusje/startseite/verein/1014",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hsk-posusje/besucherzahlenentwicklung/verein/1014",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/H%C5%A0K_Posu%C5%A1je",
+      "stadium": {
+        "name": "Mokri Dolac",
+        "transfermarkt_url": "https://www.transfermarkt.com/hsk-posusje/stadion/verein/1014/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Mokri_Dolac_Stadium",
+        "city": {
+          "name": "Posušje",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Posu%C5%A1je"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Sloga Meridian Doboj",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-sloga-doboj/startseite/verein/7569",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-sloga-doboj/besucherzahlenentwicklung/verein/7569",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Sloga_Doboj",
+      "stadium": {
+        "name": "Luke Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-sloga-doboj/stadion/verein/7569/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Luke_Stadium",
+        "city": {
+          "name": "Doboj",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Doboj"
+        }
+      },
+      "girone": null
+    }
+  ]
+}

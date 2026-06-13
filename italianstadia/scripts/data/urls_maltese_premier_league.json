@@ -1,0 +1,203 @@
+{
+  "league": {
+    "name": "Maltese Premier League",
+    "country": "Malta",
+    "country_code": "MT",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Hibernians FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/hibernians-fc/startseite/verein/4174",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hibernians-fc/besucherzahlenentwicklung/verein/4174",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Hibernians_F.C.",
+      "stadium": {
+        "name": "Tony Bezzina Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/hibernians-fc/stadion/verein/4174/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tony_Bezzina_Stadium",
+        "city": {
+          "name": "Paola",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Paola,_Malta"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Ħamrun Spartans",
+      "transfermarkt_url": "https://www.transfermarkt.com/hamrun-spartans/startseite/verein/4175",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hamrun-spartans/besucherzahlenentwicklung/verein/4175",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/%C4%A6amrun_Spartans_F.C.",
+      "stadium": {
+        "name": "Victor Tedesco Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/hamrun-spartans/stadion/verein/4175/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Victor_Tedesco_Stadium",
+        "city": {
+          "name": "Ħamrun",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/%C4%A6amrun"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Valletta FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/valletta-fc/startseite/verein/4178",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/valletta-fc/besucherzahlenentwicklung/verein/4178",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Valletta_F.C.",
+      "stadium": {
+        "name": "Ta' Qali National Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/valletta-fc/stadion/verein/4178/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali_National_Stadium",
+        "city": {
+          "name": "Ta' Qali",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Birkirkara FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/birkirkara-fc/startseite/verein/4176",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/birkirkara-fc/besucherzahlenentwicklung/verein/4176",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Birkirkara_F.C.",
+      "stadium": {
+        "name": "Ta' Qali National Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/birkirkara-fc/stadion/verein/4176/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali_National_Stadium",
+        "city": {
+          "name": "Ta' Qali",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Floriana FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/floriana-fc/startseite/verein/4177",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/floriana-fc/besucherzahlenentwicklung/verein/4177",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Floriana_F.C.",
+      "stadium": {
+        "name": "Ta' Qali National Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/floriana-fc/stadion/verein/4177/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali_National_Stadium",
+        "city": {
+          "name": "Ta' Qali",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Sliema Wanderers",
+      "transfermarkt_url": "https://www.transfermarkt.com/sliema-wanderers/startseite/verein/4179",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sliema-wanderers/besucherzahlenentwicklung/verein/4179",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sliema_Wanderers_F.C.",
+      "stadium": {
+        "name": "Ta' Qali National Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/sliema-wanderers/stadion/verein/4179/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali_National_Stadium",
+        "city": {
+          "name": "Ta' Qali",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Mosta FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/mosta-fc/startseite/verein/16699",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/mosta-fc/besucherzahlenentwicklung/verein/16699",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Mosta_F.C.",
+      "stadium": {
+        "name": "Ta' Qali National Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/mosta-fc/stadion/verein/16699/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali_National_Stadium",
+        "city": {
+          "name": "Ta' Qali",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Gżira United",
+      "transfermarkt_url": "https://www.transfermarkt.com/gzira-united/startseite/verein/20416",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gzira-united/besucherzahlenentwicklung/verein/20416",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/G%C5%BCira_United_F.C.",
+      "stadium": {
+        "name": "Ta' Qali National Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/gzira-united/stadion/verein/20416/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali_National_Stadium",
+        "city": {
+          "name": "Ta' Qali",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Naxxar Lions",
+      "transfermarkt_url": "https://www.transfermarkt.com/naxxar-lions/startseite/verein/22043",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/naxxar-lions/besucherzahlenentwicklung/verein/22043",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Naxxar_Lions_F.C.",
+      "stadium": {
+        "name": "Ta' Qali National Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/naxxar-lions/stadion/verein/22043/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali_National_Stadium",
+        "city": {
+          "name": "Ta' Qali",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Tarxien Rainbows",
+      "transfermarkt_url": "https://www.transfermarkt.com/tarxien-rainbows/startseite/verein/4184",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/tarxien-rainbows/besucherzahlenentwicklung/verein/4184",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Tarxien_Rainbows_F.C.",
+      "stadium": {
+        "name": "Ta' Qali National Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/tarxien-rainbows/stadion/verein/4184/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali_National_Stadium",
+        "city": {
+          "name": "Ta' Qali",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Marsaxlokk FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/marsaxlokk-fc/startseite/verein/20837",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/marsaxlokk-fc/besucherzahlenentwicklung/verein/20837",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Marsaxlokk_F.C.",
+      "stadium": {
+        "name": "Ta' Qali National Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/marsaxlokk-fc/stadion/verein/20837/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali_National_Stadium",
+        "city": {
+          "name": "Ta' Qali",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Żabbar St. Patrick",
+      "transfermarkt_url": "https://www.transfermarkt.com/zabbar-st-patrick/startseite/verein/35832",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/zabbar-st-patrick/besucherzahlenentwicklung/verein/35832",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%BBabbar_St._Patrick_F.C.",
+      "stadium": {
+        "name": "Ta' Qali National Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/zabbar-st-patrick/stadion/verein/35832/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali_National_Stadium",
+        "city": {
+          "name": "Ta' Qali",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ta%27_Qali"
+        }
+      },
+      "girone": null
+    }
+  ]
+}

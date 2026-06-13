@@ -1,0 +1,210 @@
+{
+  "league": {
+    "name": "Besta deild karla",
+    "country": "Iceland",
+    "country_code": "IS",
+    "division_level": 1,
+    "season": "2025"
+  },
+  "teams": [
+    {
+      "name": "Víkingur Reykjavík",
+      "transfermarkt_url": "https://www.transfermarkt.com/vikingur-reykjavik/startseite/verein/5849",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/vikingur-reykjavik/besucherzahlenentwicklung/verein/5849",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/V%C3%ADkingur_Reykjav%C3%ADk",
+      "stadium": {
+        "name": "Víkingsvöllur",
+        "transfermarkt_url": "https://www.transfermarkt.com/vikingur-reykjavik/stadion/verein/5849/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/V%C3%ADkingsv%C3%B6llur",
+        "city": {
+          "name": "Reykjavík",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Reykjav%C3%ADk"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Valur",
+      "transfermarkt_url": "https://www.transfermarkt.com/valur-reykjavik/startseite/verein/1033",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/valur-reykjavik/besucherzahlenentwicklung/verein/1033",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Valur_(men%27s_football)",
+      "stadium": {
+        "name": "Völlur",
+        "transfermarkt_url": "https://www.transfermarkt.com/valur-reykjavik/stadion/verein/1033/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Hl%C3%AD%C3%B0arendi_(stadium)",
+        "city": {
+          "name": "Reykjavík",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Reykjav%C3%ADk"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Breiðablik",
+      "transfermarkt_url": "https://www.transfermarkt.com/breidablik-kopavogur/startseite/verein/3737",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/breidablik-kopavogur/besucherzahlenentwicklung/verein/3737",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Brei%C3%B0ablik",
+      "stadium": {
+        "name": "Kópavogsvöllur",
+        "transfermarkt_url": "https://www.transfermarkt.com/breidablik-kopavogur/stadion/verein/3737/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/K%C3%B3pavogsv%C3%B6llur",
+        "city": {
+          "name": "Kópavogur",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/K%C3%B3pavogur"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Stjarnan",
+      "transfermarkt_url": "https://www.transfermarkt.com/stjarnan-gardabaer/startseite/verein/21875",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/stjarnan-gardabaer/besucherzahlenentwicklung/verein/21875",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Stjarnan",
+      "stadium": {
+        "name": "Stjörnuvöllur",
+        "transfermarkt_url": "https://www.transfermarkt.com/stjarnan-gardabaer/stadion/verein/21875/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stj%C3%B6rnuv%C3%B6llur",
+        "owner_raw": "Stjarnan Garðabær",
+        "city": {
+          "name": "Garðabær",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gar%C3%B0ab%C3%A6r"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "ÍBV Vestmannaeyjar",
+      "transfermarkt_url": "https://www.transfermarkt.com/ibv-vestmannaeyjar/startseite/verein/8036",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ibv-vestmannaeyjar/besucherzahlenentwicklung/verein/8036",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/%C3%8DBV_Vestmannaeyjar",
+      "stadium": {
+        "name": "Hásteinsvöllur",
+        "transfermarkt_url": "https://www.transfermarkt.com/ibv-vestmannaeyjar/stadion/verein/8036/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/H%C3%A1steinsv%C3%B6llur",
+        "city": {
+          "name": "Vestmannaeyjar",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vestmannaeyjar"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Fram Reykjavík",
+      "transfermarkt_url": "https://www.transfermarkt.com/fram-reykjavik/startseite/verein/3832",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fram-reykjavik/besucherzahlenentwicklung/verein/3832",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Fram_Reykjav%C3%ADk",
+      "stadium": {
+        "name": "Framsvöllur",
+        "transfermarkt_url": "https://www.transfermarkt.com/fram-reykjavik/stadion/verein/3832/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Reykjav%C3%ADk",
+        "owner_raw": "Fram Reykjavík",
+        "city": {
+          "name": "Reykjavík",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Reykjav%C3%ADk"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "KR Reykjavík",
+      "transfermarkt_url": "https://www.transfermarkt.com/kr-reykjavik/startseite/verein/3237",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kr-reykjavik/besucherzahlenentwicklung/verein/3237",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KR_Reykjav%C3%ADk",
+      "stadium": {
+        "name": "KR-völlur",
+        "transfermarkt_url": "https://www.transfermarkt.com/kr-reykjavik/stadion/verein/3237/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/KR-v%C3%B6llur",
+        "owner_raw": "Knattspyrnufélag Reykjavíkur",
+        "city": {
+          "name": "Reykjavík",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Reykjav%C3%ADk"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "KA Akureyri",
+      "transfermarkt_url": "https://www.transfermarkt.com/ka-akureyri/startseite/verein/1839",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ka-akureyri/besucherzahlenentwicklung/verein/1839",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Knattspyrnuf%C3%A9lag_Akureyrar",
+      "stadium": {
+        "name": "KA-Völlur",
+        "transfermarkt_url": "https://www.transfermarkt.com/ka-akureyri/stadion/verein/1839/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/KA-V%C3%B6llur",
+        "owner_raw": "Knattspyrnufélag Akureyrar",
+        "city": {
+          "name": "Akureyri",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Akureyri"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "ÍA Akranes",
+      "transfermarkt_url": "https://www.transfermarkt.com/ia-akranes/startseite/verein/1231",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ia-akranes/besucherzahlenentwicklung/verein/1231",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/%C3%8D%C3%BEr%C3%B3ttabandalag_Akraness",
+      "stadium": {
+        "name": "Akranesvöllur",
+        "transfermarkt_url": "https://www.transfermarkt.com/ia-akranes/stadion/verein/1231/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Akranesv%C3%B6llur",
+        "owner_raw": "Íþróttabandalag Akraness",
+        "city": {
+          "name": "Akranes",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Akranes"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FH Hafnarfjörður",
+      "transfermarkt_url": "https://www.transfermarkt.com/fh-hafnarfjordur/startseite/verein/1185",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fh-hafnarfjordur/besucherzahlenentwicklung/verein/1185",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FH_Hafnarfj%C3%B6r%C3%B0ur",
+      "stadium": {
+        "name": "Kaplakriki",
+        "transfermarkt_url": "https://www.transfermarkt.com/fh-hafnarfjordur/stadion/verein/1185/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kaplakriki",
+        "city": {
+          "name": "Hafnarfjörður",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Hafnarfj%C3%B6r%C3%B0ur"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Keflavík ÍF",
+      "transfermarkt_url": "https://www.transfermarkt.com/keflavik-if/startseite/verein/8037",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/keflavik-if/besucherzahlenentwicklung/verein/8037",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Knattspyrnudeild_Keflav%C3%ADk",
+      "stadium": {
+        "name": "Keflavíkurvöllur",
+        "transfermarkt_url": "https://www.transfermarkt.com/keflavik-if/stadion/verein/8037/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Keflav%C3%ADkurv%C3%B6llur",
+        "owner_raw": "Keflavík Íþrótta- og Ungmennafélag",
+        "city": {
+          "name": "Keflavík",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Keflav%C3%ADk"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Þór Akureyri",
+      "transfermarkt_url": "https://www.transfermarkt.com/thor-akureyri/startseite/verein/21864",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/thor-akureyri/besucherzahlenentwicklung/verein/21864",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/%C3%9E%C3%B3r_Akureyri",
+      "stadium": {
+        "name": "Þórsvöllur",
+        "transfermarkt_url": "https://www.transfermarkt.com/thor-akureyri/stadion/verein/21864/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/%C3%9E%C3%B3rsv%C3%B6llur",
+        "owner_raw": "Íþróttafélagið Þór",
+        "city": {
+          "name": "Akureyri",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Akureyri"
+        }
+      },
+      "girone": null
+    }
+  ]
+}

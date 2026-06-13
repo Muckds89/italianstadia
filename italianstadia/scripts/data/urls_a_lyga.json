@@ -1,0 +1,177 @@
+{
+  "league": {
+    "name": "A Lyga",
+    "country": "Lithuania",
+    "country_code": "LT",
+    "division_level": 1,
+    "season": "2025"
+  },
+  "teams": [
+    {
+      "name": "FK Žalgiris Vilnius",
+      "transfermarkt_url": "https://www.transfermarkt.com/zalgiris-vilnius/startseite/verein/602",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/zalgiris-vilnius/besucherzahlenentwicklung/verein/602",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_%C5%BDalgiris_Vilnius",
+      "stadium": {
+        "name": "LFF Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/zalgiris-vilnius/stadion/verein/602/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/LFF_Stadium",
+        "city": {
+          "name": "Vilnius",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vilnius"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Riteriai",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-riteriai/startseite/verein/32832",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-riteriai/besucherzahlenentwicklung/verein/32832",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Riteriai",
+      "stadium": {
+        "name": "LFF Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-riteriai/stadion/verein/32832/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/LFF_Stadium",
+        "city": {
+          "name": "Vilnius",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vilnius"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Kauno Žalgiris",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-kauno-zalgiris/startseite/verein/40090",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-kauno-zalgiris/besucherzahlenentwicklung/verein/40090",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Kauno_%C5%BDalgiris",
+      "stadium": {
+        "name": "Darius and Girėnas Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-kauno-zalgiris/stadion/verein/40090/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Darius_and_Gir%C4%97nas_Stadium",
+        "city": {
+          "name": "Kaunas",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kaunas"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Sūduva Marijampolė",
+      "transfermarkt_url": "https://www.transfermarkt.com/suduva-marijampole/startseite/verein/8047",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/suduva-marijampole/besucherzahlenentwicklung/verein/8047",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_S%C5%ABduva_Marijampol%C4%97",
+      "stadium": {
+        "name": "Marijampolės stadionas",
+        "transfermarkt_url": "https://www.transfermarkt.com/suduva-marijampole/stadion/verein/8047/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Mantinga_Football_Arena",
+        "owner_raw": "Marijampolė Municipality",
+        "city": {
+          "name": "Marijampolė",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Marijampol%C4%97"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Hegelmann",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-hegelmann-litauen/startseite/verein/69752",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-hegelmann-litauen/besucherzahlenentwicklung/verein/69752",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Hegelmann",
+      "stadium": {
+        "name": "Hegelmann Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-hegelmann-litauen/stadion/verein/69752/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kaunas",
+        "owner_raw": "FC Hegelmann",
+        "city": {
+          "name": "Kaunas",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kaunas"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Panevėžys",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-panevezys/startseite/verein/49149",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-panevezys/besucherzahlenentwicklung/verein/49149",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Panev%C4%97%C5%BEys",
+      "stadium": {
+        "name": "Panevėžio stadionas",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-panevezys/stadion/verein/49149/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Auk%C5%A1taitija_Stadium",
+        "owner_raw": "Panevėžys City Municipality",
+        "city": {
+          "name": "Panevėžys",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Panev%C4%97%C5%BEys"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FA Šiauliai",
+      "transfermarkt_url": "https://www.transfermarkt.com/siauliai-fa/startseite/verein/42310",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/siauliai-fa/besucherzahlenentwicklung/verein/42310",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FA_%C5%A0iauliai",
+      "stadium": {
+        "name": "Šiauliai Sporto centras",
+        "transfermarkt_url": "https://www.transfermarkt.com/siauliai-fa/stadion/verein/42310/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Savivaldyb%C4%97_Stadium",
+        "owner_raw": "Šiauliai City Municipality",
+        "city": {
+          "name": "Šiauliai",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%A0iauliai"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "DFK Dainava Alytus",
+      "transfermarkt_url": "https://www.transfermarkt.com/dainava-alytus/startseite/verein/30739",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dainava-alytus/besucherzahlenentwicklung/verein/30739",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/DFK_Dainava",
+      "stadium": {
+        "name": "Alytaus stadionas",
+        "transfermarkt_url": "https://www.transfermarkt.com/dainava-alytus/stadion/verein/30739/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Alytus_Stadium",
+        "city": {
+          "name": "Alytus",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Alytus"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Banga Gargždai",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-banga-gargzdai/startseite/verein/23559",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-banga-gargzdai/besucherzahlenentwicklung/verein/23559",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Banga_Garg%C5%BEdai",
+      "stadium": {
+        "name": "Gargždų stadionas",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-banga-gargzdai/stadion/verein/23559/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Garg%C5%BEdai_Stadium",
+        "owner_raw": "Klaipėda District Municipality",
+        "city": {
+          "name": "Gargždai",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Garg%C5%BEdai"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Džiugas Telšiai",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-dziugas-telsiai/startseite/verein/28740",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-dziugas-telsiai/besucherzahlenentwicklung/verein/28740",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_D%C5%BEiugas_Tel%C5%A1iai",
+      "stadium": {
+        "name": "Telšių stadionas",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-dziugas-telsiai/stadion/verein/28740/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tel%C5%A1iai_Central_Stadium",
+        "owner_raw": "Telšiai District Municipality",
+        "city": {
+          "name": "Telšiai",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tel%C5%A1iai"
+        }
+      },
+      "girone": null
+    }
+  ]
+}

@@ -1,0 +1,267 @@
+{
+  "league": {
+    "name": "Ukrainian Premier League",
+    "country": "Ukraine",
+    "country_code": "UA",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Shakhtar Donetsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/shakhtar-donetsk/startseite/verein/660",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/shakhtar-donetsk/besucherzahlenentwicklung/verein/660",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Shakhtar_Donetsk",
+      "stadium": {
+        "name": "Arena Lviv",
+        "transfermarkt_url": "https://www.transfermarkt.com/shakhtar-donetsk/stadion/verein/660/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Arena_Lviv",
+        "city": {
+          "name": "Lviv",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lviv"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Dynamo Kyiv",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-dynamo-kyiv/startseite/verein/338",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-dynamo-kyiv/besucherzahlenentwicklung/verein/338",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dynamo_Kyiv",
+      "stadium": {
+        "name": "Valeriy Lobanovskyi Dynamo Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-dynamo-kyiv/stadion/verein/338/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Valeriy_Lobanovskyi_Dynamo_Stadium",
+        "city": {
+          "name": "Kyiv",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kyiv"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Zorya Luhansk",
+      "transfermarkt_url": "https://www.transfermarkt.com/zorya-lugansk/startseite/verein/10690",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/zorya-lugansk/besucherzahlenentwicklung/verein/10690",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Zorya_Luhansk",
+      "stadium": {
+        "name": "Valeriy Lobanovskyi Dynamo Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/zorya-lugansk/stadion/verein/10690/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Valeriy_Lobanovskyi_Dynamo_Stadium",
+        "city": {
+          "name": "Kyiv",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kyiv"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Karpaty Lviv",
+      "transfermarkt_url": "https://www.transfermarkt.com/karpaty-lwiw/startseite/verein/85465",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/karpaty-lwiw/besucherzahlenentwicklung/verein/85465",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Karpaty_Lviv",
+      "stadium": {
+        "name": "Ukraina Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/karpaty-lwiw/stadion/verein/85465/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ukraina_Stadium",
+        "city": {
+          "name": "Lviv",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lviv"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Rukh Lviv",
+      "transfermarkt_url": "https://www.transfermarkt.com/rukh-lwiw/startseite/verein/48726",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rukh-lwiw/besucherzahlenentwicklung/verein/48726",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Rukh_Lviv",
+      "stadium": {
+        "name": "Arena Lviv",
+        "transfermarkt_url": "https://www.transfermarkt.com/rukh-lwiw/stadion/verein/48726/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Arena_Lviv",
+        "city": {
+          "name": "Lviv",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lviv"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Polissya Zhytomyr",
+      "transfermarkt_url": "https://www.transfermarkt.com/polissya-zhytomyr/startseite/verein/53646",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/polissya-zhytomyr/besucherzahlenentwicklung/verein/53646",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Polissya_Zhytomyr",
+      "stadium": {
+        "name": "Tsentralnyi Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/polissya-zhytomyr/stadion/verein/53646/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tsentralnyi_Stadium_(Zhytomyr)",
+        "city": {
+          "name": "Zhytomyr",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Zhytomyr"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Metalist 1925 Kharkiv",
+      "transfermarkt_url": "https://www.transfermarkt.com/metalist-1925-charkiw/startseite/verein/55686",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/metalist-1925-charkiw/besucherzahlenentwicklung/verein/55686",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Metalist_1925_Kharkiv",
+      "stadium": {
+        "name": "Tsentralnyi Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/metalist-1925-charkiw/stadion/verein/55686/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tsentralnyi_Stadium_(Zhytomyr)",
+        "city": {
+          "name": "Zhytomyr",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Zhytomyr"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "LNZ Cherkasy",
+      "transfermarkt_url": "https://www.transfermarkt.com/lnz-cherkasy/startseite/verein/63007",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/lnz-cherkasy/besucherzahlenentwicklung/verein/63007",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_LNZ_Cherkasy",
+      "stadium": {
+        "name": "Cherkasy Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/lnz-cherkasy/stadion/verein/63007/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Cherkasy_Arena",
+        "city": {
+          "name": "Cherkasy",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Cherkasy"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Kolos Kovalivka",
+      "transfermarkt_url": "https://www.transfermarkt.com/kolos-kovalivka/startseite/verein/48332",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kolos-kovalivka/besucherzahlenentwicklung/verein/48332",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Kolos_Kovalivka",
+      "stadium": {
+        "name": "Kolos Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/kolos-kovalivka/stadion/verein/48332/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kolos_Stadium_(Kovalivka)",
+        "city": {
+          "name": "Kovalivka",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kovalivka,_Kyiv_Oblast"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Kryvbas Kryvyi Rih",
+      "transfermarkt_url": "https://www.transfermarkt.com/krywbas-krywyj-rih/startseite/verein/3592",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/krywbas-krywyj-rih/besucherzahlenentwicklung/verein/3592",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Kryvbas_Kryvyi_Rih",
+      "stadium": {
+        "name": "Hirnyk Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/krywbas-krywyj-rih/stadion/verein/3592/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Hirnyk_Stadium_(Kryvyi_Rih)",
+        "city": {
+          "name": "Kryvyi Rih",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kryvyi_Rih"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Veres Rivne",
+      "transfermarkt_url": "https://www.transfermarkt.com/nk-veres-rivne/startseite/verein/26459",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nk-veres-rivne/besucherzahlenentwicklung/verein/26459",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NK_Veres_Rivne",
+      "stadium": {
+        "name": "Avanhard Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/nk-veres-rivne/stadion/verein/26459/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Avanhard_Stadium_(Rivne)",
+        "city": {
+          "name": "Rivne",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rivne"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Oleksandriya",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-oleksandria/startseite/verein/18303",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-oleksandria/besucherzahlenentwicklung/verein/18303",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Oleksandriya",
+      "stadium": {
+        "name": "CSC Nika Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-oleksandria/stadion/verein/18303/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/CSC_Nika_Stadium",
+        "city": {
+          "name": "Oleksandria",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Oleksandria"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Obolon Kyiv",
+      "transfermarkt_url": "https://www.transfermarkt.com/obolon-kyiv/startseite/verein/39097",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/obolon-kyiv/besucherzahlenentwicklung/verein/39097",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Obolon_Kyiv",
+      "stadium": {
+        "name": "Obolon Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/obolon-kyiv/stadion/verein/39097/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Obolon_Arena",
+        "city": {
+          "name": "Kyiv",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kyiv"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Kudrivka",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-kudrivka/startseite/verein/87883",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-kudrivka/besucherzahlenentwicklung/verein/87883",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Kudrivka",
+      "stadium": {
+        "name": "Obolon Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-kudrivka/stadion/verein/87883/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Obolon_Arena",
+        "city": {
+          "name": "Kyiv",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kyiv"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "SC Poltava",
+      "transfermarkt_url": "https://www.transfermarkt.com/sc-poltawa/startseite/verein/81401",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sc-poltawa/besucherzahlenentwicklung/verein/81401",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Poltava",
+      "stadium": {
+        "name": "Zirka Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/sc-poltawa/stadion/verein/81401/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Zirka_Stadium",
+        "city": {
+          "name": "Poltava",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Poltava"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Epitsentr Kamianets-Podilskyi",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-epicentr-kamenez-podolski/startseite/verein/84122",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-epicentr-kamenez-podolski/besucherzahlenentwicklung/verein/84122",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Epitsentr_Kamianets-Podilskyi",
+      "stadium": {
+        "name": "Arena Livyi Bereh",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-epicentr-kamenez-podolski/stadion/verein/84122/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Arena_Livyi_Bereh",
+        "city": {
+          "name": "Kyiv",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kyiv"
+        }
+      },
+      "girone": null
+    }
+  ]
+}

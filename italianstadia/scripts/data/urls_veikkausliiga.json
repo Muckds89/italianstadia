@@ -1,0 +1,203 @@
+{
+  "league": {
+    "name": "Veikkausliiga",
+    "country": "Finland",
+    "country_code": "FI",
+    "division_level": 1,
+    "season": "2025"
+  },
+  "teams": [
+    {
+      "name": "HJK Helsinki",
+      "transfermarkt_url": "https://www.transfermarkt.com/hjk-helsinki/startseite/verein/1008",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hjk-helsinki/besucherzahlenentwicklung/verein/1008",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Helsingin_Jalkapalloklubi",
+      "stadium": {
+        "name": "Bolt Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/hjk-helsinki/stadion/verein/1008/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bolt_Arena",
+        "city": {
+          "name": "Helsinki",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Helsinki"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "SJK Seinäjoki",
+      "transfermarkt_url": "https://www.transfermarkt.com/sjk-seinajoki/startseite/verein/23777",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sjk-seinajoki/besucherzahlenentwicklung/verein/23777",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sein%C3%A4joen_Jalkapallokerho",
+      "stadium": {
+        "name": "OmaSP Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/sjk-seinajoki/stadion/verein/23777/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/OmaSP_Stadion",
+        "city": {
+          "name": "Seinäjoki",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sein%C3%A4joki"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "KuPS Kuopio",
+      "transfermarkt_url": "https://www.transfermarkt.com/kuopion-palloseura/startseite/verein/6251",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kuopion-palloseura/besucherzahlenentwicklung/verein/6251",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Kuopion_Palloseura",
+      "stadium": {
+        "name": "Väre Areena",
+        "transfermarkt_url": "https://www.transfermarkt.com/kuopion-palloseura/stadion/verein/6251/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kuopio_Football_Stadium",
+        "city": {
+          "name": "Kuopio",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kuopio"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Inter Turku",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-inter-turku/startseite/verein/8042",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-inter-turku/besucherzahlenentwicklung/verein/8042",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Inter_Turku",
+      "stadium": {
+        "name": "Veritas Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-inter-turku/stadion/verein/8042/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Veritas_Stadion",
+        "city": {
+          "name": "Turku",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Turku"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Ilves Tampere",
+      "transfermarkt_url": "https://www.transfermarkt.com/ilves-tampere/startseite/verein/3189",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ilves-tampere/besucherzahlenentwicklung/verein/3189",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ilves_(football)",
+      "stadium": {
+        "name": "Tammelan Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/ilves-tampere/stadion/verein/3189/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tammelan_Stadion",
+        "city": {
+          "name": "Tampere",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tampere"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "AC Oulu",
+      "transfermarkt_url": "https://www.transfermarkt.com/ac-oulu/startseite/verein/7008",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ac-oulu/besucherzahlenentwicklung/verein/7008",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AC_Oulu",
+      "stadium": {
+        "name": "Raatti Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/ac-oulu/stadion/verein/7008/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Raatti_Stadium",
+        "city": {
+          "name": "Oulu",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Oulu"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "VPS Vaasa",
+      "transfermarkt_url": "https://www.transfermarkt.com/vaasan-palloseura/startseite/verein/1102",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/vaasan-palloseura/besucherzahlenentwicklung/verein/1102",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Vaasan_Palloseura",
+      "stadium": {
+        "name": "Hietalahti Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/vaasan-palloseura/stadion/verein/1102/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Hietalahti_Stadium",
+        "city": {
+          "name": "Vaasa",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vaasa"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Haka",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-haka/startseite/verein/1225",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-haka/besucherzahlenentwicklung/verein/1225",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Haka",
+      "stadium": {
+        "name": "Tehtaan kenttä",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-haka/stadion/verein/1225/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tehtaan_kentt%C3%A4",
+        "city": {
+          "name": "Valkeakoski",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Valkeakoski"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FF Jaro",
+      "transfermarkt_url": "https://www.transfermarkt.com/ff-jaro/startseite/verein/3650",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ff-jaro/besucherzahlenentwicklung/verein/3650",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FF_Jaro",
+      "stadium": {
+        "name": "Jakobstads Centralplan",
+        "transfermarkt_url": "https://www.transfermarkt.com/ff-jaro/stadion/verein/3650/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Jakobstads_Centralplan",
+        "city": {
+          "name": "Jakobstad",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Jakobstad"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "IFK Mariehamn",
+      "transfermarkt_url": "https://www.transfermarkt.com/ifk-mariehamn/startseite/verein/6017",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ifk-mariehamn/besucherzahlenentwicklung/verein/6017",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/IFK_Mariehamn",
+      "stadium": {
+        "name": "Wiklöf Holding Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/ifk-mariehamn/stadion/verein/6017/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Wikl%C3%B6f_Holding_Arena",
+        "city": {
+          "name": "Mariehamn",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Mariehamn"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC KTP",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-ktp/startseite/verein/7315",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-ktp/besucherzahlenentwicklung/verein/7315",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Kotkan_Ty%C3%B6v%C3%A4en_Palloilijat",
+      "stadium": {
+        "name": "Arto Tolsa Areena",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-ktp/stadion/verein/7315/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Arto_Tolsa_Areena",
+        "city": {
+          "name": "Kotka",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kotka"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "IF Gnistan",
+      "transfermarkt_url": "https://www.transfermarkt.com/if-gnistan/startseite/verein/23564",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/if-gnistan/besucherzahlenentwicklung/verein/23564",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/IF_Gnistan",
+      "stadium": {
+        "name": "Mustapekka Areena",
+        "transfermarkt_url": "https://www.transfermarkt.com/if-gnistan/stadion/verein/23564/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Mustapekka_Areena",
+        "city": {
+          "name": "Helsinki",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Helsinki"
+        }
+      },
+      "girone": null
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "league": {
+    "name": "Virsliga",
+    "country": "Latvia",
+    "country_code": "LV",
+    "division_level": 1,
+    "season": "2025"
+  },
+  "teams": [
+    {
+      "name": "Riga FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-riga/startseite/verein/48325",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-riga/besucherzahlenentwicklung/verein/48325",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Riga_FC",
+      "stadium": {
+        "name": "Skonto Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-riga/stadion/verein/48325/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Skonto_Stadium",
+        "owner_raw": "Riga City Municipality",
+        "city": {
+          "name": "Riga",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Riga"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK RFS",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-rfs/startseite/verein/33783",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-rfs/besucherzahlenentwicklung/verein/33783",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_RFS",
+      "stadium": {
+        "name": "Skonto Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-rfs/stadion/verein/33783/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Skonto_Stadium",
+        "owner_raw": "Riga City Municipality",
+        "city": {
+          "name": "Riga",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Riga"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Liepāja",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-liepaja/startseite/verein/43162",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-liepaja/besucherzahlenentwicklung/verein/43162",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Liep%C4%81ja",
+      "stadium": {
+        "name": "Daugava Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-liepaja/stadion/verein/43162/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Daugava_Stadium_(Liep%C4%81ja)",
+        "owner_raw": "Liepāja City Municipality",
+        "city": {
+          "name": "Liepāja",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Liep%C4%81ja"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "BFC Daugavpils",
+      "transfermarkt_url": "https://www.transfermarkt.com/bfc-daugavpils/startseite/verein/28931",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/bfc-daugavpils/besucherzahlenentwicklung/verein/28931",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/BFC_Daugavpils",
+      "stadium": {
+        "name": "Celtnieks Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/bfc-daugavpils/stadion/verein/28931/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Daugavpils",
+        "owner_raw": "Daugavpils City Municipality",
+        "city": {
+          "name": "Daugavpils",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Daugavpils"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FS Jelgava",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-jelgava/startseite/verein/27118",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-jelgava/besucherzahlenentwicklung/verein/27118",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FS_Jelgava",
+      "stadium": {
+        "name": "Jelgava Olympic Centre",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-jelgava/stadion/verein/27118/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Zemgale_Olympic_Center",
+        "owner_raw": "Jelgava City Municipality",
+        "city": {
+          "name": "Jelgava",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Jelgava"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Auda",
+      "transfermarkt_url": "https://www.transfermarkt.com/auda-kekava/startseite/verein/8606",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/auda-kekava/besucherzahlenentwicklung/verein/8606",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Auda",
+      "stadium": {
+        "name": "Skonto Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/auda-kekava/stadion/verein/8606/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Skonto_Stadium",
+        "owner_raw": "Riga City Municipality",
+        "city": {
+          "name": "Riga",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Riga"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Tukums 2000",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-tukums-2000/startseite/verein/28937",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-tukums-2000/besucherzahlenentwicklung/verein/28937",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Tukums_2000",
+      "stadium": {
+        "name": "Tukums Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-tukums-2000/stadion/verein/28937/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tukums",
+        "owner_raw": "Tukums Municipality",
+        "city": {
+          "name": "Tukums",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tukums"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "SK Super Nova",
+      "transfermarkt_url": "https://www.transfermarkt.com/sk-super-nova/startseite/verein/40788",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sk-super-nova/besucherzahlenentwicklung/verein/40788",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SK_Super_Nova",
+      "stadium": {
+        "name": "Skonto Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/sk-super-nova/stadion/verein/40788/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Skonto_Stadium",
+        "owner_raw": "Riga City Municipality",
+        "city": {
+          "name": "Riga",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Riga"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Grobiņas SC",
+      "transfermarkt_url": "https://www.transfermarkt.com/grobinas-sc/startseite/verein/40880",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/grobinas-sc/besucherzahlenentwicklung/verein/40880",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Grobi%C5%86as_SC",
+      "stadium": {
+        "name": "Grobiņas Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/grobinas-sc/stadion/verein/40880/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Grobi%C5%86a",
+        "owner_raw": "Liepāja Municipality",
+        "city": {
+          "name": "Grobiņa",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Grobi%C5%86a"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Ogre United",
+      "transfermarkt_url": "https://www.transfermarkt.com/ogre-united/startseite/verein/107916",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ogre-united/besucherzahlenentwicklung/verein/107916",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ogre_United",
+      "stadium": {
+        "name": "Ogres Sporta Komplekss",
+        "transfermarkt_url": "https://www.transfermarkt.com/ogre-united/stadion/verein/107916/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ogre,_Latvia",
+        "owner_raw": "Ogre Municipality",
+        "city": {
+          "name": "Ogre",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ogre,_Latvia"
+        }
+      },
+      "girone": null
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "league": {
+    "name": "Macedonian First Football League",
+    "country": "North Macedonia",
+    "country_code": "MK",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "FK Vardar Skopje",
+      "transfermarkt_url": "https://www.transfermarkt.com/vardar-skopje/startseite/verein/77",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/vardar-skopje/besucherzahlenentwicklung/verein/77",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Vardar",
+      "stadium": {
+        "name": "Toše Proeski Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/vardar-skopje/stadion/verein/77/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/To%C5%A1e_Proeski_Arena",
+        "city": {
+          "name": "Skopje",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Skopje"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Rabotnički Skopje",
+      "transfermarkt_url": "https://www.transfermarkt.com/rabotnicki-skopje/startseite/verein/4641",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rabotnicki-skopje/besucherzahlenentwicklung/verein/4641",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Rabotni%C4%8Dki",
+      "stadium": {
+        "name": "Čair Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/rabotnicki-skopje/stadion/verein/4641/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/%C4%8Cair_Stadium_(North_Macedonia)",
+        "city": {
+          "name": "Skopje",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Skopje"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "KF Shkëndija Tetovo",
+      "transfermarkt_url": "https://www.transfermarkt.com/shkendija-tetovo/startseite/verein/1167",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/shkendija-tetovo/besucherzahlenentwicklung/verein/1167",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Shk%C3%ABndija",
+      "stadium": {
+        "name": "Ecolog Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/shkendija-tetovo/stadion/verein/1167/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ecolog_Arena",
+        "city": {
+          "name": "Tetovo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tetovo"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Shkupi",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-shkupi/startseite/verein/4644",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-shkupi/besucherzahlenentwicklung/verein/4644",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Shkupi",
+      "stadium": {
+        "name": "Čair Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-shkupi/stadion/verein/4644/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/%C4%8Cair_Stadium_(North_Macedonia)",
+        "city": {
+          "name": "Skopje",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Skopje"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Pelister Bitola",
+      "transfermarkt_url": "https://www.transfermarkt.com/pelister-bitola/startseite/verein/534",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/pelister-bitola/besucherzahlenentwicklung/verein/534",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Pelister",
+      "stadium": {
+        "name": "Petar Miloševski Football Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/pelister-bitola/stadion/verein/534/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Petar_Milo%C5%A1evski_Football_Stadium",
+        "city": {
+          "name": "Bitola",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bitola"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Makedonija Gjorce Petrov",
+      "transfermarkt_url": "https://www.transfermarkt.com/makedonija-gjorce-petrov/startseite/verein/8397",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/makedonija-gjorce-petrov/besucherzahlenentwicklung/verein/8397",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Makedonija_G.P.",
+      "stadium": {
+        "name": "Gjorče Petrov Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/makedonija-gjorce-petrov/stadion/verein/8397/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gjor%C4%8De_Petrov_Stadium",
+        "city": {
+          "name": "Skopje",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Skopje"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "GFK Tikveš Kavadarci",
+      "transfermarkt_url": "https://www.transfermarkt.com/tikves-kavadarci/startseite/verein/8969",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/tikves-kavadarci/besucherzahlenentwicklung/verein/8969",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/GFK_Tikvesh",
+      "stadium": {
+        "name": "Kavadarci City Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/tikves-kavadarci/stadion/verein/8969/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kavadarci_City_Stadium",
+        "city": {
+          "name": "Kavadarci",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kavadarci"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "KF Arsimi",
+      "transfermarkt_url": "https://www.transfermarkt.com/arsimi/startseite/verein/101280",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/arsimi/besucherzahlenentwicklung/verein/101280",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Arsimi",
+      "stadium": {
+        "name": "City Stadium Gostivar",
+        "transfermarkt_url": "https://www.transfermarkt.com/arsimi/stadion/verein/101280/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/City_Stadium_Gostivar",
+        "owner_raw": "Municipality of Gostivar",
+        "city": {
+          "name": "Gostivar",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gostivar"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "KF Bashkimi",
+      "transfermarkt_url": "https://www.transfermarkt.com/baskimi/startseite/verein/8334",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/baskimi/besucherzahlenentwicklung/verein/8334",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Bashkimi_1947",
+      "stadium": {
+        "name": "KF Bashkimi Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/baskimi/stadion/verein/8334/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Bashkimi_Stadium",
+        "owner_raw": "Municipality of Kumanovo",
+        "city": {
+          "name": "Kumanovo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kumanovo"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Sileks Kratovo",
+      "transfermarkt_url": "https://www.transfermarkt.com/sileks-kratovo/startseite/verein/535",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sileks-kratovo/besucherzahlenentwicklung/verein/535",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Sileks",
+      "stadium": {
+        "name": "Gradski stadion Kratovo",
+        "transfermarkt_url": "https://www.transfermarkt.com/sileks-kratovo/stadion/verein/535/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gradski_Stadion_Kratovo",
+        "owner_raw": "Municipality of Kratovo",
+        "latitude": 42.0748,
+        "longitude": 22.1808,
+        "city": {
+          "name": "Kratovo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kratovo"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Struga Trim & Lum",
+      "transfermarkt_url": "https://www.transfermarkt.com/struga-trim-amp-lum/startseite/verein/64534",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/struga-trim-amp-lum/besucherzahlenentwicklung/verein/64534",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Struga",
+      "stadium": {
+        "name": "Gradska Plaža Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/struga-trim-amp-lum/stadion/verein/64534/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gradska_Pla%C5%BEa_Stadium",
+        "city": {
+          "name": "Struga",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Struga"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "AP Brera Strumica",
+      "transfermarkt_url": "https://www.transfermarkt.com/akademija-pandev/startseite/verein/45935",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/akademija-pandev/besucherzahlenentwicklung/verein/45935",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_AP_Brera_Strumica",
+      "stadium": {
+        "name": "Stadion Mladost Strumica",
+        "transfermarkt_url": "https://www.transfermarkt.com/akademija-pandev/stadion/verein/45935/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Blagoj_Istatov",
+        "owner_raw": "FK Belasica",
+        "city": {
+          "name": "Strumica",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Strumica"
+        }
+      },
+      "girone": null
+    }
+  ]
+}

@@ -993,6 +993,8 @@ def classify_ownership(owner_raw):
         "region", "province", "metropolitan city", "district",
         "town of", "town council",
         "city council", "county council", "district council",
+        " county",                 # administrative county (e.g. Klaipėda County, County Dublin)
+        " parish",                 # rural municipality in Baltic/Nordic countries (e.g. Saue Parish)
         "metropolitan borough", "london borough", "royal borough",
         "public authority", "public body", "national sports",
         "sports authority", "stadium authority",
@@ -1090,6 +1092,15 @@ def classify_ownership(owner_raw):
         # ── Greek (transliterated) ───────────────────────────────────────────
         "dimos ",                  # δήμος → dimos (municipality)
         "dimou",                   # genitive form
+        # ── Lithuanian ───────────────────────────────────────────────────────
+        "savivaldybė",             # municipality (e.g. Šiaulių miesto savivaldybė)
+        "savivaldybes",            # genitive form
+        "miesto savivaldybė",      # city municipality
+        "rajono savivaldybė",      # district municipality
+        # ── Albanian ─────────────────────────────────────────────────────────
+        "bashkia ",                # municipality (Bashkia Vlorë, Bashkia Tiranë …)
+        "bashkie",                 # genitive / other forms
+        "komuna ",                 # commune / municipality
     ]
 
     private_keywords = [
@@ -1238,8 +1249,10 @@ def scrape_stadium(stadium_data, city):
         driver.quit()
 
     # 4. Merge Transfermarkt + Wikipedia + JSON fallback
-    final_name = first_valid(name, fallback_name)
-    final_capacity = first_valid(capacity, wiki_data.get("capacity"))
+    # JSON name takes priority over TM: TM often shows sponsorship/old names (e.g.
+    # "Party-Rent-Arena" for VictoriArena); the JSON is manually curated and correct.
+    final_name = first_valid(fallback_name, name)
+    final_capacity = first_valid(capacity, wiki_data.get("capacity"), stadium_data.get("capacity"))
     final_year = first_valid(year_of_construction, wiki_data.get("year_of_construction"))
     final_address = first_valid(wiki_data.get("address"), "Unknown")
     final_latitude = wiki_data.get("latitude")
@@ -1332,11 +1345,76 @@ def scrape_stadium(stadium_data, city):
     # with the same Wikipedia URL in the same city (e.g. Jan Breydel, Stelios
     # Kyriakides, Arena Națională), reuse that row instead of creating a duplicate.
     # Only the transfermarkt_url column is overwritten — all scraped data stays intact.
+    # Exception: if the shared stadium has UNKNOWN ownership and the JSON provides
+    # an owner_raw fallback, apply it now so repeated scrapes can resolve UNKNOWN.
     if wikipedia_url:
         shared = Stadium.objects.filter(wikipedia_url=wikipedia_url, city=city).first()
         if shared:
+            update_fields = ["transfermarkt_url"]
             shared.transfermarkt_url = transfermarkt_url
-            shared.save(update_fields=["transfermarkt_url"])
+            # Correct a stale name: if Wikipedia now returns a different name for
+            # the same article, trust the fresh scrape over the old DB value.
+            if final_name and shared.name != final_name:
+                logging.info(
+                    f"Shared stadium: correcting name '{shared.name}' -> '{final_name}' "
+                    f"(Wikipedia: {wikipedia_url})"
+                )
+                shared.name = final_name
+                update_fields.append("name")
+            if shared.ownership == "UNKNOWN":
+                json_owner = stadium_data.get("owner_raw")
+                if json_owner and not shared.owner_raw:
+                    shared.owner_raw = json_owner
+                    shared.ownership = classify_ownership(json_owner)
+                    update_fields += ["owner_raw", "ownership"]
+            # Re-evaluate ownership when keyword additions would change the result
+            # (self-heals after public_keywords list is expanded)
+            elif shared.owner_raw:
+                reclassified = classify_ownership(shared.owner_raw)
+                if reclassified != shared.ownership:
+                    logging.info(
+                        f"Shared stadium '{shared.name}': ownership reclassified "
+                        f"{shared.ownership} -> {reclassified} "
+                        f"(owner_raw='{shared.owner_raw}')"
+                    )
+                    shared.ownership = reclassified
+                    update_fields += ["ownership"]
+            # Update capacity from Wikipedia when a fresh scrape returns a better value
+            # (fixes stale JSON-fallback values; only fires when Wikipedia has data)
+            wiki_cap = wiki_data.get("capacity")
+            if wiki_cap and wiki_cap != shared.capacity:
+                old_cap = shared.capacity
+                shared.capacity = wiki_cap
+                update_fields.append("capacity")
+                logging.info(
+                    f"Shared stadium '{shared.name}': updated capacity "
+                    f"{old_cap} -> {wiki_cap} (Wikipedia)"
+                )
+            # Apply JSON hardcoded capacity when the existing stadium still has none
+            # (city-page Wikipedia URLs have no capacity data; JSON value is authoritative)
+            elif shared.capacity is None:
+                json_cap = stadium_data.get("capacity")
+                if json_cap is not None and json_cap > 0:
+                    shared.capacity = json_cap
+                    update_fields.append("capacity")
+                    logging.info(
+                        f"Shared stadium '{shared.name}': applied JSON hardcoded "
+                        f"capacity ({json_cap}) — was null in DB"
+                    )
+            # Apply JSON hardcoded coords when the existing stadium has none
+            # (happens when Wikipedia + Nominatim both failed on the first scrape)
+            if shared.latitude is None or shared.longitude is None:
+                json_lat = stadium_data.get("latitude")
+                json_lon = stadium_data.get("longitude")
+                if json_lat is not None and json_lon is not None:
+                    shared.latitude  = json_lat
+                    shared.longitude = json_lon
+                    update_fields += ["latitude", "longitude"]
+                    logging.info(
+                        f"Shared stadium '{shared.name}': applied JSON hardcoded "
+                        f"coords ({json_lat}, {json_lon}) — was null in DB"
+                    )
+            shared.save(update_fields=update_fields)
             logging.info(
                 f"Shared stadium — reused existing '{shared.name}' "
                 f"(Wikipedia: {wikipedia_url})"
@@ -1577,6 +1655,21 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
         "Slovakia": "Slovak",
         "Slovenia": "Slovenian",
         "Ireland": "Irish",
+        # New leagues added 2026-06
+        "Moldova": "Moldavian",
+        "Ukraine": "Ukrainian",
+        "Bosnia and Herzegovina": "Bosnian-Herzegovinian",
+        "North Macedonia": "Macedonian",
+        "Albania": "Albanian",
+        "Latvia": "Latvian",
+        "Lithuania": "Lithuanian",
+        "Estonia": "Estonian",
+        "Iceland": "Icelandic",
+        "Finland": "Finnish",
+        "Montenegro": "Montenegrian",
+        "Luxembourg": "Luxembourgian",
+        "Malta": "Maltese",
+        "Wales": "Welsh",
     }
 
     try:
@@ -1738,10 +1831,15 @@ def _validate_league(league):
             if team.stadium.latitude is None or team.stadium.longitude is None:
                 issues["missing_coords"].append(team.name)
 
+    # If every team has 0 titles, the NATIONALITY_MAP adjective is almost certainly wrong.
+    all_zero_titles = all((t.num_of_titles or 0) == 0 for t in teams)
+
     warnings = sum(
         len(v) for k, v in issues.items() if k != "missing_coords"
     )
     errors = len(issues["missing_coords"])
+    if all_zero_titles:
+        errors += 1
 
     lines = [
         f"\n=== Data Quality Report: {league.name} ({total} teams) ===",
@@ -1751,6 +1849,9 @@ def _validate_league(league):
         f"  Missing coordinates: {len(issues['missing_coords'])}",
         f"  Zero avg attendance: {len(issues['zero_attendance'])}",
     ]
+
+    if all_zero_titles:
+        lines.append(f"  [ERROR] All teams have 0 domestic titles — check NATIONALITY_MAP adjective for '{league.country.name}'")
 
     detail_map = {
         "unknown_ownership": "ownership=UNKNOWN",

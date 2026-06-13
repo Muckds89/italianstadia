@@ -1,0 +1,172 @@
+{
+  "league": {
+    "name": "Kategoria Superiore",
+    "country": "Albania",
+    "country_code": "AL",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "FK Partizani Tirana",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-partizani/startseite/verein/4040",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-partizani/besucherzahlenentwicklung/verein/4040",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Partizani_Tirana",
+      "stadium": {
+        "name": "Arena Kombëtare",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-partizani/stadion/verein/4040/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Arena_Komb%C3%ABtare",
+        "city": {
+          "name": "Tirana",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tirana"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "KF Tirana",
+      "transfermarkt_url": "https://www.transfermarkt.com/kf-tirana/startseite/verein/2049",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kf-tirana/besucherzahlenentwicklung/verein/2049",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Tirana",
+      "stadium": {
+        "name": "Selman Stërmasi Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/kf-tirana/stadion/verein/2049/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Selman_St%C3%ABrmasi_Stadium",
+        "city": {
+          "name": "Tirana",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tirana"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "KF Vllaznia Shkodër",
+      "transfermarkt_url": "https://www.transfermarkt.com/kf-vllaznia/startseite/verein/8671",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kf-vllaznia/besucherzahlenentwicklung/verein/8671",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Vllaznia_Shkod%C3%ABr",
+      "stadium": {
+        "name": "Loro Borici Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/kf-vllaznia/stadion/verein/8671/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Loro_Borici_Stadium",
+        "city": {
+          "name": "Shkodër",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Shkod%C3%ABr"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "KF Teuta Durrës",
+      "transfermarkt_url": "https://www.transfermarkt.com/kf-teuta/startseite/verein/3739",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kf-teuta/besucherzahlenentwicklung/verein/3739",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Teuta_Durr%C3%ABs",
+      "stadium": {
+        "name": "Niko Dovana Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/kf-teuta/stadion/verein/3739/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Niko_Dovana_Stadium",
+        "city": {
+          "name": "Durrës",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Durr%C3%ABs"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Flamurtari FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/flamurtari-fc/startseite/verein/12460",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/flamurtari-fc/besucherzahlenentwicklung/verein/12460",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Flamurtari_FC",
+      "stadium": {
+        "name": "Stadiumi Flamurtari",
+        "transfermarkt_url": "https://www.transfermarkt.com/flamurtari-fc/stadion/verein/12460/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Flamurtari_FC",
+        "city": {
+          "name": "Vlorë",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vlor%C3%AB"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "AF Elbasani",
+      "transfermarkt_url": "https://www.transfermarkt.com/af-elbasani/startseite/verein/98106",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/af-elbasani/besucherzahlenentwicklung/verein/98106",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AF_Elbasani",
+      "stadium": {
+        "name": "Elbasan Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/af-elbasani/stadion/verein/98106/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Elbasan_Arena",
+        "city": {
+          "name": "Elbasan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Elbasan"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "KF Bylis Ballsh",
+      "transfermarkt_url": "https://www.transfermarkt.com/kf-bylis-ballsh/startseite/verein/21234",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kf-bylis-ballsh/besucherzahlenentwicklung/verein/21234",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Bylis",
+      "stadium": {
+        "name": "Stadiumi Adush Muça",
+        "transfermarkt_url": "https://www.transfermarkt.com/kf-bylis-ballsh/stadion/verein/21234/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Adush_Mu%C3%A7a_Stadium",
+        "city": {
+          "name": "Ballsh",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ballsh"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "KF Egnatia",
+      "transfermarkt_url": "https://www.transfermarkt.com/kf-egnatia/startseite/verein/27114",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kf-egnatia/besucherzahlenentwicklung/verein/27114",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Egnatia",
+      "stadium": {
+        "name": "Arena Egnatia",
+        "transfermarkt_url": "https://www.transfermarkt.com/kf-egnatia/stadion/verein/27114/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Egnatia_Arena",
+        "city": {
+          "name": "Rrogozhinë",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rrogozhina"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Dinamo City",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-dinamo-tirana/startseite/verein/588",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-dinamo-tirana/besucherzahlenentwicklung/verein/588",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dinamo_City",
+      "stadium": {
+        "name": "Selman Stërmasi Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-dinamo-tirana/stadion/verein/588/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Selman_St%C3%ABrmasi_Stadium",
+        "city": {
+          "name": "Tirana",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tirana"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Vora",
+      "transfermarkt_url": "https://www.transfermarkt.com/kf-vora/startseite/verein/45456",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kf-vora/besucherzahlenentwicklung/verein/45456",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Vora",
+      "stadium": {
+        "name": "Vora City Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/kf-vora/stadion/verein/45456/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Vor%C3%AB",
+        "owner_raw": "Vorë Municipality",
+        "city": {
+          "name": "Vorë",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vor%C3%AB"
+        }
+      },
+      "girone": null
+    }
+  ]
+}

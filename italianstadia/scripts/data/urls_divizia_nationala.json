@@ -1,0 +1,149 @@
+{
+  "league": {
+    "name": "Moldovan Super Liga",
+    "country": "Moldova",
+    "country_code": "MD",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "FC Sheriff Tiraspol",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-sheriff-tiraspol/startseite/verein/2481",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-sheriff-tiraspol/besucherzahlenentwicklung/verein/2481",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Sheriff_Tiraspol",
+      "num_of_titles": 20,
+      "stadium": {
+        "name": "Sheriff Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-sheriff-tiraspol/stadion/verein/2481/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sheriff_Stadium",
+        "city": {
+          "name": "Tiraspol",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tiraspol"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Zimbru Chișinău",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-zimbru-chisinau/startseite/verein/2714",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-zimbru-chisinau/besucherzahlenentwicklung/verein/2714",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Zimbru_Chi%C8%99in%C4%83u",
+      "stadium": {
+        "name": "Zimbru Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-zimbru-chisinau/stadion/verein/2714/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Zimbru_Stadium",
+        "latitude": 47.0184,
+        "longitude": 28.8519,
+        "city": {
+          "name": "Chișinău",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Chi%C8%99in%C4%83u"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Petrocub Hîncești",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-petrocub/startseite/verein/46643",
+      "num_of_titles": 2,
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-petrocub/besucherzahlenentwicklung/verein/46643",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Petrocub_H%C3%AEnce%C8%99ti",
+      "stadium": {
+        "name": "Stadionul Millenium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-petrocub/stadion/verein/46643/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/H%C3%AEnce%C8%99ti_Municipal_Stadium",
+        "owner_raw": "FC Petrocub Hîncești",
+        "city": {
+          "name": "Hîncești",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/H%C3%AEnce%C8%99ti"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Milsami Orhei",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-milsami-orhei/startseite/verein/30686",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-milsami-orhei/besucherzahlenentwicklung/verein/30686",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Milsami_Orhei",
+      "stadium": {
+        "name": "Milsami Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-milsami-orhei/stadion/verein/30686/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/CSR_Orhei",
+        "owner_raw": "FC Milsami Orhei",
+        "city": {
+          "name": "Orhei",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Orhei"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Dacia Buiucani",
+      "transfermarkt_url": "https://www.transfermarkt.com/dacia-buiucani/startseite/verein/39003",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dacia-buiucani/besucherzahlenentwicklung/verein/39003",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dacia_Buiucani",
+      "stadium": {
+        "name": "Stadionul Republican",
+        "transfermarkt_url": "https://www.transfermarkt.com/dacia-buiucani/stadion/verein/39003/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Republican_Stadium_(Chi%C8%99in%C4%83u)",
+        "owner_raw": "Ministerul Tineretului și Sportului",
+        "city": {
+          "name": "Chișinău",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Chi%C8%99in%C4%83u"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Bălți",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-balti/startseite/verein/83016",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-balti/besucherzahlenentwicklung/verein/83016",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_B%C4%83l%C8%9Bi",
+      "stadium": {
+        "name": "Stadionul Municipal Bălți",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-balti/stadion/verein/83016/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadionul_Municipal_(B%C4%83l%C8%9Bi)",
+        "owner_raw": "Primăria municipiului Bălți",
+        "city": {
+          "name": "Bălți",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/B%C4%83l%C8%9Bi"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Politehnica UTM Chișinău",
+      "transfermarkt_url": "https://www.transfermarkt.com/cstc-saksan/startseite/verein/90107",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cstc-saksan/besucherzahlenentwicklung/verein/90107",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Politehnica_UTM_Chi%C8%99in%C4%83u",
+      "stadium": {
+        "name": "Stadionul Republican",
+        "transfermarkt_url": "https://www.transfermarkt.com/cstc-saksan/stadion/verein/90107/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Republican_Stadium_(Chi%C8%99in%C4%83u)",
+        "owner_raw": "Ministerul Tineretului și Sportului",
+        "city": {
+          "name": "Chișinău",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Chi%C8%99in%C4%83u"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "CSF Spartanii Sportul Selemet",
+      "transfermarkt_url": "https://www.transfermarkt.com/cf-spartanii-selemet/startseite/verein/73711",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cf-spartanii-selemet/besucherzahlenentwicklung/verein/73711",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Selemet",
+      "stadium": {
+        "name": "Stadionul Selemet",
+        "transfermarkt_url": "https://www.transfermarkt.com/cf-spartanii-selemet/stadion/verein/73711/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Selemet",
+        "owner_raw": "CSF Spartanii Sportul Selemet",
+        "city": {
+          "name": "Selemet",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Selemet"
+        }
+      },
+      "girone": null
+    }
+  ]
+}

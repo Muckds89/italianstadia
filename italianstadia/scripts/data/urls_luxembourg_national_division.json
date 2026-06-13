@@ -1,0 +1,290 @@
+{
+  "league": {
+    "name": "Luxembourg National Division",
+    "country": "Luxembourg",
+    "country_code": "LU",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "F91 Dudelange",
+      "transfermarkt_url": "https://www.transfermarkt.com/f91-dudelingen/startseite/verein/853",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/f91-dudelingen/besucherzahlenentwicklung/verein/853",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/F91_Dudelange",
+      "stadium": {
+        "name": "Stade Jos Nosbaum",
+        "transfermarkt_url": "https://www.transfermarkt.com/f91-dudelingen/stadion/verein/853/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Jos_Nosbaum",
+        "owner_raw": "Commune de Dudelange",
+        "city": {
+          "name": "Dudelange",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Dudelange"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Jeunesse Esch",
+      "transfermarkt_url": "https://www.transfermarkt.com/jeunesse-esch/startseite/verein/1257",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/jeunesse-esch/besucherzahlenentwicklung/verein/1257",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Jeunesse_Esch",
+      "stadium": {
+        "name": "Stade de la Frontière",
+        "transfermarkt_url": "https://www.transfermarkt.com/jeunesse-esch/stadion/verein/1257/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_la_Fronti%C3%A8re",
+        "owner_raw": "Commune d'Esch-sur-Alzette",
+        "city": {
+          "name": "Esch-sur-Alzette",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Esch-sur-Alzette"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Progrès Niederkorn",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-progres-niederkorn/startseite/verein/12346",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-progres-niederkorn/besucherzahlenentwicklung/verein/12346",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Progr%C3%A8s_Niederkorn",
+      "stadium": {
+        "name": "Stade Jos Haupert",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-progres-niederkorn/stadion/verein/12346/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Jos_Haupert",
+        "owner_raw": "Commune de Pétange",
+        "city": {
+          "name": "Niederkorn",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Niederkorn"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Differdange 03",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-differdingen-03/startseite/verein/11914",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-differdingen-03/besucherzahlenentwicklung/verein/11914",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Differdange_03",
+      "stadium": {
+        "name": "Stade Municipal de la Ville de Differdange",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-differdingen-03/stadion/verein/11914/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Municipal_de_la_Ville_de_Differdange",
+        "owner_raw": "Ville de Differdange",
+        "city": {
+          "name": "Differdange",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Differdange"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Swift Hesperange",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-swift-hesperingen/startseite/verein/9284",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-swift-hesperingen/besucherzahlenentwicklung/verein/9284",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Swift_Hesperange",
+      "stadium": {
+        "name": "Stade Alphonse Theis",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-swift-hesperingen/stadion/verein/9284/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Alphonse_Theis",
+        "owner_raw": "Commune de Hesperange",
+        "city": {
+          "name": "Hesperange",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Hesperange"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Racing FC Union Luxembourg",
+      "transfermarkt_url": "https://www.transfermarkt.com/racing-fc-union-luxemburg/startseite/verein/13467",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/racing-fc-union-luxemburg/besucherzahlenentwicklung/verein/13467",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Racing_FC_Union_Luxembourg",
+      "stadium": {
+        "name": "Stade Achille Hammerel",
+        "transfermarkt_url": "https://www.transfermarkt.com/racing-fc-union-luxemburg/stadion/verein/13467/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Achille_Hammerel",
+        "owner_raw": "Ville de Luxembourg",
+        "city": {
+          "name": "Luxembourg City",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Luxembourg_City"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Atert Bissen",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-atert-bissen/startseite/verein/21640",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-atert-bissen/besucherzahlenentwicklung/verein/21640",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Atert_Bissen",
+      "stadium": {
+        "name": "Terrain ZAC Klengbousbierg",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-atert-bissen/stadion/verein/21640/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bissen",
+        "owner_raw": "Commune de Bissen",
+        "capacity": 1500,
+        "city": {
+          "name": "Bissen",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bissen"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "UN Käerjeng 97",
+      "transfermarkt_url": "https://www.transfermarkt.com/un-kaerjeng-97/startseite/verein/12004",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/un-kaerjeng-97/besucherzahlenentwicklung/verein/12004",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/UN_K%C3%A4erj%C3%A9ng_97",
+      "stadium": {
+        "name": "Stade Um Dribbel",
+        "transfermarkt_url": "https://www.transfermarkt.com/un-kaerjeng-97/stadion/verein/12004/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bascharage",
+        "owner_raw": "Commune de Käerjeng",
+        "capacity": 2400,
+        "city": {
+          "name": "Bascharage",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bascharage"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Victoria Rosport",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-victoria-rosport/startseite/verein/2660",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-victoria-rosport/besucherzahlenentwicklung/verein/2660",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Victoria_Rosport",
+      "stadium": {
+        "name": "VictoriArena",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-victoria-rosport/stadion/verein/2660/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/VictoriArena",
+        "owner_raw": "FC Victoria Rosport",
+        "city": {
+          "name": "Rosport",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rosport"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Rodange 91",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-rodange-91/startseite/verein/21803",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-rodange-91/besucherzahlenentwicklung/verein/21803",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Rodange_91",
+      "stadium": {
+        "name": "Stade Joseph Philippart",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-rodange-91/stadion/verein/21803/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Rodange",
+        "owner_raw": "Commune de Pétange",
+        "capacity": 3400,
+        "city": {
+          "name": "Rodange",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rodange"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "US Hostert",
+      "transfermarkt_url": "https://www.transfermarkt.com/us-hostert/startseite/verein/21645",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/us-hostert/besucherzahlenentwicklung/verein/21645",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/US_Hostert",
+      "stadium": {
+        "name": "Stade Jos Becker",
+        "transfermarkt_url": "https://www.transfermarkt.com/us-hostert/stadion/verein/21645/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Niederanven",
+        "owner_raw": "Commune de Niederanven",
+        "capacity": 1500,
+        "city": {
+          "name": "Niederanven",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Niederanven"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Jeunesse Canach",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-jeunesse-canach/startseite/verein/21465",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-jeunesse-canach/besucherzahlenentwicklung/verein/21465",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Jeunesse_Canach",
+      "stadium": {
+        "name": "Stade Fernand Weber",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-jeunesse-canach/stadion/verein/21465/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Fernand_Weber",
+        "owner_raw": "Commune de Lenningen",
+        "capacity": 1500,
+        "city": {
+          "name": "Canach",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Canach"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC Mamer 32",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-mamer-32/startseite/verein/21454",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-mamer-32/besucherzahlenentwicklung/verein/21454",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Mamer_32",
+      "stadium": {
+        "name": "Stade François Trausch",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-mamer-32/stadion/verein/21454/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Fran%C3%A7ois_Trausch",
+        "owner_raw": "Commune de Mamer",
+        "city": {
+          "name": "Mamer",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Mamer"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Union Titus Pétange",
+      "transfermarkt_url": "https://www.transfermarkt.com/union-titus-petingen/startseite/verein/48712",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/union-titus-petingen/besucherzahlenentwicklung/verein/48712",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Union_Titus_P%C3%A9tange",
+      "stadium": {
+        "name": "Stade Municipal Pétange",
+        "transfermarkt_url": "https://www.transfermarkt.com/union-titus-petingen/stadion/verein/48712/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Municipal,_P%C3%A9tange",
+        "owner_raw": "Commune de Pétange",
+        "city": {
+          "name": "Pétange",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/P%C3%A9tange"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FC UNA Strassen",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-una-strassen/startseite/verein/21835",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-una-strassen/besucherzahlenentwicklung/verein/21835",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_UNA_Strassen",
+      "stadium": {
+        "name": "Stade An de Millewisen",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-una-strassen/stadion/verein/21835/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Strassen,_Luxembourg",
+        "owner_raw": "Commune de Strassen",
+        "capacity": 2500,
+        "city": {
+          "name": "Strassen",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Strassen,_Luxembourg"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "US Mondorf-les-Bains",
+      "transfermarkt_url": "https://www.transfermarkt.com/us-mondorf-les-bains/startseite/verein/21274",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/us-mondorf-les-bains/besucherzahlenentwicklung/verein/21274",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/US_Mondorf-les-Bains",
+      "stadium": {
+        "name": "Stade John Grün",
+        "transfermarkt_url": "https://www.transfermarkt.com/us-mondorf-les-bains/stadion/verein/21274/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bad_Mondorf",
+        "owner_raw": "Commune de Mondorf-les-Bains",
+        "capacity": 3500,
+        "city": {
+          "name": "Mondorf-les-Bains",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bad_Mondorf"
+        }
+      },
+      "girone": null
+    }
+  ]
+}

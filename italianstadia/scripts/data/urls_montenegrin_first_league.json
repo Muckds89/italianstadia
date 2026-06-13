@@ -1,0 +1,171 @@
+{
+  "league": {
+    "name": "Montenegrin First Football League",
+    "country": "Montenegro",
+    "country_code": "ME",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "FK Budućnost Podgorica",
+      "transfermarkt_url": "https://www.transfermarkt.com/buducnost-podgorica/startseite/verein/4391",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/buducnost-podgorica/besucherzahlenentwicklung/verein/4391",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Budu%C4%87nost_Podgorica",
+      "stadium": {
+        "name": "Stadion pod Goricom",
+        "transfermarkt_url": "https://www.transfermarkt.com/buducnost-podgorica/stadion/verein/4391/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Podgorica_City_Stadium",
+        "city": {
+          "name": "Podgorica",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Podgorica"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Sutjeska Nikšić",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-sutjeska-niksic/startseite/verein/3070",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-sutjeska-niksic/besucherzahlenentwicklung/verein/3070",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Sutjeska_Nik%C5%A1i%C4%87",
+      "stadium": {
+        "name": "Gradski stadion Nikšić",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-sutjeska-niksic/stadion/verein/3070/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gradski_stadion_(Nik%C5%A1i%C4%87)",
+        "city": {
+          "name": "Nikšić",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Nik%C5%A1i%C4%87"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Mornar Bar",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-mornar-bar/startseite/verein/4639",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-mornar-bar/besucherzahlenentwicklung/verein/4639",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Mornar",
+      "stadium": {
+        "name": "Stadion Topolica",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-mornar-bar/stadion/verein/4639/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Topolica",
+        "city": {
+          "name": "Bar",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bar,_Montenegro"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "OFK Petrovac",
+      "transfermarkt_url": "https://www.transfermarkt.com/ofk-petrovac/startseite/verein/12889",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ofk-petrovac/besucherzahlenentwicklung/verein/12889",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/OFK_Petrovac",
+      "stadium": {
+        "name": "Stadion Mitar Mićo Goliš",
+        "transfermarkt_url": "https://www.transfermarkt.com/ofk-petrovac/stadion/verein/12889/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Mitar_Mi%C4%87o_Goli%C5%A1",
+        "city": {
+          "name": "Petrovac",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Petrovac,_Montenegro"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Dečić",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-decic-tuzi/startseite/verein/11065",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-decic-tuzi/besucherzahlenentwicklung/verein/11065",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_De%C4%8Di%C4%87",
+      "stadium": {
+        "name": "Stadion Tuško Polje",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-decic-tuzi/stadion/verein/11065/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Tu%C5%A1ko_Polje",
+        "city": {
+          "name": "Tuzi",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tuzi"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Arsenal Tivat",
+      "transfermarkt_url": "https://www.transfermarkt.com/arsenal-tivat/startseite/verein/37989",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/arsenal-tivat/besucherzahlenentwicklung/verein/37989",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Arsenal_Tivat",
+      "stadium": {
+        "name": "Stadion u Parku",
+        "transfermarkt_url": "https://www.transfermarkt.com/arsenal-tivat/stadion/verein/37989/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_u_Parku",
+        "city": {
+          "name": "Tivat",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tivat"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Bokelj Kotor",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-bokelj/startseite/verein/4949",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-bokelj/besucherzahlenentwicklung/verein/4949",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Bokelj",
+      "stadium": {
+        "name": "Stadion pod Vrmcem",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-bokelj/stadion/verein/4949/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_pod_Vrmcem",
+        "city": {
+          "name": "Kotor",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kotor"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Jedinstvo Bijelo Polje",
+      "transfermarkt_url": "https://www.transfermarkt.com/jedinstvo-bijelo-polje/startseite/verein/8357",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/jedinstvo-bijelo-polje/besucherzahlenentwicklung/verein/8357",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Jedinstvo_Bijelo_Polje",
+      "stadium": {
+        "name": "Gradski stadion Bijelo Polje",
+        "transfermarkt_url": "https://www.transfermarkt.com/jedinstvo-bijelo-polje/stadion/verein/8357/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gradski_stadion_(Bijelo_Polje)",
+        "city": {
+          "name": "Bijelo Polje",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bijelo_Polje"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "FK Jezero Plav",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-jezero/startseite/verein/21575",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-jezero/besucherzahlenentwicklung/verein/21575",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FK_Jezero",
+      "stadium": {
+        "name": "Stadion Pod Racinom",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-jezero/stadion/verein/21575/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Pod_Racinom",
+        "city": {
+          "name": "Plav",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Plav,_Montenegro"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "OFK Mladost Donja Gorica",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-mladost-donja-gorica/startseite/verein/76077",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-mladost-donja-gorica/besucherzahlenentwicklung/verein/76077",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/OFK_Mladost_Donja_Gorica",
+      "stadium": {
+        "name": "DG Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-mladost-donja-gorica/stadion/verein/76077/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/DG_Arena",
+        "city": {
+          "name": "Podgorica",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Podgorica"
+        }
+      },
+      "girone": null
+    }
+  ]
+}

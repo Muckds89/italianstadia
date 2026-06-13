@@ -304,6 +304,20 @@ Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 f
 - Slovak clubs: @title = "Slovak Champion"
 - Slovenian clubs: @title = "Slovenian Champion"
 - Irish clubs: @title = "Irish Champion"
+- Moldovan clubs: @title = "Moldavian Champion"  ← TM uses "Moldavian" not "Moldovan"
+- Ukrainian clubs: @title = "Ukrainian Champion"
+- Bosnian clubs: @title = "Bosnian-Herzegovinian Champion"  ← TM uses full hyphenated form
+- Macedonian clubs: @title = "Macedonian Champion"
+- Albanian clubs: @title = "Albanian Champion"  ← unverified; TM may not track in header
+- Latvian clubs: @title = "Latvian Champion"  ← unverified; TM may not track in header
+- Lithuanian clubs: @title = "Lithuanian Champion"
+- Estonian clubs: @title = "Estonian Champion"
+- Icelandic clubs: @title = "Icelandic Champion"  ← unverified; TM may not track in header
+- Finnish clubs: @title = "Finnish Champion"  ← unverified; TM may not track in header
+- Montenegrin clubs: @title = "Montenegrian Champion"  ← TM uses "Montenegrian" (with extra 'i'), verified via static HTML
+- Luxembourgish clubs: @title = "Luxembourgian Champion"  ← TM uses "Luxembourgian" (not "Luxembourgish"), verified via static HTML
+- Maltese clubs: @title = "Maltese Champion"  ← unverified; TM may not track in header
+- Welsh clubs: @title = "Welsh Champion"  ← unverified; TM may not track in header
 
 ## Data quality rules
 
