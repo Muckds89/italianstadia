@@ -7412,9 +7412,9 @@
   "pk": 529,
   "fields": {
     "name": "Kovalivka",
-    "population": null,
+    "population": 1500,
     "country": "Ukraine",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Kovalivka,_Kyiv_Oblast",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Kovalivka,_Bila_Tserkva_Raion,_Kyiv_Oblast",
     "image_url": null,
     "image_credit": null,
     "description": null
@@ -8036,7 +8036,7 @@
   "pk": 577,
   "fields": {
     "name": "Skopje",
-    "population": null,
+    "population": 526502,
     "country": "North Macedonia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Skopje",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Skopje_view_from_Kale_3.jpg",
@@ -8088,7 +8088,7 @@
   "pk": 581,
   "fields": {
     "name": "Kumanovo",
-    "population": null,
+    "population": 75051,
     "country": "North Macedonia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Kumanovo",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/20/%D0%9A%D1%83%D0%BC%D0%B0%D0%BD%D0%BE%D0%B2%D0%BE.jpg",
@@ -8101,7 +8101,7 @@
   "pk": 582,
   "fields": {
     "name": "Kratovo",
-    "population": null,
+    "population": 5791,
     "country": "North Macedonia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Kratovo",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
@@ -8127,7 +8127,7 @@
   "pk": 584,
   "fields": {
     "name": "Strumica",
-    "population": null,
+    "population": 33825,
     "country": "North Macedonia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Strumica",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/%D0%9F%D0%BB%D0%BE%D1%88%D1%82%D0%B0%D0%B4_%D0%93%D0%BE%D1%86%D0%B5_%D0%94%D0%B5%D0%BB%D1%87%D0%B5%D0%B2_%D0%A1%D1%82%D1%80%D1%83%D0%BC%D0%B8%D1%86%D0%B0_%282%29.jpg",
@@ -8283,7 +8283,7 @@
   "pk": 596,
   "fields": {
     "name": "Niederkorn",
-    "population": null,
+    "population": 8183,
     "country": "Luxembourg",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Niederkorn",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Vue_op_Nidderkuer_vum_Kierfecht-102.jpg",
@@ -8374,7 +8374,7 @@
   "pk": 603,
   "fields": {
     "name": "Rodange",
-    "population": null,
+    "population": 7878,
     "country": "Luxembourg",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Rodange",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Vue_vum_%C2%ABMirador_de_Lamadelaine%C2%BB-103.jpg",
@@ -8582,7 +8582,7 @@
   "pk": 619,
   "fields": {
     "name": "Vora",
-    "population": null,
+    "population": 21621,
     "country": "Albania",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Vora,_Albania",
     "image_url": null,
@@ -8595,7 +8595,7 @@
   "pk": 620,
   "fields": {
     "name": "Riga",
-    "population": null,
+    "population": 591882,
     "country": "Latvia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Riga",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Riga_%2833844464828%29.jpg",
@@ -8608,7 +8608,7 @@
   "pk": 621,
   "fields": {
     "name": "Liepāja",
-    "population": null,
+    "population": 67421,
     "country": "Latvia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Liep%C4%81ja",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Liepajas_Sveta_Jazepa_Romas_katolu_katedrale_2.jpg",
@@ -8803,7 +8803,7 @@
   "pk": 636,
   "fields": {
     "name": "Ballsh",
-    "population": null,
+    "population": 7657,
     "country": "Albania",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Ballsh",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/94/Ballsh.jpg",
