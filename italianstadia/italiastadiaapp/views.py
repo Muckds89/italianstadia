@@ -408,6 +408,42 @@ def team_list(request):
     })
 
 
+def stadium_development_list(request):
+    selected_country = request.GET.get("country", "").strip()
+
+    qs = (
+        StadiumDevelopment.objects
+        .select_related("stadium__city")
+        .prefetch_related("future_tenants")
+        .order_by("country", "estimated_opening", "name")
+    )
+    if selected_country:
+        qs = qs.filter(country=selected_country)
+
+    countries = list(
+        StadiumDevelopment.objects
+        .exclude(country__isnull=True).exclude(country="")
+        .values_list("country", flat=True)
+        .distinct().order_by("country")
+    )
+
+    by_country = defaultdict(list)
+    for dev in qs:
+        by_country[dev.country or "Unknown"].append(dev)
+
+    sections = [
+        {"country": c, "developments": devs,
+         "anchor": "country-" + c.lower().replace(" ", "-")}
+        for c, devs in sorted(by_country.items())
+    ]
+
+    return render(request, "stadium_development_list.html", {
+        "sections": sections,
+        "countries": countries,
+        "selected_country": selected_country,
+    })
+
+
 # ── Export API ────────────────────────────────────────────────────────────────
 
 _EXPORT_FIELDS = [

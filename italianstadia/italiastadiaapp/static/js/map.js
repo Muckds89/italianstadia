@@ -789,17 +789,14 @@ function loadDevelopmentStadiums() {
                 </div>
             `;                
 
-                marker.bindPopup(popupContent, {
-                    maxWidth: 260,
-                    minWidth: 220,
-                    autoPan: true,
-                    autoPanPadding: [20, 20],
-                    closeButton: true
-                });
                 marker.on("click", function () {
                     if (window.innerWidth <= 768) {
-                        marker.closePopup();
                         openMobileSheet(popupContent);
+                    } else {
+                        L.popup({ maxWidth: 260, minWidth: 220, autoPan: true, autoPanPadding: [20, 20] })
+                            .setLatLng(marker.getLatLng())
+                            .setContent(popupContent)
+                            .openOn(map);
                     }
                 });
 

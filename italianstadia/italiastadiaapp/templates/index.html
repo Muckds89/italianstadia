@@ -128,6 +128,11 @@
             transform: translateX(clamp(26px, 2.5vw, 38px));
         }
 
+        /* Stadiums dropdown opens on hover on desktop */
+        @media (min-width: 992px) {
+            .nav-hover-dropdown:hover .dropdown-menu { display: block; }
+        }
+
         .filter-area {
             min-width: 0;
             flex-shrink: 1;
@@ -167,8 +172,13 @@
 
         <!-- DESKTOP nav links: inline on lg+, hidden on mobile -->
         <ul class="navbar-nav flex-row me-auto d-none d-lg-flex">
-            <li class="nav-item">
-                <a class="nav-link px-2" href="{% url 'italiastadiaapp:stadium_list' %}">Stadiums</a>
+            <li class="nav-item dropdown nav-hover-dropdown">
+                <a class="nav-link px-2 dropdown-toggle" href="{% url 'italiastadiaapp:stadium_list' %}"
+                   data-bs-toggle="dropdown" role="button" aria-expanded="false">Stadiums</a>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="{% url 'italiastadiaapp:stadium_list' %}">Operational</a></li>
+                    <li><a class="dropdown-item" href="{% url 'italiastadiaapp:stadium_development_list' %}">Under Development</a></li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link px-2" href="{% url 'italiastadiaapp:team_list' %}">Teams</a>
@@ -185,11 +195,18 @@
                 Menu
             </button>
             <ul class="dropdown-menu dropdown-menu-dark">
+                <li><h6 class="dropdown-header">Stadiums</h6></li>
                 <li>
                     <a class="dropdown-item" href="{% url 'italiastadiaapp:stadium_list' %}">
-                        Stadiums
+                        Operational
                     </a>
                 </li>
+                <li>
+                    <a class="dropdown-item" href="{% url 'italiastadiaapp:stadium_development_list' %}">
+                        Under Development
+                    </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
                 <li>
                     <a class="dropdown-item" href="{% url 'italiastadiaapp:team_list' %}">
                         Teams
