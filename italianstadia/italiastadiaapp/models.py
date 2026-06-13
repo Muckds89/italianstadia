@@ -14,7 +14,7 @@ class Country(models.Model):
 
 
 class League(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, db_index=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE,
                                 related_name="leagues", db_index=True)
     division_level = models.IntegerField()  # 1=top flight, 2=second, ...
@@ -24,6 +24,7 @@ class League(models.Model):
 
     class Meta:
         ordering = ["country", "division_level"]
+        unique_together = [("name", "country")]
 
 
 class City(models.Model):

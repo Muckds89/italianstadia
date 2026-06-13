@@ -797,7 +797,10 @@ function loadDevelopmentStadiums() {
                     closeButton: true
                 });
                 marker.on("click", function () {
-                    if (window.innerWidth <= 768) openMobileSheet(popupContent);
+                    if (window.innerWidth <= 768) {
+                        marker.closePopup();
+                        openMobileSheet(popupContent);
+                    }
                 });
 
                 marker.addTo(map);
@@ -1278,7 +1281,10 @@ mapModeToggle.addEventListener("change", function () {
         operationalLabel.classList.add("active");
     }
 });
-developmentCountryFilter.addEventListener("change", applyDevelopmentFilters);
+developmentCountryFilter.addEventListener("change", function () {
+    developmentStadiumFilter.value = "";
+    applyDevelopmentFilters();
+});
 
 developmentStatusFilter.addEventListener("change", function () {
     developmentStadiumFilter.value = "";

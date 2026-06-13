@@ -47,6 +47,7 @@ def stadium_development_detail(request, pk):
         "development": development
     })
 
+@cache_page(60 * 60)
 def stadium_developments_geojson(request):
     features = []
 

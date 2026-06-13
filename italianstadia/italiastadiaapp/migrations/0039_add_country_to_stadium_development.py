@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 def backfill_italian_country(apps, schema_editor):
     StadiumDevelopment = apps.get_model("italiastadiaapp", "StadiumDevelopment")
-    StadiumDevelopment.objects.filter(pk__lte=10).update(country="Italy")
+    StadiumDevelopment.objects.filter(country__isnull=True).update(country="Italy")
 
 
 class Migration(migrations.Migration):
