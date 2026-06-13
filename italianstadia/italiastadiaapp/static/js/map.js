@@ -152,8 +152,8 @@ function updateClearButton() {
         countryFilter.value || leagueFilter.value ||
         gironeFilter.value  || ownershipFilter.value || stadiumFilter.value;
     const developmentActive =
-        developmentStatusFilter?.value || developmentYearFilter?.value ||
-        developmentStadiumFilter?.value;
+        developmentCountryFilter?.value || developmentStatusFilter?.value ||
+        developmentYearFilter?.value    || developmentStadiumFilter?.value;
     const active = currentLayerMode === "development" ? developmentActive : operationalActive;
     clearFiltersBtn.style.display = active ? "inline-block" : "none";
     updateSelectHighlights();
@@ -161,6 +161,7 @@ function updateClearButton() {
 
 clearFiltersBtn.addEventListener("click", function () {
     if (currentLayerMode === "development") {
+        developmentCountryFilter.value = "";
         developmentStatusFilter.value  = "";
         developmentYearFilter.value    = "";
         developmentStadiumFilter.value = "";
@@ -185,6 +186,7 @@ clearFiltersBtn.addEventListener("click", function () {
     updateClearButton();
 });
 
+const developmentCountryFilter = document.getElementById("developmentCountryFilter");
 const developmentStatusFilter = document.getElementById("developmentStatusFilter");
 const developmentYearFilter = document.getElementById("developmentYearFilter");
 const developmentStadiumFilter = document.getElementById("developmentStadiumFilter");
@@ -716,6 +718,8 @@ function loadDevelopmentStadiums() {
                 marker.estimatedOpening = props.estimated_opening
                     ? String(props.estimated_opening)
                     : "";
+                marker.country = props.country || "";
+                marker.city    = props.city    || "";
 
                 // Store base radius so mouseout can restore it exactly
                 const baseRadius = isMobile ? 13 : 7;
@@ -785,17 +789,16 @@ function loadDevelopmentStadiums() {
                 </div>
             `;                
 
-                if (isMobile) {
-                    marker.on("click", function () { openMobileSheet(popupContent); });
-                } else {
-                    marker.bindPopup(popupContent, {
-                        maxWidth: 260,
-                        minWidth: 220,
-                        autoPan: true,
-                        autoPanPadding: [20, 20],
-                        closeButton: true
-                    });
-                }
+                marker.bindPopup(popupContent, {
+                    maxWidth: 260,
+                    minWidth: 220,
+                    autoPan: true,
+                    autoPanPadding: [20, 20],
+                    closeButton: true
+                });
+                marker.on("click", function () {
+                    if (window.innerWidth <= 768) openMobileSheet(popupContent);
+                });
 
                 marker.addTo(map);
                 developmentMarkers.push(marker);
@@ -817,8 +820,16 @@ function getDevelopmentMarkerColor(status) {
 }
 
 function updateDevelopmentDropdownOptions() {
+    const countries = [...new Set(developmentMarkers.map(m => m.country).filter(Boolean))].sort();
     const statuses = [...new Set(developmentMarkers.map(m => m.status).filter(Boolean))].sort();
     const years = [...new Set(developmentMarkers.map(m => m.estimatedOpening).filter(Boolean))].sort();
+
+    developmentCountryFilter.innerHTML = `<option value="">All countries</option>`;
+    countries.forEach(c => {
+        const opt = document.createElement("option");
+        opt.value = opt.textContent = c;
+        developmentCountryFilter.appendChild(opt);
+    });
 
     developmentStatusFilter.innerHTML = `<option value="">All statuses</option>`;
     statuses.forEach(status => {
@@ -847,6 +858,7 @@ function updateDevelopmentDropdownOptions() {
         });
 }
 function applyDevelopmentFilters() {
+    const selectedCountry = developmentCountryFilter.value;
     const selectedStatus = developmentStatusFilter.value;
     const selectedYear = developmentYearFilter.value;
     const selectedProject = developmentStadiumFilter.value;
@@ -854,11 +866,12 @@ function applyDevelopmentFilters() {
     let visibleMarkers = [];
 
     developmentMarkers.forEach(marker => {
+        const countryMatches = !selectedCountry || marker.country === selectedCountry;
         const statusMatches = !selectedStatus || marker.status === selectedStatus;
         const yearMatches = !selectedYear || marker.estimatedOpening === selectedYear;
         const projectMatches = !selectedProject || marker.developmentId === selectedProject;
 
-        if (statusMatches && yearMatches && projectMatches) {
+        if (countryMatches && statusMatches && yearMatches && projectMatches) {
             marker.addTo(map);
             visibleMarkers.push(marker);
         } else {
@@ -1265,6 +1278,8 @@ mapModeToggle.addEventListener("change", function () {
         operationalLabel.classList.add("active");
     }
 });
+developmentCountryFilter.addEventListener("change", applyDevelopmentFilters);
+
 developmentStatusFilter.addEventListener("change", function () {
     developmentStadiumFilter.value = "";
     applyDevelopmentFilters();

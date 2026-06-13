@@ -50,9 +50,18 @@ def stadium_development_detail(request, pk):
 def stadium_developments_geojson(request):
     features = []
 
-    for s in StadiumDevelopment.objects.all():
+    qs = StadiumDevelopment.objects.select_related(
+        "stadium__city"
+    ).prefetch_related("future_tenants")
+
+    for s in qs:
         if s.latitude is None or s.longitude is None:
             continue
+
+        country = s.country or (
+            s.stadium.city.country if s.stadium and s.stadium.city else ""
+        )
+        city = s.stadium.city.name if s.stadium and s.stadium.city else ""
 
         features.append({
             "type": "Feature",
@@ -73,6 +82,12 @@ def stadium_developments_geojson(request):
                 "source_url": s.source_url or "",
                 "image_url": s.image_url or "",
                 "notes": s.notes or "",
+                "country": country,
+                "city": city,
+                "future_tenants": [
+                    {"id": t.id, "name": t.name, "image_url": t.image_url or ""}
+                    for t in s.future_tenants.all()
+                ],
             }
         })
 

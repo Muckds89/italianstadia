@@ -149,6 +149,7 @@ def test_stadium_developments_geojson(client):
         estimated_opening=2028,
         latitude=45.0,
         longitude=9.0,
+        country="Italy",
     )
 
     response = client.get(reverse("italiastadiaapp:stadium_developments_geojson"))
@@ -159,6 +160,13 @@ def test_stadium_developments_geojson(client):
 
     assert data["type"] == "FeatureCollection"
     assert len(data["features"]) == 1
+
+    props = data["features"][0]["properties"]
+    assert "country" in props
+    assert "city" in props
+    assert "future_tenants" in props
+    assert isinstance(props["future_tenants"], list)
+    assert props["country"] == "Italy"
 
 
 # ---------------------------------------------------------------------------

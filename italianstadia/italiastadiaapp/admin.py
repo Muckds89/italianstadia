@@ -71,6 +71,7 @@ from .models import StadiumDevelopment, LastRefresh
 class StadiumDevelopmentAdmin(admin.ModelAdmin):
     list_display = (
         "name",
+        "country",
         "project_type",
         "status",
         "future_capacity",
@@ -84,8 +85,8 @@ class StadiumDevelopmentAdmin(admin.ModelAdmin):
         "image_credit",
         "notes",
     )
-    list_filter = ("project_type", "status")
-    search_fields = ("name", "notes", "architect", "developer")
+    list_filter = ("project_type", "status", "country")
+    search_fields = ("name", "country", "notes", "architect", "developer")
 
 
 @admin.register(LastRefresh)

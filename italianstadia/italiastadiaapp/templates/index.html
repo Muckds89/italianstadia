@@ -97,12 +97,15 @@
             white-space: nowrap;
         }
 
-        /* On narrow screens, hide the mode switch labels so the toggle
-           doesn't eat the entire navbar row. The coloured slider is
-           self-explanatory (green = Operational, amber/red = Development). */
+        /* On narrow screens show abbreviated labels via data-short attribute
+           so the toggle always communicates which mode it switches between. */
         @media (max-width: 991px) {
-            .mode-switch-wrap .mode-label { display: none; }
-            .mode-switch-wrap { gap: 0; margin-right: 6px; }
+            .mode-switch-wrap .mode-label { font-size: 0; }
+            .mode-switch-wrap .mode-label::before {
+                content: attr(data-short);
+                font-size: 12px;
+            }
+            .mode-switch-wrap { gap: 4px; margin-right: 6px; }
         }
 
         .mode-switch-wrap {
@@ -201,12 +204,12 @@
         </div>
 
         <div class="mode-switch-wrap">
-            <span id="operationalLabel" class="mode-label active">Operational</span>
+            <span id="operationalLabel" class="mode-label active" data-short="Ops">Operational</span>
             <label class="mode-switch">
                 <input type="checkbox" id="mapModeToggle">
                 <span class="mode-slider"></span>
             </label>
-            <span id="developmentLabel" class="mode-label">Under Development</span>
+            <span id="developmentLabel" class="mode-label" data-short="Dev">Under Development</span>
         </div>
 
         <!-- Flex break: push filters to second row -->
@@ -261,6 +264,10 @@
             </div>
 
             <div id="developmentFilters" class="d-none align-items-center flex-wrap gap-2">
+                <select id="developmentCountryFilter" class="form-select form-select-sm">
+                    <option value="">All countries</option>
+                </select>
+
                 <select id="developmentStatusFilter" class="form-select">
                     <option value="">All statuses</option>
                 </select>
