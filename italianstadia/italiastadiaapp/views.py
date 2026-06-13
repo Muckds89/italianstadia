@@ -410,6 +410,7 @@ def team_list(request):
 
 def stadium_development_list(request):
     selected_country = request.GET.get("country", "").strip()
+    selected_status  = request.GET.get("status",  "").strip()
 
     qs = (
         StadiumDevelopment.objects
@@ -419,6 +420,8 @@ def stadium_development_list(request):
     )
     if selected_country:
         qs = qs.filter(country=selected_country)
+    if selected_status:
+        qs = qs.filter(status=selected_status)
 
     countries = list(
         StadiumDevelopment.objects
@@ -426,6 +429,8 @@ def stadium_development_list(request):
         .values_list("country", flat=True)
         .distinct().order_by("country")
     )
+
+    status_choices = StadiumDevelopment._meta.get_field("status").choices
 
     by_country = defaultdict(list)
     for dev in qs:
@@ -441,6 +446,8 @@ def stadium_development_list(request):
         "sections": sections,
         "countries": countries,
         "selected_country": selected_country,
+        "status_choices": status_choices,
+        "selected_status": selected_status,
     })
 
 

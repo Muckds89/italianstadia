@@ -789,8 +789,9 @@ function loadDevelopmentStadiums() {
                 </div>
             `;                
 
-                marker.on("click", function () {
-                    if (window.innerWidth <= 768) {
+                marker.on("click", function (e) {
+                    L.DomEvent.stopPropagation(e);
+                    if (isMobile) {
                         openMobileSheet(popupContent);
                     } else {
                         L.popup({ maxWidth: 260, minWidth: 220, autoPan: true, autoPanPadding: [20, 20] })
