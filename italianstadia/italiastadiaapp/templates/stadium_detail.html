@@ -132,17 +132,19 @@
                         <h6>Tournaments</h6>
                         <ul class="list-group list-group-flush">
                             {% for t in stadium.tournaments %}
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <span>
-                                    <a href="{% url 'italiastadiaapp:tournament_detail' t.tournament|slugify %}" style="color:#0d6efd;text-decoration:underline;">
-                                        <strong>{{ t.tournament }}</strong>
-                                    </a>
-                                    {% if t.year %} ({{ t.year }}){% endif %}
-                                    {% if t.matches %} — {{ t.matches }} match{{ t.matches|pluralize:"es" }}{% endif %}
-                                </span>
-                                <span class="badge {% if t.status == 'CONFIRMED' %}bg-success{% else %}bg-warning text-dark{% endif %}">
-                                    {{ t.status|default:"—" }}
-                                </span>
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <a href="/tournaments/{{ t.tournament|slugify }}/"
+                                           class="btn btn-sm btn-outline-primary me-2">
+                                            {{ t.tournament }}{% if t.year %} {{ t.year }}{% endif %}
+                                        </a>
+                                        {% if t.matches %}<span class="text-muted small">{{ t.matches }} match{{ t.matches|pluralize:"es" }}</span>{% endif %}
+                                    </div>
+                                    <span class="badge {% if t.status == 'CONFIRMED' %}bg-success{% else %}bg-warning text-dark{% endif %}">
+                                        {{ t.status|default:"—" }}
+                                    </span>
+                                </div>
                             </li>
                             {% endfor %}
                         </ul>
