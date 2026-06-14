@@ -171,6 +171,18 @@ class Team(models.Model):
 
     uefa_coefficient = models.FloatField(null=True, blank=True)
 
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base = slugify(self.name) or f"team-{self.pk or 0}"
+            slug = base
+            n = 2
+            while Team.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base}-{n}"
+                n += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name

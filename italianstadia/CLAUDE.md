@@ -184,9 +184,9 @@ Scraped fields that may be missing **must** have `blank=True, null=True` — a `
 
 `COUNTRY_FLAGS` in `views.py` maps country names to emoji flags for the tournament detail page. It currently covers England, Wales, Scotland, Ireland, Italy, Turkey. **Extend this dict whenever a new host country is added to a tournament** — missing entries render as an empty string (no flag shown, not an error).
 
-### Stadium.slug constraint
+### Auto-slug constraint (Stadium and Team)
 
-`Stadium.slug` is `unique=True` but not `null=True`. The `save()` method auto-generates slugs, so normal ORM usage (`create()`, `get_or_create()`, `save()`) is safe. **Never use `bulk_create()` on Stadium** — it bypasses `save()`, leaving slugs as `""`, and the second such row violates the `UNIQUE` constraint.
+`Stadium.slug` and `Team.slug` are both `unique=True` but not `null=True`. Each model's `save()` auto-generates the slug, so normal ORM usage (`create()`, `get_or_create()`, `save()`) is safe. **Never use `bulk_create()` on Stadium or Team** — it bypasses `save()`, leaving slugs as `""`, and the second such row violates the `UNIQUE` constraint.
 
 ### N+1 query prevention
 
