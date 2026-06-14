@@ -514,8 +514,8 @@ function buildPopupContent(props) {
                 ${!hasMultiple && t.image_url
                     ? `<img src="${t.image_url}" alt="${t.name}" class="popup-single-logo">`
                     : ""}
-                <strong>${t.name}</strong><br>
-                <span style="font-size:0.8em">${t.league_name || t.tier_name || "Unknown"}${t.girone ? ` — Girone ${t.girone}` : ""}</span><br>
+                <strong>${t.name}</strong>${t.is_national ? ' <span style="font-size:0.75em;background:#0d6efd;color:#fff;border-radius:3px;padding:1px 4px">National</span>' : ''}<br>
+                <span style="font-size:0.8em">${t.is_national ? "National Team Stadium" : (t.league_name || t.tier_name || "Unknown")}${t.girone ? ` — Girone ${t.girone}` : ""}</span><br>
                 ${t.wikipedia_url    ? `<a href="${t.wikipedia_url}" target="_blank" style="font-size:0.8em">Team Wikipedia</a><br>` : ""}
                 ${t.transfermarkt_url ? `<a href="${t.transfermarkt_url}" target="_blank" style="font-size:0.8em">Team Transfermarkt</a><br>` : ""}
             </div>
@@ -613,7 +613,8 @@ function applyFilters(updateStadiumDropdown = true) {
             marker.leagues.some(l => l.country === selectedCountry);
         const inSelectedLeague  = selectedLeague &&
             marker.leagues.some(l => l.id === selectedLeague);
-        const isTopTier = marker.primaryLeague?.divisionLevel === 1;
+        const isTopTier    = marker.primaryLeague?.divisionLevel === 1;
+        const isNational   = marker.isNational;
 
         const ownershipMatches =
             !selectedOwnership || marker.ownership === selectedOwnership;
@@ -630,8 +631,8 @@ function applyFilters(updateStadiumDropdown = true) {
         let role; // "active" | "context-2" | "context-3" | "hidden"
 
         if (!selectedCountry && !selectedLeague) {
-            // Default: show only tier-1 teams from all countries
-            role = isTopTier ? "active" : "hidden";
+            // Default: show tier-1 clubs + national team stadiums
+            role = (isTopTier || isNational) ? "active" : "hidden";
         } else if (selectedLeague) {
             // League selected: show ONLY that league — no context markers from other tiers
             role = inSelectedLeague ? "active" : "hidden";
@@ -639,7 +640,7 @@ function applyFilters(updateStadiumDropdown = true) {
             // Country only: all tiers visible with hierarchy
             if (!inSelectedCountry) {
                 role = "hidden";
-            } else if (isTopTier) {
+            } else if (isTopTier || isNational) {
                 role = "active";
             } else {
                 role = (marker.primaryLeague?.divisionLevel ?? 99) <= 2 ? "context-2" : "context-3";
@@ -1128,6 +1129,7 @@ fetch(document.getElementById("map").dataset.stadiumsUrl)
                 : (props.country || "");
 
             marker.gironi = marker.teams.map(t => t.girone || "");
+            marker.isNational = marker.teams.some(t => t.is_national);
 
             marker.ownership    = props.ownership ? String(props.ownership) : "UNKNOWN";
             marker.surface      = props.surface || "";

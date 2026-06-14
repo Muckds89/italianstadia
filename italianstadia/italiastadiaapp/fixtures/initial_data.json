@@ -882,6 +882,87 @@
   }
 },
 {
+  "model": "italiastadiaapp.league",
+  "pk": 50,
+  "fields": {
+    "name": "National Football Team",
+    "country": 6,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 51,
+  "fields": {
+    "name": "National Football Team",
+    "country": 3,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 52,
+  "fields": {
+    "name": "National Football Team",
+    "country": 52,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 53,
+  "fields": {
+    "name": "National Football Team",
+    "country": 43,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 54,
+  "fields": {
+    "name": "National Football Team",
+    "country": 26,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 55,
+  "fields": {
+    "name": "National Football Team",
+    "country": 36,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 56,
+  "fields": {
+    "name": "National Football Team",
+    "country": 5,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 57,
+  "fields": {
+    "name": "National Football Team",
+    "country": 13,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 58,
+  "fields": {
+    "name": "National Football Team",
+    "country": 50,
+    "division_level": 0
+  }
+},
+{
   "model": "italiastadiaapp.city",
   "pk": 6,
   "fields": {
@@ -13627,7 +13708,7 @@
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/St._James%27_Park",
     "transfermarkt_url": "https://www.transfermarkt.com/st-james-park/stadion/stadion/70",
-    "image_url": "https://upload.wikimedia.org/wikipedia/en/d/de/St_James%27_Park.png",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Newcastle_st-james-park_stadium.jpg/1280px-Newcastle_st-james-park_stadium.jpg",
     "image_credit": null,
     "extra_images": [],
     "description": null
@@ -32045,9 +32126,36 @@
   }
 },
 {
+  "model": "italiastadiaapp.stadium",
+  "pk": 785,
+  "fields": {
+    "name": "Stade de France",
+    "capacity": 81338,
+    "address": null,
+    "year_of_construction": null,
+    "city": 138,
+    "latitude": "48.924400",
+    "longitude": "2.360100",
+    "owner_raw": null,
+    "ownership": "PUBLIC",
+    "slug": "stade-de-france",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_France",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Stade_de_France_-_juin_2014_%28cropped%29.jpg/1280px-Stade_de_France_-_juin_2014_%28cropped%29.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null
+  }
+},
+{
   "model": "italiastadiaapp.team",
   "pk": 7,
   "fields": {
+    "is_national": false,
     "name": "AC Milan",
     "founded": "1899-01-01",
     "tier": 1,
@@ -32071,6 +32179,7 @@
   "model": "italiastadiaapp.team",
   "pk": 8,
   "fields": {
+    "is_national": false,
     "name": "Inter Milan",
     "founded": "1908-01-01",
     "tier": 1,
@@ -32094,6 +32203,7 @@
   "model": "italiastadiaapp.team",
   "pk": 35,
   "fields": {
+    "is_national": false,
     "name": "Juventus FC",
     "founded": "1897-01-01",
     "tier": 1,
@@ -32117,6 +32227,7 @@
   "model": "italiastadiaapp.team",
   "pk": 36,
   "fields": {
+    "is_national": false,
     "name": "Torino",
     "founded": "1906-01-01",
     "tier": 1,
@@ -32140,6 +32251,7 @@
   "model": "italiastadiaapp.team",
   "pk": 37,
   "fields": {
+    "is_national": false,
     "name": "AS Roma",
     "founded": "1927-01-01",
     "tier": 1,
@@ -32163,6 +32275,7 @@
   "model": "italiastadiaapp.team",
   "pk": 38,
   "fields": {
+    "is_national": false,
     "name": "Lazio",
     "founded": "1900-01-01",
     "tier": 1,
@@ -32186,6 +32299,7 @@
   "model": "italiastadiaapp.team",
   "pk": 39,
   "fields": {
+    "is_national": false,
     "name": "Napoli",
     "founded": "1926-01-01",
     "tier": 1,
@@ -32209,6 +32323,7 @@
   "model": "italiastadiaapp.team",
   "pk": 40,
   "fields": {
+    "is_national": false,
     "name": "Atalanta",
     "founded": "1907-01-01",
     "tier": 1,
@@ -32232,6 +32347,7 @@
   "model": "italiastadiaapp.team",
   "pk": 41,
   "fields": {
+    "is_national": false,
     "name": "Bologna",
     "founded": "1909-01-01",
     "tier": 1,
@@ -32255,6 +32371,7 @@
   "model": "italiastadiaapp.team",
   "pk": 42,
   "fields": {
+    "is_national": false,
     "name": "Fiorentina",
     "founded": "1926-01-01",
     "tier": 1,
@@ -32278,6 +32395,7 @@
   "model": "italiastadiaapp.team",
   "pk": 43,
   "fields": {
+    "is_national": false,
     "name": "Genoa",
     "founded": "1893-01-01",
     "tier": 1,
@@ -32301,6 +32419,7 @@
   "model": "italiastadiaapp.team",
   "pk": 44,
   "fields": {
+    "is_national": false,
     "name": "Lecce",
     "founded": "1908-01-01",
     "tier": 1,
@@ -32324,6 +32443,7 @@
   "model": "italiastadiaapp.team",
   "pk": 45,
   "fields": {
+    "is_national": false,
     "name": "Udinese",
     "founded": "1896-01-01",
     "tier": 1,
@@ -32347,6 +32467,7 @@
   "model": "italiastadiaapp.team",
   "pk": 46,
   "fields": {
+    "is_national": false,
     "name": "Verona",
     "founded": "1903-01-01",
     "tier": 1,
@@ -32370,6 +32491,7 @@
   "model": "italiastadiaapp.team",
   "pk": 47,
   "fields": {
+    "is_national": false,
     "name": "Sassuolo",
     "founded": "1920-01-01",
     "tier": 1,
@@ -32393,6 +32515,7 @@
   "model": "italiastadiaapp.team",
   "pk": 49,
   "fields": {
+    "is_national": false,
     "name": "Cremonese",
     "founded": "1903-01-01",
     "tier": 1,
@@ -32416,6 +32539,7 @@
   "model": "italiastadiaapp.team",
   "pk": 50,
   "fields": {
+    "is_national": false,
     "name": "Monza",
     "founded": "1912-01-01",
     "tier": 2,
@@ -32439,6 +32563,7 @@
   "model": "italiastadiaapp.team",
   "pk": 51,
   "fields": {
+    "is_national": false,
     "name": "Frosinone",
     "founded": "1911-01-01",
     "tier": 2,
@@ -32462,6 +32587,7 @@
   "model": "italiastadiaapp.team",
   "pk": 52,
   "fields": {
+    "is_national": false,
     "name": "Parma",
     "founded": "1913-01-01",
     "tier": 1,
@@ -32485,6 +32611,7 @@
   "model": "italiastadiaapp.team",
   "pk": 53,
   "fields": {
+    "is_national": false,
     "name": "Cagliari",
     "founded": "1920-01-01",
     "tier": 1,
@@ -32508,6 +32635,7 @@
   "model": "italiastadiaapp.team",
   "pk": 54,
   "fields": {
+    "is_national": false,
     "name": "Pisa",
     "founded": "1909-01-01",
     "tier": 1,
@@ -32531,6 +32659,7 @@
   "model": "italiastadiaapp.team",
   "pk": 55,
   "fields": {
+    "is_national": false,
     "name": "Venezia FC",
     "founded": "1907-01-01",
     "tier": 2,
@@ -32554,6 +32683,7 @@
   "model": "italiastadiaapp.team",
   "pk": 57,
   "fields": {
+    "is_national": false,
     "name": "Cosenza Calcio",
     "founded": "1913-01-01",
     "tier": 3,
@@ -32577,6 +32707,7 @@
   "model": "italiastadiaapp.team",
   "pk": 58,
   "fields": {
+    "is_national": false,
     "name": "Spezia Calcio",
     "founded": "1906-01-01",
     "tier": 2,
@@ -32600,6 +32731,7 @@
   "model": "italiastadiaapp.team",
   "pk": 59,
   "fields": {
+    "is_national": false,
     "name": "UC Sampdoria",
     "founded": "1946-01-01",
     "tier": 2,
@@ -32623,6 +32755,7 @@
   "model": "italiastadiaapp.team",
   "pk": 60,
   "fields": {
+    "is_national": false,
     "name": "Palermo FC",
     "founded": "1900-01-01",
     "tier": 2,
@@ -32646,6 +32779,7 @@
   "model": "italiastadiaapp.team",
   "pk": 61,
   "fields": {
+    "is_national": false,
     "name": "US Catanzaro",
     "founded": "1928-01-01",
     "tier": 2,
@@ -32669,6 +32803,7 @@
   "model": "italiastadiaapp.team",
   "pk": 62,
   "fields": {
+    "is_national": false,
     "name": "Bari",
     "founded": "1908-01-01",
     "tier": 2,
@@ -32692,6 +32827,7 @@
   "model": "italiastadiaapp.team",
   "pk": 63,
   "fields": {
+    "is_national": false,
     "name": "FC Empoli",
     "founded": "1920-01-01",
     "tier": 2,
@@ -32715,6 +32851,7 @@
   "model": "italiastadiaapp.team",
   "pk": 64,
   "fields": {
+    "is_national": false,
     "name": "Modena FC",
     "founded": "1912-01-01",
     "tier": 2,
@@ -32738,6 +32875,7 @@
   "model": "italiastadiaapp.team",
   "pk": 65,
   "fields": {
+    "is_national": false,
     "name": "Cesena FC",
     "founded": "2018-01-01",
     "tier": 2,
@@ -32761,6 +32899,7 @@
   "model": "italiastadiaapp.team",
   "pk": 66,
   "fields": {
+    "is_national": false,
     "name": "Mantova 1911",
     "founded": "1911-01-01",
     "tier": 2,
@@ -32784,6 +32923,7 @@
   "model": "italiastadiaapp.team",
   "pk": 67,
   "fields": {
+    "is_national": false,
     "name": "Carrarese Calcio",
     "founded": "1908-01-01",
     "tier": 2,
@@ -32807,6 +32947,7 @@
   "model": "italiastadiaapp.team",
   "pk": 68,
   "fields": {
+    "is_national": false,
     "name": "SS Juve Stabia",
     "founded": "1907-01-01",
     "tier": 2,
@@ -32830,6 +32971,7 @@
   "model": "italiastadiaapp.team",
   "pk": 69,
   "fields": {
+    "is_national": false,
     "name": "US Avellino 1912",
     "founded": "1912-01-01",
     "tier": 2,
@@ -32853,6 +32995,7 @@
   "model": "italiastadiaapp.team",
   "pk": 70,
   "fields": {
+    "is_national": false,
     "name": "Delfino Pescara 1936",
     "founded": "1936-01-01",
     "tier": 2,
@@ -32876,6 +33019,7 @@
   "model": "italiastadiaapp.team",
   "pk": 71,
   "fields": {
+    "is_national": false,
     "name": "FC Sudtrol",
     "founded": "1974-01-01",
     "tier": 2,
@@ -32899,6 +33043,7 @@
   "model": "italiastadiaapp.team",
   "pk": 72,
   "fields": {
+    "is_national": false,
     "name": "AC Reggiana 1919",
     "founded": "1919-01-01",
     "tier": 2,
@@ -32922,6 +33067,7 @@
   "model": "italiastadiaapp.team",
   "pk": 73,
   "fields": {
+    "is_national": false,
     "name": "Calcio Padova",
     "founded": "1910-01-01",
     "tier": 2,
@@ -32945,6 +33091,7 @@
   "model": "italiastadiaapp.team",
   "pk": 74,
   "fields": {
+    "is_national": false,
     "name": "Virtus Entella",
     "founded": "1914-01-01",
     "tier": 2,
@@ -32968,6 +33115,7 @@
   "model": "italiastadiaapp.team",
   "pk": 75,
   "fields": {
+    "is_national": false,
     "name": "Inter U23",
     "founded": null,
     "tier": 3,
@@ -32991,6 +33139,7 @@
   "model": "italiastadiaapp.team",
   "pk": 76,
   "fields": {
+    "is_national": false,
     "name": "LR Vicenza",
     "founded": "1902-01-01",
     "tier": 3,
@@ -33014,6 +33163,7 @@
   "model": "italiastadiaapp.team",
   "pk": 77,
   "fields": {
+    "is_national": false,
     "name": "Union Brescia",
     "founded": "2025-01-01",
     "tier": 3,
@@ -33037,6 +33187,7 @@
   "model": "italiastadiaapp.team",
   "pk": 78,
   "fields": {
+    "is_national": false,
     "name": "AS Cittadella",
     "founded": "1973-01-01",
     "tier": 3,
@@ -33060,6 +33211,7 @@
   "model": "italiastadiaapp.team",
   "pk": 79,
   "fields": {
+    "is_national": false,
     "name": "Calcio Lecco 1912",
     "founded": "1912-01-01",
     "tier": 3,
@@ -33083,6 +33235,7 @@
   "model": "italiastadiaapp.team",
   "pk": 80,
   "fields": {
+    "is_national": false,
     "name": "AC Trento",
     "founded": "1921-01-01",
     "tier": 3,
@@ -33106,6 +33259,7 @@
   "model": "italiastadiaapp.team",
   "pk": 81,
   "fields": {
+    "is_national": false,
     "name": "Dolomiti Bellunesi",
     "founded": "2021-01-01",
     "tier": 3,
@@ -33129,6 +33283,7 @@
   "model": "italiastadiaapp.team",
   "pk": 82,
   "fields": {
+    "is_national": false,
     "name": "Alcione Milano",
     "founded": "1952-01-01",
     "tier": 3,
@@ -33152,6 +33307,7 @@
   "model": "italiastadiaapp.team",
   "pk": 83,
   "fields": {
+    "is_national": false,
     "name": "Juventus Next Gen",
     "founded": "2018-01-01",
     "tier": 3,
@@ -33175,6 +33331,7 @@
   "model": "italiastadiaapp.team",
   "pk": 84,
   "fields": {
+    "is_national": false,
     "name": "SS Arezzo",
     "founded": "1923-01-01",
     "tier": 3,
@@ -33198,6 +33355,7 @@
   "model": "italiastadiaapp.team",
   "pk": 85,
   "fields": {
+    "is_national": false,
     "name": "Ascoli Calcio",
     "founded": "1898-01-01",
     "tier": 3,
@@ -33221,6 +33379,7 @@
   "model": "italiastadiaapp.team",
   "pk": 86,
   "fields": {
+    "is_national": false,
     "name": "Ternana Calcio",
     "founded": "1925-01-01",
     "tier": 3,
@@ -33244,6 +33403,7 @@
   "model": "italiastadiaapp.team",
   "pk": 87,
   "fields": {
+    "is_national": false,
     "name": "Ravenna FC",
     "founded": "1913-01-01",
     "tier": 3,
@@ -33267,6 +33427,7 @@
   "model": "italiastadiaapp.team",
   "pk": 88,
   "fields": {
+    "is_national": false,
     "name": "AC Perugia Calcio",
     "founded": "1905-01-01",
     "tier": 3,
@@ -33290,6 +33451,7 @@
   "model": "italiastadiaapp.team",
   "pk": 89,
   "fields": {
+    "is_national": false,
     "name": "Forlì FC",
     "founded": "1919-01-01",
     "tier": 3,
@@ -33313,6 +33475,7 @@
   "model": "italiastadiaapp.team",
   "pk": 90,
   "fields": {
+    "is_national": false,
     "name": "US Città di Pontedera",
     "founded": "1911-01-01",
     "tier": 3,
@@ -33336,6 +33499,7 @@
   "model": "italiastadiaapp.team",
   "pk": 91,
   "fields": {
+    "is_national": false,
     "name": "Atalanta U23",
     "founded": null,
     "tier": 3,
@@ -33359,6 +33523,7 @@
   "model": "italiastadiaapp.team",
   "pk": 92,
   "fields": {
+    "is_national": false,
     "name": "Benevento Calcio",
     "founded": "1929-01-01",
     "tier": 3,
@@ -33382,6 +33547,7 @@
   "model": "italiastadiaapp.team",
   "pk": 93,
   "fields": {
+    "is_national": false,
     "name": "US Salernitana 1919",
     "founded": "1919-01-01",
     "tier": 3,
@@ -33405,6 +33571,7 @@
   "model": "italiastadiaapp.team",
   "pk": 94,
   "fields": {
+    "is_national": false,
     "name": "Catania FC",
     "founded": "1929-01-01",
     "tier": 3,
@@ -33428,6 +33595,7 @@
   "model": "italiastadiaapp.team",
   "pk": 95,
   "fields": {
+    "is_national": false,
     "name": "Casertana FC",
     "founded": "1908-01-01",
     "tier": 3,
@@ -33451,6 +33619,7 @@
   "model": "italiastadiaapp.team",
   "pk": 96,
   "fields": {
+    "is_national": false,
     "name": "Potenza Calcio",
     "founded": "1918-01-01",
     "tier": 3,
@@ -33474,6 +33643,7 @@
   "model": "italiastadiaapp.team",
   "pk": 97,
   "fields": {
+    "is_national": false,
     "name": "Casarano Calcio",
     "founded": "1927-01-01",
     "tier": 3,
@@ -33497,6 +33667,7 @@
   "model": "italiastadiaapp.team",
   "pk": 98,
   "fields": {
+    "is_national": false,
     "name": "FC Crotone",
     "founded": "1922-01-01",
     "tier": 3,
@@ -33520,6 +33691,7 @@
   "model": "italiastadiaapp.team",
   "pk": 99,
   "fields": {
+    "is_national": false,
     "name": "Calcio Foggia 1920",
     "founded": "1920-01-01",
     "tier": 3,
@@ -33543,6 +33715,7 @@
   "model": "italiastadiaapp.team",
   "pk": 100,
   "fields": {
+    "is_national": false,
     "name": "Giugliano Calcio 1928",
     "founded": "1928-01-01",
     "tier": 3,
@@ -33566,6 +33739,7 @@
   "model": "italiastadiaapp.team",
   "pk": 101,
   "fields": {
+    "is_national": false,
     "name": "FC Trapani 1905",
     "founded": "1905-01-01",
     "tier": 3,
@@ -33589,6 +33763,7 @@
   "model": "italiastadiaapp.team",
   "pk": 102,
   "fields": {
+    "is_national": false,
     "name": "Latina Calcio 1932",
     "founded": "1945-01-01",
     "tier": 3,
@@ -33612,6 +33787,7 @@
   "model": "italiastadiaapp.team",
   "pk": 103,
   "fields": {
+    "is_national": false,
     "name": "SS Monopoli 1966",
     "founded": "1966-01-01",
     "tier": 3,
@@ -33635,6 +33811,7 @@
   "model": "italiastadiaapp.team",
   "pk": 104,
   "fields": {
+    "is_national": false,
     "name": "Audace Cerignola",
     "founded": "1912-01-01",
     "tier": 3,
@@ -33658,6 +33835,7 @@
   "model": "italiastadiaapp.team",
   "pk": 105,
   "fields": {
+    "is_national": false,
     "name": "ASD Team Altamura",
     "founded": "2024-01-01",
     "tier": 3,
@@ -33681,6 +33859,7 @@
   "model": "italiastadiaapp.team",
   "pk": 106,
   "fields": {
+    "is_national": false,
     "name": "Cavese 1919",
     "founded": "1919-01-01",
     "tier": 3,
@@ -33704,6 +33883,7 @@
   "model": "italiastadiaapp.team",
   "pk": 107,
   "fields": {
+    "is_national": false,
     "name": "AZ Picerno",
     "founded": "1973-01-01",
     "tier": 3,
@@ -33727,6 +33907,7 @@
   "model": "italiastadiaapp.team",
   "pk": 108,
   "fields": {
+    "is_national": false,
     "name": "Sorrento 1945",
     "founded": "1945-01-01",
     "tier": 3,
@@ -33750,6 +33931,7 @@
   "model": "italiastadiaapp.team",
   "pk": 109,
   "fields": {
+    "is_national": false,
     "name": "Siracusa Calcio",
     "founded": "1924-01-01",
     "tier": 3,
@@ -33773,6 +33955,7 @@
   "model": "italiastadiaapp.team",
   "pk": 110,
   "fields": {
+    "is_national": false,
     "name": "FC Pro Vercelli 1892",
     "founded": "1891-01-01",
     "tier": 3,
@@ -33796,6 +33979,7 @@
   "model": "italiastadiaapp.team",
   "pk": 111,
   "fields": {
+    "is_national": false,
     "name": "Novara FC",
     "founded": "1908-01-01",
     "tier": 3,
@@ -33819,6 +34003,7 @@
   "model": "italiastadiaapp.team",
   "pk": 112,
   "fields": {
+    "is_national": false,
     "name": "FC Lumezzane",
     "founded": "1946-01-01",
     "tier": 3,
@@ -33842,6 +34027,7 @@
   "model": "italiastadiaapp.team",
   "pk": 113,
   "fields": {
+    "is_national": false,
     "name": "AC Renate",
     "founded": "1947-01-01",
     "tier": 3,
@@ -33865,6 +34051,7 @@
   "model": "italiastadiaapp.team",
   "pk": 114,
   "fields": {
+    "is_national": false,
     "name": "Virtusvecomp Verona",
     "founded": "1921-01-01",
     "tier": 3,
@@ -33888,6 +34075,7 @@
   "model": "italiastadiaapp.team",
   "pk": 115,
   "fields": {
+    "is_national": false,
     "name": "AS Giana Erminio",
     "founded": "1909-01-01",
     "tier": 3,
@@ -33911,6 +34099,7 @@
   "model": "italiastadiaapp.team",
   "pk": 116,
   "fields": {
+    "is_national": false,
     "name": "UC AlbinoLeffe",
     "founded": "1998-01-01",
     "tier": 3,
@@ -33934,6 +34123,7 @@
   "model": "italiastadiaapp.team",
   "pk": 117,
   "fields": {
+    "is_national": false,
     "name": "Arzignano Valchiampo",
     "founded": "2011-01-01",
     "tier": 3,
@@ -33957,6 +34147,7 @@
   "model": "italiastadiaapp.team",
   "pk": 118,
   "fields": {
+    "is_national": false,
     "name": "Aurora Pro Patria",
     "founded": "1919-01-01",
     "tier": 3,
@@ -33980,6 +34171,7 @@
   "model": "italiastadiaapp.team",
   "pk": 119,
   "fields": {
+    "is_national": false,
     "name": "CPR Ospitaletto",
     "founded": "2021-01-01",
     "tier": 3,
@@ -34003,6 +34195,7 @@
   "model": "italiastadiaapp.team",
   "pk": 120,
   "fields": {
+    "is_national": false,
     "name": "US Pergolettese 1932",
     "founded": "1932-01-01",
     "tier": 3,
@@ -34026,6 +34219,7 @@
   "model": "italiastadiaapp.team",
   "pk": 121,
   "fields": {
+    "is_national": false,
     "name": "US Triestina",
     "founded": "1918-01-01",
     "tier": 3,
@@ -34049,6 +34243,7 @@
   "model": "italiastadiaapp.team",
   "pk": 122,
   "fields": {
+    "is_national": false,
     "name": "US Livorno 1915",
     "founded": "1915-01-01",
     "tier": 3,
@@ -34072,6 +34267,7 @@
   "model": "italiastadiaapp.team",
   "pk": 123,
   "fields": {
+    "is_national": false,
     "name": "Vis Pesaro 1898",
     "founded": "1898-01-01",
     "tier": 3,
@@ -34095,6 +34291,7 @@
   "model": "italiastadiaapp.team",
   "pk": 124,
   "fields": {
+    "is_national": false,
     "name": "Guidonia Montecelio 1937 FC",
     "founded": "2004-01-01",
     "tier": 3,
@@ -34118,6 +34315,7 @@
   "model": "italiastadiaapp.team",
   "pk": 125,
   "fields": {
+    "is_national": false,
     "name": "US Sambenedettese",
     "founded": "1923-01-01",
     "tier": 3,
@@ -34141,6 +34339,7 @@
   "model": "italiastadiaapp.team",
   "pk": 126,
   "fields": {
+    "is_national": false,
     "name": "Pineto Calcio",
     "founded": "1962-01-01",
     "tier": 3,
@@ -34164,6 +34363,7 @@
   "model": "italiastadiaapp.team",
   "pk": 127,
   "fields": {
+    "is_national": false,
     "name": "AS Gubbio 1910",
     "founded": "1910-01-01",
     "tier": 3,
@@ -34187,6 +34387,7 @@
   "model": "italiastadiaapp.team",
   "pk": 128,
   "fields": {
+    "is_national": false,
     "name": "Campobasso FC",
     "founded": "2016-01-01",
     "tier": 3,
@@ -34210,6 +34411,7 @@
   "model": "italiastadiaapp.team",
   "pk": 129,
   "fields": {
+    "is_national": false,
     "name": "SEF Torres 1903",
     "founded": "1903-01-01",
     "tier": 3,
@@ -34233,6 +34435,7 @@
   "model": "italiastadiaapp.team",
   "pk": 130,
   "fields": {
+    "is_national": false,
     "name": "AC Carpi",
     "founded": "1908-01-01",
     "tier": 3,
@@ -34256,6 +34459,7 @@
   "model": "italiastadiaapp.team",
   "pk": 131,
   "fields": {
+    "is_national": false,
     "name": "US Pianese",
     "founded": "2016-01-01",
     "tier": 3,
@@ -34279,6 +34483,7 @@
   "model": "italiastadiaapp.team",
   "pk": 132,
   "fields": {
+    "is_national": false,
     "name": "AC Bra",
     "founded": "1913-01-01",
     "tier": 3,
@@ -34302,6 +34507,7 @@
   "model": "italiastadiaapp.team",
   "pk": 133,
   "fields": {
+    "is_national": false,
     "name": "Rimini FC",
     "founded": "1912-01-01",
     "tier": 3,
@@ -34325,6 +34531,7 @@
   "model": "italiastadiaapp.team",
   "pk": 134,
   "fields": {
+    "is_national": false,
     "name": "Como 1907",
     "founded": "1907-01-01",
     "tier": 1,
@@ -34348,6 +34555,7 @@
   "model": "italiastadiaapp.team",
   "pk": 135,
   "fields": {
+    "is_national": false,
     "name": "Bayern München",
     "founded": "1900-01-01",
     "tier": 1,
@@ -34371,6 +34579,7 @@
   "model": "italiastadiaapp.team",
   "pk": 136,
   "fields": {
+    "is_national": false,
     "name": "Bayer 04 Leverkusen",
     "founded": "1904-01-01",
     "tier": 1,
@@ -34394,6 +34603,7 @@
   "model": "italiastadiaapp.team",
   "pk": 137,
   "fields": {
+    "is_national": false,
     "name": "VfB Stuttgart",
     "founded": "1893-01-01",
     "tier": 1,
@@ -34417,6 +34627,7 @@
   "model": "italiastadiaapp.team",
   "pk": 138,
   "fields": {
+    "is_national": false,
     "name": "RB Leipzig",
     "founded": "2009-01-01",
     "tier": 1,
@@ -34440,6 +34651,7 @@
   "model": "italiastadiaapp.team",
   "pk": 139,
   "fields": {
+    "is_national": false,
     "name": "Borussia Dortmund",
     "founded": "1909-01-01",
     "tier": 1,
@@ -34463,6 +34675,7 @@
   "model": "italiastadiaapp.team",
   "pk": 140,
   "fields": {
+    "is_national": false,
     "name": "Eintracht Frankfurt",
     "founded": "1899-01-01",
     "tier": 1,
@@ -34486,6 +34699,7 @@
   "model": "italiastadiaapp.team",
   "pk": 141,
   "fields": {
+    "is_national": false,
     "name": "TSG Hoffenheim",
     "founded": "1899-01-01",
     "tier": 1,
@@ -34509,6 +34723,7 @@
   "model": "italiastadiaapp.team",
   "pk": 142,
   "fields": {
+    "is_national": false,
     "name": "SC Freiburg",
     "founded": "1904-01-01",
     "tier": 1,
@@ -34532,6 +34747,7 @@
   "model": "italiastadiaapp.team",
   "pk": 143,
   "fields": {
+    "is_national": false,
     "name": "Werder Bremen",
     "founded": "1899-01-01",
     "tier": 1,
@@ -34555,6 +34771,7 @@
   "model": "italiastadiaapp.team",
   "pk": 144,
   "fields": {
+    "is_national": false,
     "name": "FC Augsburg",
     "founded": "1907-01-01",
     "tier": 1,
@@ -34578,6 +34795,7 @@
   "model": "italiastadiaapp.team",
   "pk": 145,
   "fields": {
+    "is_national": false,
     "name": "VfL Wolfsburg",
     "founded": "1945-01-01",
     "tier": 1,
@@ -34601,6 +34819,7 @@
   "model": "italiastadiaapp.team",
   "pk": 147,
   "fields": {
+    "is_national": false,
     "name": "FSV Mainz 05",
     "founded": "1905-01-01",
     "tier": 1,
@@ -34624,6 +34843,7 @@
   "model": "italiastadiaapp.team",
   "pk": 148,
   "fields": {
+    "is_national": false,
     "name": "Borussia M'gladbach",
     "founded": "1900-01-01",
     "tier": 1,
@@ -34647,6 +34867,7 @@
   "model": "italiastadiaapp.team",
   "pk": 149,
   "fields": {
+    "is_national": false,
     "name": "1. FC Union Berlin",
     "founded": "1966-01-01",
     "tier": 1,
@@ -34670,6 +34891,7 @@
   "model": "italiastadiaapp.team",
   "pk": 150,
   "fields": {
+    "is_national": false,
     "name": "FC St. Pauli",
     "founded": "1910-01-01",
     "tier": 1,
@@ -34693,6 +34915,7 @@
   "model": "italiastadiaapp.team",
   "pk": 152,
   "fields": {
+    "is_national": false,
     "name": "1. FC Heidenheim",
     "founded": "1972-01-01",
     "tier": 1,
@@ -34716,6 +34939,7 @@
   "model": "italiastadiaapp.team",
   "pk": 153,
   "fields": {
+    "is_national": false,
     "name": "Paris Saint-Germain",
     "founded": "1970-01-01",
     "tier": 1,
@@ -34739,6 +34963,7 @@
   "model": "italiastadiaapp.team",
   "pk": 154,
   "fields": {
+    "is_national": false,
     "name": "Olympique de Marseille",
     "founded": "1899-01-01",
     "tier": 1,
@@ -34762,6 +34987,7 @@
   "model": "italiastadiaapp.team",
   "pk": 155,
   "fields": {
+    "is_national": false,
     "name": "Olympique Lyonnais",
     "founded": "1950-01-01",
     "tier": 1,
@@ -34785,6 +35011,7 @@
   "model": "italiastadiaapp.team",
   "pk": 156,
   "fields": {
+    "is_national": false,
     "name": "AS Monaco",
     "founded": "1924-01-01",
     "tier": 1,
@@ -34808,6 +35035,7 @@
   "model": "italiastadiaapp.team",
   "pk": 157,
   "fields": {
+    "is_national": false,
     "name": "LOSC Lille",
     "founded": "1944-01-01",
     "tier": 1,
@@ -34831,6 +35059,7 @@
   "model": "italiastadiaapp.team",
   "pk": 158,
   "fields": {
+    "is_national": false,
     "name": "Stade Rennais FC",
     "founded": "1901-01-01",
     "tier": 1,
@@ -34854,6 +35083,7 @@
   "model": "italiastadiaapp.team",
   "pk": 159,
   "fields": {
+    "is_national": false,
     "name": "RC Lens",
     "founded": "1906-01-01",
     "tier": 1,
@@ -34877,6 +35107,7 @@
   "model": "italiastadiaapp.team",
   "pk": 160,
   "fields": {
+    "is_national": false,
     "name": "OGC Nice",
     "founded": "1904-01-01",
     "tier": 1,
@@ -34900,6 +35131,7 @@
   "model": "italiastadiaapp.team",
   "pk": 161,
   "fields": {
+    "is_national": false,
     "name": "RC Strasbourg Alsace",
     "founded": "1906-01-01",
     "tier": 1,
@@ -34923,6 +35155,7 @@
   "model": "italiastadiaapp.team",
   "pk": 162,
   "fields": {
+    "is_national": false,
     "name": "Toulouse FC",
     "founded": "1937-01-01",
     "tier": 1,
@@ -34946,6 +35179,7 @@
   "model": "italiastadiaapp.team",
   "pk": 163,
   "fields": {
+    "is_national": false,
     "name": "Stade Brestois 29",
     "founded": "1950-01-01",
     "tier": 1,
@@ -34969,6 +35203,7 @@
   "model": "italiastadiaapp.team",
   "pk": 164,
   "fields": {
+    "is_national": false,
     "name": "FC Nantes",
     "founded": "1943-01-01",
     "tier": 1,
@@ -34992,6 +35227,7 @@
   "model": "italiastadiaapp.team",
   "pk": 165,
   "fields": {
+    "is_national": false,
     "name": "Le Havre AC",
     "founded": "1872-01-01",
     "tier": 1,
@@ -35015,6 +35251,7 @@
   "model": "italiastadiaapp.team",
   "pk": 166,
   "fields": {
+    "is_national": false,
     "name": "AJ Auxerre",
     "founded": "1905-01-01",
     "tier": 1,
@@ -35038,6 +35275,7 @@
   "model": "italiastadiaapp.team",
   "pk": 167,
   "fields": {
+    "is_national": false,
     "name": "Angers SCO",
     "founded": "1919-01-01",
     "tier": 1,
@@ -35061,6 +35299,7 @@
   "model": "italiastadiaapp.team",
   "pk": 168,
   "fields": {
+    "is_national": false,
     "name": "FC Lorient",
     "founded": "1926-01-01",
     "tier": 1,
@@ -35084,6 +35323,7 @@
   "model": "italiastadiaapp.team",
   "pk": 169,
   "fields": {
+    "is_national": false,
     "name": "Paris FC",
     "founded": "1969-01-01",
     "tier": 1,
@@ -35107,6 +35347,7 @@
   "model": "italiastadiaapp.team",
   "pk": 170,
   "fields": {
+    "is_national": false,
     "name": "FC Metz",
     "founded": "1932-01-01",
     "tier": 1,
@@ -35130,6 +35371,7 @@
   "model": "italiastadiaapp.team",
   "pk": 171,
   "fields": {
+    "is_national": false,
     "name": "SL Benfica",
     "founded": "1904-01-01",
     "tier": 1,
@@ -35153,6 +35395,7 @@
   "model": "italiastadiaapp.team",
   "pk": 172,
   "fields": {
+    "is_national": false,
     "name": "FC Porto",
     "founded": "1893-01-01",
     "tier": 1,
@@ -35176,6 +35419,7 @@
   "model": "italiastadiaapp.team",
   "pk": 173,
   "fields": {
+    "is_national": false,
     "name": "Sporting CP",
     "founded": "1906-01-01",
     "tier": 1,
@@ -35199,6 +35443,7 @@
   "model": "italiastadiaapp.team",
   "pk": 174,
   "fields": {
+    "is_national": false,
     "name": "SC Braga",
     "founded": "1921-01-01",
     "tier": 1,
@@ -35222,6 +35467,7 @@
   "model": "italiastadiaapp.team",
   "pk": 175,
   "fields": {
+    "is_national": false,
     "name": "Vitória SC",
     "founded": "1922-01-01",
     "tier": 1,
@@ -35245,6 +35491,7 @@
   "model": "italiastadiaapp.team",
   "pk": 176,
   "fields": {
+    "is_national": false,
     "name": "GD Estoril Praia",
     "founded": "1939-01-01",
     "tier": 1,
@@ -35268,6 +35515,7 @@
   "model": "italiastadiaapp.team",
   "pk": 177,
   "fields": {
+    "is_national": false,
     "name": "FC Famalicão",
     "founded": "1931-01-01",
     "tier": 1,
@@ -35291,6 +35539,7 @@
   "model": "italiastadiaapp.team",
   "pk": 178,
   "fields": {
+    "is_national": false,
     "name": "Gil Vicente FC",
     "founded": "1924-01-01",
     "tier": 1,
@@ -35314,6 +35563,7 @@
   "model": "italiastadiaapp.team",
   "pk": 179,
   "fields": {
+    "is_national": false,
     "name": "Rio Ave FC",
     "founded": "1939-01-01",
     "tier": 1,
@@ -35337,6 +35587,7 @@
   "model": "italiastadiaapp.team",
   "pk": 180,
   "fields": {
+    "is_national": false,
     "name": "Moreirense FC",
     "founded": "1938-01-01",
     "tier": 1,
@@ -35360,6 +35611,7 @@
   "model": "italiastadiaapp.team",
   "pk": 181,
   "fields": {
+    "is_national": false,
     "name": "Casa Pia AC",
     "founded": "1879-01-01",
     "tier": 1,
@@ -35383,6 +35635,7 @@
   "model": "italiastadiaapp.team",
   "pk": 182,
   "fields": {
+    "is_national": false,
     "name": "CD Santa Clara",
     "founded": "1921-01-01",
     "tier": 1,
@@ -35406,6 +35659,7 @@
   "model": "italiastadiaapp.team",
   "pk": 183,
   "fields": {
+    "is_national": false,
     "name": "FC Arouca",
     "founded": "1951-01-01",
     "tier": 1,
@@ -35429,6 +35683,7 @@
   "model": "italiastadiaapp.team",
   "pk": 184,
   "fields": {
+    "is_national": false,
     "name": "CD Nacional",
     "founded": "1910-01-01",
     "tier": 1,
@@ -35452,6 +35707,7 @@
   "model": "italiastadiaapp.team",
   "pk": 185,
   "fields": {
+    "is_national": false,
     "name": "CF Estrela Amadora",
     "founded": "1932-01-01",
     "tier": 1,
@@ -35475,6 +35731,7 @@
   "model": "italiastadiaapp.team",
   "pk": 186,
   "fields": {
+    "is_national": false,
     "name": "CD Tondela",
     "founded": "1933-01-01",
     "tier": 1,
@@ -35498,6 +35755,7 @@
   "model": "italiastadiaapp.team",
   "pk": 187,
   "fields": {
+    "is_national": false,
     "name": "FC Alverca",
     "founded": "1939-01-01",
     "tier": 1,
@@ -35521,6 +35779,7 @@
   "model": "italiastadiaapp.team",
   "pk": 188,
   "fields": {
+    "is_national": false,
     "name": "AVS Futebol SAD",
     "founded": "2023-01-01",
     "tier": 1,
@@ -35544,6 +35803,7 @@
   "model": "italiastadiaapp.team",
   "pk": 189,
   "fields": {
+    "is_national": false,
     "name": "Arsenal",
     "founded": "1886-01-01",
     "tier": 1,
@@ -35567,6 +35827,7 @@
   "model": "italiastadiaapp.team",
   "pk": 190,
   "fields": {
+    "is_national": false,
     "name": "Chelsea",
     "founded": "1905-01-01",
     "tier": 1,
@@ -35590,6 +35851,7 @@
   "model": "italiastadiaapp.team",
   "pk": 191,
   "fields": {
+    "is_national": false,
     "name": "Liverpool",
     "founded": "1892-01-01",
     "tier": 1,
@@ -35613,6 +35875,7 @@
   "model": "italiastadiaapp.team",
   "pk": 192,
   "fields": {
+    "is_national": false,
     "name": "Manchester City",
     "founded": "1880-01-01",
     "tier": 1,
@@ -35636,6 +35899,7 @@
   "model": "italiastadiaapp.team",
   "pk": 193,
   "fields": {
+    "is_national": false,
     "name": "Manchester United",
     "founded": "1902-01-01",
     "tier": 1,
@@ -35659,6 +35923,7 @@
   "model": "italiastadiaapp.team",
   "pk": 194,
   "fields": {
+    "is_national": false,
     "name": "Tottenham Hotspur",
     "founded": "1882-01-01",
     "tier": 1,
@@ -35682,6 +35947,7 @@
   "model": "italiastadiaapp.team",
   "pk": 195,
   "fields": {
+    "is_national": false,
     "name": "Newcastle United",
     "founded": "1892-01-01",
     "tier": 1,
@@ -35705,6 +35971,7 @@
   "model": "italiastadiaapp.team",
   "pk": 196,
   "fields": {
+    "is_national": false,
     "name": "Aston Villa",
     "founded": "1874-01-01",
     "tier": 1,
@@ -35728,6 +35995,7 @@
   "model": "italiastadiaapp.team",
   "pk": 197,
   "fields": {
+    "is_national": false,
     "name": "West Ham United",
     "founded": "1895-01-01",
     "tier": 1,
@@ -35751,6 +36019,7 @@
   "model": "italiastadiaapp.team",
   "pk": 198,
   "fields": {
+    "is_national": false,
     "name": "Brighton & Hove Albion",
     "founded": "1901-01-01",
     "tier": 1,
@@ -35774,6 +36043,7 @@
   "model": "italiastadiaapp.team",
   "pk": 199,
   "fields": {
+    "is_national": false,
     "name": "Fulham",
     "founded": "1879-01-01",
     "tier": 1,
@@ -35797,6 +36067,7 @@
   "model": "italiastadiaapp.team",
   "pk": 200,
   "fields": {
+    "is_national": false,
     "name": "Wolverhampton Wanderers",
     "founded": "1877-01-01",
     "tier": 1,
@@ -35820,6 +36091,7 @@
   "model": "italiastadiaapp.team",
   "pk": 201,
   "fields": {
+    "is_national": false,
     "name": "Everton",
     "founded": "1878-01-01",
     "tier": 1,
@@ -35843,6 +36115,7 @@
   "model": "italiastadiaapp.team",
   "pk": 202,
   "fields": {
+    "is_national": false,
     "name": "Brentford",
     "founded": "1889-01-01",
     "tier": 1,
@@ -35866,6 +36139,7 @@
   "model": "italiastadiaapp.team",
   "pk": 203,
   "fields": {
+    "is_national": false,
     "name": "Crystal Palace",
     "founded": "1905-01-01",
     "tier": 1,
@@ -35889,6 +36163,7 @@
   "model": "italiastadiaapp.team",
   "pk": 204,
   "fields": {
+    "is_national": false,
     "name": "Nottingham Forest",
     "founded": "1865-01-01",
     "tier": 1,
@@ -35912,6 +36187,7 @@
   "model": "italiastadiaapp.team",
   "pk": 205,
   "fields": {
+    "is_national": false,
     "name": "Bournemouth",
     "founded": "1899-01-01",
     "tier": 1,
@@ -35935,6 +36211,7 @@
   "model": "italiastadiaapp.team",
   "pk": 209,
   "fields": {
+    "is_national": false,
     "name": "Leeds United",
     "founded": "1919-01-01",
     "tier": 1,
@@ -35958,6 +36235,7 @@
   "model": "italiastadiaapp.team",
   "pk": 210,
   "fields": {
+    "is_national": false,
     "name": "Burnley",
     "founded": "1882-01-01",
     "tier": 1,
@@ -35981,6 +36259,7 @@
   "model": "italiastadiaapp.team",
   "pk": 211,
   "fields": {
+    "is_national": false,
     "name": "Sunderland",
     "founded": "1879-01-01",
     "tier": 1,
@@ -36004,6 +36283,7 @@
   "model": "italiastadiaapp.team",
   "pk": 212,
   "fields": {
+    "is_national": false,
     "name": "Hamburger SV",
     "founded": "1887-01-01",
     "tier": 1,
@@ -36027,6 +36307,7 @@
   "model": "italiastadiaapp.team",
   "pk": 213,
   "fields": {
+    "is_national": false,
     "name": "1. FC Köln",
     "founded": "1948-01-01",
     "tier": 1,
@@ -36050,6 +36331,7 @@
   "model": "italiastadiaapp.team",
   "pk": 214,
   "fields": {
+    "is_national": false,
     "name": "Legia Warsaw",
     "founded": "1916-01-01",
     "tier": 1,
@@ -36073,6 +36355,7 @@
   "model": "italiastadiaapp.team",
   "pk": 215,
   "fields": {
+    "is_national": false,
     "name": "Lech Poznań",
     "founded": "1922-01-01",
     "tier": 1,
@@ -36096,6 +36379,7 @@
   "model": "italiastadiaapp.team",
   "pk": 216,
   "fields": {
+    "is_national": false,
     "name": "Raków Częstochowa",
     "founded": "1921-01-01",
     "tier": 1,
@@ -36119,6 +36403,7 @@
   "model": "italiastadiaapp.team",
   "pk": 217,
   "fields": {
+    "is_national": false,
     "name": "Jagiellonia Białystok",
     "founded": "1920-01-01",
     "tier": 1,
@@ -36142,6 +36427,7 @@
   "model": "italiastadiaapp.team",
   "pk": 218,
   "fields": {
+    "is_national": false,
     "name": "Pogoń Szczecin",
     "founded": "1948-01-01",
     "tier": 1,
@@ -36165,6 +36451,7 @@
   "model": "italiastadiaapp.team",
   "pk": 219,
   "fields": {
+    "is_national": false,
     "name": "Górnik Zabrze",
     "founded": "1948-01-01",
     "tier": 1,
@@ -36188,6 +36475,7 @@
   "model": "italiastadiaapp.team",
   "pk": 220,
   "fields": {
+    "is_national": false,
     "name": "Lechia Gdańsk",
     "founded": "1945-01-01",
     "tier": 1,
@@ -36211,6 +36499,7 @@
   "model": "italiastadiaapp.team",
   "pk": 221,
   "fields": {
+    "is_national": false,
     "name": "GKS Katowice",
     "founded": "1964-01-01",
     "tier": 1,
@@ -36234,6 +36523,7 @@
   "model": "italiastadiaapp.team",
   "pk": 222,
   "fields": {
+    "is_national": false,
     "name": "Zagłębie Lubin",
     "founded": "1945-01-01",
     "tier": 1,
@@ -36257,6 +36547,7 @@
   "model": "italiastadiaapp.team",
   "pk": 223,
   "fields": {
+    "is_national": false,
     "name": "Widzew Łódź",
     "founded": "1910-01-01",
     "tier": 1,
@@ -36280,6 +36571,7 @@
   "model": "italiastadiaapp.team",
   "pk": 224,
   "fields": {
+    "is_national": false,
     "name": "Piast Gliwice",
     "founded": "1945-01-01",
     "tier": 1,
@@ -36303,6 +36595,7 @@
   "model": "italiastadiaapp.team",
   "pk": 225,
   "fields": {
+    "is_national": false,
     "name": "Cracovia",
     "founded": "1906-01-01",
     "tier": 1,
@@ -36326,6 +36619,7 @@
   "model": "italiastadiaapp.team",
   "pk": 226,
   "fields": {
+    "is_national": false,
     "name": "Motor Lublin",
     "founded": "1950-01-01",
     "tier": 1,
@@ -36349,6 +36643,7 @@
   "model": "italiastadiaapp.team",
   "pk": 227,
   "fields": {
+    "is_national": false,
     "name": "Wisła Płock",
     "founded": "1947-01-01",
     "tier": 1,
@@ -36372,6 +36667,7 @@
   "model": "italiastadiaapp.team",
   "pk": 228,
   "fields": {
+    "is_national": false,
     "name": "Radomiak Radom",
     "founded": "1910-01-01",
     "tier": 1,
@@ -36395,6 +36691,7 @@
   "model": "italiastadiaapp.team",
   "pk": 229,
   "fields": {
+    "is_national": false,
     "name": "Korona Kielce",
     "founded": "1973-01-01",
     "tier": 1,
@@ -36418,6 +36715,7 @@
   "model": "italiastadiaapp.team",
   "pk": 230,
   "fields": {
+    "is_national": false,
     "name": "Arka Gdynia",
     "founded": "1929-01-01",
     "tier": 1,
@@ -36441,6 +36739,7 @@
   "model": "italiastadiaapp.team",
   "pk": 231,
   "fields": {
+    "is_national": false,
     "name": "Bruk-Bet Termalica Nieciecza",
     "founded": "1922-01-01",
     "tier": 1,
@@ -36464,6 +36763,7 @@
   "model": "italiastadiaapp.team",
   "pk": 232,
   "fields": {
+    "is_national": false,
     "name": "Real Madrid",
     "founded": "1902-01-01",
     "tier": 1,
@@ -36487,6 +36787,7 @@
   "model": "italiastadiaapp.team",
   "pk": 233,
   "fields": {
+    "is_national": false,
     "name": "FC Barcelona",
     "founded": "1899-01-01",
     "tier": 1,
@@ -36510,6 +36811,7 @@
   "model": "italiastadiaapp.team",
   "pk": 234,
   "fields": {
+    "is_national": false,
     "name": "Atlético de Madrid",
     "founded": "1903-01-01",
     "tier": 1,
@@ -36533,6 +36835,7 @@
   "model": "italiastadiaapp.team",
   "pk": 235,
   "fields": {
+    "is_national": false,
     "name": "Athletic Club",
     "founded": "1898-01-01",
     "tier": 1,
@@ -36556,6 +36859,7 @@
   "model": "italiastadiaapp.team",
   "pk": 236,
   "fields": {
+    "is_national": false,
     "name": "Villarreal CF",
     "founded": "1923-01-01",
     "tier": 1,
@@ -36579,6 +36883,7 @@
   "model": "italiastadiaapp.team",
   "pk": 237,
   "fields": {
+    "is_national": false,
     "name": "Real Betis",
     "founded": "1907-01-01",
     "tier": 1,
@@ -36602,6 +36907,7 @@
   "model": "italiastadiaapp.team",
   "pk": 238,
   "fields": {
+    "is_national": false,
     "name": "Real Sociedad",
     "founded": "1908-01-01",
     "tier": 1,
@@ -36625,6 +36931,7 @@
   "model": "italiastadiaapp.team",
   "pk": 239,
   "fields": {
+    "is_national": false,
     "name": "RC Celta de Vigo",
     "founded": "1923-01-01",
     "tier": 1,
@@ -36648,6 +36955,7 @@
   "model": "italiastadiaapp.team",
   "pk": 240,
   "fields": {
+    "is_national": false,
     "name": "Sevilla FC",
     "founded": "1890-01-01",
     "tier": 1,
@@ -36671,6 +36979,7 @@
   "model": "italiastadiaapp.team",
   "pk": 241,
   "fields": {
+    "is_national": false,
     "name": "Rayo Vallecano",
     "founded": "1924-01-01",
     "tier": 1,
@@ -36694,6 +37003,7 @@
   "model": "italiastadiaapp.team",
   "pk": 242,
   "fields": {
+    "is_national": false,
     "name": "Getafe CF",
     "founded": "1983-01-01",
     "tier": 1,
@@ -36717,6 +37027,7 @@
   "model": "italiastadiaapp.team",
   "pk": 243,
   "fields": {
+    "is_national": false,
     "name": "CA Osasuna",
     "founded": "1920-01-01",
     "tier": 1,
@@ -36740,6 +37051,7 @@
   "model": "italiastadiaapp.team",
   "pk": 244,
   "fields": {
+    "is_national": false,
     "name": "Valencia CF",
     "founded": "1919-01-01",
     "tier": 1,
@@ -36763,6 +37075,7 @@
   "model": "italiastadiaapp.team",
   "pk": 245,
   "fields": {
+    "is_national": false,
     "name": "RCD Mallorca",
     "founded": "1916-01-01",
     "tier": 1,
@@ -36786,6 +37099,7 @@
   "model": "italiastadiaapp.team",
   "pk": 246,
   "fields": {
+    "is_national": false,
     "name": "Girona FC",
     "founded": "1930-01-01",
     "tier": 1,
@@ -36809,6 +37123,7 @@
   "model": "italiastadiaapp.team",
   "pk": 247,
   "fields": {
+    "is_national": false,
     "name": "Deportivo Alavés",
     "founded": "1921-01-01",
     "tier": 1,
@@ -36832,6 +37147,7 @@
   "model": "italiastadiaapp.team",
   "pk": 248,
   "fields": {
+    "is_national": false,
     "name": "RCD Espanyol",
     "founded": "1900-01-01",
     "tier": 1,
@@ -36855,6 +37171,7 @@
   "model": "italiastadiaapp.team",
   "pk": 249,
   "fields": {
+    "is_national": false,
     "name": "Levante UD",
     "founded": "1908-01-01",
     "tier": 1,
@@ -36878,6 +37195,7 @@
   "model": "italiastadiaapp.team",
   "pk": 250,
   "fields": {
+    "is_national": false,
     "name": "Elche CF",
     "founded": "1922-01-01",
     "tier": 1,
@@ -36901,6 +37219,7 @@
   "model": "italiastadiaapp.team",
   "pk": 251,
   "fields": {
+    "is_national": false,
     "name": "Real Oviedo",
     "founded": "1926-01-01",
     "tier": 1,
@@ -36924,6 +37243,7 @@
   "model": "italiastadiaapp.team",
   "pk": 252,
   "fields": {
+    "is_national": false,
     "name": "AIK",
     "founded": "1891-01-01",
     "tier": 1,
@@ -36947,6 +37267,7 @@
   "model": "italiastadiaapp.team",
   "pk": 253,
   "fields": {
+    "is_national": false,
     "name": "BK Häcken",
     "founded": "1940-01-01",
     "tier": 1,
@@ -36970,6 +37291,7 @@
   "model": "italiastadiaapp.team",
   "pk": 254,
   "fields": {
+    "is_national": false,
     "name": "Degerfors IF",
     "founded": "1907-01-01",
     "tier": 1,
@@ -36993,6 +37315,7 @@
   "model": "italiastadiaapp.team",
   "pk": 255,
   "fields": {
+    "is_national": false,
     "name": "Djurgårdens IF",
     "founded": "1891-01-01",
     "tier": 1,
@@ -37016,6 +37339,7 @@
   "model": "italiastadiaapp.team",
   "pk": 256,
   "fields": {
+    "is_national": false,
     "name": "GAIS",
     "founded": "1894-01-01",
     "tier": 1,
@@ -37039,6 +37363,7 @@
   "model": "italiastadiaapp.team",
   "pk": 257,
   "fields": {
+    "is_national": false,
     "name": "Halmstads BK",
     "founded": "1914-01-01",
     "tier": 1,
@@ -37062,6 +37387,7 @@
   "model": "italiastadiaapp.team",
   "pk": 258,
   "fields": {
+    "is_national": false,
     "name": "Hammarby IF",
     "founded": "1897-01-01",
     "tier": 1,
@@ -37085,6 +37411,7 @@
   "model": "italiastadiaapp.team",
   "pk": 259,
   "fields": {
+    "is_national": false,
     "name": "IF Brommapojkarna",
     "founded": "1942-01-01",
     "tier": 1,
@@ -37108,6 +37435,7 @@
   "model": "italiastadiaapp.team",
   "pk": 260,
   "fields": {
+    "is_national": false,
     "name": "IF Elfsborg",
     "founded": "1904-01-01",
     "tier": 1,
@@ -37131,6 +37459,7 @@
   "model": "italiastadiaapp.team",
   "pk": 261,
   "fields": {
+    "is_national": false,
     "name": "IFK Göteborg",
     "founded": "1904-01-01",
     "tier": 1,
@@ -37154,6 +37483,7 @@
   "model": "italiastadiaapp.team",
   "pk": 262,
   "fields": {
+    "is_national": false,
     "name": "IFK Norrköping",
     "founded": "1897-01-01",
     "tier": 1,
@@ -37177,6 +37507,7 @@
   "model": "italiastadiaapp.team",
   "pk": 263,
   "fields": {
+    "is_national": false,
     "name": "IFK Värnamo",
     "founded": "1912-01-01",
     "tier": 1,
@@ -37200,6 +37531,7 @@
   "model": "italiastadiaapp.team",
   "pk": 264,
   "fields": {
+    "is_national": false,
     "name": "IK Sirius",
     "founded": "1907-01-01",
     "tier": 1,
@@ -37223,6 +37555,7 @@
   "model": "italiastadiaapp.team",
   "pk": 265,
   "fields": {
+    "is_national": false,
     "name": "Malmö FF",
     "founded": "1910-01-01",
     "tier": 1,
@@ -37246,6 +37579,7 @@
   "model": "italiastadiaapp.team",
   "pk": 266,
   "fields": {
+    "is_national": false,
     "name": "Mjällby AIF",
     "founded": "1939-01-01",
     "tier": 1,
@@ -37269,6 +37603,7 @@
   "model": "italiastadiaapp.team",
   "pk": 267,
   "fields": {
+    "is_national": false,
     "name": "Östers IF",
     "founded": "1930-01-01",
     "tier": 1,
@@ -37292,6 +37627,7 @@
   "model": "italiastadiaapp.team",
   "pk": 268,
   "fields": {
+    "is_national": false,
     "name": "FK Bodø/Glimt",
     "founded": "1916-01-01",
     "tier": 1,
@@ -37315,6 +37651,7 @@
   "model": "italiastadiaapp.team",
   "pk": 269,
   "fields": {
+    "is_national": false,
     "name": "SK Brann",
     "founded": "1908-01-01",
     "tier": 1,
@@ -37338,6 +37675,7 @@
   "model": "italiastadiaapp.team",
   "pk": 270,
   "fields": {
+    "is_national": false,
     "name": "Bryne FK",
     "founded": "1926-01-01",
     "tier": 1,
@@ -37361,6 +37699,7 @@
   "model": "italiastadiaapp.team",
   "pk": 271,
   "fields": {
+    "is_national": false,
     "name": "Fredrikstad FK",
     "founded": "1903-01-01",
     "tier": 1,
@@ -37384,6 +37723,7 @@
   "model": "italiastadiaapp.team",
   "pk": 272,
   "fields": {
+    "is_national": false,
     "name": "Hamarkameratene",
     "founded": "1918-01-01",
     "tier": 1,
@@ -37407,6 +37747,7 @@
   "model": "italiastadiaapp.team",
   "pk": 273,
   "fields": {
+    "is_national": false,
     "name": "FK Haugesund",
     "founded": "1993-01-01",
     "tier": 1,
@@ -37430,6 +37771,7 @@
   "model": "italiastadiaapp.team",
   "pk": 274,
   "fields": {
+    "is_national": false,
     "name": "KFUM-Kameratene Oslo",
     "founded": "1939-01-01",
     "tier": 1,
@@ -37453,6 +37795,7 @@
   "model": "italiastadiaapp.team",
   "pk": 275,
   "fields": {
+    "is_national": false,
     "name": "Kristiansund BK",
     "founded": "2003-01-01",
     "tier": 1,
@@ -37476,6 +37819,7 @@
   "model": "italiastadiaapp.team",
   "pk": 276,
   "fields": {
+    "is_national": false,
     "name": "Molde FK",
     "founded": "1911-01-01",
     "tier": 1,
@@ -37499,6 +37843,7 @@
   "model": "italiastadiaapp.team",
   "pk": 277,
   "fields": {
+    "is_national": false,
     "name": "Rosenborg BK",
     "founded": "1917-01-01",
     "tier": 1,
@@ -37522,6 +37867,7 @@
   "model": "italiastadiaapp.team",
   "pk": 278,
   "fields": {
+    "is_national": false,
     "name": "Sandefjord Fotball",
     "founded": "1998-01-01",
     "tier": 1,
@@ -37545,6 +37891,7 @@
   "model": "italiastadiaapp.team",
   "pk": 279,
   "fields": {
+    "is_national": false,
     "name": "Sarpsborg 08 FF",
     "founded": "2008-01-01",
     "tier": 1,
@@ -37568,6 +37915,7 @@
   "model": "italiastadiaapp.team",
   "pk": 280,
   "fields": {
+    "is_national": false,
     "name": "Strømsgodset Toppfotball",
     "founded": "1907-01-01",
     "tier": 1,
@@ -37591,6 +37939,7 @@
   "model": "italiastadiaapp.team",
   "pk": 281,
   "fields": {
+    "is_national": false,
     "name": "Tromsø IL",
     "founded": "1920-01-01",
     "tier": 1,
@@ -37614,6 +37963,7 @@
   "model": "italiastadiaapp.team",
   "pk": 282,
   "fields": {
+    "is_national": false,
     "name": "Viking FK",
     "founded": "1899-01-01",
     "tier": 1,
@@ -37637,6 +37987,7 @@
   "model": "italiastadiaapp.team",
   "pk": 283,
   "fields": {
+    "is_national": false,
     "name": "Vålerenga Fotball",
     "founded": "1913-01-01",
     "tier": 1,
@@ -37660,6 +38011,7 @@
   "model": "italiastadiaapp.team",
   "pk": 284,
   "fields": {
+    "is_national": false,
     "name": "Aberdeen FC",
     "founded": "1903-01-01",
     "tier": 1,
@@ -37683,6 +38035,7 @@
   "model": "italiastadiaapp.team",
   "pk": 285,
   "fields": {
+    "is_national": false,
     "name": "Celtic FC",
     "founded": "1887-01-01",
     "tier": 1,
@@ -37706,6 +38059,7 @@
   "model": "italiastadiaapp.team",
   "pk": 286,
   "fields": {
+    "is_national": false,
     "name": "Dundee FC",
     "founded": "1893-01-01",
     "tier": 1,
@@ -37729,6 +38083,7 @@
   "model": "italiastadiaapp.team",
   "pk": 287,
   "fields": {
+    "is_national": false,
     "name": "Dundee United FC",
     "founded": "1909-01-01",
     "tier": 1,
@@ -37752,6 +38107,7 @@
   "model": "italiastadiaapp.team",
   "pk": 288,
   "fields": {
+    "is_national": false,
     "name": "Falkirk FC",
     "founded": "1877-01-01",
     "tier": 1,
@@ -37775,6 +38131,7 @@
   "model": "italiastadiaapp.team",
   "pk": 289,
   "fields": {
+    "is_national": false,
     "name": "Heart of Midlothian FC",
     "founded": "1874-01-01",
     "tier": 1,
@@ -37798,6 +38155,7 @@
   "model": "italiastadiaapp.team",
   "pk": 290,
   "fields": {
+    "is_national": false,
     "name": "Hibernian FC",
     "founded": "1875-01-01",
     "tier": 1,
@@ -37821,6 +38179,7 @@
   "model": "italiastadiaapp.team",
   "pk": 291,
   "fields": {
+    "is_national": false,
     "name": "Kilmarnock FC",
     "founded": "1869-01-01",
     "tier": 1,
@@ -37844,6 +38203,7 @@
   "model": "italiastadiaapp.team",
   "pk": 292,
   "fields": {
+    "is_national": false,
     "name": "Livingston FC",
     "founded": "1943-01-01",
     "tier": 1,
@@ -37867,6 +38227,7 @@
   "model": "italiastadiaapp.team",
   "pk": 293,
   "fields": {
+    "is_national": false,
     "name": "Motherwell FC",
     "founded": "1886-01-01",
     "tier": 1,
@@ -37890,6 +38251,7 @@
   "model": "italiastadiaapp.team",
   "pk": 294,
   "fields": {
+    "is_national": false,
     "name": "Rangers FC",
     "founded": "1872-01-01",
     "tier": 1,
@@ -37913,6 +38275,7 @@
   "model": "italiastadiaapp.team",
   "pk": 295,
   "fields": {
+    "is_national": false,
     "name": "St Mirren FC",
     "founded": "1877-01-01",
     "tier": 1,
@@ -37936,6 +38299,7 @@
   "model": "italiastadiaapp.team",
   "pk": 296,
   "fields": {
+    "is_national": false,
     "name": "Alanyaspor",
     "founded": "1948-01-01",
     "tier": 1,
@@ -37959,6 +38323,7 @@
   "model": "italiastadiaapp.team",
   "pk": 297,
   "fields": {
+    "is_national": false,
     "name": "Antalyaspor",
     "founded": "1966-01-01",
     "tier": 1,
@@ -37982,6 +38347,7 @@
   "model": "italiastadiaapp.team",
   "pk": 298,
   "fields": {
+    "is_national": false,
     "name": "Beşiktaş JK",
     "founded": "1903-01-01",
     "tier": 1,
@@ -38005,6 +38371,7 @@
   "model": "italiastadiaapp.team",
   "pk": 299,
   "fields": {
+    "is_national": false,
     "name": "Çaykur Rizespor",
     "founded": "1953-01-01",
     "tier": 1,
@@ -38028,6 +38395,7 @@
   "model": "italiastadiaapp.team",
   "pk": 300,
   "fields": {
+    "is_national": false,
     "name": "Eyüpspor",
     "founded": "1919-01-01",
     "tier": 1,
@@ -38051,6 +38419,7 @@
   "model": "italiastadiaapp.team",
   "pk": 301,
   "fields": {
+    "is_national": false,
     "name": "Fatih Karagümrük",
     "founded": "1926-01-01",
     "tier": 1,
@@ -38074,6 +38443,7 @@
   "model": "italiastadiaapp.team",
   "pk": 302,
   "fields": {
+    "is_national": false,
     "name": "Fenerbahçe SK",
     "founded": "1907-01-01",
     "tier": 1,
@@ -38097,6 +38467,7 @@
   "model": "italiastadiaapp.team",
   "pk": 303,
   "fields": {
+    "is_national": false,
     "name": "Galatasaray SK",
     "founded": "1905-01-01",
     "tier": 1,
@@ -38120,6 +38491,7 @@
   "model": "italiastadiaapp.team",
   "pk": 304,
   "fields": {
+    "is_national": false,
     "name": "Gaziantep FK",
     "founded": "1988-01-01",
     "tier": 1,
@@ -38143,6 +38515,7 @@
   "model": "italiastadiaapp.team",
   "pk": 305,
   "fields": {
+    "is_national": false,
     "name": "Gençlerbirliği SK",
     "founded": "1923-01-01",
     "tier": 1,
@@ -38166,6 +38539,7 @@
   "model": "italiastadiaapp.team",
   "pk": 306,
   "fields": {
+    "is_national": false,
     "name": "Göztepe SK",
     "founded": "1925-01-01",
     "tier": 1,
@@ -38189,6 +38563,7 @@
   "model": "italiastadiaapp.team",
   "pk": 307,
   "fields": {
+    "is_national": false,
     "name": "İstanbul Başakşehir FK",
     "founded": "2014-01-01",
     "tier": 1,
@@ -38212,6 +38587,7 @@
   "model": "italiastadiaapp.team",
   "pk": 308,
   "fields": {
+    "is_national": false,
     "name": "Kasımpaşa SK",
     "founded": "1921-01-01",
     "tier": 1,
@@ -38235,6 +38611,7 @@
   "model": "italiastadiaapp.team",
   "pk": 309,
   "fields": {
+    "is_national": false,
     "name": "Kayserispor",
     "founded": "1966-01-01",
     "tier": 1,
@@ -38258,6 +38635,7 @@
   "model": "italiastadiaapp.team",
   "pk": 310,
   "fields": {
+    "is_national": false,
     "name": "Kocaelispor",
     "founded": "1966-01-01",
     "tier": 1,
@@ -38281,6 +38659,7 @@
   "model": "italiastadiaapp.team",
   "pk": 311,
   "fields": {
+    "is_national": false,
     "name": "Konyaspor",
     "founded": "1922-01-01",
     "tier": 1,
@@ -38304,6 +38683,7 @@
   "model": "italiastadiaapp.team",
   "pk": 312,
   "fields": {
+    "is_national": false,
     "name": "Samsunspor",
     "founded": "1965-01-01",
     "tier": 1,
@@ -38327,6 +38707,7 @@
   "model": "italiastadiaapp.team",
   "pk": 313,
   "fields": {
+    "is_national": false,
     "name": "Trabzonspor",
     "founded": "1967-01-01",
     "tier": 1,
@@ -38350,6 +38731,7 @@
   "model": "italiastadiaapp.team",
   "pk": 314,
   "fields": {
+    "is_national": false,
     "name": "AFC Ajax",
     "founded": "1900-01-01",
     "tier": 1,
@@ -38373,6 +38755,7 @@
   "model": "italiastadiaapp.team",
   "pk": 315,
   "fields": {
+    "is_national": false,
     "name": "AZ Alkmaar",
     "founded": "1967-01-01",
     "tier": 1,
@@ -38396,6 +38779,7 @@
   "model": "italiastadiaapp.team",
   "pk": 316,
   "fields": {
+    "is_national": false,
     "name": "Excelsior Rotterdam",
     "founded": "1902-01-01",
     "tier": 1,
@@ -38419,6 +38803,7 @@
   "model": "italiastadiaapp.team",
   "pk": 317,
   "fields": {
+    "is_national": false,
     "name": "FC Groningen",
     "founded": "1971-01-01",
     "tier": 1,
@@ -38442,6 +38827,7 @@
   "model": "italiastadiaapp.team",
   "pk": 318,
   "fields": {
+    "is_national": false,
     "name": "FC Twente",
     "founded": "1965-01-01",
     "tier": 1,
@@ -38465,6 +38851,7 @@
   "model": "italiastadiaapp.team",
   "pk": 319,
   "fields": {
+    "is_national": false,
     "name": "FC Utrecht",
     "founded": "1970-01-01",
     "tier": 1,
@@ -38488,6 +38875,7 @@
   "model": "italiastadiaapp.team",
   "pk": 320,
   "fields": {
+    "is_national": false,
     "name": "Feyenoord",
     "founded": "1908-01-01",
     "tier": 1,
@@ -38511,6 +38899,7 @@
   "model": "italiastadiaapp.team",
   "pk": 321,
   "fields": {
+    "is_national": false,
     "name": "Fortuna Sittard",
     "founded": "1968-01-01",
     "tier": 1,
@@ -38534,6 +38923,7 @@
   "model": "italiastadiaapp.team",
   "pk": 322,
   "fields": {
+    "is_national": false,
     "name": "Go Ahead Eagles",
     "founded": "1902-01-01",
     "tier": 1,
@@ -38557,6 +38947,7 @@
   "model": "italiastadiaapp.team",
   "pk": 323,
   "fields": {
+    "is_national": false,
     "name": "Heracles Almelo",
     "founded": "1903-01-01",
     "tier": 1,
@@ -38580,6 +38971,7 @@
   "model": "italiastadiaapp.team",
   "pk": 324,
   "fields": {
+    "is_national": false,
     "name": "NAC Breda",
     "founded": "1912-01-01",
     "tier": 1,
@@ -38603,6 +38995,7 @@
   "model": "italiastadiaapp.team",
   "pk": 325,
   "fields": {
+    "is_national": false,
     "name": "NEC Nijmegen",
     "founded": "1900-01-01",
     "tier": 1,
@@ -38626,6 +39019,7 @@
   "model": "italiastadiaapp.team",
   "pk": 326,
   "fields": {
+    "is_national": false,
     "name": "PEC Zwolle",
     "founded": "1910-01-01",
     "tier": 1,
@@ -38649,6 +39043,7 @@
   "model": "italiastadiaapp.team",
   "pk": 327,
   "fields": {
+    "is_national": false,
     "name": "PSV Eindhoven",
     "founded": "1913-01-01",
     "tier": 1,
@@ -38672,6 +39067,7 @@
   "model": "italiastadiaapp.team",
   "pk": 328,
   "fields": {
+    "is_national": false,
     "name": "RKC Waalwijk",
     "founded": "1940-01-01",
     "tier": 1,
@@ -38695,6 +39091,7 @@
   "model": "italiastadiaapp.team",
   "pk": 329,
   "fields": {
+    "is_national": false,
     "name": "SC Heerenveen",
     "founded": "1920-01-01",
     "tier": 1,
@@ -38718,6 +39115,7 @@
   "model": "italiastadiaapp.team",
   "pk": 330,
   "fields": {
+    "is_national": false,
     "name": "SC Telstar",
     "founded": "1963-01-01",
     "tier": 1,
@@ -38741,6 +39139,7 @@
   "model": "italiastadiaapp.team",
   "pk": 331,
   "fields": {
+    "is_national": false,
     "name": "Sparta Rotterdam",
     "founded": "1888-01-01",
     "tier": 1,
@@ -38764,6 +39163,7 @@
   "model": "italiastadiaapp.team",
   "pk": 332,
   "fields": {
+    "is_national": false,
     "name": "Cercle Brugge KSV",
     "founded": "1899-01-01",
     "tier": 1,
@@ -38787,6 +39187,7 @@
   "model": "italiastadiaapp.team",
   "pk": 333,
   "fields": {
+    "is_national": false,
     "name": "Club Brugge KV",
     "founded": "1891-01-01",
     "tier": 1,
@@ -38810,6 +39211,7 @@
   "model": "italiastadiaapp.team",
   "pk": 334,
   "fields": {
+    "is_national": false,
     "name": "FCV Dender EH",
     "founded": "2005-01-01",
     "tier": 1,
@@ -38833,6 +39235,7 @@
   "model": "italiastadiaapp.team",
   "pk": 335,
   "fields": {
+    "is_national": false,
     "name": "KAA Gent",
     "founded": "1898-01-01",
     "tier": 1,
@@ -38856,6 +39259,7 @@
   "model": "italiastadiaapp.team",
   "pk": 336,
   "fields": {
+    "is_national": false,
     "name": "KRC Genk",
     "founded": "1988-01-01",
     "tier": 1,
@@ -38879,6 +39283,7 @@
   "model": "italiastadiaapp.team",
   "pk": 337,
   "fields": {
+    "is_national": false,
     "name": "KV Mechelen",
     "founded": "1904-01-01",
     "tier": 1,
@@ -38902,6 +39307,7 @@
   "model": "italiastadiaapp.team",
   "pk": 338,
   "fields": {
+    "is_national": false,
     "name": "KVC Westerlo",
     "founded": "1933-01-01",
     "tier": 1,
@@ -38925,6 +39331,7 @@
   "model": "italiastadiaapp.team",
   "pk": 339,
   "fields": {
+    "is_national": false,
     "name": "Oud-Heverlee Leuven",
     "founded": "1957-01-01",
     "tier": 1,
@@ -38948,6 +39355,7 @@
   "model": "italiastadiaapp.team",
   "pk": 340,
   "fields": {
+    "is_national": false,
     "name": "RAAL La Louvière",
     "founded": "2017-01-01",
     "tier": 1,
@@ -38971,6 +39379,7 @@
   "model": "italiastadiaapp.team",
   "pk": 341,
   "fields": {
+    "is_national": false,
     "name": "Royal Antwerp FC",
     "founded": "1880-01-01",
     "tier": 1,
@@ -38994,6 +39403,7 @@
   "model": "italiastadiaapp.team",
   "pk": 342,
   "fields": {
+    "is_national": false,
     "name": "Royal Charleroi SC",
     "founded": "1904-01-01",
     "tier": 1,
@@ -39017,6 +39427,7 @@
   "model": "italiastadiaapp.team",
   "pk": 343,
   "fields": {
+    "is_national": false,
     "name": "Royale Union Saint-Gilloise",
     "founded": "1897-01-01",
     "tier": 1,
@@ -39040,6 +39451,7 @@
   "model": "italiastadiaapp.team",
   "pk": 344,
   "fields": {
+    "is_national": false,
     "name": "RSC Anderlecht",
     "founded": "1908-01-01",
     "tier": 1,
@@ -39063,6 +39475,7 @@
   "model": "italiastadiaapp.team",
   "pk": 345,
   "fields": {
+    "is_national": false,
     "name": "Sint-Truidense VV",
     "founded": "1924-01-01",
     "tier": 1,
@@ -39086,6 +39499,7 @@
   "model": "italiastadiaapp.team",
   "pk": 346,
   "fields": {
+    "is_national": false,
     "name": "Standard Liège",
     "founded": "1900-01-01",
     "tier": 1,
@@ -39109,6 +39523,7 @@
   "model": "italiastadiaapp.team",
   "pk": 347,
   "fields": {
+    "is_national": false,
     "name": "SV Zulte Waregem",
     "founded": "2001-01-01",
     "tier": 1,
@@ -39132,6 +39547,7 @@
   "model": "italiastadiaapp.team",
   "pk": 348,
   "fields": {
+    "is_national": false,
     "name": "CFR Cluj",
     "founded": "1907-01-01",
     "tier": 1,
@@ -39155,6 +39571,7 @@
   "model": "italiastadiaapp.team",
   "pk": 349,
   "fields": {
+    "is_national": false,
     "name": "FCSB",
     "founded": "1947-01-01",
     "tier": 1,
@@ -39178,6 +39595,7 @@
   "model": "italiastadiaapp.team",
   "pk": 350,
   "fields": {
+    "is_national": false,
     "name": "Universitatea Cluj",
     "founded": "1919-01-01",
     "tier": 1,
@@ -39201,6 +39619,7 @@
   "model": "italiastadiaapp.team",
   "pk": 351,
   "fields": {
+    "is_national": false,
     "name": "Rapid București",
     "founded": "1923-01-01",
     "tier": 1,
@@ -39224,6 +39643,7 @@
   "model": "italiastadiaapp.team",
   "pk": 352,
   "fields": {
+    "is_national": false,
     "name": "Dinamo București",
     "founded": "1948-01-01",
     "tier": 1,
@@ -39247,6 +39667,7 @@
   "model": "italiastadiaapp.team",
   "pk": 353,
   "fields": {
+    "is_national": false,
     "name": "Universitatea Craiova",
     "founded": "1948-01-01",
     "tier": 1,
@@ -39270,6 +39691,7 @@
   "model": "italiastadiaapp.team",
   "pk": 354,
   "fields": {
+    "is_national": false,
     "name": "Sepsi OSK",
     "founded": "2011-01-01",
     "tier": 1,
@@ -39293,6 +39715,7 @@
   "model": "italiastadiaapp.team",
   "pk": 355,
   "fields": {
+    "is_national": false,
     "name": "Farul Constanța",
     "founded": "1920-01-01",
     "tier": 1,
@@ -39316,6 +39739,7 @@
   "model": "italiastadiaapp.team",
   "pk": 356,
   "fields": {
+    "is_national": false,
     "name": "Petrolul Ploiești",
     "founded": "1924-01-01",
     "tier": 1,
@@ -39339,6 +39763,7 @@
   "model": "italiastadiaapp.team",
   "pk": 357,
   "fields": {
+    "is_national": false,
     "name": "FC Botoșani",
     "founded": "2001-01-01",
     "tier": 1,
@@ -39362,6 +39787,7 @@
   "model": "italiastadiaapp.team",
   "pk": 358,
   "fields": {
+    "is_national": false,
     "name": "FC Hermannstadt",
     "founded": "2015-01-01",
     "tier": 1,
@@ -39385,6 +39811,7 @@
   "model": "italiastadiaapp.team",
   "pk": 359,
   "fields": {
+    "is_national": false,
     "name": "FC Argeș",
     "founded": "1953-01-01",
     "tier": 1,
@@ -39408,6 +39835,7 @@
   "model": "italiastadiaapp.team",
   "pk": 360,
   "fields": {
+    "is_national": false,
     "name": "FC Voluntari",
     "founded": "2010-01-01",
     "tier": 1,
@@ -39431,6 +39859,7 @@
   "model": "italiastadiaapp.team",
   "pk": 361,
   "fields": {
+    "is_national": false,
     "name": "Gloria Buzău",
     "founded": "2016-01-01",
     "tier": 1,
@@ -39454,6 +39883,7 @@
   "model": "italiastadiaapp.team",
   "pk": 362,
   "fields": {
+    "is_national": false,
     "name": "Metaloglobus București",
     "founded": "1936-01-01",
     "tier": 1,
@@ -39477,6 +39907,7 @@
   "model": "italiastadiaapp.team",
   "pk": 363,
   "fields": {
+    "is_national": false,
     "name": "Poli Iași",
     "founded": null,
     "tier": 1,
@@ -39500,6 +39931,7 @@
   "model": "italiastadiaapp.team",
   "pk": 364,
   "fields": {
+    "is_national": false,
     "name": "AC Sparta Prague",
     "founded": "1893-01-01",
     "tier": 1,
@@ -39523,6 +39955,7 @@
   "model": "italiastadiaapp.team",
   "pk": 365,
   "fields": {
+    "is_national": false,
     "name": "SK Slavia Prague",
     "founded": "1892-01-01",
     "tier": 1,
@@ -39546,6 +39979,7 @@
   "model": "italiastadiaapp.team",
   "pk": 366,
   "fields": {
+    "is_national": false,
     "name": "FC Viktoria Plzeň",
     "founded": "1911-01-01",
     "tier": 1,
@@ -39569,6 +40003,7 @@
   "model": "italiastadiaapp.team",
   "pk": 367,
   "fields": {
+    "is_national": false,
     "name": "FC Baník Ostrava",
     "founded": "1922-01-01",
     "tier": 1,
@@ -39592,6 +40027,7 @@
   "model": "italiastadiaapp.team",
   "pk": 368,
   "fields": {
+    "is_national": false,
     "name": "FK Mladá Boleslav",
     "founded": "1902-01-01",
     "tier": 1,
@@ -39615,6 +40051,7 @@
   "model": "italiastadiaapp.team",
   "pk": 369,
   "fields": {
+    "is_national": false,
     "name": "SK Sigma Olomouc",
     "founded": "1919-01-01",
     "tier": 1,
@@ -39638,6 +40075,7 @@
   "model": "italiastadiaapp.team",
   "pk": 370,
   "fields": {
+    "is_national": false,
     "name": "FC Slovan Liberec",
     "founded": "1958-01-01",
     "tier": 1,
@@ -39661,6 +40099,7 @@
   "model": "italiastadiaapp.team",
   "pk": 371,
   "fields": {
+    "is_national": false,
     "name": "FK Jablonec",
     "founded": "1945-01-01",
     "tier": 1,
@@ -39684,6 +40123,7 @@
   "model": "italiastadiaapp.team",
   "pk": 372,
   "fields": {
+    "is_national": false,
     "name": "FK Teplice",
     "founded": "1945-01-01",
     "tier": 1,
@@ -39707,6 +40147,7 @@
   "model": "italiastadiaapp.team",
   "pk": 373,
   "fields": {
+    "is_national": false,
     "name": "Bohemians 1905",
     "founded": "1904-01-01",
     "tier": 1,
@@ -39730,6 +40171,7 @@
   "model": "italiastadiaapp.team",
   "pk": 374,
   "fields": {
+    "is_national": false,
     "name": "FK Dukla Prague",
     "founded": "1947-01-01",
     "tier": 1,
@@ -39753,6 +40195,7 @@
   "model": "italiastadiaapp.team",
   "pk": 375,
   "fields": {
+    "is_national": false,
     "name": "FC Hradec Králové",
     "founded": "1904-01-01",
     "tier": 1,
@@ -39776,6 +40219,7 @@
   "model": "italiastadiaapp.team",
   "pk": 376,
   "fields": {
+    "is_national": false,
     "name": "MFK Karviná",
     "founded": "2003-01-01",
     "tier": 1,
@@ -39799,6 +40243,7 @@
   "model": "italiastadiaapp.team",
   "pk": 377,
   "fields": {
+    "is_national": false,
     "name": "FK Pardubice",
     "founded": "2007-01-01",
     "tier": 1,
@@ -39822,6 +40267,7 @@
   "model": "italiastadiaapp.team",
   "pk": 378,
   "fields": {
+    "is_national": false,
     "name": "1. FC Slovácko",
     "founded": "2000-01-01",
     "tier": 1,
@@ -39845,6 +40291,7 @@
   "model": "italiastadiaapp.team",
   "pk": 379,
   "fields": {
+    "is_national": false,
     "name": "FC Zlín",
     "founded": "1918-01-01",
     "tier": 1,
@@ -39868,6 +40315,7 @@
   "model": "italiastadiaapp.team",
   "pk": 380,
   "fields": {
+    "is_national": false,
     "name": "FK Austria Wien",
     "founded": "1911-01-01",
     "tier": 1,
@@ -39891,6 +40339,7 @@
   "model": "italiastadiaapp.team",
   "pk": 381,
   "fields": {
+    "is_national": false,
     "name": "FC Blau-Weiß Linz",
     "founded": "1997-01-01",
     "tier": 1,
@@ -39914,6 +40363,7 @@
   "model": "italiastadiaapp.team",
   "pk": 382,
   "fields": {
+    "is_national": false,
     "name": "Grazer AK 1902",
     "founded": "1902-01-01",
     "tier": 1,
@@ -39937,6 +40387,7 @@
   "model": "italiastadiaapp.team",
   "pk": 383,
   "fields": {
+    "is_national": false,
     "name": "TSV Hartberg",
     "founded": "1946-01-01",
     "tier": 1,
@@ -39960,6 +40411,7 @@
   "model": "italiastadiaapp.team",
   "pk": 384,
   "fields": {
+    "is_national": false,
     "name": "LASK",
     "founded": "1908-01-01",
     "tier": 1,
@@ -39983,6 +40435,7 @@
   "model": "italiastadiaapp.team",
   "pk": 385,
   "fields": {
+    "is_national": false,
     "name": "SK Rapid Wien",
     "founded": "1899-01-01",
     "tier": 1,
@@ -40006,6 +40459,7 @@
   "model": "italiastadiaapp.team",
   "pk": 386,
   "fields": {
+    "is_national": false,
     "name": "FC Red Bull Salzburg",
     "founded": "1933-01-01",
     "tier": 1,
@@ -40029,6 +40483,7 @@
   "model": "italiastadiaapp.team",
   "pk": 387,
   "fields": {
+    "is_national": false,
     "name": "SCR Altach",
     "founded": "1929-01-01",
     "tier": 1,
@@ -40052,6 +40507,7 @@
   "model": "italiastadiaapp.team",
   "pk": 388,
   "fields": {
+    "is_national": false,
     "name": "SV Ried",
     "founded": "1912-01-01",
     "tier": 1,
@@ -40075,6 +40531,7 @@
   "model": "italiastadiaapp.team",
   "pk": 389,
   "fields": {
+    "is_national": false,
     "name": "SK Sturm Graz",
     "founded": "1909-01-01",
     "tier": 1,
@@ -40098,6 +40555,7 @@
   "model": "italiastadiaapp.team",
   "pk": 390,
   "fields": {
+    "is_national": false,
     "name": "WSG Tirol",
     "founded": "1930-01-01",
     "tier": 1,
@@ -40121,6 +40579,7 @@
   "model": "italiastadiaapp.team",
   "pk": 391,
   "fields": {
+    "is_national": false,
     "name": "Wolfsberger AC",
     "founded": "1931-01-01",
     "tier": 1,
@@ -40144,6 +40603,7 @@
   "model": "italiastadiaapp.team",
   "pk": 392,
   "fields": {
+    "is_national": false,
     "name": "Birmingham City F.C.",
     "founded": "1875-01-01",
     "tier": 2,
@@ -40167,6 +40627,7 @@
   "model": "italiastadiaapp.team",
   "pk": 393,
   "fields": {
+    "is_national": false,
     "name": "Blackburn Rovers F.C.",
     "founded": "1875-01-01",
     "tier": 2,
@@ -40190,6 +40651,7 @@
   "model": "italiastadiaapp.team",
   "pk": 394,
   "fields": {
+    "is_national": false,
     "name": "Bristol City F.C.",
     "founded": "1894-01-01",
     "tier": 2,
@@ -40213,6 +40675,7 @@
   "model": "italiastadiaapp.team",
   "pk": 395,
   "fields": {
+    "is_national": false,
     "name": "Charlton Athletic F.C.",
     "founded": "1905-01-01",
     "tier": 2,
@@ -40236,6 +40699,7 @@
   "model": "italiastadiaapp.team",
   "pk": 396,
   "fields": {
+    "is_national": false,
     "name": "Coventry City F.C.",
     "founded": "1883-01-01",
     "tier": 2,
@@ -40259,6 +40723,7 @@
   "model": "italiastadiaapp.team",
   "pk": 397,
   "fields": {
+    "is_national": false,
     "name": "Derby County F.C.",
     "founded": "1884-01-01",
     "tier": 2,
@@ -40282,6 +40747,7 @@
   "model": "italiastadiaapp.team",
   "pk": 398,
   "fields": {
+    "is_national": false,
     "name": "Hull City A.F.C.",
     "founded": "1904-01-01",
     "tier": 2,
@@ -40305,6 +40771,7 @@
   "model": "italiastadiaapp.team",
   "pk": 399,
   "fields": {
+    "is_national": false,
     "name": "Ipswich Town F.C.",
     "founded": "1878-01-01",
     "tier": 2,
@@ -40328,6 +40795,7 @@
   "model": "italiastadiaapp.team",
   "pk": 400,
   "fields": {
+    "is_national": false,
     "name": "Leicester City F.C.",
     "founded": "1884-01-01",
     "tier": 2,
@@ -40351,6 +40819,7 @@
   "model": "italiastadiaapp.team",
   "pk": 401,
   "fields": {
+    "is_national": false,
     "name": "Middlesbrough F.C.",
     "founded": "1876-01-01",
     "tier": 2,
@@ -40374,6 +40843,7 @@
   "model": "italiastadiaapp.team",
   "pk": 402,
   "fields": {
+    "is_national": false,
     "name": "Millwall F.C.",
     "founded": "1885-01-01",
     "tier": 2,
@@ -40397,6 +40867,7 @@
   "model": "italiastadiaapp.team",
   "pk": 403,
   "fields": {
+    "is_national": false,
     "name": "Norwich City F.C.",
     "founded": "1902-01-01",
     "tier": 2,
@@ -40420,6 +40891,7 @@
   "model": "italiastadiaapp.team",
   "pk": 404,
   "fields": {
+    "is_national": false,
     "name": "Oxford United F.C.",
     "founded": "1893-01-01",
     "tier": 2,
@@ -40443,6 +40915,7 @@
   "model": "italiastadiaapp.team",
   "pk": 405,
   "fields": {
+    "is_national": false,
     "name": "Portsmouth F.C.",
     "founded": "1898-01-01",
     "tier": 2,
@@ -40466,6 +40939,7 @@
   "model": "italiastadiaapp.team",
   "pk": 406,
   "fields": {
+    "is_national": false,
     "name": "Preston North End F.C.",
     "founded": "1863-01-01",
     "tier": 2,
@@ -40489,6 +40963,7 @@
   "model": "italiastadiaapp.team",
   "pk": 407,
   "fields": {
+    "is_national": false,
     "name": "Queens Park Rangers F.C.",
     "founded": "1882-01-01",
     "tier": 2,
@@ -40512,6 +40987,7 @@
   "model": "italiastadiaapp.team",
   "pk": 408,
   "fields": {
+    "is_national": false,
     "name": "Sheffield United F.C.",
     "founded": "1889-01-01",
     "tier": 2,
@@ -40535,6 +41011,7 @@
   "model": "italiastadiaapp.team",
   "pk": 409,
   "fields": {
+    "is_national": false,
     "name": "Sheffield Wednesday F.C.",
     "founded": "1867-01-01",
     "tier": 2,
@@ -40558,6 +41035,7 @@
   "model": "italiastadiaapp.team",
   "pk": 410,
   "fields": {
+    "is_national": false,
     "name": "Southampton F.C.",
     "founded": "1885-01-01",
     "tier": 2,
@@ -40581,6 +41059,7 @@
   "model": "italiastadiaapp.team",
   "pk": 411,
   "fields": {
+    "is_national": false,
     "name": "Stoke City F.C.",
     "founded": "1863-01-01",
     "tier": 2,
@@ -40604,6 +41083,7 @@
   "model": "italiastadiaapp.team",
   "pk": 412,
   "fields": {
+    "is_national": false,
     "name": "Swansea City A.F.C.",
     "founded": "1912-01-01",
     "tier": 2,
@@ -40627,6 +41107,7 @@
   "model": "italiastadiaapp.team",
   "pk": 413,
   "fields": {
+    "is_national": false,
     "name": "Watford F.C.",
     "founded": "1881-01-01",
     "tier": 2,
@@ -40650,6 +41131,7 @@
   "model": "italiastadiaapp.team",
   "pk": 414,
   "fields": {
+    "is_national": false,
     "name": "West Bromwich Albion F.C.",
     "founded": "1878-01-01",
     "tier": 2,
@@ -40673,6 +41155,7 @@
   "model": "italiastadiaapp.team",
   "pk": 415,
   "fields": {
+    "is_national": false,
     "name": "Wrexham A.F.C.",
     "founded": "1864-01-01",
     "tier": 2,
@@ -40696,6 +41179,7 @@
   "model": "italiastadiaapp.team",
   "pk": 416,
   "fields": {
+    "is_national": false,
     "name": "Hertha BSC",
     "founded": "1892-01-01",
     "tier": 2,
@@ -40719,6 +41203,7 @@
   "model": "italiastadiaapp.team",
   "pk": 417,
   "fields": {
+    "is_national": false,
     "name": "DSC Arminia Bielefeld",
     "founded": "1905-01-01",
     "tier": 2,
@@ -40742,6 +41227,7 @@
   "model": "italiastadiaapp.team",
   "pk": 418,
   "fields": {
+    "is_national": false,
     "name": "VfL Bochum 1848",
     "founded": "1949-01-01",
     "tier": 2,
@@ -40765,6 +41251,7 @@
   "model": "italiastadiaapp.team",
   "pk": 419,
   "fields": {
+    "is_national": false,
     "name": "Eintracht Braunschweig",
     "founded": "1895-01-01",
     "tier": 2,
@@ -40788,6 +41275,7 @@
   "model": "italiastadiaapp.team",
   "pk": 420,
   "fields": {
+    "is_national": false,
     "name": "SV Darmstadt 98",
     "founded": "1898-01-01",
     "tier": 2,
@@ -40811,6 +41299,7 @@
   "model": "italiastadiaapp.team",
   "pk": 421,
   "fields": {
+    "is_national": false,
     "name": "SG Dynamo Dresden",
     "founded": "1953-01-01",
     "tier": 2,
@@ -40834,6 +41323,7 @@
   "model": "italiastadiaapp.team",
   "pk": 422,
   "fields": {
+    "is_national": false,
     "name": "Fortuna Düsseldorf",
     "founded": "1895-01-01",
     "tier": 2,
@@ -40857,6 +41347,7 @@
   "model": "italiastadiaapp.team",
   "pk": 423,
   "fields": {
+    "is_national": false,
     "name": "SV 07 Elversberg",
     "founded": "1907-01-01",
     "tier": 2,
@@ -40880,6 +41371,7 @@
   "model": "italiastadiaapp.team",
   "pk": 424,
   "fields": {
+    "is_national": false,
     "name": "SpVgg Greuther Fürth",
     "founded": "1903-01-01",
     "tier": 2,
@@ -40903,6 +41395,7 @@
   "model": "italiastadiaapp.team",
   "pk": 425,
   "fields": {
+    "is_national": false,
     "name": "Hannover 96",
     "founded": "1896-01-01",
     "tier": 2,
@@ -40926,6 +41419,7 @@
   "model": "italiastadiaapp.team",
   "pk": 426,
   "fields": {
+    "is_national": false,
     "name": "1. FC Kaiserslautern",
     "founded": "1900-01-01",
     "tier": 2,
@@ -40949,6 +41443,7 @@
   "model": "italiastadiaapp.team",
   "pk": 427,
   "fields": {
+    "is_national": false,
     "name": "Karlsruher SC",
     "founded": "1952-01-01",
     "tier": 2,
@@ -40972,6 +41467,7 @@
   "model": "italiastadiaapp.team",
   "pk": 428,
   "fields": {
+    "is_national": false,
     "name": "Holstein Kiel",
     "founded": "1900-01-01",
     "tier": 2,
@@ -40995,6 +41491,7 @@
   "model": "italiastadiaapp.team",
   "pk": 429,
   "fields": {
+    "is_national": false,
     "name": "1. FC Magdeburg",
     "founded": "1965-01-01",
     "tier": 2,
@@ -41018,6 +41515,7 @@
   "model": "italiastadiaapp.team",
   "pk": 430,
   "fields": {
+    "is_national": false,
     "name": "SC Preußen Münster",
     "founded": "1906-01-01",
     "tier": 2,
@@ -41041,6 +41539,7 @@
   "model": "italiastadiaapp.team",
   "pk": 431,
   "fields": {
+    "is_national": false,
     "name": "1. FC Nürnberg",
     "founded": "1900-01-01",
     "tier": 2,
@@ -41064,6 +41563,7 @@
   "model": "italiastadiaapp.team",
   "pk": 432,
   "fields": {
+    "is_national": false,
     "name": "SC Paderborn 07",
     "founded": "1985-01-01",
     "tier": 2,
@@ -41087,6 +41587,7 @@
   "model": "italiastadiaapp.team",
   "pk": 433,
   "fields": {
+    "is_national": false,
     "name": "FC Schalke 04",
     "founded": "1904-01-01",
     "tier": 2,
@@ -41110,6 +41611,7 @@
   "model": "italiastadiaapp.team",
   "pk": 434,
   "fields": {
+    "is_national": false,
     "name": "Albacete Balompié",
     "founded": "1940-01-01",
     "tier": 2,
@@ -41133,6 +41635,7 @@
   "model": "italiastadiaapp.team",
   "pk": 435,
   "fields": {
+    "is_national": false,
     "name": "UD Almería",
     "founded": "1989-01-01",
     "tier": 2,
@@ -41156,6 +41659,7 @@
   "model": "italiastadiaapp.team",
   "pk": 436,
   "fields": {
+    "is_national": false,
     "name": "FC Andorra",
     "founded": "1942-01-01",
     "tier": 2,
@@ -41179,6 +41683,7 @@
   "model": "italiastadiaapp.team",
   "pk": 437,
   "fields": {
+    "is_national": false,
     "name": "Burgos CF",
     "founded": "1982-01-01",
     "tier": 2,
@@ -41202,6 +41707,7 @@
   "model": "italiastadiaapp.team",
   "pk": 438,
   "fields": {
+    "is_national": false,
     "name": "Cádiz CF",
     "founded": "1910-01-01",
     "tier": 2,
@@ -41225,6 +41731,7 @@
   "model": "italiastadiaapp.team",
   "pk": 439,
   "fields": {
+    "is_national": false,
     "name": "CD Castellón",
     "founded": "1922-01-01",
     "tier": 2,
@@ -41248,6 +41755,7 @@
   "model": "italiastadiaapp.team",
   "pk": 440,
   "fields": {
+    "is_national": false,
     "name": "AD Ceuta FC",
     "founded": "1956-01-01",
     "tier": 2,
@@ -41271,6 +41779,7 @@
   "model": "italiastadiaapp.team",
   "pk": 441,
   "fields": {
+    "is_national": false,
     "name": "Córdoba CF",
     "founded": "1953-01-01",
     "tier": 2,
@@ -41294,6 +41803,7 @@
   "model": "italiastadiaapp.team",
   "pk": 442,
   "fields": {
+    "is_national": false,
     "name": "Cultural y Deportiva Leonesa",
     "founded": "1923-01-01",
     "tier": 2,
@@ -41317,6 +41827,7 @@
   "model": "italiastadiaapp.team",
   "pk": 443,
   "fields": {
+    "is_national": false,
     "name": "Deportivo de La Coruña",
     "founded": "1906-01-01",
     "tier": 2,
@@ -41340,6 +41851,7 @@
   "model": "italiastadiaapp.team",
   "pk": 444,
   "fields": {
+    "is_national": false,
     "name": "SD Eibar",
     "founded": "1940-01-01",
     "tier": 2,
@@ -41363,6 +41875,7 @@
   "model": "italiastadiaapp.team",
   "pk": 445,
   "fields": {
+    "is_national": false,
     "name": "Granada CF",
     "founded": "1931-01-01",
     "tier": 2,
@@ -41386,6 +41899,7 @@
   "model": "italiastadiaapp.team",
   "pk": 446,
   "fields": {
+    "is_national": false,
     "name": "SD Huesca",
     "founded": "1960-01-01",
     "tier": 2,
@@ -41409,6 +41923,7 @@
   "model": "italiastadiaapp.team",
   "pk": 447,
   "fields": {
+    "is_national": false,
     "name": "UD Las Palmas",
     "founded": "1949-01-01",
     "tier": 2,
@@ -41432,6 +41947,7 @@
   "model": "italiastadiaapp.team",
   "pk": 448,
   "fields": {
+    "is_national": false,
     "name": "CD Leganés",
     "founded": "1928-01-01",
     "tier": 2,
@@ -41455,6 +41971,7 @@
   "model": "italiastadiaapp.team",
   "pk": 449,
   "fields": {
+    "is_national": false,
     "name": "Málaga CF",
     "founded": "1948-01-01",
     "tier": 2,
@@ -41478,6 +41995,7 @@
   "model": "italiastadiaapp.team",
   "pk": 450,
   "fields": {
+    "is_national": false,
     "name": "CD Mirandés",
     "founded": "1927-01-01",
     "tier": 2,
@@ -41501,6 +42019,7 @@
   "model": "italiastadiaapp.team",
   "pk": 451,
   "fields": {
+    "is_national": false,
     "name": "Racing de Santander",
     "founded": "1913-01-01",
     "tier": 2,
@@ -41524,6 +42043,7 @@
   "model": "italiastadiaapp.team",
   "pk": 452,
   "fields": {
+    "is_national": false,
     "name": "Real Sociedad B",
     "founded": "1908-01-01",
     "tier": 2,
@@ -41547,6 +42067,7 @@
   "model": "italiastadiaapp.team",
   "pk": 453,
   "fields": {
+    "is_national": false,
     "name": "Sporting de Gijón",
     "founded": "1905-01-01",
     "tier": 2,
@@ -41570,6 +42091,7 @@
   "model": "italiastadiaapp.team",
   "pk": 454,
   "fields": {
+    "is_national": false,
     "name": "Real Valladolid",
     "founded": "1928-01-01",
     "tier": 2,
@@ -41593,6 +42115,7 @@
   "model": "italiastadiaapp.team",
   "pk": 455,
   "fields": {
+    "is_national": false,
     "name": "Real Zaragoza",
     "founded": "1932-01-01",
     "tier": 2,
@@ -41616,6 +42139,7 @@
   "model": "italiastadiaapp.team",
   "pk": 456,
   "fields": {
+    "is_national": false,
     "name": "Aarhus Gymnastikforening",
     "founded": "1880-01-01",
     "tier": 1,
@@ -41639,6 +42163,7 @@
   "model": "italiastadiaapp.team",
   "pk": 457,
   "fields": {
+    "is_national": false,
     "name": "Brøndby IF",
     "founded": "1964-01-01",
     "tier": 1,
@@ -41662,6 +42187,7 @@
   "model": "italiastadiaapp.team",
   "pk": 458,
   "fields": {
+    "is_national": false,
     "name": "F.C. Copenhagen",
     "founded": "1992-01-01",
     "tier": 1,
@@ -41685,6 +42211,7 @@
   "model": "italiastadiaapp.team",
   "pk": 459,
   "fields": {
+    "is_national": false,
     "name": "FC Fredericia",
     "founded": "1991-01-01",
     "tier": 1,
@@ -41708,6 +42235,7 @@
   "model": "italiastadiaapp.team",
   "pk": 460,
   "fields": {
+    "is_national": false,
     "name": "FC Midtjylland",
     "founded": "1999-01-01",
     "tier": 1,
@@ -41731,6 +42259,7 @@
   "model": "italiastadiaapp.team",
   "pk": 461,
   "fields": {
+    "is_national": false,
     "name": "FC Nordsjælland",
     "founded": "2003-01-01",
     "tier": 1,
@@ -41754,6 +42283,7 @@
   "model": "italiastadiaapp.team",
   "pk": 462,
   "fields": {
+    "is_national": false,
     "name": "Odense Boldklub",
     "founded": "1887-01-01",
     "tier": 1,
@@ -41777,6 +42307,7 @@
   "model": "italiastadiaapp.team",
   "pk": 463,
   "fields": {
+    "is_national": false,
     "name": "Randers FC",
     "founded": "2003-01-01",
     "tier": 1,
@@ -41800,6 +42331,7 @@
   "model": "italiastadiaapp.team",
   "pk": 464,
   "fields": {
+    "is_national": false,
     "name": "Silkeborg IF",
     "founded": "1917-01-01",
     "tier": 1,
@@ -41823,6 +42355,7 @@
   "model": "italiastadiaapp.team",
   "pk": 465,
   "fields": {
+    "is_national": false,
     "name": "Sønderjyske Fodbold",
     "founded": "2004-01-01",
     "tier": 1,
@@ -41846,6 +42379,7 @@
   "model": "italiastadiaapp.team",
   "pk": 466,
   "fields": {
+    "is_national": false,
     "name": "Vejle Boldklub",
     "founded": "1891-01-01",
     "tier": 1,
@@ -41869,6 +42403,7 @@
   "model": "italiastadiaapp.team",
   "pk": 467,
   "fields": {
+    "is_national": false,
     "name": "Viborg FF",
     "founded": "1896-01-01",
     "tier": 1,
@@ -41892,6 +42427,7 @@
   "model": "italiastadiaapp.team",
   "pk": 468,
   "fields": {
+    "is_national": false,
     "name": "Olympiacos FC",
     "founded": "1925-01-01",
     "tier": 1,
@@ -41915,6 +42451,7 @@
   "model": "italiastadiaapp.team",
   "pk": 469,
   "fields": {
+    "is_national": false,
     "name": "Panathinaikos FC",
     "founded": "1908-01-01",
     "tier": 1,
@@ -41938,6 +42475,7 @@
   "model": "italiastadiaapp.team",
   "pk": 470,
   "fields": {
+    "is_national": false,
     "name": "PAOK FC",
     "founded": "1926-01-01",
     "tier": 1,
@@ -41961,6 +42499,7 @@
   "model": "italiastadiaapp.team",
   "pk": 471,
   "fields": {
+    "is_national": false,
     "name": "AEK Athens FC",
     "founded": "1924-01-01",
     "tier": 1,
@@ -41984,6 +42523,7 @@
   "model": "italiastadiaapp.team",
   "pk": 472,
   "fields": {
+    "is_national": false,
     "name": "Aris Thessaloniki FC",
     "founded": "1914-01-01",
     "tier": 1,
@@ -42007,6 +42547,7 @@
   "model": "italiastadiaapp.team",
   "pk": 473,
   "fields": {
+    "is_national": false,
     "name": "Atromitos FC",
     "founded": "1923-01-01",
     "tier": 1,
@@ -42030,6 +42571,7 @@
   "model": "italiastadiaapp.team",
   "pk": 474,
   "fields": {
+    "is_national": false,
     "name": "OFI Crete FC",
     "founded": "1925-01-01",
     "tier": 1,
@@ -42053,6 +42595,7 @@
   "model": "italiastadiaapp.team",
   "pk": 475,
   "fields": {
+    "is_national": false,
     "name": "Asteras Tripolis FC",
     "founded": "1931-01-01",
     "tier": 1,
@@ -42076,6 +42619,7 @@
   "model": "italiastadiaapp.team",
   "pk": 476,
   "fields": {
+    "is_national": false,
     "name": "Panetolikos GFS",
     "founded": "1926-01-01",
     "tier": 1,
@@ -42099,6 +42643,7 @@
   "model": "italiastadiaapp.team",
   "pk": 477,
   "fields": {
+    "is_national": false,
     "name": "Panserraikos FC",
     "founded": "1964-01-01",
     "tier": 1,
@@ -42122,6 +42667,7 @@
   "model": "italiastadiaapp.team",
   "pk": 478,
   "fields": {
+    "is_national": false,
     "name": "Volos NFC",
     "founded": "2017-01-01",
     "tier": 1,
@@ -42145,6 +42691,7 @@
   "model": "italiastadiaapp.team",
   "pk": 479,
   "fields": {
+    "is_national": false,
     "name": "Levadiakos FC",
     "founded": "1961-01-01",
     "tier": 1,
@@ -42168,6 +42715,7 @@
   "model": "italiastadiaapp.team",
   "pk": 480,
   "fields": {
+    "is_national": false,
     "name": "AEL Larissa FC",
     "founded": "1964-01-01",
     "tier": 1,
@@ -42191,6 +42739,7 @@
   "model": "italiastadiaapp.team",
   "pk": 481,
   "fields": {
+    "is_national": false,
     "name": "A.E. Kifisia FC",
     "founded": "2012-01-01",
     "tier": 1,
@@ -42214,6 +42763,7 @@
   "model": "italiastadiaapp.team",
   "pk": 482,
   "fields": {
+    "is_national": false,
     "name": "FC Basel 1893",
     "founded": "1893-01-01",
     "tier": 1,
@@ -42237,6 +42787,7 @@
   "model": "italiastadiaapp.team",
   "pk": 483,
   "fields": {
+    "is_national": false,
     "name": "BSC Young Boys",
     "founded": "1898-01-01",
     "tier": 1,
@@ -42260,6 +42811,7 @@
   "model": "italiastadiaapp.team",
   "pk": 484,
   "fields": {
+    "is_national": false,
     "name": "FC Zürich",
     "founded": "1896-01-01",
     "tier": 1,
@@ -42283,6 +42835,7 @@
   "model": "italiastadiaapp.team",
   "pk": 485,
   "fields": {
+    "is_national": false,
     "name": "Servette FC",
     "founded": "1890-01-01",
     "tier": 1,
@@ -42306,6 +42859,7 @@
   "model": "italiastadiaapp.team",
   "pk": 486,
   "fields": {
+    "is_national": false,
     "name": "FC Lugano",
     "founded": "1908-01-01",
     "tier": 1,
@@ -42329,6 +42883,7 @@
   "model": "italiastadiaapp.team",
   "pk": 487,
   "fields": {
+    "is_national": false,
     "name": "FC Luzern",
     "founded": "1901-01-01",
     "tier": 1,
@@ -42352,6 +42907,7 @@
   "model": "italiastadiaapp.team",
   "pk": 488,
   "fields": {
+    "is_national": false,
     "name": "FC St. Gallen 1879",
     "founded": "1879-01-01",
     "tier": 1,
@@ -42375,6 +42931,7 @@
   "model": "italiastadiaapp.team",
   "pk": 489,
   "fields": {
+    "is_national": false,
     "name": "FC Sion",
     "founded": "1909-01-01",
     "tier": 1,
@@ -42398,6 +42955,7 @@
   "model": "italiastadiaapp.team",
   "pk": 490,
   "fields": {
+    "is_national": false,
     "name": "Grasshopper Club Zürich",
     "founded": "1886-01-01",
     "tier": 1,
@@ -42421,6 +42979,7 @@
   "model": "italiastadiaapp.team",
   "pk": 491,
   "fields": {
+    "is_national": false,
     "name": "FC Winterthur",
     "founded": "1896-01-01",
     "tier": 1,
@@ -42444,6 +43003,7 @@
   "model": "italiastadiaapp.team",
   "pk": 492,
   "fields": {
+    "is_national": false,
     "name": "FC Lausanne-Sport",
     "founded": "1896-01-01",
     "tier": 1,
@@ -42467,6 +43027,7 @@
   "model": "italiastadiaapp.team",
   "pk": 493,
   "fields": {
+    "is_national": false,
     "name": "FC Thun",
     "founded": "1898-01-01",
     "tier": 1,
@@ -42490,6 +43051,7 @@
   "model": "italiastadiaapp.team",
   "pk": 494,
   "fields": {
+    "is_national": false,
     "name": "GNK Dinamo Zagreb",
     "founded": "1911-01-01",
     "tier": 1,
@@ -42513,6 +43075,7 @@
   "model": "italiastadiaapp.team",
   "pk": 495,
   "fields": {
+    "is_national": false,
     "name": "HNK Hajduk Split",
     "founded": "1911-01-01",
     "tier": 1,
@@ -42536,6 +43099,7 @@
   "model": "italiastadiaapp.team",
   "pk": 496,
   "fields": {
+    "is_national": false,
     "name": "HNK Rijeka",
     "founded": "1946-01-01",
     "tier": 1,
@@ -42559,6 +43123,7 @@
   "model": "italiastadiaapp.team",
   "pk": 497,
   "fields": {
+    "is_national": false,
     "name": "NK Osijek",
     "founded": "1947-01-01",
     "tier": 1,
@@ -42582,6 +43147,7 @@
   "model": "italiastadiaapp.team",
   "pk": 498,
   "fields": {
+    "is_national": false,
     "name": "NK Lokomotiva Zagreb",
     "founded": "1913-01-01",
     "tier": 1,
@@ -42605,6 +43171,7 @@
   "model": "italiastadiaapp.team",
   "pk": 499,
   "fields": {
+    "is_national": false,
     "name": "NK Istra 1961",
     "founded": "1947-01-01",
     "tier": 1,
@@ -42628,6 +43195,7 @@
   "model": "italiastadiaapp.team",
   "pk": 500,
   "fields": {
+    "is_national": false,
     "name": "HNK Gorica",
     "founded": "2009-01-01",
     "tier": 1,
@@ -42651,6 +43219,7 @@
   "model": "italiastadiaapp.team",
   "pk": 501,
   "fields": {
+    "is_national": false,
     "name": "NK Slaven Belupo",
     "founded": "1907-01-01",
     "tier": 1,
@@ -42674,6 +43243,7 @@
   "model": "italiastadiaapp.team",
   "pk": 502,
   "fields": {
+    "is_national": false,
     "name": "NK Varaždin",
     "founded": "1931-01-01",
     "tier": 1,
@@ -42697,6 +43267,7 @@
   "model": "italiastadiaapp.team",
   "pk": 503,
   "fields": {
+    "is_national": false,
     "name": "HNK Vukovar 1991",
     "founded": "1990-01-01",
     "tier": 1,
@@ -42720,6 +43291,7 @@
   "model": "italiastadiaapp.team",
   "pk": 504,
   "fields": {
+    "is_national": false,
     "name": "APOEL FC",
     "founded": "1926-01-01",
     "tier": 1,
@@ -42743,6 +43315,7 @@
   "model": "italiastadiaapp.team",
   "pk": 505,
   "fields": {
+    "is_national": false,
     "name": "AC Omonia",
     "founded": "1948-01-01",
     "tier": 1,
@@ -42766,6 +43339,7 @@
   "model": "italiastadiaapp.team",
   "pk": 506,
   "fields": {
+    "is_national": false,
     "name": "Olympiakos Nicosia",
     "founded": "1931-01-01",
     "tier": 1,
@@ -42789,6 +43363,7 @@
   "model": "italiastadiaapp.team",
   "pk": 507,
   "fields": {
+    "is_national": false,
     "name": "AEL Limassol",
     "founded": "1930-01-01",
     "tier": 1,
@@ -42812,6 +43387,7 @@
   "model": "italiastadiaapp.team",
   "pk": 508,
   "fields": {
+    "is_national": false,
     "name": "Apollon Limassol FC",
     "founded": "1954-01-01",
     "tier": 1,
@@ -42835,6 +43411,7 @@
   "model": "italiastadiaapp.team",
   "pk": 509,
   "fields": {
+    "is_national": false,
     "name": "Aris Limassol FC",
     "founded": "1930-01-01",
     "tier": 1,
@@ -42858,6 +43435,7 @@
   "model": "italiastadiaapp.team",
   "pk": 510,
   "fields": {
+    "is_national": false,
     "name": "AEK Larnaca FC",
     "founded": "1994-01-01",
     "tier": 1,
@@ -42881,6 +43459,7 @@
   "model": "italiastadiaapp.team",
   "pk": 511,
   "fields": {
+    "is_national": false,
     "name": "Anorthosis Famagusta FC",
     "founded": "1911-01-01",
     "tier": 1,
@@ -42904,6 +43483,7 @@
   "model": "italiastadiaapp.team",
   "pk": 512,
   "fields": {
+    "is_national": false,
     "name": "Omonia Aradippou",
     "founded": "1929-01-01",
     "tier": 1,
@@ -42927,6 +43507,7 @@
   "model": "italiastadiaapp.team",
   "pk": 513,
   "fields": {
+    "is_national": false,
     "name": "Pafos FC",
     "founded": "2014-01-01",
     "tier": 1,
@@ -42950,6 +43531,7 @@
   "model": "italiastadiaapp.team",
   "pk": 514,
   "fields": {
+    "is_national": false,
     "name": "Akritas Chlorakas",
     "founded": "1971-01-01",
     "tier": 1,
@@ -42973,6 +43555,7 @@
   "model": "italiastadiaapp.team",
   "pk": 515,
   "fields": {
+    "is_national": false,
     "name": "Krasava ENY Ypsonas",
     "founded": "2014-01-01",
     "tier": 1,
@@ -42996,6 +43579,7 @@
   "model": "italiastadiaapp.team",
   "pk": 516,
   "fields": {
+    "is_national": false,
     "name": "Ethnikos Achna FC",
     "founded": "1968-01-01",
     "tier": 1,
@@ -43019,6 +43603,7 @@
   "model": "italiastadiaapp.team",
   "pk": 517,
   "fields": {
+    "is_national": false,
     "name": "Enosis Neon Paralimni FC",
     "founded": "1936-01-01",
     "tier": 1,
@@ -43042,6 +43627,7 @@
   "model": "italiastadiaapp.team",
   "pk": 518,
   "fields": {
+    "is_national": false,
     "name": "Ferencvárosi TC",
     "founded": "1899-01-01",
     "tier": 1,
@@ -43065,6 +43651,7 @@
   "model": "italiastadiaapp.team",
   "pk": 519,
   "fields": {
+    "is_national": false,
     "name": "ETO FC Győr",
     "founded": "1904-01-01",
     "tier": 1,
@@ -43088,6 +43675,7 @@
   "model": "italiastadiaapp.team",
   "pk": 520,
   "fields": {
+    "is_national": false,
     "name": "Újpest FC",
     "founded": "1885-01-01",
     "tier": 1,
@@ -43111,6 +43699,7 @@
   "model": "italiastadiaapp.team",
   "pk": 521,
   "fields": {
+    "is_national": false,
     "name": "MTK Budapest FC",
     "founded": "1888-01-01",
     "tier": 1,
@@ -43134,6 +43723,7 @@
   "model": "italiastadiaapp.team",
   "pk": 522,
   "fields": {
+    "is_national": false,
     "name": "Puskás Akadémia FC",
     "founded": "2012-01-01",
     "tier": 1,
@@ -43157,6 +43747,7 @@
   "model": "italiastadiaapp.team",
   "pk": 523,
   "fields": {
+    "is_national": false,
     "name": "Debreceni VSC",
     "founded": "1902-01-01",
     "tier": 1,
@@ -43180,6 +43771,7 @@
   "model": "italiastadiaapp.team",
   "pk": 524,
   "fields": {
+    "is_national": false,
     "name": "Zalaegerszegi TE FC",
     "founded": "1919-01-01",
     "tier": 1,
@@ -43203,6 +43795,7 @@
   "model": "italiastadiaapp.team",
   "pk": 525,
   "fields": {
+    "is_national": false,
     "name": "Nyíregyháza Spartacus FC",
     "founded": "1928-01-01",
     "tier": 1,
@@ -43226,6 +43819,7 @@
   "model": "italiastadiaapp.team",
   "pk": 526,
   "fields": {
+    "is_national": false,
     "name": "Paksi FC",
     "founded": "1952-01-01",
     "tier": 1,
@@ -43249,6 +43843,7 @@
   "model": "italiastadiaapp.team",
   "pk": 527,
   "fields": {
+    "is_national": false,
     "name": "Kisvárda FC",
     "founded": "1911-01-01",
     "tier": 1,
@@ -43272,6 +43867,7 @@
   "model": "italiastadiaapp.team",
   "pk": 528,
   "fields": {
+    "is_national": false,
     "name": "Diósgyőri VTK",
     "founded": "1910-01-01",
     "tier": 1,
@@ -43295,6 +43891,7 @@
   "model": "italiastadiaapp.team",
   "pk": 529,
   "fields": {
+    "is_national": false,
     "name": "Kazincbarcikai SC",
     "founded": "1957-01-01",
     "tier": 1,
@@ -43318,6 +43915,7 @@
   "model": "italiastadiaapp.team",
   "pk": 530,
   "fields": {
+    "is_national": false,
     "name": "FK Red Star Belgrade",
     "founded": "1945-01-01",
     "tier": 1,
@@ -43341,6 +43939,7 @@
   "model": "italiastadiaapp.team",
   "pk": 531,
   "fields": {
+    "is_national": false,
     "name": "FK Partizan",
     "founded": "1945-01-01",
     "tier": 1,
@@ -43364,6 +43963,7 @@
   "model": "italiastadiaapp.team",
   "pk": 532,
   "fields": {
+    "is_national": false,
     "name": "FK Vojvodina",
     "founded": "1914-01-01",
     "tier": 1,
@@ -43387,6 +43987,7 @@
   "model": "italiastadiaapp.team",
   "pk": 533,
   "fields": {
+    "is_national": false,
     "name": "FK Čukarički",
     "founded": "1926-01-01",
     "tier": 1,
@@ -43410,6 +44011,7 @@
   "model": "italiastadiaapp.team",
   "pk": 534,
   "fields": {
+    "is_national": false,
     "name": "FK TSC Bačka Topola",
     "founded": "1913-01-01",
     "tier": 1,
@@ -43433,6 +44035,7 @@
   "model": "italiastadiaapp.team",
   "pk": 535,
   "fields": {
+    "is_national": false,
     "name": "FK Spartak Subotica",
     "founded": "1945-01-01",
     "tier": 1,
@@ -43456,6 +44059,7 @@
   "model": "italiastadiaapp.team",
   "pk": 536,
   "fields": {
+    "is_national": false,
     "name": "FK Radnički Niš",
     "founded": "1923-01-01",
     "tier": 1,
@@ -43479,6 +44083,7 @@
   "model": "italiastadiaapp.team",
   "pk": 537,
   "fields": {
+    "is_national": false,
     "name": "FK Novi Pazar",
     "founded": "1927-01-01",
     "tier": 1,
@@ -43502,6 +44107,7 @@
   "model": "italiastadiaapp.team",
   "pk": 538,
   "fields": {
+    "is_national": false,
     "name": "FK Mladost Lučani",
     "founded": "1952-01-01",
     "tier": 1,
@@ -43525,6 +44131,7 @@
   "model": "italiastadiaapp.team",
   "pk": 539,
   "fields": {
+    "is_national": false,
     "name": "FK Napredak Kruševac",
     "founded": "1946-01-01",
     "tier": 1,
@@ -43548,6 +44155,7 @@
   "model": "italiastadiaapp.team",
   "pk": 540,
   "fields": {
+    "is_national": false,
     "name": "FK Radnički 1923",
     "founded": "1923-01-01",
     "tier": 1,
@@ -43571,6 +44179,7 @@
   "model": "italiastadiaapp.team",
   "pk": 541,
   "fields": {
+    "is_national": false,
     "name": "FK Javor-Matis Ivanjica",
     "founded": "1912-01-01",
     "tier": 1,
@@ -43594,6 +44203,7 @@
   "model": "italiastadiaapp.team",
   "pk": 542,
   "fields": {
+    "is_national": false,
     "name": "FK Železničar Pančevo",
     "founded": "1947-01-01",
     "tier": 1,
@@ -43617,6 +44227,7 @@
   "model": "italiastadiaapp.team",
   "pk": 543,
   "fields": {
+    "is_national": false,
     "name": "FK IMT",
     "founded": "1953-01-01",
     "tier": 1,
@@ -43640,6 +44251,7 @@
   "model": "italiastadiaapp.team",
   "pk": 544,
   "fields": {
+    "is_national": false,
     "name": "FK Radnik Surdulica",
     "founded": "1926-01-01",
     "tier": 1,
@@ -43663,6 +44275,7 @@
   "model": "italiastadiaapp.team",
   "pk": 545,
   "fields": {
+    "is_national": false,
     "name": "OFK Beograd",
     "founded": "1911-01-01",
     "tier": 1,
@@ -43686,6 +44299,7 @@
   "model": "italiastadiaapp.team",
   "pk": 546,
   "fields": {
+    "is_national": false,
     "name": "FC Arda Kardzhali",
     "founded": "1924-01-01",
     "tier": 1,
@@ -43709,6 +44323,7 @@
   "model": "italiastadiaapp.team",
   "pk": 547,
   "fields": {
+    "is_national": false,
     "name": "PFC Beroe Stara Zagora",
     "founded": "1916-01-01",
     "tier": 1,
@@ -43732,6 +44347,7 @@
   "model": "italiastadiaapp.team",
   "pk": 548,
   "fields": {
+    "is_national": false,
     "name": "Botev Plovdiv",
     "founded": "1912-01-01",
     "tier": 1,
@@ -43755,6 +44371,7 @@
   "model": "italiastadiaapp.team",
   "pk": 549,
   "fields": {
+    "is_national": false,
     "name": "POFC Botev Vratsa",
     "founded": "1921-01-01",
     "tier": 1,
@@ -43778,6 +44395,7 @@
   "model": "italiastadiaapp.team",
   "pk": 550,
   "fields": {
+    "is_national": false,
     "name": "PFC Cherno More Varna",
     "founded": "1913-01-01",
     "tier": 1,
@@ -43801,6 +44419,7 @@
   "model": "italiastadiaapp.team",
   "pk": 551,
   "fields": {
+    "is_national": false,
     "name": "FC CSKA 1948 Sofia",
     "founded": "2016-01-01",
     "tier": 1,
@@ -43824,6 +44443,7 @@
   "model": "italiastadiaapp.team",
   "pk": 552,
   "fields": {
+    "is_national": false,
     "name": "PFC CSKA Sofia",
     "founded": "2016-01-01",
     "tier": 1,
@@ -43847,6 +44467,7 @@
   "model": "italiastadiaapp.team",
   "pk": 553,
   "fields": {
+    "is_national": false,
     "name": "FC Dobrudzha Dobrich",
     "founded": "1919-01-01",
     "tier": 1,
@@ -43870,6 +44491,7 @@
   "model": "italiastadiaapp.team",
   "pk": 554,
   "fields": {
+    "is_national": false,
     "name": "PFC Levski Sofia",
     "founded": "1914-01-01",
     "tier": 1,
@@ -43893,6 +44515,7 @@
   "model": "italiastadiaapp.team",
   "pk": 555,
   "fields": {
+    "is_national": false,
     "name": "PFC Lokomotiv Plovdiv",
     "founded": "1926-01-01",
     "tier": 1,
@@ -43916,6 +44539,7 @@
   "model": "italiastadiaapp.team",
   "pk": 556,
   "fields": {
+    "is_national": false,
     "name": "FC Lokomotiv 1929 Sofia",
     "founded": "1929-01-01",
     "tier": 1,
@@ -43939,6 +44563,7 @@
   "model": "italiastadiaapp.team",
   "pk": 557,
   "fields": {
+    "is_national": false,
     "name": "PFC Ludogorets Razgrad",
     "founded": "2001-01-01",
     "tier": 1,
@@ -43962,6 +44587,7 @@
   "model": "italiastadiaapp.team",
   "pk": 558,
   "fields": {
+    "is_national": false,
     "name": "PFC Montana",
     "founded": "1947-01-01",
     "tier": 1,
@@ -43985,6 +44611,7 @@
   "model": "italiastadiaapp.team",
   "pk": 559,
   "fields": {
+    "is_national": false,
     "name": "PFC Septemvri Sofia",
     "founded": "1944-01-01",
     "tier": 1,
@@ -44008,6 +44635,7 @@
   "model": "italiastadiaapp.team",
   "pk": 560,
   "fields": {
+    "is_national": false,
     "name": "PFC Slavia Sofia",
     "founded": "1913-01-01",
     "tier": 1,
@@ -44031,6 +44659,7 @@
   "model": "italiastadiaapp.team",
   "pk": 561,
   "fields": {
+    "is_national": false,
     "name": "FC Spartak Varna",
     "founded": "1918-01-01",
     "tier": 1,
@@ -44054,6 +44683,7 @@
   "model": "italiastadiaapp.team",
   "pk": 562,
   "fields": {
+    "is_national": false,
     "name": "ŠK Slovan Bratislava",
     "founded": "1919-01-01",
     "tier": 1,
@@ -44077,6 +44707,7 @@
   "model": "italiastadiaapp.team",
   "pk": 563,
   "fields": {
+    "is_national": false,
     "name": "FC DAC 1904 Dunajská Streda",
     "founded": "1903-01-01",
     "tier": 1,
@@ -44100,6 +44731,7 @@
   "model": "italiastadiaapp.team",
   "pk": 564,
   "fields": {
+    "is_national": false,
     "name": "FC Spartak Trnava",
     "founded": "1923-01-01",
     "tier": 1,
@@ -44123,6 +44755,7 @@
   "model": "italiastadiaapp.team",
   "pk": 565,
   "fields": {
+    "is_national": false,
     "name": "AS Trenčín",
     "founded": "1991-01-01",
     "tier": 1,
@@ -44146,6 +44779,7 @@
   "model": "italiastadiaapp.team",
   "pk": 566,
   "fields": {
+    "is_national": false,
     "name": "MŠK Žilina",
     "founded": "1908-01-01",
     "tier": 1,
@@ -44169,6 +44803,7 @@
   "model": "italiastadiaapp.team",
   "pk": 567,
   "fields": {
+    "is_national": false,
     "name": "MFK Ružomberok",
     "founded": "1905-01-01",
     "tier": 1,
@@ -44192,6 +44827,7 @@
   "model": "italiastadiaapp.team",
   "pk": 568,
   "fields": {
+    "is_national": false,
     "name": "FC Košice",
     "founded": "2018-01-01",
     "tier": 1,
@@ -44215,6 +44851,7 @@
   "model": "italiastadiaapp.team",
   "pk": 569,
   "fields": {
+    "is_national": false,
     "name": "1. FC Tatran Prešov",
     "founded": "1898-01-01",
     "tier": 1,
@@ -44238,6 +44875,7 @@
   "model": "italiastadiaapp.team",
   "pk": 570,
   "fields": {
+    "is_national": false,
     "name": "FK Železiarne Podbrezová",
     "founded": "1920-01-01",
     "tier": 1,
@@ -44261,6 +44899,7 @@
   "model": "italiastadiaapp.team",
   "pk": 571,
   "fields": {
+    "is_national": false,
     "name": "MFK Zemplín Michalovce",
     "founded": "1912-01-01",
     "tier": 1,
@@ -44284,6 +44923,7 @@
   "model": "italiastadiaapp.team",
   "pk": 572,
   "fields": {
+    "is_national": false,
     "name": "MFK Skalica",
     "founded": "1920-01-01",
     "tier": 1,
@@ -44307,6 +44947,7 @@
   "model": "italiastadiaapp.team",
   "pk": 573,
   "fields": {
+    "is_national": false,
     "name": "KFC Komárno",
     "founded": "1900-01-01",
     "tier": 1,
@@ -44330,6 +44971,7 @@
   "model": "italiastadiaapp.team",
   "pk": 574,
   "fields": {
+    "is_national": false,
     "name": "NK Olimpija Ljubljana",
     "founded": "1911-01-01",
     "tier": 1,
@@ -44353,6 +44995,7 @@
   "model": "italiastadiaapp.team",
   "pk": 575,
   "fields": {
+    "is_national": false,
     "name": "NK Maribor",
     "founded": "1960-01-01",
     "tier": 1,
@@ -44376,6 +45019,7 @@
   "model": "italiastadiaapp.team",
   "pk": 576,
   "fields": {
+    "is_national": false,
     "name": "NK Celje",
     "founded": "1919-01-01",
     "tier": 1,
@@ -44399,6 +45043,7 @@
   "model": "italiastadiaapp.team",
   "pk": 577,
   "fields": {
+    "is_national": false,
     "name": "FC Koper",
     "founded": "1954-01-01",
     "tier": 1,
@@ -44422,6 +45067,7 @@
   "model": "italiastadiaapp.team",
   "pk": 578,
   "fields": {
+    "is_national": false,
     "name": "NK Bravo",
     "founded": "2006-01-01",
     "tier": 1,
@@ -44445,6 +45091,7 @@
   "model": "italiastadiaapp.team",
   "pk": 579,
   "fields": {
+    "is_national": false,
     "name": "NŠ Mura",
     "founded": "1924-01-01",
     "tier": 1,
@@ -44468,6 +45115,7 @@
   "model": "italiastadiaapp.team",
   "pk": 580,
   "fields": {
+    "is_national": false,
     "name": "NK Aluminij",
     "founded": "1946-01-01",
     "tier": 1,
@@ -44491,6 +45139,7 @@
   "model": "italiastadiaapp.team",
   "pk": 581,
   "fields": {
+    "is_national": false,
     "name": "ND Primorje",
     "founded": "2021-01-01",
     "tier": 1,
@@ -44514,6 +45163,7 @@
   "model": "italiastadiaapp.team",
   "pk": 582,
   "fields": {
+    "is_national": false,
     "name": "NK Radomlje",
     "founded": "1972-01-01",
     "tier": 1,
@@ -44537,6 +45187,7 @@
   "model": "italiastadiaapp.team",
   "pk": 583,
   "fields": {
+    "is_national": false,
     "name": "NK Domžale",
     "founded": "1920-01-01",
     "tier": 1,
@@ -44560,6 +45211,7 @@
   "model": "italiastadiaapp.team",
   "pk": 584,
   "fields": {
+    "is_national": false,
     "name": "Shamrock Rovers",
     "founded": "1899-01-01",
     "tier": 1,
@@ -44583,6 +45235,7 @@
   "model": "italiastadiaapp.team",
   "pk": 585,
   "fields": {
+    "is_national": false,
     "name": "Shelbourne FC",
     "founded": "1895-01-01",
     "tier": 1,
@@ -44606,6 +45259,7 @@
   "model": "italiastadiaapp.team",
   "pk": 586,
   "fields": {
+    "is_national": false,
     "name": "Bohemian FC",
     "founded": "1890-01-01",
     "tier": 1,
@@ -44629,6 +45283,7 @@
   "model": "italiastadiaapp.team",
   "pk": 587,
   "fields": {
+    "is_national": false,
     "name": "St Patrick's Athletic",
     "founded": "1929-01-01",
     "tier": 1,
@@ -44652,6 +45307,7 @@
   "model": "italiastadiaapp.team",
   "pk": 588,
   "fields": {
+    "is_national": false,
     "name": "Derry City",
     "founded": "1927-01-01",
     "tier": 1,
@@ -44675,6 +45331,7 @@
   "model": "italiastadiaapp.team",
   "pk": 589,
   "fields": {
+    "is_national": false,
     "name": "Drogheda United",
     "founded": "1919-01-01",
     "tier": 1,
@@ -44698,6 +45355,7 @@
   "model": "italiastadiaapp.team",
   "pk": 590,
   "fields": {
+    "is_national": false,
     "name": "Galway United",
     "founded": "2013-01-01",
     "tier": 1,
@@ -44721,6 +45379,7 @@
   "model": "italiastadiaapp.team",
   "pk": 591,
   "fields": {
+    "is_national": false,
     "name": "Sligo Rovers",
     "founded": "1927-01-01",
     "tier": 1,
@@ -44744,6 +45403,7 @@
   "model": "italiastadiaapp.team",
   "pk": 592,
   "fields": {
+    "is_national": false,
     "name": "Cork City",
     "founded": "1984-01-01",
     "tier": 1,
@@ -44767,6 +45427,7 @@
   "model": "italiastadiaapp.team",
   "pk": 593,
   "fields": {
+    "is_national": false,
     "name": "Waterford FC",
     "founded": "1929-01-01",
     "tier": 1,
@@ -44790,6 +45451,7 @@
   "model": "italiastadiaapp.team",
   "pk": 594,
   "fields": {
+    "is_national": false,
     "name": "AFC Wimbledon",
     "founded": "2002-01-01",
     "tier": 3,
@@ -44813,6 +45475,7 @@
   "model": "italiastadiaapp.team",
   "pk": 595,
   "fields": {
+    "is_national": false,
     "name": "Barnsley FC",
     "founded": "1887-01-01",
     "tier": 3,
@@ -44836,6 +45499,7 @@
   "model": "italiastadiaapp.team",
   "pk": 596,
   "fields": {
+    "is_national": false,
     "name": "Blackpool FC",
     "founded": "1887-01-01",
     "tier": 3,
@@ -44859,6 +45523,7 @@
   "model": "italiastadiaapp.team",
   "pk": 597,
   "fields": {
+    "is_national": false,
     "name": "Bolton Wanderers",
     "founded": "1874-01-01",
     "tier": 3,
@@ -44882,6 +45547,7 @@
   "model": "italiastadiaapp.team",
   "pk": 598,
   "fields": {
+    "is_national": false,
     "name": "Bradford City",
     "founded": "1903-01-01",
     "tier": 3,
@@ -44905,6 +45571,7 @@
   "model": "italiastadiaapp.team",
   "pk": 599,
   "fields": {
+    "is_national": false,
     "name": "Burton Albion",
     "founded": "1949-01-01",
     "tier": 3,
@@ -44928,6 +45595,7 @@
   "model": "italiastadiaapp.team",
   "pk": 600,
   "fields": {
+    "is_national": false,
     "name": "Cardiff City",
     "founded": "1899-01-01",
     "tier": 3,
@@ -44951,6 +45619,7 @@
   "model": "italiastadiaapp.team",
   "pk": 601,
   "fields": {
+    "is_national": false,
     "name": "Doncaster Rovers",
     "founded": "1879-01-01",
     "tier": 3,
@@ -44974,6 +45643,7 @@
   "model": "italiastadiaapp.team",
   "pk": 602,
   "fields": {
+    "is_national": false,
     "name": "Exeter City",
     "founded": "1904-01-01",
     "tier": 3,
@@ -44997,6 +45667,7 @@
   "model": "italiastadiaapp.team",
   "pk": 603,
   "fields": {
+    "is_national": false,
     "name": "Huddersfield Town",
     "founded": "1908-01-01",
     "tier": 3,
@@ -45020,6 +45691,7 @@
   "model": "italiastadiaapp.team",
   "pk": 604,
   "fields": {
+    "is_national": false,
     "name": "Leyton Orient",
     "founded": "1881-01-01",
     "tier": 3,
@@ -45043,6 +45715,7 @@
   "model": "italiastadiaapp.team",
   "pk": 605,
   "fields": {
+    "is_national": false,
     "name": "Lincoln City",
     "founded": "1884-01-01",
     "tier": 3,
@@ -45066,6 +45739,7 @@
   "model": "italiastadiaapp.team",
   "pk": 606,
   "fields": {
+    "is_national": false,
     "name": "Luton Town",
     "founded": "1885-01-01",
     "tier": 3,
@@ -45089,6 +45763,7 @@
   "model": "italiastadiaapp.team",
   "pk": 607,
   "fields": {
+    "is_national": false,
     "name": "Mansfield Town",
     "founded": "1897-01-01",
     "tier": 3,
@@ -45112,6 +45787,7 @@
   "model": "italiastadiaapp.team",
   "pk": 608,
   "fields": {
+    "is_national": false,
     "name": "Northampton Town",
     "founded": "1897-01-01",
     "tier": 3,
@@ -45135,6 +45811,7 @@
   "model": "italiastadiaapp.team",
   "pk": 609,
   "fields": {
+    "is_national": false,
     "name": "Peterborough United",
     "founded": "1934-01-01",
     "tier": 3,
@@ -45158,6 +45835,7 @@
   "model": "italiastadiaapp.team",
   "pk": 610,
   "fields": {
+    "is_national": false,
     "name": "Plymouth Argyle",
     "founded": "1886-01-01",
     "tier": 3,
@@ -45181,6 +45859,7 @@
   "model": "italiastadiaapp.team",
   "pk": 611,
   "fields": {
+    "is_national": false,
     "name": "Port Vale",
     "founded": "1876-01-01",
     "tier": 3,
@@ -45204,6 +45883,7 @@
   "model": "italiastadiaapp.team",
   "pk": 612,
   "fields": {
+    "is_national": false,
     "name": "Reading FC",
     "founded": "1871-01-01",
     "tier": 3,
@@ -45227,6 +45907,7 @@
   "model": "italiastadiaapp.team",
   "pk": 613,
   "fields": {
+    "is_national": false,
     "name": "Rotherham United",
     "founded": "1870-01-01",
     "tier": 3,
@@ -45250,6 +45931,7 @@
   "model": "italiastadiaapp.team",
   "pk": 614,
   "fields": {
+    "is_national": false,
     "name": "Stevenage FC",
     "founded": "1975-01-01",
     "tier": 3,
@@ -45273,6 +45955,7 @@
   "model": "italiastadiaapp.team",
   "pk": 615,
   "fields": {
+    "is_national": false,
     "name": "Stockport County",
     "founded": "1883-01-01",
     "tier": 3,
@@ -45296,6 +45979,7 @@
   "model": "italiastadiaapp.team",
   "pk": 616,
   "fields": {
+    "is_national": false,
     "name": "Wigan Athletic",
     "founded": "1932-01-01",
     "tier": 3,
@@ -45319,6 +46003,7 @@
   "model": "italiastadiaapp.team",
   "pk": 617,
   "fields": {
+    "is_national": false,
     "name": "Wycombe Wanderers",
     "founded": "1887-01-01",
     "tier": 3,
@@ -45342,6 +46027,7 @@
   "model": "italiastadiaapp.team",
   "pk": 618,
   "fields": {
+    "is_national": false,
     "name": "Shakhtar Donetsk",
     "founded": "1936-01-01",
     "tier": 1,
@@ -45365,6 +46051,7 @@
   "model": "italiastadiaapp.team",
   "pk": 619,
   "fields": {
+    "is_national": false,
     "name": "Dynamo Kyiv",
     "founded": "1927-01-01",
     "tier": 1,
@@ -45388,6 +46075,7 @@
   "model": "italiastadiaapp.team",
   "pk": 620,
   "fields": {
+    "is_national": false,
     "name": "Zorya Luhansk",
     "founded": "1923-01-01",
     "tier": 1,
@@ -45411,6 +46099,7 @@
   "model": "italiastadiaapp.team",
   "pk": 621,
   "fields": {
+    "is_national": false,
     "name": "Karpaty Lviv",
     "founded": "2020-01-01",
     "tier": 1,
@@ -45434,6 +46123,7 @@
   "model": "italiastadiaapp.team",
   "pk": 622,
   "fields": {
+    "is_national": false,
     "name": "Rukh Lviv",
     "founded": "2003-01-01",
     "tier": 1,
@@ -45457,6 +46147,7 @@
   "model": "italiastadiaapp.team",
   "pk": 623,
   "fields": {
+    "is_national": false,
     "name": "Polissya Zhytomyr",
     "founded": "2018-01-01",
     "tier": 1,
@@ -45480,6 +46171,7 @@
   "model": "italiastadiaapp.team",
   "pk": 624,
   "fields": {
+    "is_national": false,
     "name": "Metalist 1925 Kharkiv",
     "founded": "2016-01-01",
     "tier": 1,
@@ -45503,6 +46195,7 @@
   "model": "italiastadiaapp.team",
   "pk": 625,
   "fields": {
+    "is_national": false,
     "name": "LNZ Cherkasy",
     "founded": "2020-01-01",
     "tier": 1,
@@ -45526,6 +46219,7 @@
   "model": "italiastadiaapp.team",
   "pk": 626,
   "fields": {
+    "is_national": false,
     "name": "Kolos Kovalivka",
     "founded": "2012-01-01",
     "tier": 1,
@@ -45549,6 +46243,7 @@
   "model": "italiastadiaapp.team",
   "pk": 627,
   "fields": {
+    "is_national": false,
     "name": "Kryvbas Kryvyi Rih",
     "founded": "1959-01-01",
     "tier": 1,
@@ -45572,6 +46267,7 @@
   "model": "italiastadiaapp.team",
   "pk": 628,
   "fields": {
+    "is_national": false,
     "name": "Veres Rivne",
     "founded": "1956-01-01",
     "tier": 1,
@@ -45595,6 +46291,7 @@
   "model": "italiastadiaapp.team",
   "pk": 629,
   "fields": {
+    "is_national": false,
     "name": "Oleksandriya",
     "founded": "1947-01-01",
     "tier": 1,
@@ -45618,6 +46315,7 @@
   "model": "italiastadiaapp.team",
   "pk": 630,
   "fields": {
+    "is_national": false,
     "name": "Obolon Kyiv",
     "founded": "2012-01-01",
     "tier": 1,
@@ -45641,6 +46339,7 @@
   "model": "italiastadiaapp.team",
   "pk": 631,
   "fields": {
+    "is_national": false,
     "name": "FC Kudrivka",
     "founded": "1982-01-01",
     "tier": 1,
@@ -45664,6 +46363,7 @@
   "model": "italiastadiaapp.team",
   "pk": 632,
   "fields": {
+    "is_national": false,
     "name": "SC Poltava",
     "founded": "2020-01-01",
     "tier": 1,
@@ -45687,6 +46387,7 @@
   "model": "italiastadiaapp.team",
   "pk": 633,
   "fields": {
+    "is_national": false,
     "name": "Epitsentr Kamianets-Podilskyi",
     "founded": "2021-01-01",
     "tier": 1,
@@ -45710,6 +46411,7 @@
   "model": "italiastadiaapp.team",
   "pk": 634,
   "fields": {
+    "is_national": false,
     "name": "HJK Helsinki",
     "founded": "1907-01-01",
     "tier": 1,
@@ -45733,6 +46435,7 @@
   "model": "italiastadiaapp.team",
   "pk": 635,
   "fields": {
+    "is_national": false,
     "name": "SJK Seinäjoki",
     "founded": "2007-01-01",
     "tier": 1,
@@ -45756,6 +46459,7 @@
   "model": "italiastadiaapp.team",
   "pk": 636,
   "fields": {
+    "is_national": false,
     "name": "KuPS Kuopio",
     "founded": "1923-01-01",
     "tier": 1,
@@ -45779,6 +46483,7 @@
   "model": "italiastadiaapp.team",
   "pk": 637,
   "fields": {
+    "is_national": false,
     "name": "FC Inter Turku",
     "founded": "1990-01-01",
     "tier": 1,
@@ -45802,6 +46507,7 @@
   "model": "italiastadiaapp.team",
   "pk": 638,
   "fields": {
+    "is_national": false,
     "name": "Ilves Tampere",
     "founded": "1931-01-01",
     "tier": 1,
@@ -45825,6 +46531,7 @@
   "model": "italiastadiaapp.team",
   "pk": 639,
   "fields": {
+    "is_national": false,
     "name": "AC Oulu",
     "founded": "2002-01-01",
     "tier": 1,
@@ -45848,6 +46555,7 @@
   "model": "italiastadiaapp.team",
   "pk": 640,
   "fields": {
+    "is_national": false,
     "name": "VPS Vaasa",
     "founded": "1924-01-01",
     "tier": 1,
@@ -45871,6 +46579,7 @@
   "model": "italiastadiaapp.team",
   "pk": 641,
   "fields": {
+    "is_national": false,
     "name": "FC Haka",
     "founded": "1934-01-01",
     "tier": 1,
@@ -45894,6 +46603,7 @@
   "model": "italiastadiaapp.team",
   "pk": 642,
   "fields": {
+    "is_national": false,
     "name": "FF Jaro",
     "founded": "1965-01-01",
     "tier": 1,
@@ -45917,6 +46627,7 @@
   "model": "italiastadiaapp.team",
   "pk": 643,
   "fields": {
+    "is_national": false,
     "name": "IFK Mariehamn",
     "founded": "1931-01-01",
     "tier": 1,
@@ -45940,6 +46651,7 @@
   "model": "italiastadiaapp.team",
   "pk": 644,
   "fields": {
+    "is_national": false,
     "name": "KTP Kotka",
     "founded": "1927-01-01",
     "tier": 1,
@@ -45963,6 +46675,7 @@
   "model": "italiastadiaapp.team",
   "pk": 645,
   "fields": {
+    "is_national": false,
     "name": "IF Gnistan",
     "founded": "1924-01-01",
     "tier": 1,
@@ -45986,6 +46699,7 @@
   "model": "italiastadiaapp.team",
   "pk": 646,
   "fields": {
+    "is_national": false,
     "name": "FK Sarajevo",
     "founded": "1946-01-01",
     "tier": 1,
@@ -46009,6 +46723,7 @@
   "model": "italiastadiaapp.team",
   "pk": 647,
   "fields": {
+    "is_national": false,
     "name": "FK Željezničar",
     "founded": "1909-01-01",
     "tier": 1,
@@ -46032,6 +46747,7 @@
   "model": "italiastadiaapp.team",
   "pk": 648,
   "fields": {
+    "is_national": false,
     "name": "HŠK Zrinjski Mostar",
     "founded": "1905-01-01",
     "tier": 1,
@@ -46055,6 +46771,7 @@
   "model": "italiastadiaapp.team",
   "pk": 649,
   "fields": {
+    "is_national": false,
     "name": "FK Velež Mostar",
     "founded": "1922-01-01",
     "tier": 1,
@@ -46078,6 +46795,7 @@
   "model": "italiastadiaapp.team",
   "pk": 650,
   "fields": {
+    "is_national": false,
     "name": "NK Široki Brijeg",
     "founded": "1948-01-01",
     "tier": 1,
@@ -46101,6 +46819,7 @@
   "model": "italiastadiaapp.team",
   "pk": 651,
   "fields": {
+    "is_national": false,
     "name": "FK Borac Banja Luka",
     "founded": "1926-01-01",
     "tier": 1,
@@ -46124,6 +46843,7 @@
   "model": "italiastadiaapp.team",
   "pk": 652,
   "fields": {
+    "is_national": false,
     "name": "FK Radnik Bijeljina",
     "founded": "1945-01-01",
     "tier": 1,
@@ -46147,6 +46867,7 @@
   "model": "italiastadiaapp.team",
   "pk": 653,
   "fields": {
+    "is_national": false,
     "name": "FK Rudar Prijedor",
     "founded": "1967-01-01",
     "tier": 1,
@@ -46170,6 +46891,7 @@
   "model": "italiastadiaapp.team",
   "pk": 654,
   "fields": {
+    "is_national": false,
     "name": "HŠK Posušje",
     "founded": "1950-01-01",
     "tier": 1,
@@ -46193,6 +46915,7 @@
   "model": "italiastadiaapp.team",
   "pk": 655,
   "fields": {
+    "is_national": false,
     "name": "FK Sloga Doboj",
     "founded": "1945-01-01",
     "tier": 1,
@@ -46216,6 +46939,7 @@
   "model": "italiastadiaapp.team",
   "pk": 663,
   "fields": {
+    "is_national": false,
     "name": "Pärnu JK Vaprus",
     "founded": "1922-01-01",
     "tier": 1,
@@ -46239,6 +46963,7 @@
   "model": "italiastadiaapp.team",
   "pk": 667,
   "fields": {
+    "is_national": false,
     "name": "FK Riteriai",
     "founded": "2005-01-01",
     "tier": 1,
@@ -46262,6 +46987,7 @@
   "model": "italiastadiaapp.team",
   "pk": 668,
   "fields": {
+    "is_national": false,
     "name": "FK Kauno Žalgiris",
     "founded": "2004-01-01",
     "tier": 1,
@@ -46285,6 +47011,7 @@
   "model": "italiastadiaapp.team",
   "pk": 670,
   "fields": {
+    "is_national": false,
     "name": "FC Hegelmann",
     "founded": "2009-01-01",
     "tier": 1,
@@ -46308,6 +47035,7 @@
   "model": "italiastadiaapp.team",
   "pk": 671,
   "fields": {
+    "is_national": false,
     "name": "FK Panevėžys",
     "founded": "2015-01-01",
     "tier": 1,
@@ -46331,6 +47059,7 @@
   "model": "italiastadiaapp.team",
   "pk": 672,
   "fields": {
+    "is_national": false,
     "name": "FA Šiauliai",
     "founded": "2007-01-01",
     "tier": 1,
@@ -46354,6 +47083,7 @@
   "model": "italiastadiaapp.team",
   "pk": 674,
   "fields": {
+    "is_national": false,
     "name": "FK Banga Gargždai",
     "founded": "1966-01-01",
     "tier": 1,
@@ -46377,6 +47107,7 @@
   "model": "italiastadiaapp.team",
   "pk": 675,
   "fields": {
+    "is_national": false,
     "name": "FC Džiugas Telšiai",
     "founded": "2014-01-01",
     "tier": 1,
@@ -46400,6 +47131,7 @@
   "model": "italiastadiaapp.team",
   "pk": 676,
   "fields": {
+    "is_national": false,
     "name": "Víkingur Reykjavík",
     "founded": "1908-01-01",
     "tier": 1,
@@ -46423,6 +47155,7 @@
   "model": "italiastadiaapp.team",
   "pk": 677,
   "fields": {
+    "is_national": false,
     "name": "KR Reykjavík",
     "founded": "1899-01-01",
     "tier": 1,
@@ -46446,6 +47179,7 @@
   "model": "italiastadiaapp.team",
   "pk": 678,
   "fields": {
+    "is_national": false,
     "name": "Breiðablik",
     "founded": "1950-01-01",
     "tier": 1,
@@ -46469,6 +47203,7 @@
   "model": "italiastadiaapp.team",
   "pk": 679,
   "fields": {
+    "is_national": false,
     "name": "FH Hafnarfjörður",
     "founded": "1929-01-01",
     "tier": 1,
@@ -46492,6 +47227,7 @@
   "model": "italiastadiaapp.team",
   "pk": 680,
   "fields": {
+    "is_national": false,
     "name": "Valur Reykjavík",
     "founded": "1911-01-01",
     "tier": 1,
@@ -46515,6 +47251,7 @@
   "model": "italiastadiaapp.team",
   "pk": 681,
   "fields": {
+    "is_national": false,
     "name": "Stjarnan",
     "founded": "1960-01-01",
     "tier": 1,
@@ -46538,6 +47275,7 @@
   "model": "italiastadiaapp.team",
   "pk": 682,
   "fields": {
+    "is_national": false,
     "name": "Fram Reykjavík",
     "founded": "1908-01-01",
     "tier": 1,
@@ -46561,6 +47299,7 @@
   "model": "italiastadiaapp.team",
   "pk": 683,
   "fields": {
+    "is_national": false,
     "name": "ÍA Akranes",
     "founded": "1945-01-01",
     "tier": 1,
@@ -46584,6 +47323,7 @@
   "model": "italiastadiaapp.team",
   "pk": 684,
   "fields": {
+    "is_national": false,
     "name": "KA Akureyri",
     "founded": "1928-01-01",
     "tier": 1,
@@ -46607,6 +47347,7 @@
   "model": "italiastadiaapp.team",
   "pk": 685,
   "fields": {
+    "is_national": false,
     "name": "ÍBV Vestmannaeyjar",
     "founded": "1903-01-01",
     "tier": 1,
@@ -46630,6 +47371,7 @@
   "model": "italiastadiaapp.team",
   "pk": 686,
   "fields": {
+    "is_national": false,
     "name": "Vestri Ísafjörður",
     "founded": "1986-01-01",
     "tier": 1,
@@ -46653,6 +47395,7 @@
   "model": "italiastadiaapp.team",
   "pk": 695,
   "fields": {
+    "is_national": false,
     "name": "KF Arsimi",
     "founded": "1973-01-01",
     "tier": 1,
@@ -46676,6 +47419,7 @@
   "model": "italiastadiaapp.team",
   "pk": 696,
   "fields": {
+    "is_national": false,
     "name": "KF Bashkimi",
     "founded": "2021-01-01",
     "tier": 1,
@@ -46699,6 +47443,7 @@
   "model": "italiastadiaapp.team",
   "pk": 700,
   "fields": {
+    "is_national": false,
     "name": "FK Budućnost Podgorica",
     "founded": "1924-01-01",
     "tier": 1,
@@ -46722,6 +47467,7 @@
   "model": "italiastadiaapp.team",
   "pk": 701,
   "fields": {
+    "is_national": false,
     "name": "FK Sutjeska Nikšić",
     "founded": "1927-01-01",
     "tier": 1,
@@ -46745,6 +47491,7 @@
   "model": "italiastadiaapp.team",
   "pk": 702,
   "fields": {
+    "is_national": false,
     "name": "FK Mornar Bar",
     "founded": "1923-01-01",
     "tier": 1,
@@ -46768,6 +47515,7 @@
   "model": "italiastadiaapp.team",
   "pk": 703,
   "fields": {
+    "is_national": false,
     "name": "OFK Petrovac",
     "founded": "1969-01-01",
     "tier": 1,
@@ -46791,6 +47539,7 @@
   "model": "italiastadiaapp.team",
   "pk": 704,
   "fields": {
+    "is_national": false,
     "name": "FK Dečić",
     "founded": "1926-01-01",
     "tier": 1,
@@ -46814,6 +47563,7 @@
   "model": "italiastadiaapp.team",
   "pk": 705,
   "fields": {
+    "is_national": false,
     "name": "FK Arsenal Tivat",
     "founded": "1914-01-01",
     "tier": 1,
@@ -46837,6 +47587,7 @@
   "model": "italiastadiaapp.team",
   "pk": 706,
   "fields": {
+    "is_national": false,
     "name": "FK Bokelj Kotor",
     "founded": "1921-01-01",
     "tier": 1,
@@ -46860,6 +47611,7 @@
   "model": "italiastadiaapp.team",
   "pk": 707,
   "fields": {
+    "is_national": false,
     "name": "FK Jedinstvo Bijelo Polje",
     "founded": "1922-01-01",
     "tier": 1,
@@ -46883,6 +47635,7 @@
   "model": "italiastadiaapp.team",
   "pk": 708,
   "fields": {
+    "is_national": false,
     "name": "FK Jezero Plav",
     "founded": "1934-01-01",
     "tier": 1,
@@ -46906,6 +47659,7 @@
   "model": "italiastadiaapp.team",
   "pk": 709,
   "fields": {
+    "is_national": false,
     "name": "OFK Mladost Donja Gorica",
     "founded": null,
     "tier": 1,
@@ -46929,6 +47683,7 @@
   "model": "italiastadiaapp.team",
   "pk": 710,
   "fields": {
+    "is_national": false,
     "name": "F91 Dudelange",
     "founded": "1991-01-01",
     "tier": 1,
@@ -46952,6 +47707,7 @@
   "model": "italiastadiaapp.team",
   "pk": 711,
   "fields": {
+    "is_national": false,
     "name": "Jeunesse Esch",
     "founded": "1907-01-01",
     "tier": 1,
@@ -46975,6 +47731,7 @@
   "model": "italiastadiaapp.team",
   "pk": 712,
   "fields": {
+    "is_national": false,
     "name": "FC Progrès Niederkorn",
     "founded": "1919-01-01",
     "tier": 1,
@@ -46998,6 +47755,7 @@
   "model": "italiastadiaapp.team",
   "pk": 713,
   "fields": {
+    "is_national": false,
     "name": "FC Differdange 03",
     "founded": "2002-01-01",
     "tier": 1,
@@ -47021,6 +47779,7 @@
   "model": "italiastadiaapp.team",
   "pk": 714,
   "fields": {
+    "is_national": false,
     "name": "FC Swift Hesperange",
     "founded": "1916-01-01",
     "tier": 1,
@@ -47044,6 +47803,7 @@
   "model": "italiastadiaapp.team",
   "pk": 715,
   "fields": {
+    "is_national": false,
     "name": "Racing FC Union Luxembourg",
     "founded": "2005-01-01",
     "tier": 1,
@@ -47067,6 +47827,7 @@
   "model": "italiastadiaapp.team",
   "pk": 716,
   "fields": {
+    "is_national": false,
     "name": "FC Atert Bissen",
     "founded": "1945-01-01",
     "tier": 1,
@@ -47090,6 +47851,7 @@
   "model": "italiastadiaapp.team",
   "pk": 717,
   "fields": {
+    "is_national": false,
     "name": "UN Käerjeng 97",
     "founded": "1997-01-01",
     "tier": 1,
@@ -47113,6 +47875,7 @@
   "model": "italiastadiaapp.team",
   "pk": 718,
   "fields": {
+    "is_national": false,
     "name": "FC Victoria Rosport",
     "founded": "1928-01-01",
     "tier": 1,
@@ -47136,6 +47899,7 @@
   "model": "italiastadiaapp.team",
   "pk": 719,
   "fields": {
+    "is_national": false,
     "name": "FC Rodange 91",
     "founded": "1991-01-01",
     "tier": 1,
@@ -47159,6 +47923,7 @@
   "model": "italiastadiaapp.team",
   "pk": 720,
   "fields": {
+    "is_national": false,
     "name": "US Hostert",
     "founded": "1946-01-01",
     "tier": 1,
@@ -47182,6 +47947,7 @@
   "model": "italiastadiaapp.team",
   "pk": 721,
   "fields": {
+    "is_national": false,
     "name": "FC Jeunesse Canach",
     "founded": "1957-01-01",
     "tier": 1,
@@ -47205,6 +47971,7 @@
   "model": "italiastadiaapp.team",
   "pk": 722,
   "fields": {
+    "is_national": false,
     "name": "FC Mamer 32",
     "founded": "1931-01-01",
     "tier": 1,
@@ -47228,6 +47995,7 @@
   "model": "italiastadiaapp.team",
   "pk": 723,
   "fields": {
+    "is_national": false,
     "name": "Union Titus Pétange",
     "founded": "2015-01-01",
     "tier": 1,
@@ -47251,6 +48019,7 @@
   "model": "italiastadiaapp.team",
   "pk": 724,
   "fields": {
+    "is_national": false,
     "name": "FC UNA Strassen",
     "founded": "1921-01-01",
     "tier": 1,
@@ -47274,6 +48043,7 @@
   "model": "italiastadiaapp.team",
   "pk": 725,
   "fields": {
+    "is_national": false,
     "name": "US Mondorf-les-Bains",
     "founded": "1915-01-01",
     "tier": 1,
@@ -47297,6 +48067,7 @@
   "model": "italiastadiaapp.team",
   "pk": 726,
   "fields": {
+    "is_national": false,
     "name": "Hibernians FC",
     "founded": "1922-01-01",
     "tier": 1,
@@ -47320,6 +48091,7 @@
   "model": "italiastadiaapp.team",
   "pk": 727,
   "fields": {
+    "is_national": false,
     "name": "Ħamrun Spartans",
     "founded": "1907-01-01",
     "tier": 1,
@@ -47343,6 +48115,7 @@
   "model": "italiastadiaapp.team",
   "pk": 728,
   "fields": {
+    "is_national": false,
     "name": "Valletta FC",
     "founded": "1943-01-01",
     "tier": 1,
@@ -47366,6 +48139,7 @@
   "model": "italiastadiaapp.team",
   "pk": 729,
   "fields": {
+    "is_national": false,
     "name": "Birkirkara FC",
     "founded": "1976-01-01",
     "tier": 1,
@@ -47389,6 +48163,7 @@
   "model": "italiastadiaapp.team",
   "pk": 730,
   "fields": {
+    "is_national": false,
     "name": "Floriana FC",
     "founded": "1894-01-01",
     "tier": 1,
@@ -47412,6 +48187,7 @@
   "model": "italiastadiaapp.team",
   "pk": 731,
   "fields": {
+    "is_national": false,
     "name": "Sliema Wanderers",
     "founded": "2016-01-01",
     "tier": 1,
@@ -47435,6 +48211,7 @@
   "model": "italiastadiaapp.team",
   "pk": 732,
   "fields": {
+    "is_national": false,
     "name": "Mosta FC",
     "founded": "1935-01-01",
     "tier": 1,
@@ -47458,6 +48235,7 @@
   "model": "italiastadiaapp.team",
   "pk": 733,
   "fields": {
+    "is_national": false,
     "name": "Gżira United",
     "founded": "1947-01-01",
     "tier": 1,
@@ -47481,6 +48259,7 @@
   "model": "italiastadiaapp.team",
   "pk": 734,
   "fields": {
+    "is_national": false,
     "name": "Naxxar Lions",
     "founded": "2021-01-01",
     "tier": 1,
@@ -47504,6 +48283,7 @@
   "model": "italiastadiaapp.team",
   "pk": 735,
   "fields": {
+    "is_national": false,
     "name": "Tarxien Rainbows",
     "founded": "1908-01-01",
     "tier": 1,
@@ -47527,6 +48307,7 @@
   "model": "italiastadiaapp.team",
   "pk": 736,
   "fields": {
+    "is_national": false,
     "name": "Marsaxlokk FC",
     "founded": "1928-01-01",
     "tier": 1,
@@ -47550,6 +48331,7 @@
   "model": "italiastadiaapp.team",
   "pk": 737,
   "fields": {
+    "is_national": false,
     "name": "Żabbar St. Patrick",
     "founded": "1912-01-01",
     "tier": 1,
@@ -47573,6 +48355,7 @@
   "model": "italiastadiaapp.team",
   "pk": 738,
   "fields": {
+    "is_national": false,
     "name": "FK Partizani Tirana",
     "founded": "1946-01-01",
     "tier": 1,
@@ -47596,6 +48379,7 @@
   "model": "italiastadiaapp.team",
   "pk": 739,
   "fields": {
+    "is_national": false,
     "name": "KF Tirana",
     "founded": "1920-01-01",
     "tier": 1,
@@ -47619,6 +48403,7 @@
   "model": "italiastadiaapp.team",
   "pk": 740,
   "fields": {
+    "is_national": false,
     "name": "KF Vllaznia Shkodër",
     "founded": "1919-01-01",
     "tier": 1,
@@ -47642,6 +48427,7 @@
   "model": "italiastadiaapp.team",
   "pk": 741,
   "fields": {
+    "is_national": false,
     "name": "KF Teuta Durrës",
     "founded": "1925-01-01",
     "tier": 1,
@@ -47665,6 +48451,7 @@
   "model": "italiastadiaapp.team",
   "pk": 743,
   "fields": {
+    "is_national": false,
     "name": "AF Elbasani",
     "founded": "2021-01-01",
     "tier": 1,
@@ -47688,6 +48475,7 @@
   "model": "italiastadiaapp.team",
   "pk": 745,
   "fields": {
+    "is_national": false,
     "name": "KF Egnatia",
     "founded": "1934-01-01",
     "tier": 1,
@@ -47711,6 +48499,7 @@
   "model": "italiastadiaapp.team",
   "pk": 746,
   "fields": {
+    "is_national": false,
     "name": "FC Dinamo City",
     "founded": "1950-01-01",
     "tier": 1,
@@ -47734,6 +48523,7 @@
   "model": "italiastadiaapp.team",
   "pk": 747,
   "fields": {
+    "is_national": false,
     "name": "FK Vora",
     "founded": "1989-01-01",
     "tier": 1,
@@ -47757,6 +48547,7 @@
   "model": "italiastadiaapp.team",
   "pk": 748,
   "fields": {
+    "is_national": false,
     "name": "Riga FC",
     "founded": "2014-01-01",
     "tier": 1,
@@ -47780,6 +48571,7 @@
   "model": "italiastadiaapp.team",
   "pk": 749,
   "fields": {
+    "is_national": false,
     "name": "FK RFS",
     "founded": "2005-01-01",
     "tier": 1,
@@ -47803,6 +48595,7 @@
   "model": "italiastadiaapp.team",
   "pk": 750,
   "fields": {
+    "is_national": false,
     "name": "FK Liepāja",
     "founded": "2014-01-01",
     "tier": 1,
@@ -47826,6 +48619,7 @@
   "model": "italiastadiaapp.team",
   "pk": 751,
   "fields": {
+    "is_national": false,
     "name": "BFC Daugavpils",
     "founded": "2009-01-01",
     "tier": 1,
@@ -47849,6 +48643,7 @@
   "model": "italiastadiaapp.team",
   "pk": 752,
   "fields": {
+    "is_national": false,
     "name": "FS Jelgava",
     "founded": "2004-01-01",
     "tier": 1,
@@ -47872,6 +48667,7 @@
   "model": "italiastadiaapp.team",
   "pk": 753,
   "fields": {
+    "is_national": false,
     "name": "FK Auda",
     "founded": "1969-01-01",
     "tier": 1,
@@ -47895,6 +48691,7 @@
   "model": "italiastadiaapp.team",
   "pk": 754,
   "fields": {
+    "is_national": false,
     "name": "FK Tukums 2000",
     "founded": "2000-01-01",
     "tier": 1,
@@ -47918,6 +48715,7 @@
   "model": "italiastadiaapp.team",
   "pk": 755,
   "fields": {
+    "is_national": false,
     "name": "SK Super Nova",
     "founded": "2000-01-01",
     "tier": 1,
@@ -47941,6 +48739,7 @@
   "model": "italiastadiaapp.team",
   "pk": 756,
   "fields": {
+    "is_national": false,
     "name": "Grobiņas SC",
     "founded": "2025-01-01",
     "tier": 1,
@@ -47964,6 +48763,7 @@
   "model": "italiastadiaapp.team",
   "pk": 757,
   "fields": {
+    "is_national": false,
     "name": "Ogre United",
     "founded": "2022-01-01",
     "tier": 1,
@@ -47987,6 +48787,7 @@
   "model": "italiastadiaapp.team",
   "pk": 758,
   "fields": {
+    "is_national": false,
     "name": "FC Sheriff Tiraspol",
     "founded": "1997-01-01",
     "tier": 1,
@@ -48010,6 +48811,7 @@
   "model": "italiastadiaapp.team",
   "pk": 760,
   "fields": {
+    "is_national": false,
     "name": "FC Petrocub Hîncești",
     "founded": "1999-01-01",
     "tier": 1,
@@ -48033,6 +48835,7 @@
   "model": "italiastadiaapp.team",
   "pk": 761,
   "fields": {
+    "is_national": false,
     "name": "FC Milsami Orhei",
     "founded": "2004-01-01",
     "tier": 1,
@@ -48056,6 +48859,7 @@
   "model": "italiastadiaapp.team",
   "pk": 762,
   "fields": {
+    "is_national": false,
     "name": "FC Dacia Buiucani",
     "founded": "1997-01-01",
     "tier": 1,
@@ -48079,6 +48883,7 @@
   "model": "italiastadiaapp.team",
   "pk": 763,
   "fields": {
+    "is_national": false,
     "name": "FC Bălți",
     "founded": "2020-01-01",
     "tier": 1,
@@ -48102,6 +48907,7 @@
   "model": "italiastadiaapp.team",
   "pk": 764,
   "fields": {
+    "is_national": false,
     "name": "FC Politehnica UTM Chișinău",
     "founded": "1964-01-01",
     "tier": 1,
@@ -48125,6 +48931,7 @@
   "model": "italiastadiaapp.team",
   "pk": 766,
   "fields": {
+    "is_national": false,
     "name": "CSF Spartanii Sportul Selemet",
     "founded": "2018-01-01",
     "tier": 1,
@@ -48148,6 +48955,7 @@
   "model": "italiastadiaapp.team",
   "pk": 767,
   "fields": {
+    "is_national": false,
     "name": "FC Zimbru Chișinău",
     "founded": "1947-01-01",
     "tier": 1,
@@ -48171,6 +48979,7 @@
   "model": "italiastadiaapp.team",
   "pk": 768,
   "fields": {
+    "is_national": false,
     "name": "FK Željezničar Sarajevo",
     "founded": "1921-01-01",
     "tier": 1,
@@ -48194,6 +49003,7 @@
   "model": "italiastadiaapp.team",
   "pk": 769,
   "fields": {
+    "is_national": false,
     "name": "FK Sloga Meridian Doboj",
     "founded": "1945-01-01",
     "tier": 1,
@@ -48217,6 +49027,7 @@
   "model": "italiastadiaapp.team",
   "pk": 770,
   "fields": {
+    "is_national": false,
     "name": "Valur",
     "founded": "1911-01-01",
     "tier": 1,
@@ -48240,6 +49051,7 @@
   "model": "italiastadiaapp.team",
   "pk": 771,
   "fields": {
+    "is_national": false,
     "name": "Keflavík ÍF",
     "founded": "1955-01-01",
     "tier": 1,
@@ -48263,6 +49075,7 @@
   "model": "italiastadiaapp.team",
   "pk": 772,
   "fields": {
+    "is_national": false,
     "name": "Þór Akureyri",
     "founded": "1915-01-01",
     "tier": 1,
@@ -48286,6 +49099,7 @@
   "model": "italiastadiaapp.team",
   "pk": 773,
   "fields": {
+    "is_national": false,
     "name": "FC KTP",
     "founded": "1927-01-01",
     "tier": 1,
@@ -48309,6 +49123,7 @@
   "model": "italiastadiaapp.team",
   "pk": 774,
   "fields": {
+    "is_national": false,
     "name": "Flamurtari FC",
     "founded": "1923-01-01",
     "tier": 1,
@@ -48332,6 +49147,7 @@
   "model": "italiastadiaapp.team",
   "pk": 775,
   "fields": {
+    "is_national": false,
     "name": "KF Bylis Ballsh",
     "founded": "1972-01-01",
     "tier": 1,
@@ -48355,6 +49171,7 @@
   "model": "italiastadiaapp.team",
   "pk": 776,
   "fields": {
+    "is_national": false,
     "name": "FK Žalgiris Vilnius",
     "founded": "1947-01-01",
     "tier": 1,
@@ -48378,6 +49195,7 @@
   "model": "italiastadiaapp.team",
   "pk": 777,
   "fields": {
+    "is_national": false,
     "name": "FK Sūduva Marijampolė",
     "founded": "1921-01-01",
     "tier": 1,
@@ -48401,6 +49219,7 @@
   "model": "italiastadiaapp.team",
   "pk": 779,
   "fields": {
+    "is_national": false,
     "name": "AP Brera Strumica",
     "founded": "2020-01-01",
     "tier": 1,
@@ -48424,6 +49243,7 @@
   "model": "italiastadiaapp.team",
   "pk": 782,
   "fields": {
+    "is_national": false,
     "name": "KF Shkëndija Tetovo",
     "founded": "1979-01-01",
     "tier": 1,
@@ -48447,6 +49267,7 @@
   "model": "italiastadiaapp.team",
   "pk": 784,
   "fields": {
+    "is_national": false,
     "name": "FK Pelister Bitola",
     "founded": "1945-01-01",
     "tier": 1,
@@ -48470,6 +49291,7 @@
   "model": "italiastadiaapp.team",
   "pk": 785,
   "fields": {
+    "is_national": false,
     "name": "FK Makedonija Gjorce Petrov",
     "founded": "1932-01-01",
     "tier": 1,
@@ -48493,6 +49315,7 @@
   "model": "italiastadiaapp.team",
   "pk": 786,
   "fields": {
+    "is_national": false,
     "name": "GFK Tikveš Kavadarci",
     "founded": "1930-01-01",
     "tier": 1,
@@ -48516,6 +49339,7 @@
   "model": "italiastadiaapp.team",
   "pk": 787,
   "fields": {
+    "is_national": false,
     "name": "FK Sileks Kratovo",
     "founded": "1965-01-01",
     "tier": 1,
@@ -48539,6 +49363,7 @@
   "model": "italiastadiaapp.team",
   "pk": 788,
   "fields": {
+    "is_national": false,
     "name": "FC Struga Trim & Lum",
     "founded": "2015-01-01",
     "tier": 1,
@@ -48562,6 +49387,7 @@
   "model": "italiastadiaapp.team",
   "pk": 789,
   "fields": {
+    "is_national": false,
     "name": "DFK Dainava Alytus",
     "founded": "1931-01-01",
     "tier": 1,
@@ -48585,6 +49411,7 @@
   "model": "italiastadiaapp.team",
   "pk": 790,
   "fields": {
+    "is_national": false,
     "name": "FK Vardar Skopje",
     "founded": "1947-01-01",
     "tier": 1,
@@ -48608,6 +49435,7 @@
   "model": "italiastadiaapp.team",
   "pk": 791,
   "fields": {
+    "is_national": false,
     "name": "FK Rabotnički Skopje",
     "founded": "1937-01-01",
     "tier": 1,
@@ -48631,6 +49459,7 @@
   "model": "italiastadiaapp.team",
   "pk": 792,
   "fields": {
+    "is_national": false,
     "name": "FC Shkupi",
     "founded": "1927-01-01",
     "tier": 1,
@@ -48654,6 +49483,7 @@
   "model": "italiastadiaapp.team",
   "pk": 793,
   "fields": {
+    "is_national": false,
     "name": "FCI Levadia",
     "founded": "1998-01-01",
     "tier": 1,
@@ -48677,6 +49507,7 @@
   "model": "italiastadiaapp.team",
   "pk": 794,
   "fields": {
+    "is_national": false,
     "name": "FC Flora Tallinn",
     "founded": "1990-01-01",
     "tier": 1,
@@ -48700,6 +49531,7 @@
   "model": "italiastadiaapp.team",
   "pk": 797,
   "fields": {
+    "is_national": false,
     "name": "Jalgpallikool Tammeka",
     "founded": "1989-01-01",
     "tier": 1,
@@ -48723,6 +49555,7 @@
   "model": "italiastadiaapp.team",
   "pk": 798,
   "fields": {
+    "is_national": false,
     "name": "Kalev Tallinn",
     "founded": "1911-01-01",
     "tier": 1,
@@ -48746,6 +49579,7 @@
   "model": "italiastadiaapp.team",
   "pk": 799,
   "fields": {
+    "is_national": false,
     "name": "Kalju FC",
     "founded": "1922-01-01",
     "tier": 1,
@@ -48769,6 +49603,7 @@
   "model": "italiastadiaapp.team",
   "pk": 800,
   "fields": {
+    "is_national": false,
     "name": "Paide Linnameeskond",
     "founded": "1989-01-01",
     "tier": 1,
@@ -48792,6 +49627,7 @@
   "model": "italiastadiaapp.team",
   "pk": 801,
   "fields": {
+    "is_national": false,
     "name": "JK Narva Trans",
     "founded": "1978-01-01",
     "tier": 1,
@@ -48815,6 +49651,7 @@
   "model": "italiastadiaapp.team",
   "pk": 802,
   "fields": {
+    "is_national": false,
     "name": "Harju JK Laagri",
     "founded": "2009-01-01",
     "tier": 1,
@@ -48838,6 +49675,7 @@
   "model": "italiastadiaapp.team",
   "pk": 803,
   "fields": {
+    "is_national": false,
     "name": "FC Kuressaare",
     "founded": "1997-01-01",
     "tier": 1,
@@ -48853,6 +49691,174 @@
     "image_credit": null,
     "description": "FC Kuressaare , commonly known as Kuressaare , is an Estonian professional football club based in Kuressaare , Saaremaa island. The club's home ground is Kuressaare linnastaadion .",
     "league": 38,
+    "under_development_stadium": null,
+    "uefa_coefficient": null
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 804,
+  "fields": {
+    "is_national": true,
+    "name": "England",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 777,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 170,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/England_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/England_national_football_team_badge.svg/500px-England_national_football_team_badge.svg.png",
+    "image_credit": null,
+    "description": null,
+    "league": 50,
+    "under_development_stadium": null,
+    "uefa_coefficient": null
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 805,
+  "fields": {
+    "is_national": true,
+    "name": "France",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 785,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 138,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/France_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0d/France_national_football_team_%28crest%29.png/190px-France_national_football_team_%28crest%29.png",
+    "image_credit": null,
+    "description": null,
+    "league": 51,
+    "under_development_stadium": null,
+    "uefa_coefficient": null
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 806,
+  "fields": {
+    "is_national": true,
+    "name": "Wales",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 778,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 507,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Wales_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Flag_of_Wales_%281959%29.svg/500px-Flag_of_Wales_%281959%29.svg.png",
+    "image_credit": null,
+    "description": null,
+    "league": 52,
+    "under_development_stadium": null,
+    "uefa_coefficient": null
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 807,
+  "fields": {
+    "is_national": true,
+    "name": "Scotland",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 779,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 248,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Scotland_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Scotland_national_football_team_crest.svg/200px-Scotland_national_football_team_crest.svg.png",
+    "image_credit": null,
+    "description": null,
+    "league": 53,
+    "under_development_stadium": null,
+    "uefa_coefficient": null
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 808,
+  "fields": {
+    "is_national": true,
+    "name": "Republic of Ireland",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 780,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 494,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Republic_of_Ireland_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Football_Association_of_Ireland_crest.svg/200px-Football_Association_of_Ireland_crest.svg.png",
+    "image_credit": null,
+    "description": null,
+    "league": 54,
+    "under_development_stadium": null,
+    "uefa_coefficient": null
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 809,
+  "fields": {
+    "is_national": true,
+    "name": "Netherlands",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 311,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 268,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Netherlands_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Netherlands_national_football_team_crest.svg/200px-Netherlands_national_football_team_crest.svg.png",
+    "image_credit": null,
+    "description": null,
+    "league": 55,
+    "under_development_stadium": null,
+    "uefa_coefficient": null
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 810,
+  "fields": {
+    "is_national": true,
+    "name": "Portugal",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 165,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 155,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Portugal_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Portugal_national_football_team_%28badge%2C_2015%29.svg/200px-Portugal_national_football_team_%28badge%2C_2015%29.svg.png",
+    "image_credit": null,
+    "description": null,
+    "league": 56,
     "under_development_stadium": null,
     "uefa_coefficient": null
   }

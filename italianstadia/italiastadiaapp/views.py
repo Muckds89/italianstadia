@@ -198,12 +198,13 @@ def _build_stadium_features(qs=None):
                     {
                         "id": t.id,
                         "name": t.name,
+                        "is_national": t.is_national,
                         "tier": t.tier,
-                        "tier_name": t.get_tier_display(),
+                        "tier_name": t.get_tier_display() if t.tier else ("National Team" if t.is_national else ""),
                         "girone": t.girone or "",
                         "league_id": t.league_id,
-                        "league_name": t.league.name if t.league else t.get_tier_display(),
-                        "division_level": t.league.division_level if t.league else t.tier,
+                        "league_name": t.league.name if t.league else ("National Team" if t.is_national else ""),
+                        "division_level": t.league.division_level if t.league else (0 if t.is_national else t.tier),
                         "country": (
                             t.league.country.name
                             if t.league and t.league.country

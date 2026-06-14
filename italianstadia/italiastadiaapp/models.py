@@ -119,6 +119,8 @@ class Team(models.Model):
         (3, 'Third Division'),
     ]
 
+    is_national = models.BooleanField(default=False, db_index=True)
+
     GIRONE_CHOICES = [
     ("A", "Girone A"),
     ("B", "Girone B"),
@@ -129,7 +131,7 @@ class Team(models.Model):
 
     name = models.CharField(max_length=255)
     founded = models.DateField(null=True, blank=True)
-    tier = models.IntegerField(choices=TIER_CHOICES)
+    tier = models.IntegerField(choices=TIER_CHOICES, null=True, blank=True)
     girone = models.CharField(
     max_length=1,
     choices=GIRONE_CHOICES,
