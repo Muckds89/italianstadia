@@ -4,6 +4,22 @@ from django.db import migrations, models
 from django.utils.text import slugify
 
 
+def apply_slug_unique_pg(apps, schema_editor):
+    """Add unique constraint + varchar_pattern_ops index idempotently on PostgreSQL."""
+    if schema_editor.connection.vendor != "postgresql":
+        return
+    schema_editor.execute(
+        "DO $$ BEGIN "
+        "IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'italiastadiaapp_stadium_slug_b1ce6737_uniq') THEN "
+        "ALTER TABLE italiastadiaapp_stadium ADD CONSTRAINT italiastadiaapp_stadium_slug_b1ce6737_uniq UNIQUE (slug); "
+        "END IF; END $$;"
+    )
+    schema_editor.execute(
+        "CREATE INDEX IF NOT EXISTS italiastadiaapp_stadium_slug_b1ce6737_like "
+        "ON italiastadiaapp_stadium (slug varchar_pattern_ops);"
+    )
+
+
 def backfill_slugs(apps, schema_editor):
     Stadium = apps.get_model("italiastadiaapp", "Stadium")
     seen = {}
@@ -72,10 +88,20 @@ class Migration(migrations.Migration):
         ),
         # Backfill unique slugs before adding the unique constraint
         migrations.RunPython(backfill_slugs, migrations.RunPython.noop),
-        # Now enforce uniqueness
-        migrations.AlterField(
-            model_name="stadium",
-            name="slug",
-            field=models.SlugField(blank=True, max_length=255, unique=True),
+        # Enforce uniqueness + unique btree index (Django auto-generates this).
+        # We use SeparateDatabaseAndState so we can control the exact SQL:
+        # the varchar_pattern_ops (_like) index may already exist in production
+        # if the column was added in a previous partial migration run.
+        migrations.SeparateDatabaseAndState(
+            database_operations=[
+                migrations.RunPython(apply_slug_unique_pg, migrations.RunPython.noop),
+            ],
+            state_operations=[
+                migrations.AlterField(
+                    model_name="stadium",
+                    name="slug",
+                    field=models.SlugField(blank=True, max_length=255, unique=True),
+                ),
+            ],
         ),
     ]
