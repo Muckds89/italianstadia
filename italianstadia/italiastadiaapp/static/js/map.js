@@ -516,8 +516,7 @@ function buildPopupContent(props) {
                     : ""}
                 <strong>${t.name}</strong>${t.is_national ? ' <span style="font-size:0.75em;background:#0d6efd;color:#fff;border-radius:3px;padding:1px 4px">National</span>' : ''}<br>
                 <span style="font-size:0.8em">${t.is_national ? "National Team Stadium" : (t.league_name || t.tier_name || "Unknown")}${t.girone ? ` — Girone ${t.girone}` : ""}</span><br>
-                ${t.wikipedia_url    ? `<a href="${t.wikipedia_url}" target="_blank" style="font-size:0.8em">Team Wikipedia</a><br>` : ""}
-                ${t.transfermarkt_url ? `<a href="${t.transfermarkt_url}" target="_blank" style="font-size:0.8em">Team Transfermarkt</a><br>` : ""}
+                <a href="/team/${t.id}/" style="font-size:0.8em">View team</a><br>
             </div>
           `).join("")
         : `<em>No team linked</em>`;
@@ -537,8 +536,6 @@ function buildPopupContent(props) {
             ${teamPanels}
             <hr style="margin:6px 0">
             <a href="/stadium/${props.slug || props.id}/">View stadium details</a>
-            ${props.wikipedia_url    ? `<br><a href="${props.wikipedia_url}" target="_blank">Stadium Wikipedia</a>` : ""}
-            ${props.transfermarkt_url ? `<br><a href="${props.transfermarkt_url}" target="_blank">Stadium Transfermarkt</a>` : ""}
         </div>
     `;
 }
@@ -1194,10 +1191,18 @@ fetch(document.getElementById("map").dataset.stadiumsUrl)
                 fitToVisibleMarkers(visible);
             }
         }
+
+        const overlay = document.getElementById("map-overlay");
+        if (overlay) {
+            overlay.classList.add("hidden");
+            setTimeout(() => overlay.remove(), 450);
+        }
     })
     .catch(err => {
         console.error("Failed to load stadiums:", err);
         stadiumCounter.textContent = "⚠ Load failed";
+        const overlay = document.getElementById("map-overlay");
+        if (overlay) overlay.remove();
     });
 
 countryFilter.addEventListener("change", function () {

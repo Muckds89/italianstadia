@@ -12,6 +12,8 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Stadiums of Europe">
     <link rel="manifest" href="{% static 'manifest.json' %}">
+    <link rel="preload" href="{% static 'data/stadiums_map.json' %}" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="{% static 'js/map.js' %}" as="script">
     <title>Stadiums of Europe</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -357,7 +359,12 @@
 <div id="map"
      data-countries-url="{% static 'data/ne_110m_admin_0_countries.geojson' %}"
      data-stadiums-url="{% static 'data/stadiums_map.json' %}"
-     data-developments-url="{% url 'italiastadiaapp:stadium_developments_geojson' %}"></div>
+     data-developments-url="{% url 'italiastadiaapp:stadium_developments_geojson' %}">
+    <div id="map-overlay" aria-hidden="true">
+        <div class="map-spinner"></div>
+        <p class="map-loading-text">Loading stadiums…</p>
+    </div>
+</div>
 
 <!-- Mobile bottom sheet — must be outside #map to avoid Leaflet's CSS transform stacking context -->
 <div id="mobileSheet" role="dialog" aria-modal="true">
@@ -370,7 +377,7 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{% static 'js/map.js' %}?v=17"></script>
+<script src="{% static 'js/map.js' %}"></script>
 
 <footer style="text-align:center;padding:10px;font-size:12px;color:#888;">
     <a href="{% url 'italiastadiaapp:privacy' %}" style="color:#888;">Privacy Policy</a>

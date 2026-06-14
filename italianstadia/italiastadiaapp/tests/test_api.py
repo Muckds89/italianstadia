@@ -73,8 +73,10 @@ def test_stadiums_geojson_team_league_fields(client):
     assert t["league_name"] == "Serie A"
     assert t["division_level"] == 1
     assert t["country"] == "Italy"
-    assert "country_rank" in t  # UEFA rank exposed in GeoJSON for map sorting
-    assert "image_url" in t     # required for badge marker rendering
+    assert "country_rank" in t   # UEFA rank exposed in GeoJSON for map sorting
+    assert "image_url" in t      # required for badge marker rendering
+    assert "is_national" in t    # required for national team badge/label in popup
+    assert t["is_national"] is False
 
 
 @pytest.fixture

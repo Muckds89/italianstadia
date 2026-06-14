@@ -180,6 +180,14 @@ league = models.ForeignKey(League, on_delete=models.SET_NULL, null=True, db_inde
 
 Scraped fields that may be missing **must** have `blank=True, null=True` — a `None` from a scraper will raise `IntegrityError` otherwise.
 
+### Tournament country flags
+
+`COUNTRY_FLAGS` in `views.py` maps country names to emoji flags for the tournament detail page. It currently covers England, Wales, Scotland, Ireland, Italy, Turkey. **Extend this dict whenever a new host country is added to a tournament** — missing entries render as an empty string (no flag shown, not an error).
+
+### Stadium.slug constraint
+
+`Stadium.slug` is `unique=True` but not `null=True`. The `save()` method auto-generates slugs, so normal ORM usage (`create()`, `get_or_create()`, `save()`) is safe. **Never use `bulk_create()` on Stadium** — it bypasses `save()`, leaving slugs as `""`, and the second such row violates the `UNIQUE` constraint.
+
 ### N+1 query prevention
 
 All views that iterate over related objects must use `select_related` / `prefetch_related`:
