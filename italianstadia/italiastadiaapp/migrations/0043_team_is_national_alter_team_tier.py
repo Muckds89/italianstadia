@@ -10,11 +10,8 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name="team",
-            name="is_national",
-            field=models.BooleanField(db_index=True, default=False),
-        ),
+        # Make tier nullable first so SQLite's _remake_table doesn't choke on
+        # existing rows that already have tier=NULL (national team records).
         migrations.AlterField(
             model_name="team",
             name="tier",
@@ -27,5 +24,10 @@ class Migration(migrations.Migration):
                 ],
                 null=True,
             ),
+        ),
+        migrations.AddField(
+            model_name="team",
+            name="is_national",
+            field=models.BooleanField(db_index=True, default=False),
         ),
     ]
