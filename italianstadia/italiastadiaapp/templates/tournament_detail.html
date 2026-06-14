@@ -1,0 +1,176 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ tournament_name }} Venues — Stadiums of Europe</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+    body { padding-top: 56px; }
+    #tournament-map { height: 420px; width: 100%; border-radius: 8px; }
+    @media (max-width: 767px) { #tournament-map { height: 260px; } }
+    .stat-card { border-left: 4px solid #0d6efd; }
+    .venue-card { transition: box-shadow 0.15s; }
+    .venue-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.13); }
+    .confirmed-bar { border-left: 4px solid #198754; }
+    .candidate-bar { border-left: 4px solid #ffc107; }
+    .status-confirmed { color: #198754; font-weight: 600; }
+    .status-candidate { color: #856404; font-weight: 600; }
+    .match-count { font-size: 2rem; font-weight: 700; color: #0d6efd; line-height: 1; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-light bg-white shadow-sm fixed-top px-3">
+    <a href="{% url 'italiastadiaapp:tournament_list' %}" class="btn btn-secondary btn-sm">← Tournaments</a>
+    <span class="navbar-brand mb-0 ms-2 h6">{{ tournament_name }}</span>
+    <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-outline-secondary btn-sm ms-auto">Map</a>
+</nav>
+
+<div class="container mt-4">
+
+    <h1 class="mb-1">{{ tournament_name }}</h1>
+    {% if host_countries %}
+    <p class="text-muted mb-4">
+        Hosted in: {% for c in host_countries %}<strong>{{ c }}</strong>{% if not forloop.last %}, {% endif %}{% endfor %}
+    </p>
+    {% endif %}
+
+    <!-- Stat cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+            <div class="card stat-card h-100 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small">Confirmed venues</div>
+                    <div class="fs-3 fw-bold">{{ confirmed_count }}</div>
+                </div>
+            </div>
+        </div>
+        {% if candidate_count > 0 %}
+        <div class="col-6 col-md-3">
+            <div class="card stat-card h-100 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small">Candidate venues</div>
+                    <div class="fs-3 fw-bold">{{ candidate_count }}</div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if total_capacity %}
+        <div class="col-6 col-md-3">
+            <div class="card stat-card h-100 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small">Total capacity</div>
+                    <div class="fs-3 fw-bold">{{ total_capacity|floatformat:"0" }}</div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if total_matches %}
+        <div class="col-6 col-md-3">
+            <div class="card stat-card h-100 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small">Total matches</div>
+                    <div class="fs-3 fw-bold">{{ total_matches }}</div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Map -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header"><strong>Venue locations</strong></div>
+        <div class="card-body p-0">
+            <div id="tournament-map"></div>
+        </div>
+    </div>
+
+    <!-- Venue cards -->
+    <h5 class="mb-3">Venues</h5>
+    <div class="row g-3 mb-4">
+        {% for v in venues %}
+        <div class="col-12 col-md-6 col-lg-4">
+            <a href="{% url 'italiastadiaapp:stadium_detail' v.stadium.slug %}" class="text-decoration-none text-dark">
+                <div class="card venue-card h-100 shadow-sm {% if v.status == 'CONFIRMED' %}confirmed-bar{% else %}candidate-bar{% endif %}">
+                    {% if v.stadium.image_url %}
+                    <img src="{{ v.stadium.image_url }}" class="card-img-top" alt="{{ v.stadium.name }}"
+                         style="height:160px;object-fit:cover;">
+                    {% endif %}
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-1">
+                            <h6 class="card-title mb-0">{{ v.stadium.name }}</h6>
+                            {% if v.matches %}
+                            <span class="match-count ms-2">{{ v.matches }}</span>
+                            {% endif %}
+                        </div>
+                        {% if v.stadium.city %}
+                        <div class="text-muted small mb-2">{{ v.stadium.city.name }}, {{ v.stadium.city.country }}</div>
+                        {% endif %}
+                        <div class="d-flex flex-wrap gap-2 align-items-center">
+                            {% if v.status == 'CONFIRMED' %}
+                            <span class="badge bg-success">Confirmed</span>
+                            {% else %}
+                            <span class="badge bg-warning text-dark">Candidate</span>
+                            {% endif %}
+                            {% if v.stadium.capacity %}
+                            <span class="text-muted small">{{ v.stadium.capacity|floatformat:"0" }} seats</span>
+                            {% endif %}
+                        </div>
+                        {% if v.matches %}
+                        <div class="text-muted small mt-1">{{ v.matches }} match{{ v.matches|pluralize:"es" }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+    const geojson = {{ geojson|safe }};
+    const map = L.map("tournament-map");
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap contributors",
+        maxZoom: 18,
+    }).addTo(map);
+
+    const bounds = [];
+    geojson.features.forEach(function (f) {
+        const [lng, lat] = f.geometry.coordinates;
+        const props = f.properties;
+        const isConfirmed = props.status === "CONFIRMED";
+        const circle = L.circleMarker([lat, lng], {
+            radius: 8,
+            color: isConfirmed ? "#198754" : "#ffc107",
+            fillColor: isConfirmed ? "#198754" : "#ffc107",
+            fillOpacity: 0.8,
+            weight: 2,
+        }).addTo(map);
+        const tip = props.name + (props.matches ? " (" + props.matches + " matches)" : "");
+        circle.bindTooltip(tip, { permanent: false, direction: "top" });
+        circle.on("click", function () {
+            window.location.href = "/stadium/" + props.slug + "/";
+        });
+        bounds.push([lat, lng]);
+    });
+
+    if (bounds.length > 0) {
+        map.fitBounds(bounds, { padding: [30, 30] });
+    } else {
+        map.setView([48, 15], 4);
+    }
+})();
+</script>
+</body>
+</html>
