@@ -143,11 +143,15 @@ class Command(BaseCommand):
                     updates["surface"] = mapped
 
             # -- Stadium type (from roof field) ------------------------------
-            if (force or not stadium.stadium_type) and fields.get("roof"):
-                raw = _clean_wikitext(fields["roof"])
-                mapped = _map_type(raw)
-                if mapped:
-                    updates["stadium_type"] = mapped
+            if force or not stadium.stadium_type:
+                if fields.get("roof"):
+                    raw = _clean_wikitext(fields["roof"])
+                    mapped = _map_type(raw)
+                    if mapped:
+                        updates["stadium_type"] = mapped
+                elif fields:
+                    # Infobox parsed OK but no roof field → open-air stadium
+                    updates["stadium_type"] = "OPEN"
 
             if updates:
                 parts = []
