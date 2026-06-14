@@ -129,6 +129,20 @@
         }
 
 
+        /* Stadiums dropdown opens on hover (desktop only) */
+        @media (min-width: 992px) {
+            .nav-hover-dropdown:hover .dropdown-menu { display: block; }
+            /* Keep the dropdown absolutely positioned so it overlays content
+               and does not push the filter row downward */
+            .navbar-nav .nav-hover-dropdown { position: relative; }
+            .navbar-nav .nav-hover-dropdown .dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                margin-top: 2px;
+            }
+        }
+
         .filter-area {
             min-width: 0;
             flex-shrink: 1;

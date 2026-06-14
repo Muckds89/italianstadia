@@ -848,7 +848,7 @@ html {
 select.filter-has-value {
     border-color: #4a9eff !important;
     box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.25);
-    color: #fff;
+    background-color: rgba(74, 158, 255, 0.12);
 }
 
 /* ── Live search ── */
