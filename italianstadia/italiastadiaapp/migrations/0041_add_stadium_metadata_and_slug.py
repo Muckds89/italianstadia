@@ -4,26 +4,13 @@ from django.db import migrations, models
 from django.utils.text import slugify
 
 
-def apply_slug_unique_pg(apps, schema_editor):
-    """Add unique constraint + varchar_pattern_ops index idempotently on PostgreSQL."""
-    if schema_editor.connection.vendor != "postgresql":
-        return
-    schema_editor.execute(
-        "DO $$ BEGIN "
-        "IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'italiastadiaapp_stadium_slug_b1ce6737_uniq') THEN "
-        "ALTER TABLE italiastadiaapp_stadium ADD CONSTRAINT italiastadiaapp_stadium_slug_b1ce6737_uniq UNIQUE (slug); "
-        "END IF; END $$;"
-    )
-    schema_editor.execute(
-        "CREATE INDEX IF NOT EXISTS italiastadiaapp_stadium_slug_b1ce6737_like "
-        "ON italiastadiaapp_stadium (slug varchar_pattern_ops);"
-    )
-
-
 def backfill_slugs(apps, schema_editor):
     Stadium = apps.get_model("italiastadiaapp", "Stadium")
     seen = {}
     for s in Stadium.objects.order_by("id"):
+        if s.slug:
+            seen[s.slug] = True
+            continue
         base = slugify(s.name) or f"stadium-{s.id}"
         slug, n = base, 2
         while slug in seen:
@@ -32,6 +19,29 @@ def backfill_slugs(apps, schema_editor):
         seen[slug] = True
         s.slug = slug
         s.save(update_fields=["slug"])
+
+
+def fix_pg_indexes(apps, schema_editor):
+    """
+    On PostgreSQL only: ensure the unique constraint and varchar_pattern_ops
+    index on stadium.slug exist, using IF NOT EXISTS so this is safe even if
+    a previous failed deploy already created them.
+    """
+    if schema_editor.connection.vendor != "postgresql":
+        return
+    with schema_editor.connection.cursor() as c:
+        c.execute(
+            "DO $$ BEGIN "
+            "IF NOT EXISTS (SELECT 1 FROM pg_constraint "
+            "WHERE conname = 'italiastadiaapp_stadium_slug_b1ce6737_uniq') THEN "
+            "ALTER TABLE italiastadiaapp_stadium "
+            "ADD CONSTRAINT italiastadiaapp_stadium_slug_b1ce6737_uniq UNIQUE (slug); "
+            "END IF; END $$;"
+        )
+        c.execute(
+            "CREATE INDEX IF NOT EXISTS italiastadiaapp_stadium_slug_b1ce6737_like "
+            "ON italiastadiaapp_stadium (slug varchar_pattern_ops);"
+        )
 
 
 class Migration(migrations.Migration):
@@ -46,7 +56,7 @@ class Migration(migrations.Migration):
             name="architect",
             field=models.CharField(blank=True, max_length=255, null=True),
         ),
-        # Add slug WITHOUT unique=True first so existing rows default to '' without conflict
+        # Add slug without unique=True first so existing rows default to '' without conflict.
         migrations.AddField(
             model_name="stadium",
             name="slug",
@@ -86,15 +96,13 @@ class Migration(migrations.Migration):
             name="tournaments",
             field=models.JSONField(blank=True, default=list),
         ),
-        # Backfill unique slugs before adding the unique constraint
         migrations.RunPython(backfill_slugs, migrations.RunPython.noop),
-        # Enforce uniqueness + unique btree index (Django auto-generates this).
-        # We use SeparateDatabaseAndState so we can control the exact SQL:
-        # the varchar_pattern_ops (_like) index may already exist in production
-        # if the column was added in a previous partial migration run.
+        # On PostgreSQL, AlterField would blindly re-create the _like index that
+        # AddField(unique=False) already created → "relation already exists".
+        # fix_pg_indexes creates both idempotently; AlterField handles SQLite/other.
         migrations.SeparateDatabaseAndState(
             database_operations=[
-                migrations.RunPython(apply_slug_unique_pg, migrations.RunPython.noop),
+                migrations.RunPython(fix_pg_indexes, migrations.RunPython.noop),
             ],
             state_operations=[
                 migrations.AlterField(
