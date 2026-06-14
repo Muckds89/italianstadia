@@ -4,8 +4,9 @@ from collections import defaultdict
 
 from django.conf import settings
 from django.db.models import Avg, Count, F, Max, Sum
-from django.http import HttpResponse, JsonResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.text import slugify
 from django.views.decorators.cache import cache_page
 from .models import City, LastRefresh, League, Stadium, Team, StadiumDevelopment
 
@@ -600,4 +601,124 @@ def api_status(request):
         "last_refresh": refresh.ran_at.isoformat() if refresh and refresh.ran_at else None,
         "last_refresh_status": refresh.status if refresh else None,
         "last_refresh_detail": refresh.detail if refresh else None,
+    })
+
+
+def tournament_list(request):
+    """Aggregate all tournaments from the Stadium.tournaments JSONField."""
+    stadiums = (
+        Stadium.objects
+        .select_related("city")
+        .exclude(tournaments=[])
+    )
+    tournaments = {}
+    for stadium in stadiums:
+        for entry in stadium.tournaments:
+            name = entry.get("tournament", "")
+            if not name:
+                continue
+            slug = slugify(name)
+            if slug not in tournaments:
+                tournaments[slug] = {
+                    "name": name,
+                    "slug": slug,
+                    "year": entry.get("year"),
+                    "venues": [],
+                    "confirmed": 0,
+                    "candidate": 0,
+                    "total_capacity": 0,
+                }
+            t = tournaments[slug]
+            status = entry.get("status", "")
+            if status == "CONFIRMED":
+                t["confirmed"] += 1
+            elif status == "CANDIDATE":
+                t["candidate"] += 1
+            t["venues"].append(stadium)
+            if stadium.capacity:
+                t["total_capacity"] += stadium.capacity
+
+    tournament_list_sorted = sorted(tournaments.values(), key=lambda t: t.get("year") or 9999)
+    return render(request, "tournament_list.html", {
+        "tournaments": tournament_list_sorted,
+    })
+
+
+def tournament_detail(request, slug):
+    """Show all venues for a single tournament identified by its slugified name."""
+    stadiums = (
+        Stadium.objects
+        .select_related("city")
+        .exclude(tournaments=[])
+    )
+
+    tournament_name = None
+    tournament_year = None
+    venues = []
+
+    for stadium in stadiums:
+        for entry in stadium.tournaments:
+            name = entry.get("tournament", "")
+            if slugify(name) == slug:
+                tournament_name = name
+                tournament_year = entry.get("year")
+                venues.append({
+                    "stadium": stadium,
+                    "status": entry.get("status", ""),
+                    "matches": entry.get("matches"),
+                })
+                break
+
+    if not tournament_name:
+        raise Http404
+
+    # CONFIRMED first, then CANDIDATE, each group sorted by capacity desc
+    venues.sort(key=lambda v: (
+        0 if v["status"] == "CONFIRMED" else 1,
+        -(v["stadium"].capacity or 0),
+    ))
+
+    # Aggregate stats
+    confirmed_venues = [v for v in venues if v["status"] == "CONFIRMED"]
+    total_capacity = sum(v["stadium"].capacity or 0 for v in confirmed_venues)
+    total_matches = sum(v["matches"] or 0 for v in venues if v["matches"])
+
+    # Derive host countries from confirmed venue countries
+    host_countries = sorted({
+        v["stadium"].city.country
+        for v in venues
+        if v["status"] == "CONFIRMED" and v["stadium"].city and v["stadium"].city.country
+    })
+
+    # GeoJSON for mini-map
+    features = []
+    for v in venues:
+        s = v["stadium"]
+        if s.latitude is None or s.longitude is None:
+            continue
+        features.append({
+            "type": "Feature",
+            "geometry": {"type": "Point", "coordinates": [float(s.longitude), float(s.latitude)]},
+            "properties": {
+                "id": s.id,
+                "slug": s.slug or str(s.id),
+                "name": s.name,
+                "capacity": s.capacity,
+                "status": v["status"],
+                "matches": v["matches"],
+            },
+        })
+    geojson = json.dumps({"type": "FeatureCollection", "features": features})
+
+    return render(request, "tournament_detail.html", {
+        "tournament_name": tournament_name,
+        "tournament_year": tournament_year,
+        "tournament_slug": slug,
+        "venues": venues,
+        "confirmed_count": len(confirmed_venues),
+        "candidate_count": len(venues) - len(confirmed_venues),
+        "total_capacity": total_capacity,
+        "total_matches": total_matches,
+        "host_countries": host_countries,
+        "geojson": geojson,
     })

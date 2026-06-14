@@ -5,6 +5,7 @@ from .views import (
     stadium_developments_geojson, stadium_development_list, stadium_list, team_list,
     stadium_detail, stadium_detail_redirect, stadiums_geojson,
     stadium_development_detail, team_detail,
+    tournament_list, tournament_detail,
 )
 
 app_name = "italiastadiaapp"
@@ -18,6 +19,8 @@ urlpatterns = [
     path("stadium/<int:id>/", stadium_detail_redirect, name="stadium_detail_by_id"),
     path("stadium/<slug:slug>/", stadium_detail, name="stadium_detail"),
     path("country/<str:country_name>/", country_stats, name="country_stats"),
+    path("tournaments/", tournament_list, name="tournament_list"),
+    path("tournaments/<slug:slug>/", tournament_detail, name="tournament_detail"),
     path("api/stadiums/", stadiums_geojson, name="stadiums_geojson"),
     path("api/stadium-developments/", stadium_developments_geojson, name="stadium_developments_geojson"),
     path("api/export/stadiums/", export_stadiums, name="export_stadiums"),

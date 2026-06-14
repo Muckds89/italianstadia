@@ -202,3 +202,44 @@ def test_city_list_filter_unknown_country(client, two_country_data):
     response = client.get(reverse("italiastadiaapp:city_list") + "?country=Zzz")
     assert response.status_code == 200
     assert list(response.context["cities"]) == []
+
+
+# ---------------------------------------------------------------------------
+# tournament pages
+# ---------------------------------------------------------------------------
+
+@pytest.fixture
+def euro_2028_venue(db):
+    city = City.objects.create(name="London", population=9000000, country="England")
+    stadium = Stadium.objects.create(
+        name="Test Arena",
+        city=city,
+        latitude=51.555,
+        longitude=-0.108,
+        capacity=60000,
+        ownership="PRIVATE",
+        tournaments=[{"tournament": "UEFA Euro 2028", "year": 2028, "status": "CONFIRMED", "matches": 5}],
+    )
+    return stadium
+
+
+@pytest.mark.django_db
+def test_tournament_list_page_loads(client, euro_2028_venue):
+    response = client.get(reverse("italiastadiaapp:tournament_list"))
+    assert response.status_code == 200
+    assert b"UEFA Euro 2028" in response.content
+
+
+@pytest.mark.django_db
+def test_tournament_detail_page_loads(client, euro_2028_venue):
+    response = client.get(reverse("italiastadiaapp:tournament_detail", args=["uefa-euro-2028"]))
+    assert response.status_code == 200
+    assert b"UEFA Euro 2028" in response.content
+    assert b"Test Arena" in response.content
+    assert response.context["confirmed_count"] == 1
+
+
+@pytest.mark.django_db
+def test_tournament_detail_404_unknown_slug(client):
+    response = client.get(reverse("italiastadiaapp:tournament_detail", args=["no-such-tournament"]))
+    assert response.status_code == 404
