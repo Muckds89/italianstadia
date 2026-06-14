@@ -71,7 +71,9 @@ def _team_description(team):
 
 def stadium_detail(request, slug):
     stadium = get_object_or_404(
-        Stadium.objects.select_related("city").prefetch_related("teams"),
+        Stadium.objects.select_related("city").prefetch_related(
+            "teams__league__country"
+        ),
         slug=slug,
     )
     # Back-navigation: ?from_list=<country> when coming from stadium_list,
@@ -80,11 +82,19 @@ def stadium_detail(request, slug):
     back_country = from_list.strip() if from_list else ""
     from_teams   = request.GET.get("from_team_list", "")   # "1" when routed via team_detail
 
+    # Flag image URLs for national teams (flagcdn.com, handles GB subdivisions)
+    team_flag_urls = {}
+    for t in stadium.teams.all():
+        if t.is_national and t.league and t.league.country:
+            code = _country_flag_code(t.league.country.code)
+            team_flag_urls[t.pk] = f"https://flagcdn.com/w160/{code}.png"
+
     # Build a JSON-safe logos array for the mini-map split badge
+    # Use flag URL for national teams so the broken SVG badge is not shown
     team_logos = [
-        {"url": t.image_url, "name": t.name}
+        {"url": team_flag_urls.get(t.pk) or t.image_url, "name": t.name}
         for t in stadium.teams.all()
-        if t.image_url
+        if team_flag_urls.get(t.pk) or t.image_url
     ]
 
     return render(request, "stadium_detail.html", {
@@ -94,6 +104,7 @@ def stadium_detail(request, slug):
         "back_country": back_country,
         "from_team_list": bool(from_teams),
         "team_logos_json": json.dumps(team_logos),
+        "team_flag_urls": team_flag_urls,
         "page_description": _stadium_description(stadium),
     })
 
