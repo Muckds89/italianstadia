@@ -161,6 +161,27 @@ def test_team_uefa_coefficient_field():
 
 
 @pytest.mark.django_db
+def test_team_slug_auto_generated():
+    city = City.objects.create(name="Turin", population=900000, country="Italy")
+    stadium = Stadium.objects.create(
+        name="Juventus Stadium", city=city, latitude=45.1, longitude=7.6, ownership="PRIVATE"
+    )
+    team = Team.objects.create(name="FC Test", city=city, stadium=stadium)
+    assert team.slug == "fc-test"
+
+
+@pytest.mark.django_db
+def test_team_slug_collision_gets_suffix():
+    city = City.objects.create(name="Turin", population=900000, country="Italy")
+    stadium = Stadium.objects.create(
+        name="Juventus Stadium", city=city, latitude=45.1, longitude=7.6, ownership="PRIVATE"
+    )
+    Team.objects.create(name="FC Test", city=city, stadium=stadium)
+    team2 = Team.objects.create(name="FC Test", city=city, stadium=stadium)
+    assert team2.slug == "fc-test-2"
+
+
+@pytest.mark.django_db
 def test_league_ordering():
     # Use get_or_create — data migration may have already seeded these rows
     country, _ = Country.objects.get_or_create(name="Italy", defaults={"code": "IT"})
