@@ -4,8 +4,31 @@ from django.db import migrations, models
 from django.utils.text import slugify
 
 
-def backfill_team_slugs(apps, schema_editor):
+def apply_everything(apps, schema_editor):
+    """
+    Fully idempotent: add column, backfill slugs, create unique index.
+    Uses IF NOT EXISTS / IF EXISTS throughout so concurrent migrate processes
+    (Render multi-worker) and retries after partial failures are all safe.
+    """
+    conn = schema_editor.connection
+    vendor = conn.vendor
     Team = apps.get_model("italiastadiaapp", "Team")
+
+    with conn.cursor() as cursor:
+        if vendor == "postgresql":
+            cursor.execute(
+                "ALTER TABLE italiastadiaapp_team "
+                "ADD COLUMN IF NOT EXISTS slug varchar(255) NOT NULL DEFAULT ''"
+            )
+        elif vendor == "sqlite":
+            cursor.execute("PRAGMA table_info(italiastadiaapp_team)")
+            if "slug" not in [row[1] for row in cursor.fetchall()]:
+                cursor.execute(
+                    "ALTER TABLE italiastadiaapp_team "
+                    "ADD COLUMN slug varchar(255) NOT NULL DEFAULT ''"
+                )
+
+    # 2. Backfill slugs (already skips teams that have one)
     for team in Team.objects.order_by("pk"):
         if team.slug:
             continue
@@ -18,65 +41,70 @@ def backfill_team_slugs(apps, schema_editor):
         team.slug = slug
         team.save(update_fields=["slug"])
 
-
-def apply_ddl(apps, schema_editor):
-    vendor = schema_editor.connection.vendor
-    with schema_editor.connection.cursor() as cursor:
+    # 3. Create unique index idempotently
+    #    DROP any prior artifacts (constraint-backed or standalone), then
+    #    CREATE IF NOT EXISTS — safe even under concurrent migrate processes.
+    with conn.cursor() as cursor:
         if vendor == "postgresql":
-            # Add column if it doesn't already exist
-            cursor.execute("""
-                ALTER TABLE italiastadiaapp_team
-                ADD COLUMN IF NOT EXISTS slug varchar(255) NOT NULL DEFAULT ''
-            """)
-        # SQLite: column was already added by AddField above (no-op here)
-
-
-def make_unique(apps, schema_editor):
-    vendor = schema_editor.connection.vendor
-    with schema_editor.connection.cursor() as cursor:
-        if vendor == "postgresql":
-            # Drop any partial artifacts from a previous failed run
-            cursor.execute(
-                "DROP INDEX IF EXISTS italiastadiaapp_team_slug_f547d06f_like"
-            )
+            # Drop constraint if it exists (also drops its backing index)
             cursor.execute(
                 "ALTER TABLE italiastadiaapp_team "
                 "DROP CONSTRAINT IF EXISTS italiastadiaapp_team_slug_f547d06f_uniq"
             )
-            # Re-create clean
+            # Drop standalone indexes in case they exist without a constraint
             cursor.execute(
-                "ALTER TABLE italiastadiaapp_team "
-                "ADD CONSTRAINT italiastadiaapp_team_slug_f547d06f_uniq UNIQUE (slug)"
+                "DROP INDEX IF EXISTS italiastadiaapp_team_slug_f547d06f_uniq"
             )
             cursor.execute(
-                "CREATE INDEX italiastadiaapp_team_slug_f547d06f_like "
+                "DROP INDEX IF EXISTS italiastadiaapp_team_slug_f547d06f_like"
+            )
+            # CREATE IF NOT EXISTS — concurrent processes skip silently
+            cursor.execute(
+                "CREATE UNIQUE INDEX IF NOT EXISTS "
+                "italiastadiaapp_team_slug_f547d06f_uniq "
+                "ON italiastadiaapp_team (slug)"
+            )
+            cursor.execute(
+                "CREATE INDEX IF NOT EXISTS "
+                "italiastadiaapp_team_slug_f547d06f_like "
                 "ON italiastadiaapp_team (slug varchar_pattern_ops)"
             )
-        # SQLite: AlterField below handles it natively
+        elif vendor == "sqlite":
+            cursor.execute(
+                "CREATE UNIQUE INDEX IF NOT EXISTS "
+                "italiastadiaapp_team_slug_uniq ON italiastadiaapp_team (slug)"
+            )
 
 
 class Migration(migrations.Migration):
+    atomic = False  # Each statement commits independently — safe for retries
 
     dependencies = [
         ("italiastadiaapp", "0044_mark_national_teams"),
     ]
 
     operations = [
-        # Step 1 — add column (SQLite path); PostgreSQL path is in apply_ddl
-        migrations.AddField(
-            model_name="team",
-            name="slug",
-            field=models.SlugField(blank=True, max_length=255),
+        # State-only: update Django's ORM state without running DDL
+        # (apply_everything handles all DDL idempotently)
+        migrations.SeparateDatabaseAndState(
+            database_operations=[],
+            state_operations=[
+                migrations.AddField(
+                    model_name="team",
+                    name="slug",
+                    field=models.SlugField(blank=True, max_length=255),
+                ),
+            ],
         ),
-        # Step 1b — PostgreSQL: idempotent ADD COLUMN IF NOT EXISTS (no-op on SQLite)
-        migrations.RunPython(apply_ddl, migrations.RunPython.noop),
-        # Step 2 — backfill
-        migrations.RunPython(backfill_team_slugs, migrations.RunPython.noop),
-        # Step 3 — add unique (PostgreSQL: drop-and-recreate idempotently; SQLite: AlterField)
-        migrations.RunPython(make_unique, migrations.RunPython.noop),
-        migrations.AlterField(
-            model_name="team",
-            name="slug",
-            field=models.SlugField(blank=True, max_length=255, unique=True),
+        migrations.RunPython(apply_everything, migrations.RunPython.noop),
+        migrations.SeparateDatabaseAndState(
+            database_operations=[],
+            state_operations=[
+                migrations.AlterField(
+                    model_name="team",
+                    name="slug",
+                    field=models.SlugField(blank=True, max_length=255, unique=True),
+                ),
+            ],
         ),
     ]
