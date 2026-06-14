@@ -216,6 +216,7 @@ class StadiumDevelopment(models.Model):
 
 
     notes = models.TextField(blank=True, null=True)
+    tournaments = models.JSONField(default=list, blank=True)
 
     def __str__(self):
         return self.name

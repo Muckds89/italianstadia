@@ -224,10 +224,9 @@ def euro_2028_venue(db):
 
 
 @pytest.mark.django_db
-def test_tournament_list_page_loads(client, euro_2028_venue):
+def test_tournament_list_redirects_to_home(client):
     response = client.get(reverse("italiastadiaapp:tournament_list"))
-    assert response.status_code == 200
-    assert b"UEFA Euro 2028" in response.content
+    assert response.status_code == 302
 
 
 @pytest.mark.django_db

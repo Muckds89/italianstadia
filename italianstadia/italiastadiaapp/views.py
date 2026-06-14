@@ -605,9 +605,9 @@ def api_status(request):
 
 
 COUNTRY_FLAGS = {
-    "England":  "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-    "Wales":    "🏴󠁧󠁢󠁷󠁬󠁳󠁿",
-    "Scotland": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+    "England":  "🇬🇧",
+    "Wales":    "🇬🇧",
+    "Scotland": "🇬🇧",
     "Ireland":  "🇮🇪",
     "Italy":    "🇮🇹",
     "Turkey":   "🇹🇷",
@@ -615,67 +615,57 @@ COUNTRY_FLAGS = {
 
 
 def tournament_list(request):
-    """Aggregate all tournaments from the Stadium.tournaments JSONField."""
-    stadiums = (
-        Stadium.objects
-        .select_related("city")
-        .exclude(tournaments=[])
-    )
-    tournaments = {}
-    for stadium in stadiums:
-        for entry in stadium.tournaments:
-            name = entry.get("tournament", "")
-            if not name:
-                continue
-            slug = slugify(name)
-            if slug not in tournaments:
-                tournaments[slug] = {
-                    "name": name,
-                    "slug": slug,
-                    "year": entry.get("year"),
-                    "venues": [],
-                    "confirmed": 0,
-                    "candidate": 0,
-                    "total_capacity": 0,
-                }
-            t = tournaments[slug]
-            status = entry.get("status", "")
-            if status == "CONFIRMED":
-                t["confirmed"] += 1
-            elif status == "CANDIDATE":
-                t["candidate"] += 1
-            t["venues"].append(stadium)
-            if stadium.capacity:
-                t["total_capacity"] += stadium.capacity
-
-    tournament_list_sorted = sorted(tournaments.values(), key=lambda t: t.get("year") or 9999)
-    return render(request, "tournament_list.html", {
-        "tournaments": tournament_list_sorted,
-    })
+    return redirect("italiastadiaapp:home")
 
 
 def tournament_detail(request, slug):
-    """Show all venues for a single tournament identified by its slugified name."""
-    stadiums = (
-        Stadium.objects
-        .select_related("city")
-        .exclude(tournaments=[])
-    )
-
+    """Show all venues for a single tournament (Stadium + StadiumDevelopment)."""
     tournament_name = None
     tournament_year = None
     venues = []
 
-    for stadium in stadiums:
+    # Pull from operational stadiums
+    for stadium in Stadium.objects.select_related("city").exclude(tournaments=[]):
         for entry in stadium.tournaments:
             name = entry.get("tournament", "")
             if slugify(name) == slug:
                 tournament_name = name
                 tournament_year = entry.get("year")
                 venues.append({
-                    "stadium": stadium,
+                    "name": stadium.name,
+                    "city": stadium.city,
+                    "capacity": stadium.capacity,
+                    "image_url": stadium.image_url,
+                    "latitude": stadium.latitude,
+                    "longitude": stadium.longitude,
+                    "detail_url": f"/stadium/{stadium.slug}/",
                     "status": entry.get("status", ""),
                     "matches": entry.get("matches"),
+                    "is_development": False,
+                })
+                break
+
+    # Pull from development stadiums
+    for dev in StadiumDevelopment.objects.select_related("stadium__city").exclude(tournaments=[]):
+        for entry in dev.tournaments:
+            name = entry.get("tournament", "")
+            if slugify(name) == slug:
+                tournament_name = tournament_name or name
+                tournament_year = tournament_year or entry.get("year")
+                city = dev.stadium.city if dev.stadium else None
+                country = dev.country or (city.country if city else None)
+                venues.append({
+                    "name": dev.name,
+                    "city": city,
+                    "country_override": country,
+                    "capacity": dev.future_capacity,
+                    "image_url": dev.image_url,
+                    "latitude": dev.latitude,
+                    "longitude": dev.longitude,
+                    "detail_url": f"/stadium-development/{dev.id}/",
+                    "status": entry.get("status", ""),
+                    "matches": entry.get("matches"),
+                    "is_development": True,
                 })
                 break
 
@@ -685,52 +675,47 @@ def tournament_detail(request, slug):
     # CONFIRMED first, then CANDIDATE, each group sorted by capacity desc
     venues.sort(key=lambda v: (
         0 if v["status"] == "CONFIRMED" else 1,
-        -(v["stadium"].capacity or 0),
+        -(v["capacity"] or 0),
     ))
 
     # Aggregate stats
     confirmed_venues = [v for v in venues if v["status"] == "CONFIRMED"]
-    total_capacity = sum(v["stadium"].capacity or 0 for v in confirmed_venues)
+    total_capacity = sum(v["capacity"] or 0 for v in confirmed_venues)
     total_matches = sum(v["matches"] or 0 for v in venues if v["matches"])
 
-    # Derive host countries (preserve insertion order by capacity for display)
-    seen = OrderedDict()
-    for v in venues:
-        if v["stadium"].city and v["stadium"].city.country:
-            c = v["stadium"].city.country
-            if c not in seen:
-                seen[c] = COUNTRY_FLAGS.get(c, "")
-    host_countries = list(seen.keys())
-    host_country_flags = seen  # {country: flag_emoji}
+    def _venue_country(v):
+        if v.get("country_override"):
+            return v["country_override"]
+        return v["city"].country if v.get("city") else "Unknown"
 
-    # Group venues by country (for multi-host tournaments like Euro 2032)
+    # Group venues by country
     _country_groups = {}
     for v in venues:
-        country = v["stadium"].city.country if v["stadium"].city else "Unknown"
+        country = _venue_country(v)
         flag = COUNTRY_FLAGS.get(country, "")
         if country not in _country_groups:
-            _country_groups[country] = {"flag": flag, "venues": [], "confirmed": 0}
+            _country_groups[country] = {"flag": flag, "venues": []}
         _country_groups[country]["venues"].append(v)
-        if v["status"] == "CONFIRMED":
-            _country_groups[country]["confirmed"] += 1
 
     venues_by_country = OrderedDict(sorted(_country_groups.items(), key=lambda item: item[0]))
     multi_country = len(venues_by_country) > 1
 
+    host_country_flags = OrderedDict(
+        (c, grp["flag"]) for c, grp in venues_by_country.items()
+    )
+
     # GeoJSON for mini-map
     features = []
     for v in venues:
-        s = v["stadium"]
-        if s.latitude is None or s.longitude is None:
+        if v["latitude"] is None or v["longitude"] is None:
             continue
         features.append({
             "type": "Feature",
-            "geometry": {"type": "Point", "coordinates": [float(s.longitude), float(s.latitude)]},
+            "geometry": {"type": "Point", "coordinates": [float(v["longitude"]), float(v["latitude"])]},
             "properties": {
-                "id": s.id,
-                "slug": s.slug or str(s.id),
-                "name": s.name,
-                "capacity": s.capacity,
+                "url": v["detail_url"],
+                "name": v["name"],
+                "capacity": v["capacity"],
                 "status": v["status"],
                 "matches": v["matches"],
             },
@@ -748,7 +733,6 @@ def tournament_detail(request, slug):
         "candidate_count": len(venues) - len(confirmed_venues),
         "total_capacity": total_capacity,
         "total_matches": total_matches,
-        "host_countries": host_countries,
         "host_country_flags": host_country_flags,
         "geojson": geojson,
     })

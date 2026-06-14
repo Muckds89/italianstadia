@@ -9105,13 +9105,7 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": null,
-    "tournaments": [
-      {
-        "tournament": "UEFA Euro 2032",
-        "year": 2032,
-        "status": "CANDIDATE"
-      }
-    ],
+    "tournaments": [],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Renato_Dall%27Ara",
     "transfermarkt_url": "https://www.transfermarkt.com/fc-bologna/stadion/verein/1025/saison_id/2025",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadio-renato-dallara-bologna-1627641591-68074.jpg?lm=1627641622",
@@ -9142,13 +9136,7 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": "Pier Luigi Nervi",
-    "tournaments": [
-      {
-        "tournament": "UEFA Euro 2032",
-        "year": 2032,
-        "status": "CANDIDATE"
-      }
-    ],
+    "tournaments": [],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Artemio_Franchi",
     "transfermarkt_url": "https://www.transfermarkt.com/ac-florenz/stadion/verein/430/saison_id/2025",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadio-artemio-franchi-fiorentina-1627641839-68075.jpg?lm=1627641872",
@@ -32026,38 +32014,6 @@
 },
 {
   "model": "italiastadiaapp.stadium",
-  "pk": 783,
-  "fields": {
-    "name": "Yeni Cagliari Stadio",
-    "capacity": 30000,
-    "address": null,
-    "year_of_construction": null,
-    "city": 44,
-    "latitude": "39.358800",
-    "longitude": "9.128900",
-    "owner_raw": null,
-    "ownership": "UNKNOWN",
-    "slug": "yeni-cagliari-stadio",
-    "stadium_type": null,
-    "surface": null,
-    "architect": null,
-    "tournaments": [
-      {
-        "tournament": "UEFA Euro 2032",
-        "year": 2032,
-        "status": "CANDIDATE"
-      }
-    ],
-    "wikipedia_url": "",
-    "transfermarkt_url": null,
-    "image_url": null,
-    "image_credit": null,
-    "extra_images": [],
-    "description": null
-  }
-},
-{
-  "model": "italiastadiaapp.stadium",
   "pk": 784,
   "fields": {
     "name": "Yeni Ankara Stadyumu",
@@ -48919,7 +48875,8 @@
     "image_url": "https://populous.com/uploads/2025/04/Image-52-1920x1440-c-center-1920x0-c-default.webp",
     "image_credit": "populous.com",
     "source_url": "https://populous.com/article/new-18500-capacity-stadium-unveiled-in-venice-italy",
-    "notes": ""
+    "notes": "",
+    "tournaments": []
   }
 },
 {
@@ -48940,7 +48897,14 @@
     "image_url": "https://www.arup.com/globalassets/images/news/2022/03-march/city-of-florence-unveils-winning-design-for-stadio-artemio-franchi-rennovation/artists-impression-of-fiorentinas-new-stadium.jpg?format=webp&width=760&quality=80",
     "image_credit": "arup.com",
     "source_url": "https://www.arup.com/news/city-of-florence-unveils-winning-design-for-stadio-artemio-franchi-renovation/",
-    "notes": ""
+    "notes": "",
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ]
   }
 },
 {
@@ -48961,7 +48925,8 @@
     "image_url": "https://www.gauarena.com/wp-content/uploads/2023/08/20230724_RENDER-FACADE-day.png",
     "image_credit": "gauarena.com",
     "source_url": "https://www.gauarena.com/progetti/restyling-stadio-arechi-salerno/",
-    "notes": "Benvenuti nel futuro dello sport e dell'innovazione: il progetto rivoluzionario dello Stadio \"Arechi\". Un'ambiziosa visione della Regione per dare vita a uno stadio all'avanguardia, dove sicurezza, sostenibilità e qualità si fondono con l'eccellenza del calcio di massima serie. Questa incredibile struttura è stata concepita con un unico obiettivo: rispettare e valorizzare la città e la tifoseria che tanto ama la sua squadra. L'attenzione per l'ambiente è al centro del progetto, grazie all'utilizzo di tecnologie all'avanguardia che minimizzano l'impatto ambientale e massimizzano l'efficienza energetica. Ma non è tutto: il nuovo stadio \"Arechi\" abbraccia l'inclusività, con un design senza barriere architettoniche e sociali, garantendo l'accessibilità a tutte le persone, comprese quelle con disabilità."
+    "notes": "Benvenuti nel futuro dello sport e dell'innovazione: il progetto rivoluzionario dello Stadio \"Arechi\". Un'ambiziosa visione della Regione per dare vita a uno stadio all'avanguardia, dove sicurezza, sostenibilità e qualità si fondono con l'eccellenza del calcio di massima serie. Questa incredibile struttura è stata concepita con un unico obiettivo: rispettare e valorizzare la città e la tifoseria che tanto ama la sua squadra. L'attenzione per l'ambiente è al centro del progetto, grazie all'utilizzo di tecnologie all'avanguardia che minimizzano l'impatto ambientale e massimizzano l'efficienza energetica. Ma non è tutto: il nuovo stadio \"Arechi\" abbraccia l'inclusività, con un design senza barriere architettoniche e sociali, garantendo l'accessibilità a tutte le persone, comprese quelle con disabilità.",
+    "tournaments": []
   }
 },
 {
@@ -48982,7 +48947,14 @@
     "image_url": "https://www.gauarena.com/wp-content/uploads/2021/04/INTERNA-CATINO-scaled-1500x800.jpg",
     "image_credit": "gauarena.com",
     "source_url": "https://www.gauarena.com/progetti/restyling-stadio-renato-dallara/",
-    "notes": "La volontà di avviare un processo di ammodernamento dello stadio Renato Dall'Ara comporterà oltre che una valorizzazione di un così importante bene architettonico della città, anche un miglioramento sostanziale dell'impatto che lo stadio stesso ha sul contesto circostante.\r\n\r\nLo Stadio Dall’Ara, una volta ristrutturato, sarà in grado di accogliere circa 30.000 spettatori e ospiterà, oltre alle funzioni strettamente connesse all’evento sportivo (spogliatoi, area media, ospitalità...) anche destinazioni terziarie e ludiche."
+    "notes": "La volontà di avviare un processo di ammodernamento dello stadio Renato Dall'Ara comporterà oltre che una valorizzazione di un così importante bene architettonico della città, anche un miglioramento sostanziale dell'impatto che lo stadio stesso ha sul contesto circostante.\r\n\r\nLo Stadio Dall’Ara, una volta ristrutturato, sarà in grado di accogliere circa 30.000 spettatori e ospiterà, oltre alle funzioni strettamente connesse all’evento sportivo (spogliatoi, area media, ospitalità...) anche destinazioni terziarie e ludiche.",
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ]
   }
 },
 {
@@ -49003,7 +48975,8 @@
     "image_url": "https://populous.com/uploads/2025/02/Como-Stadium_1-1920x1440-c-center-1920x0-c-default.webp",
     "image_credit": "populous.com",
     "source_url": "https://populous.com/article/como-1907-announces-first-stage-of-populous-designed-stadio-giuseppe-sinigaglia-redevelopment",
-    "notes": "Now, in collaboration with the Municipality of Como, the Club has announced initial plans and unveiled concept images for the Populous-designed redevelopment of their iconic stadium.\r\n\r\nWhile all of the current renderings are concept images, and therefore not necessarily representative of the final designs, the club expects to show completed designs following the completion of the first phase – the submission and approval of the Document of Feasibility of Project Alternatives (DOCFAP)."
+    "notes": "Now, in collaboration with the Municipality of Como, the Club has announced initial plans and unveiled concept images for the Populous-designed redevelopment of their iconic stadium.\r\n\r\nWhile all of the current renderings are concept images, and therefore not necessarily representative of the final designs, the club expects to show completed designs following the completion of the first phase – the submission and approval of the Document of Feasibility of Project Alternatives (DOCFAP).",
+    "tournaments": []
   }
 },
 {
@@ -49024,7 +48997,8 @@
     "image_url": "https://media.arcadis.com/-/media/project/arcadiscom/com/projects/europe/italy/tardini/tardini_header.jpg?rev=-1",
     "image_credit": "media.arcadis.com/",
     "source_url": "https://www.arcadis.com/en-gb/projects/europe/italy/stadio-ennio-tardini",
-    "notes": "The Tardini stadium is located in the center of Parma. The site not only forms part of the city's history, but also part of the history of sport in Italy. However, its downtown location and its age render it a problematic structure in terms of traffic and safety. What's more, its historical and cultural value place it at the center of key social and political sensitivities that need to be balanced. As such, adapting the stadium to current needs means considering the wellbeing of fans and citizens, protecting the environment and improving the match experience, all while ensuring that the impact from sound and lighting on the surrounding areas is reduced."
+    "notes": "The Tardini stadium is located in the center of Parma. The site not only forms part of the city's history, but also part of the history of sport in Italy. However, its downtown location and its age render it a problematic structure in terms of traffic and safety. What's more, its historical and cultural value place it at the center of key social and political sensitivities that need to be balanced. As such, adapting the stadium to current needs means considering the wellbeing of fans and citizens, protecting the environment and improving the match experience, all while ensuring that the impact from sound and lighting on the surrounding areas is reduced.",
+    "tournaments": []
   }
 },
 {
@@ -49045,7 +49019,8 @@
     "image_url": "https://sport.sky.it/assets/images/5538e596ccbd47550e5c2ca97e0e702507620431/skysport/it/calcio/serie-a/2024/07/15/empoli-stadio-futuro-progetto/03_nuovo_stadio_empoli_screen.jpeg",
     "image_credit": "sport.sky.it",
     "source_url": "https://www.studiocroce.com/?page_id=2169",
-    "notes": "Il progetto del nuovo stadio, un intervento realizzato attraverso un’operazione di Partenariato Pubblico-Privato nella forma del Project Financing, prevede un orizzonte temporale di 36 mesi, comprensivo della progettazione esecutiva e della relativa validazione. Il restyling interesserà il rifacimento completo di tre dei quattro settori dell’impianto e l’eliminazione della pista di atletica leggera, consentendo così l’avvicinamento del campo di gioco alle tribune. L’obiettivo è quello di realizzare un impianto di eccellenza nel panorama nazionale, moderno, funzionale e capace di contribuire in modo significativo alla riqualificazione dell’intera area, a beneficio dell’Empoli Football Club e dell’intera città."
+    "notes": "Il progetto del nuovo stadio, un intervento realizzato attraverso un’operazione di Partenariato Pubblico-Privato nella forma del Project Financing, prevede un orizzonte temporale di 36 mesi, comprensivo della progettazione esecutiva e della relativa validazione. Il restyling interesserà il rifacimento completo di tre dei quattro settori dell’impianto e l’eliminazione della pista di atletica leggera, consentendo così l’avvicinamento del campo di gioco alle tribune. L’obiettivo è quello di realizzare un impianto di eccellenza nel panorama nazionale, moderno, funzionale e capace di contribuire in modo significativo alla riqualificazione dell’intera area, a beneficio dell’Empoli Football Club e dell’intera città.",
+    "tournaments": []
   }
 },
 {
@@ -49066,7 +49041,8 @@
     "image_url": "https://udinese.cdn.xpl.io/xsr-img/79123/ita/600x1200/1/geehrycxuaapd8r.jpg",
     "image_credit": "www.udinese.it",
     "source_url": "https://www.udinese.it/news/societa/stadio-2.0-accordo-definitivo-tra-comune-di-udine-e-udinese-calcio-per-la-trasformazione-del-bluenergy-stadium-stadio-friuli",
-    "notes": "Il Bluenergy Stadium/Stadio Friuli, oltre ad essere un impianto green, ospita già oltre 150 grandi eventi l’anno e, grazie alla sua modernità e polifunzionalità, è teatro di grandi avvenimenti sportivi, come le gare delle nazionali italiane di calcio e di rugby, e di grandi concerti come quelli della scorsa estate di Zucchero e dei Negramaro."
+    "notes": "Il Bluenergy Stadium/Stadio Friuli, oltre ad essere un impianto green, ospita già oltre 150 grandi eventi l’anno e, grazie alla sua modernità e polifunzionalità, è teatro di grandi avvenimenti sportivi, come le gare delle nazionali italiane di calcio e di rugby, e di grandi concerti come quelli della scorsa estate di Zucchero e dei Negramaro.",
+    "tournaments": []
   }
 },
 {
@@ -49087,7 +49063,14 @@
     "image_url": "https://www.progettocmr.com/wp-content/uploads/2018/06/cagliari-calcio-stadio.jpg",
     "image_credit": "progettocmr",
     "source_url": "https://www.progettocmr.com/project/stadio-del-cagliari-calcio-2/",
-    "notes": "Il progetto del nuovo stadio del Cagliari Calcio, presentato con Sportium, intende dare vita ad una vera e propria smart arena, perfettamente integrata nell’ambiente esterno.\r\n\r\nMorfologicamente coerente con l’ambiente circostante e con la città di Cagliari, lo stadio ne richiama costantemente le peculiarità sia cromatiche che materiche, non astratto ed alieno edificio ma componente sostanziale del paesaggio, di cui riporta armonicamente le linee essenziali e si configura come intervento di efficace ricucitura con i diversi ambiti."
+    "notes": "Il progetto del nuovo stadio del Cagliari Calcio, presentato con Sportium, intende dare vita ad una vera e propria smart arena, perfettamente integrata nell’ambiente esterno.\r\n\r\nMorfologicamente coerente con l’ambiente circostante e con la città di Cagliari, lo stadio ne richiama costantemente le peculiarità sia cromatiche che materiche, non astratto ed alieno edificio ma componente sostanziale del paesaggio, di cui riporta armonicamente le linee essenziali e si configura come intervento di efficace ricucitura con i diversi ambiti.",
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ]
   }
 },
 {
@@ -49108,7 +49091,8 @@
     "image_url": "https://www.gauarena.com/wp-content/uploads/2022/08/4-1500x800.png",
     "image_credit": "gauarena.com",
     "source_url": "https://www.gauarena.com/progetti/nuovo-stadio-e-iacovone-taranto/",
-    "notes": "Complete reconstruction of the historic Stadio Erasmo Iacovone in Taranto for the 2026 Mediterranean Games. The project includes a fully modernized football stadium with covered stands, upgraded hospitality and media facilities, and improved urban integration. Taranto FC is expected to return after completion."
+    "notes": "Complete reconstruction of the historic Stadio Erasmo Iacovone in Taranto for the 2026 Mediterranean Games. The project includes a fully modernized football stadium with covered stands, upgraded hospitality and media facilities, and improved urban integration. Taranto FC is expected to return after completion.",
+    "tournaments": []
   }
 },
 {
