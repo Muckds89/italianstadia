@@ -844,11 +844,13 @@ html {
     background: rgba(255, 255, 255, 0.07);
 }
 
-/* ── Filter active-state highlight (ownership, stadium selects) ── */
+/* ── Filter active-state highlight — solid blue pill when a value is selected ── */
 select.filter-has-value {
-    border-color: #4a9eff !important;
-    box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.25);
-    background-color: rgba(74, 158, 255, 0.12);
+    background-color: #0d6efd !important;
+    color: #fff !important;
+    border-color: #0d6efd !important;
+    /* White chevron to replace Bootstrap's default dark arrow */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
 }
 
 /* ── Live search ── */
