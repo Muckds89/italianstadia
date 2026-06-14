@@ -4,10 +4,9 @@
 {% block title %}{{ stadium.name }}{% endblock %}
 
 {% block meta %}
-{% with desc=stadium.description|default:"Explore capacity, ownership, location and 3D view for this stadium." %}
-<meta name="description" content="{{ desc|truncatechars:155 }}">
+<meta name="description" content="{{ page_description }}">
 <meta property="og:title" content="{{ stadium.name }} — Stadiums of Europe">
-<meta property="og:description" content="{{ desc|truncatechars:200 }}">
+<meta property="og:description" content="{{ page_description }}">
 <meta property="og:type" content="place">
 <meta property="og:site_name" content="Stadiums of Europe">
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
@@ -17,8 +16,7 @@
 {% endif %}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ stadium.name }}">
-<meta name="twitter:description" content="{{ desc|truncatechars:200 }}">
-{% endwith %}
+<meta name="twitter:description" content="{{ page_description }}">
 {% endblock %}
 
 {% block extra_head %}

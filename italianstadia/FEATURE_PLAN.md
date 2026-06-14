@@ -1,113 +1,63 @@
-# Feature Plan — JSON-LD Structured Data + Cookie Consent Banner
+# Feature Plan — Rich Auto-Generated Meta Descriptions
 _Created: 2026-06-14 | Branch: main_
 
 ## Problem / Goal
-Google and AI crawlers cannot extract structured facts from the site because
-there is no schema.org markup. This suppresses rich results (knowledge panels,
-event cards) and reduces crawl priority. AdSense approval also requires a
-visible, GDPR-compliant cookie consent mechanism before setting any non-essential
-cookies. Both are needed to improve SEO visibility and unblock the AdSense review.
+Stadium pages fall back to a generic "Explore capacity, ownership…" description when
+`stadium.description` is empty (most stadiums). Team pages use a flat
+"Name — First Division" string that tells Google nothing useful. Tournament pages have
+no `<meta name="description">` at all. Google shows these dull snippets in search
+results, hurting click-through rate. Success = every page has a unique, fact-rich
+description (~155 chars) generated from structured fields even when the text
+description is blank.
 
 ## Scope
 **In scope:**
-- [ ] `StadiumOrArena` JSON-LD on `stadium_detail.html`
-- [ ] `SportsOrganization` JSON-LD on `team_detail.html`
-- [ ] `SportsEvent` JSON-LD on `tournament_detail.html` (one block per confirmed venue)
-- [ ] Cookie consent banner (accept / reject) rendered site-wide via `base.html`
-- [ ] `consent.js` — stores choice in `localStorage`, conditionally loads AdSense script only after accept
-- [ ] `/privacy/` stub page — required by AdSense policy
+- [ ] `stadium_detail` view: build `page_description` from capacity, city, year, teams, type
+- [ ] `team_detail` view: build `page_description` from league, city, stadium, founded, titles
+- [ ] `tournament_detail` view: build `page_description` from confirmed count, host countries, total matches
+- [ ] Update `{% block meta %}` in `stadium_detail.html` and `team_detail.html` to use `page_description`
+- [ ] Add `<meta name="description">` to `tournament_detail.html` (currently missing entirely)
 
 **Out of scope (do not touch):**
-- Map page (`index.html`) — no structured data needed there
-- City detail page — no useful schema.org type
-- Any new Django model or migration
-- Changing existing view logic
+- `city_list.html` — filtered list page, not a detail page
+- `stadium_list.html` / `team_list.html` — list pages, generic description is fine
+- Any model or migration change
+- Map page (`index.html`)
 
 ## Design decisions
-1. JSON-LD in `<script type="application/ld+json">` inside each detail template's `{% block extra_head %}` | Alternative: microdata attributes on HTML elements | Reason: JSON-LD is Google's recommended approach, easier to maintain, no HTML restructuring
-2. Cookie consent stored in `localStorage` (key: `cookie_consent`) | Alternative: Django session cookie | Reason: no server round-trip; banner resolved before any Django session cookie is set
-3. Plain Bootstrap toast for consent banner — no third-party CMP library | Alternative: Cookiebot / OneTrust | Reason: zero cost, no external JS dependency, sufficient for AdSense review
-4. AdSense `<script>` injected dynamically by `consent.js` only on accept | Alternative: hardcode in `<head>` | Reason: GDPR requires explicit consent before loading advertising scripts
+1. Generate description in the **view** (Python), not in the template | Alternative: template logic with `{% if %}` chains | Reason: Python is testable, readable, and doesn't clutter templates with long conditional blocks
+2. Build description from structured fields, append `stadium.description` excerpt only if it adds non-redundant info | Alternative: use description field always | Reason: most stadiums have no description; those that do often repeat facts already in the generated sentence
+3. Cap at 155 chars in the view (not via `|truncatechars` in template) | Alternative: truncate in template | Reason: avoids mid-word cuts; view can trim at word boundary
+
+## Example outputs
+- Stadium: `"Wembley Stadium — 90,000 capacity, London, England. Built 1923. Closed roof, grass surface. Home of England national team."`
+- Team: `"Inter Milan — Serie A, Milan, Italy. Home ground: Stadio Giuseppe Meazza (75,923 capacity). Founded 1908. 19 league titles."`
+- Tournament: `"UEFA Euro 2028 — 9 confirmed venues across England and Ireland. 51 matches. Wembley Stadium, Tottenham Hotspur Stadium, Emirates Stadium…"`
 
 ## Files that will change
 | File | Change type | Why |
 |------|-------------|-----|
-| `italiastadiaapp/templates/base.html` | Edit | Add consent banner HTML + load consent.js |
-| `italiastadiaapp/static/js/consent.js` | Create | Consent logic + conditional AdSense injection |
-| `italiastadiaapp/templates/stadium_detail.html` | Edit | Add `StadiumOrArena` JSON-LD block |
-| `italiastadiaapp/templates/team_detail.html` | Edit | Add `SportsOrganization` JSON-LD block |
-| `italiastadiaapp/templates/tournament_detail.html` | Edit | Add `SportsEvent` JSON-LD blocks |
-| `italiastadiaapp/templates/privacy.html` | Create | Privacy policy stub page (AdSense requirement) |
-| `italiastadiaapp/views.py` | Edit | Add `privacy` view |
-| `italiastadiaapp/urls.py` | Edit | Add `/privacy/` URL |
-
-## JSON-LD schemas
-
-### StadiumOrArena (stadium_detail.html)
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "StadiumOrArena",
-  "name": "Stadio Giuseppe Meazza",
-  "address": { "@type": "PostalAddress", "addressLocality": "Milan", "addressCountry": "IT" },
-  "geo": { "@type": "GeoCoordinates", "latitude": 45.478, "longitude": 9.124 },
-  "maximumAttendeeCapacity": 75923,
-  "url": "https://www.stadiumsofeurope.com/stadiums/san-siro/",
-  "image": "<image_url>",
-  "sport": "Football"
-}
-```
-
-### SportsOrganization (team_detail.html)
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "SportsOrganization",
-  "name": "Inter Milan",
-  "sport": "Football",
-  "url": "https://www.stadiumsofeurope.com/teams/42/",
-  "location": { "@type": "StadiumOrArena", "name": "Stadio Giuseppe Meazza" },
-  "foundingDate": "1908"
-}
-```
-
-### SportsEvent (tournament_detail.html — one per confirmed venue)
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "SportsEvent",
-  "name": "UEFA Euro 2028",
-  "startDate": "2028",
-  "sport": "Football",
-  "location": { "@type": "StadiumOrArena", "name": "Wembley Stadium", "address": "London" },
-  "organizer": { "@type": "Organization", "name": "UEFA" }
-}
-```
-
-## Cookie consent banner behaviour
-- First visit: toast slides up from bottom-right corner
-- "Accept all" → `localStorage.cookie_consent = "accepted"` → AdSense script injected
-- "Reject non-essential" → `localStorage.cookie_consent = "rejected"` → no AdSense
-- Subsequent visits: localStorage read on page load, banner skipped, AdSense conditionally loaded
-- Banner includes link to `/privacy/`
+| `italiastadiaapp/views.py` | Edit | Add `page_description` to context in stadium_detail, team_detail, tournament_detail |
+| `italiastadiaapp/templates/stadium_detail.html` | Edit | Replace `desc` with `page_description` in `{% block meta %}` |
+| `italiastadiaapp/templates/team_detail.html` | Edit | Replace generated string with `page_description` |
+| `italiastadiaapp/templates/tournament_detail.html` | Edit | Add `<meta name="description">` block |
 
 ## Implementation steps
-1. [ ] Create `italiastadiaapp/static/js/consent.js`
-2. [ ] Edit `base.html` — add consent banner HTML + `{% block extra_head %}` if missing
-3. [ ] Edit `stadium_detail.html` — add `StadiumOrArena` JSON-LD
-4. [ ] Edit `team_detail.html` — add `SportsOrganization` JSON-LD
-5. [ ] Edit `tournament_detail.html` — add `SportsEvent` JSON-LD
-6. [ ] Create `privacy.html` template
-7. [ ] Add `privacy` view + URL
-8. [ ] Run tests
+1. [ ] Add `_stadium_description()` helper in `views.py`
+2. [ ] Add `_team_description()` helper in `views.py`
+3. [ ] Add `page_description` to `stadium_detail` context
+4. [ ] Add `page_description` to `team_detail` context
+5. [ ] Add `page_description` to `tournament_detail` context
+6. [ ] Update `stadium_detail.html` `{% block meta %}`
+7. [ ] Update `team_detail.html` `{% block meta %}`
+8. [ ] Add `<meta name="description">` to `tournament_detail.html`
+9. [ ] Run tests
 
 ## Test plan
-- `pytest italiastadiaapp/tests/ -q` — all 44 existing tests still pass
-- Manual: visit `/stadiums/san-siro/`, view source, confirm `application/ld+json` present
-- Manual: fresh browser → consent banner visible
-- Manual: Accept → refresh → no banner, AdSense loads
-- Manual: Reject → refresh → no banner, no AdSense
+- `pytest italiastadiaapp/tests/ -q` — all 44 tests still pass
+- Manual: visit `/stadiums/wembley-stadium/`, view source → description contains "90,000" and "London"
+- Manual: visit `/teams/<id>/`, view source → description contains league name and stadium
+- Manual: visit `/tournaments/uefa-euro-2028/`, view source → description tag present
 
 ## Rollback plan
-- All changes are additive (no model/migration) — revert template/static commits
-- No database changes to undo
+- Pure Python/template change — revert commit, no migration needed

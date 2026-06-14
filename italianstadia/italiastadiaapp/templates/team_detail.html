@@ -4,10 +4,9 @@
 {% block title %}{{ team.name }}{% endblock %}
 
 {% block meta %}
-{% with desc=team.name|add:" — "|add:team.get_tier_display %}
-<meta name="description" content="{{ desc }}. View stadium, league, and season data on Stadiums of Europe.">
+<meta name="description" content="{{ page_description }}">
 <meta property="og:title" content="{{ team.name }} — Stadiums of Europe">
-<meta property="og:description" content="{{ team.name }} play in {{ team.get_tier_display }}{% if team.stadium %} at {{ team.stadium.name }}{% endif %}.">
+<meta property="og:description" content="{{ page_description }}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Stadiums of Europe">
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
@@ -17,7 +16,6 @@
 {% endif %}
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ team.name }}">
-{% endwith %}
 {% endblock %}
 
 {% block extra_nav %}

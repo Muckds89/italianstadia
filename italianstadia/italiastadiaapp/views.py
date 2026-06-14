@@ -6,9 +6,67 @@ from django.conf import settings
 from django.db.models import Avg, Count, F, Max, Sum
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.utils.text import slugify
 from django.views.decorators.cache import cache_page
 from .models import City, LastRefresh, League, Stadium, Team, StadiumDevelopment
+
+
+def _trim(text, limit=155):
+    """Trim to `limit` chars at a word boundary."""
+    if len(text) <= limit:
+        return text
+    return text[:limit].rsplit(" ", 1)[0].rstrip(",.") + "…"
+
+
+def _stadium_description(stadium):
+    parts = [stadium.name]
+    cap = getattr(stadium, "capacity", None)
+    if cap:
+        parts.append(f"{cap:,} capacity")
+    city = getattr(stadium, "city", None)
+    if city:
+        loc = city.name
+        if city.country:
+            loc += f", {city.country}"
+        parts.append(loc)
+    year = getattr(stadium, "year_of_construction", None)
+    if year:
+        parts.append(f"built {year}")
+    stype = stadium.get_stadium_type_display() if stadium.stadium_type else None
+    surface = stadium.get_surface_display() if stadium.surface else None
+    if stype and surface:
+        parts.append(f"{stype} roof, {surface.lower()} surface")
+    elif stype:
+        parts.append(f"{stype} roof")
+    teams = list(stadium.teams.all())
+    if teams:
+        team_names = ", ".join(t.name for t in teams[:3])
+        parts.append(f"Home of {team_names}")
+    sentence = ". ".join([parts[0]] + [p[0].upper() + p[1:] for p in parts[1:]]) + "."
+    return _trim(sentence)
+
+
+def _team_description(team):
+    parts = [team.name]
+    if team.league:
+        parts.append(team.league.name)
+    if team.city:
+        loc = team.city.name
+        if team.league and team.league.country:
+            loc += f", {team.league.country.name}"
+        parts.append(loc)
+    if team.stadium:
+        stad = team.stadium.name
+        if team.stadium.capacity:
+            stad += f" ({team.stadium.capacity:,} capacity)"
+        parts.append(f"Home ground: {stad}")
+    if team.founded:
+        parts.append(f"Founded {team.founded.year}")
+    if team.num_of_titles:
+        parts.append(f"{team.num_of_titles} league title{'s' if team.num_of_titles != 1 else ''}")
+    sentence = ". ".join([parts[0]] + [p[0].upper() + p[1:] for p in parts[1:]]) + "."
+    return _trim(sentence)
 
 
 def stadium_detail(request, slug):
@@ -36,6 +94,7 @@ def stadium_detail(request, slug):
         "back_country": back_country,
         "from_team_list": bool(from_teams),
         "team_logos_json": json.dumps(team_logos),
+        "page_description": _stadium_description(stadium),
     })
 
 
@@ -409,6 +468,7 @@ def team_detail(request, pk):
         "team": team,
         "from_list": from_list is not None,
         "back_country": back_country,
+        "page_description": _team_description(team),
     })
 
 
@@ -619,6 +679,7 @@ def tournament_list(request):
     return redirect("italiastadiaapp:home")
 
 
+@cache_page(60 * 60)
 def tournament_detail(request, slug):
     """Show all venues for a single tournament (Stadium + StadiumDevelopment)."""
     tournament_name = None
@@ -639,7 +700,7 @@ def tournament_detail(request, slug):
                     "image_url": stadium.image_url,
                     "latitude": stadium.latitude,
                     "longitude": stadium.longitude,
-                    "detail_url": f"/stadium/{stadium.slug}/",
+                    "detail_url": reverse("italiastadiaapp:stadium_detail", kwargs={"slug": stadium.slug}),
                     "status": entry.get("status", ""),
                     "matches": entry.get("matches"),
                     "is_development": False,
@@ -663,7 +724,7 @@ def tournament_detail(request, slug):
                     "image_url": dev.image_url,
                     "latitude": dev.latitude,
                     "longitude": dev.longitude,
-                    "detail_url": f"/stadium-development/{dev.id}/",
+                    "detail_url": reverse("italiastadiaapp:stadium_development_detail", kwargs={"pk": dev.id}),
                     "status": entry.get("status", ""),
                     "matches": entry.get("matches"),
                     "is_development": True,
@@ -723,6 +784,24 @@ def tournament_detail(request, slug):
         })
     geojson = json.dumps({"type": "FeatureCollection", "features": features})
 
+    # Build meta description
+    host_countries = list(venues_by_country.keys())
+    if len(host_countries) == 1:
+        host_str = host_countries[0]
+    elif len(host_countries) == 2:
+        host_str = f"{host_countries[0]} and {host_countries[1]}"
+    else:
+        host_str = ", ".join(host_countries[:-1]) + f" and {host_countries[-1]}"
+    desc_parts = [f"{tournament_name} — {len(confirmed_venues)} confirmed venue{'s' if len(confirmed_venues) != 1 else ''}"]
+    if host_str:
+        desc_parts.append(f"across {host_str}")
+    if total_matches:
+        desc_parts.append(f"{total_matches} matches")
+    sample_names = [v["name"] for v in confirmed_venues[:3]]
+    if sample_names:
+        desc_parts.append(", ".join(sample_names))
+    tournament_description = _trim(". ".join(desc_parts) + ".")
+
     return render(request, "tournament_detail.html", {
         "tournament_name": tournament_name,
         "tournament_year": tournament_year,
@@ -736,4 +815,5 @@ def tournament_detail(request, slug):
         "total_matches": total_matches,
         "host_country_flags": host_country_flags,
         "geojson": geojson,
+        "page_description": tournament_description,
     })
