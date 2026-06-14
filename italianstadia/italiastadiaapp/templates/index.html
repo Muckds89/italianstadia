@@ -196,8 +196,13 @@
             <li class="nav-item">
                 <a class="nav-link px-2" href="{% url 'italiastadiaapp:city_list' %}">Cities</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link px-2" href="{% url 'italiastadiaapp:tournament_list' %}">Tournaments</a>
+            <li class="nav-item dropdown nav-hover-dropdown">
+                <a class="nav-link px-2 dropdown-toggle" href="{% url 'italiastadiaapp:tournament_list' %}"
+                   data-bs-toggle="dropdown" role="button" aria-expanded="false">Tournaments</a>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="{% url 'italiastadiaapp:tournament_detail' 'uefa-euro-2028' %}">🏴󠁧󠁢󠁥󠁮󠁧󠁿🏴󠁧󠁢󠁷󠁬󠁳󠁿🇮🇪🏴󠁧󠁢󠁳󠁣󠁴󠁿 UEFA Euro 2028</a></li>
+                    <li><a class="dropdown-item" href="{% url 'italiastadiaapp:tournament_detail' 'uefa-euro-2032' %}">🇮🇹🇹🇷 UEFA Euro 2032</a></li>
+                </ul>
             </li>
         </ul>
 
@@ -230,9 +235,15 @@
                         Cities
                     </a>
                 </li>
+                <li><h6 class="dropdown-header">Tournaments</h6></li>
                 <li>
-                    <a class="dropdown-item" href="{% url 'italiastadiaapp:tournament_list' %}">
-                        Tournaments
+                    <a class="dropdown-item" href="{% url 'italiastadiaapp:tournament_detail' 'uefa-euro-2028' %}">
+                        🏴󠁧󠁢󠁥󠁮󠁧󠁿🏴󠁧󠁢󠁷󠁬󠁳󠁥󠁿🇮🇪🏴󠁧󠁢󠁳󠁣󠁴󠁿 UEFA Euro 2028
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{% url 'italiastadiaapp:tournament_detail' 'uefa-euro-2032' %}">
+                        🇮🇹🇹🇷 UEFA Euro 2032
                     </a>
                 </li>
             </ul>

@@ -19,14 +19,20 @@
     .venue-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.13); }
     .confirmed-bar { border-left: 4px solid #198754; }
     .candidate-bar { border-left: 4px solid #ffc107; }
-    .status-confirmed { color: #198754; font-weight: 600; }
-    .status-candidate { color: #856404; font-weight: 600; }
     .match-count { font-size: 2rem; font-weight: 700; color: #0d6efd; line-height: 1; }
+    .country-section-header {
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-bottom: 2px solid rgba(255,255,255,0.1);
+        padding-bottom: .4rem;
+        margin-bottom: 1rem;
+        margin-top: 1.5rem;
+    }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-light bg-white shadow-sm fixed-top px-3">
+<nav class="navbar navbar-dark bg-dark shadow-sm fixed-top px-3">
     <a href="{% url 'italiastadiaapp:tournament_list' %}" class="btn btn-secondary btn-sm">← Tournaments</a>
     <span class="navbar-brand mb-0 ms-2 h6">{{ tournament_name }}</span>
     <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-outline-secondary btn-sm ms-auto">Map</a>
@@ -35,9 +41,12 @@
 <div class="container mt-4">
 
     <h1 class="mb-1">{{ tournament_name }}</h1>
-    {% if host_countries %}
+    {% if host_country_flags %}
     <p class="text-muted mb-4">
-        Hosted in: {% for c in host_countries %}<strong>{{ c }}</strong>{% if not forloop.last %}, {% endif %}{% endfor %}
+        Hosted in:
+        {% for country, flag in host_country_flags.items %}
+        <strong>{{ flag }} {{ country }}</strong>{% if not forloop.last %} &amp; {% endif %}
+        {% endfor %}
     </p>
     {% endif %}
 
@@ -91,46 +100,90 @@
         </div>
     </div>
 
-    <!-- Venue cards -->
-    <h5 class="mb-3">Venues</h5>
-    <div class="row g-3 mb-4">
-        {% for v in venues %}
-        <div class="col-12 col-md-6 col-lg-4">
-            <a href="{% url 'italiastadiaapp:stadium_detail' v.stadium.slug %}" class="text-decoration-none text-dark">
-                <div class="card venue-card h-100 shadow-sm {% if v.status == 'CONFIRMED' %}confirmed-bar{% else %}candidate-bar{% endif %}">
-                    {% if v.stadium.image_url %}
-                    <img src="{{ v.stadium.image_url }}" class="card-img-top" alt="{{ v.stadium.name }}"
-                         style="height:160px;object-fit:cover;">
-                    {% endif %}
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-start mb-1">
-                            <h6 class="card-title mb-0">{{ v.stadium.name }}</h6>
+    <!-- Venue cards — grouped by country when multi-host -->
+    {% if multi_country %}
+        {% for country, group in venues_by_country.items %}
+        <h5 class="country-section-header">{{ group.flag }} {{ country }}</h5>
+        <div class="row g-3 mb-3">
+            {% for v in group.venues %}
+            <div class="col-12 col-md-6 col-lg-4">
+                <a href="{% url 'italiastadiaapp:stadium_detail' v.stadium.slug %}" class="text-decoration-none text-dark">
+                    <div class="card venue-card h-100 shadow-sm {% if v.status == 'CONFIRMED' %}confirmed-bar{% else %}candidate-bar{% endif %}">
+                        {% if v.stadium.image_url %}
+                        <img src="{{ v.stadium.image_url }}" class="card-img-top" alt="{{ v.stadium.name }}"
+                             style="height:160px;object-fit:cover;">
+                        {% endif %}
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-1">
+                                <h6 class="card-title mb-0">{{ v.stadium.name }}</h6>
+                                {% if v.matches %}
+                                <span class="match-count ms-2">{{ v.matches }}</span>
+                                {% endif %}
+                            </div>
+                            {% if v.stadium.city %}
+                            <div class="text-muted small mb-2">{{ v.stadium.city.name }}, {{ v.stadium.city.country }}</div>
+                            {% endif %}
+                            <div class="d-flex flex-wrap gap-2 align-items-center">
+                                {% if v.status == 'CONFIRMED' %}
+                                <span class="badge bg-success">Confirmed</span>
+                                {% else %}
+                                <span class="badge bg-warning text-dark">Candidate</span>
+                                {% endif %}
+                                {% if v.stadium.capacity %}
+                                <span class="text-muted small">{{ v.stadium.capacity|intcomma }} seats</span>
+                                {% endif %}
+                            </div>
                             {% if v.matches %}
-                            <span class="match-count ms-2">{{ v.matches }}</span>
+                            <div class="text-muted small mt-1">{{ v.matches }} match{{ v.matches|pluralize:"es" }}</div>
                             {% endif %}
                         </div>
-                        {% if v.stadium.city %}
-                        <div class="text-muted small mb-2">{{ v.stadium.city.name }}, {{ v.stadium.city.country }}</div>
-                        {% endif %}
-                        <div class="d-flex flex-wrap gap-2 align-items-center">
-                            {% if v.status == 'CONFIRMED' %}
-                            <span class="badge bg-success">Confirmed</span>
-                            {% else %}
-                            <span class="badge bg-warning text-dark">Candidate</span>
-                            {% endif %}
-                            {% if v.stadium.capacity %}
-                            <span class="text-muted small">{{ v.stadium.capacity|intcomma }} seats</span>
-                            {% endif %}
-                        </div>
-                        {% if v.matches %}
-                        <div class="text-muted small mt-1">{{ v.matches }} match{{ v.matches|pluralize:"es" }}</div>
-                        {% endif %}
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
+            {% endfor %}
         </div>
         {% endfor %}
-    </div>
+    {% else %}
+        <h5 class="mb-3">Venues</h5>
+        <div class="row g-3 mb-4">
+            {% for v in venues %}
+            <div class="col-12 col-md-6 col-lg-4">
+                <a href="{% url 'italiastadiaapp:stadium_detail' v.stadium.slug %}" class="text-decoration-none text-dark">
+                    <div class="card venue-card h-100 shadow-sm {% if v.status == 'CONFIRMED' %}confirmed-bar{% else %}candidate-bar{% endif %}">
+                        {% if v.stadium.image_url %}
+                        <img src="{{ v.stadium.image_url }}" class="card-img-top" alt="{{ v.stadium.name }}"
+                             style="height:160px;object-fit:cover;">
+                        {% endif %}
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-1">
+                                <h6 class="card-title mb-0">{{ v.stadium.name }}</h6>
+                                {% if v.matches %}
+                                <span class="match-count ms-2">{{ v.matches }}</span>
+                                {% endif %}
+                            </div>
+                            {% if v.stadium.city %}
+                            <div class="text-muted small mb-2">{{ v.stadium.city.name }}, {{ v.stadium.city.country }}</div>
+                            {% endif %}
+                            <div class="d-flex flex-wrap gap-2 align-items-center">
+                                {% if v.status == 'CONFIRMED' %}
+                                <span class="badge bg-success">Confirmed</span>
+                                {% else %}
+                                <span class="badge bg-warning text-dark">Candidate</span>
+                                {% endif %}
+                                {% if v.stadium.capacity %}
+                                <span class="text-muted small">{{ v.stadium.capacity|intcomma }} seats</span>
+                                {% endif %}
+                            </div>
+                            {% if v.matches %}
+                            <div class="text-muted small mt-1">{{ v.matches }} match{{ v.matches|pluralize:"es" }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 
 </div>
 

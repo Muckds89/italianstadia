@@ -8838,6 +8838,32 @@
   }
 },
 {
+  "model": "italiastadiaapp.city",
+  "pk": 639,
+  "fields": {
+    "name": "Bursa",
+    "population": 1600000,
+    "country": "Turkey",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 640,
+  "fields": {
+    "name": "Eskişehir",
+    "population": 871000,
+    "country": "Turkey",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
   "model": "italiastadiaapp.stadium",
   "pk": 8,
   "fields": {
@@ -8858,8 +8884,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CONFIRMED",
-        "matches": 7
+        "status": "CANDIDATE"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/San_Siro",
@@ -8896,8 +8921,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CONFIRMED",
-        "matches": 5
+        "status": "CONFIRMED"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Juventus_Stadium",
@@ -8969,8 +8993,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CONFIRMED",
-        "matches": 6
+        "status": "CONFIRMED"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Olimpico",
@@ -9019,8 +9042,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CONFIRMED",
-        "matches": 5
+        "status": "CANDIDATE"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Diego_Armando_Maradona",
@@ -9083,7 +9105,13 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": null,
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Renato_Dall%27Ara",
     "transfermarkt_url": "https://www.transfermarkt.com/fc-bologna/stadion/verein/1025/saison_id/2025",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadio-renato-dallara-bologna-1627641591-68074.jpg?lm=1627641622",
@@ -9118,8 +9146,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CONFIRMED",
-        "matches": 4
+        "status": "CANDIDATE"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Artemio_Franchi",
@@ -9147,7 +9174,13 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": "Vittorio Gregotti",
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Luigi_Ferraris",
     "transfermarkt_url": "https://www.transfermarkt.com/uc-sampdoria/stadion/verein/1038/saison_id/2025",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/uc-sampdoria-fans-2024-25-1747231360-167844.jpg?lm=1747231369",
@@ -9234,7 +9267,13 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": null,
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Marc%27Antonio_Bentegodi",
     "transfermarkt_url": "https://www.transfermarkt.com/hellas-verona/stadion/verein/276/saison_id/2025",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/marcantonio-bentegodi-1509704785-12572.jpg?lm=1509704793",
@@ -9647,8 +9686,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CONFIRMED",
-        "matches": 4
+        "status": "CANDIDATE"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_San_Nicola",
@@ -13465,7 +13503,14 @@
     "stadium_type": "OPEN",
     "surface": "HYBRID",
     "architect": "Arup Group (stadium design)",
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2028",
+        "year": 2028,
+        "status": "CONFIRMED",
+        "matches": 4
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Etihad_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/etihad-stadium/stadion/stadion/254",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/27/City_of_Manchester_Stadium_2023_cropped.jpg",
@@ -13539,7 +13584,7 @@
         "tournament": "UEFA Euro 2028",
         "year": 2028,
         "status": "CONFIRMED",
-        "matches": 6
+        "matches": 5
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Tottenham_Hotspur_Stadium",
@@ -13589,7 +13634,7 @@
         "tournament": "UEFA Euro 2028",
         "year": 2028,
         "status": "CONFIRMED",
-        "matches": 5
+        "matches": 4
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/St._James%27_Park",
@@ -13622,7 +13667,7 @@
         "tournament": "UEFA Euro 2028",
         "year": 2028,
         "status": "CONFIRMED",
-        "matches": 5
+        "matches": 4
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Villa_Park",
@@ -13979,7 +14024,14 @@
     "stadium_type": "OPEN",
     "surface": null,
     "architect": "Dan Meis",
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2028",
+        "year": 2028,
+        "status": "CONFIRMED",
+        "matches": 4
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Hill_Dickinson_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/fc-everton/stadion/verein/29",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/hill-dickinson-stadium-everton-2025-1767369244-186362.jpg?lm=1767369540",
@@ -16381,13 +16433,7 @@
     "stadium_type": "OPEN",
     "surface": "HYBRID",
     "architect": "Duncan and Kerr (Main Stand, 1929)",
-    "tournaments": [
-      {
-        "tournament": "UEFA Euro 2028",
-        "year": 2028,
-        "status": "CANDIDATE"
-      }
-    ],
+    "tournaments": [],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Celtic_Park",
     "transfermarkt_url": "https://www.transfermarkt.com/celtic-glasgow/stadion/verein/371",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/celtic-choreo-1585320964-35030.jpg?lm=1585320990",
@@ -16812,7 +16858,13 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": "Azaksu Architecture Office",
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Antalya_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/antalyaspor/stadion/verein/589",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/antalyaspor-stadi-1566307715-24826.png?lm=1566307726",
@@ -16843,13 +16895,7 @@
     "stadium_type": "OPEN",
     "surface": "HYBRID",
     "architect": "Bünyamin Derman",
-    "tournaments": [
-      {
-        "tournament": "UEFA Euro 2032",
-        "year": 2032,
-        "status": "CANDIDATE"
-      }
-    ],
+    "tournaments": [],
     "wikipedia_url": "https://en.wikipedia.org/wiki/T%C3%BCpra%C5%9F_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/besiktas-istanbul/stadion/verein/114",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/besiktas-stadion-1733744971-156206.jpg?lm=1733745016",
@@ -16936,8 +16982,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CONFIRMED",
-        "matches": 7
+        "status": "CONFIRMED"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Atat%C3%BCrk_Olympic_Stadium",
@@ -16986,8 +17031,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CONFIRMED",
-        "matches": 5
+        "status": "CONFIRMED"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%9E%C3%BCkr%C3%BC_Saraco%C4%9Flu_Stadium",
@@ -17036,8 +17080,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CONFIRMED",
-        "matches": 5
+        "status": "CONFIRMED"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Rams_Park",
@@ -17082,7 +17125,13 @@
     "stadium_type": "OPEN",
     "surface": "HYBRID",
     "architect": null,
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Gaziantep_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/gaziantep-fk/stadion/verein/2832",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/gazisehir-stadyumu-1566308087-24828.jpg?lm=1566308093",
@@ -17262,7 +17311,13 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": "Bahadır Kul",
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Konya_Metropolitan_Municipality_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/konyaspor/stadion/verein/2293",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/yeni-konya-stadi-1488291839-9546.png?lm=1491209243",
@@ -17328,7 +17383,13 @@
     "stadium_type": "OPEN",
     "surface": "HYBRID",
     "architect": "ASP Stuttgart",
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%9Eenol_G%C3%BCne%C5%9F_Sports_Complex",
     "transfermarkt_url": "https://www.transfermarkt.com/trabzonspor/stadion/verein/449",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/senol-gunes-stadium-trabzonspor-uefa-europa-conference-league-1678194716-103249.jpg?lm=1678194736",
@@ -20474,14 +20535,7 @@
     "stadium_type": "OPEN",
     "surface": "HYBRID",
     "architect": "(John St Stand) Ward McHugh Associates",
-    "tournaments": [
-      {
-        "tournament": "UEFA Euro 2028",
-        "year": 2028,
-        "status": "CONFIRMED",
-        "matches": 4
-      }
-    ],
+    "tournaments": [],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Bramall_Lane",
     "transfermarkt_url": "https://www.transfermarkt.com/sheffield-united/stadion/verein/350",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/sheffield-united-bramall-lane-2021-1629202522-69127.jpg?lm=1629202537",
@@ -26616,13 +26670,7 @@
     "stadium_type": "OPEN",
     "surface": "HYBRID",
     "architect": "Arup Group Limited",
-    "tournaments": [
-      {
-        "tournament": "UEFA Euro 2028",
-        "year": 2028,
-        "status": "CANDIDATE"
-      }
-    ],
+    "tournaments": [],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Cardiff_City_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/cardiff-city/stadion/verein/603",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/cardiff-city-stadium-1581411513-31539.jpg?lm=1581411545",
@@ -31777,6 +31825,266 @@
         "credit": "5anco5s / Wikimedia Commons / CC BY-SA 4.0"
       }
     ],
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 777,
+  "fields": {
+    "name": "Wembley Stadium",
+    "capacity": 90000,
+    "address": null,
+    "year_of_construction": null,
+    "city": 170,
+    "latitude": "51.556000",
+    "longitude": "-0.279500",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "wembley-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2028",
+        "year": 2028,
+        "status": "CONFIRMED",
+        "matches": 7
+      }
+    ],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Wembley_Stadium",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 778,
+  "fields": {
+    "name": "Principality Stadium",
+    "capacity": 74500,
+    "address": null,
+    "year_of_construction": null,
+    "city": 507,
+    "latitude": "51.478200",
+    "longitude": "-3.182600",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "principality-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2028",
+        "year": 2028,
+        "status": "CONFIRMED",
+        "matches": 5
+      }
+    ],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Principality_Stadium",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 779,
+  "fields": {
+    "name": "Hampden Park",
+    "capacity": 51866,
+    "address": null,
+    "year_of_construction": null,
+    "city": 248,
+    "latitude": "55.823400",
+    "longitude": "-4.251700",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "hampden-park",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2028",
+        "year": 2028,
+        "status": "CONFIRMED",
+        "matches": 4
+      }
+    ],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Hampden_Park",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 780,
+  "fields": {
+    "name": "Aviva Stadium",
+    "capacity": 51700,
+    "address": null,
+    "year_of_construction": null,
+    "city": 494,
+    "latitude": "53.335200",
+    "longitude": "-6.228400",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "aviva-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2028",
+        "year": 2028,
+        "status": "CONFIRMED",
+        "matches": 4
+      }
+    ],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Aviva_Stadium",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 781,
+  "fields": {
+    "name": "Timsah Arena",
+    "capacity": 43331,
+    "address": null,
+    "year_of_construction": null,
+    "city": 639,
+    "latitude": "40.193800",
+    "longitude": "29.067500",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "timsah-arena",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Timsah_Arena",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 782,
+  "fields": {
+    "name": "Yeni Eskişehir Stadyumu",
+    "capacity": 34000,
+    "address": null,
+    "year_of_construction": null,
+    "city": 640,
+    "latitude": "39.766100",
+    "longitude": "30.537000",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "yeni-eskisehir-stadyumu",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Yeni_Eskişehir_Stadyumu",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 783,
+  "fields": {
+    "name": "Yeni Cagliari Stadio",
+    "capacity": 30000,
+    "address": null,
+    "year_of_construction": null,
+    "city": 44,
+    "latitude": "39.358800",
+    "longitude": "9.128900",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "yeni-cagliari-stadio",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ],
+    "wikipedia_url": "",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 784,
+  "fields": {
+    "name": "Yeni Ankara Stadyumu",
+    "capacity": 45000,
+    "address": null,
+    "year_of_construction": null,
+    "city": 261,
+    "latitude": "39.933400",
+    "longitude": "32.859700",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "yeni-ankara-stadyumu",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ],
+    "wikipedia_url": "",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
     "description": null
   }
 },

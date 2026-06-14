@@ -1,6 +1,6 @@
 import csv
 import json
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 
 from django.conf import settings
 from django.db.models import Avg, Count, F, Max, Sum
@@ -604,6 +604,16 @@ def api_status(request):
     })
 
 
+COUNTRY_FLAGS = {
+    "England":  "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+    "Wales":    "🏴󠁧󠁢󠁷󠁬󠁳󠁿",
+    "Scotland": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+    "Ireland":  "🇮🇪",
+    "Italy":    "🇮🇹",
+    "Turkey":   "🇹🇷",
+}
+
+
 def tournament_list(request):
     """Aggregate all tournaments from the Stadium.tournaments JSONField."""
     stadiums = (
@@ -683,12 +693,29 @@ def tournament_detail(request, slug):
     total_capacity = sum(v["stadium"].capacity or 0 for v in confirmed_venues)
     total_matches = sum(v["matches"] or 0 for v in venues if v["matches"])
 
-    # Derive host countries from confirmed venue countries
-    host_countries = sorted({
-        v["stadium"].city.country
-        for v in venues
-        if v["status"] == "CONFIRMED" and v["stadium"].city and v["stadium"].city.country
-    })
+    # Derive host countries (preserve insertion order by capacity for display)
+    seen = OrderedDict()
+    for v in venues:
+        if v["stadium"].city and v["stadium"].city.country:
+            c = v["stadium"].city.country
+            if c not in seen:
+                seen[c] = COUNTRY_FLAGS.get(c, "")
+    host_countries = list(seen.keys())
+    host_country_flags = seen  # {country: flag_emoji}
+
+    # Group venues by country (for multi-host tournaments like Euro 2032)
+    _country_groups = {}
+    for v in venues:
+        country = v["stadium"].city.country if v["stadium"].city else "Unknown"
+        flag = COUNTRY_FLAGS.get(country, "")
+        if country not in _country_groups:
+            _country_groups[country] = {"flag": flag, "venues": [], "confirmed": 0}
+        _country_groups[country]["venues"].append(v)
+        if v["status"] == "CONFIRMED":
+            _country_groups[country]["confirmed"] += 1
+
+    venues_by_country = OrderedDict(sorted(_country_groups.items(), key=lambda item: item[0]))
+    multi_country = len(venues_by_country) > 1
 
     # GeoJSON for mini-map
     features = []
@@ -715,10 +742,13 @@ def tournament_detail(request, slug):
         "tournament_year": tournament_year,
         "tournament_slug": slug,
         "venues": venues,
+        "venues_by_country": venues_by_country,
+        "multi_country": multi_country,
         "confirmed_count": len(confirmed_venues),
         "candidate_count": len(venues) - len(confirmed_venues),
         "total_capacity": total_capacity,
         "total_matches": total_matches,
         "host_countries": host_countries,
+        "host_country_flags": host_country_flags,
         "geojson": geojson,
     })
