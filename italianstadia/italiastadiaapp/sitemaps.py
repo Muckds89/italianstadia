@@ -41,6 +41,7 @@ class CitySitemap(Sitemap):
 class TournamentSitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.9
+    cache_timeout = 86400  # 24 h — tournament venues change rarely
 
     def items(self):
         """Return unique tournament slugs derived from Stadium and StadiumDevelopment JSONFields."""
