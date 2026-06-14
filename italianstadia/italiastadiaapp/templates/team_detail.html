@@ -236,7 +236,7 @@
   "@context": "https://schema.org",
   "@type": "SportsTeam",
   "name": "{{ team.name|escapejs }}",
-  "sport": "Soccer"{% if team.image_url %},
+  "sport": "Football"{% if team.image_url %},
   "logo": "{{ team.image_url|escapejs }}"{% endif %}{% if team.wikipedia_url %},
   "sameAs": "{{ team.wikipedia_url|escapejs }}"{% endif %}{% if team.stadium %},
   "homeLocation": {

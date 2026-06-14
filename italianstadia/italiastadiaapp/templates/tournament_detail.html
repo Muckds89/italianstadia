@@ -194,6 +194,28 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{% static 'js/consent.js' %}"></script>
+
+<!-- Cookie consent banner -->
+<div id="cookie-banner" class="d-none position-fixed bottom-0 start-0 end-0 bg-dark text-white p-3 shadow-lg" style="z-index:9999">
+  <div class="container d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2">
+    <p class="mb-0 small">We use cookies to serve ads and analyse traffic. See our <a href="{% url 'italiastadiaapp:privacy' %}" class="text-warning">Privacy Policy</a>.</p>
+    <div class="d-flex gap-2 flex-shrink-0">
+      <button id="cookie-reject" class="btn btn-outline-light btn-sm">Reject non-essential</button>
+      <button id="cookie-accept" class="btn btn-warning btn-sm fw-semibold">Accept all</button>
+    </div>
+  </div>
+</div>
+
+{% if multi_country %}
+  {% for country, group in venues_by_country.items %}{% for v in group.venues %}{% if v.status == 'CONFIRMED' %}
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SportsEvent","name":"{{ tournament_name|escapejs }}","startDate":"{{ tournament_year }}","sport":"Football","organizer":{"@type":"Organization","name":"UEFA"},"location":{"@type":"StadiumOrArena","name":"{{ v.name|escapejs }}"{% if v.city %},"address":{"@type":"PostalAddress","addressLocality":"{{ v.city.name|escapejs }}"}{% endif %}}}</script>
+  {% endif %}{% endfor %}{% endfor %}
+{% else %}
+  {% for v in venues %}{% if v.status == 'CONFIRMED' %}
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SportsEvent","name":"{{ tournament_name|escapejs }}","startDate":"{{ tournament_year }}","sport":"Football","organizer":{"@type":"Organization","name":"UEFA"},"location":{"@type":"StadiumOrArena","name":"{{ v.name|escapejs }}"{% if v.city %},"address":{"@type":"PostalAddress","addressLocality":"{{ v.city.name|escapejs }}"}{% endif %}}}</script>
+  {% endif %}{% endfor %}
+{% endif %}
 <script>
 (function () {
     const geojson = {{ geojson|safe }};
