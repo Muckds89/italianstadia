@@ -130,6 +130,7 @@ const countryFilter   = document.getElementById("countryFilter");
 const leagueFilter    = document.getElementById("leagueFilter");
 const gironeFilter    = document.getElementById("gironeFilter");
 const ownershipFilter = document.getElementById("ownershipFilter");
+const surfaceFilter   = document.getElementById("surfaceFilter");
 const stadiumFilter   = document.getElementById("stadiumFilter");
 const stadiumCounter  = document.getElementById("stadiumCounter");
 const clearFiltersBtn = document.getElementById("clearFiltersBtn");
@@ -141,7 +142,7 @@ const operationalLabel = document.getElementById("operationalLabel");
 const developmentLabel = document.getElementById("developmentLabel");
 
 function updateSelectHighlights() {
-    [ownershipFilter, stadiumFilter].forEach(sel => {
+    [ownershipFilter, surfaceFilter, stadiumFilter].forEach(sel => {
         sel.classList.toggle("filter-has-value", sel.value !== "");
     });
 }
@@ -150,7 +151,8 @@ function updateSelectHighlights() {
 function updateClearButton() {
     const operationalActive =
         countryFilter.value || leagueFilter.value ||
-        gironeFilter.value  || ownershipFilter.value || stadiumFilter.value;
+        gironeFilter.value  || ownershipFilter.value ||
+        surfaceFilter.value || stadiumFilter.value;
     const developmentActive =
         developmentCountryFilter?.value || developmentStatusFilter?.value ||
         developmentYearFilter?.value    || developmentStadiumFilter?.value;
@@ -175,6 +177,7 @@ clearFiltersBtn.addEventListener("click", function () {
         gironeFilter.value    = "";
         gironeFilter.style.display = "none";
         ownershipFilter.value = "";
+        surfaceFilter.value   = "";
         stadiumFilter.value   = "";
         populateLeagueFilter("");
         if (flashLayer) { map.removeLayer(flashLayer); flashLayer = null; }
@@ -593,6 +596,7 @@ function applyFilters(updateStadiumDropdown = true) {
     const selectedLeague   = leagueFilter.value;   // league ID string or ""
     const selectedGirone   = gironeFilter.value;
     const selectedOwnership = ownershipFilter.value;
+    const selectedSurface   = surfaceFilter.value;
     const selectedStadium  = stadiumFilter.value;
 
     clusterGroup.clearLayers();
@@ -607,6 +611,8 @@ function applyFilters(updateStadiumDropdown = true) {
 
         const ownershipMatches =
             !selectedOwnership || marker.ownership === selectedOwnership;
+        const surfaceMatches =
+            !selectedSurface || marker.surface === selectedSurface;
         const gironeMatches =
             !selectedGirone || marker.gironi.includes(selectedGirone);
         const stadiumMatches =
@@ -632,8 +638,8 @@ function applyFilters(updateStadiumDropdown = true) {
             }
         }
 
-        // Additional filters (ownership, girone, stadium) override role to hidden
-        if (!ownershipMatches || !gironeMatches || !stadiumMatches) {
+        // Additional filters override role to hidden
+        if (!ownershipMatches || !surfaceMatches || !gironeMatches || !stadiumMatches) {
             role = "hidden";
         }
 
@@ -1015,6 +1021,7 @@ function saveFilterState() {
         league:    leagueFilter.value,
         girone:    gironeFilter.value,
         ownership: ownershipFilter.value,
+        surface:   surfaceFilter.value,
         stadium:   stadiumFilter.value,
     }));
 }
@@ -1037,6 +1044,7 @@ function restoreFilterState() {
         gironeFilter.style.display = "inline-block";
     }
     if (state.ownership) ownershipFilter.value = state.ownership;
+    if (state.surface)   surfaceFilter.value   = state.surface;
 
     // Re-run filters — this also repopulates the stadium dropdown
     applyFilters();
@@ -1112,6 +1120,7 @@ fetch(document.getElementById("map").dataset.stadiumsUrl)
             marker.gironi = marker.teams.map(t => t.girone || "");
 
             marker.ownership = props.ownership ? String(props.ownership) : "UNKNOWN";
+            marker.surface   = props.surface || "";
             marker.stadiumId = String(props.id);
             marker.stadiumName = props.name;
 
@@ -1223,6 +1232,12 @@ gironeFilter.addEventListener("change", function () {
 });
 
 ownershipFilter.addEventListener("change", function () {
+    stadiumFilter.value = "";
+    applyFilters();
+    saveFilterState();
+});
+
+surfaceFilter.addEventListener("change", function () {
     stadiumFilter.value = "";
     applyFilters();
     saveFilterState();
