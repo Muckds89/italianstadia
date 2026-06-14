@@ -1,4 +1,4 @@
-{% load static %}
+{% load static humanize %}
 
 <!DOCTYPE html>
 <html>
@@ -47,7 +47,7 @@
                         <div class="text-muted small">
                             {{ t.venues|length }} venue{{ t.venues|length|pluralize }}
                             {% if t.total_capacity %}
-                            · {{ t.total_capacity|floatformat:"0" }} total seats
+                            · {{ t.total_capacity|intcomma }} total seats
                             {% endif %}
                         </div>
                     </div>
