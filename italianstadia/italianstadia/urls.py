@@ -9,13 +9,15 @@ from italiastadiaapp.sitemaps import (
     StadiumSitemap,
     StaticViewSitemap,
     TeamSitemap,
+    TournamentSitemap,
 )
 
 sitemaps = {
-    "stadiums": StadiumSitemap,
-    "teams":    TeamSitemap,
-    "cities":   CitySitemap,
-    "static":   StaticViewSitemap,
+    "stadiums":    StadiumSitemap,
+    "teams":       TeamSitemap,
+    "cities":      CitySitemap,
+    "tournaments": TournamentSitemap,
+    "static":      StaticViewSitemap,
 }
 
 

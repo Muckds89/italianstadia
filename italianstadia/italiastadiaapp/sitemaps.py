@@ -1,7 +1,8 @@
 from django.contrib.sitemaps import Sitemap
+from django.utils.text import slugify
 from django.urls import reverse
 
-from .models import City, Stadium, Team
+from .models import City, Stadium, StadiumDevelopment, Team
 
 
 class StadiumSitemap(Sitemap):
@@ -9,11 +10,10 @@ class StadiumSitemap(Sitemap):
     priority = 0.8
 
     def items(self):
-        # Only stadiums with coordinates are meaningfully indexable
-        return Stadium.objects.filter(latitude__isnull=False).order_by("id")
+        return Stadium.objects.filter(latitude__isnull=False).exclude(slug="").order_by("id")
 
     def location(self, obj):
-        return reverse("italiastadiaapp:stadium_detail", args=[obj.id])
+        return reverse("italiastadiaapp:stadium_detail", args=[obj.slug])
 
 
 class TeamSitemap(Sitemap):
@@ -35,8 +35,37 @@ class CitySitemap(Sitemap):
         return City.objects.order_by("id")
 
     def location(self, obj):
-        # City list filtered to this city's country — best proxy until individual city pages exist
         return reverse("italiastadiaapp:city_list") + f"?country={obj.country}"
+
+
+class TournamentSitemap(Sitemap):
+    changefreq = "monthly"
+    priority = 0.9
+
+    def items(self):
+        """Return unique tournament slugs derived from Stadium and StadiumDevelopment JSONFields."""
+        seen = set()
+        slugs = []
+        for stadium in Stadium.objects.exclude(tournaments=[]):
+            for entry in (stadium.tournaments or []):
+                name = entry.get("tournament", "")
+                if name:
+                    s = slugify(name)
+                    if s not in seen:
+                        seen.add(s)
+                        slugs.append(s)
+        for dev in StadiumDevelopment.objects.exclude(tournaments=[]):
+            for entry in (dev.tournaments or []):
+                name = entry.get("tournament", "")
+                if name:
+                    s = slugify(name)
+                    if s not in seen:
+                        seen.add(s)
+                        slugs.append(s)
+        return slugs
+
+    def location(self, slug):
+        return reverse("italiastadiaapp:tournament_detail", args=[slug])
 
 
 class StaticViewSitemap(Sitemap):
