@@ -4,7 +4,7 @@ from .views import (
     api_status, city_list, country_stats, export_stadiums,
     stadium_developments_geojson, stadium_development_list, stadium_list, team_list,
     stadium_detail, stadium_detail_redirect, stadiums_geojson,
-    stadium_development_detail, team_detail,
+    stadium_development_detail, team_detail, team_detail_redirect,
     tournament_list, tournament_detail,
 )
 
@@ -15,7 +15,8 @@ urlpatterns = [
     path('stadiums/', stadium_list, name='stadium_list'),
     path('under-development/', stadium_development_list, name='stadium_development_list'),
     path('teams/', team_list, name='team_list'),
-    path("team/<int:pk>/", team_detail, name="team_detail"),
+    path("team/<int:pk>/", views.team_detail_redirect, name="team_detail_by_id"),
+    path("team/<slug:slug>/", team_detail, name="team_detail"),
     path("stadium/<int:id>/", stadium_detail_redirect, name="stadium_detail_by_id"),
     path("stadium/<slug:slug>/", stadium_detail, name="stadium_detail"),
     path("country/<str:country_name>/", country_stats, name="country_stats"),

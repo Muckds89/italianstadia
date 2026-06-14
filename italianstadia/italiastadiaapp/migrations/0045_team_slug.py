@@ -19,6 +19,42 @@ def backfill_team_slugs(apps, schema_editor):
         team.save(update_fields=["slug"])
 
 
+def apply_ddl(apps, schema_editor):
+    vendor = schema_editor.connection.vendor
+    with schema_editor.connection.cursor() as cursor:
+        if vendor == "postgresql":
+            # Add column if it doesn't already exist
+            cursor.execute("""
+                ALTER TABLE italiastadiaapp_team
+                ADD COLUMN IF NOT EXISTS slug varchar(255) NOT NULL DEFAULT ''
+            """)
+        # SQLite: column was already added by AddField above (no-op here)
+
+
+def make_unique(apps, schema_editor):
+    vendor = schema_editor.connection.vendor
+    with schema_editor.connection.cursor() as cursor:
+        if vendor == "postgresql":
+            # Drop any partial artifacts from a previous failed run
+            cursor.execute(
+                "DROP INDEX IF EXISTS italiastadiaapp_team_slug_f547d06f_like"
+            )
+            cursor.execute(
+                "ALTER TABLE italiastadiaapp_team "
+                "DROP CONSTRAINT IF EXISTS italiastadiaapp_team_slug_f547d06f_uniq"
+            )
+            # Re-create clean
+            cursor.execute(
+                "ALTER TABLE italiastadiaapp_team "
+                "ADD CONSTRAINT italiastadiaapp_team_slug_f547d06f_uniq UNIQUE (slug)"
+            )
+            cursor.execute(
+                "CREATE INDEX italiastadiaapp_team_slug_f547d06f_like "
+                "ON italiastadiaapp_team (slug varchar_pattern_ops)"
+            )
+        # SQLite: AlterField below handles it natively
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -26,14 +62,18 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        # Add without unique so SQLite doesn't reject blank rows during table copy
+        # Step 1 — add column (SQLite path); PostgreSQL path is in apply_ddl
         migrations.AddField(
             model_name="team",
             name="slug",
             field=models.SlugField(blank=True, max_length=255),
         ),
+        # Step 1b — PostgreSQL: idempotent ADD COLUMN IF NOT EXISTS (no-op on SQLite)
+        migrations.RunPython(apply_ddl, migrations.RunPython.noop),
+        # Step 2 — backfill
         migrations.RunPython(backfill_team_slugs, migrations.RunPython.noop),
-        # Now all slugs are filled — safe to enforce unique
+        # Step 3 — add unique (PostgreSQL: drop-and-recreate idempotently; SQLite: AlterField)
+        migrations.RunPython(make_unique, migrations.RunPython.noop),
         migrations.AlterField(
             model_name="team",
             name="slug",

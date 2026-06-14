@@ -267,6 +267,7 @@ def _build_stadium_features(qs=None):
                 "teams": [
                     {
                         "id": t.id,
+                        "slug": t.slug,
                         "name": t.name,
                         "is_national": t.is_national,
                         "tier": t.tier,
@@ -463,7 +464,7 @@ def _country_flag_emoji(code: str) -> str:
     return ""
 
 
-def team_detail(request, pk):
+def team_detail(request, slug):
     team = get_object_or_404(
         Team.objects.select_related(
             "city",
@@ -471,7 +472,7 @@ def team_detail(request, pk):
             "league__country",
             "under_development_stadium",
         ),
-        pk=pk,
+        slug=slug,
     )
     from_list    = request.GET.get("from_list", None)
     back_country = from_list if from_list else ""
@@ -481,6 +482,11 @@ def team_detail(request, pk):
         "back_country": back_country,
         "page_description": _team_description(team),
     })
+
+
+def team_detail_redirect(request, pk):
+    team = get_object_or_404(Team, pk=pk)
+    return redirect("italiastadiaapp:team_detail", slug=team.slug, permanent=True)
 
 
 def team_list(request):

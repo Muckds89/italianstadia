@@ -108,14 +108,22 @@ def two_country_data(db):
 @pytest.mark.django_db
 def test_team_detail_page_loads(client, two_country_data):
     team = Team.objects.get(name="Inter")
-    response = client.get(reverse("italiastadiaapp:team_detail", args=[team.pk]))
+    response = client.get(reverse("italiastadiaapp:team_detail", args=[team.slug]))
     assert response.status_code == 200
     assert b"Inter" in response.content
 
 
 @pytest.mark.django_db
+def test_team_detail_redirect(client, two_country_data):
+    team = Team.objects.get(name="Inter")
+    response = client.get(reverse("italiastadiaapp:team_detail_by_id", args=[team.pk]))
+    assert response.status_code == 301
+    assert f"/team/{team.slug}/" in response["Location"]
+
+
+@pytest.mark.django_db
 def test_team_detail_404(client):
-    response = client.get(reverse("italiastadiaapp:team_detail", args=[99999]))
+    response = client.get(reverse("italiastadiaapp:team_detail", args=["no-such-team"]))
     assert response.status_code == 404
 
 

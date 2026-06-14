@@ -516,7 +516,7 @@ function buildPopupContent(props) {
                     : ""}
                 <strong>${t.name}</strong>${t.is_national ? ' <span style="font-size:0.75em;background:#0d6efd;color:#fff;border-radius:3px;padding:1px 4px">National</span>' : ''}<br>
                 <span style="font-size:0.8em">${t.is_national ? "National Team Stadium" : (t.league_name || t.tier_name || "Unknown")}${t.girone ? ` — Girone ${t.girone}` : ""}</span><br>
-                <a href="/team/${t.id}/" style="font-size:0.8em">View team</a><br>
+                <a href="/team/${t.slug || t.id}/" style="font-size:0.8em">View team</a><br>
             </div>
           `).join("")
         : `<em>No team linked</em>`;
