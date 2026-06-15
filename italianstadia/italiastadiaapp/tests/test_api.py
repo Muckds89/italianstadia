@@ -284,20 +284,20 @@ def map_export_stadium(db):
 
 
 @pytest.mark.django_db
-def test_map_export_no_api_key_returns_503(client, map_export_stadium, settings):
-    settings.MAPTILER_API_KEY = ""
-    url = reverse("italiastadiaapp:map_export")
-    response = client.get(url)
-    assert response.status_code == 503
-
-
-@pytest.mark.django_db
-def test_map_export_no_results_returns_400(client, settings):
-    settings.MAPTILER_API_KEY = "dummy"
+def test_map_export_no_results_returns_400(client):
     url = reverse("italiastadiaapp:map_export")
     response = client.get(url + "?surface=ARTIFICIAL")
     assert response.status_code == 400
     assert "error" in response.json()
+
+
+@pytest.mark.django_db
+def test_map_export_returns_png(client, map_export_stadium):
+    url = reverse("italiastadiaapp:map_export")
+    response = client.get(url + "?surface=ARTIFICIAL&size=twitter&style=dark&legend=1&north=1&title=Test")
+    assert response.status_code == 200
+    assert response["Content-Type"] == "image/png"
+    assert len(response.content) > 1000
 
 
 

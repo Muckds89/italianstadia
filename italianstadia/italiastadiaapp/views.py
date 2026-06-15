@@ -840,7 +840,6 @@ def tournament_detail(request, slug):
 
 import io
 import math
-import requests as _requests
 from django.core.cache import cache
 from PIL import Image, ImageDraw, ImageFont
 
@@ -850,11 +849,20 @@ _EXPORT_SIZES = {
     "landscape": (1920, 1080),
 }
 
-_MAPTILER_STYLES = {
-    "dark":      "dataviz-dark",
-    "light":     "dataviz",
-    "topo":      "topo-v2",
-    "satellite": "satellite",
+# Background colours for each style (RGBA)
+_STYLE_BACKGROUNDS = {
+    "dark":      (18,  22,  36,  255),
+    "light":     (240, 242, 245, 255),
+    "topo":      (228, 237, 214, 255),
+    "satellite": (16,  28,  16,  255),
+}
+
+# Grid line colours per style
+_STYLE_GRID = {
+    "dark":      (40,  46,  66,  255),
+    "light":     (200, 205, 215, 255),
+    "topo":      (190, 210, 170, 255),
+    "satellite": (30,  50,  30,  255),
 }
 
 _SURFACE_COLOURS = {
@@ -879,7 +887,7 @@ def _parse_export_params(request):
     W, H = _EXPORT_SIZES[size_key]
 
     style_key = request.GET.get("style", "dark").lower()
-    if style_key not in _MAPTILER_STYLES:
+    if style_key not in _STYLE_BACKGROUNDS:
         style_key = "dark"
 
     color_by = request.GET.get("color_by", "surface").lower()
@@ -896,7 +904,6 @@ def _parse_export_params(request):
         "W": W, "H": H,
         "size_key": size_key,
         "style_key": style_key,
-        "maptiler_style": _MAPTILER_STYLES[style_key],
         "color_by": color_by,
         "single_color": single_color,
         "legend": request.GET.get("legend", "1") == "1",
@@ -959,20 +966,27 @@ def _lon_lat_to_px(lon, lat, bbox, W, H):
     return int(x), int(y)
 
 
-def _fetch_maptiler_tile(bbox, style, W, H, api_key):
-    """Fetch a static map PNG from MapTiler and return a PIL Image."""
+def _make_background(style_key, W, H, bbox):
+    """Render a clean data-viz background with subtle lat/lon grid lines."""
+    bg_colour   = _STYLE_BACKGROUNDS[style_key]
+    grid_colour = _STYLE_GRID[style_key]
+
+    img = Image.new("RGBA", (W, H), bg_colour)
+    d   = ImageDraw.Draw(img)
+
     lon_min, lat_min, lon_max, lat_max = bbox
-    # Clamp to valid ranges
-    lon_min = max(lon_min, -180); lon_max = min(lon_max, 180)
-    lat_min = max(lat_min, -85);  lat_max = min(lat_max, 85)
-    url = (
-        f"https://api.maptiler.com/maps/{style}/static/"
-        f"{lon_min:.6f},{lat_min:.6f},{lon_max:.6f},{lat_max:.6f}"
-        f"/{W}x{H}.png?key={api_key}"
-    )
-    resp = _requests.get(url, timeout=10)
-    resp.raise_for_status()
-    return Image.open(io.BytesIO(resp.content)).convert("RGBA")
+
+    # Draw subtle grid every ~10 degrees
+    for lon in range(-180, 181, 10):
+        if lon_min <= lon <= lon_max:
+            px, _ = _lon_lat_to_px(lon, (lat_min + lat_max) / 2, bbox, W, H)
+            d.line([(px, 0), (px, H)], fill=grid_colour, width=1)
+    for lat in range(-80, 81, 10):
+        if lat_min <= lat <= lat_max:
+            _, py = _lon_lat_to_px((lon_min + lon_max) / 2, lat, bbox, W, H)
+            d.line([(0, py), (W, py)], fill=grid_colour, width=1)
+
+    return img
 
 
 def _dot_colour(stadium, params, country_index):
@@ -1124,10 +1138,6 @@ def map_export(request):
         return JsonResponse({"error": "Too many requests. Wait 10 seconds."}, status=429)
     cache.set(cache_key, True, 10)
 
-    api_key = settings.MAPTILER_API_KEY
-    if not api_key:
-        return JsonResponse({"error": "Map export not configured (missing API key)."}, status=503)
-
     params = _parse_export_params(request)
     stadiums = _get_export_stadiums(params)
 
@@ -1143,10 +1153,7 @@ def map_export(request):
         if s["country"] not in country_index:
             country_index[s["country"]] = len(country_index)
 
-    try:
-        img = _fetch_maptiler_tile(bbox, params["maptiler_style"], W, H, api_key)
-    except Exception:
-        return JsonResponse({"error": "Failed to fetch base map. Try again shortly."}, status=502)
+    img = _make_background(params["style_key"], W, H, bbox)
 
     img = _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index)
 
