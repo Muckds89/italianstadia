@@ -942,8 +942,10 @@ def _parse_export_params(request):
         "label_color": label_color,
         "legend": request.GET.get("legend", "0") == "1",
         "north": request.GET.get("north", "0") == "1",
+        "scale": request.GET.get("scale", "0") == "1",
         "labels": request.GET.get("labels", "1") == "1",
         "logo": request.GET.get("logo", "0") == "1",
+        "tiles": request.GET.get("tiles", "1") != "0",
         "title":    request.GET.get("title", "").strip()[:80],
         "subtitle": request.GET.get("subtitle", "").strip()[:100],
         # filter params
@@ -1518,29 +1520,6 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
     if not params["labels"]:
         return img
 
-    # Reserve the title/subtitle band (top-centre) so labels never cover it.
-    # Mirrors the geometry in _draw_title; pre-seeding placed_boxes makes the
-    # placement search avoid this rectangle automatically.
-    if params.get("title"):
-        ft = _load_font(bold=True,  size=32)
-        fs = _load_font(bold=False, size=20)
-        PAD_T, GAP_T = 14, 6
-        def _dim(txt, fnt):
-            try:
-                bb = draw.textbbox((0, 0), txt, font=fnt)
-                return bb[2] - bb[0], bb[3] - bb[1]
-            except Exception:
-                return len(txt) * 16, 28
-        tw_t, th_t = _dim(params["title"], ft)
-        sub = params.get("subtitle", "")
-        tw_s, th_s = _dim(sub, fs) if sub else (0, 0)
-        box_w = max(tw_t, tw_s) + PAD_T * 2
-        box_h = th_t + (GAP_T + th_s if sub else 0) + PAD_T * 2
-        rx0 = (W - box_w) // 2
-        ry0 = 20
-        M = 10  # breathing room around the title block
-        placed_boxes.append((rx0 - M, ry0 - M, rx0 + box_w + M, ry0 + box_h + M))
-
     # R4: below 70 badges, every label MUST be placed (no clutter-drop).
     force_all = len(dot_positions) < 70
 
@@ -1553,21 +1532,29 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
                 return False
         return True
 
-    def _route(px, py, side, lx, ly, pill_w, pill_h):
-        """Build an orthogonal (90°-bend) leader polyline from the badge ring edge
-        to the pill's near side. Returns the point list, or None if it crosses a badge."""
+    def _route(px, py, side, lx, ly, pill_w, pill_h, allow_cross=False):
+        """Build an orthogonal (90°-bend) leader polyline from the badge to the
+        pill's near side. Tries a horizontal-first elbow AND a vertical-first
+        elbow (the latter lets a badge in a tight cluster escape up/down before
+        going sideways). Returns the first route that clears all other badges,
+        or — when allow_cross — the horizontal elbow regardless."""
         cy = ly + pill_h / 2                      # pill vertical centre
         if side == "right":
-            ax = px + rr + 1                      # anchor on badge ring, right side
             connect_x = lx                        # pill left edge
+            hx = px + rr + 1                       # horizontal anchor on ring
         else:
-            ax = px - rr - 1
             connect_x = lx + pill_w               # pill right edge
-        ay = py
-        bend_x = (ax + connect_x) / 2
-        # horizontal → vertical → horizontal (collapses to straight if ay == cy)
-        pts = [(ax, ay), (bend_x, ay), (bend_x, cy), (connect_x, cy)]
-        return pts if _polyline_clear(pts, px, py) else None
+            hx = px - rr - 1
+        # A) horizontal → vertical → horizontal
+        bend_x = (hx + connect_x) / 2
+        route_h = [(hx, py), (bend_x, py), (bend_x, cy), (connect_x, cy)]
+        # B) vertical-first: exit the badge top/bottom toward the pill row, then across
+        vy = py - rr - 1 if cy < py else py + rr + 1
+        route_v = [(px, vy), (px, cy), (connect_x, cy)]
+        for pts in (route_h, route_v):
+            if _polyline_clear(pts, px, py):
+                return pts
+        return route_h if allow_cross else None
 
     # Place labels left-to-right so left badges claim left space first
     order = sorted(dot_positions, key=lambda t: t[0])
@@ -1617,29 +1604,36 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
         sides = [primary_side] + (["right" if primary_side == "left" else "left"]
                                   if force_all else [])
 
-        chosen = None
-        for side in sides:
-            for voff in base_voffs:
-                for gap in base_gaps:
-                    if side == "right":
-                        lx = int(px + gap)
-                    else:
-                        lx = int(px - gap - pill_w)
-                    ly = int(py + voff - pill_h / 2)
-                    if lx < 2 or ly < 2 or lx + pill_w > W - 2 or ly + pill_h > H - 2:
-                        continue
-                    box = (lx, ly, lx + pill_w, ly + pill_h)
-                    if _box_overlaps(box):
-                        continue
-                    pts = _route(px, py, side, lx, ly, pill_w, pill_h)
-                    if pts is None:
-                        continue
-                    chosen = (lx, ly, box, pts)
-                    break
-                if chosen:
-                    break
-            if chosen:
-                break
+        def _search(allow_overlap, allow_cross):
+            for side in sides:
+                for voff in base_voffs:
+                    for gap in base_gaps:
+                        if side == "right":
+                            lx = int(px + gap)
+                        else:
+                            lx = int(px - gap - pill_w)
+                        ly = int(py + voff - pill_h / 2)
+                        if lx < 2 or ly < 2 or lx + pill_w > W - 2 or ly + pill_h > H - 2:
+                            continue
+                        box = (lx, ly, lx + pill_w, ly + pill_h)
+                        if not allow_overlap and _box_overlaps(box):
+                            continue
+                        pts = _route(px, py, side, lx, ly, pill_w, pill_h, allow_cross=allow_cross)
+                        if pts is None:
+                            continue
+                        return (lx, ly, box, pts)
+            return None
+
+        chosen = _search(allow_overlap=False, allow_cross=False)
+        # R4: below 70 badges every label MUST show. Escalate:
+        #  tier-2: allow pill overlap (still no badge crossing)
+        #  tier-3: last resort — allow the leader line to clip a badge so the
+        #          label is never silently dropped (better a faint cross than
+        #          a missing label, per the user's "all labels must appear").
+        if chosen is None and force_all:
+            chosen = _search(allow_overlap=True, allow_cross=False)
+        if chosen is None and force_all:
+            chosen = _search(allow_overlap=True, allow_cross=True)
 
         if not chosen:
             continue  # R3: drop only when no clean placement exists (≥70 badges)
@@ -1762,6 +1756,98 @@ def _draw_title(img, title_text, W, subtitle_text=""):
     return img
 
 
+def _title_band_height(params, ref_img=None):
+    """Height of the top header band reserved for the title/subtitle, or 0."""
+    if not params.get("title"):
+        return 0
+    th_title = 32
+    th_sub   = 20 if params.get("subtitle") else 0
+    PAD, GAP = 14, 6
+    # box_h + top margin (20) + bottom breathing room (16)
+    box_h = th_title + (GAP + th_sub if th_sub else 0) + PAD * 2
+    return box_h + 20 + 16
+
+
+def _draw_title_in_band(img, title_text, subtitle_text, W, band_h):
+    """Draw the title/subtitle centred within the top header band so it never
+    overlaps map content (the map is rendered below the band)."""
+    font_title    = _load_font(bold=True,  size=32)
+    font_subtitle = _load_font(bold=False, size=20)
+    d = ImageDraw.Draw(img)
+    PAD, GAP = 14, 6
+
+    def _tw_th(text, font):
+        try:
+            bb = d.textbbox((0, 0), text, font=font)
+            return bb[2] - bb[0], bb[3] - bb[1]
+        except AttributeError:
+            return len(text) * 16, 28
+
+    tw1, th1 = _tw_th(title_text, font_title)
+    tw2, th2 = (_tw_th(subtitle_text, font_subtitle) if subtitle_text else (0, 0))
+    box_w = max(tw1, tw2) + PAD * 2
+    box_h = th1 + (GAP + th2 if subtitle_text else 0) + PAD * 2
+    rx0 = (W - box_w) // 2
+    ry0 = (band_h - box_h) // 2
+    d.rounded_rectangle([rx0, ry0, rx0 + box_w, ry0 + box_h], radius=8, fill=(10, 12, 22, 230))
+    tx = rx0 + (box_w - tw1) // 2
+    d.text((tx, ry0 + PAD), title_text, font=font_title, fill=(255, 255, 255))
+    if subtitle_text:
+        sx = rx0 + (box_w - tw2) // 2
+        d.text((sx, ry0 + PAD + th1 + GAP), subtitle_text, font=font_subtitle, fill=(0, 220, 255))
+    return img
+
+
+def _draw_scale_bar(img, bbox, W, H):
+    """Draw a distance scale bar (bottom-centre) showing real-world km, computed
+    from the bbox at its centre latitude. Avoids legend (bottom-left), logo
+    (bottom-right), north arrow (top-right) and title (top band)."""
+    lon_min, lat_min, lon_max, lat_max = bbox
+    lat_c = (lat_min + lat_max) / 2.0
+    ground_width_m = (lon_max - lon_min) * 111320.0 * max(0.05, math.cos(math.radians(lat_c)))
+    if ground_width_m <= 0:
+        return img
+    m_per_px = ground_width_m / W
+    # Target bar ≈ 1/6 of width, rounded to a nice 1/2/5 × 10ⁿ value
+    target_m = m_per_px * (W / 6.0)
+    exp = math.floor(math.log10(target_m))
+    base = 10 ** exp
+    for mult in (5, 2, 1):
+        if base * mult <= target_m:
+            nice_m = base * mult
+            break
+    else:
+        nice_m = base
+    bar_px = int(nice_m / m_per_px)
+    if bar_px < 30:
+        return img
+    label = f"{nice_m/1000:g} km" if nice_m >= 1000 else f"{int(nice_m)} m"
+
+    d = ImageDraw.Draw(img)
+    font = _load_font(bold=True, size=13)
+    try:
+        bb = d.textbbox((0, 0), label, font=font)
+        lw, lh = bb[2] - bb[0], bb[3] - bb[1]
+    except AttributeError:
+        lw, lh = len(label) * 8, 14
+
+    pad = 8
+    block_w = max(bar_px, lw) + pad * 2
+    block_h = lh + 12 + pad * 2
+    bx = (W - block_w) // 2
+    by = H - block_h - 16
+    d.rounded_rectangle([bx, by, bx + block_w, by + block_h], radius=6, fill=(10, 12, 22, 200))
+    # bar with end ticks
+    bar_y = by + block_h - pad - 4
+    bar_x0 = bx + (block_w - bar_px) // 2
+    bar_x1 = bar_x0 + bar_px
+    d.line([(bar_x0, bar_y), (bar_x1, bar_y)], fill=(255, 255, 255), width=2)
+    d.line([(bar_x0, bar_y - 5), (bar_x0, bar_y + 1)], fill=(255, 255, 255), width=2)
+    d.line([(bar_x1, bar_y - 5), (bar_x1, bar_y + 1)], fill=(255, 255, 255), width=2)
+    d.text((bx + (block_w - lw) // 2, by + pad), label, font=font, fill=(255, 255, 255))
+    return img
+
+
 def _draw_logo(img, W, H):
     """Stamp 'Stadiums of Europe' branding in the bottom-right corner."""
     font = _load_font(bold=True, size=18)
@@ -1780,6 +1866,55 @@ def _draw_logo(img, W, H):
     return img
 
 
+def _compose_export_image(params):
+    """Shared render core for both the free preview and the paid download.
+    Returns (PIL RGBA Image, None) or (None, error_message).
+
+    When a title is set, the map is rendered into the area BELOW a reserved
+    top header band, then composited so the title/subtitle can never cover map
+    content.
+    """
+    stadiums = _get_export_stadiums(params)
+    if not stadiums:
+        return None, "No stadiums match the selected filters."
+
+    W, H = params["W"], params["H"]
+    band  = _title_band_height(params)     # 0 when no title
+    H_map = H - band
+
+    main_stadiums, inset_stadiums = _split_main_inset(stadiums)
+    raw_bbox = _bbox_with_padding(main_stadiums if main_stadiums else stadiums)
+    bbox = _expand_bbox_to_aspect(raw_bbox, W, H_map)
+
+    country_index = {}
+    for s in stadiums:
+        country_index.setdefault(s["country"], len(country_index))
+
+    # R1: real CARTO tiles unless a custom land colour selects the diagram view
+    use_tiles = params.get("tiles", True) and not params.get("bg_color")
+    img = _make_background(params["style_key"], W, H_map, bbox,
+                           use_tiles=use_tiles, land_color=params.get("bg_color"))
+    img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H_map, country_index)
+    if inset_stadiums:
+        img = _draw_inset(img, inset_stadiums, params, W, H_map, country_index, params["style_key"])
+    if params["legend"]:
+        img = _draw_legend(img, params, stadiums)
+    if params["north"]:
+        img = _draw_north_arrow(img, W, H_map)
+    if params.get("scale"):
+        img = _draw_scale_bar(img, bbox, W, H_map)
+    if params.get("logo"):
+        img = _draw_logo(img, W, H_map)
+
+    if band:
+        final = Image.new("RGBA", (W, H), _STYLE_BACKGROUNDS[params["style_key"]])
+        final.paste(img, (0, band))
+        _draw_title_in_band(final, params["title"], params.get("subtitle", ""), W, band)
+        img = final
+
+    return img, None
+
+
 def map_export(request):
     # Rate-limit: 1 request per 10 s per IP
     ip = request.META.get("HTTP_X_FORWARDED_FOR", request.META.get("REMOTE_ADDR", "")).split(",")[0].strip()
@@ -1793,54 +1928,21 @@ def map_export(request):
     if params["size_key"] in ("fhd", "4k"):
         params["size_key"] = "hd"
         params["W"], params["H"] = 1280, 720
-    stadiums = _get_export_stadiums(params)
-
-    if not stadiums:
-        return JsonResponse({"error": "No stadiums match the selected filters."}, status=400)
-
-    W, H = params["W"], params["H"]
-    main_stadiums, inset_stadiums = _split_main_inset(stadiums)
-    # Use main cluster for bbox so Iceland doesn't stretch the canvas
-    raw_bbox = _bbox_with_padding(main_stadiums if main_stadiums else stadiums)
-    # Expand bbox to match W:H aspect ratio so the map isn't geographically stretched
-    bbox = _expand_bbox_to_aspect(raw_bbox, W, H)
-
-    # Build country index for colour-by-country mode
-    country_index = {}
-    for s in stadiums:
-        if s["country"] not in country_index:
-            country_index[s["country"]] = len(country_index)
-
     log = logging.getLogger(__name__)
 
-    try:
-        # R1: real CARTO tiles by default (match Leaflet). `tiles=0` selects the
-        # flat diagram view; a custom land/background colour also implies diagram.
-        use_tiles = request.GET.get("tiles", "1") != "0" and not params.get("bg_color")
-        img = _make_background(params["style_key"], W, H, bbox,
-                               use_tiles=use_tiles, land_color=params.get("bg_color"))
-    except Exception as e:
-        log.error("_make_background failed: %s\n%s", e, traceback.format_exc())
-        return JsonResponse({"error": "Background render failed.", "detail": str(e)}, status=500)
+    # `tiles=0` forces the flat diagram view even without a custom colour
+    if request.GET.get("tiles", "1") == "0":
+        params["tiles"] = False
 
     try:
-        img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index)
-        if inset_stadiums:
-            img = _draw_inset(img, inset_stadiums, params, W, H, country_index, params["style_key"])
-        if params["legend"]:
-            img = _draw_legend(img, params, stadiums)
-        if params["north"]:
-            img = _draw_north_arrow(img, W, H)
-        if params["title"]:
-            img = _draw_title(img, params["title"], W, params["subtitle"])
-        if params.get("logo"):
-            img = _draw_logo(img, W, H)
-
+        img, err = _compose_export_image(params)
+        if err:
+            return JsonResponse({"error": err}, status=400)
         buf = io.BytesIO()
         img.convert("RGB").save(buf, format="PNG", optimize=True)
         buf.seek(0)
     except Exception as e:
-        log.error("Overlay/encode failed: %s\n%s", e, traceback.format_exc())
+        log.error("Export render failed: %s\n%s", e, traceback.format_exc())
         return JsonResponse({"error": "Image render failed.", "detail": str(e)}, status=500)
 
     filename = f"stadiums-map-{params['size_key']}.png"
@@ -1885,7 +1987,8 @@ def export_checkout(request):
     # Build filter param string that will be stored and used at download time
     allowed_keys = {
         "country", "league", "ownership", "surface", "type",
-        "color_by", "style_key", "size_key", "title", "labels", "north", "legend",
+        "color_by", "style_key", "size_key", "title", "subtitle", "labels",
+        "north", "legend", "scale", "logo", "bg_color", "label_size", "label_color",
     }
     filters = {k: v for k, v in body.items() if k in allowed_keys}
     filters_json = json.dumps(filters)
@@ -2011,35 +2114,10 @@ def _render_export_png(token_obj):
     class _FakeRequest:
         GET = _FakeGET()
 
-    params   = _parse_export_params(_FakeRequest())
-    stadiums = _get_export_stadiums(params)
-    if not stadiums:
-        return None, "No stadiums match the filters."
-
-    W, H = params["W"], params["H"]
-    main_stadiums, inset_stadiums = _split_main_inset(stadiums)
-    raw_bbox = _bbox_with_padding(main_stadiums if main_stadiums else stadiums)
-    bbox = _expand_bbox_to_aspect(raw_bbox, W, H)
-    country_index = {}
-    for s in stadiums:
-        if s["country"] not in country_index:
-            country_index[s["country"]] = len(country_index)
-
-    # R1: real CARTO tiles unless a custom land colour selects the diagram view
-    use_tiles = not params.get("bg_color")
-    img = _make_background(params["style_key"], W, H, bbox,
-                           use_tiles=use_tiles, land_color=params.get("bg_color"))
-    img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index)
-    if inset_stadiums:
-        img = _draw_inset(img, inset_stadiums, params, W, H, country_index, params["style_key"])
-    if params["legend"]:
-        img = _draw_legend(img, params, stadiums)
-    if params["north"]:
-        img = _draw_north_arrow(img, W, H)
-    if params["title"]:
-        img = _draw_title(img, params["title"], W, params["subtitle"])
-    if params.get("logo"):
-        img = _draw_logo(img, W, H)
+    params = _parse_export_params(_FakeRequest())
+    img, err = _compose_export_image(params)
+    if err:
+        return None, err
 
     buf = io.BytesIO()
     img.convert("RGB").save(buf, format="PNG", optimize=True)

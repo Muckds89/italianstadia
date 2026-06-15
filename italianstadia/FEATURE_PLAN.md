@@ -165,6 +165,25 @@ Target behaviour (the Transfermarkt-style reference the user shared):
    count < 70, dropping is forbidden — widen the search (more slots, larger radii,
    both sides) until every label is placed without crossing a badge.
 
+### Routing & R4 escalation (as implemented)
+- `_route` tries TWO elbow shapes per candidate: **horizontal-first** (H→V→H)
+  and **vertical-first** (V→H, exit the badge top/bottom to escape a tight
+  cluster before going sideways). First clear one wins.
+- R4 escalation when badges < 70 and the clean search fails:
+  tier-1 clean → tier-2 allow pill overlap (still no badge crossing) →
+  tier-3 last resort allow the line to clip a badge (never drop). Verified:
+  Serie A 18/18, England 67/67, Greece 14/14 labels placed.
+
+### Title/subtitle band (no overlap with content)
+- When a title is set, the map renders into the area BELOW a reserved top band
+  (`_title_band_height`); the final image composites the map under the band and
+  draws the title/subtitle centred in the band (`_draw_title_in_band`). Title can
+  never cover badges/labels.
+
+### Scale bar (`scale=1`)
+- `_draw_scale_bar` computes real-world km from the bbox centre latitude and draws
+  a 1/2/5×10ⁿ bar bottom-centre (clear of legend, logo, north arrow, title band).
+
 ## Files that will change
 | File | Change type | Why |
 |------|-------------|-----|

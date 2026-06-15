@@ -163,9 +163,13 @@
                     <input class="form-check-input" type="checkbox" id="expNorth">
                     <label class="form-check-label small" for="expNorth">North arrow</label>
                 </div>
-                <div class="form-check">
+                <div class="form-check mb-1">
                     <input class="form-check-input" type="checkbox" id="expLegend">
                     <label class="form-check-label small" for="expLegend">Legend</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="expScale">
+                    <label class="form-check-label small" for="expScale">Distance scale bar</label>
                 </div>
             </div>
         </div>
@@ -321,6 +325,7 @@ function _getFilters() {
         labels:      document.getElementById("expLabels").checked  ? "1" : "0",
         north:       document.getElementById("expNorth").checked   ? "1" : "0",
         legend:      document.getElementById("expLegend").checked  ? "1" : "0",
+        scale:       document.getElementById("expScale").checked   ? "1" : "0",
         logo:        document.getElementById("expLogo").checked    ? "1" : "0",
         color_by:    "surface",
         label_size:  document.getElementById("expLabelSize").value,
