@@ -913,7 +913,7 @@ def _parse_export_params(request):
         "style_key": style_key,
         "color_by": color_by,
         "single_color": single_color,
-        "legend": request.GET.get("legend", "1") == "1",
+        "legend": request.GET.get("legend", "0") == "1",
         "north": request.GET.get("north", "0") == "1",
         "labels": request.GET.get("labels", "1") == "1",
         "title": request.GET.get("title", "").strip()[:80],
@@ -954,13 +954,13 @@ def _get_export_stadiums(params):
     return results
 
 
-def _bbox_with_padding(stadiums, pad=0.12):
+def _bbox_with_padding(stadiums, pad=0.06):
     lats = [s["lat"] for s in stadiums]
     lons = [s["lon"] for s in stadiums]
     lat_min, lat_max = min(lats), max(lats)
     lon_min, lon_max = min(lons), max(lons)
-    lat_pad = max((lat_max - lat_min) * pad, 1.5)
-    lon_pad = max((lon_max - lon_min) * pad, 1.5)
+    lat_pad = max((lat_max - lat_min) * pad, 0.8)
+    lon_pad = max((lon_max - lon_min) * pad, 0.8)
     return (
         lon_min - lon_pad, lat_min - lat_pad,
         lon_max + lon_pad, lat_max + lat_pad,
@@ -990,8 +990,8 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key):
 
     IW, IH = 210, 160
     margin = 12
-    ix0 = W - IW - margin
-    iy0 = margin  # top-right corner
+    ix0 = margin   # top-left corner
+    iy0 = margin
 
     inset_bbox = _bbox_with_padding(inset_stadiums, pad=0.25)
     inset_img  = _solid_background(style_key, IW, IH, inset_bbox)
@@ -1218,65 +1218,93 @@ def _dot_colour(stadium, params, country_index):
 
 
 def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
-    BADGE_R = 10   # badge circle radius (pixels)
-    RING_W  = 2    # white ring width around badge
+    BADGE_R  = 12   # badge circle radius (pixels)
+    RING_W   = 2    # white ring around badge
+    FONT_SZ  = 14
+    PAD      = 4    # label text padding inside pill
+    GAP      = 5    # gap between badge edge and label pill
 
-    # Pre-fetch all badge images in parallel
     badges = _prefetch_badges(stadiums, size=BADGE_R * 2)
 
     draw = ImageDraw.Draw(img)
     try:
-        font = ImageFont.truetype("arial.ttf", 12)
+        font = ImageFont.truetype("arial.ttf", FONT_SZ)
     except Exception:
         font = ImageFont.load_default()
 
-    placed_labels = []  # list of (x0,y0,x1,y1) boxes already drawn
+    placed_boxes = []   # (x0,y0,x1,y1) of every placed label pill
+
+    def _overlaps(box):
+        return any(
+            not (box[2] < pb[0] or box[0] > pb[2] or box[3] < pb[1] or box[1] > pb[3])
+            for pb in placed_boxes
+        )
+
+    rr = BADGE_R + RING_W  # outer radius including ring
 
     for s in stadiums:
         px, py = _lon_lat_to_px(s["lon"], s["lat"], bbox, W, H)
-        colour = _dot_colour(s, params, country_index)
+        colour  = _dot_colour(s, params, country_index)
         badge_img = badges.get(s["name"])
 
-        # White ring
-        rr = BADGE_R + RING_W
+        # White ring + badge
         draw.ellipse([px - rr, py - rr, px + rr, py + rr], fill=(255, 255, 255))
-
         if badge_img:
-            # Circular mask + paste
             mask = Image.new("L", (BADGE_R * 2, BADGE_R * 2), 0)
             ImageDraw.Draw(mask).ellipse([0, 0, BADGE_R * 2 - 1, BADGE_R * 2 - 1], fill=255)
             img.paste(badge_img, (px - BADGE_R, py - BADGE_R), mask)
-            # Redraw the draw handle — paste invalidates draw's internal cache
             draw = ImageDraw.Draw(img)
         else:
             draw.ellipse([px - BADGE_R, py - BADGE_R, px + BADGE_R, py + BADGE_R], fill=colour)
 
-        if params["labels"]:
-            label = s["name"]
-            try:
-                tb = draw.textbbox((0, 0), label, font=font)
-                tw, th = tb[2] - tb[0], tb[3] - tb[1]
-            except AttributeError:
-                tw, th = len(label) * 7, 13
+        if not params["labels"]:
+            continue
 
-            gap = 4
-            # Prefer right of dot; fall back to left if it would overflow
-            lx = px + rr + gap
-            if lx + tw > W - 4:
-                lx = px - rr - gap - tw
-            ly = py - th // 2
+        label = s["name"]
+        try:
+            tb = draw.textbbox((0, 0), label, font=font)
+            tw, th = tb[2] - tb[0], tb[3] - tb[1]
+        except AttributeError:
+            tw, th = len(label) * 8, FONT_SZ
 
-            # Skip label if it overlaps any already-placed label
-            box = (lx - 1, ly - 1, lx + tw + 1, ly + th + 1)
-            overlap = any(
-                not (box[2] < pb[0] or box[0] > pb[2] or box[3] < pb[1] or box[1] > pb[3])
-                for pb in placed_labels
+        pill_w = tw + PAD * 2
+        pill_h = th + PAD * 2
+
+        # Try 4 candidate positions: right, left, above, below
+        candidates = [
+            (px + rr + GAP,            py - pill_h // 2),   # right
+            (px - rr - GAP - pill_w,   py - pill_h // 2),   # left
+            (px - pill_w // 2,         py - rr - GAP - pill_h),  # above
+            (px - pill_w // 2,         py + rr + GAP),      # below
+        ]
+
+        chosen = None
+        for lx, ly in candidates:
+            box = (lx, ly, lx + pill_w, ly + pill_h)
+            if lx >= 2 and ly >= 2 and lx + pill_w <= W - 2 and ly + pill_h <= H - 2:
+                if not _overlaps(box):
+                    chosen = (lx, ly, box)
+                    break
+
+        if chosen is None:
+            # Accept right-side even if overlapping, rather than silently drop
+            lx, ly = candidates[0]
+            box = (lx, ly, lx + pill_w, ly + pill_h)
+            if lx >= 2 and lx + pill_w <= W - 2:
+                chosen = (lx, ly, box)
+
+        if chosen:
+            lx, ly, box = chosen
+            # Semi-transparent dark pill background
+            overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+            ImageDraw.Draw(overlay).rounded_rectangle(
+                [lx, ly, lx + pill_w, ly + pill_h],
+                radius=4, fill=(10, 12, 22, 200)
             )
-            if not overlap:
-                for dx, dy in [(-1, -1), (1, -1), (-1, 1), (1, 1)]:
-                    draw.text((lx + dx, ly + dy), label, font=font, fill=(0, 0, 0))
-                draw.text((lx, ly), label, font=font, fill=(255, 255, 255))
-                placed_labels.append(box)
+            img = Image.alpha_composite(img, overlay)
+            draw = ImageDraw.Draw(img)
+            draw.text((lx + PAD, ly + PAD), label, font=font, fill=(255, 255, 255))
+            placed_boxes.append(box)
 
     return img
 
@@ -1355,28 +1383,34 @@ def _draw_north_arrow(img, W, H):
 
 
 def _draw_title(img, title_text, W):
-    try:
-        font = ImageFont.truetype("arialbd.ttf", 22)
-    except Exception:
+    for size in (32, 28, 24):
         try:
-            font = ImageFont.truetype("arial.ttf", 22)
+            font = ImageFont.truetype("arialbd.ttf", size)
+            break
         except Exception:
-            font = ImageFont.load_default()
+            try:
+                font = ImageFont.truetype("arial.ttf", size)
+                break
+            except Exception:
+                font = None
+    if font is None:
+        font = ImageFont.load_default()
 
     overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(overlay)
-    margin = 16
-    padding = 10
+    padding = 14
 
     try:
         bb = d.textbbox((0, 0), title_text, font=font)
         tw, th = bb[2] - bb[0], bb[3] - bb[1]
     except AttributeError:
-        tw, th = len(title_text) * 13, 22
+        tw, th = len(title_text) * 18, 32
 
-    rx0, ry0 = margin, margin
-    rx1, ry1 = margin + tw + padding * 2, margin + th + padding * 2
-    d.rounded_rectangle([rx0, ry0, rx1, ry1], radius=6, fill=(10, 10, 10, 200))
+    # Centred horizontally, near top
+    rx0 = (W - tw - padding * 2) // 2
+    ry0 = 20
+    rx1, ry1 = rx0 + tw + padding * 2, ry0 + th + padding * 2
+    d.rounded_rectangle([rx0, ry0, rx1, ry1], radius=8, fill=(10, 12, 22, 210))
     d.text((rx0 + padding, ry0 + padding), title_text, font=font, fill=(255, 255, 255))
     return Image.alpha_composite(img, overlay)
 
