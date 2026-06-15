@@ -968,6 +968,49 @@ def _merc_y(lat):
     return (1 - math.log(math.tan(r) + 1 / math.cos(r)) / math.pi) / 2
 
 
+_INSET_LON_THRESHOLD = -14  # stadiums west of here go into the Iceland inset
+
+
+def _split_main_inset(stadiums):
+    main  = [s for s in stadiums if s["lon"] >= _INSET_LON_THRESHOLD]
+    inset = [s for s in stadiums if s["lon"] <  _INSET_LON_THRESHOLD]
+    return main, inset
+
+
+def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key):
+    """Draw a small Iceland inset in the bottom-right corner."""
+    if not inset_stadiums:
+        return img
+
+    IW, IH = 210, 160
+    margin = 12
+    ix0 = W - IW - margin
+    iy0 = H - IH - margin
+
+    inset_bbox = _bbox_with_padding(inset_stadiums, pad=0.25)
+    inset_img  = _solid_background(style_key, IW, IH, inset_bbox)
+
+    # Dots only — labels too cluttered at inset scale
+    d = ImageDraw.Draw(inset_img)
+    for s in inset_stadiums:
+        px, py = _lon_lat_to_px(s["lon"], s["lat"], inset_bbox, IW, IH)
+        colour = _dot_colour(s, params, country_index)
+        r = 4
+        d.ellipse([(px-r-1, py-r-1), (px+r+1, py+r+1)], fill=(255, 255, 255))
+        d.ellipse([(px-r,   py-r),   (px+r,   py+r)],   fill=colour)
+
+    # Border + label
+    d.rectangle([(0, 0), (IW-1, IH-1)], outline=(160, 165, 190), width=2)
+    try:
+        font = ImageFont.truetype("arial.ttf", 13)
+    except Exception:
+        font = ImageFont.load_default()
+    d.text((6, 5), "Iceland / Faroe Is.", font=font, fill=(210, 215, 230))
+
+    img.paste(inset_img, (ix0, iy0))
+    return img
+
+
 def _lon_lat_to_px(lon, lat, bbox, W, H):
     """Mercator projection: lon/lat → pixel coordinates within the export image."""
     lon_min, lat_min, lon_max, lat_max = bbox
@@ -1265,7 +1308,9 @@ def map_export(request):
         return JsonResponse({"error": "No stadiums match the selected filters."}, status=400)
 
     W, H = params["W"], params["H"]
-    bbox = _bbox_with_padding(stadiums)
+    main_stadiums, inset_stadiums = _split_main_inset(stadiums)
+    # Use main cluster for bbox so Iceland doesn't stretch the canvas
+    bbox = _bbox_with_padding(main_stadiums if main_stadiums else stadiums)
 
     # Build country index for colour-by-country mode
     country_index = {}
@@ -1284,7 +1329,9 @@ def map_export(request):
         return JsonResponse({"error": "Background render failed.", "detail": str(e)}, status=500)
 
     try:
-        img = _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index)
+        img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index)
+        if inset_stadiums:
+            img = _draw_inset(img, inset_stadiums, params, W, H, country_index, params["style_key"])
         if params["legend"]:
             img = _draw_legend(img, params, stadiums)
         if params["north"]:
