@@ -1518,6 +1518,29 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
     if not params["labels"]:
         return img
 
+    # Reserve the title/subtitle band (top-centre) so labels never cover it.
+    # Mirrors the geometry in _draw_title; pre-seeding placed_boxes makes the
+    # placement search avoid this rectangle automatically.
+    if params.get("title"):
+        ft = _load_font(bold=True,  size=32)
+        fs = _load_font(bold=False, size=20)
+        PAD_T, GAP_T = 14, 6
+        def _dim(txt, fnt):
+            try:
+                bb = draw.textbbox((0, 0), txt, font=fnt)
+                return bb[2] - bb[0], bb[3] - bb[1]
+            except Exception:
+                return len(txt) * 16, 28
+        tw_t, th_t = _dim(params["title"], ft)
+        sub = params.get("subtitle", "")
+        tw_s, th_s = _dim(sub, fs) if sub else (0, 0)
+        box_w = max(tw_t, tw_s) + PAD_T * 2
+        box_h = th_t + (GAP_T + th_s if sub else 0) + PAD_T * 2
+        rx0 = (W - box_w) // 2
+        ry0 = 20
+        M = 10  # breathing room around the title block
+        placed_boxes.append((rx0 - M, ry0 - M, rx0 + box_w + M, ry0 + box_h + M))
+
     # R4: below 70 badges, every label MUST be placed (no clutter-drop).
     force_all = len(dot_positions) < 70
 
@@ -1615,8 +1638,8 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
 
         lx, ly, box, pts = chosen
 
-        # ── Orthogonal leader polyline + pill — drawn directly, no overlay ──
-        draw.line(pts, fill=label_rgb, width=1, joint="curve")
+        # ── Orthogonal leader polyline + pill — sharp 90° corners ──
+        draw.line([(int(x), int(y)) for x, y in pts], fill=label_rgb, width=1)
         draw.rounded_rectangle([lx, ly, lx + pill_w, ly + pill_h], radius=5, fill=(8, 10, 20, 220))
 
         ty = ly + PAD_Y
