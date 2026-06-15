@@ -21,10 +21,10 @@ class TeamSitemap(Sitemap):
     priority = 0.7
 
     def items(self):
-        return Team.objects.select_related("league").order_by("id")
+        return Team.objects.select_related("league").exclude(slug="").order_by("id")
 
     def location(self, obj):
-        return reverse("italiastadiaapp:team_detail", args=[obj.pk])
+        return reverse("italiastadiaapp:team_detail", args=[obj.slug])
 
 
 class CitySitemap(Sitemap):
