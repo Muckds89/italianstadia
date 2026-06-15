@@ -984,7 +984,7 @@ def _fetch_one_tile(z, x, y, style_key):
         return Image.open(io.BytesIO(data)).convert("RGBA")
     url = _TILE_SERVERS[style_key].format(z=z, x=x, y=y)
     headers = {"User-Agent": "StadiumsOfEurope/1.0 (stadiumsofeurope.com)"}
-    resp = _requests.get(url, timeout=8, headers=headers)
+    resp = _requests.get(url, timeout=4, headers=headers)
     resp.raise_for_status()
     cache.set(cache_key, resp.content, 86400)
     return Image.open(io.BytesIO(resp.content)).convert("RGBA")
@@ -1207,20 +1207,30 @@ def map_export(request):
         if s["country"] not in country_index:
             country_index[s["country"]] = len(country_index)
 
-    img = _make_background(params["style_key"], W, H, bbox)
+    import logging, traceback
+    log = logging.getLogger(__name__)
 
-    img = _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index)
+    try:
+        img = _make_background(params["style_key"], W, H, bbox)
+    except Exception as e:
+        log.error("_make_background failed: %s\n%s", e, traceback.format_exc())
+        return JsonResponse({"error": "Background render failed.", "detail": str(e)}, status=500)
 
-    if params["legend"]:
-        img = _draw_legend(img, params, stadiums)
-    if params["north"]:
-        img = _draw_north_arrow(img, W, H)
-    if params["title"]:
-        img = _draw_title(img, params["title"], W)
+    try:
+        img = _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index)
+        if params["legend"]:
+            img = _draw_legend(img, params, stadiums)
+        if params["north"]:
+            img = _draw_north_arrow(img, W, H)
+        if params["title"]:
+            img = _draw_title(img, params["title"], W)
 
-    buf = io.BytesIO()
-    img.convert("RGB").save(buf, format="PNG", optimize=True)
-    buf.seek(0)
+        buf = io.BytesIO()
+        img.convert("RGB").save(buf, format="PNG", optimize=True)
+        buf.seek(0)
+    except Exception as e:
+        log.error("Overlay/encode failed: %s\n%s", e, traceback.format_exc())
+        return JsonResponse({"error": "Image render failed.", "detail": str(e)}, status=500)
 
     filename = f"stadiums-map-{params['size_key']}.png"
     response = HttpResponse(buf.read(), content_type="image/png")
