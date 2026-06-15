@@ -849,8 +849,11 @@ def tournament_detail(request, slug):
 # ── Map Export ────────────────────────────────────────────────────────────────
 
 _EXPORT_SIZES = {
-    "twitter":   (1500, 500),
+    "hd":        (1280, 720),
+    "fhd":       (1920, 1080),
+    "4k":        (3840, 2160),
     "instagram": (1080, 1080),
+    "twitter":   (1500, 500),
     "landscape": (1920, 1080),
 }
 
@@ -886,14 +889,24 @@ _COUNTRY_PALETTE = [
 ]
 
 
+def _hex_to_rgba(hex_str, default):
+    try:
+        h = hex_str.lstrip("#")
+        return tuple(int(h[i:i+2], 16) for i in (0, 2, 4)) + (255,)
+    except Exception:
+        return default
+
+
 def _parse_export_params(request):
-    """Validate and return all export configuration from query params."""
-    size_key = request.GET.get("size", "landscape").lower()
+    """Validate and return all export configuration from query params.
+    Accepts both 'size'/'style' (legacy) and 'size_key'/'style_key' (export page).
+    """
+    size_key = (request.GET.get("size_key") or request.GET.get("size") or "fhd").lower()
     if size_key not in _EXPORT_SIZES:
-        size_key = "landscape"
+        size_key = "fhd"
     W, H = _EXPORT_SIZES[size_key]
 
-    style_key = request.GET.get("style", "dark").lower()
+    style_key = (request.GET.get("style_key") or request.GET.get("style") or "dark").lower()
     if style_key not in _STYLE_BACKGROUNDS:
         style_key = "dark"
 
@@ -907,20 +920,36 @@ def _parse_export_params(request):
     except Exception:
         single_color = (245, 197, 66)
 
+    # Custom background colour (hex, e.g. "#1a1033")
+    bg_hex = request.GET.get("bg_color", "").strip()
+    bg_color = _hex_to_rgba(bg_hex, None) if bg_hex else None
+
+    # Label appearance
+    try:
+        label_size = max(10, min(48, int(request.GET.get("label_size", "22"))))
+    except ValueError:
+        label_size = 22
+    label_color = request.GET.get("label_color", "#ffffff").strip()
+
     return {
         "W": W, "H": H,
         "size_key": size_key,
         "style_key": style_key,
         "color_by": color_by,
         "single_color": single_color,
+        "bg_color": bg_color,
+        "label_size": label_size,
+        "label_color": label_color,
         "legend": request.GET.get("legend", "0") == "1",
         "north": request.GET.get("north", "0") == "1",
         "labels": request.GET.get("labels", "1") == "1",
-        "title": request.GET.get("title", "").strip()[:80],
+        "logo": request.GET.get("logo", "0") == "1",
+        "title":    request.GET.get("title", "").strip()[:80],
+        "subtitle": request.GET.get("subtitle", "").strip()[:100],
         # filter params
-        "surface": request.GET.get("surface", "").strip().upper(),
-        "country": request.GET.get("country", "").strip(),
-        "league": request.GET.get("league", "").strip(),
+        "surface":   request.GET.get("surface", "").strip().upper(),
+        "country":   request.GET.get("country", "").strip(),
+        "league":    request.GET.get("league", "").strip(),
         "ownership": request.GET.get("ownership", "").strip().upper(),
     }
 
@@ -1139,9 +1168,10 @@ def _draw_countries(img, bbox, W, H, style_key):
     return img
 
 
-def _solid_background(style_key, W, H, bbox):
+def _solid_background(style_key, W, H, bbox, bg_color=None):
     """Background with country outlines — no external requests."""
-    img = Image.new("RGBA", (W, H), _STYLE_BACKGROUNDS[style_key])
+    fill = bg_color if bg_color else _STYLE_BACKGROUNDS[style_key]
+    img = Image.new("RGBA", (W, H), fill)
     try:
         img = _draw_countries(img, bbox, W, H, style_key)
     except Exception:
@@ -1502,36 +1532,75 @@ def _draw_north_arrow(img, W, H):
     return Image.alpha_composite(img, overlay)
 
 
-def _draw_title(img, title_text, W):
-    for size in (32, 28, 24):
-        try:
-            font = ImageFont.truetype("arialbd.ttf", size)
-            break
-        except Exception:
+def _draw_title(img, title_text, W, subtitle_text=""):
+    def _load_font(bold, size):
+        for name in (("arialbd.ttf" if bold else "arial.ttf"), "arial.ttf"):
             try:
-                font = ImageFont.truetype("arial.ttf", size)
-                break
+                return ImageFont.truetype(name, size)
             except Exception:
-                font = None
-    if font is None:
-        font = ImageFont.load_default()
+                pass
+        return ImageFont.load_default()
+
+    font_title    = _load_font(True,  32)
+    font_subtitle = _load_font(False, 20)
 
     overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(overlay)
-    padding = 14
+    PAD = 14
+    GAP = 6   # gap between title and subtitle
 
+    def _tw_th(text, font):
+        try:
+            bb = d.textbbox((0, 0), text, font=font)
+            return bb[2] - bb[0], bb[3] - bb[1]
+        except AttributeError:
+            return len(text) * 16, 28
+
+    tw1, th1 = _tw_th(title_text, font_title)
+    tw2, th2 = (_tw_th(subtitle_text, font_subtitle) if subtitle_text else (0, 0))
+
+    box_w = max(tw1, tw2) + PAD * 2
+    box_h = th1 + (GAP + th2 if subtitle_text else 0) + PAD * 2
+
+    rx0 = (W - box_w) // 2
+    ry0 = 20
+    rx1, ry1 = rx0 + box_w, ry0 + box_h
+
+    d.rounded_rectangle([rx0, ry0, rx1, ry1], radius=8, fill=(10, 12, 22, 210))
+    # Title centred in box
+    tx = rx0 + (box_w - tw1) // 2
+    d.text((tx, ry0 + PAD), title_text, font=font_title, fill=(255, 255, 255))
+    if subtitle_text:
+        sx = rx0 + (box_w - tw2) // 2
+        d.text((sx, ry0 + PAD + th1 + GAP), subtitle_text, font=font_subtitle, fill=(0, 220, 255))
+
+    return Image.alpha_composite(img, overlay)
+
+
+def _draw_logo(img, W, H):
+    """Stamp 'Stadiums of Europe' branding in the bottom-right corner."""
+    def _load_font(bold, size):
+        for name in (("arialbd.ttf" if bold else "arial.ttf"), "arial.ttf"):
+            try:
+                return ImageFont.truetype(name, size)
+            except Exception:
+                pass
+        return ImageFont.load_default()
+
+    font = _load_font(True, 18)
+    text = "stadiumsofeurope.com"
+    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(overlay)
     try:
-        bb = d.textbbox((0, 0), title_text, font=font)
+        bb = d.textbbox((0, 0), text, font=font)
         tw, th = bb[2] - bb[0], bb[3] - bb[1]
     except AttributeError:
-        tw, th = len(title_text) * 18, 32
-
-    # Centred horizontally, near top
-    rx0 = (W - tw - padding * 2) // 2
-    ry0 = 20
-    rx1, ry1 = rx0 + tw + padding * 2, ry0 + th + padding * 2
-    d.rounded_rectangle([rx0, ry0, rx1, ry1], radius=8, fill=(10, 12, 22, 210))
-    d.text((rx0 + padding, ry0 + padding), title_text, font=font, fill=(255, 255, 255))
+        tw, th = len(text) * 10, 18
+    PAD = 10
+    x = W - tw - PAD * 2 - 4
+    y = H - th - PAD * 2 - 4
+    d.rounded_rectangle([x, y, x + tw + PAD * 2, y + th + PAD * 2], radius=6, fill=(10, 12, 22, 200))
+    d.text((x + PAD, y + PAD), text, font=font, fill=(0, 220, 255))
     return Image.alpha_composite(img, overlay)
 
 
@@ -1565,6 +1634,10 @@ def map_export(request):
     try:
         use_tiles = request.GET.get("tiles", "0") == "1"
         img = _make_background(params["style_key"], W, H, bbox, use_tiles=use_tiles)
+        if params.get("bg_color"):
+            # Tint the background with the user's chosen colour
+            tint = Image.new("RGBA", (W, H), params["bg_color"])
+            img = Image.alpha_composite(img, tint)
     except Exception as e:
         log.error("_make_background failed: %s\n%s", e, traceback.format_exc())
         return JsonResponse({"error": "Background render failed.", "detail": str(e)}, status=500)
@@ -1578,7 +1651,9 @@ def map_export(request):
         if params["north"]:
             img = _draw_north_arrow(img, W, H)
         if params["title"]:
-            img = _draw_title(img, params["title"], W)
+            img = _draw_title(img, params["title"], W, params.get("subtitle", ""))
+        if params.get("logo"):
+            img = _draw_logo(img, W, H)
 
         buf = io.BytesIO()
         img.convert("RGB").save(buf, format="PNG", optimize=True)
@@ -1696,30 +1771,48 @@ def export_webhook(request):
 
 @require_GET
 def export_success(request):
-    """Redirect from Stripe success URL — find the token and show download page."""
+    """Redirect from Stripe success URL — find or create token, show download page."""
     session_id = request.GET.get("session_id", "")
     if not session_id:
         return redirect("italiastadiaapp:export_page")
 
-    # Poll briefly — webhook may arrive before or after this redirect
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+
+    # Always verify payment status with Stripe directly (webhook may not have fired yet)
+    stripe_session = None
+    try:
+        stripe_session = stripe.checkout.Session.retrieve(session_id)
+    except Exception:
+        pass
+
+    # If token doesn't exist yet (e.g. webhook race), create it from Stripe session metadata
     token_qs = ExportToken.objects.filter(stripe_session=session_id)
+    if not token_qs.exists() and stripe_session:
+        filters_json = stripe_session.metadata.get("filters_json", "{}")
+        ExportToken.objects.create(
+            stripe_session=session_id,
+            filters_json=filters_json,
+            paid=(stripe_session.payment_status == "paid"),
+            expires_at=timezone.now() + timedelta(hours=24),
+        )
+        token_qs = ExportToken.objects.filter(stripe_session=session_id)
+
     if not token_qs.exists():
-        return render(request, "export_error.html", {"msg": "Session not found."})
+        return render(request, "export_error.html", {
+            "msg": "Session not found. Please contact support with your Stripe receipt."
+        })
 
     token_obj = token_qs.first()
-    if not token_obj.paid:
-        # Verify with Stripe directly (webhook may be delayed)
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        try:
-            session = stripe.checkout.Session.retrieve(session_id)
-            if session.payment_status == "paid":
-                token_obj.paid = True
-                token_obj.save(update_fields=["paid"])
-        except Exception:
-            pass
+
+    # Sync paid status from Stripe if webhook was delayed
+    if not token_obj.paid and stripe_session and stripe_session.payment_status == "paid":
+        token_obj.paid = True
+        token_obj.save(update_fields=["paid"])
 
     if not token_obj.paid:
-        return render(request, "export_error.html", {"msg": "Payment not confirmed yet. Please wait a moment and refresh."})
+        return render(request, "export_error.html", {
+            "msg": "Payment not confirmed yet — please wait a few seconds and refresh this page."
+        })
 
     return render(request, "export_success.html", {"token": str(token_obj.token)})
 
@@ -1774,6 +1867,9 @@ def export_download(request, token):
             country_index[s["country"]] = len(country_index)
 
     img = _make_background(params["style_key"], W, H, bbox)
+    if params.get("bg_color"):
+        tint = Image.new("RGBA", (W, H), params["bg_color"])
+        img = Image.alpha_composite(img, tint)
     img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index)
     if inset_stadiums:
         img = _draw_inset(img, inset_stadiums, params, W, H, country_index, params["style_key"])
@@ -1782,7 +1878,9 @@ def export_download(request, token):
     if params["north"]:
         img = _draw_north_arrow(img, W, H)
     if params["title"]:
-        img = _draw_title(img, params["title"], W)
+        img = _draw_title(img, params["title"], W, params.get("subtitle", ""))
+    if params.get("logo"):
+        img = _draw_logo(img, W, H)
 
     buf = io.BytesIO()
     img.convert("RGB").save(buf, format="PNG", optimize=True)
@@ -1793,3 +1891,25 @@ def export_download(request, token):
     response["Content-Disposition"] = f'attachment; filename="{filename}"'
     response["Content-Encoding"] = "identity"
     return response
+
+
+@require_GET
+def export_options(request):
+    """Return available countries and leagues for autocomplete on the export page."""
+    from django.db.models import Count
+    countries = (
+        City.objects.exclude(country="")
+        .values_list("country", flat=True)
+        .distinct()
+        .order_by("country")
+    )
+    leagues = (
+        League.objects.select_related("country")
+        .values_list("name", flat=True)
+        .distinct()
+        .order_by("name")
+    )
+    return JsonResponse({
+        "countries": list(countries),
+        "leagues":   list(leagues),
+    })

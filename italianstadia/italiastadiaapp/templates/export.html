@@ -6,52 +6,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Export Map — Stadiums of Europe</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <style>
-        body { background: #12151e; color: #e0e6f0; }
-        .export-card { background: #1a1f2e; border: 1px solid #2a3045; border-radius: 12px; padding: 2rem; }
-        .price-badge { background: linear-gradient(135deg,#00c853,#00e5ff); color:#000; font-weight:700; border-radius:8px; padding:6px 16px; display:inline-block; font-size:1.3rem; }
-        .preview-wrap { position:relative; background:#0d1017; border-radius:8px; overflow:hidden; min-height:220px; display:flex; align-items:center; justify-content:center; }
-        .watermark-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
-        .watermark-overlay span { font-size:2rem; font-weight:900; color:rgba(255,255,255,0.18); transform:rotate(-30deg); white-space:nowrap; }
-        .preview-img { max-width:100%; max-height:320px; object-fit:contain; }
-        select.form-select, input.form-control { background:#0d1017; color:#e0e6f0; border-color:#2a3045; }
+        body { background:#12151e; color:#e0e6f0; }
+        .card  { background:#1a1f2e; border:1px solid #2a3045; border-radius:12px; padding:1.5rem; }
+        .section-label { font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color:#7a8faf; font-weight:700; margin-bottom:.4rem; }
+        .price-badge { background:linear-gradient(135deg,#00c853,#00e5ff); color:#000; font-weight:700; border-radius:8px; padding:6px 16px; display:inline-block; font-size:1.3rem; }
+        .preview-wrap { position:relative; background:#0d1017; border-radius:8px; overflow:hidden; min-height:200px; display:flex; align-items:center; justify-content:center; }
+        .preview-img { max-width:100%; max-height:340px; object-fit:contain; }
+        .wm { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+        .wm span { font-size:1.4rem; font-weight:900; color:rgba(255,255,255,0.15); transform:rotate(-30deg); white-space:nowrap; }
+        select.form-select, input.form-control, input[type=text] {
+            background:#0d1017; color:#e0e6f0; border-color:#2a3045;
+        }
         select.form-select:focus, input.form-control:focus { background:#0d1017; color:#e0e6f0; border-color:#00c853; box-shadow:none; }
-        .btn-pay { background:linear-gradient(135deg,#00c853,#00e5ff); color:#000; font-weight:700; font-size:1.1rem; border:none; }
-        .btn-pay:hover { opacity:0.9; color:#000; }
+        .btn-pay { background:linear-gradient(135deg,#00c853,#00e5ff); color:#000; font-weight:700; font-size:1.05rem; border:none; }
+        .btn-pay:hover { opacity:.9; color:#000; }
         #previewBtn { background:#1e2740; color:#adc4e8; border:1px solid #2a3045; }
         #previewBtn:hover { background:#263050; color:#fff; }
-        .spinner-border { width:1.2rem; height:1.2rem; }
+        .spinner-border { width:1rem; height:1rem; }
+        .form-check-input { background-color:#0d1017; border-color:#2a3045; }
+        .form-check-input:checked { background-color:#00c853; border-color:#00c853; }
+        input[type=color] { height:34px; padding:2px 4px; border-radius:6px; border:1px solid #2a3045; background:#0d1017; cursor:pointer; }
+        .ac-wrap { position:relative; }
+        .ac-list { position:absolute; top:100%; left:0; right:0; background:#1a1f2e; border:1px solid #2a3045; border-radius:6px; z-index:100; max-height:180px; overflow-y:auto; display:none; }
+        .ac-list li { padding:6px 12px; cursor:pointer; font-size:.9rem; }
+        .ac-list li:hover { background:#263050; }
+        .range-val { color:#00e5ff; font-weight:600; min-width:2ch; display:inline-block; }
     </style>
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark py-2 mb-4">
-    <div class="container">
+    <div class="container-fluid px-4">
         <a class="navbar-brand" href="/">Stadiums of Europe</a>
         <a href="/" class="btn btn-sm btn-outline-light">← Map</a>
     </div>
 </nav>
 
-<div class="container" style="max-width:860px">
+<div class="container-fluid px-4" style="max-width:1200px">
     <h1 class="fw-bold mb-1">Export Your Map</h1>
-    <p class="text-secondary mb-4">Apply filters, preview, then download a high-resolution PNG — €1.99 per download.</p>
+    <p class="text-secondary mb-4">Configure, preview (watermarked), then pay €1.99 for a full-resolution download.</p>
 
     <div class="row g-4">
-        <!-- Filters -->
-        <div class="col-md-5">
-            <div class="export-card h-100">
-                <h5 class="fw-bold mb-3">Filters</h5>
 
-                <div class="mb-3">
-                    <label class="form-label small text-secondary">Country</label>
-                    <input type="text" id="expCountry" class="form-control form-control-sm" placeholder="e.g. Norway">
+        <!-- ── LEFT PANEL: filters + style ─────────────────────────────── -->
+        <div class="col-lg-4">
+
+            <!-- Filters -->
+            <div class="card mb-3">
+                <p class="section-label">Filters</p>
+                <div class="mb-2 ac-wrap">
+                    <label class="form-label small mb-1">Country</label>
+                    <input type="text" id="expCountry" class="form-control form-control-sm" placeholder="e.g. Norway" autocomplete="off">
+                    <ul class="ac-list" id="countryList"></ul>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label small text-secondary">League</label>
-                    <input type="text" id="expLeague" class="form-control form-control-sm" placeholder="e.g. Eliteserien">
+                <div class="mb-2 ac-wrap">
+                    <label class="form-label small mb-1">League</label>
+                    <input type="text" id="expLeague" class="form-control form-control-sm" placeholder="e.g. Eliteserien" autocomplete="off">
+                    <ul class="ac-list" id="leagueList"></ul>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label small text-secondary">Surface</label>
+                <div class="mb-2">
+                    <label class="form-label small mb-1">Surface</label>
                     <select id="expSurface" class="form-select form-select-sm">
                         <option value="">All surfaces</option>
                         <option value="GRASS">Grass</option>
@@ -59,8 +73,8 @@
                         <option value="ARTIFICIAL">Artificial</option>
                     </select>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label small text-secondary">Ownership</label>
+                <div class="mb-0">
+                    <label class="form-label small mb-1">Ownership</label>
                     <select id="expOwnership" class="form-select form-select-sm">
                         <option value="">All ownership</option>
                         <option value="PUBLIC">Public</option>
@@ -68,63 +82,119 @@
                         <option value="MIXED">Mixed</option>
                     </select>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label small text-secondary">Map style</label>
+            </div>
+
+            <!-- Style -->
+            <div class="card mb-3">
+                <p class="section-label">Map Style</p>
+                <div class="mb-2">
+                    <label class="form-label small mb-1">Base style</label>
                     <select id="expStyle" class="form-select form-select-sm">
-                        <option value="dark">Dark</option>
+                        <option value="dark" selected>Dark</option>
                         <option value="light">Light</option>
                         <option value="satellite">Satellite</option>
+                        <option value="topo">Topo</option>
                     </select>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label small text-secondary">Size</label>
+                <div class="mb-2">
+                    <label class="form-label small mb-1">Background colour <span class="text-secondary">(overrides base)</span></label>
+                    <div class="d-flex align-items-center gap-2">
+                        <input type="color" id="expBgColor" value="#12151e">
+                        <input type="text"  id="expBgHex"   class="form-control form-control-sm" value="#12151e" style="max-width:90px">
+                        <button class="btn btn-sm btn-outline-secondary" id="clearBgColor">Clear</button>
+                    </div>
+                </div>
+                <div class="mb-0">
+                    <label class="form-label small mb-1">Export size</label>
                     <select id="expSize" class="form-select form-select-sm">
                         <option value="hd">HD (1280×720)</option>
                         <option value="fhd" selected>Full HD (1920×1080)</option>
                         <option value="4k">4K (3840×2160)</option>
+                        <option value="instagram">Instagram (1080×1080)</option>
                     </select>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label small text-secondary">Map title</label>
+            </div>
+
+            <!-- Title & Branding -->
+            <div class="card mb-3">
+                <p class="section-label">Title &amp; Branding</p>
+                <div class="mb-2">
+                    <label class="form-label small mb-1">Main title</label>
                     <input type="text" id="expTitle" class="form-control form-control-sm" placeholder="e.g. Artificial Turf Stadiums">
                 </div>
+                <div class="mb-2">
+                    <label class="form-label small mb-1">Subtitle</label>
+                    <input type="text" id="expSubtitle" class="form-control form-control-sm" placeholder="e.g. Biggest UEFA Leagues 2025/26">
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="expLogo">
+                    <label class="form-check-label small" for="expLogo">Add "stadiumsofeurope.com" logo</label>
+                </div>
+            </div>
+
+            <!-- Label Options -->
+            <div class="card mb-3">
+                <p class="section-label">Label Options</p>
                 <div class="form-check mb-2">
                     <input class="form-check-input" type="checkbox" id="expLabels" checked>
                     <label class="form-check-label small" for="expLabels">Show team / stadium labels</label>
                 </div>
-                <div class="form-check mb-3">
+                <div id="labelOpts">
+                    <div class="mb-2">
+                        <label class="form-label small mb-1">Font size: <span class="range-val" id="labelSizeVal">22</span>px</label>
+                        <input type="range" class="form-range" id="expLabelSize" min="12" max="40" value="22">
+                    </div>
+                    <div class="mb-0">
+                        <label class="form-label small mb-1">Label text colour</label>
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="color" id="expLabelColor" value="#ffffff">
+                            <input type="text"  id="expLabelHex"  class="form-control form-control-sm" value="#ffffff" style="max-width:90px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map extras -->
+            <div class="card">
+                <p class="section-label">Extras</p>
+                <div class="form-check mb-1">
                     <input class="form-check-input" type="checkbox" id="expNorth">
                     <label class="form-check-label small" for="expNorth">North arrow</label>
                 </div>
-
-                <button id="previewBtn" class="btn btn-sm w-100 mb-2">
-                    <span id="previewSpinner" class="spinner-border d-none" role="status"></span>
-                    Preview (watermarked)
-                </button>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="expLegend">
+                    <label class="form-check-label small" for="expLegend">Legend</label>
+                </div>
             </div>
         </div>
 
-        <!-- Preview + checkout -->
-        <div class="col-md-7 d-flex flex-column gap-3">
-            <div class="export-card">
-                <h5 class="fw-bold mb-3">Preview</h5>
-                <div class="preview-wrap" id="previewWrap">
-                    <span class="text-secondary small">Click "Preview" to generate a watermarked preview.</span>
-                    <div class="watermark-overlay" id="watermarkOverlay" style="display:none">
-                        <span>PREVIEW — stadiumsofeurope.com</span>
-                    </div>
+        <!-- ── RIGHT PANEL: preview + payment ──────────────────────────── -->
+        <div class="col-lg-8 d-flex flex-column gap-3">
+
+            <div class="card">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0">Preview <span class="text-secondary" style="font-size:.8rem;font-weight:400">(watermarked)</span></h5>
+                    <button id="previewBtn" class="btn btn-sm px-4">
+                        <span id="previewSpinner" class="spinner-border d-none me-1" role="status"></span>
+                        Generate Preview
+                    </button>
                 </div>
+                <div class="preview-wrap" id="previewWrap">
+                    <span class="text-secondary small">Click "Generate Preview" to see your map.</span>
+                    <div class="wm" id="wm" style="display:none"><span>PREVIEW — stadiumsofeurope.com</span></div>
+                </div>
+                <p id="previewError" class="text-danger small mt-2 d-none"></p>
             </div>
 
-            <div class="export-card">
+            <div class="card">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <div>
                         <h5 class="fw-bold mb-0">Pay &amp; Download</h5>
-                        <span class="text-secondary small">Single-use download, valid 24 h</span>
+                        <span class="text-secondary small">Single-use · valid 24 h · high resolution</span>
                     </div>
                     <span class="price-badge">€1.99</span>
                 </div>
-                <p class="text-secondary small mb-3">Your map is generated with the filters above immediately after payment. Secure checkout via Stripe.</p>
+                <p class="text-secondary small mb-3">Your filters are locked in at checkout. The final PNG is generated immediately after payment — no watermark.</p>
                 <button id="payBtn" class="btn btn-pay w-100">
                     <span id="paySpinner" class="spinner-border d-none me-2" role="status"></span>
                     Pay €1.99 &amp; Download
@@ -136,36 +206,120 @@
 </div>
 
 <script>
+// ── Autocomplete helper ───────────────────────────────────────────────────────
+let _acData = {countries: [], leagues: []};
+
+fetch("{% url 'italiastadiaapp:export_options' %}")
+    .then(r => r.json())
+    .then(d => { _acData = d; })
+    .catch(() => {});
+
+function _setupAC(inputId, listId, dataKey) {
+    const input = document.getElementById(inputId);
+    const list  = document.getElementById(listId);
+    input.addEventListener("input", function () {
+        const q = this.value.trim().toLowerCase();
+        list.innerHTML = "";
+        if (!q) { list.style.display = "none"; return; }
+        const matches = _acData[dataKey].filter(v => v.toLowerCase().includes(q)).slice(0, 10);
+        if (!matches.length) { list.style.display = "none"; return; }
+        matches.forEach(m => {
+            const li = document.createElement("li");
+            li.textContent = m;
+            li.addEventListener("mousedown", () => { input.value = m; list.style.display = "none"; });
+            list.appendChild(li);
+        });
+        list.style.display = "block";
+    });
+    input.addEventListener("blur", () => setTimeout(() => list.style.display = "none", 150));
+}
+_setupAC("expCountry", "countryList", "countries");
+_setupAC("expLeague",  "leagueList",  "leagues");
+
+// ── Auto-populate from map URL params ─────────────────────────────────────────
+(function() {
+    const p = new URLSearchParams(window.location.search);
+    if (p.get("country"))   document.getElementById("expCountry").value   = p.get("country");
+    if (p.get("league"))    document.getElementById("expLeague").value    = p.get("league");
+    if (p.get("surface"))   document.getElementById("expSurface").value   = p.get("surface");
+    if (p.get("ownership")) document.getElementById("expOwnership").value = p.get("ownership");
+    if (p.get("title"))     document.getElementById("expTitle").value     = p.get("title");
+})();
+
+// ── Colour pickers sync ───────────────────────────────────────────────────────
+let _useBgColor = false;
+
+document.getElementById("expBgColor").addEventListener("input", function () {
+    document.getElementById("expBgHex").value = this.value;
+    _useBgColor = true;
+});
+document.getElementById("expBgHex").addEventListener("input", function () {
+    if (/^#[0-9a-fA-F]{6}$/.test(this.value)) {
+        document.getElementById("expBgColor").value = this.value;
+        _useBgColor = true;
+    }
+});
+document.getElementById("clearBgColor").addEventListener("click", function () {
+    _useBgColor = false;
+    document.getElementById("expBgHex").value = "";
+});
+
+document.getElementById("expLabelColor").addEventListener("input", function () {
+    document.getElementById("expLabelHex").value = this.value;
+});
+document.getElementById("expLabelHex").addEventListener("input", function () {
+    if (/^#[0-9a-fA-F]{6}$/.test(this.value))
+        document.getElementById("expLabelColor").value = this.value;
+});
+
+// ── Label size range ──────────────────────────────────────────────────────────
+document.getElementById("expLabelSize").addEventListener("input", function () {
+    document.getElementById("labelSizeVal").textContent = this.value;
+});
+document.getElementById("expLabels").addEventListener("change", function () {
+    document.getElementById("labelOpts").style.display = this.checked ? "" : "none";
+});
+
+// ── Build filters object ──────────────────────────────────────────────────────
 function _getFilters() {
-    return {
-        country:   document.getElementById("expCountry").value.trim(),
-        surface:   document.getElementById("expSurface").value,
-        ownership: document.getElementById("expOwnership").value,
-        league:    document.getElementById("expLeague").value.trim(),
-        style_key: document.getElementById("expStyle").value,
-        size_key:  document.getElementById("expSize").value,
-        title:     document.getElementById("expTitle").value.trim(),
-        labels:    document.getElementById("expLabels").checked ? "1" : "0",
-        north:     document.getElementById("expNorth").checked  ? "1" : "0",
-        legend:    "0",
-        color_by:  "surface",
+    const f = {
+        country:     document.getElementById("expCountry").value.trim(),
+        surface:     document.getElementById("expSurface").value,
+        ownership:   document.getElementById("expOwnership").value,
+        league:      document.getElementById("expLeague").value.trim(),
+        style_key:   document.getElementById("expStyle").value,
+        size_key:    document.getElementById("expSize").value,
+        title:       document.getElementById("expTitle").value.trim(),
+        subtitle:    document.getElementById("expSubtitle").value.trim(),
+        labels:      document.getElementById("expLabels").checked  ? "1" : "0",
+        north:       document.getElementById("expNorth").checked   ? "1" : "0",
+        legend:      document.getElementById("expLegend").checked  ? "1" : "0",
+        logo:        document.getElementById("expLogo").checked    ? "1" : "0",
+        color_by:    "surface",
+        label_size:  document.getElementById("expLabelSize").value,
+        label_color: document.getElementById("expLabelColor").value,
     };
+    if (_useBgColor) f.bg_color = document.getElementById("expBgHex").value || document.getElementById("expBgColor").value;
+    return f;
 }
 
+// ── Preview ───────────────────────────────────────────────────────────────────
 document.getElementById("previewBtn").addEventListener("click", function () {
-    const filters = _getFilters();
-    const params  = new URLSearchParams(filters);
-    // Use the existing free endpoint for watermarked preview
-    const url = "/api/export/map/?" + params.toString() + "&watermark=1&size_key=hd";
+    const f = _getFilters();
+    const p = new URLSearchParams({...f, size_key: "hd"});  // always HD for preview speed
+    const url = "/api/export/map/?" + p.toString();
+
     const spinner = document.getElementById("previewSpinner");
+    const wrap    = document.getElementById("previewWrap");
+    const errEl   = document.getElementById("previewError");
     spinner.classList.remove("d-none");
-    const wrap  = document.getElementById("previewWrap");
-    const wm    = document.getElementById("watermarkOverlay");
-    wrap.querySelectorAll("img,span.text-secondary").forEach(el => el.remove());
+    errEl.classList.add("d-none");
+    wrap.querySelectorAll("img,.text-secondary").forEach(el => el.remove());
+    document.getElementById("wm").style.display = "none";
 
     fetch(url)
         .then(r => {
-            if (!r.ok) throw new Error("Preview failed.");
+            if (!r.ok) return r.json().then(d => { throw new Error(d.error || "Preview failed"); });
             return r.blob();
         })
         .then(blob => {
@@ -173,19 +327,21 @@ document.getElementById("previewBtn").addEventListener("click", function () {
             img.src = URL.createObjectURL(blob);
             img.className = "preview-img";
             wrap.appendChild(img);
-            wm.style.display = "flex";
+            document.getElementById("wm").style.display = "flex";
             spinner.classList.add("d-none");
         })
         .catch(err => {
-            wrap.innerHTML = '<span class="text-danger small">' + err.message + '</span>';
+            errEl.textContent = err.message;
+            errEl.classList.remove("d-none");
             spinner.classList.add("d-none");
         });
 });
 
+// ── Pay & Download ────────────────────────────────────────────────────────────
 document.getElementById("payBtn").addEventListener("click", function () {
-    const filters  = _getFilters();
-    const spinner  = document.getElementById("paySpinner");
-    const errEl    = document.getElementById("payError");
+    const filters = _getFilters();
+    const spinner = document.getElementById("paySpinner");
+    const errEl   = document.getElementById("payError");
     spinner.classList.remove("d-none");
     errEl.classList.add("d-none");
 
@@ -197,12 +353,8 @@ document.getElementById("payBtn").addEventListener("click", function () {
     .then(r => r.json())
     .then(data => {
         spinner.classList.add("d-none");
-        if (data.checkout_url) {
-            window.location.href = data.checkout_url;
-        } else {
-            errEl.textContent = data.error || "Something went wrong.";
-            errEl.classList.remove("d-none");
-        }
+        if (data.checkout_url) { window.location.href = data.checkout_url; }
+        else { errEl.textContent = data.error || "Something went wrong."; errEl.classList.remove("d-none"); }
     })
     .catch(() => {
         spinner.classList.add("d-none");
