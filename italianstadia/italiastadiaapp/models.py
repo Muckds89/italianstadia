@@ -252,3 +252,20 @@ class LastRefresh(models.Model):
 
     def __str__(self):
         return f"{self.status} @ {self.ran_at}" if self.ran_at else "Never run"
+
+
+import uuid as _uuid
+
+
+class ExportToken(models.Model):
+    """One-time download token created after a successful Stripe payment."""
+    token           = models.UUIDField(default=_uuid.uuid4, unique=True, db_index=True)
+    stripe_session  = models.CharField(max_length=255, db_index=True)
+    filters_json    = models.TextField()          # JSON-encoded export params
+    paid            = models.BooleanField(default=False)
+    used            = models.BooleanField(default=False)
+    created_at      = models.DateTimeField(auto_now_add=True)
+    expires_at      = models.DateTimeField()      # set to created_at + 24h
+
+    def __str__(self):
+        return f"ExportToken {self.token} paid={self.paid} used={self.used}"

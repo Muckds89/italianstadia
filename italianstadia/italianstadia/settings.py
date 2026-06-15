@@ -37,6 +37,12 @@ GOOGLE_ADSENSE_SLOT   = os.environ.get("GOOGLE_ADSENSE_SLOT", "")
 # MapTiler API key — set in Render env vars; never commit to git.
 MAPTILER_API_KEY = os.environ.get("MAPTILER_API_KEY", "")
 
+# Stripe — set STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET in Render env vars.
+STRIPE_SECRET_KEY      = os.environ.get("STRIPE_SECRET_KEY", "")
+STRIPE_WEBHOOK_SECRET  = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
+STRIPE_PRICE_EXPORT    = os.environ.get("STRIPE_PRICE_EXPORT", "")   # Price ID for €1.99 export
+EXPORT_BASE_URL        = os.environ.get("EXPORT_BASE_URL", "http://localhost:8000")
+
 SECRET_KEY = os.environ.get(
     "SECRET_KEY",
     "django-insecure-local-dev-key"

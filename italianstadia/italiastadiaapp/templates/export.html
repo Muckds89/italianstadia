@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Export Map — Stadiums of Europe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body { background: #12151e; color: #e0e6f0; }
+        .export-card { background: #1a1f2e; border: 1px solid #2a3045; border-radius: 12px; padding: 2rem; }
+        .price-badge { background: linear-gradient(135deg,#00c853,#00e5ff); color:#000; font-weight:700; border-radius:8px; padding:6px 16px; display:inline-block; font-size:1.3rem; }
+        .preview-wrap { position:relative; background:#0d1017; border-radius:8px; overflow:hidden; min-height:220px; display:flex; align-items:center; justify-content:center; }
+        .watermark-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+        .watermark-overlay span { font-size:2rem; font-weight:900; color:rgba(255,255,255,0.18); transform:rotate(-30deg); white-space:nowrap; }
+        .preview-img { max-width:100%; max-height:320px; object-fit:contain; }
+        select.form-select, input.form-control { background:#0d1017; color:#e0e6f0; border-color:#2a3045; }
+        select.form-select:focus, input.form-control:focus { background:#0d1017; color:#e0e6f0; border-color:#00c853; box-shadow:none; }
+        .btn-pay { background:linear-gradient(135deg,#00c853,#00e5ff); color:#000; font-weight:700; font-size:1.1rem; border:none; }
+        .btn-pay:hover { opacity:0.9; color:#000; }
+        #previewBtn { background:#1e2740; color:#adc4e8; border:1px solid #2a3045; }
+        #previewBtn:hover { background:#263050; color:#fff; }
+        .spinner-border { width:1.2rem; height:1.2rem; }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark py-2 mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="/">Stadiums of Europe</a>
+        <a href="/" class="btn btn-sm btn-outline-light">← Map</a>
+    </div>
+</nav>
+
+<div class="container" style="max-width:860px">
+    <h1 class="fw-bold mb-1">Export Your Map</h1>
+    <p class="text-secondary mb-4">Apply filters, preview, then download a high-resolution PNG — €1.99 per download.</p>
+
+    <div class="row g-4">
+        <!-- Filters -->
+        <div class="col-md-5">
+            <div class="export-card h-100">
+                <h5 class="fw-bold mb-3">Filters</h5>
+
+                <div class="mb-3">
+                    <label class="form-label small text-secondary">Country</label>
+                    <input type="text" id="expCountry" class="form-control form-control-sm" placeholder="e.g. Norway">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small text-secondary">League</label>
+                    <input type="text" id="expLeague" class="form-control form-control-sm" placeholder="e.g. Eliteserien">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small text-secondary">Surface</label>
+                    <select id="expSurface" class="form-select form-select-sm">
+                        <option value="">All surfaces</option>
+                        <option value="GRASS">Grass</option>
+                        <option value="HYBRID">Hybrid</option>
+                        <option value="ARTIFICIAL">Artificial</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small text-secondary">Ownership</label>
+                    <select id="expOwnership" class="form-select form-select-sm">
+                        <option value="">All ownership</option>
+                        <option value="PUBLIC">Public</option>
+                        <option value="PRIVATE">Private</option>
+                        <option value="MIXED">Mixed</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small text-secondary">Map style</label>
+                    <select id="expStyle" class="form-select form-select-sm">
+                        <option value="dark">Dark</option>
+                        <option value="light">Light</option>
+                        <option value="satellite">Satellite</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small text-secondary">Size</label>
+                    <select id="expSize" class="form-select form-select-sm">
+                        <option value="hd">HD (1280×720)</option>
+                        <option value="fhd" selected>Full HD (1920×1080)</option>
+                        <option value="4k">4K (3840×2160)</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small text-secondary">Map title</label>
+                    <input type="text" id="expTitle" class="form-control form-control-sm" placeholder="e.g. Artificial Turf Stadiums">
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="expLabels" checked>
+                    <label class="form-check-label small" for="expLabels">Show team / stadium labels</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="expNorth">
+                    <label class="form-check-label small" for="expNorth">North arrow</label>
+                </div>
+
+                <button id="previewBtn" class="btn btn-sm w-100 mb-2">
+                    <span id="previewSpinner" class="spinner-border d-none" role="status"></span>
+                    Preview (watermarked)
+                </button>
+            </div>
+        </div>
+
+        <!-- Preview + checkout -->
+        <div class="col-md-7 d-flex flex-column gap-3">
+            <div class="export-card">
+                <h5 class="fw-bold mb-3">Preview</h5>
+                <div class="preview-wrap" id="previewWrap">
+                    <span class="text-secondary small">Click "Preview" to generate a watermarked preview.</span>
+                    <div class="watermark-overlay" id="watermarkOverlay" style="display:none">
+                        <span>PREVIEW — stadiumsofeurope.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="export-card">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-0">Pay &amp; Download</h5>
+                        <span class="text-secondary small">Single-use download, valid 24 h</span>
+                    </div>
+                    <span class="price-badge">€1.99</span>
+                </div>
+                <p class="text-secondary small mb-3">Your map is generated with the filters above immediately after payment. Secure checkout via Stripe.</p>
+                <button id="payBtn" class="btn btn-pay w-100">
+                    <span id="paySpinner" class="spinner-border d-none me-2" role="status"></span>
+                    Pay €1.99 &amp; Download
+                </button>
+                <p id="payError" class="text-danger small mt-2 d-none"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function _getFilters() {
+    return {
+        country:   document.getElementById("expCountry").value.trim(),
+        surface:   document.getElementById("expSurface").value,
+        ownership: document.getElementById("expOwnership").value,
+        league:    document.getElementById("expLeague").value.trim(),
+        style_key: document.getElementById("expStyle").value,
+        size_key:  document.getElementById("expSize").value,
+        title:     document.getElementById("expTitle").value.trim(),
+        labels:    document.getElementById("expLabels").checked ? "1" : "0",
+        north:     document.getElementById("expNorth").checked  ? "1" : "0",
+        legend:    "0",
+        color_by:  "surface",
+    };
+}
+
+document.getElementById("previewBtn").addEventListener("click", function () {
+    const filters = _getFilters();
+    const params  = new URLSearchParams(filters);
+    // Use the existing free endpoint for watermarked preview
+    const url = "/api/export/map/?" + params.toString() + "&watermark=1&size_key=hd";
+    const spinner = document.getElementById("previewSpinner");
+    spinner.classList.remove("d-none");
+    const wrap  = document.getElementById("previewWrap");
+    const wm    = document.getElementById("watermarkOverlay");
+    wrap.querySelectorAll("img,span.text-secondary").forEach(el => el.remove());
+
+    fetch(url)
+        .then(r => {
+            if (!r.ok) throw new Error("Preview failed.");
+            return r.blob();
+        })
+        .then(blob => {
+            const img = document.createElement("img");
+            img.src = URL.createObjectURL(blob);
+            img.className = "preview-img";
+            wrap.appendChild(img);
+            wm.style.display = "flex";
+            spinner.classList.add("d-none");
+        })
+        .catch(err => {
+            wrap.innerHTML = '<span class="text-danger small">' + err.message + '</span>';
+            spinner.classList.add("d-none");
+        });
+});
+
+document.getElementById("payBtn").addEventListener("click", function () {
+    const filters  = _getFilters();
+    const spinner  = document.getElementById("paySpinner");
+    const errEl    = document.getElementById("payError");
+    spinner.classList.remove("d-none");
+    errEl.classList.add("d-none");
+
+    fetch("{% url 'italiastadiaapp:export_checkout' %}", {
+        method: "POST",
+        headers: {"Content-Type": "application/json", "X-CSRFToken": "{{ csrf_token }}"},
+        body: JSON.stringify(filters),
+    })
+    .then(r => r.json())
+    .then(data => {
+        spinner.classList.add("d-none");
+        if (data.checkout_url) {
+            window.location.href = data.checkout_url;
+        } else {
+            errEl.textContent = data.error || "Something went wrong.";
+            errEl.classList.remove("d-none");
+        }
+    })
+    .catch(() => {
+        spinner.classList.add("d-none");
+        errEl.textContent = "Network error — please try again.";
+        errEl.classList.remove("d-none");
+    });
+});
+</script>
+</body>
+</html>

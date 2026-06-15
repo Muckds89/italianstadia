@@ -6,6 +6,7 @@ from .views import (
     stadium_detail, stadium_detail_redirect, stadiums_geojson,
     stadium_development_detail, team_detail, team_detail_redirect,
     tournament_list, tournament_detail, map_export,
+    export_page, export_checkout, export_webhook, export_success, export_download,
 )
 
 app_name = "italiastadiaapp"
@@ -29,4 +30,10 @@ urlpatterns = [
     path("api/status/", api_status, name="api_status"),
     path("stadium-development/<int:pk>/", stadium_development_detail, name="stadium_development_detail"),
     path("privacy/", views.privacy, name="privacy"),
+    # Paid export
+    path("export/", export_page, name="export_page"),
+    path("export/checkout/", export_checkout, name="export_checkout"),
+    path("export/webhook/", export_webhook, name="export_webhook"),
+    path("export/success/", export_success, name="export_success"),
+    path("export/download/<uuid:token>/", export_download, name="export_download"),
 ]

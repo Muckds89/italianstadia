@@ -1592,3 +1592,204 @@ def map_export(request):
     response["Content-Disposition"] = f'attachment; filename="{filename}"'
     response["Content-Encoding"] = "identity"  # prevent GzipMiddleware from re-encoding PNG
     return response
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PAID EXPORT — Stripe pay-per-download
+# ─────────────────────────────────────────────────────────────────────────────
+import stripe
+import uuid
+from datetime import timedelta
+from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST, require_GET
+from .models import ExportToken
+
+EXPORT_PRICE_EUR = 199  # cents
+
+
+def export_page(request):
+    """The /export/ landing page — shows filter UI and watermarked preview."""
+    return render(request, "export.html", {
+        "stripe_publishable_key": settings.STRIPE_SECRET_KEY.replace("sk_", "pk_") if settings.STRIPE_SECRET_KEY else "",
+    })
+
+
+@require_POST
+def export_checkout(request):
+    """Create a Stripe Checkout Session and redirect the user to it."""
+    if not settings.STRIPE_SECRET_KEY:
+        return JsonResponse({"error": "Stripe not configured."}, status=503)
+
+    try:
+        body = json.loads(request.body)
+    except Exception:
+        return JsonResponse({"error": "Invalid JSON."}, status=400)
+
+    # Build filter param string that will be stored and used at download time
+    allowed_keys = {
+        "country", "league", "ownership", "surface", "type",
+        "color_by", "style_key", "size_key", "title", "labels", "north", "legend",
+    }
+    filters = {k: v for k, v in body.items() if k in allowed_keys}
+    filters_json = json.dumps(filters)
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    base_url = settings.EXPORT_BASE_URL.rstrip("/")
+
+    try:
+        session = stripe.checkout.Session.create(
+            payment_method_types=["card"],
+            line_items=[{
+                "price_data": {
+                    "currency": "eur",
+                    "unit_amount": EXPORT_PRICE_EUR,
+                    "product_data": {
+                        "name": "Stadium Map Export",
+                        "description": "High-resolution PNG map download — single use",
+                    },
+                },
+                "quantity": 1,
+            }],
+            mode="payment",
+            success_url=base_url + "/export/success/?session_id={CHECKOUT_SESSION_ID}",
+            cancel_url=base_url + "/export/",
+            metadata={"filters_json": filters_json[:500]},  # Stripe metadata limit 500 chars
+        )
+    except stripe.StripeError as e:
+        return JsonResponse({"error": str(e)}, status=502)
+
+    # Persist token — paid=False until webhook confirms
+    ExportToken.objects.create(
+        stripe_session=session.id,
+        filters_json=filters_json,
+        paid=False,
+        expires_at=timezone.now() + timedelta(hours=24),
+    )
+
+    return JsonResponse({"checkout_url": session.url})
+
+
+@csrf_exempt
+@require_POST
+def export_webhook(request):
+    """Stripe webhook — marks ExportToken as paid on checkout.session.completed."""
+    payload = request.body
+    sig    = request.META.get("HTTP_STRIPE_SIGNATURE", "")
+    secret = settings.STRIPE_WEBHOOK_SECRET
+
+    if not secret:
+        return HttpResponse(status=400)
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    try:
+        event = stripe.Webhook.construct_event(payload, sig, secret)
+    except (ValueError, stripe.SignatureVerificationError):
+        return HttpResponse(status=400)
+
+    if event["type"] == "checkout.session.completed":
+        session_id = event["data"]["object"]["id"]
+        ExportToken.objects.filter(stripe_session=session_id).update(paid=True)
+
+    return HttpResponse(status=200)
+
+
+@require_GET
+def export_success(request):
+    """Redirect from Stripe success URL — find the token and show download page."""
+    session_id = request.GET.get("session_id", "")
+    if not session_id:
+        return redirect("italiastadiaapp:export_page")
+
+    # Poll briefly — webhook may arrive before or after this redirect
+    token_qs = ExportToken.objects.filter(stripe_session=session_id)
+    if not token_qs.exists():
+        return render(request, "export_error.html", {"msg": "Session not found."})
+
+    token_obj = token_qs.first()
+    if not token_obj.paid:
+        # Verify with Stripe directly (webhook may be delayed)
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        try:
+            session = stripe.checkout.Session.retrieve(session_id)
+            if session.payment_status == "paid":
+                token_obj.paid = True
+                token_obj.save(update_fields=["paid"])
+        except Exception:
+            pass
+
+    if not token_obj.paid:
+        return render(request, "export_error.html", {"msg": "Payment not confirmed yet. Please wait a moment and refresh."})
+
+    return render(request, "export_success.html", {"token": str(token_obj.token)})
+
+
+@require_GET
+def export_download(request, token):
+    """Validate token → generate PNG → mark used → return file."""
+    try:
+        token_uuid = uuid.UUID(str(token))
+    except ValueError:
+        raise Http404
+
+    try:
+        token_obj = ExportToken.objects.get(token=token_uuid)
+    except ExportToken.DoesNotExist:
+        raise Http404
+
+    if not token_obj.paid:
+        return render(request, "export_error.html", {"msg": "Payment not confirmed."}, status=402)
+    if token_obj.used:
+        return render(request, "export_error.html", {"msg": "This download link has already been used."}, status=410)
+    if timezone.now() > token_obj.expires_at:
+        return render(request, "export_error.html", {"msg": "This download link has expired."}, status=410)
+
+    # Mark used immediately to prevent double-download
+    token_obj.used = True
+    token_obj.save(update_fields=["used"])
+
+    # Reconstruct a fake GET request object for _parse_export_params
+    filters = json.loads(token_obj.filters_json)
+
+    class _FakeGET:
+        def get(self, key, default=""):
+            return filters.get(key, default)
+
+    class _FakeRequest:
+        GET = _FakeGET()
+
+    fake = _FakeRequest()
+    params = _parse_export_params(fake)
+    stadiums = _get_export_stadiums(params)
+
+    if not stadiums:
+        return JsonResponse({"error": "No stadiums match the filters."}, status=400)
+
+    W, H = params["W"], params["H"]
+    main_stadiums, inset_stadiums = _split_main_inset(stadiums)
+    bbox = _bbox_with_padding(main_stadiums if main_stadiums else stadiums)
+    country_index = {}
+    for s in stadiums:
+        if s["country"] not in country_index:
+            country_index[s["country"]] = len(country_index)
+
+    img = _make_background(params["style_key"], W, H, bbox)
+    img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index)
+    if inset_stadiums:
+        img = _draw_inset(img, inset_stadiums, params, W, H, country_index, params["style_key"])
+    if params["legend"]:
+        img = _draw_legend(img, params, stadiums)
+    if params["north"]:
+        img = _draw_north_arrow(img, W, H)
+    if params["title"]:
+        img = _draw_title(img, params["title"], W)
+
+    buf = io.BytesIO()
+    img.convert("RGB").save(buf, format="PNG", optimize=True)
+    buf.seek(0)
+
+    filename = f"stadiums-map-{params['size_key']}.png"
+    response = HttpResponse(buf.read(), content_type="image/png")
+    response["Content-Disposition"] = f'attachment; filename="{filename}"'
+    response["Content-Encoding"] = "identity"
+    return response
