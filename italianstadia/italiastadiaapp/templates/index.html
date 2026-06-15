@@ -12,7 +12,6 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Stadiums of Europe">
     <link rel="manifest" href="{% static 'manifest.json' %}">
-    <link rel="preload" href="{% static 'data/stadiums_map.json' %}" as="fetch" crossorigin="anonymous">
     <link rel="preload" href="{% static 'js/map.js' %}" as="script">
     <title>Stadiums of Europe</title>
 
@@ -358,7 +357,7 @@
 </nav>
 <div id="map"
      data-countries-url="{% static 'data/ne_110m_admin_0_countries.geojson' %}"
-     data-stadiums-url="{% static 'data/stadiums_map.json' %}"
+     data-stadiums-url="{% url 'italiastadiaapp:stadiums_geojson' %}"
      data-developments-url="{% url 'italiastadiaapp:stadium_developments_geojson' %}">
     <div id="map-overlay" aria-hidden="true">
         <div class="map-spinner"></div>
