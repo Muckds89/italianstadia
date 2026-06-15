@@ -60,7 +60,7 @@ html, body {
     border-radius: 50%;
     border: 2px solid rgba(255,255,255,0.85);
     box-shadow: 0 1px 5px rgba(0,0,0,0.7);
-    background: #222;
+    background: #fff;
     overflow: hidden;
     transition: transform 0.15s, box-shadow 0.15s;
     cursor: pointer;
@@ -892,12 +892,39 @@ select.filter-has-value {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
 }
 
-/* ── Live search ── */
+/* ── Live search & city zoom ── */
 .search-wrap {
     position: relative;
     flex-shrink: 0;
     width: clamp(160px, 18vw, 300px);
 }
+.city-zoom-clear {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 0 2px;
+    line-height: 1;
+}
+.city-zoom-clear:hover { color: #fff; }
+/* Permanent label tooltips shown in city-zoom mode */
+.city-label-tooltip {
+    background: rgba(10,10,20,0.82);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 4px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+.city-label-tooltip::before { display: none; }
 .search-results {
     position: absolute;
     top: 100%;

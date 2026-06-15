@@ -272,6 +272,14 @@
                 <ul id="searchResults" class="search-results" style="display:none"></ul>
             </div>
 
+            <!-- City area zoom -->
+            <div id="cityZoomWrap" class="search-wrap">
+                <input type="search" id="cityZoomInput" class="form-control form-control-sm"
+                       placeholder="Zoom to city…" autocomplete="off" list="cityZoomList">
+                <datalist id="cityZoomList"></datalist>
+                <button id="cityZoomClear" class="city-zoom-clear" title="Clear city zoom" style="display:none">✕</button>
+            </div>
+
             <div id="operationalFilters" class="d-flex align-items-center flex-wrap gap-2">
 
                 <!-- Country-League combined picker (visual component) -->

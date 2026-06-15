@@ -1177,6 +1177,7 @@ fetch(document.getElementById("map").dataset.stadiumsUrl)
         populateCountryFilter();
         populateLeagueFilter("");
         wireSearch();
+        document.dispatchEvent(new Event("stadiumsLoaded"));
 
         if (autoDevMode) {
             // Coming back from a development detail page — skip operational view entirely,
@@ -1424,6 +1425,118 @@ function wireSearch() {
         if (!e.target.closest("#searchWrap")) results.style.display = "none";
     });
 }
+
+// ── City area zoom ────────────────────────────────────────────────────────
+// When the user types a city name and presses Enter (or picks from datalist),
+// the map flies to that city's markers and shows permanent name labels so
+// teams/stadiums are identifiable without hovering.
+
+let _cityZoomLabels = [];  // active permanent tooltips
+
+function _clearCityZoom() {
+    _cityZoomLabels.forEach(function (t) { t.remove(); });
+    _cityZoomLabels = [];
+    const clearBtn = document.getElementById("cityZoomClear");
+    if (clearBtn) clearBtn.style.display = "none";
+    const input = document.getElementById("cityZoomInput");
+    if (input) input.value = "";
+}
+
+function _applyCityZoom(cityName) {
+    _clearCityZoom();
+    if (!cityName) return;
+
+    // Find all operational markers in this city (case-insensitive)
+    const q = cityName.trim().toLowerCase();
+    const cityMarkers = operationalMarkers.filter(function (m) {
+        return (m.city || "").toLowerCase() === q;
+    });
+    if (!cityMarkers.length) return;
+
+    // Ensure all city markers are on the map (some may be filtered out)
+    cityMarkers.forEach(function (m) {
+        if (!clusterGroup.hasLayer(m) && !map.hasLayer(m)) {
+            m.setOpacity(1.0);
+            m.setZIndexOffset(2000);
+            m.setIcon(createMultiBadgeIcon(m.teams, BADGE_SIZE.active));
+            m.addTo(map);
+        }
+    });
+
+    // Fly to bounding box of the city markers
+    const group = L.featureGroup(cityMarkers);
+    map.flyToBounds(group.getBounds(), {
+        paddingTopLeft: [40, 80],
+        paddingBottomRight: [40, 40],
+        maxZoom: 14,
+        duration: 1.2,
+    });
+
+    // After fly completes, open permanent label tooltips
+    map.once("moveend", function () {
+        cityMarkers.forEach(function (m) {
+            const label = m.primaryTeam && m.primaryTeam.name
+                ? m.primaryTeam.name + " · " + m.stadiumName
+                : m.stadiumName;
+            const tt = m.bindTooltip(label, {
+                permanent: true,
+                direction: "top",
+                className: "city-label-tooltip",
+                offset: [0, -18],
+            }).openTooltip();
+            _cityZoomLabels.push(tt);
+        });
+    });
+
+    const clearBtn = document.getElementById("cityZoomClear");
+    if (clearBtn) clearBtn.style.display = "";
+}
+
+(function initCityZoom() {
+    const input   = document.getElementById("cityZoomInput");
+    const datalist = document.getElementById("cityZoomList");
+    const clearBtn = document.getElementById("cityZoomClear");
+    if (!input || !datalist) return;
+
+    // Populate datalist after markers load (operationalMarkers filled by loadStadiums)
+    // We hook into the existing fetch flow by re-checking after a short delay
+    function populateCityList() {
+        const cities = [...new Set(operationalMarkers.map(m => m.city).filter(Boolean))].sort();
+        datalist.innerHTML = "";
+        cities.forEach(function (city) {
+            const opt = document.createElement("option");
+            opt.value = city;
+            datalist.appendChild(opt);
+        });
+    }
+
+    // Call after data loads — operationalMarkers is populated in loadStadiums callback
+    const _origLoad = window._stadiumsLoaded;
+    document.addEventListener("stadiumsLoaded", populateCityList);
+
+    input.addEventListener("change", function () {
+        _applyCityZoom(input.value);
+    });
+
+    input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            _applyCityZoom(input.value);
+            input.blur();
+        }
+        if (e.key === "Escape") {
+            _clearCityZoom();
+            input.blur();
+        }
+    });
+
+    if (clearBtn) {
+        clearBtn.addEventListener("click", function () {
+            _clearCityZoom();
+            fitToVisibleMarkers(lastVisibleMarkers);
+        });
+    }
+}());
 
 // ── Mobile sheet wiring ───────────────────────────────────────────────────
 const mobileSheetClose = document.getElementById("mobileSheetClose");
