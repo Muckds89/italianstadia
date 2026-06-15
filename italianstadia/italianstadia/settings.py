@@ -40,8 +40,17 @@ MAPTILER_API_KEY = os.environ.get("MAPTILER_API_KEY", "")
 # Stripe — set STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET in Render env vars.
 STRIPE_SECRET_KEY      = os.environ.get("STRIPE_SECRET_KEY", "")
 STRIPE_WEBHOOK_SECRET  = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
-STRIPE_PRICE_EXPORT    = os.environ.get("STRIPE_PRICE_EXPORT", "")   # Price ID for €1.99 export
+STRIPE_PRICE_EXPORT    = os.environ.get("STRIPE_PRICE_EXPORT", "")
 EXPORT_BASE_URL        = os.environ.get("EXPORT_BASE_URL", "http://localhost:8000")
+
+# Email — set GMAIL_USER and GMAIL_APP_PASSWORD in Render env vars
+EMAIL_BACKEND         = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST            = "smtp.gmail.com"
+EMAIL_PORT            = 587
+EMAIL_USE_TLS         = True
+EMAIL_HOST_USER       = os.environ.get("GMAIL_USER", "")
+EMAIL_HOST_PASSWORD   = os.environ.get("GMAIL_APP_PASSWORD", "")
+DEFAULT_FROM_EMAIL    = os.environ.get("GMAIL_USER", "noreply@stadiumsofeurope.com")
 
 SECRET_KEY = os.environ.get(
     "SECRET_KEY",

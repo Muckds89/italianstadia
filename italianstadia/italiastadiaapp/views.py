@@ -1817,31 +1817,11 @@ def export_success(request):
     return render(request, "export_success.html", {"token": str(token_obj.token)})
 
 
-@require_GET
-def export_download(request, token):
-    """Validate token → generate PNG → mark used → return file."""
-    try:
-        token_uuid = uuid.UUID(str(token))
-    except ValueError:
-        raise Http404
-
-    try:
-        token_obj = ExportToken.objects.get(token=token_uuid)
-    except ExportToken.DoesNotExist:
-        raise Http404
-
-    if not token_obj.paid:
-        return render(request, "export_error.html", {"msg": "Payment not confirmed."}, status=402)
-    if token_obj.used:
-        return render(request, "export_error.html", {"msg": "This download link has already been used."}, status=410)
-    if timezone.now() > token_obj.expires_at:
-        return render(request, "export_error.html", {"msg": "This download link has expired."}, status=410)
-
-    # Reconstruct a fake GET request object for _parse_export_params
+def _render_export_png(token_obj):
+    """Generate the PNG for an ExportToken and return raw bytes."""
     filters = json.loads(token_obj.filters_json)
-    # Cap at FHD to avoid gunicorn timeout on 4K renders
     if filters.get("size_key") == "4k":
-        filters["size_key"] = "fhd"
+        filters["size_key"] = "fhd"   # cap to avoid OOM on free tier
 
     class _FakeGET:
         def get(self, key, default=""):
@@ -1850,12 +1830,10 @@ def export_download(request, token):
     class _FakeRequest:
         GET = _FakeGET()
 
-    fake = _FakeRequest()
-    params = _parse_export_params(fake)
+    params   = _parse_export_params(_FakeRequest())
     stadiums = _get_export_stadiums(params)
-
     if not stadiums:
-        return JsonResponse({"error": "No stadiums match the filters."}, status=400)
+        return None, "No stadiums match the filters."
 
     W, H = params["W"], params["H"]
     main_stadiums, inset_stadiums = _split_main_inset(stadiums)
@@ -1883,14 +1861,71 @@ def export_download(request, token):
 
     buf = io.BytesIO()
     img.convert("RGB").save(buf, format="PNG", optimize=True)
-    buf.seek(0)
+    return buf.getvalue(), None
 
-    # Mark used only after successful generation — timeout won't burn the token
+
+@require_GET
+def export_download(request, token):
+    """Validate token → generate PNG → email it to the buyer → mark used."""
+    from django.core.mail import EmailMessage
+
+    try:
+        token_uuid = uuid.UUID(str(token))
+    except ValueError:
+        raise Http404
+
+    try:
+        token_obj = ExportToken.objects.get(token=token_uuid)
+    except ExportToken.DoesNotExist:
+        raise Http404
+
+    if not token_obj.paid:
+        return render(request, "export_error.html", {"msg": "Payment not confirmed."}, status=402)
+    if token_obj.used:
+        return render(request, "export_error.html", {"msg": "This download link has already been used. Check your email — the map was sent after your first click."}, status=410)
+    if timezone.now() > token_obj.expires_at:
+        return render(request, "export_error.html", {"msg": "This download link has expired."}, status=410)
+
+    # Get buyer email from Stripe
+    buyer_email = ""
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    try:
+        session = stripe.checkout.Session.retrieve(token_obj.stripe_session)
+        buyer_email = session.customer_details.email or ""
+    except Exception:
+        pass
+
+    # Generate PNG
+    png_bytes, err = _render_export_png(token_obj)
+    if err:
+        return render(request, "export_error.html", {"msg": err})
+
+    # Mark used before sending email (generation succeeded)
     token_obj.used = True
     token_obj.save(update_fields=["used"])
 
-    filename = f"stadiums-map-{params['size_key']}.png"
-    response = HttpResponse(buf.read(), content_type="image/png")
+    # Email PNG to buyer
+    filename = "stadiums-of-europe-map.png"
+    if buyer_email:
+        try:
+            mail = EmailMessage(
+                subject="Your Stadiums of Europe Map",
+                body=(
+                    "Hi,\n\nThank you for your purchase!\n\n"
+                    "Your map is attached to this email as a high-resolution PNG.\n\n"
+                    "— Stadiums of Europe\n"
+                    "stadiumsofeurope.com"
+                ),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[buyer_email],
+            )
+            mail.attach(filename, png_bytes, "image/png")
+            mail.send(fail_silently=True)
+        except Exception:
+            pass
+
+    # Also return the file directly in the response
+    response = HttpResponse(png_bytes, content_type="image/png")
     response["Content-Disposition"] = f'attachment; filename="{filename}"'
     response["Content-Encoding"] = "identity"
     return response
