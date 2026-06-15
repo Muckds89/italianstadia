@@ -1482,17 +1482,9 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
 
         lx, ly, box, lsx, lsy, lex, ley = chosen
 
-        # ── Thin leader line drawn first ──────────────────────────────────────
+        # ── Thin leader line + pill — drawn directly, no full-canvas overlay ──
         draw.line([(lsx, lsy), (lex, ley)], fill=(255, 255, 255), width=1)
-
-        # ── Pill background ───────────────────────────────────────────────────
-        overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
-        ImageDraw.Draw(overlay).rounded_rectangle(
-            [lx, ly, lx + pill_w, ly + pill_h],
-            radius=5, fill=(8, 10, 20, 220)
-        )
-        img = Image.alpha_composite(img, overlay)
-        draw = ImageDraw.Draw(img)
+        draw.rounded_rectangle([lx, ly, lx + pill_w, ly + pill_h], radius=5, fill=(8, 10, 20, 220))
 
         ty = ly + PAD_Y
         if show_team:
@@ -1549,8 +1541,7 @@ def _draw_legend(img, params, stadiums):
     margin = 16
     x0, y0 = margin, H - margin - box_h
 
-    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
-    d = ImageDraw.Draw(overlay)
+    d = ImageDraw.Draw(img)
     d.rounded_rectangle([x0, y0, x0 + box_w, y0 + box_h], radius=8, fill=(20, 20, 20, 190))
 
     for i, (colour, label) in enumerate(entries):
@@ -1559,15 +1550,13 @@ def _draw_legend(img, params, stadiums):
         d.ellipse([cx - dot_r, cy - dot_r, cx + dot_r, cy + dot_r], fill=colour)
         d.text((cx + dot_r + 8, cy - 8), label, font=font, fill=(230, 230, 230))
 
-    return Image.alpha_composite(img, overlay)
+    return img
 
 
 def _draw_north_arrow(img, W, H):
-    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
-    d = ImageDraw.Draw(overlay)
+    d = ImageDraw.Draw(img)
     margin = 20
     cx, cy = W - margin - 18, margin + 30
-    # Arrow shaft + head
     d.polygon([(cx, cy - 20), (cx - 8, cy + 4), (cx + 8, cy + 4)], fill=(255, 255, 255, 220))
     d.polygon([(cx, cy - 20), (cx - 8, cy + 4), (cx, cy - 4)], fill=(100, 100, 100, 220))
     try:
@@ -1575,7 +1564,7 @@ def _draw_north_arrow(img, W, H):
     except Exception:
         font = ImageFont.load_default()
     d.text((cx - 5, cy + 6), "N", font=font, fill=(255, 255, 255, 220))
-    return Image.alpha_composite(img, overlay)
+    return img
 
 
 def _draw_title(img, title_text, W, subtitle_text=""):
@@ -1590,10 +1579,9 @@ def _draw_title(img, title_text, W, subtitle_text=""):
     font_title    = _load_font(True,  32)
     font_subtitle = _load_font(False, 20)
 
-    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
-    d = ImageDraw.Draw(overlay)
+    d = ImageDraw.Draw(img)
     PAD = 14
-    GAP = 6   # gap between title and subtitle
+    GAP = 6
 
     def _tw_th(text, font):
         try:
@@ -1613,14 +1601,13 @@ def _draw_title(img, title_text, W, subtitle_text=""):
     rx1, ry1 = rx0 + box_w, ry0 + box_h
 
     d.rounded_rectangle([rx0, ry0, rx1, ry1], radius=8, fill=(10, 12, 22, 210))
-    # Title centred in box
     tx = rx0 + (box_w - tw1) // 2
     d.text((tx, ry0 + PAD), title_text, font=font_title, fill=(255, 255, 255))
     if subtitle_text:
         sx = rx0 + (box_w - tw2) // 2
         d.text((sx, ry0 + PAD + th1 + GAP), subtitle_text, font=font_subtitle, fill=(0, 220, 255))
 
-    return Image.alpha_composite(img, overlay)
+    return img
 
 
 def _draw_logo(img, W, H):
@@ -1635,8 +1622,7 @@ def _draw_logo(img, W, H):
 
     font = _load_font(True, 18)
     text = "stadiumsofeurope.com"
-    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
-    d = ImageDraw.Draw(overlay)
+    d = ImageDraw.Draw(img)
     try:
         bb = d.textbbox((0, 0), text, font=font)
         tw, th = bb[2] - bb[0], bb[3] - bb[1]
@@ -1647,7 +1633,7 @@ def _draw_logo(img, W, H):
     y = H - th - PAD * 2 - 4
     d.rounded_rectangle([x, y, x + tw + PAD * 2, y + th + PAD * 2], radius=6, fill=(10, 12, 22, 200))
     d.text((x + PAD, y + PAD), text, font=font, fill=(0, 220, 255))
-    return Image.alpha_composite(img, overlay)
+    return img
 
 
 def map_export(request):
@@ -1659,6 +1645,10 @@ def map_export(request):
     cache.set(cache_key, True, 10)
 
     params = _parse_export_params(request)
+    # Cap to HD on free tier (512 MB RAM limit — FHD/4K OOM-kills the dyno)
+    if params["size_key"] in ("fhd", "4k"):
+        params["size_key"] = "hd"
+        params["W"], params["H"] = 1280, 720
     stadiums = _get_export_stadiums(params)
 
     if not stadiums:
@@ -1867,7 +1857,7 @@ def _render_export_png(token_obj):
     """Generate the PNG for an ExportToken and return raw bytes."""
     filters = json.loads(token_obj.filters_json)
     if filters.get("size_key") == "4k":
-        filters["size_key"] = "fhd"   # cap to avoid OOM on free tier
+        filters["size_key"] = "hd"   # cap to HD — free tier 512 MB RAM limit
 
     class _FakeGET:
         def get(self, key, default=""):
