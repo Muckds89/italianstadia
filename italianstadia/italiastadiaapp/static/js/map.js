@@ -1431,11 +1431,14 @@ function wireSearch() {
 // the map flies to that city's markers and shows permanent name labels so
 // teams/stadiums are identifiable without hovering.
 
-let _cityZoomLabels = [];  // active permanent tooltips
+let _cityZoomMarkers = [];  // markers with active permanent tooltips
 
 function _clearCityZoom() {
-    _cityZoomLabels.forEach(function (t) { t.remove(); });
-    _cityZoomLabels = [];
+    // Unbind tooltips only — do NOT remove the markers themselves
+    _cityZoomMarkers.forEach(function (m) {
+        try { m.unbindTooltip(); } catch (e) {}
+    });
+    _cityZoomMarkers = [];
     const clearBtn = document.getElementById("cityZoomClear");
     if (clearBtn) clearBtn.style.display = "none";
     const input = document.getElementById("cityZoomInput");
@@ -1444,16 +1447,15 @@ function _clearCityZoom() {
 
 function _applyCityZoom(cityName) {
     _clearCityZoom();
-    if (!cityName) return;
+    if (!cityName || !cityName.trim()) return;
 
-    // Find all operational markers in this city (case-insensitive)
     const q = cityName.trim().toLowerCase();
     const cityMarkers = operationalMarkers.filter(function (m) {
         return (m.city || "").toLowerCase() === q;
     });
     if (!cityMarkers.length) return;
 
-    // Ensure all city markers are on the map (some may be filtered out)
+    // Make sure every city marker is visible on the map
     cityMarkers.forEach(function (m) {
         if (!clusterGroup.hasLayer(m) && !map.hasLayer(m)) {
             m.setOpacity(1.0);
@@ -1463,7 +1465,6 @@ function _applyCityZoom(cityName) {
         }
     });
 
-    // Fly to bounding box of the city markers
     const group = L.featureGroup(cityMarkers);
     map.flyToBounds(group.getBounds(), {
         paddingTopLeft: [40, 80],
@@ -1472,19 +1473,19 @@ function _applyCityZoom(cityName) {
         duration: 1.2,
     });
 
-    // After fly completes, open permanent label tooltips
+    // Open permanent tooltips after fly completes
     map.once("moveend", function () {
         cityMarkers.forEach(function (m) {
             const label = m.primaryTeam && m.primaryTeam.name
                 ? m.primaryTeam.name + " · " + m.stadiumName
                 : m.stadiumName;
-            const tt = m.bindTooltip(label, {
+            m.bindTooltip(label, {
                 permanent: true,
                 direction: "top",
                 className: "city-label-tooltip",
                 offset: [0, -18],
             }).openTooltip();
-            _cityZoomLabels.push(tt);
+            _cityZoomMarkers.push(m);
         });
     });
 
@@ -1493,15 +1494,13 @@ function _applyCityZoom(cityName) {
 }
 
 (function initCityZoom() {
-    const input   = document.getElementById("cityZoomInput");
+    const input    = document.getElementById("cityZoomInput");
     const datalist = document.getElementById("cityZoomList");
     const clearBtn = document.getElementById("cityZoomClear");
     if (!input || !datalist) return;
 
-    // Populate datalist after markers load (operationalMarkers filled by loadStadiums)
-    // We hook into the existing fetch flow by re-checking after a short delay
     function populateCityList() {
-        const cities = [...new Set(operationalMarkers.map(m => m.city).filter(Boolean))].sort();
+        const cities = [...new Set(operationalMarkers.map(function (m) { return m.city; }).filter(Boolean))].sort();
         datalist.innerHTML = "";
         cities.forEach(function (city) {
             const opt = document.createElement("option");
@@ -1510,13 +1509,21 @@ function _applyCityZoom(cityName) {
         });
     }
 
-    // Call after data loads — operationalMarkers is populated in loadStadiums callback
-    const _origLoad = window._stadiumsLoaded;
     document.addEventListener("stadiumsLoaded", populateCityList);
 
-    input.addEventListener("change", function () {
-        _applyCityZoom(input.value);
-    });
+    // `input` fires immediately when user picks from datalist (cross-browser);
+    // `change` fires on blur — listen to both to cover all browsers
+    function _onCityInput() {
+        const val = input.value.trim();
+        // Only fire when the typed value exactly matches a known city
+        const known = [...datalist.options].map(function (o) { return o.value.toLowerCase(); });
+        if (known.includes(val.toLowerCase())) {
+            _applyCityZoom(val);
+        }
+    }
+
+    input.addEventListener("input",  _onCityInput);
+    input.addEventListener("change", _onCityInput);
 
     input.addEventListener("keydown", function (e) {
         if (e.key === "Enter") {
