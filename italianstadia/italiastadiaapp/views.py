@@ -1260,14 +1260,17 @@ def _dot_colour(stadium, params, country_index):
 
 
 def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
-    BADGE_R   = 13    # badge circle radius
-    RING_W    = 2     # white ring width
-    FONT_SZ   = 22    # stadium name (bold) — readable at social media size
-    FONT_SZ2  = 17    # team name (regular) above stadium
-    PAD_X     = 10    # horizontal padding inside pill
-    PAD_Y     = 7     # vertical padding inside pill
-    GAP       = 55    # gap between badge edge and pill — wide enough for visible leader line
-    LINE_GAP  = 3     # gap between the two text lines
+    BADGE_R   = 13
+    RING_W    = 2
+    FONT_SZ   = 22
+    FONT_SZ2  = 17
+    PAD_X     = 10
+    PAD_Y     = 7
+    LINE_GAP  = 3
+    # Radial search: try these distances (badge-center to pill-center) in order
+    RADII     = [120, 160, 200, 240, 90]
+    # 16 angles, starting from right, going clockwise
+    ANGLES    = [i * (360 / 16) for i in range(16)]
 
     badges = _prefetch_badges(stadiums, size=BADGE_R * 2)
 
@@ -1284,28 +1287,47 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
 
     rr = BADGE_R + RING_W
 
-    # Track both placed label boxes AND badge circles for collision
-    placed_boxes  = []   # label pill boxes (x0,y0,x1,y1)
-    badge_circles = []   # (cx, cy, r) for every badge
+    placed_boxes  = []
+    badge_circles = []
 
-    def _box_overlaps(box):
-        x0, y0, x1, y1 = box
-        # Check against other labels
-        for pb in placed_boxes:
-            if not (x1 < pb[0] or x0 > pb[2] or y1 < pb[1] or y0 > pb[3]):
-                return True
-        # Check against badge circles (label must not sit on top of another badge)
-        cx2, cy2 = (x0 + x1) / 2, (y0 + y1) / 2
-        hw, hh = (x1 - x0) / 2, (y1 - y0) / 2
+    def _seg_hits_badge(ax, ay, bx, by, own_px, own_py):
+        """Return True if segment (ax,ay)→(bx,by) intersects any badge circle
+        except the one at (own_px, own_py)."""
         for bcx, bcy, br in badge_circles:
-            # rough AABB vs circle check
-            dx = max(abs(bcx - cx2) - hw, 0)
-            dy = max(abs(bcy - cy2) - hh, 0)
-            if dx * dx + dy * dy < (br + 4) ** 2:
+            if bcx == own_px and bcy == own_py:
+                continue
+            dx, dy = bx - ax, by - ay
+            fx, fy = ax - bcx, ay - bcy
+            a = dx*dx + dy*dy
+            if a == 0:
+                continue
+            b = 2*(fx*dx + fy*dy)
+            c = fx*fx + fy*fy - (br + 3)**2
+            disc = b*b - 4*a*c
+            if disc < 0:
+                continue
+            sd = math.sqrt(disc)
+            t1 = (-b - sd) / (2*a)
+            t2 = (-b + sd) / (2*a)
+            if (0 <= t1 <= 1) or (0 <= t2 <= 1):
                 return True
         return False
 
-    # First pass: draw all badges and record their positions
+    def _box_overlaps(box):
+        x0, y0, x1, y1 = box
+        for pb in placed_boxes:
+            if not (x1 < pb[0] or x0 > pb[2] or y1 < pb[1] or y0 > pb[3]):
+                return True
+        cx2, cy2 = (x0 + x1) / 2, (y0 + y1) / 2
+        hw, hh = (x1 - x0) / 2, (y1 - y0) / 2
+        for bcx, bcy, br in badge_circles:
+            dx = max(abs(bcx - cx2) - hw, 0)
+            dy = max(abs(bcy - cy2) - hh, 0)
+            if dx*dx + dy*dy < (br + 4)**2:
+                return True
+        return False
+
+    # First pass: draw all badges
     dot_positions = []
     for s in stadiums:
         px, py = _lon_lat_to_px(s["lon"], s["lat"], bbox, W, H)
@@ -1327,7 +1349,7 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
     if not params["labels"]:
         return img
 
-    # Second pass: place labels now that all badges are drawn and registered
+    # Second pass: radial search for each label
     for px, py, s in dot_positions:
         team_line    = s.get("team_name", "") or ""
         stadium_line = s["name"]
@@ -1345,44 +1367,47 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
         pill_w = max(tw1, tw2) + PAD_X * 2
         pill_h = (th1 + LINE_GAP + th2 if show_team else th2) + PAD_Y * 2
 
-        # Candidate positions + the exact anchor points for the leader line
-        # Each entry: (pill_lx, pill_ly, badge_anchor, pill_anchor)
-        pmid = pill_h // 2
-        candidates = [
-            # right: line from badge right edge → pill left mid
-            (px + rr + GAP,          py - pmid,
-             (px + rr,               py),
-             (px + rr + GAP,         py)),
-            # left: line from badge left edge → pill right mid
-            (px - rr - GAP - pill_w, py - pmid,
-             (px - rr,               py),
-             (px - rr - GAP,         py)),
-            # above: line from badge top edge → pill bottom mid
-            (px - pill_w // 2,       py - rr - GAP - pill_h,
-             (px,                    py - rr),
-             (px,                    py - rr - GAP)),
-            # below: line from badge bottom edge → pill top mid
-            (px - pill_w // 2,       py + rr + GAP,
-             (px,                    py + rr),
-             (px,                    py + rr + GAP)),
-        ]
+        # Prefer angles pointing outward (away from image center)
+        cx_map, cy_map = W / 2, H / 2
+        base_angle = math.degrees(math.atan2(py - cy_map, px - cx_map))
+        sorted_angles = sorted(
+            ANGLES,
+            key=lambda a: abs(((a - base_angle + 180) % 360) - 180)
+        )
 
         chosen = None
-        for lx, ly, ba, pa in candidates:
-            box = (lx, ly, lx + pill_w, ly + pill_h)
-            if lx >= 2 and ly >= 2 and lx + pill_w <= W - 2 and ly + pill_h <= H - 2:
-                if not _box_overlaps(box):
-                    chosen = (lx, ly, box, ba, pa)
-                    break
+        for radius in RADII:
+            for angle_deg in sorted_angles:
+                rad = math.radians(angle_deg)
+                # pill center target
+                pcx = px + radius * math.cos(rad)
+                pcy = py + radius * math.sin(rad)
+                lx = int(pcx - pill_w / 2)
+                ly = int(pcy - pill_h / 2)
+                box = (lx, ly, lx + pill_w, ly + pill_h)
+                if lx < 2 or ly < 2 or lx + pill_w > W - 2 or ly + pill_h > H - 2:
+                    continue
+                if _box_overlaps(box):
+                    continue
+                # Leader line: badge-ring edge → pill center
+                nx = math.cos(rad)
+                ny = math.sin(rad)
+                line_sx = px + nx * (rr + 1)
+                line_sy = py + ny * (rr + 1)
+                if _seg_hits_badge(line_sx, line_sy, pcx, pcy, px, py):
+                    continue
+                chosen = (lx, ly, box, line_sx, line_sy, pcx, pcy)
+                break
+            if chosen:
+                break
 
-        # No clean position found → skip to reduce clutter in dense areas
         if not chosen:
             continue
 
-        lx, ly, box, badge_anchor, pill_anchor = chosen
+        lx, ly, box, lsx, lsy, lex, ley = chosen
 
-        # ── Leader line: badge edge → pill edge, drawn BEFORE pill so pill covers the end ──
-        draw.line([badge_anchor, pill_anchor], fill=(255, 255, 255), width=3)
+        # ── Thin leader line drawn first ──────────────────────────────────────
+        draw.line([(lsx, lsy), (lex, ley)], fill=(255, 255, 255), width=1)
 
         # ── Pill background ───────────────────────────────────────────────────
         overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
