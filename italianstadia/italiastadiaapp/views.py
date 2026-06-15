@@ -1,8 +1,17 @@
 import csv
+import io
 import json
+import logging
+import math
+import traceback
 from collections import defaultdict, OrderedDict
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+import requests as _requests
+from PIL import Image, ImageDraw, ImageFont
 
 from django.conf import settings
+from django.core.cache import cache
 from django.db.models import Avg, Count, F, Max, Sum
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -838,13 +847,6 @@ def tournament_detail(request, slug):
 
 # ── Map Export ────────────────────────────────────────────────────────────────
 
-import io
-import math
-import requests as _requests
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from django.core.cache import cache
-from PIL import Image, ImageDraw, ImageFont
-
 _EXPORT_SIZES = {
     "twitter":   (1500, 500),
     "instagram": (1080, 1080),
@@ -1318,7 +1320,6 @@ def map_export(request):
         if s["country"] not in country_index:
             country_index[s["country"]] = len(country_index)
 
-    import logging, traceback
     log = logging.getLogger(__name__)
 
     try:
