@@ -1,4 +1,5 @@
 import csv
+import hashlib
 import io
 import json
 import logging
@@ -940,12 +941,15 @@ def _get_export_stadiums(params):
     results = []
     for s in qs:
         country = s.city.country if s.city else ""
+        primary_team = next(iter(s.teams.all()), None)
+        image_url = (primary_team.image_url or "") if primary_team else ""
         results.append({
             "name": s.name,
             "lat": float(s.latitude),
             "lon": float(s.longitude),
             "surface": s.surface or "",
             "country": country,
+            "image_url": image_url,
         })
     return results
 
@@ -987,7 +991,7 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key):
     IW, IH = 210, 160
     margin = 12
     ix0 = W - IW - margin
-    iy0 = H - IH - margin
+    iy0 = margin  # top-right corner
 
     inset_bbox = _bbox_with_padding(inset_stadiums, pad=0.25)
     inset_img  = _solid_background(style_key, IW, IH, inset_bbox)
@@ -1039,13 +1043,13 @@ import json
 from pathlib import Path
 
 _LAND_COLOURS = {
-    "dark":      (32,  36,  54,  255),
+    "dark":      (38,  46,  72,  255),   # noticeably brighter than bg (18,22,36)
     "light":     (215, 220, 228, 255),
     "topo":      (200, 218, 180, 255),
     "satellite": (28,  44,  28,  255),
 }
 _BORDER_COLOURS = {
-    "dark":      (55,  62,  90,  255),
+    "dark":      (85, 100, 150, 255),    # strong blue-grey border
     "light":     (155, 162, 175, 255),
     "topo":      (140, 165, 120, 255),
     "satellite": (50,  70,  50,  255),
@@ -1078,12 +1082,16 @@ def _draw_countries(img, bbox, W, H, style_key):
         elif geom["type"] == "MultiPolygon":
             rings = [poly[0] for poly in geom["coordinates"]]
         for ring in rings:
-            pts = [
-                _lon_lat_to_px(lon, lat, bbox, W, H)
+            # Check if ring overlaps the extended view bbox at all
+            if not any(
+                (lon_min - pad) <= lon <= (lon_max + pad) and
+                (lat_min - pad) <= lat <= (lat_max + pad)
                 for lon, lat in ring
-                if (lon_min - pad) <= lon <= (lon_max + pad)
-                and (lat_min - pad) <= lat <= (lat_max + pad)
-            ]
+            ):
+                continue
+            # Project ALL points — Pillow clips naturally; per-point filtering
+            # creates broken polygons for rings that cross the bbox edge
+            pts = [_lon_lat_to_px(lon, lat, bbox, W, H) for lon, lat in ring]
             if len(pts) >= 3:
                 d.polygon(pts, fill=land, outline=border)
     return img
@@ -1154,6 +1162,51 @@ def _make_background(style_key, W, H, bbox, use_tiles=True):
     return cropped.resize((W, H), Image.LANCZOS)
 
 
+def _fetch_badge_image(url, size=20):
+    """Download, resize to size×size, and cache a badge image. Returns RGBA Image or None."""
+    if not url:
+        return None
+    key = f"export_badge_{hashlib.md5(url.encode()).hexdigest()}_{size}"
+    data = cache.get(key)
+    if data:
+        try:
+            return Image.open(io.BytesIO(data)).convert("RGBA")
+        except Exception:
+            return None
+    try:
+        r = _requests.get(url, timeout=4, headers={"User-Agent": "StadiumsOfEurope/1.0"})
+        r.raise_for_status()
+        img = Image.open(io.BytesIO(r.content)).convert("RGBA")
+        # For portrait images (national team badges include text below crest)
+        # crop to the top square where the actual emblem lives
+        w, h = img.size
+        if h > w:
+            img = img.crop((0, 0, w, w))
+        img = img.resize((size, size), Image.LANCZOS)
+        buf = io.BytesIO()
+        img.save(buf, format="PNG")
+        cache.set(key, buf.getvalue(), 86400 * 7)
+        return img
+    except Exception:
+        return None
+
+
+def _prefetch_badges(stadiums, size=20):
+    """Fetch all badge images in parallel. Returns dict {stadium_name: Image}."""
+    items = [(s["name"], s.get("image_url", "")) for s in stadiums if s.get("image_url")]
+
+    def _one(item):
+        name, url = item
+        return name, _fetch_badge_image(url, size)
+
+    result = {}
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        for name, img in pool.map(_one, items):
+            if img:
+                result[name] = img
+    return result
+
+
 def _dot_colour(stadium, params, country_index):
     if params["color_by"] == "single":
         return params["single_color"]
@@ -1165,33 +1218,66 @@ def _dot_colour(stadium, params, country_index):
 
 
 def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
+    BADGE_R = 10   # badge circle radius (pixels)
+    RING_W  = 2    # white ring width around badge
+
+    # Pre-fetch all badge images in parallel
+    badges = _prefetch_badges(stadiums, size=BADGE_R * 2)
+
     draw = ImageDraw.Draw(img)
     try:
-        font = ImageFont.truetype("arial.ttf", 13)
+        font = ImageFont.truetype("arial.ttf", 12)
     except Exception:
         font = ImageFont.load_default()
+
+    placed_labels = []  # list of (x0,y0,x1,y1) boxes already drawn
 
     for s in stadiums:
         px, py = _lon_lat_to_px(s["lon"], s["lat"], bbox, W, H)
         colour = _dot_colour(s, params, country_index)
-        r = 6
-        draw.ellipse([px - r, py - r, px + r, py + r], fill=colour, outline=(255, 255, 255), width=1)
+        badge_img = badges.get(s["name"])
+
+        # White ring
+        rr = BADGE_R + RING_W
+        draw.ellipse([px - rr, py - rr, px + rr, py + rr], fill=(255, 255, 255))
+
+        if badge_img:
+            # Circular mask + paste
+            mask = Image.new("L", (BADGE_R * 2, BADGE_R * 2), 0)
+            ImageDraw.Draw(mask).ellipse([0, 0, BADGE_R * 2 - 1, BADGE_R * 2 - 1], fill=255)
+            img.paste(badge_img, (px - BADGE_R, py - BADGE_R), mask)
+            # Redraw the draw handle — paste invalidates draw's internal cache
+            draw = ImageDraw.Draw(img)
+        else:
+            draw.ellipse([px - BADGE_R, py - BADGE_R, px + BADGE_R, py + BADGE_R], fill=colour)
 
         if params["labels"]:
             label = s["name"]
             try:
-                bbox_txt = draw.textbbox((0, 0), label, font=font)
-                tw = bbox_txt[2] - bbox_txt[0]
+                tb = draw.textbbox((0, 0), label, font=font)
+                tw, th = tb[2] - tb[0], tb[3] - tb[1]
             except AttributeError:
-                tw = len(label) * 7
+                tw, th = len(label) * 7, 13
 
             gap = 4
-            lx = px + r + gap if px + r + gap + tw < W else px - r - gap - tw
-            ly = py - 7
-            # Dark outline
-            for dx, dy in [(-1, -1), (1, -1), (-1, 1), (1, 1)]:
-                draw.text((lx + dx, ly + dy), label, font=font, fill=(0, 0, 0))
-            draw.text((lx, ly), label, font=font, fill=(255, 255, 255))
+            # Prefer right of dot; fall back to left if it would overflow
+            lx = px + rr + gap
+            if lx + tw > W - 4:
+                lx = px - rr - gap - tw
+            ly = py - th // 2
+
+            # Skip label if it overlaps any already-placed label
+            box = (lx - 1, ly - 1, lx + tw + 1, ly + th + 1)
+            overlap = any(
+                not (box[2] < pb[0] or box[0] > pb[2] or box[3] < pb[1] or box[1] > pb[3])
+                for pb in placed_labels
+            )
+            if not overlap:
+                for dx, dy in [(-1, -1), (1, -1), (-1, 1), (1, 1)]:
+                    draw.text((lx + dx, ly + dy), label, font=font, fill=(0, 0, 0))
+                draw.text((lx, ly), label, font=font, fill=(255, 255, 255))
+                placed_labels.append(box)
+
     return img
 
 
