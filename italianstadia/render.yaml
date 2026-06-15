@@ -3,7 +3,12 @@ services:
     name: italianstadia
     env: python
     buildCommand: ./build.sh
-    startCommand: gunicorn italianstadia.wsgi:application --timeout 120
+    # Free tier = 512 MB shared across ALL workers. Without --workers, gunicorn
+    # reads $WEB_CONCURRENCY (set by Render) and forks several workers, each
+    # loading Pillow + the country geojson (~150 MB) → OOM. Pin to 1 worker +
+    # threads (exports are I/O-bound on tile/badge fetches). --max-requests
+    # recycles the worker to cap slow memory growth.
+    startCommand: gunicorn italianstadia.wsgi:application --workers 1 --threads 8 --timeout 60 --max-requests 120 --max-requests-jitter 20
     envVarGroups:
       - italianstadia-env
 

@@ -1572,7 +1572,15 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
     # Place labels left-to-right so left badges claim left space first
     order = sorted(dot_positions, key=lambda t: t[0])
 
+    # Hard wall-clock budget: label placement is O(n²); for huge selections it
+    # could run ~30-50s, blow Render's request timeout, and stack memory across
+    # retries → OOM. Stop placing once the budget is spent (remaining labels are
+    # dropped, which R3 permits at ≥70 badges; small maps finish well within it).
+    label_deadline = _time.monotonic() + 10
+
     for px, py, s in order:
+        if _time.monotonic() > label_deadline:
+            break
         team_line    = s.get("team_name", "") or ""
         stadium_line = s["name"]
 
