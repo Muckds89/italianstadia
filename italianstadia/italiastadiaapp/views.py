@@ -1005,6 +1005,56 @@ def _merc_y(lat):
     return (1 - math.log(math.tan(r) + 1 / math.cos(r)) / math.pi) / 2
 
 
+def _merc_y_inv(y):
+    """Inverse: normalized Mercator Y → latitude."""
+    return math.degrees(math.atan(math.sinh(math.pi * (1 - 2 * y))))
+
+
+def _expand_bbox_to_aspect(bbox, W, H):
+    """Expand bbox symmetrically so its Mercator aspect ratio matches W:H.
+    This ensures the exported image isn't geographically stretched."""
+    lon_min, lat_min, lon_max, lat_max = bbox
+    merc_span_x = (lon_max - lon_min) / 360.0
+    merc_span_y = _merc_y(lat_min) - _merc_y(lat_max)
+    if merc_span_x <= 0 or merc_span_y <= 0:
+        return bbox
+    natural_aspect = merc_span_x / merc_span_y
+    target_aspect  = W / H
+    if natural_aspect > target_aspect:
+        # bbox wider than canvas → expand vertically
+        new_span_y   = merc_span_x / target_aspect
+        merc_mid     = (_merc_y(lat_min) + _merc_y(lat_max)) / 2
+        lat_min = _merc_y_inv(min(merc_mid + new_span_y / 2, 0.9999))
+        lat_max = _merc_y_inv(max(merc_mid - new_span_y / 2, 0.0001))
+    else:
+        # bbox taller than canvas → expand horizontally
+        new_span_x_deg = merc_span_y * target_aspect * 360.0
+        lon_mid   = (lon_min + lon_max) / 2
+        half      = new_span_x_deg / 2
+        lon_min   = lon_mid - half
+        lon_max   = lon_mid + half
+    return (lon_min, lat_min, lon_max, lat_max)
+
+
+def _load_font(bold=False, size=20):
+    """Load a TrueType font, trying Windows names then Linux system paths."""
+    candidates = (
+        ["arialbd.ttf", "Arial Bold.ttf",
+         "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+         "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf"]
+        if bold else
+        ["arial.ttf", "Arial.ttf",
+         "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+         "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf"]
+    )
+    for name in candidates:
+        try:
+            return ImageFont.truetype(name, size)
+        except Exception:
+            pass
+    return ImageFont.load_default()
+
+
 _INSET_LON_THRESHOLD = -14  # stadiums west of here go into the Iceland inset
 
 
@@ -1134,9 +1184,9 @@ def _load_countries():
     return _countries_cache
 
 
-def _draw_countries(img, bbox, W, H, style_key):
+def _draw_countries(img, bbox, W, H, style_key, land_color=None):
     """Draw country land + outlines from the bundled Natural Earth 110m dataset."""
-    land   = _LAND_COLOURS.get(style_key, _LAND_COLOURS["dark"])
+    land   = land_color or _LAND_COLOURS.get(style_key, _LAND_COLOURS["dark"])
     border = _BORDER_COLOURS.get(style_key, _BORDER_COLOURS["dark"])
     lon_min, lat_min, lon_max, lat_max = bbox
     pad = 5  # degrees beyond bbox to catch clipped polygons
@@ -1165,21 +1215,20 @@ def _draw_countries(img, bbox, W, H, style_key):
     return img
 
 
-def _solid_background(style_key, W, H, bbox, bg_color=None):
-    """Background with country outlines — no external requests."""
-    fill = bg_color if bg_color else _STYLE_BACKGROUNDS[style_key]
-    img = Image.new("RGBA", (W, H), fill)
+def _solid_background(style_key, W, H, bbox, land_color=None):
+    """Sea = style background; land = land_color (user pick) or default land colour."""
+    img = Image.new("RGBA", (W, H), _STYLE_BACKGROUNDS[style_key])
     try:
-        img = _draw_countries(img, bbox, W, H, style_key)
+        img = _draw_countries(img, bbox, W, H, style_key, land_color=land_color)
     except Exception:
-        pass  # fall back to plain colour if data file missing
+        pass
     return img
 
 
-def _make_background(style_key, W, H, bbox, use_tiles=True):
+def _make_background(style_key, W, H, bbox, use_tiles=True, land_color=None):
     """Country-outline background; optionally stitch tiles on top."""
     if not use_tiles:
-        return _solid_background(style_key, W, H, bbox)
+        return _solid_background(style_key, W, H, bbox, land_color=land_color)
     lon_min, lat_min, lon_max, lat_max = bbox
     lon_min = max(lon_min, -179.9); lon_max = min(lon_max, 179.9)
     lat_min = max(lat_min, -85.0);  lat_max = min(lat_max, 85.0)
@@ -1339,28 +1388,35 @@ def _dot_colour(stadium, params, country_index):
 def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
     BADGE_R   = 13
     RING_W    = 2
-    FONT_SZ   = 22
-    FONT_SZ2  = 17
+    FONT_SZ   = params.get("label_size", 22)
+    FONT_SZ2  = max(10, int(FONT_SZ * 0.78))
     PAD_X     = 10
     PAD_Y     = 7
     LINE_GAP  = 3
-    # Radial search: try these distances (badge-center to pill-center) in order
-    RADII     = [120, 160, 200, 240, 90]
-    # 16 angles, starting from right, going clockwise
+    # Radial search: prefer large distances first to push labels toward edges
+    short = max(80, int(min(W, H) * 0.12))
+    RADII = [
+        int(min(W, H) * 0.42),
+        int(min(W, H) * 0.32),
+        int(min(W, H) * 0.22),
+        int(min(W, H) * 0.16),
+        short,
+    ]
     ANGLES    = [i * (360 / 16) for i in range(16)]
+
+    # Parse label colour — hex string → RGB tuple
+    try:
+        lc_hex = params.get("label_color", "#ffffff").lstrip("#")
+        label_rgb = tuple(int(lc_hex[i:i+2], 16) for i in (0, 2, 4))
+    except Exception:
+        label_rgb = (255, 255, 255)
+    team_rgb = tuple(min(255, int(c * 0.75) + 40) for c in label_rgb)  # slightly dimmer for team line
 
     badges = _prefetch_badges(stadiums, size=BADGE_R * 2)
 
     draw = ImageDraw.Draw(img)
-    try:
-        font_team    = ImageFont.truetype("arial.ttf",   FONT_SZ2)
-        font_stadium = ImageFont.truetype("arialbd.ttf", FONT_SZ)
-    except Exception:
-        try:
-            font_team    = ImageFont.truetype("arial.ttf", FONT_SZ2)
-            font_stadium = ImageFont.truetype("arial.ttf", FONT_SZ)
-        except Exception:
-            font_team = font_stadium = ImageFont.load_default()
+    font_team    = _load_font(bold=False, size=FONT_SZ2)
+    font_stadium = _load_font(bold=True,  size=FONT_SZ)
 
     rr = BADGE_R + RING_W
 
@@ -1484,14 +1540,14 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
         lx, ly, box, lsx, lsy, lex, ley = chosen
 
         # ── Thin leader line + pill — drawn directly, no full-canvas overlay ──
-        draw.line([(lsx, lsy), (lex, ley)], fill=(255, 255, 255), width=1)
+        draw.line([(lsx, lsy), (lex, ley)], fill=label_rgb, width=1)
         draw.rounded_rectangle([lx, ly, lx + pill_w, ly + pill_h], radius=5, fill=(8, 10, 20, 220))
 
         ty = ly + PAD_Y
         if show_team:
-            draw.text((lx + PAD_X, ty), team_line, font=font_team, fill=(180, 210, 255))
+            draw.text((lx + PAD_X, ty), team_line, font=font_team, fill=team_rgb)
             ty += th1 + LINE_GAP
-        draw.text((lx + PAD_X, ty), stadium_line, font=font_stadium, fill=(255, 255, 255))
+        draw.text((lx + PAD_X, ty), stadium_line, font=font_stadium, fill=label_rgb)
 
         placed_boxes.append(box)
 
@@ -1560,25 +1616,13 @@ def _draw_north_arrow(img, W, H):
     cx, cy = W - margin - 18, margin + 30
     d.polygon([(cx, cy - 20), (cx - 8, cy + 4), (cx + 8, cy + 4)], fill=(255, 255, 255, 220))
     d.polygon([(cx, cy - 20), (cx - 8, cy + 4), (cx, cy - 4)], fill=(100, 100, 100, 220))
-    try:
-        font = ImageFont.truetype("arial.ttf", 14)
-    except Exception:
-        font = ImageFont.load_default()
-    d.text((cx - 5, cy + 6), "N", font=font, fill=(255, 255, 255, 220))
+    d.text((cx - 5, cy + 6), "N", font=_load_font(bold=True, size=14), fill=(255, 255, 255, 220))
     return img
 
 
 def _draw_title(img, title_text, W, subtitle_text=""):
-    def _load_font(bold, size):
-        for name in (("arialbd.ttf" if bold else "arial.ttf"), "arial.ttf"):
-            try:
-                return ImageFont.truetype(name, size)
-            except Exception:
-                pass
-        return ImageFont.load_default()
-
-    font_title    = _load_font(True,  32)
-    font_subtitle = _load_font(False, 20)
+    font_title    = _load_font(bold=True,  size=32)
+    font_subtitle = _load_font(bold=False, size=20)
 
     d = ImageDraw.Draw(img)
     PAD = 14
@@ -1613,15 +1657,7 @@ def _draw_title(img, title_text, W, subtitle_text=""):
 
 def _draw_logo(img, W, H):
     """Stamp 'Stadiums of Europe' branding in the bottom-right corner."""
-    def _load_font(bold, size):
-        for name in (("arialbd.ttf" if bold else "arial.ttf"), "arial.ttf"):
-            try:
-                return ImageFont.truetype(name, size)
-            except Exception:
-                pass
-        return ImageFont.load_default()
-
-    font = _load_font(True, 18)
+    font = _load_font(bold=True, size=18)
     text = "stadiumsofeurope.com"
     d = ImageDraw.Draw(img)
     try:
@@ -1658,7 +1694,9 @@ def map_export(request):
     W, H = params["W"], params["H"]
     main_stadiums, inset_stadiums = _split_main_inset(stadiums)
     # Use main cluster for bbox so Iceland doesn't stretch the canvas
-    bbox = _bbox_with_padding(main_stadiums if main_stadiums else stadiums)
+    raw_bbox = _bbox_with_padding(main_stadiums if main_stadiums else stadiums)
+    # Expand bbox to match W:H aspect ratio so the map isn't geographically stretched
+    bbox = _expand_bbox_to_aspect(raw_bbox, W, H)
 
     # Build country index for colour-by-country mode
     country_index = {}
@@ -1670,11 +1708,8 @@ def map_export(request):
 
     try:
         use_tiles = request.GET.get("tiles", "0") == "1"
-        img = _make_background(params["style_key"], W, H, bbox, use_tiles=use_tiles)
-        if params.get("bg_color"):
-            # Tint the background with the user's chosen colour
-            tint = Image.new("RGBA", (W, H), params["bg_color"])
-            img = Image.alpha_composite(img, tint)
+        img = _make_background(params["style_key"], W, H, bbox,
+                               use_tiles=use_tiles, land_color=params.get("bg_color"))
     except Exception as e:
         log.error("_make_background failed: %s\n%s", e, traceback.format_exc())
         return JsonResponse({"error": "Background render failed.", "detail": str(e)}, status=500)
@@ -1688,7 +1723,7 @@ def map_export(request):
         if params["north"]:
             img = _draw_north_arrow(img, W, H)
         if params["title"]:
-            img = _draw_title(img, params["title"], W, params.get("subtitle", ""))
+            img = _draw_title(img, params["title"], W, params["subtitle"])
         if params.get("logo"):
             img = _draw_logo(img, W, H)
 
@@ -1874,18 +1909,15 @@ def _render_export_png(token_obj):
 
     W, H = params["W"], params["H"]
     main_stadiums, inset_stadiums = _split_main_inset(stadiums)
-    bbox = _bbox_with_padding(main_stadiums if main_stadiums else stadiums)
+    raw_bbox = _bbox_with_padding(main_stadiums if main_stadiums else stadiums)
+    bbox = _expand_bbox_to_aspect(raw_bbox, W, H)
     country_index = {}
     for s in stadiums:
         if s["country"] not in country_index:
             country_index[s["country"]] = len(country_index)
 
-    # Always use solid background on free tier — tile stitching builds a
-    # multi-hundred-MB intermediate canvas and OOM-kills the 512 MB dyno.
-    img = _make_background(params["style_key"], W, H, bbox, use_tiles=False)
-    if params.get("bg_color"):
-        tint = Image.new("RGBA", (W, H), params["bg_color"])
-        img = Image.alpha_composite(img, tint)
+    img = _make_background(params["style_key"], W, H, bbox,
+                           use_tiles=False, land_color=params.get("bg_color"))
     img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index)
     if inset_stadiums:
         img = _draw_inset(img, inset_stadiums, params, W, H, country_index, params["style_key"])
@@ -1894,7 +1926,7 @@ def _render_export_png(token_obj):
     if params["north"]:
         img = _draw_north_arrow(img, W, H)
     if params["title"]:
-        img = _draw_title(img, params["title"], W, params.get("subtitle", ""))
+        img = _draw_title(img, params["title"], W, params["subtitle"])
     if params.get("logo"):
         img = _draw_logo(img, W, H)
 
