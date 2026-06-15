@@ -19,18 +19,20 @@
             background:#0d1017; color:#e0e6f0; border-color:#2a3045;
         }
         select.form-select:focus, input.form-control:focus { background:#0d1017; color:#e0e6f0; border-color:#00c853; box-shadow:none; }
+        ::placeholder { color:#5a6a88 !important; opacity:1; }
         .btn-pay { background:linear-gradient(135deg,#00c853,#00e5ff); color:#000; font-weight:700; font-size:1.05rem; border:none; }
         .btn-pay:hover { opacity:.9; color:#000; }
-        #previewBtn { background:#1e2740; color:#adc4e8; border:1px solid #2a3045; }
-        #previewBtn:hover { background:#263050; color:#fff; }
+        #previewBtn { background:#263a5e; color:#e0e6f0; border:1px solid #4a6a9e; font-weight:600; }
+        #previewBtn:hover { background:#2e4570; color:#fff; border-color:#5a7abe; }
         .spinner-border { width:1rem; height:1rem; }
-        .form-check-input { background-color:#0d1017; border-color:#2a3045; }
+        .form-check-input { background-color:#0d1017; border-color:#4a5a7a; }
         .form-check-input:checked { background-color:#00c853; border-color:#00c853; }
+        .form-check-label { color:#c8d8f0 !important; }
         input[type=color] { height:34px; padding:2px 4px; border-radius:6px; border:1px solid #2a3045; background:#0d1017; cursor:pointer; }
         .ac-wrap { position:relative; }
-        .ac-list { position:absolute; top:100%; left:0; right:0; background:#1a1f2e; border:1px solid #2a3045; border-radius:6px; z-index:100; max-height:180px; overflow-y:auto; display:none; }
-        .ac-list li { padding:6px 12px; cursor:pointer; font-size:.9rem; }
-        .ac-list li:hover { background:#263050; }
+        .ac-list { position:absolute; top:100%; left:0; right:0; background:#1e2535; border:1px solid #3a4a6a; border-radius:6px; z-index:100; max-height:200px; overflow-y:auto; display:none; list-style:none; padding:4px 0; margin:0; }
+        .ac-list li { padding:7px 14px; cursor:pointer; font-size:.9rem; color:#e0e6f0; }
+        .ac-list li:hover, .ac-list li.ac-active { background:#2e4570; color:#fff; }
         .range-val { color:#00e5ff; font-weight:600; min-width:2ch; display:inline-block; }
     </style>
 </head>
@@ -206,35 +208,60 @@
 </div>
 
 <script>
-// ── Autocomplete helper ───────────────────────────────────────────────────────
-let _acData = {countries: [], leagues: []};
+// ── Autocomplete ──────────────────────────────────────────────────────────────
+let _acData = {countries: [], leagues: [], leagues_by_country: {}};
 
 fetch("{% url 'italiastadiaapp:export_options' %}")
     .then(r => r.json())
     .then(d => { _acData = d; })
     .catch(() => {});
 
+function _showAC(input, list, items) {
+    list.innerHTML = "";
+    if (!items.length) { list.style.display = "none"; return; }
+    items.slice(0, 12).forEach(m => {
+        const li = document.createElement("li");
+        li.textContent = m;
+        li.addEventListener("mousedown", () => { input.value = m; list.style.display = "none"; input.dispatchEvent(new Event("change")); });
+        list.appendChild(li);
+    });
+    list.style.display = "block";
+}
+
 function _setupAC(inputId, listId, dataKey) {
     const input = document.getElementById(inputId);
     const list  = document.getElementById(listId);
+    const getItems = () => {
+        let pool = _acData[dataKey] || [];
+        // For league input: filter to active country if one is set
+        if (dataKey === "leagues") {
+            const country = document.getElementById("expCountry").value.trim();
+            if (country && _acData.leagues_by_country[country]) {
+                pool = _acData.leagues_by_country[country];
+            }
+        }
+        return pool;
+    };
+    input.addEventListener("focus", function () {
+        const q = this.value.trim().toLowerCase();
+        const pool = getItems();
+        _showAC(input, list, q ? pool.filter(v => v.toLowerCase().includes(q)) : pool);
+    });
     input.addEventListener("input", function () {
         const q = this.value.trim().toLowerCase();
-        list.innerHTML = "";
-        if (!q) { list.style.display = "none"; return; }
-        const matches = _acData[dataKey].filter(v => v.toLowerCase().includes(q)).slice(0, 10);
-        if (!matches.length) { list.style.display = "none"; return; }
-        matches.forEach(m => {
-            const li = document.createElement("li");
-            li.textContent = m;
-            li.addEventListener("mousedown", () => { input.value = m; list.style.display = "none"; });
-            list.appendChild(li);
-        });
-        list.style.display = "block";
+        const pool = getItems();
+        _showAC(input, list, q ? pool.filter(v => v.toLowerCase().includes(q)) : pool);
     });
-    input.addEventListener("blur", () => setTimeout(() => list.style.display = "none", 150));
+    input.addEventListener("blur", () => setTimeout(() => list.style.display = "none", 200));
 }
+
 _setupAC("expCountry", "countryList", "countries");
 _setupAC("expLeague",  "leagueList",  "leagues");
+
+// When country changes, clear league so stale value isn't sent
+document.getElementById("expCountry").addEventListener("change", function () {
+    document.getElementById("expLeague").value = "";
+});
 
 // ── Auto-populate from map URL params ─────────────────────────────────────────
 (function() {

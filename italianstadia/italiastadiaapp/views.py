@@ -1980,13 +1980,21 @@ def export_options(request):
         .distinct()
         .order_by("country")
     )
-    leagues = (
+    leagues_qs = (
         League.objects.select_related("country")
-        .values_list("name", flat=True)
+        .values("name", "country__name")
         .distinct()
         .order_by("name")
     )
+    leagues = sorted({r["name"] for r in leagues_qs})
+    leagues_by_country = {}
+    for r in leagues_qs:
+        c = r["country__name"] or ""
+        leagues_by_country.setdefault(c, [])
+        if r["name"] not in leagues_by_country[c]:
+            leagues_by_country[c].append(r["name"])
     return JsonResponse({
-        "countries": list(countries),
-        "leagues":   list(leagues),
+        "countries":         list(countries),
+        "leagues":           leagues,
+        "leagues_by_country": leagues_by_country,
     })
