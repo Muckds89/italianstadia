@@ -1,63 +1,121 @@
-# Feature Plan — Rich Auto-Generated Meta Descriptions
-_Created: 2026-06-14 | Branch: main_
+# Feature Plan — Map Export (Static Image)
+_Created: 2026-06-15 | Branch: main_
 
 ## Problem / Goal
-Stadium pages fall back to a generic "Explore capacity, ownership…" description when
-`stadium.description` is empty (most stadiums). Team pages use a flat
-"Name — First Division" string that tells Google nothing useful. Tournament pages have
-no `<meta name="description">` at all. Google shows these dull snippets in search
-results, hurting click-through rate. Success = every page has a unique, fact-rich
-description (~155 chars) generated from structured fields even when the text
-description is blank.
+Football social media pages and analysts want to export the filtered stadium
+map as a professional static image (e.g. "all artificial turf venues in Europe")
+for sharing on Twitter/X, Instagram, or Reddit. The export must look polished
+out of the box for non-professionals, while giving enough configuration for
+professional use. Server-side: MapTiler Static API for the base tile, Pillow
+for all overlays (dots, labels, legend, north arrow, title).
 
 ## Scope
 **In scope:**
-- [ ] `stadium_detail` view: build `page_description` from capacity, city, year, teams, type
-- [ ] `team_detail` view: build `page_description` from league, city, stadium, founded, titles
-- [ ] `tournament_detail` view: build `page_description` from confirmed count, host countries, total matches
-- [ ] Update `{% block meta %}` in `stadium_detail.html` and `team_detail.html` to use `page_description`
-- [ ] Add `<meta name="description">` to `tournament_detail.html` (currently missing entirely)
+- [ ] `GET /api/export/map/` → PNG download
+- [ ] **Filter params** (what stadiums to show): `surface`, `country`, `league`, `ownership`
+- [ ] **Size presets**: `twitter` 1500×500 · `instagram` 1080×1080 · `landscape` 1920×1080 (default)
+- [ ] **Base map style**: `dark` (default) · `light` · `topo` · `satellite`
+- [ ] **Dot colour scheme**: `surface` (default, yellow/green/grey by surface type) · `country` (one colour per country) · `single` (one colour, pass `dot_color=#hex`)
+- [ ] **Legend overlay**: `legend=1` (default on) · `legend=0` — semi-transparent box, bottom-left
+- [ ] **North arrow**: `north=1` (default off) · `north=0` — simple N + arrow, top-right
+- [ ] **Title text**: `title=Artificial+Turf+in+Europe` (default off) — bold white text top-left with dark pill background
+- [ ] **Label toggle**: `labels=1` (default on) · `labels=0` — show/hide stadium name labels
+- [ ] Rate-limit: 1 export / 10 s per IP (Django cache)
+- [ ] `MAPTILER_API_KEY` read from env var
 
-**Out of scope (do not touch):**
-- `city_list.html` — filtered list page, not a detail page
-- `stadium_list.html` / `team_list.html` — list pages, generic description is fine
-- Any model or migration change
-- Map page (`index.html`)
+**Out of scope:**
+- Payment / Stripe gating (can be layered on later)
+- Badge/logo images on the export
+- Animated exports
+- Existing `/api/export/stadiums/` CSV endpoint (untouched)
+- Changes to the live map JS or templates
 
-## Design decisions
-1. Generate description in the **view** (Python), not in the template | Alternative: template logic with `{% if %}` chains | Reason: Python is testable, readable, and doesn't clutter templates with long conditional blocks
-2. Build description from structured fields, append `stadium.description` excerpt only if it adds non-redundant info | Alternative: use description field always | Reason: most stadiums have no description; those that do often repeat facts already in the generated sentence
-3. Cap at 155 chars in the view (not via `|truncatechars` in template) | Alternative: truncate in template | Reason: avoids mid-word cuts; view can trim at word boundary
+## Query parameter reference
+| Param | Values | Default | Description |
+|-------|--------|---------|-------------|
+| `surface` | `GRASS`, `ARTIFICIAL`, `HYBRID` | — | Filter stadiums by surface |
+| `country` | e.g. `Norway` | — | Filter by country |
+| `league` | e.g. `Serie+A` | — | Filter by league |
+| `ownership` | `PUBLIC`, `PRIVATE`, `MIXED` | — | Filter by ownership |
+| `size` | `twitter`, `instagram`, `landscape` | `landscape` | Export dimensions |
+| `style` | `dark`, `light`, `topo`, `satellite` | `dark` | Base map style |
+| `color_by` | `surface`, `country`, `single` | `surface` | Dot colouring scheme |
+| `dot_color` | `#rrggbb` | `#f5c542` | Used when `color_by=single` |
+| `legend` | `0`, `1` | `1` | Show legend box |
+| `north` | `0`, `1` | `0` | Show north arrow |
+| `title` | URL-encoded string | — | Title overlay text |
+| `labels` | `0`, `1` | `1` | Show stadium name labels |
 
-## Example outputs
-- Stadium: `"Wembley Stadium — 90,000 capacity, London, England. Built 1923. Closed roof, grass surface. Home of England national team."`
-- Team: `"Inter Milan — Serie A, Milan, Italy. Home ground: Stadio Giuseppe Meazza (75,923 capacity). Founded 1908. 19 league titles."`
-- Tournament: `"UEFA Euro 2028 — 9 confirmed venues across England and Ireland. 51 matches. Wembley Stadium, Tottenham Hotspur Stadium, Emirates Stadium…"`
+## Export sizes
+| Preset | W | H |
+|--------|---|---|
+| `twitter` | 1500 | 500 |
+| `instagram` | 1080 | 1080 |
+| `landscape` | 1920 | 1080 |
+
+## MapTiler style mapping
+| `style` param | MapTiler style ID |
+|---------------|-------------------|
+| `dark` | `dataviz-dark` |
+| `light` | `dataviz` |
+| `topo` | `topo-v2` |
+| `satellite` | `satellite` |
+
+MapTiler bbox static endpoint:
+```
+GET https://api.maptiler.com/maps/{style_id}/static/{lon_min},{lat_min},{lon_max},{lat_max}/{W}x{H}.png?key={KEY}
+```
+
+## Dot colour schemes
+**`surface`** (default):
+- `#f5c542` — Artificial
+- `#4caf50` — Grass / Natural
+- `#2196f3` — Hybrid
+- `#888888` — Unknown
+
+**`country`**: auto-assign from a fixed palette of 12 distinct colours cycling per unique country name.
+
+**`single`**: use `dot_color` param hex value for all dots.
+
+## Overlay rendering (Pillow, drawn in order)
+1. Base PNG from MapTiler
+2. Dots (radius 6px, filled circle with 1px white border)
+3. Labels (if `labels=1`): stadium name, white text, 2px dark outline, right/left of dot
+4. Legend box (if `legend=1`): semi-transparent dark pill, bottom-left, lists colour → meaning
+5. North arrow (if `north=1`): simple filled triangle + "N" text, top-right corner
+6. Title bar (if `title` provided): bold white text on dark rounded-rect, top-left
 
 ## Files that will change
 | File | Change type | Why |
 |------|-------------|-----|
-| `italiastadiaapp/views.py` | Edit | Add `page_description` to context in stadium_detail, team_detail, tournament_detail |
-| `italiastadiaapp/templates/stadium_detail.html` | Edit | Replace `desc` with `page_description` in `{% block meta %}` |
-| `italiastadiaapp/templates/team_detail.html` | Edit | Replace generated string with `page_description` |
-| `italiastadiaapp/templates/tournament_detail.html` | Edit | Add `<meta name="description">` block |
+| `italianstadia/settings.py` | Edit | Add `MAPTILER_API_KEY` env read |
+| `italiastadiaapp/views.py` | Edit | Add `map_export` view + helper functions |
+| `italiastadiaapp/urls.py` | Edit | Register `/api/export/map/` |
+| `requirements.txt` | Edit | Pin Pillow explicitly |
+| `italiastadiaapp/tests/test_api.py` | Edit | Smoke tests |
 
 ## Implementation steps
-1. [ ] Add `_stadium_description()` helper in `views.py`
-2. [ ] Add `_team_description()` helper in `views.py`
-3. [ ] Add `page_description` to `stadium_detail` context
-4. [ ] Add `page_description` to `team_detail` context
-5. [ ] Add `page_description` to `tournament_detail` context
-6. [ ] Update `stadium_detail.html` `{% block meta %}`
-7. [ ] Update `team_detail.html` `{% block meta %}`
-8. [ ] Add `<meta name="description">` to `tournament_detail.html`
-9. [ ] Run tests
+1. [ ] Add `MAPTILER_API_KEY` to `settings.py`
+2. [ ] Write helper: `_parse_export_params(request)` → validated dict of all params
+3. [ ] Write helper: `_get_export_stadiums(params)` → filtered queryset → list of dicts
+4. [ ] Write helper: `_fetch_maptiler_tile(bbox, style, W, H)` → PIL Image
+5. [ ] Write helper: `_draw_dots(img, stadiums, params, bbox, W, H)` → PIL Image
+6. [ ] Write helper: `_draw_labels(img, stadiums, params, bbox, W, H)` → PIL Image
+7. [ ] Write helper: `_draw_legend(img, params, stadiums)` → PIL Image
+8. [ ] Write helper: `_draw_north_arrow(img, W, H)` → PIL Image
+9. [ ] Write helper: `_draw_title(img, title_text, W)` → PIL Image
+10. [ ] Assemble `map_export` view calling helpers in order → `HttpResponse(png, content_type="image/png")`
+11. [ ] Add URL in `urls.py`
+12. [ ] Pin Pillow in `requirements.txt`
+13. [ ] Add smoke tests
+14. [ ] Add `MAPTILER_API_KEY` to Render env + sign up at maptiler.com (manual)
 
 ## Test plan
-- `pytest italiastadiaapp/tests/ -q` — all 44 tests still pass
-- Manual: visit `/stadiums/wembley-stadium/`, view source → description contains "90,000" and "London"
-- Manual: visit `/teams/<id>/`, view source → description contains league name and stadium
-- Manual: visit `/tournaments/uefa-euro-2028/`, view source → description tag present
+- `test_map_export_returns_png` — GET with no params → 200, content-type image/png
+- `test_map_export_surface_filter` — `?surface=ARTIFICIAL` → 200, PNG
+- `test_map_export_no_results` — filter with no matches → 400 with JSON error
+- Manual: `curl "http://localhost:8000/api/export/map/?surface=ARTIFICIAL&size=twitter&style=dark&legend=1&north=1&title=Artificial+Turf+in+Europe" -o out.png && start out.png`
 
 ## Rollback plan
-- Pure Python/template change — revert commit, no migration needed
+- Remove `map_export` from `views.py` and its URL from `urls.py`
+- No migration needed

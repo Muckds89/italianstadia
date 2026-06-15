@@ -34,6 +34,9 @@ DEBUG = os.environ.get("DEBUG", "True") == "True"
 GOOGLE_ADSENSE_CLIENT = os.environ.get("GOOGLE_ADSENSE_CLIENT", "")
 GOOGLE_ADSENSE_SLOT   = os.environ.get("GOOGLE_ADSENSE_SLOT", "")
 
+# MapTiler API key — set in Render env vars; never commit to git.
+MAPTILER_API_KEY = os.environ.get("MAPTILER_API_KEY", "")
+
 SECRET_KEY = os.environ.get(
     "SECRET_KEY",
     "django-insecure-local-dev-key"

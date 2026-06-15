@@ -5,7 +5,7 @@ from .views import (
     stadium_developments_geojson, stadium_development_list, stadium_list, team_list,
     stadium_detail, stadium_detail_redirect, stadiums_geojson,
     stadium_development_detail, team_detail, team_detail_redirect,
-    tournament_list, tournament_detail,
+    tournament_list, tournament_detail, map_export,
 )
 
 app_name = "italiastadiaapp"
@@ -25,6 +25,7 @@ urlpatterns = [
     path("api/stadiums/", stadiums_geojson, name="stadiums_geojson"),
     path("api/stadium-developments/", stadium_developments_geojson, name="stadium_developments_geojson"),
     path("api/export/stadiums/", export_stadiums, name="export_stadiums"),
+    path("api/export/map/", map_export, name="map_export"),
     path("api/status/", api_status, name="api_status"),
     path("stadium-development/<int:pk>/", stadium_development_detail, name="stadium_development_detail"),
     path("privacy/", views.privacy, name="privacy"),

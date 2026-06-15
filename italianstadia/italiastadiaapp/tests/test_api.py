@@ -269,6 +269,39 @@ def test_api_status_no_refresh(client):
     assert data["last_refresh_status"] is None
 
 
+# ---------------------------------------------------------------------------
+# Map Export (/api/export/map/)
+# ---------------------------------------------------------------------------
+
+@pytest.fixture
+def map_export_stadium(db):
+    city = City.objects.create(name="Oslo", population=700000, country="Norway")
+    return Stadium.objects.create(
+        name="Aspmyra", city=city,
+        latitude=67.28, longitude=14.41,
+        surface="ARTIFICIAL", ownership="PUBLIC",
+    )
+
+
+@pytest.mark.django_db
+def test_map_export_no_api_key_returns_503(client, map_export_stadium, settings):
+    settings.MAPTILER_API_KEY = ""
+    url = reverse("italiastadiaapp:map_export")
+    response = client.get(url)
+    assert response.status_code == 503
+
+
+@pytest.mark.django_db
+def test_map_export_no_results_returns_400(client, settings):
+    settings.MAPTILER_API_KEY = "dummy"
+    url = reverse("italiastadiaapp:map_export")
+    response = client.get(url + "?surface=ARTIFICIAL")
+    assert response.status_code == 400
+    assert "error" in response.json()
+
+
+
+
 @pytest.mark.django_db
 def test_api_status_with_refresh(client):
     from django.utils import timezone

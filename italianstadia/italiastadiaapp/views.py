@@ -834,3 +834,334 @@ def tournament_detail(request, slug):
         "geojson": geojson,
         "page_description": tournament_description,
     })
+
+
+# ── Map Export ────────────────────────────────────────────────────────────────
+
+import io
+import math
+import requests as _requests
+from django.core.cache import cache
+from PIL import Image, ImageDraw, ImageFont
+
+_EXPORT_SIZES = {
+    "twitter":   (1500, 500),
+    "instagram": (1080, 1080),
+    "landscape": (1920, 1080),
+}
+
+_MAPTILER_STYLES = {
+    "dark":      "dataviz-dark",
+    "light":     "dataviz",
+    "topo":      "topo-v2",
+    "satellite": "satellite",
+}
+
+_SURFACE_COLOURS = {
+    "ARTIFICIAL": (245, 197, 66),
+    "GRASS":      (76, 175, 80),
+    "HYBRID":     (33, 150, 243),
+}
+_DEFAULT_DOT_COLOUR = (136, 136, 136)
+
+_COUNTRY_PALETTE = [
+    (229, 57, 53), (30, 136, 229), (67, 160, 71), (251, 140, 0),
+    (142, 36, 170), (0, 172, 193), (216, 27, 96), (124, 179, 66),
+    (255, 179, 0), (84, 110, 122), (0, 137, 123), (198, 40, 40),
+]
+
+
+def _parse_export_params(request):
+    """Validate and return all export configuration from query params."""
+    size_key = request.GET.get("size", "landscape").lower()
+    if size_key not in _EXPORT_SIZES:
+        size_key = "landscape"
+    W, H = _EXPORT_SIZES[size_key]
+
+    style_key = request.GET.get("style", "dark").lower()
+    if style_key not in _MAPTILER_STYLES:
+        style_key = "dark"
+
+    color_by = request.GET.get("color_by", "surface").lower()
+    if color_by not in ("surface", "country", "single"):
+        color_by = "surface"
+
+    raw_color = request.GET.get("dot_color", "#f5c542").lstrip("#")
+    try:
+        single_color = tuple(int(raw_color[i:i+2], 16) for i in (0, 2, 4))
+    except Exception:
+        single_color = (245, 197, 66)
+
+    return {
+        "W": W, "H": H,
+        "size_key": size_key,
+        "style_key": style_key,
+        "maptiler_style": _MAPTILER_STYLES[style_key],
+        "color_by": color_by,
+        "single_color": single_color,
+        "legend": request.GET.get("legend", "1") == "1",
+        "north": request.GET.get("north", "0") == "1",
+        "labels": request.GET.get("labels", "1") == "1",
+        "title": request.GET.get("title", "").strip()[:80],
+        # filter params
+        "surface": request.GET.get("surface", "").strip().upper(),
+        "country": request.GET.get("country", "").strip(),
+        "league": request.GET.get("league", "").strip(),
+        "ownership": request.GET.get("ownership", "").strip().upper(),
+    }
+
+
+def _get_export_stadiums(params):
+    """Return list of dicts for stadiums matching the filter params."""
+    qs = Stadium.objects.select_related("city").prefetch_related("teams__league__country")
+    if params["surface"]:
+        qs = qs.filter(surface=params["surface"])
+    if params["country"]:
+        qs = qs.filter(city__country=params["country"])
+    if params["league"]:
+        qs = qs.filter(teams__league__name=params["league"])
+    if params["ownership"]:
+        qs = qs.filter(ownership=params["ownership"])
+    qs = qs.exclude(latitude=None).exclude(longitude=None).distinct()
+
+    results = []
+    for s in qs:
+        country = s.city.country if s.city else ""
+        results.append({
+            "name": s.name,
+            "lat": float(s.latitude),
+            "lon": float(s.longitude),
+            "surface": s.surface or "",
+            "country": country,
+        })
+    return results
+
+
+def _bbox_with_padding(stadiums, pad=0.12):
+    lats = [s["lat"] for s in stadiums]
+    lons = [s["lon"] for s in stadiums]
+    lat_min, lat_max = min(lats), max(lats)
+    lon_min, lon_max = min(lons), max(lons)
+    lat_pad = max((lat_max - lat_min) * pad, 1.5)
+    lon_pad = max((lon_max - lon_min) * pad, 1.5)
+    return (
+        lon_min - lon_pad, lat_min - lat_pad,
+        lon_max + lon_pad, lat_max + lat_pad,
+    )
+
+
+def _lon_lat_to_px(lon, lat, bbox, W, H):
+    """Map geographic coordinates to pixel coordinates."""
+    lon_min, lat_min, lon_max, lat_max = bbox
+    x = (lon - lon_min) / (lon_max - lon_min) * W
+    # Latitude: invert (north = top)
+    y = (1 - (lat - lat_min) / (lat_max - lat_min)) * H
+    return int(x), int(y)
+
+
+def _fetch_maptiler_tile(bbox, style, W, H, api_key):
+    """Fetch a static map PNG from MapTiler and return a PIL Image."""
+    lon_min, lat_min, lon_max, lat_max = bbox
+    # Clamp to valid ranges
+    lon_min = max(lon_min, -180); lon_max = min(lon_max, 180)
+    lat_min = max(lat_min, -85);  lat_max = min(lat_max, 85)
+    url = (
+        f"https://api.maptiler.com/maps/{style}/static/"
+        f"{lon_min:.6f},{lat_min:.6f},{lon_max:.6f},{lat_max:.6f}"
+        f"/{W}x{H}.png?key={api_key}"
+    )
+    resp = _requests.get(url, timeout=10)
+    resp.raise_for_status()
+    return Image.open(io.BytesIO(resp.content)).convert("RGBA")
+
+
+def _dot_colour(stadium, params, country_index):
+    if params["color_by"] == "single":
+        return params["single_color"]
+    if params["color_by"] == "country":
+        idx = country_index.get(stadium["country"], 0)
+        return _COUNTRY_PALETTE[idx % len(_COUNTRY_PALETTE)]
+    # surface
+    return _SURFACE_COLOURS.get(stadium["surface"], _DEFAULT_DOT_COLOUR)
+
+
+def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
+    draw = ImageDraw.Draw(img)
+    try:
+        font = ImageFont.truetype("arial.ttf", 13)
+    except Exception:
+        font = ImageFont.load_default()
+
+    for s in stadiums:
+        px, py = _lon_lat_to_px(s["lon"], s["lat"], bbox, W, H)
+        colour = _dot_colour(s, params, country_index)
+        r = 6
+        draw.ellipse([px - r, py - r, px + r, py + r], fill=colour, outline=(255, 255, 255), width=1)
+
+        if params["labels"]:
+            label = s["name"]
+            try:
+                bbox_txt = draw.textbbox((0, 0), label, font=font)
+                tw = bbox_txt[2] - bbox_txt[0]
+            except AttributeError:
+                tw = len(label) * 7
+
+            gap = 4
+            lx = px + r + gap if px + r + gap + tw < W else px - r - gap - tw
+            ly = py - 7
+            # Dark outline
+            for dx, dy in [(-1, -1), (1, -1), (-1, 1), (1, 1)]:
+                draw.text((lx + dx, ly + dy), label, font=font, fill=(0, 0, 0))
+            draw.text((lx, ly), label, font=font, fill=(255, 255, 255))
+    return img
+
+
+def _build_legend_entries(params, stadiums):
+    """Return list of (colour_tuple, label_str) for the legend."""
+    if params["color_by"] == "single":
+        return [(params["single_color"], "Stadium")]
+    if params["color_by"] == "surface":
+        surfaces_present = {s["surface"] for s in stadiums}
+        entries = []
+        for surf, colour in _SURFACE_COLOURS.items():
+            if surf in surfaces_present:
+                entries.append((colour, surf.capitalize()))
+        if "" in surfaces_present or "UNKNOWN" in surfaces_present:
+            entries.append((_DEFAULT_DOT_COLOUR, "Unknown"))
+        return entries
+    # country
+    country_index = {}
+    for s in stadiums:
+        if s["country"] not in country_index:
+            country_index[s["country"]] = len(country_index)
+    return [
+        (_COUNTRY_PALETTE[i % len(_COUNTRY_PALETTE)], name)
+        for name, i in sorted(country_index.items(), key=lambda x: x[1])
+    ]
+
+
+def _draw_legend(img, params, stadiums):
+    entries = _build_legend_entries(params, stadiums)
+    if not entries:
+        return img
+
+    try:
+        font = ImageFont.truetype("arial.ttf", 14)
+    except Exception:
+        font = ImageFont.load_default()
+
+    padding = 12
+    dot_r = 6
+    line_h = 22
+    box_w = 160
+    box_h = padding * 2 + len(entries) * line_h
+
+    W, H = img.size
+    margin = 16
+    x0, y0 = margin, H - margin - box_h
+
+    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(overlay)
+    d.rounded_rectangle([x0, y0, x0 + box_w, y0 + box_h], radius=8, fill=(20, 20, 20, 190))
+
+    for i, (colour, label) in enumerate(entries):
+        cy = y0 + padding + i * line_h + dot_r
+        cx = x0 + padding + dot_r
+        d.ellipse([cx - dot_r, cy - dot_r, cx + dot_r, cy + dot_r], fill=colour)
+        d.text((cx + dot_r + 8, cy - 8), label, font=font, fill=(230, 230, 230))
+
+    return Image.alpha_composite(img, overlay)
+
+
+def _draw_north_arrow(img, W, H):
+    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(overlay)
+    margin = 20
+    cx, cy = W - margin - 18, margin + 30
+    # Arrow shaft + head
+    d.polygon([(cx, cy - 20), (cx - 8, cy + 4), (cx + 8, cy + 4)], fill=(255, 255, 255, 220))
+    d.polygon([(cx, cy - 20), (cx - 8, cy + 4), (cx, cy - 4)], fill=(100, 100, 100, 220))
+    try:
+        font = ImageFont.truetype("arial.ttf", 14)
+    except Exception:
+        font = ImageFont.load_default()
+    d.text((cx - 5, cy + 6), "N", font=font, fill=(255, 255, 255, 220))
+    return Image.alpha_composite(img, overlay)
+
+
+def _draw_title(img, title_text, W):
+    try:
+        font = ImageFont.truetype("arialbd.ttf", 22)
+    except Exception:
+        try:
+            font = ImageFont.truetype("arial.ttf", 22)
+        except Exception:
+            font = ImageFont.load_default()
+
+    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(overlay)
+    margin = 16
+    padding = 10
+
+    try:
+        bb = d.textbbox((0, 0), title_text, font=font)
+        tw, th = bb[2] - bb[0], bb[3] - bb[1]
+    except AttributeError:
+        tw, th = len(title_text) * 13, 22
+
+    rx0, ry0 = margin, margin
+    rx1, ry1 = margin + tw + padding * 2, margin + th + padding * 2
+    d.rounded_rectangle([rx0, ry0, rx1, ry1], radius=6, fill=(10, 10, 10, 200))
+    d.text((rx0 + padding, ry0 + padding), title_text, font=font, fill=(255, 255, 255))
+    return Image.alpha_composite(img, overlay)
+
+
+def map_export(request):
+    # Rate-limit: 1 request per 10 s per IP
+    ip = request.META.get("HTTP_X_FORWARDED_FOR", request.META.get("REMOTE_ADDR", ""))
+    cache_key = f"map_export_ratelimit_{ip}"
+    if cache.get(cache_key):
+        return JsonResponse({"error": "Too many requests. Wait 10 seconds."}, status=429)
+    cache.set(cache_key, True, 10)
+
+    api_key = settings.MAPTILER_API_KEY
+    if not api_key:
+        return JsonResponse({"error": "Map export not configured (missing API key)."}, status=503)
+
+    params = _parse_export_params(request)
+    stadiums = _get_export_stadiums(params)
+
+    if not stadiums:
+        return JsonResponse({"error": "No stadiums match the selected filters."}, status=400)
+
+    W, H = params["W"], params["H"]
+    bbox = _bbox_with_padding(stadiums)
+
+    # Build country index for colour-by-country mode
+    country_index = {}
+    for s in stadiums:
+        if s["country"] not in country_index:
+            country_index[s["country"]] = len(country_index)
+
+    try:
+        img = _fetch_maptiler_tile(bbox, params["maptiler_style"], W, H, api_key)
+    except Exception:
+        return JsonResponse({"error": "Failed to fetch base map. Try again shortly."}, status=502)
+
+    img = _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index)
+
+    if params["legend"]:
+        img = _draw_legend(img, params, stadiums)
+    if params["north"]:
+        img = _draw_north_arrow(img, W, H)
+    if params["title"]:
+        img = _draw_title(img, params["title"], W)
+
+    buf = io.BytesIO()
+    img.convert("RGB").save(buf, format="PNG", optimize=True)
+    buf.seek(0)
+
+    filename = f"stadiums-map-{params['size_key']}.png"
+    response = HttpResponse(buf.read(), content_type="image/png")
+    response["Content-Disposition"] = f'attachment; filename="{filename}"'
+    return response
