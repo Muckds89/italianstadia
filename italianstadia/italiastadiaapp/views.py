@@ -986,34 +986,74 @@ def _split_main_inset(stadiums):
 
 
 def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key):
-    """Draw a small Iceland inset in the bottom-right corner."""
+    """Draw Iceland inset (top-left) with badges and labels."""
     if not inset_stadiums:
         return img
 
-    IW, IH = 210, 160
+    IW, IH = 280, 200
     margin = 12
-    ix0 = margin   # top-left corner
-    iy0 = margin
+    ix0, iy0 = margin, margin
 
     inset_bbox = _bbox_with_padding(inset_stadiums, pad=0.25)
     inset_img  = _solid_background(style_key, IW, IH, inset_bbox)
 
-    # Dots only — labels too cluttered at inset scale
-    d = ImageDraw.Draw(inset_img)
+    badges = _prefetch_badges(inset_stadiums, size=16)
+
+    try:
+        font_s = ImageFont.truetype("arialbd.ttf", 13)
+        font_t = ImageFont.truetype("arial.ttf",   11)
+    except Exception:
+        font_s = font_t = ImageFont.load_default()
+
+    placed = []
+    BR, RW = 8, 2
+    rr = BR + RW
+
     for s in inset_stadiums:
         px, py = _lon_lat_to_px(s["lon"], s["lat"], inset_bbox, IW, IH)
-        colour = _dot_colour(s, params, country_index)
-        r = 4
-        d.ellipse([(px-r-1, py-r-1), (px+r+1, py+r+1)], fill=(255, 255, 255))
-        d.ellipse([(px-r,   py-r),   (px+r,   py+r)],   fill=colour)
+        colour    = _dot_colour(s, params, country_index)
+        badge_img = badges.get(s["name"])
 
-    # Border + label
-    d.rectangle([(0, 0), (IW-1, IH-1)], outline=(160, 165, 190), width=2)
+        d = ImageDraw.Draw(inset_img)
+        d.ellipse([px-rr, py-rr, px+rr, py+rr], fill=(255, 255, 255))
+        if badge_img:
+            b = badge_img.resize((BR*2, BR*2), Image.LANCZOS)
+            mask = Image.new("L", (BR*2, BR*2), 0)
+            ImageDraw.Draw(mask).ellipse([0, 0, BR*2-1, BR*2-1], fill=255)
+            inset_img.paste(b, (px-BR, py-BR), mask)
+        else:
+            d.ellipse([px-BR, py-BR, px+BR, py+BR], fill=colour)
+
+        # Simple label: team / stadium, right or left
+        label1 = s.get("team_name", "") or ""
+        label2 = s["name"]
+        tw = max(len(label1)*6, len(label2)*7)
+        th = 26
+        gap = 8
+        lx = px + rr + gap if px + rr + gap + tw < IW - 2 else px - rr - gap - tw
+        ly = py - th // 2
+        box = (lx, ly, lx + tw, ly + th)
+        if not any(not (box[2]<pb[0] or box[0]>pb[2] or box[3]<pb[1] or box[1]>pb[3]) for pb in placed):
+            d = ImageDraw.Draw(inset_img)
+            ov = Image.new("RGBA", inset_img.size, (0,0,0,0))
+            ImageDraw.Draw(ov).rounded_rectangle([lx-2,ly-2,lx+tw+2,ly+th+2], radius=3, fill=(8,10,20,210))
+            inset_img = Image.alpha_composite(inset_img, ov)
+            d = ImageDraw.Draw(inset_img)
+            # leader line
+            d.line([(px + (rr if lx > px else -rr), py), (lx if lx > px else lx+tw, py)],
+                   fill=(255,255,255,160), width=1)
+            if label1:
+                d.text((lx, ly+2), label1, font=font_t, fill=(180,210,255))
+            d.text((lx, ly+14 if label1 else ly+6), label2, font=font_s, fill=(255,255,255))
+            placed.append(box)
+
+    d = ImageDraw.Draw(inset_img)
+    d.rectangle([(0,0),(IW-1,IH-1)], outline=(160,165,190), width=2)
     try:
-        font = ImageFont.truetype("arial.ttf", 13)
+        fhdr = ImageFont.truetype("arial.ttf", 12)
     except Exception:
-        font = ImageFont.load_default()
-    d.text((6, 5), "Iceland / Faroe Is.", font=font, fill=(210, 215, 230))
+        fhdr = ImageFont.load_default()
+    d.text((6, IH-18), "Iceland / Faroe Is.", font=fhdr, fill=(210,215,230))
 
     img.paste(inset_img, (ix0, iy0))
     return img
@@ -1220,14 +1260,14 @@ def _dot_colour(stadium, params, country_index):
 
 
 def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
-    BADGE_R   = 12    # badge circle radius
+    BADGE_R   = 13    # badge circle radius
     RING_W    = 2     # white ring width
-    FONT_SZ   = 15    # stadium name font size
-    FONT_SZ2  = 12    # team name font size (line above)
-    PAD_X     = 8     # horizontal padding inside pill
-    PAD_Y     = 5     # vertical padding inside pill
-    GAP       = 6     # gap between badge edge and pill
-    LINE_GAP  = 2     # gap between the two text lines
+    FONT_SZ   = 22    # stadium name (bold) — readable at social media size
+    FONT_SZ2  = 17    # team name (regular) above stadium
+    PAD_X     = 10    # horizontal padding inside pill
+    PAD_Y     = 7     # vertical padding inside pill
+    GAP       = 32    # gap between badge edge and pill (leave room for leader line)
+    LINE_GAP  = 3     # gap between the two text lines
 
     badges = _prefetch_badges(stadiums, size=BADGE_R * 2)
 
@@ -1320,21 +1360,37 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
                     chosen = (lx, ly, box)
                     break
 
-        if chosen is None:
-            # Last resort: pick the position with fewest collisions (right side preferred)
-            lx, ly = candidates[0]
-            box = (lx, ly, lx + pill_w, ly + pill_h)
-            if lx >= 2 and lx + pill_w <= W - 2:
-                chosen = (lx, ly, box)
-
+        # No clean position found → skip this label entirely to avoid clutter
         if not chosen:
             continue
 
         lx, ly, box = chosen
+
+        # ── Leader line from badge edge to pill edge ──────────────────────────
+        # Direction: badge center → pill center
+        pcx = lx + pill_w / 2
+        pcy = ly + pill_h / 2
+        dx, dy = pcx - px, pcy - py
+        dist = math.sqrt(dx * dx + dy * dy) or 1
+        nx, ny = dx / dist, dy / dist
+        # Start: badge ring edge
+        line_start = (px + nx * (rr + 2), py + ny * (rr + 2))
+        # End: nearest pill edge (walk inward from pill center by half-dimension)
+        edge_x = pcx - nx * (pill_w / 2 + 1)
+        edge_y = pcy - ny * (pill_h / 2 + 1)
+        line_end = (edge_x, edge_y)
+
+        line_overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        ImageDraw.Draw(line_overlay).line(
+            [line_start, line_end], fill=(255, 255, 255, 180), width=2
+        )
+        img = Image.alpha_composite(img, line_overlay)
+
+        # ── Pill background ───────────────────────────────────────────────────
         overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
         ImageDraw.Draw(overlay).rounded_rectangle(
             [lx, ly, lx + pill_w, ly + pill_h],
-            radius=5, fill=(8, 10, 20, 215)
+            radius=5, fill=(8, 10, 20, 220)
         )
         img = Image.alpha_composite(img, overlay)
         draw = ImageDraw.Draw(img)
