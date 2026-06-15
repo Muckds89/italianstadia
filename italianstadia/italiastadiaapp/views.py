@@ -1266,7 +1266,7 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
     FONT_SZ2  = 17    # team name (regular) above stadium
     PAD_X     = 10    # horizontal padding inside pill
     PAD_Y     = 7     # vertical padding inside pill
-    GAP       = 32    # gap between badge edge and pill (leave room for leader line)
+    GAP       = 55    # gap between badge edge and pill — wide enough for visible leader line
     LINE_GAP  = 3     # gap between the two text lines
 
     badges = _prefetch_badges(stadiums, size=BADGE_R * 2)
@@ -1345,46 +1345,44 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
         pill_w = max(tw1, tw2) + PAD_X * 2
         pill_h = (th1 + LINE_GAP + th2 if show_team else th2) + PAD_Y * 2
 
+        # Candidate positions + the exact anchor points for the leader line
+        # Each entry: (pill_lx, pill_ly, badge_anchor, pill_anchor)
+        pmid = pill_h // 2
         candidates = [
-            (px + rr + GAP,          py - pill_h // 2),        # right
-            (px - rr - GAP - pill_w, py - pill_h // 2),        # left
-            (px - pill_w // 2,       py - rr - GAP - pill_h),  # above
-            (px - pill_w // 2,       py + rr + GAP),           # below
+            # right: line from badge right edge → pill left mid
+            (px + rr + GAP,          py - pmid,
+             (px + rr,               py),
+             (px + rr + GAP,         py)),
+            # left: line from badge left edge → pill right mid
+            (px - rr - GAP - pill_w, py - pmid,
+             (px - rr,               py),
+             (px - rr - GAP,         py)),
+            # above: line from badge top edge → pill bottom mid
+            (px - pill_w // 2,       py - rr - GAP - pill_h,
+             (px,                    py - rr),
+             (px,                    py - rr - GAP)),
+            # below: line from badge bottom edge → pill top mid
+            (px - pill_w // 2,       py + rr + GAP,
+             (px,                    py + rr),
+             (px,                    py + rr + GAP)),
         ]
 
         chosen = None
-        for lx, ly in candidates:
+        for lx, ly, ba, pa in candidates:
             box = (lx, ly, lx + pill_w, ly + pill_h)
             if lx >= 2 and ly >= 2 and lx + pill_w <= W - 2 and ly + pill_h <= H - 2:
                 if not _box_overlaps(box):
-                    chosen = (lx, ly, box)
+                    chosen = (lx, ly, box, ba, pa)
                     break
 
-        # No clean position found → skip this label entirely to avoid clutter
+        # No clean position found → skip to reduce clutter in dense areas
         if not chosen:
             continue
 
-        lx, ly, box = chosen
+        lx, ly, box, badge_anchor, pill_anchor = chosen
 
-        # ── Leader line from badge edge to pill edge ──────────────────────────
-        # Direction: badge center → pill center
-        pcx = lx + pill_w / 2
-        pcy = ly + pill_h / 2
-        dx, dy = pcx - px, pcy - py
-        dist = math.sqrt(dx * dx + dy * dy) or 1
-        nx, ny = dx / dist, dy / dist
-        # Start: badge ring edge
-        line_start = (px + nx * (rr + 2), py + ny * (rr + 2))
-        # End: nearest pill edge (walk inward from pill center by half-dimension)
-        edge_x = pcx - nx * (pill_w / 2 + 1)
-        edge_y = pcy - ny * (pill_h / 2 + 1)
-        line_end = (edge_x, edge_y)
-
-        line_overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
-        ImageDraw.Draw(line_overlay).line(
-            [line_start, line_end], fill=(255, 255, 255, 180), width=2
-        )
-        img = Image.alpha_composite(img, line_overlay)
+        # ── Leader line: badge edge → pill edge, drawn BEFORE pill so pill covers the end ──
+        draw.line([badge_anchor, pill_anchor], fill=(255, 255, 255), width=3)
 
         # ── Pill background ───────────────────────────────────────────────────
         overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
