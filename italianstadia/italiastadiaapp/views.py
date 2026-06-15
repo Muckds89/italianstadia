@@ -841,6 +841,7 @@ def tournament_detail(request, slug):
 import io
 import math
 import requests as _requests
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from django.core.cache import cache
 from PIL import Image, ImageDraw, ImageFont
 
@@ -1018,13 +1019,20 @@ def _make_background(style_key, W, H, bbox):
     stitch_h = (ty1 - ty0 + 1) * _TILE_SIZE
     stitched = Image.new("RGBA", (stitch_w, stitch_h), _STYLE_BACKGROUNDS[style_key])
 
-    for tx in range(tx0, tx1 + 1):
-        for ty in range(ty0, ty1 + 1):
-            try:
-                tile = _fetch_one_tile(z, tx, ty, style_key)
+    coords = [(tx, ty) for tx in range(tx0, tx1 + 1) for ty in range(ty0, ty1 + 1)]
+
+    def _fetch(coord):
+        tx, ty = coord
+        try:
+            return coord, _fetch_one_tile(z, tx, ty, style_key)
+        except Exception:
+            return coord, None
+
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        for coord, tile in pool.map(_fetch, coords):
+            if tile:
+                tx, ty = coord
                 stitched.paste(tile, ((tx - tx0) * _TILE_SIZE, (ty - ty0) * _TILE_SIZE))
-            except Exception:
-                pass  # keep fallback colour for this tile
 
     # Crop to exact bbox in tile-pixel space, then scale to output size
     crop_l = (tx_min_f - tx0) * _TILE_SIZE

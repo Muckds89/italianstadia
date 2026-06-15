@@ -3,7 +3,7 @@ services:
     name: italianstadia
     env: python
     buildCommand: ./build.sh
-    startCommand: gunicorn italianstadia.wsgi:application
+    startCommand: gunicorn italianstadia.wsgi:application --timeout 120
     envVarGroups:
       - italianstadia-env
 
