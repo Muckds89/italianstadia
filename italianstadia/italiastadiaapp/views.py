@@ -2018,13 +2018,18 @@ def export_checkout(request):
     except stripe.StripeError as e:
         return JsonResponse({"error": str(e)}, status=502)
 
-    # Persist token — paid=False until webhook confirms
-    ExportToken.objects.create(
-        stripe_session=session.id,
-        filters_json=filters_json,
-        paid=False,
-        expires_at=timezone.now() + timedelta(hours=24),
-    )
+    # Persist token — paid=False until webhook confirms. If this write fails,
+    # export_success recreates it from the Stripe session metadata as a fallback.
+    try:
+        ExportToken.objects.create(
+            stripe_session=session.id,
+            filters_json=filters_json,
+            paid=False,
+            expires_at=timezone.now() + timedelta(hours=24),
+        )
+    except Exception as e:
+        logging.getLogger(__name__).error(
+            "export_checkout: token create failed for %s: %s", session.id, e)
 
     return JsonResponse({"checkout_url": session.url})
 
@@ -2056,40 +2061,53 @@ def export_webhook(request):
 @require_GET
 def export_success(request):
     """Redirect from Stripe success URL — find or create token, show download page."""
+    log = logging.getLogger(__name__)
     session_id = request.GET.get("session_id", "")
     if not session_id:
         return redirect("italiastadiaapp:export_page")
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
-    # Always verify payment status with Stripe directly (webhook may not have fired yet)
-    stripe_session = None
-    try:
-        stripe_session = stripe.checkout.Session.retrieve(session_id)
-    except Exception:
-        pass
+    # 1) The token is normally created at checkout time. Look it up first — this
+    #    does NOT depend on Stripe being reachable.
+    token_obj = ExportToken.objects.filter(stripe_session=session_id).first()
 
-    # If token doesn't exist yet (e.g. webhook race), create it from Stripe session metadata
-    token_qs = ExportToken.objects.filter(stripe_session=session_id)
-    if not token_qs.exists() and stripe_session:
-        filters_json = stripe_session.metadata.get("filters_json", "{}")
-        ExportToken.objects.create(
+    # 2) Verify payment with Stripe directly (webhook may not have fired). Retry a
+    #    couple of times — a transient failure (e.g. during a deploy) must not turn
+    #    a real payment into "Session not found".
+    stripe_session = None
+    last_err = None
+    for attempt in range(3):
+        try:
+            stripe_session = stripe.checkout.Session.retrieve(session_id)
+            break
+        except Exception as e:
+            last_err = e
+            _time.sleep(0.6 * (attempt + 1))
+    if stripe_session is None:
+        log.error("export_success: Stripe retrieve failed for %s: %s", session_id, last_err)
+
+    # 3) If the token row is missing (e.g. checkout DB write was interrupted by a
+    #    deploy), recreate it from the Stripe session metadata.
+    if token_obj is None and stripe_session is not None:
+        filters_json = (stripe_session.metadata or {}).get("filters_json", "{}")
+        token_obj = ExportToken.objects.create(
             stripe_session=session_id,
             filters_json=filters_json,
             paid=(stripe_session.payment_status == "paid"),
             expires_at=timezone.now() + timedelta(hours=24),
         )
-        token_qs = ExportToken.objects.filter(stripe_session=session_id)
+        log.warning("export_success: recreated missing token for %s", session_id)
 
-    if not token_qs.exists():
+    if token_obj is None:
+        log.error("export_success: token missing AND Stripe unreachable for %s", session_id)
         return render(request, "export_error.html", {
-            "msg": "Session not found. Please contact support with your Stripe receipt."
+            "msg": "We couldn't verify your session just now. Your payment is safe — "
+                   "please refresh in a few seconds, or contact support with your Stripe receipt."
         })
 
-    token_obj = token_qs.first()
-
-    # Sync paid status from Stripe if webhook was delayed
-    if not token_obj.paid and stripe_session and stripe_session.payment_status == "paid":
+    # Sync paid status from Stripe if the webhook was delayed
+    if not token_obj.paid and stripe_session is not None and stripe_session.payment_status == "paid":
         token_obj.paid = True
         token_obj.save(update_fields=["paid"])
 
