@@ -1186,7 +1186,7 @@ def _draw_title(img, title_text, W):
 
 def map_export(request):
     # Rate-limit: 1 request per 10 s per IP
-    ip = request.META.get("HTTP_X_FORWARDED_FOR", request.META.get("REMOTE_ADDR", ""))
+    ip = request.META.get("HTTP_X_FORWARDED_FOR", request.META.get("REMOTE_ADDR", "")).split(",")[0].strip()
     cache_key = f"map_export_ratelimit_{ip}"
     if cache.get(cache_key):
         return JsonResponse({"error": "Too many requests. Wait 10 seconds."}, status=429)
