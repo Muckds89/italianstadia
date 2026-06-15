@@ -1144,16 +1144,38 @@ def _lon_lat_to_px(lon, lat, bbox, W, H):
 
 
 def _fetch_one_tile(z, x, y, style_key):
-    """Fetch a single 256×256 tile, caching for 24 h."""
+    """Fetch a single 256×256 tile, caching to /tmp (survives across workers) + Django cache."""
+    import os as _o
+    disk_path = None
+    try:
+        disk_dir = _o.path.join(_o.path.sep, "tmp", "soe_tiles")
+        _o.makedirs(disk_dir, exist_ok=True)
+        disk_path = _o.path.join(disk_dir, f"{style_key}_{z}_{x}_{y}.png")
+        if _o.path.exists(disk_path):
+            return Image.open(disk_path).convert("RGBA")
+    except Exception:
+        disk_path = None
+
     cache_key = f"tile_{style_key}_{z}_{x}_{y}"
     data = cache.get(cache_key)
     if data:
-        return Image.open(io.BytesIO(data)).convert("RGBA")
+        img = Image.open(io.BytesIO(data)).convert("RGBA")
+        if disk_path:
+            try: img.save(disk_path, format="PNG")
+            except Exception: pass
+        return img
+
     url = _TILE_SERVERS[style_key].format(z=z, x=x, y=y)
     headers = {"User-Agent": "StadiumsOfEurope/1.0 (stadiumsofeurope.com)"}
     resp = _requests.get(url, timeout=4, headers=headers)
     resp.raise_for_status()
     cache.set(cache_key, resp.content, 86400)
+    if disk_path:
+        try:
+            with open(disk_path, "wb") as fh:
+                fh.write(resp.content)
+        except Exception:
+            pass
     return Image.open(io.BytesIO(resp.content)).convert("RGBA")
 
 
@@ -1226,22 +1248,39 @@ def _solid_background(style_key, W, H, bbox, land_color=None):
 
 
 def _make_background(style_key, W, H, bbox, use_tiles=True, land_color=None):
-    """Country-outline background; optionally stitch tiles on top."""
-    if not use_tiles:
+    """Base map matching the live Leaflet CARTO tiles (R1).
+
+    Memory-bounded: pastes each 256×256 tile DIRECTLY into the W×H output image,
+    scaled/positioned per the aspect-corrected bbox. Peak memory is just the
+    output image + a handful of in-flight tiles — never a giant stitch canvas,
+    so it stays well under the 512 MB Render limit (the old stitch+crop approach
+    built a ~98 MB intermediate at z=7 and OOM-killed the dyno).
+    """
+    if not use_tiles or style_key not in _TILE_SERVERS:
         return _solid_background(style_key, W, H, bbox, land_color=land_color)
+
     lon_min, lat_min, lon_max, lat_max = bbox
     lon_min = max(lon_min, -179.9); lon_max = min(lon_max, 179.9)
     lat_min = max(lat_min, -85.0);  lat_max = min(lat_max, 85.0)
 
-    # Pick zoom so the bbox spans at least the output width or height in pixels
-    z = 4
+    # Pick the largest zoom where the bbox covers at least the output pixels
+    # (so tiles are downscaled → crisp), but cap total tiles to bound HTTP work.
+    MAX_TILES = 160
+    z = 3
     for z_try in range(7, 2, -1):
         n = 2 ** z_try
-        span_x = ((lon_max - lon_min) / 360) * n * _TILE_SIZE
-        span_y = (_merc_y(lat_min) - _merc_y(lat_max)) * n * _TILE_SIZE
-        if span_x >= W or span_y >= H:
+        tx_min_f = (lon_min + 180) / 360 * n
+        tx_max_f = (lon_max + 180) / 360 * n
+        ty_min_f = _merc_y(lat_max) * n
+        ty_max_f = _merc_y(lat_min) * n
+        ntiles = (int(tx_max_f) - int(tx_min_f) + 1) * (int(ty_max_f) - int(ty_min_f) + 1)
+        span_x = (tx_max_f - tx_min_f) * _TILE_SIZE
+        span_y = (ty_max_f - ty_min_f) * _TILE_SIZE
+        if (span_x >= W or span_y >= H) and ntiles <= MAX_TILES:
             z = z_try
             break
+        if ntiles <= MAX_TILES:
+            z = z_try  # remember the largest affordable zoom as a fallback
 
     n = 2 ** z
     tx_min_f = (lon_min + 180) / 360 * n
@@ -1249,16 +1288,16 @@ def _make_background(style_key, W, H, bbox, use_tiles=True, land_color=None):
     ty_min_f = _merc_y(lat_max) * n   # lat_max → smaller y (north = top)
     ty_max_f = _merc_y(lat_min) * n
 
-    tx0, tx1 = max(0, int(tx_min_f)), min(n - 1, int(tx_max_f) + 1)
-    ty0, ty1 = max(0, int(ty_min_f)), min(n - 1, int(ty_max_f) + 1)
+    tx0, tx1 = max(0, int(tx_min_f)), min(n - 1, int(tx_max_f))
+    ty0, ty1 = max(0, int(ty_min_f)), min(n - 1, int(ty_max_f))
 
-    stitch_w = (tx1 - tx0 + 1) * _TILE_SIZE
-    stitch_h = (ty1 - ty0 + 1) * _TILE_SIZE
-    # Guard: if the canvas would exceed ~50 MB (RGBA), fall back to solid background.
-    # This prevents OOM on wide-bbox exports (full-Europe at z>=6 can hit 100 MB+).
-    if stitch_w * stitch_h * 4 > 50 * 1024 * 1024:
-        return _solid_background(style_key, W, H, bbox)
-    stitched = Image.new("RGBA", (stitch_w, stitch_h), _STYLE_BACKGROUNDS[style_key])
+    # Linear map: tile-pixel space → output (W×H) space
+    px_min = tx_min_f * _TILE_SIZE
+    py_min = ty_min_f * _TILE_SIZE
+    sx = W / ((tx_max_f - tx_min_f) * _TILE_SIZE)
+    sy = H / ((ty_max_f - ty_min_f) * _TILE_SIZE)
+
+    out = Image.new("RGBA", (W, H), _STYLE_BACKGROUNDS[style_key])
 
     coords = [(tx, ty) for tx in range(tx0, tx1 + 1) for ty in range(ty0, ty1 + 1)]
 
@@ -1269,19 +1308,26 @@ def _make_background(style_key, W, H, bbox, use_tiles=True, land_color=None):
         except Exception:
             return coord, None
 
+    deadline = _time.monotonic() + 18  # leave headroom under Render's 30s
     with ThreadPoolExecutor(max_workers=8) as pool:
         for coord, tile in pool.map(_fetch, coords):
-            if tile:
-                tx, ty = coord
-                stitched.paste(tile, ((tx - tx0) * _TILE_SIZE, (ty - ty0) * _TILE_SIZE))
-
-    # Crop to exact bbox in tile-pixel space, then scale to output size
-    crop_l = (tx_min_f - tx0) * _TILE_SIZE
-    crop_t = (ty_min_f - ty0) * _TILE_SIZE
-    crop_r = (tx_max_f - tx0) * _TILE_SIZE
-    crop_b = (ty_max_f - ty0) * _TILE_SIZE
-    cropped = stitched.crop((int(crop_l), int(crop_t), int(crop_r), int(crop_b)))
-    return cropped.resize((W, H), Image.LANCZOS)
+            if _time.monotonic() > deadline:
+                break
+            if not tile:
+                continue
+            tx, ty = coord
+            # Destination box for this tile in output space
+            dx0 = int(round((tx * _TILE_SIZE - px_min) * sx))
+            dy0 = int(round((ty * _TILE_SIZE - py_min) * sy))
+            dx1 = int(round(((tx + 1) * _TILE_SIZE - px_min) * sx))
+            dy1 = int(round(((ty + 1) * _TILE_SIZE - py_min) * sy))
+            tw, th = max(1, dx1 - dx0), max(1, dy1 - dy0)
+            try:
+                resized = tile.resize((tw, th), Image.LANCZOS)
+                out.paste(resized, (dx0, dy0))
+            except Exception:
+                pass
+    return out
 
 
 import os as _os
@@ -1707,7 +1753,9 @@ def map_export(request):
     log = logging.getLogger(__name__)
 
     try:
-        use_tiles = request.GET.get("tiles", "0") == "1"
+        # R1: real CARTO tiles by default (match Leaflet). `tiles=0` selects the
+        # flat diagram view; a custom land/background colour also implies diagram.
+        use_tiles = request.GET.get("tiles", "1") != "0" and not params.get("bg_color")
         img = _make_background(params["style_key"], W, H, bbox,
                                use_tiles=use_tiles, land_color=params.get("bg_color"))
     except Exception as e:
@@ -1916,8 +1964,10 @@ def _render_export_png(token_obj):
         if s["country"] not in country_index:
             country_index[s["country"]] = len(country_index)
 
+    # R1: real CARTO tiles unless a custom land colour selects the diagram view
+    use_tiles = not params.get("bg_color")
     img = _make_background(params["style_key"], W, H, bbox,
-                           use_tiles=False, land_color=params.get("bg_color"))
+                           use_tiles=use_tiles, land_color=params.get("bg_color"))
     img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index)
     if inset_stadiums:
         img = _draw_inset(img, inset_stadiums, params, W, H, country_index, params["style_key"])

@@ -45,6 +45,16 @@ a regression, regardless of what else changed. Do not re-litigate these per task
 - Leave breathing room: the centre of the map stays readable; labels migrate
   outward.
 
+### R4 — Small maps show ALL labels
+- When the map has **fewer than 70 badges**, **every** label MUST be displayed —
+  no label may be dropped for clutter (R3's drop rule is suspended below 70).
+- The placement search must therefore be exhaustive enough (more candidate slots,
+  wider radii, both sides, longer detours) to find a clean spot for every label
+  at low counts. Dropping is only permitted at **≥ 70 badges**.
+- R2 still holds at all counts: even when forcing all labels, no leader line may
+  cross a badge. If geometry is truly impossible, expand the canvas search area /
+  push labels further to the edges rather than cross a badge.
+
 ---
 
 ## Scope
@@ -151,7 +161,9 @@ Target behaviour (the Transfermarkt-style reference the user shared):
    with 90° bends — never a diagonal straight line. Anchor at the badge-ring edge
    on the label's side; terminate at the label pill's near edge.
 5. If no candidate passes after all slots + detours → **drop the label** (R3),
-   don't force an overlapping/crossing one.
+   don't force an overlapping/crossing one. **Exception (R4):** when total badge
+   count < 70, dropping is forbidden — widen the search (more slots, larger radii,
+   both sides) until every label is placed without crossing a badge.
 
 ## Files that will change
 | File | Change type | Why |
@@ -177,7 +189,9 @@ bringing the render up to the three rules above:
        search; validate every polyline segment against badge circles, detour on hit.
 5. [ ] **R3:** drop labels that can't be placed without overlap/crossing; bias
        candidates outward to keep the centre clear.
-6. [ ] Smoke test each rule (see Test plan).
+6. [ ] **R4:** when badge count < 70, never drop — widen the candidate search
+       (more slots/radii/sides) until all labels are placed.
+7. [ ] Smoke test each rule (see Test plan).
 
 ## Test plan
 - `test_map_export_returns_png` — GET with no params → 200, content-type image/png
@@ -189,6 +203,8 @@ bringing the render up to the three rules above:
   left badges → left labels, right badges → right labels; all bends are 90°.
 - **R3 manual:** dense filter (e.g. all England) → no overlapping labels; unplaceable
   labels are dropped, centre stays readable.
+- **R4 manual:** filter to < 70 badges (e.g. one league) → EVERY label is shown,
+  none dropped, and R2 still holds (no line crosses a badge).
 
 ## Rollback plan
 - Remove `map_export` from `views.py` and its URL from `urls.py`
