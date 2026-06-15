@@ -60,7 +60,7 @@ html, body {
     border-radius: 50%;
     border: 2px solid rgba(255,255,255,0.85);
     box-shadow: 0 1px 5px rgba(0,0,0,0.7);
-    background: #fff;
+    background: rgba(255,255,255,0.15);
     overflow: hidden;
     transition: transform 0.15s, box-shadow 0.15s;
     cursor: pointer;
@@ -72,7 +72,8 @@ html, body {
 .badge-icon-wrap img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    object-position: center 25%;
 }
 /* Fallback when no badge image */
 .badge-icon-fallback {
