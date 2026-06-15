@@ -1234,48 +1234,94 @@ def _make_background(style_key, W, H, bbox, use_tiles=True):
     return cropped.resize((W, H), Image.LANCZOS)
 
 
+import os as _os
+import time as _time
+
+_BADGE_DISK_CACHE = _os.path.join(_os.path.sep, "tmp", "soe_badges")
+try:
+    _os.makedirs(_BADGE_DISK_CACHE, exist_ok=True)
+except Exception:
+    _BADGE_DISK_CACHE = None
+
+
 def _fetch_badge_image(url, size=20):
-    """Download, resize to size×size, and cache a badge image. Returns RGBA Image or None."""
+    """Download, resize, and cache a badge image to /tmp + Django cache."""
     if not url:
         return None
-    key = f"export_badge_{hashlib.md5(url.encode()).hexdigest()}_{size}"
-    data = cache.get(key)
+    key = hashlib.md5(f"{url}_{size}".encode()).hexdigest()
+
+    # 1. Disk cache (/tmp survives between requests on the same dyno)
+    disk_path = _os.path.join(_BADGE_DISK_CACHE, f"{key}.png") if _BADGE_DISK_CACHE else None
+    if disk_path and _os.path.exists(disk_path):
+        try:
+            return Image.open(disk_path).convert("RGBA")
+        except Exception:
+            pass
+
+    # 2. Django in-memory cache
+    data = cache.get(f"badge_{key}")
     if data:
         try:
-            return Image.open(io.BytesIO(data)).convert("RGBA")
+            img = Image.open(io.BytesIO(data)).convert("RGBA")
+            if disk_path:
+                try:
+                    img.save(disk_path, format="PNG")
+                except Exception:
+                    pass
+            return img
         except Exception:
             return None
+
+    # 3. Fetch from web
     try:
-        r = _requests.get(url, timeout=4, headers={"User-Agent": "StadiumsOfEurope/1.0"})
+        r = _requests.get(url, timeout=3, headers={"User-Agent": "StadiumsOfEurope/1.0"})
         r.raise_for_status()
         img = Image.open(io.BytesIO(r.content)).convert("RGBA")
-        # For portrait images (national team badges include text below crest)
-        # crop to the top square where the actual emblem lives
         w, h = img.size
         if h > w:
             img = img.crop((0, 0, w, w))
         img = img.resize((size, size), Image.LANCZOS)
+        # Save to disk
+        if disk_path:
+            try:
+                img.save(disk_path, format="PNG")
+            except Exception:
+                pass
+        # Save to Django cache
         buf = io.BytesIO()
         img.save(buf, format="PNG")
-        cache.set(key, buf.getvalue(), 86400 * 7)
+        cache.set(f"badge_{key}", buf.getvalue(), 86400 * 7)
         return img
     except Exception:
         return None
 
 
 def _prefetch_badges(stadiums, size=20):
-    """Fetch all badge images in parallel. Returns dict {stadium_name: Image}."""
+    """Fetch badge images in parallel with a hard 22-second wall-clock budget.
+    Returns whatever loaded in time — uncached badges are skipped gracefully."""
     items = [(s["name"], s.get("image_url", "")) for s in stadiums if s.get("image_url")]
+    if not items:
+        return {}
 
-    def _one(item):
-        name, url = item
-        return name, _fetch_badge_image(url, size)
-
+    deadline = _time.monotonic() + 22   # hard budget — stay under Render's 30s limit
     result = {}
-    with ThreadPoolExecutor(max_workers=8) as pool:
-        for name, img in pool.map(_one, items):
-            if img:
-                result[name] = img
+
+    with ThreadPoolExecutor(max_workers=24) as pool:
+        futures = {pool.submit(_fetch_badge_image, url, size): name for name, url in items}
+        try:
+            for future in as_completed(futures, timeout=22):
+                if _time.monotonic() > deadline:
+                    break
+                name = futures[future]
+                try:
+                    img = future.result(timeout=0)
+                    if img:
+                        result[name] = img
+                except Exception:
+                    pass
+        except Exception:
+            pass   # TimeoutError from as_completed — return what we have
+
     return result
 
 
