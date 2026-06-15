@@ -990,8 +990,15 @@ def _fetch_one_tile(z, x, y, style_key):
     return Image.open(io.BytesIO(resp.content)).convert("RGBA")
 
 
-def _make_background(style_key, W, H, bbox):
+def _solid_background(style_key, W, H):
+    """Solid colour fallback background with no external requests."""
+    return Image.new("RGBA", (W, H), _STYLE_BACKGROUNDS[style_key])
+
+
+def _make_background(style_key, W, H, bbox, use_tiles=True):
     """Stitch free map tiles into a background image, fall back to solid colour on error."""
+    if not use_tiles:
+        return _solid_background(style_key, W, H)
     lon_min, lat_min, lon_max, lat_max = bbox
     lon_min = max(lon_min, -179.9); lon_max = min(lon_max, 179.9)
     lat_min = max(lat_min, -85.0);  lat_max = min(lat_max, 85.0)
@@ -1211,7 +1218,8 @@ def map_export(request):
     log = logging.getLogger(__name__)
 
     try:
-        img = _make_background(params["style_key"], W, H, bbox)
+        use_tiles = request.GET.get("tiles", "1") != "0"
+        img = _make_background(params["style_key"], W, H, bbox, use_tiles=use_tiles)
     except Exception as e:
         log.error("_make_background failed: %s\n%s", e, traceback.format_exc())
         return JsonResponse({"error": "Background render failed.", "detail": str(e)}, status=500)
