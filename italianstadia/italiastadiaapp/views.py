@@ -1439,16 +1439,6 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
     PAD_X     = 10
     PAD_Y     = 7
     LINE_GAP  = 3
-    # Radial search: prefer large distances first to push labels toward edges
-    short = max(80, int(min(W, H) * 0.12))
-    RADII = [
-        int(min(W, H) * 0.42),
-        int(min(W, H) * 0.32),
-        int(min(W, H) * 0.22),
-        int(min(W, H) * 0.16),
-        short,
-    ]
-    ANGLES    = [i * (360 / 16) for i in range(16)]
 
     # Parse label colour — hex string → RGB tuple
     try:
@@ -1528,8 +1518,38 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
     if not params["labels"]:
         return img
 
-    # Second pass: radial search for each label
-    for px, py, s in dot_positions:
+    # R4: below 70 badges, every label MUST be placed (no clutter-drop).
+    force_all = len(dot_positions) < 70
+
+    def _polyline_clear(pts, own_px, own_py):
+        """True if no segment of the orthogonal polyline crosses another badge."""
+        for i in range(len(pts) - 1):
+            ax, ay = pts[i]
+            bx, by = pts[i + 1]
+            if _seg_hits_badge(ax, ay, bx, by, own_px, own_py):
+                return False
+        return True
+
+    def _route(px, py, side, lx, ly, pill_w, pill_h):
+        """Build an orthogonal (90°-bend) leader polyline from the badge ring edge
+        to the pill's near side. Returns the point list, or None if it crosses a badge."""
+        cy = ly + pill_h / 2                      # pill vertical centre
+        if side == "right":
+            ax = px + rr + 1                      # anchor on badge ring, right side
+            connect_x = lx                        # pill left edge
+        else:
+            ax = px - rr - 1
+            connect_x = lx + pill_w               # pill right edge
+        ay = py
+        bend_x = (ax + connect_x) / 2
+        # horizontal → vertical → horizontal (collapses to straight if ay == cy)
+        pts = [(ax, ay), (bend_x, ay), (bend_x, cy), (connect_x, cy)]
+        return pts if _polyline_clear(pts, px, py) else None
+
+    # Place labels left-to-right so left badges claim left space first
+    order = sorted(dot_positions, key=lambda t: t[0])
+
+    for px, py, s in order:
         team_line    = s.get("team_name", "") or ""
         stadium_line = s["name"]
 
@@ -1546,47 +1566,57 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
         pill_w = max(tw1, tw2) + PAD_X * 2
         pill_h = (th1 + LINE_GAP + th2 if show_team else th2) + PAD_Y * 2
 
-        # Prefer angles pointing outward (away from image center)
-        cx_map, cy_map = W / 2, H / 2
-        base_angle = math.degrees(math.atan2(py - cy_map, px - cx_map))
-        sorted_angles = sorted(
-            ANGLES,
-            key=lambda a: abs(((a - base_angle + 180) % 360) - 180)
-        )
+        # R2 side rule: left-half badges → label left, right-half → label right
+        primary_side = "left" if px < W / 2 else "right"
+        vstep = pill_h + 6
+
+        # Candidate generation: horizontal gaps (ascending → crowded centre pushes
+        # labels outward) × vertical offsets (fan out from badge row).
+        base_gaps = [40, 70, 105, 150, 205, 270]
+        base_voffs = [0]
+        for k in range(1, 9):
+            base_voffs += [-k * vstep, k * vstep]
+        if force_all:
+            # R4: widen the search so nothing is ever dropped below 70 badges
+            base_gaps = base_gaps + [345, 430, 530, 650]
+            for k in range(9, 16):
+                base_voffs += [-k * vstep, k * vstep]
+
+        # Try the side rule first; if forcing all labels, allow the other side too
+        sides = [primary_side] + (["right" if primary_side == "left" else "left"]
+                                  if force_all else [])
 
         chosen = None
-        for radius in RADII:
-            for angle_deg in sorted_angles:
-                rad = math.radians(angle_deg)
-                # pill center target
-                pcx = px + radius * math.cos(rad)
-                pcy = py + radius * math.sin(rad)
-                lx = int(pcx - pill_w / 2)
-                ly = int(pcy - pill_h / 2)
-                box = (lx, ly, lx + pill_w, ly + pill_h)
-                if lx < 2 or ly < 2 or lx + pill_w > W - 2 or ly + pill_h > H - 2:
-                    continue
-                if _box_overlaps(box):
-                    continue
-                # Leader line: badge-ring edge → pill center
-                nx = math.cos(rad)
-                ny = math.sin(rad)
-                line_sx = px + nx * (rr + 1)
-                line_sy = py + ny * (rr + 1)
-                if _seg_hits_badge(line_sx, line_sy, pcx, pcy, px, py):
-                    continue
-                chosen = (lx, ly, box, line_sx, line_sy, pcx, pcy)
-                break
+        for side in sides:
+            for voff in base_voffs:
+                for gap in base_gaps:
+                    if side == "right":
+                        lx = int(px + gap)
+                    else:
+                        lx = int(px - gap - pill_w)
+                    ly = int(py + voff - pill_h / 2)
+                    if lx < 2 or ly < 2 or lx + pill_w > W - 2 or ly + pill_h > H - 2:
+                        continue
+                    box = (lx, ly, lx + pill_w, ly + pill_h)
+                    if _box_overlaps(box):
+                        continue
+                    pts = _route(px, py, side, lx, ly, pill_w, pill_h)
+                    if pts is None:
+                        continue
+                    chosen = (lx, ly, box, pts)
+                    break
+                if chosen:
+                    break
             if chosen:
                 break
 
         if not chosen:
-            continue
+            continue  # R3: drop only when no clean placement exists (≥70 badges)
 
-        lx, ly, box, lsx, lsy, lex, ley = chosen
+        lx, ly, box, pts = chosen
 
-        # ── Thin leader line + pill — drawn directly, no full-canvas overlay ──
-        draw.line([(lsx, lsy), (lex, ley)], fill=label_rgb, width=1)
+        # ── Orthogonal leader polyline + pill — drawn directly, no overlay ──
+        draw.line(pts, fill=label_rgb, width=1, joint="curve")
         draw.rounded_rectangle([lx, ly, lx + pill_w, ly + pill_h], radius=5, fill=(8, 10, 20, 220))
 
         ty = ly + PAD_Y
