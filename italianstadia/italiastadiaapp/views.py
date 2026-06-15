@@ -1837,12 +1837,11 @@ def export_download(request, token):
     if timezone.now() > token_obj.expires_at:
         return render(request, "export_error.html", {"msg": "This download link has expired."}, status=410)
 
-    # Mark used immediately to prevent double-download
-    token_obj.used = True
-    token_obj.save(update_fields=["used"])
-
     # Reconstruct a fake GET request object for _parse_export_params
     filters = json.loads(token_obj.filters_json)
+    # Cap at FHD to avoid gunicorn timeout on 4K renders
+    if filters.get("size_key") == "4k":
+        filters["size_key"] = "fhd"
 
     class _FakeGET:
         def get(self, key, default=""):
@@ -1885,6 +1884,10 @@ def export_download(request, token):
     buf = io.BytesIO()
     img.convert("RGB").save(buf, format="PNG", optimize=True)
     buf.seek(0)
+
+    # Mark used only after successful generation — timeout won't burn the token
+    token_obj.used = True
+    token_obj.save(update_fields=["used"])
 
     filename = f"stadiums-map-{params['size_key']}.png"
     response = HttpResponse(buf.read(), content_type="image/png")
