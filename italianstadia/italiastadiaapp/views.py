@@ -840,6 +840,7 @@ def tournament_detail(request, slug):
 
 import io
 import math
+import requests as _requests
 from django.core.cache import cache
 from PIL import Image, ImageDraw, ImageFont
 
@@ -849,7 +850,15 @@ _EXPORT_SIZES = {
     "landscape": (1920, 1080),
 }
 
-# Background colours for each style (RGBA)
+# Free tile servers — no API key required
+_TILE_SERVERS = {
+    "dark":      "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+    "light":     "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+    "topo":      "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "satellite": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+}
+
+# Fallback solid colours if tile fetch fails
 _STYLE_BACKGROUNDS = {
     "dark":      (18,  22,  36,  255),
     "light":     (240, 242, 245, 255),
@@ -857,13 +866,7 @@ _STYLE_BACKGROUNDS = {
     "satellite": (16,  28,  16,  255),
 }
 
-# Grid line colours per style
-_STYLE_GRID = {
-    "dark":      (40,  46,  66,  255),
-    "light":     (200, 205, 215, 255),
-    "topo":      (190, 210, 170, 255),
-    "satellite": (30,  50,  30,  255),
-}
+_TILE_SIZE = 256
 
 _SURFACE_COLOURS = {
     "ARTIFICIAL": (245, 197, 66),
@@ -957,36 +960,79 @@ def _bbox_with_padding(stadiums, pad=0.12):
     )
 
 
+def _merc_y(lat):
+    """Latitude → normalized Mercator Y (0 = north pole, 1 = south pole)."""
+    lat = max(min(lat, 85.051), -85.051)
+    r = math.radians(lat)
+    return (1 - math.log(math.tan(r) + 1 / math.cos(r)) / math.pi) / 2
+
+
 def _lon_lat_to_px(lon, lat, bbox, W, H):
-    """Map geographic coordinates to pixel coordinates."""
+    """Mercator projection: lon/lat → pixel coordinates within the export image."""
     lon_min, lat_min, lon_max, lat_max = bbox
     x = (lon - lon_min) / (lon_max - lon_min) * W
-    # Latitude: invert (north = top)
-    y = (1 - (lat - lat_min) / (lat_max - lat_min)) * H
+    y = (_merc_y(lat) - _merc_y(lat_max)) / (_merc_y(lat_min) - _merc_y(lat_max)) * H
     return int(x), int(y)
 
 
+def _fetch_one_tile(z, x, y, style_key):
+    """Fetch a single 256×256 tile, caching for 24 h."""
+    cache_key = f"tile_{style_key}_{z}_{x}_{y}"
+    data = cache.get(cache_key)
+    if data:
+        return Image.open(io.BytesIO(data)).convert("RGBA")
+    url = _TILE_SERVERS[style_key].format(z=z, x=x, y=y)
+    headers = {"User-Agent": "StadiumsOfEurope/1.0 (stadiumsofeurope.com)"}
+    resp = _requests.get(url, timeout=8, headers=headers)
+    resp.raise_for_status()
+    cache.set(cache_key, resp.content, 86400)
+    return Image.open(io.BytesIO(resp.content)).convert("RGBA")
+
+
 def _make_background(style_key, W, H, bbox):
-    """Render a clean data-viz background with subtle lat/lon grid lines."""
-    bg_colour   = _STYLE_BACKGROUNDS[style_key]
-    grid_colour = _STYLE_GRID[style_key]
-
-    img = Image.new("RGBA", (W, H), bg_colour)
-    d   = ImageDraw.Draw(img)
-
+    """Stitch free map tiles into a background image, fall back to solid colour on error."""
     lon_min, lat_min, lon_max, lat_max = bbox
+    lon_min = max(lon_min, -179.9); lon_max = min(lon_max, 179.9)
+    lat_min = max(lat_min, -85.0);  lat_max = min(lat_max, 85.0)
 
-    # Draw subtle grid every ~10 degrees
-    for lon in range(-180, 181, 10):
-        if lon_min <= lon <= lon_max:
-            px, _ = _lon_lat_to_px(lon, (lat_min + lat_max) / 2, bbox, W, H)
-            d.line([(px, 0), (px, H)], fill=grid_colour, width=1)
-    for lat in range(-80, 81, 10):
-        if lat_min <= lat <= lat_max:
-            _, py = _lon_lat_to_px((lon_min + lon_max) / 2, lat, bbox, W, H)
-            d.line([(0, py), (W, py)], fill=grid_colour, width=1)
+    # Pick zoom so the bbox spans at least the output width or height in pixels
+    z = 4
+    for z_try in range(7, 2, -1):
+        n = 2 ** z_try
+        span_x = ((lon_max - lon_min) / 360) * n * _TILE_SIZE
+        span_y = (_merc_y(lat_min) - _merc_y(lat_max)) * n * _TILE_SIZE
+        if span_x >= W or span_y >= H:
+            z = z_try
+            break
 
-    return img
+    n = 2 ** z
+    tx_min_f = (lon_min + 180) / 360 * n
+    tx_max_f = (lon_max + 180) / 360 * n
+    ty_min_f = _merc_y(lat_max) * n   # lat_max → smaller y (north = top)
+    ty_max_f = _merc_y(lat_min) * n
+
+    tx0, tx1 = max(0, int(tx_min_f)), min(n - 1, int(tx_max_f) + 1)
+    ty0, ty1 = max(0, int(ty_min_f)), min(n - 1, int(ty_max_f) + 1)
+
+    stitch_w = (tx1 - tx0 + 1) * _TILE_SIZE
+    stitch_h = (ty1 - ty0 + 1) * _TILE_SIZE
+    stitched = Image.new("RGBA", (stitch_w, stitch_h), _STYLE_BACKGROUNDS[style_key])
+
+    for tx in range(tx0, tx1 + 1):
+        for ty in range(ty0, ty1 + 1):
+            try:
+                tile = _fetch_one_tile(z, tx, ty, style_key)
+                stitched.paste(tile, ((tx - tx0) * _TILE_SIZE, (ty - ty0) * _TILE_SIZE))
+            except Exception:
+                pass  # keep fallback colour for this tile
+
+    # Crop to exact bbox in tile-pixel space, then scale to output size
+    crop_l = (tx_min_f - tx0) * _TILE_SIZE
+    crop_t = (ty_min_f - ty0) * _TILE_SIZE
+    crop_r = (tx_max_f - tx0) * _TILE_SIZE
+    crop_b = (ty_max_f - ty0) * _TILE_SIZE
+    cropped = stitched.crop((int(crop_l), int(crop_t), int(crop_r), int(crop_b)))
+    return cropped.resize((W, H), Image.LANCZOS)
 
 
 def _dot_colour(stadium, params, country_index):
