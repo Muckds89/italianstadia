@@ -1225,4 +1225,5 @@ def map_export(request):
     filename = f"stadiums-map-{params['size_key']}.png"
     response = HttpResponse(buf.read(), content_type="image/png")
     response["Content-Disposition"] = f'attachment; filename="{filename}"'
+    response["Content-Encoding"] = "identity"  # prevent GzipMiddleware from re-encoding PNG
     return response
