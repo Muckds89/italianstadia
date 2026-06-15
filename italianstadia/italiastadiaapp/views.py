@@ -990,15 +990,74 @@ def _fetch_one_tile(z, x, y, style_key):
     return Image.open(io.BytesIO(resp.content)).convert("RGBA")
 
 
-def _solid_background(style_key, W, H):
-    """Solid colour fallback background with no external requests."""
-    return Image.new("RGBA", (W, H), _STYLE_BACKGROUNDS[style_key])
+import json
+from pathlib import Path
+
+_LAND_COLOURS = {
+    "dark":      (32,  36,  54,  255),
+    "light":     (215, 220, 228, 255),
+    "topo":      (200, 218, 180, 255),
+    "satellite": (28,  44,  28,  255),
+}
+_BORDER_COLOURS = {
+    "dark":      (55,  62,  90,  255),
+    "light":     (155, 162, 175, 255),
+    "topo":      (140, 165, 120, 255),
+    "satellite": (50,  70,  50,  255),
+}
+
+_countries_cache = None
+
+def _load_countries():
+    global _countries_cache
+    if _countries_cache is None:
+        p = Path(__file__).parent / "static" / "data" / "countries_110m.geojson"
+        with open(p, encoding="utf-8") as f:
+            _countries_cache = json.load(f)["features"]
+    return _countries_cache
+
+
+def _draw_countries(img, bbox, W, H, style_key):
+    """Draw country land + outlines from the bundled Natural Earth 110m dataset."""
+    land   = _LAND_COLOURS.get(style_key, _LAND_COLOURS["dark"])
+    border = _BORDER_COLOURS.get(style_key, _BORDER_COLOURS["dark"])
+    lon_min, lat_min, lon_max, lat_max = bbox
+    pad = 5  # degrees beyond bbox to catch clipped polygons
+
+    d = ImageDraw.Draw(img)
+    for feat in _load_countries():
+        geom = feat["geometry"]
+        rings = []
+        if geom["type"] == "Polygon":
+            rings = [geom["coordinates"][0]]
+        elif geom["type"] == "MultiPolygon":
+            rings = [poly[0] for poly in geom["coordinates"]]
+        for ring in rings:
+            pts = [
+                _lon_lat_to_px(lon, lat, bbox, W, H)
+                for lon, lat in ring
+                if (lon_min - pad) <= lon <= (lon_max + pad)
+                and (lat_min - pad) <= lat <= (lat_max + pad)
+            ]
+            if len(pts) >= 3:
+                d.polygon(pts, fill=land, outline=border)
+    return img
+
+
+def _solid_background(style_key, W, H, bbox):
+    """Background with country outlines — no external requests."""
+    img = Image.new("RGBA", (W, H), _STYLE_BACKGROUNDS[style_key])
+    try:
+        img = _draw_countries(img, bbox, W, H, style_key)
+    except Exception:
+        pass  # fall back to plain colour if data file missing
+    return img
 
 
 def _make_background(style_key, W, H, bbox, use_tiles=True):
-    """Stitch free map tiles into a background image, fall back to solid colour on error."""
+    """Country-outline background; optionally stitch tiles on top."""
     if not use_tiles:
-        return _solid_background(style_key, W, H)
+        return _solid_background(style_key, W, H, bbox)
     lon_min, lat_min, lon_max, lat_max = bbox
     lon_min = max(lon_min, -179.9); lon_max = min(lon_max, 179.9)
     lat_min = max(lat_min, -85.0);  lat_max = min(lat_max, 85.0)
@@ -1218,7 +1277,7 @@ def map_export(request):
     log = logging.getLogger(__name__)
 
     try:
-        use_tiles = request.GET.get("tiles", "1") != "0"
+        use_tiles = request.GET.get("tiles", "0") == "1"
         img = _make_background(params["style_key"], W, H, bbox, use_tiles=use_tiles)
     except Exception as e:
         log.error("_make_background failed: %s\n%s", e, traceback.format_exc())
