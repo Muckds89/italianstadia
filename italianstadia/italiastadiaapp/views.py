@@ -1064,10 +1064,7 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key):
         box = (lx, ly, lx + tw, ly + th)
         if not any(not (box[2]<pb[0] or box[0]>pb[2] or box[3]<pb[1] or box[1]>pb[3]) for pb in placed):
             d = ImageDraw.Draw(inset_img)
-            ov = Image.new("RGBA", inset_img.size, (0,0,0,0))
-            ImageDraw.Draw(ov).rounded_rectangle([lx-2,ly-2,lx+tw+2,ly+th+2], radius=3, fill=(8,10,20,210))
-            inset_img = Image.alpha_composite(inset_img, ov)
-            d = ImageDraw.Draw(inset_img)
+            d.rounded_rectangle([lx-2,ly-2,lx+tw+2,ly+th+2], radius=3, fill=(8,10,20,210))
             # leader line
             d.line([(px + (rr if lx > px else -rr), py), (lx if lx > px else lx+tw, py)],
                    fill=(255,255,255,160), width=1)
@@ -1208,6 +1205,10 @@ def _make_background(style_key, W, H, bbox, use_tiles=True):
 
     stitch_w = (tx1 - tx0 + 1) * _TILE_SIZE
     stitch_h = (ty1 - ty0 + 1) * _TILE_SIZE
+    # Guard: if the canvas would exceed ~50 MB (RGBA), fall back to solid background.
+    # This prevents OOM on wide-bbox exports (full-Europe at z>=6 can hit 100 MB+).
+    if stitch_w * stitch_h * 4 > 50 * 1024 * 1024:
+        return _solid_background(style_key, W, H, bbox)
     stitched = Image.new("RGBA", (stitch_w, stitch_h), _STYLE_BACKGROUNDS[style_key])
 
     coords = [(tx, ty) for tx in range(tx0, tx1 + 1) for ty in range(ty0, ty1 + 1)]
@@ -1306,7 +1307,7 @@ def _prefetch_badges(stadiums, size=20):
     deadline = _time.monotonic() + 22   # hard budget — stay under Render's 30s limit
     result = {}
 
-    with ThreadPoolExecutor(max_workers=24) as pool:
+    with ThreadPoolExecutor(max_workers=8) as pool:
         futures = {pool.submit(_fetch_badge_image, url, size): name for name, url in items}
         try:
             for future in as_completed(futures, timeout=22):
@@ -1879,7 +1880,9 @@ def _render_export_png(token_obj):
         if s["country"] not in country_index:
             country_index[s["country"]] = len(country_index)
 
-    img = _make_background(params["style_key"], W, H, bbox)
+    # Always use solid background on free tier — tile stitching builds a
+    # multi-hundred-MB intermediate canvas and OOM-kills the 512 MB dyno.
+    img = _make_background(params["style_key"], W, H, bbox, use_tiles=False)
     if params.get("bg_color"):
         tint = Image.new("RGBA", (W, H), params["bg_color"])
         img = Image.alpha_composite(img, tint)
