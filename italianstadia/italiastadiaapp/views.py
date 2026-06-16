@@ -1146,7 +1146,13 @@ def _lon_lat_to_px(lon, lat, bbox, W, H):
 
 
 def _fetch_one_tile(z, x, y, style_key):
-    """Fetch a single 256×256 tile, caching to /tmp (survives across workers) + Django cache."""
+    """Fetch a single 256×256 tile, caching to /tmp only.
+
+    Deliberately does NOT use Django's in-process LocMemCache — holding tile PNG
+    bytes in RAM grows the worker's footprint render-after-render and contributes
+    to OOM on the 512 MB dyno. The /tmp disk cache is enough and is shared across
+    workers on the same instance.
+    """
     import os as _o
     disk_path = None
     try:
@@ -1158,20 +1164,10 @@ def _fetch_one_tile(z, x, y, style_key):
     except Exception:
         disk_path = None
 
-    cache_key = f"tile_{style_key}_{z}_{x}_{y}"
-    data = cache.get(cache_key)
-    if data:
-        img = Image.open(io.BytesIO(data)).convert("RGBA")
-        if disk_path:
-            try: img.save(disk_path, format="PNG")
-            except Exception: pass
-        return img
-
     url = _TILE_SERVERS[style_key].format(z=z, x=x, y=y)
     headers = {"User-Agent": "StadiumsOfEurope/1.0 (stadiumsofeurope.com)"}
     resp = _requests.get(url, timeout=4, headers=headers)
     resp.raise_for_status()
-    cache.set(cache_key, resp.content, 86400)
     if disk_path:
         try:
             with open(disk_path, "wb") as fh:
@@ -1358,7 +1354,8 @@ except Exception:
 
 
 def _fetch_badge_image(url, size=20):
-    """Download, resize, and cache a badge image to /tmp + Django cache."""
+    """Download, resize, and cache a badge image to /tmp only (no in-process
+    Django cache — see _fetch_one_tile for why)."""
     if not url:
         return None
     key = hashlib.md5(f"{url}_{size}".encode()).hexdigest()
@@ -1371,21 +1368,7 @@ def _fetch_badge_image(url, size=20):
         except Exception:
             pass
 
-    # 2. Django in-memory cache
-    data = cache.get(f"badge_{key}")
-    if data:
-        try:
-            img = Image.open(io.BytesIO(data)).convert("RGBA")
-            if disk_path:
-                try:
-                    img.save(disk_path, format="PNG")
-                except Exception:
-                    pass
-            return img
-        except Exception:
-            return None
-
-    # 3. Fetch from web
+    # 2. Fetch from web
     try:
         r = _requests.get(url, timeout=3, headers={"User-Agent": "StadiumsOfEurope/1.0"})
         r.raise_for_status()
@@ -1394,16 +1377,11 @@ def _fetch_badge_image(url, size=20):
         if h > w:
             img = img.crop((0, 0, w, w))
         img = img.resize((size, size), Image.LANCZOS)
-        # Save to disk
         if disk_path:
             try:
                 img.save(disk_path, format="PNG")
             except Exception:
                 pass
-        # Save to Django cache
-        buf = io.BytesIO()
-        img.save(buf, format="PNG")
-        cache.set(f"badge_{key}", buf.getvalue(), 86400 * 7)
         return img
     except Exception:
         return None
