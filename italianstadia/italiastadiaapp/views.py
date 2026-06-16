@@ -1267,22 +1267,31 @@ def _make_background(style_key, W, H, bbox, use_tiles=True, land_color=None):
 
     # Pick the largest zoom where the bbox covers at least the output pixels
     # (so tiles are downscaled → crisp), but cap total tiles to bound HTTP work.
+    # For small countries no zoom reaches the output size, so fall back to the
+    # HIGHEST affordable zoom (most detail). Picking the lowest zoom here was a
+    # bug: a tiny bbox at z=3 makes the per-tile upscale enormous (256→16000px)
+    # → ~1 GB allocation → instant OOM 502 (Malta/Cyprus/N. Macedonia).
     MAX_TILES = 160
-    z = 3
-    for z_try in range(7, 2, -1):
+    z = None
+    best_affordable = None
+    for z_try in range(8, 2, -1):
         n = 2 ** z_try
         tx_min_f = (lon_min + 180) / 360 * n
         tx_max_f = (lon_max + 180) / 360 * n
         ty_min_f = _merc_y(lat_max) * n
         ty_max_f = _merc_y(lat_min) * n
         ntiles = (int(tx_max_f) - int(tx_min_f) + 1) * (int(ty_max_f) - int(ty_min_f) + 1)
+        if ntiles > MAX_TILES:
+            continue
+        if best_affordable is None:
+            best_affordable = z_try          # highest zoom under the tile cap
         span_x = (tx_max_f - tx_min_f) * _TILE_SIZE
         span_y = (ty_max_f - ty_min_f) * _TILE_SIZE
-        if (span_x >= W or span_y >= H) and ntiles <= MAX_TILES:
-            z = z_try
+        if span_x >= W or span_y >= H:
+            z = z_try                         # crisp: tiles downscale to fit
             break
-        if ntiles <= MAX_TILES:
-            z = z_try  # remember the largest affordable zoom as a fallback
+    if z is None:
+        z = best_affordable if best_affordable is not None else 3
 
     n = 2 ** z
     tx_min_f = (lon_min + 180) / 360 * n
@@ -1298,6 +1307,12 @@ def _make_background(style_key, W, H, bbox, use_tiles=True, land_color=None):
     py_min = ty_min_f * _TILE_SIZE
     sx = W / ((tx_max_f - tx_min_f) * _TILE_SIZE)
     sy = H / ((ty_max_f - ty_min_f) * _TILE_SIZE)
+
+    # Defense-in-depth: if a single tile would have to be upscaled past ~2× the
+    # output (degenerate tiny bbox), the resize would allocate hundreds of MB and
+    # OOM the dyno. Fall back to the lightweight diagram background instead.
+    if _TILE_SIZE * sx > 2 * W or _TILE_SIZE * sy > 2 * H:
+        return _solid_background(style_key, W, H, bbox, land_color=land_color)
 
     out = Image.new("RGBA", (W, H), _STYLE_BACKGROUNDS[style_key])
 
