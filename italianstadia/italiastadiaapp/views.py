@@ -1866,6 +1866,15 @@ def _draw_logo(img, W, H):
     return img
 
 
+import threading as _threading
+
+# Only ONE map render may run at a time per worker process. Each render allocates
+# tens of MB of PIL buffers; with --threads >1 (or multiple workers), simultaneous
+# renders stack and OOM-kill the 512 MB Render dyno → HTTP 502. Serializing them
+# caps peak memory to a single render regardless of concurrency.
+_RENDER_LOCK = _threading.BoundedSemaphore(1)
+
+
 def _compose_export_image(params):
     """Shared render core for both the free preview and the paid download.
     Returns (PIL RGBA Image, None) or (None, error_message).
@@ -1934,6 +1943,11 @@ def map_export(request):
     if request.GET.get("tiles", "1") == "0":
         params["tiles"] = False
 
+    # Serialize renders to bound peak memory (see _RENDER_LOCK). If the worker is
+    # already busy rendering, fail fast with a friendly 429 rather than stacking
+    # memory and risking an OOM 502.
+    if not _RENDER_LOCK.acquire(timeout=25):
+        return JsonResponse({"error": "Server busy rendering another map. Try again in a moment."}, status=429)
     try:
         img, err = _compose_export_image(params)
         if err:
@@ -1944,6 +1958,8 @@ def map_export(request):
     except Exception as e:
         log.error("Export render failed: %s\n%s", e, traceback.format_exc())
         return JsonResponse({"error": "Image render failed.", "detail": str(e)}, status=500)
+    finally:
+        _RENDER_LOCK.release()
 
     filename = f"stadiums-map-{params['size_key']}.png"
     response = HttpResponse(buf.read(), content_type="image/png")
@@ -2133,12 +2149,16 @@ def _render_export_png(token_obj):
         GET = _FakeGET()
 
     params = _parse_export_params(_FakeRequest())
-    img, err = _compose_export_image(params)
-    if err:
-        return None, err
-
-    buf = io.BytesIO()
-    img.convert("RGB").save(buf, format="PNG", optimize=True)
+    # Serialize with previews to bound peak memory (see _RENDER_LOCK)
+    _RENDER_LOCK.acquire()
+    try:
+        img, err = _compose_export_image(params)
+        if err:
+            return None, err
+        buf = io.BytesIO()
+        img.convert("RGB").save(buf, format="PNG", optimize=True)
+    finally:
+        _RENDER_LOCK.release()
     return buf.getvalue(), None
 
 
