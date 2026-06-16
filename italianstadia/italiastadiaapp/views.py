@@ -2046,23 +2046,40 @@ def export_checkout(request):
 @csrf_exempt
 @require_POST
 def export_webhook(request):
-    """Stripe webhook — marks ExportToken as paid on checkout.session.completed."""
+    """Stripe webhook — reliable second confirmation path. On
+    checkout.session.completed it marks the token paid, and UPSERTS it (creates
+    from session metadata) if the checkout-time write was lost, so the download
+    works even if the success page never loaded."""
+    log = logging.getLogger(__name__)
     payload = request.body
     sig    = request.META.get("HTTP_STRIPE_SIGNATURE", "")
     secret = settings.STRIPE_WEBHOOK_SECRET
 
     if not secret:
+        log.error("export_webhook: STRIPE_WEBHOOK_SECRET not set — ignoring event")
         return HttpResponse(status=400)
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
     try:
         event = stripe.Webhook.construct_event(payload, sig, secret)
-    except (ValueError, stripe.SignatureVerificationError):
+    except (ValueError, stripe.SignatureVerificationError) as e:
+        log.error("export_webhook: signature/parse failed: %s", e)
         return HttpResponse(status=400)
 
     if event["type"] == "checkout.session.completed":
-        session_id = event["data"]["object"]["id"]
-        ExportToken.objects.filter(stripe_session=session_id).update(paid=True)
+        obj = event["data"]["object"]
+        session_id = obj["id"]
+        updated = ExportToken.objects.filter(stripe_session=session_id).update(paid=True)
+        if not updated:
+            # Token row missing (checkout write lost) — recreate it from metadata
+            filters_json = (obj.get("metadata") or {}).get("filters_json", "{}")
+            ExportToken.objects.create(
+                stripe_session=session_id,
+                filters_json=filters_json,
+                paid=True,
+                expires_at=timezone.now() + timedelta(hours=24),
+            )
+            log.warning("export_webhook: recreated missing token for %s", session_id)
 
     return HttpResponse(status=200)
 

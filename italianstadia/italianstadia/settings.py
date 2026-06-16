@@ -38,8 +38,18 @@ GOOGLE_ADSENSE_SLOT   = os.environ.get("GOOGLE_ADSENSE_SLOT", "")
 MAPTILER_API_KEY = os.environ.get("MAPTILER_API_KEY", "")
 
 # Stripe — set STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET in Render env vars.
-STRIPE_SECRET_KEY      = os.environ.get("STRIPE_SECRET_KEY", "")
-STRIPE_WEBHOOK_SECRET  = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
+# STRIPE_MODE selects which key set is active:
+#   "live" (default) → STRIPE_SECRET_KEY / STRIPE_WEBHOOK_SECRET
+#   "test"           → STRIPE_TEST_SECRET_KEY / STRIPE_TEST_WEBHOOK_SECRET
+# Set STRIPE_MODE=test on Render to test the full pay→download flow for free
+# (test card 4242 4242 4242 4242), then set it back to live. No real charges.
+STRIPE_MODE = os.environ.get("STRIPE_MODE", "live").lower()
+if STRIPE_MODE == "test":
+    STRIPE_SECRET_KEY     = os.environ.get("STRIPE_TEST_SECRET_KEY", "")
+    STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_TEST_WEBHOOK_SECRET", "")
+else:
+    STRIPE_SECRET_KEY     = os.environ.get("STRIPE_SECRET_KEY", "")
+    STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
 STRIPE_PRICE_EXPORT    = os.environ.get("STRIPE_PRICE_EXPORT", "")
 EXPORT_BASE_URL        = os.environ.get("EXPORT_BASE_URL", "http://localhost:8000")
 
