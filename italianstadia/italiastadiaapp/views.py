@@ -1477,18 +1477,20 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
                 return True
         return False
 
-    def _box_overlaps(box):
+    def _box_overlaps(box, pills=True, badges=True):
         x0, y0, x1, y1 = box
-        for pb in placed_boxes:
-            if not (x1 < pb[0] or x0 > pb[2] or y1 < pb[1] or y0 > pb[3]):
-                return True
-        cx2, cy2 = (x0 + x1) / 2, (y0 + y1) / 2
-        hw, hh = (x1 - x0) / 2, (y1 - y0) / 2
-        for bcx, bcy, br in badge_circles:
-            dx = max(abs(bcx - cx2) - hw, 0)
-            dy = max(abs(bcy - cy2) - hh, 0)
-            if dx*dx + dy*dy < (br + 4)**2:
-                return True
+        if pills:
+            for pb in placed_boxes:
+                if not (x1 < pb[0] or x0 > pb[2] or y1 < pb[1] or y0 > pb[3]):
+                    return True
+        if badges:
+            cx2, cy2 = (x0 + x1) / 2, (y0 + y1) / 2
+            hw, hh = (x1 - x0) / 2, (y1 - y0) / 2
+            for bcx, bcy, br in badge_circles:
+                dx = max(abs(bcx - cx2) - hw, 0)
+                dy = max(abs(bcy - cy2) - hh, 0)
+                if dx*dx + dy*dy < (br + 4)**2:
+                    return True
         return False
 
     # First pass: draw all badges
@@ -1609,7 +1611,9 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
                         if lx < 2 or ly < 2 or lx + pill_w > W - 2 or ly + pill_h > H - 2:
                             continue
                         box = (lx, ly, lx + pill_w, ly + pill_h)
-                        if not allow_overlap and _box_overlaps(box):
+                        # A label pill may overlap OTHER pills in the relaxed pass,
+                        # but must NEVER cover a badge (badges are the anchors).
+                        if _box_overlaps(box, pills=not allow_overlap, badges=True):
                             continue
                         pts = _route(px, py, side, lx, ly, pill_w, pill_h, allow_cross=allow_cross)
                         if pts is None:
@@ -1618,11 +1622,11 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
             return None
 
         chosen = _search(allow_overlap=False, allow_cross=False)
-        # R4: below 70 badges every label MUST show. Escalate:
-        #  tier-2: allow pill overlap (still no badge crossing)
-        #  tier-3: last resort — allow the leader line to clip a badge so the
-        #          label is never silently dropped (better a faint cross than
-        #          a missing label, per the user's "all labels must appear").
+        # R4: below 70 badges every label MUST show. Escalate, but the pill never
+        # covers a badge at any tier:
+        #  tier-2: allow pill-on-pill overlap (still clears badges; line avoids them)
+        #  tier-3: last resort — allow the leader LINE to clip a badge (the pill
+        #          still clears all badges) so the label is never silently dropped.
         if chosen is None and force_all:
             chosen = _search(allow_overlap=True, allow_cross=False)
         if chosen is None and force_all:
