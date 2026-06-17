@@ -1633,12 +1633,13 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
                         return False
         return True
 
-    def _route(px, py, side, lx, ly, pill_w, pill_h, allow_cross=False):
+    def _route(px, py, side, lx, ly, pill_w, pill_h, allow_cross=False, avoid_boxes=True):
         """Build an orthogonal (90°-bend) leader polyline from the badge to the
         pill's near side. Tries a horizontal-first elbow AND a vertical-first
         elbow (the latter lets a badge in a tight cluster escape up/down before
-        going sideways). Returns the first route that clears all other badges,
-        or — when allow_cross — the horizontal elbow regardless."""
+        going sideways). Returns the first route that clears all other badges
+        (and, when avoid_boxes, other label pills), or — when allow_cross — the
+        horizontal elbow regardless."""
         cy = ly + pill_h / 2                      # pill vertical centre
         if side == "right":
             connect_x = lx                        # pill left edge
@@ -1652,9 +1653,8 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
         # B) vertical-first: exit the badge top/bottom toward the pill row, then across
         vy = py - rr - 1 if cy < py else py + rr + 1
         route_v = [(px, vy), (px, cy), (connect_x, cy)]
-        # avoid crossing other label pills except in the last-resort (allow_cross) pass
         for pts in (route_h, route_v):
-            if _polyline_clear(pts, px, py, avoid_boxes=not allow_cross):
+            if _polyline_clear(pts, px, py, avoid_boxes=avoid_boxes):
                 return pts
         return route_h if allow_cross else None
 
@@ -1708,7 +1708,7 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
         sides = [primary_side] + (["right" if primary_side == "left" else "left"]
                                   if force_all else [])
 
-        def _search(allow_overlap, allow_cross):
+        def _search(allow_overlap, allow_cross, avoid_lines):
             best = None
             best_score = None
             for side in sides:
@@ -1733,7 +1733,8 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
                         # but must NEVER cover a badge (badges are the anchors).
                         if _box_overlaps(box, pills=not allow_overlap, badges=True):
                             continue
-                        pts = _route(px, py, side, lx, ly, pill_w, pill_h, allow_cross=allow_cross)
+                        pts = _route(px, py, side, lx, ly, pill_w, pill_h,
+                                     allow_cross=allow_cross, avoid_boxes=avoid_lines)
                         if pts is None:
                             continue
                         # Prefer EDGE-most placements: score = distance of the pill
@@ -1746,16 +1747,19 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
                             best, best_score = (lx, ly, box, pts), score
             return best
 
-        chosen = _search(allow_overlap=False, allow_cross=False)
-        # R4: below 70 badges every label MUST show. Escalate, but the pill never
-        # covers a badge at any tier:
-        #  tier-2: allow pill-on-pill overlap (still clears badges; line avoids them)
-        #  tier-3: last resort — allow the leader LINE to clip a badge (the pill
-        #          still clears all badges) so the label is never silently dropped.
+        # Escalation — NOT overlapping pills is prioritised over a clean line, since
+        # stacked labels read worse than a leader line crossing another label:
+        #  1. no overlap, line avoids other pills        (cleanest)
+        #  2. no overlap, line may cross other pills      (use the empty space)
+        #  3. allow pill overlap, line avoids badges      (dense fallback)
+        #  4. last resort: allow the line to clip a badge (never drop, force-all)
+        chosen = _search(allow_overlap=False, allow_cross=False, avoid_lines=True)
+        if chosen is None:
+            chosen = _search(allow_overlap=False, allow_cross=False, avoid_lines=False)
         if chosen is None and force_all:
-            chosen = _search(allow_overlap=True, allow_cross=False)
+            chosen = _search(allow_overlap=True, allow_cross=False, avoid_lines=False)
         if chosen is None and force_all:
-            chosen = _search(allow_overlap=True, allow_cross=True)
+            chosen = _search(allow_overlap=True, allow_cross=True, avoid_lines=False)
 
         if not chosen:
             continue  # R3: drop only when no clean placement exists (≥70 badges)
