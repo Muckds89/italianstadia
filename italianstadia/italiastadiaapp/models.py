@@ -97,6 +97,13 @@ class Stadium(models.Model):
     extra_images = models.JSONField(default=list, blank=True)
     description = models.TextField(blank=True, null=True)
 
+    # When True, the Transfermarkt/Wikipedia scraper will NOT overwrite this
+    # stadium — it preserves manual corrections across the weekly auto-scrape.
+    locked = models.BooleanField(
+        default=False,
+        help_text="Protect manual corrections — the scraper skips locked stadiums.",
+    )
+
     def save(self, *args, **kwargs):
         if not self.slug:
             base = slugify(self.name) or f"stadium-{self.pk or 0}"

@@ -37,13 +37,26 @@ class StadiumAdmin(admin.ModelAdmin):
         "surface",
         "architect",
         "ownership",
+        "locked",
         "slug",
         "latitude",
         "longitude",
     )
+    list_editable = ("locked",)   # tick to protect a corrected stadium from the scraper
 
-    list_filter = ("ownership", "stadium_type", "surface", "city")
+    list_filter = ("locked", "ownership", "stadium_type", "surface", "city")
     search_fields = ("name", "city__name", "owner_raw", "architect", "slug")
+    actions = ["lock_stadiums", "unlock_stadiums"]
+
+    @admin.action(description="🔒 Lock — protect from the scraper")
+    def lock_stadiums(self, request, queryset):
+        n = queryset.update(locked=True)
+        self.message_user(request, f"Locked {n} stadium(s) — the scraper will skip them.")
+
+    @admin.action(description="🔓 Unlock — allow the scraper to update")
+    def unlock_stadiums(self, request, queryset):
+        n = queryset.update(locked=False)
+        self.message_user(request, f"Unlocked {n} stadium(s).")
     prepopulated_fields = {"slug": ("name",)}
     fieldsets = (
         (None, {

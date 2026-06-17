@@ -9890,6 +9890,7 @@
   "pk": 61,
   "fields": {
     "name": "Stadio dei Marmi",
+    "locked": true,
     "capacity": 5587,
     "address": "Carrara",
     "year_of_construction": 1955,

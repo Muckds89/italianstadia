@@ -1343,6 +1343,18 @@ def scrape_stadium(stadium_data, city):
     log_field("Stadium", final_name, "ownership", final_ownership, "Wikipedia+Wikidata")
 
     # 6. Save to DB
+    # LOCK GUARD: never overwrite a manually-corrected stadium. If a locked row
+    # matches this team (by Wikipedia URL + city, or name + city), leave it
+    # completely untouched so the weekly auto-scrape can't undo the fix.
+    locked = None
+    if wikipedia_url:
+        locked = Stadium.objects.filter(wikipedia_url=wikipedia_url, city=city, locked=True).first()
+    if locked is None:
+        locked = Stadium.objects.filter(name=final_name, city=city, locked=True).first()
+    if locked is not None:
+        logging.info(f"[Locked] Skipping '{locked.name}' — manually corrected, scraper won't touch it.")
+        return locked
+
     # Shared-venue deduplication: if another team already produced a Stadium row
     # with the same Wikipedia URL in the same city (e.g. Jan Breydel, Stelios
     # Kyriakides, Arena Națională), reuse that row instead of creating a duplicate.
