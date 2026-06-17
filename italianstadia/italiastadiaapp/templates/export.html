@@ -54,7 +54,7 @@
 
 <div class="container-fluid px-4" style="max-width:1200px">
     <h1 class="fw-bold mb-1">Export Your Map</h1>
-    <p class="text-secondary mb-4">Configure, preview (watermarked), then pay €1.99 for a full-resolution download.</p>
+    <p class="text-secondary mb-4">Configure, preview, then download free (with logo &amp; watermark) — or chip in €0.50 to remove them and support the site.</p>
 
     <div class="row g-4">
 
@@ -135,13 +135,9 @@
                     <label class="form-label small mb-1">Main title</label>
                     <input type="text" id="expTitle" class="form-control form-control-sm" placeholder="e.g. Artificial Turf Stadiums">
                 </div>
-                <div class="mb-2">
+                <div class="mb-0">
                     <label class="form-label small mb-1">Subtitle</label>
                     <input type="text" id="expSubtitle" class="form-control form-control-sm" placeholder="e.g. Biggest UEFA Leagues 2025/26">
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="expLogo">
-                    <label class="form-check-label small" for="expLogo">Add "stadiumsofeurope.com" logo</label>
                 </div>
             </div>
 
@@ -212,19 +208,23 @@
             </div>
 
             <div class="card">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <div>
-                        <h5 class="fw-bold mb-0">Pay &amp; Download</h5>
-                        <span class="text-secondary small">Single-use · valid 24 h · high resolution</span>
-                    </div>
-                    <span class="price-badge">€1.99</span>
-                </div>
-                <p class="text-secondary small mb-3">Your filters are locked in at checkout. The final PNG is generated immediately after payment — no watermark.</p>
-                <button id="payBtn" class="btn btn-pay w-100">
-                    <span id="paySpinner" class="spinner-border d-none me-2" role="status"></span>
-                    Pay €1.99 &amp; Download
+                <h5 class="fw-bold mb-1">Download</h5>
+                <p class="text-secondary small mb-3">Free with the logo &amp; watermark — or chip in €0.50 to remove them and support the site.</p>
+
+                <button id="freeBtn" class="btn btn-outline-light w-100 mb-2 py-2">
+                    <span id="freeSpinner" class="spinner-border d-none me-2" role="status"></span>
+                    ⬇ Download free <span class="text-secondary small">(with logo &amp; watermark)</span>
                 </button>
+
+                <button id="payBtn" class="btn btn-pay w-100 py-2">
+                    <span id="paySpinner" class="spinner-border d-none me-2" role="status"></span>
+                    ✨ Clean version &amp; support the site — €0.50
+                </button>
+                <p class="text-secondary mt-2 mb-0" style="font-size:.78rem">
+                    The clean PNG (no logo, no watermark) is generated right after payment. Single-use · valid 24 h.
+                </p>
                 <p id="payError" class="text-danger small mt-2 d-none"></p>
+                <p id="freeError" class="text-danger small mt-2 d-none"></p>
             </div>
         </div>
     </div>
@@ -365,7 +365,6 @@ function _getFilters() {
         legend:      document.getElementById("expLegend").checked  ? "1" : "0",
         scale:       document.getElementById("expScale").checked   ? "1" : "0",
         spotlight:   document.getElementById("expSpotlight").checked ? "1" : "0",
-        logo:        document.getElementById("expLogo").checked    ? "1" : "0",
         color_by:    "surface",
         label_size:  document.getElementById("expLabelSize").value,
         label_color: document.getElementById("expLabelColor").value,
@@ -378,10 +377,10 @@ function _getFilters() {
     return f;
 }
 
-// ── Preview ───────────────────────────────────────────────────────────────────
+// ── Preview (shows the FREE branded version — logo + watermark) ───────────────
 document.getElementById("previewBtn").addEventListener("click", function () {
     const f = _getFilters();
-    const p = new URLSearchParams({...f, size_key: "hd", preview: "1"});  // HD + baked watermark
+    const p = new URLSearchParams({...f, size_key: "hd"});  // HD for preview speed
     const url = "/api/export/map/?" + p.toString();
 
     const spinner = document.getElementById("previewSpinner");
@@ -390,7 +389,6 @@ document.getElementById("previewBtn").addEventListener("click", function () {
     spinner.classList.remove("d-none");
     errEl.classList.add("d-none");
     wrap.querySelectorAll("img,.text-secondary").forEach(el => el.remove());
-    document.getElementById("wm").style.display = "none";
 
     fetch(url)
         .then(r => {
@@ -402,7 +400,36 @@ document.getElementById("previewBtn").addEventListener("click", function () {
             img.src = URL.createObjectURL(blob);
             img.className = "preview-img";
             wrap.appendChild(img);
-            document.getElementById("wm").style.display = "flex";
+            spinner.classList.add("d-none");
+        })
+        .catch(err => {
+            errEl.textContent = err.message;
+            errEl.classList.remove("d-none");
+            spinner.classList.add("d-none");
+        });
+});
+
+// ── Free download (branded: logo + watermark, full selected size) ─────────────
+document.getElementById("freeBtn").addEventListener("click", function () {
+    const f = _getFilters();
+    const url = "/api/export/map/?" + new URLSearchParams(f).toString();
+    const spinner = document.getElementById("freeSpinner");
+    const errEl   = document.getElementById("freeError");
+    spinner.classList.remove("d-none");
+    errEl.classList.add("d-none");
+
+    fetch(url)
+        .then(r => {
+            if (!r.ok) return r.json().then(d => { throw new Error(d.error || "Download failed"); });
+            return r.blob();
+        })
+        .then(blob => {
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "stadiums-of-europe-map.png";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
             spinner.classList.add("d-none");
         })
         .catch(err => {
@@ -416,9 +443,9 @@ document.getElementById("previewBtn").addEventListener("click", function () {
 document.getElementById("payBtn").addEventListener("click", function () {
     // Confirm before sending the user to checkout — filters lock in at payment.
     const ok = window.confirm(
-        "Your map will be exported exactly as configured now — these settings " +
-        "lock in at checkout and can't be changed afterwards.\n\n" +
-        "Tip: click \"Generate Preview\" first to check the result.\n\n" +
+        "You'll pay €0.50 for the CLEAN version (no logo, no watermark) of the map " +
+        "exactly as configured now — settings lock in at checkout.\n\n" +
+        "Prefer it free? Use \"Download free\" instead (keeps the logo & watermark).\n\n" +
         "Proceed to payment?"
     );
     if (!ok) return;

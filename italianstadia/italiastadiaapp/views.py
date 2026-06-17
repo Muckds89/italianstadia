@@ -2061,12 +2061,11 @@ def _draw_logo(img, W, H):
     return img
 
 
-def _draw_preview_watermark(img, W, H):
-    """Tile a diagonal translucent PREVIEW watermark across the WHOLE image so a
-    saved/screenshotted preview is unusable without paying. Baked into the pixels
-    (not a removable CSS overlay)."""
-    font = _load_font(bold=True, size=max(26, int(min(W, H) * 0.045)))
-    text = "PREVIEW  ·  stadiumsofeurope.com"
+def _draw_watermark(img, W, H, text="stadiumsofeurope.com", text_alpha=95, gap=70):
+    """Tile a diagonal translucent watermark across the WHOLE image, baked into
+    the pixels. Used subtly for the free (branded) download and more strongly for
+    the in-page preview. A dark outline keeps it legible on satellite + dark."""
+    font = _load_font(bold=True, size=max(24, int(min(W, H) * 0.04)))
     tmp = ImageDraw.Draw(img)
     try:
         bb = tmp.textbbox((0, 0), text, font=font)
@@ -2075,13 +2074,13 @@ def _draw_preview_watermark(img, W, H):
         tw, th = len(text) * 16, 30
     stamp = Image.new("RGBA", (tw + 28, th + 28), (0, 0, 0, 0))
     sd = ImageDraw.Draw(stamp)
-    # dark outline so the text reads on bright (satellite) and dark areas alike
+    out_alpha = min(140, int(text_alpha * 0.8))
     for ox, oy in ((-2, 0), (2, 0), (0, -2), (0, 2)):
-        sd.text((14 + ox, 14 + oy), text, font=font, fill=(0, 0, 0, 130))
-    sd.text((14, 14), text, font=font, fill=(255, 255, 255, 170))
+        sd.text((14 + ox, 14 + oy), text, font=font, fill=(0, 0, 0, out_alpha))
+    sd.text((14, 14), text, font=font, fill=(255, 255, 255, text_alpha))
     stamp = stamp.rotate(30, expand=True, resample=Image.BICUBIC)
     sw, sh = stamp.size
-    step_x, step_y = sw + 30, sh + 50
+    step_x, step_y = sw + gap, sh + gap + 20
     row = 0
     y = -sh
     while y < H + sh:
@@ -2197,15 +2196,16 @@ def map_export(request):
     # memory and risking an OOM 502.
     if not _RENDER_LOCK.acquire(timeout=25):
         return JsonResponse({"error": "Server busy rendering another map. Try again in a moment."}, status=429)
+    # The PUBLIC endpoint always returns the FREE, branded version: logo on +
+    # a baked watermark. The clean (no logo/watermark) version is produced only
+    # by the paid path (_render_export_png) after a successful payment, so a clean
+    # map can never leak from here.
+    params["logo"] = True
     try:
         img, err = _compose_export_image(params)
         if err:
             return JsonResponse({"error": err}, status=400)
-        # Bake a watermark into the preview pixels so a saved/screenshotted
-        # preview can't be used without paying. The paid download path
-        # (_render_export_png) never sets preview, so its PNG is clean.
-        if request.GET.get("preview") == "1":
-            img = _draw_preview_watermark(img, params["W"], params["H"])
+        img = _draw_watermark(img, params["W"], params["H"])
         buf = io.BytesIO()
         img.convert("RGB").save(buf, format="PNG", optimize=True)
         buf.seek(0)
@@ -2233,7 +2233,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
 from .models import ExportToken
 
-EXPORT_PRICE_EUR = 199  # cents
+EXPORT_PRICE_EUR = 50  # cents (Stripe EUR minimum) — removes watermark + logo
 
 
 def export_page(request):
@@ -2275,8 +2275,8 @@ def export_checkout(request):
                     "currency": "eur",
                     "unit_amount": EXPORT_PRICE_EUR,
                     "product_data": {
-                        "name": "Stadium Map Export",
-                        "description": "High-resolution PNG map download — single use",
+                        "name": "Stadium map — clean version",
+                        "description": "Removes the watermark + logo. Supports the site. Single use.",
                     },
                 },
                 "quantity": 1,
@@ -2421,6 +2421,7 @@ def _render_export_png(token_obj):
         GET = _FakeGET()
 
     params = _parse_export_params(_FakeRequest())
+    params["logo"] = False   # paid version is CLEAN — no logo, no watermark
     # Serialize with previews to bound peak memory (see _RENDER_LOCK)
     _RENDER_LOCK.acquire()
     try:
