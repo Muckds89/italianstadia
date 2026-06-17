@@ -344,7 +344,7 @@ function _getFilters() {
 // ── Preview ───────────────────────────────────────────────────────────────────
 document.getElementById("previewBtn").addEventListener("click", function () {
     const f = _getFilters();
-    const p = new URLSearchParams({...f, size_key: "hd"});  // always HD for preview speed
+    const p = new URLSearchParams({...f, size_key: "hd", preview: "1"});  // HD + baked watermark
     const url = "/api/export/map/?" + p.toString();
 
     const spinner = document.getElementById("previewSpinner");

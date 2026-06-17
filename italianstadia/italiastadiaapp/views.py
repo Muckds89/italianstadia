@@ -1527,7 +1527,7 @@ def _dot_colour(stadium, params, country_index):
     return _SURFACE_COLOURS.get(stadium["surface"], _DEFAULT_DOT_COLOUR)
 
 
-def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, reserve_box=None):
+def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, reserve_boxes=None):
     BADGE_R   = 13
     RING_W    = 2
     FONT_SZ   = params.get("label_size", 22)
@@ -1722,9 +1722,12 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
                         if lx < 2 or ly < 2 or lx + pill_w > W - 2 or ly + pill_h > H - 2:
                             continue
                         box = (lx, ly, lx + pill_w, ly + pill_h)
-                        # Never place a label under the reserved title block (always)
-                        if reserve_box and not (box[2] < reserve_box[0] or box[0] > reserve_box[2]
-                                                or box[3] < reserve_box[1] or box[1] > reserve_box[3]):
+                        # Never place a label over a reserved overlay area (title,
+                        # logo, legend, scale bar, north arrow) — always enforced.
+                        if reserve_boxes and any(
+                            not (box[2] < rb[0] or box[0] > rb[2] or box[3] < rb[1] or box[1] > rb[3])
+                            for rb in reserve_boxes
+                        ):
                             continue
                         # A label pill may overlap OTHER pills in the relaxed pass,
                         # but must NEVER cover a badge (badges are the anchors).
@@ -1996,40 +1999,79 @@ def _draw_pin_icon(d, cx, cy, R, cyan=(0, 229, 255), dark=(10, 14, 22)):
     d.ellipse([cx - cr, cy - cr, cx + cr, cy + cr], outline=cyan, width=lw)
 
 
-def _draw_logo(img, W, H):
-    """Stamp the pin mark + 'stadiumsofeurope.com' wordmark in the BOTTOM-RIGHT
-    corner (Transfermarkt-style), on a translucent pill so it reads over any map."""
+def _logo_metrics(W, H):
+    """Geometry of the bottom-right logo lockup — shared by the drawing code and
+    the label-reservation so labels never land on the watermark."""
     R = 12
     font = _load_font(bold=True, size=20)
     text = "stadiumsofeurope.com"
-    tmp = ImageDraw.Draw(img)
+    tmp = ImageDraw.Draw(Image.new("RGBA", (1, 1)))
     try:
         bb = tmp.textbbox((0, 0), text, font=font)
         tw, th = bb[2] - bb[0], bb[3] - bb[1]
     except AttributeError:
         tw, th = len(text) * 11, 20
-
-    PAD = 12
-    GAP = 12
+    PAD, GAP = 12, 12
     icon_w = R * 2
-    pill_h = int(R * 2 + R * 0.85 + PAD * 2)          # tall enough for pin + tail
+    pill_h = int(R * 2 + R * 0.85 + PAD * 2)
     pill_w = PAD + icon_w + GAP + tw + PAD
-    margin = 16
-    lx, ly = W - pill_w - margin, H - pill_h - margin   # bottom-right
+    margin = 8                                          # tight into the corner
+    lx, ly = W - pill_w - margin, H - pill_h - margin
+    return dict(R=R, font=font, text=text, th=th, PAD=PAD, GAP=GAP,
+                icon_w=icon_w, pill_w=pill_w, pill_h=pill_h, lx=lx, ly=ly)
 
-    # Compose on a small RGBA tile so the pill is genuinely translucent
-    tile = Image.new("RGBA", (pill_w, pill_h), (0, 0, 0, 0))
+
+def _logo_box(W, H):
+    m = _logo_metrics(W, H)
+    return (m["lx"] - 6, m["ly"] - 6, W, H)
+
+
+def _draw_logo(img, W, H):
+    """Stamp the pin mark + 'stadiumsofeurope.com' wordmark in the BOTTOM-RIGHT
+    corner (Transfermarkt-style), on a translucent pill so it reads over any map."""
+    m = _logo_metrics(W, H)
+    tile = Image.new("RGBA", (m["pill_w"], m["pill_h"]), (0, 0, 0, 0))
     td = ImageDraw.Draw(tile)
-    td.rounded_rectangle([0, 0, pill_w - 1, pill_h - 1], radius=12, fill=(9, 12, 20, 180))
-    icx = PAD + R
-    icy = PAD + R
-    _draw_pin_icon(td, icx, icy, R)
-    ty = (pill_h - th) // 2 - 2
-    td.text((PAD + icon_w + GAP, ty), text, font=font, fill=(255, 255, 255))
-
-    region = img.crop((lx, ly, lx + pill_w, ly + pill_h))
+    td.rounded_rectangle([0, 0, m["pill_w"] - 1, m["pill_h"] - 1], radius=12, fill=(9, 12, 20, 180))
+    _draw_pin_icon(td, m["PAD"] + m["R"], m["PAD"] + m["R"], m["R"])
+    ty = (m["pill_h"] - m["th"]) // 2 - 2
+    td.text((m["PAD"] + m["icon_w"] + m["GAP"], ty), m["text"], font=m["font"], fill=(255, 255, 255))
+    region = img.crop((m["lx"], m["ly"], m["lx"] + m["pill_w"], m["ly"] + m["pill_h"]))
     region = Image.alpha_composite(region, tile)
-    img.paste(region, (lx, ly))
+    img.paste(region, (m["lx"], m["ly"]))
+    return img
+
+
+def _draw_preview_watermark(img, W, H):
+    """Tile a diagonal translucent PREVIEW watermark across the WHOLE image so a
+    saved/screenshotted preview is unusable without paying. Baked into the pixels
+    (not a removable CSS overlay)."""
+    font = _load_font(bold=True, size=max(26, int(min(W, H) * 0.045)))
+    text = "PREVIEW  ·  stadiumsofeurope.com"
+    tmp = ImageDraw.Draw(img)
+    try:
+        bb = tmp.textbbox((0, 0), text, font=font)
+        tw, th = bb[2] - bb[0], bb[3] - bb[1]
+    except AttributeError:
+        tw, th = len(text) * 16, 30
+    stamp = Image.new("RGBA", (tw + 28, th + 28), (0, 0, 0, 0))
+    sd = ImageDraw.Draw(stamp)
+    # dark outline so the text reads on bright (satellite) and dark areas alike
+    for ox, oy in ((-2, 0), (2, 0), (0, -2), (0, 2)):
+        sd.text((14 + ox, 14 + oy), text, font=font, fill=(0, 0, 0, 130))
+    sd.text((14, 14), text, font=font, fill=(255, 255, 255, 170))
+    stamp = stamp.rotate(30, expand=True, resample=Image.BICUBIC)
+    sw, sh = stamp.size
+    step_x, step_y = sw + 30, sh + 50
+    row = 0
+    y = -sh
+    while y < H + sh:
+        x = -sw + (row % 2) * (step_x // 2)
+        while x < W + sw:
+            img.alpha_composite(stamp, (int(x), int(y)))
+            x += step_x
+        y += step_y
+        row += 1
     return img
 
 
@@ -2073,17 +2115,26 @@ def _compose_export_image(params):
     if params.get("spotlight"):
         img = _spotlight_country(img, main_stadiums, bbox, W, H)
 
-    # Reserve the title block from label placement (labels route around it),
-    # but the map tiles/badges still render full-canvas underneath it.
+    # Reserve every overlay area from label placement so labels never land on the
+    # title, logo, legend, scale bar, or north arrow. Map tiles/badges still
+    # render full-canvas underneath these.
+    reserves = []
     tlayout = _title_layout(params, W)
-    reserve = None
     if tlayout:
         M = 8
-        reserve = (tlayout["x0"] - M, tlayout["y0"] - M,
-                   tlayout["x0"] + tlayout["w"] + M, tlayout["y0"] + tlayout["h"] + M)
+        reserves.append((tlayout["x0"] - M, tlayout["y0"] - M,
+                         tlayout["x0"] + tlayout["w"] + M, tlayout["y0"] + tlayout["h"] + M))
+    if params["north"]:
+        reserves.append((W - 100, 0, W, 100))                     # top-right
+    if params["legend"]:
+        reserves.append((0, H - 175, 185, H))                     # bottom-left
+    if params.get("scale"):
+        reserves.append((W // 2 - 135, H - 80, W // 2 + 135, H))  # bottom-centre
+    if params.get("logo"):
+        reserves.append(_logo_box(W, H))                          # bottom-right
 
     img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index,
-                                reserve_box=reserve)
+                                reserve_boxes=reserves)
     if inset_stadiums:
         img = _draw_inset(img, inset_stadiums, params, W, H, country_index, params["style_key"])
     if params["legend"]:
@@ -2129,6 +2180,11 @@ def map_export(request):
         img, err = _compose_export_image(params)
         if err:
             return JsonResponse({"error": err}, status=400)
+        # Bake a watermark into the preview pixels so a saved/screenshotted
+        # preview can't be used without paying. The paid download path
+        # (_render_export_png) never sets preview, so its PNG is clean.
+        if request.GET.get("preview") == "1":
+            img = _draw_preview_watermark(img, params["W"], params["H"])
         buf = io.BytesIO()
         img.convert("RGB").save(buf, format="PNG", optimize=True)
         buf.seek(0)
