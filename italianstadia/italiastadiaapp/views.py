@@ -1146,6 +1146,19 @@ def _lon_lat_to_px(lon, lat, bbox, W, H):
     return int(x), int(y)
 
 
+def _orth_seg_hits_box(ax, ay, bx, by, box):
+    """Intersection test for an axis-aligned (horizontal or vertical) segment
+    against a rectangle box=(x0,y0,x1,y1). Leader polylines are orthogonal, so
+    this cheap test catches a leader line crossing another label's pill."""
+    bx0, by0, bx1, by1 = box
+    if ay == by:                                  # horizontal segment
+        xlo, xhi = (ax, bx) if ax <= bx else (bx, ax)
+        return by0 <= ay <= by1 and xlo <= bx1 and xhi >= bx0
+    else:                                         # vertical segment (ax == bx)
+        ylo, yhi = (ay, by) if ay <= by else (by, ay)
+        return bx0 <= ax <= bx1 and ylo <= by1 and yhi >= by0
+
+
 def _point_in_ring(lon, lat, ring):
     """Ray-casting point-in-polygon for a single ring of [lon, lat] pairs."""
     inside = False
@@ -1174,7 +1187,7 @@ def _spotlight_country(img, stadiums, bbox, W, H, dim=165):
     md = ImageDraw.Draw(mask)
     border_rings = []
     try:
-        feats = _load_countries()
+        feats = _load_countries_hi()
     except Exception:
         return img
 
@@ -1210,7 +1223,7 @@ def _spotlight_country(img, stadiums, bbox, W, H, dim=165):
     # Bright border around the selected country
     d = ImageDraw.Draw(img)
     for pix in border_rings:
-        d.line(pix + [pix[0]], fill=(0, 230, 255), width=3)
+        d.line(pix + [pix[0]], fill=(0, 230, 255), width=2)
     return img
 
 
@@ -1263,6 +1276,7 @@ _BORDER_COLOURS = {
 }
 
 _countries_cache = None
+_countries_hi_cache = None
 
 def _load_countries():
     global _countries_cache
@@ -1271,6 +1285,20 @@ def _load_countries():
         with open(p, encoding="utf-8") as f:
             _countries_cache = json.load(f)["features"]
     return _countries_cache
+
+
+def _load_countries_hi():
+    """Higher-resolution (Natural Earth 50m) borders for the spotlight outline,
+    so a selected country doesn't look blocky. Falls back to 110m if absent."""
+    global _countries_hi_cache
+    if _countries_hi_cache is None:
+        p = Path(__file__).parent / "static" / "data" / "countries_50m.geojson"
+        try:
+            with open(p, encoding="utf-8") as f:
+                _countries_hi_cache = json.load(f)["features"]
+        except Exception:
+            _countries_hi_cache = _load_countries()
+    return _countries_hi_cache
 
 
 def _draw_countries(img, bbox, W, H, style_key, land_color=None):
@@ -1587,13 +1615,18 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
     # R4: below 70 badges, every label MUST be placed (no clutter-drop).
     force_all = len(dot_positions) < 70
 
-    def _polyline_clear(pts, own_px, own_py):
-        """True if no segment of the orthogonal polyline crosses another badge."""
+    def _polyline_clear(pts, own_px, own_py, avoid_boxes=True):
+        """True if no segment of the orthogonal polyline crosses another badge —
+        and, when avoid_boxes, no segment crosses an already-placed label pill."""
         for i in range(len(pts) - 1):
             ax, ay = pts[i]
             bx, by = pts[i + 1]
             if _seg_hits_badge(ax, ay, bx, by, own_px, own_py):
                 return False
+            if avoid_boxes:
+                for pb in placed_boxes:
+                    if _orth_seg_hits_box(ax, ay, bx, by, pb):
+                        return False
         return True
 
     def _route(px, py, side, lx, ly, pill_w, pill_h, allow_cross=False):
@@ -1615,8 +1648,9 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
         # B) vertical-first: exit the badge top/bottom toward the pill row, then across
         vy = py - rr - 1 if cy < py else py + rr + 1
         route_v = [(px, vy), (px, cy), (connect_x, cy)]
+        # avoid crossing other label pills except in the last-resort (allow_cross) pass
         for pts in (route_h, route_v):
-            if _polyline_clear(pts, px, py):
+            if _polyline_clear(pts, px, py, avoid_boxes=not allow_cross):
                 return pts
         return route_h if allow_cross else None
 
@@ -1653,10 +1687,12 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
         vstep = pill_h + 6
 
         # Candidate generation: horizontal gaps (ascending → crowded centre pushes
-        # labels outward) × vertical offsets (fan out from badge row).
-        base_gaps = [40, 70, 105, 150, 205, 270]
+        # labels outward) × vertical offsets (fan out from badge row). Larger
+        # minimum gaps spread labels toward the edges, using the empty map space
+        # and giving leader lines room to avoid other pills.
+        base_gaps = [70, 110, 160, 220, 290, 370]
         base_voffs = [0]
-        for k in range(1, 9):
+        for k in range(1, 10):
             base_voffs += [-k * vstep, k * vstep]
         if force_all:
             # R4: widen the search so nothing is ever dropped below 70 badges
