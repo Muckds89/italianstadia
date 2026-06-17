@@ -2416,29 +2416,44 @@ def export_download(request, token):
 
 @require_GET
 def export_options(request):
-    """Return available countries and leagues for autocomplete on the export page."""
-    from django.db.models import Count
+    """Return available countries and leagues for autocomplete on the export page.
+
+    The export filters match country on `city.country` (free text) and league on
+    `teams.league.name`, so leagues_by_country MUST be keyed by `city.country`
+    (NOT the Country model name) or selections like 'Czech Republic' won't line
+    up with the league grouping.
+    """
     countries = (
         City.objects.exclude(country="")
         .values_list("country", flat=True)
         .distinct()
         .order_by("country")
     )
-    leagues_qs = (
-        League.objects.select_related("country")
-        .values("name", "country__name")
+
+    # Map city.country → leagues whose teams play at stadiums in that country,
+    # mirroring the actual export filter relationship.
+    rows = (
+        Team.objects
+        .exclude(league__isnull=True)
+        .exclude(is_national=True)            # national sides aren't a selectable league
+        .exclude(stadium__city__country="")
+        .values_list("stadium__city__country", "league__name")
         .distinct()
-        .order_by("name")
     )
-    leagues = sorted({r["name"] for r in leagues_qs})
     leagues_by_country = {}
-    for r in leagues_qs:
-        c = r["country__name"] or ""
-        leagues_by_country.setdefault(c, [])
-        if r["name"] not in leagues_by_country[c]:
-            leagues_by_country[c].append(r["name"])
+    leagues_set = set()
+    for country, league_name in rows:
+        if not country or not league_name:
+            continue
+        leagues_set.add(league_name)
+        leagues_by_country.setdefault(country, [])
+        if league_name not in leagues_by_country[country]:
+            leagues_by_country[country].append(league_name)
+    for c in leagues_by_country:
+        leagues_by_country[c].sort()
+
     return JsonResponse({
-        "countries":         list(countries),
-        "leagues":           leagues,
+        "countries":          list(countries),
+        "leagues":            sorted(leagues_set),
         "leagues_by_country": leagues_by_country,
     })
