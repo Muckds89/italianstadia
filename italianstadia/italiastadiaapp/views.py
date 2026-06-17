@@ -943,6 +943,7 @@ def _parse_export_params(request):
         "legend": request.GET.get("legend", "0") == "1",
         "north": request.GET.get("north", "0") == "1",
         "scale": request.GET.get("scale", "0") == "1",
+        "spotlight": request.GET.get("spotlight", "0") == "1",
         "labels": request.GET.get("labels", "1") == "1",
         "logo": request.GET.get("logo", "0") == "1",
         "tiles": request.GET.get("tiles", "1") != "0",
@@ -1143,6 +1144,74 @@ def _lon_lat_to_px(lon, lat, bbox, W, H):
     x = (lon - lon_min) / (lon_max - lon_min) * W
     y = (_merc_y(lat) - _merc_y(lat_max)) / (_merc_y(lat_min) - _merc_y(lat_max)) * H
     return int(x), int(y)
+
+
+def _point_in_ring(lon, lat, ring):
+    """Ray-casting point-in-polygon for a single ring of [lon, lat] pairs."""
+    inside = False
+    n = len(ring)
+    j = n - 1
+    for i in range(n):
+        xi, yi = ring[i][0], ring[i][1]
+        xj, yj = ring[j][0], ring[j][1]
+        if ((yi > lat) != (yj > lat)) and \
+           (lon < (xj - xi) * (lat - yi) / ((yj - yi) or 1e-12) + xi):
+            inside = not inside
+        j = i
+    return inside
+
+
+def _spotlight_country(img, stadiums, bbox, W, H, dim=165):
+    """Dim everything OUTSIDE the country/countries that contain the displayed
+    stadiums, and outline those borders, so the selected country stands out.
+    Name-independent: identifies the country by which polygon contains the
+    stadiums (works even for England → the UK polygon)."""
+    pts = [(s["lon"], s["lat"]) for s in stadiums]
+    if not pts:
+        return img
+
+    mask = Image.new("L", (W, H), 0)
+    md = ImageDraw.Draw(mask)
+    border_rings = []
+    try:
+        feats = _load_countries()
+    except Exception:
+        return img
+
+    for feat in feats:
+        geom = feat["geometry"]
+        if geom["type"] == "Polygon":
+            rings = [geom["coordinates"][0]]
+        elif geom["type"] == "MultiPolygon":
+            rings = [poly[0] for poly in geom["coordinates"]]
+        else:
+            continue
+        for ring in rings:
+            # bbox pre-check: skip rings that can't contain any stadium
+            rlons = [c[0] for c in ring]; rlats = [c[1] for c in ring]
+            rl0, rl1, ra0, ra1 = min(rlons), max(rlons), min(rlats), max(rlats)
+            cand = [(lo, la) for lo, la in pts if rl0 <= lo <= rl1 and ra0 <= la <= ra1]
+            if not cand:
+                continue
+            if any(_point_in_ring(lo, la, ring) for lo, la in cand):
+                pix = [_lon_lat_to_px(lo, la, bbox, W, H) for lo, la in ring]
+                if len(pix) >= 3:
+                    md.polygon(pix, fill=255)
+                    border_rings.append(pix)
+
+    if not border_rings:
+        return img  # no polygon matched — leave the map untouched
+
+    # Dim the outside: paste a dark colour with per-pixel alpha = dim where mask==0
+    from PIL import ImageChops
+    outside = ImageChops.invert(mask).point(lambda p: dim if p > 127 else 0)
+    img.paste(Image.new("RGB", (W, H), (3, 5, 12)), (0, 0), outside)
+
+    # Bright border around the selected country
+    d = ImageDraw.Draw(img)
+    for pix in border_rings:
+        d.line(pix + [pix[0]], fill=(0, 230, 255), width=3)
+    return img
 
 
 def _fetch_one_tile(z, x, y, style_key):
@@ -1913,6 +1982,11 @@ def _compose_export_image(params):
     img = _make_background(params["style_key"], W, H, bbox,
                            use_tiles=use_tiles, land_color=params.get("bg_color"))
 
+    # Spotlight: dim everything outside the selected country and outline it,
+    # so badges/labels (drawn next, on top) stay fully bright.
+    if params.get("spotlight"):
+        img = _spotlight_country(img, main_stadiums, bbox, W, H)
+
     # Reserve the title block from label placement (labels route around it),
     # but the map tiles/badges still render full-canvas underneath it.
     tlayout = _title_layout(params, W)
@@ -2021,7 +2095,7 @@ def export_checkout(request):
     allowed_keys = {
         "country", "league", "ownership", "surface", "type",
         "color_by", "style_key", "size_key", "title", "subtitle", "labels",
-        "north", "legend", "scale", "logo", "bg_color", "label_size", "label_color",
+        "north", "legend", "scale", "spotlight", "logo", "bg_color", "label_size", "label_color",
     }
     filters = {k: v for k, v in body.items() if k in allowed_keys}
     filters_json = json.dumps(filters)
