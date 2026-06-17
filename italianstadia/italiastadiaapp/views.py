@@ -1616,8 +1616,9 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
     if not params["labels"]:
         return img
 
-    # R4: below 70 badges, every label MUST be placed (no clutter-drop).
-    force_all = len(dot_positions) < 70
+    # Labels never overlap (see placement below). A single league always fits;
+    # only very dense multi-league maps drop a few labels that can't be placed
+    # cleanly — no-overlap reads far better than stacked labels.
 
     def _polyline_clear(pts, own_px, own_py, avoid_boxes=True):
         """True if no segment of the orthogonal polyline crosses another badge —
@@ -1692,21 +1693,16 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
 
         # Candidate generation: gaps reach most of the canvas WIDTH so labels can
         # be pushed all the way into the far left/right margins (e.g. the empty sea
-        # either side of a narrow country), using the whole frame.
+        # either side of a narrow country), using the whole frame. Rich search +
+        # both sides always, since labels are never allowed to overlap.
         maxgap = int(W * 0.60)
         base_gaps = [int(maxgap * f) for f in (1.0, 0.78, 0.60, 0.45, 0.33, 0.24, 0.17, 0.11)]
         base_voffs = [0]
-        for k in range(1, 12):
+        for k in range(1, 16):
             base_voffs += [-k * vstep, k * vstep]
-        if force_all:
-            # R4: widen the search so nothing is ever dropped below 70 badges
-            base_gaps = base_gaps + [345, 430, 530, 650]
-            for k in range(9, 16):
-                base_voffs += [-k * vstep, k * vstep]
 
-        # Try the side rule first; if forcing all labels, allow the other side too
-        sides = [primary_side] + (["right" if primary_side == "left" else "left"]
-                                  if force_all else [])
+        # Prefer the natural side (left badge → left) but allow the other side too.
+        sides = [primary_side, "right" if primary_side == "left" else "left"]
 
         EDGE_MARGIN = max(24, int(min(W, H) * 0.035))   # breathing room from edges
 
@@ -1747,34 +1743,34 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
                             continue
                         # Prefer the LEFT/RIGHT margins (the side seas) over the
                         # top/bottom edges: score is mainly horizontal distance to
-                        # the nearer side, with only a light vertical term so the
-                        # top/bottom are used just as a fallback. A balance penalty
-                        # spreads labels across both side margins.
+                        # the nearer side, with a light vertical fallback term.
                         cx2 = (box[0] + box[2]) / 2
                         cy2 = (box[1] + box[3]) / 2
                         edge = min(cx2, W - cx2) + 0.25 * min(cy2, H - cy2)
-                        crowd = (left_n if cx2 < W / 2 else right_n) * 7
-                        score = edge + crowd
+                        # Gentle balance across the two margins, but a leader-line
+                        # length penalty keeps each label NEAR its own badge so we
+                        # don't fling an east-side badge's label to the west edge
+                        # (which caused labels to collide).
+                        crowd = (left_n if cx2 < W / 2 else right_n) * 4
+                        linelen = abs(px - cx2) + abs(py - cy2)
+                        score = edge + crowd + 0.18 * linelen
                         if best_score is None or score < best_score:
                             best, best_score = (lx, ly, box, pts), score
             return best
 
-        # Escalation — NOT overlapping pills is prioritised over a clean line, since
-        # stacked labels read worse than a leader line crossing another label:
-        #  1. no overlap, line avoids other pills        (cleanest)
-        #  2. no overlap, line may cross other pills      (use the empty space)
-        #  3. allow pill overlap, line avoids badges      (dense fallback)
-        #  4. last resort: allow the line to clip a badge (never drop, force-all)
+        # Labels NEVER overlap. Escalate while keeping pills non-overlapping:
+        #  1. clean: line avoids badges AND other label pills
+        #  2. line may cross another label pill (but not a badge)
+        #  3. line may cross a badge too (pill still doesn't overlap anything)
+        # Only if no NON-overlapping pill position exists at all do we drop it.
         chosen = _search(allow_overlap=False, allow_cross=False, avoid_lines=True)
         if chosen is None:
             chosen = _search(allow_overlap=False, allow_cross=False, avoid_lines=False)
-        if chosen is None and force_all:
-            chosen = _search(allow_overlap=True, allow_cross=False, avoid_lines=False)
-        if chosen is None and force_all:
-            chosen = _search(allow_overlap=True, allow_cross=True, avoid_lines=False)
+        if chosen is None:
+            chosen = _search(allow_overlap=False, allow_cross=True, avoid_lines=False)
 
         if not chosen:
-            continue  # R3: drop only when no clean placement exists (≥70 badges)
+            continue  # no non-overlapping spot anywhere → drop (never stack)
 
         lx, ly, box, pts = chosen
 
