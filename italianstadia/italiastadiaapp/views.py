@@ -1965,21 +1965,58 @@ def _draw_scale_bar(img, bbox, W, H):
     return img
 
 
+def _draw_pin_icon(d, cx, cy, R, cyan=(0, 229, 255), dark=(10, 14, 22)):
+    """Draw the Stadiums of Europe map-pin mark (pin holding a top-down pitch)
+    onto ImageDraw d, centred horizontally at cx with the pin head at cy."""
+    # Pin head (filled) + tail triangle
+    d.ellipse([cx - R, cy - R, cx + R, cy + R], fill=cyan)
+    tw = R * 0.74
+    d.polygon([(cx - tw, cy + R * 0.60), (cx + tw, cy + R * 0.60), (cx, cy + R + R * 0.85)], fill=cyan)
+    # Dark inset + cyan pitch (ellipse, halfway line, centre circle)
+    orx, ory = R * 0.68, R * 0.46
+    d.ellipse([cx - orx, cy - ory, cx + orx, cy + ory], fill=dark)
+    prx, pry = R * 0.56, R * 0.34
+    lw = max(1, int(R * 0.10))
+    d.ellipse([cx - prx, cy - pry, cx + prx, cy + pry], outline=cyan, width=lw)
+    d.line([(cx, cy - pry), (cx, cy + pry)], fill=cyan, width=lw)
+    cr = R * 0.16
+    d.ellipse([cx - cr, cy - cr, cx + cr, cy + cr], outline=cyan, width=lw)
+
+
 def _draw_logo(img, W, H):
-    """Stamp 'Stadiums of Europe' branding in the bottom-right corner."""
-    font = _load_font(bold=True, size=18)
-    text = "stadiumsofeurope.com"
-    d = ImageDraw.Draw(img)
+    """Stamp the pin mark + 'Stadiums of Europe' wordmark in the BOTTOM-LEFT
+    corner (Transfermarkt-style), on a translucent pill so it reads over any map."""
+    R = 12
+    font = _load_font(bold=True, size=20)
+    text = "Stadiums of Europe"
+    tmp = ImageDraw.Draw(img)
     try:
-        bb = d.textbbox((0, 0), text, font=font)
+        bb = tmp.textbbox((0, 0), text, font=font)
         tw, th = bb[2] - bb[0], bb[3] - bb[1]
     except AttributeError:
-        tw, th = len(text) * 10, 18
-    PAD = 10
-    x = W - tw - PAD * 2 - 4
-    y = H - th - PAD * 2 - 4
-    d.rounded_rectangle([x, y, x + tw + PAD * 2, y + th + PAD * 2], radius=6, fill=(10, 12, 22, 200))
-    d.text((x + PAD, y + PAD), text, font=font, fill=(0, 220, 255))
+        tw, th = len(text) * 11, 20
+
+    PAD = 12
+    GAP = 12
+    icon_w = R * 2
+    pill_h = int(R * 2 + R * 0.85 + PAD * 2)          # tall enough for pin + tail
+    pill_w = PAD + icon_w + GAP + tw + PAD
+    margin = 16
+    lx, ly = margin, H - pill_h - margin
+
+    # Compose on a small RGBA tile so the pill is genuinely translucent
+    tile = Image.new("RGBA", (pill_w, pill_h), (0, 0, 0, 0))
+    td = ImageDraw.Draw(tile)
+    td.rounded_rectangle([0, 0, pill_w - 1, pill_h - 1], radius=12, fill=(9, 12, 20, 180))
+    icx = PAD + R
+    icy = PAD + R
+    _draw_pin_icon(td, icx, icy, R)
+    ty = (pill_h - th) // 2 - 2
+    td.text((PAD + icon_w + GAP, ty), text, font=font, fill=(255, 255, 255))
+
+    region = img.crop((lx, ly, lx + pill_w, ly + pill_h))
+    region = Image.alpha_composite(region, tile)
+    img.paste(region, (lx, ly))
     return img
 
 
