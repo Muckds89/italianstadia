@@ -1149,6 +1149,7 @@ fetch(document.getElementById("map").dataset.stadiumsUrl)
             marker.stadiumType  = props.stadium_type || "";
             marker.stadiumId = String(props.id);
             marker.stadiumName = props.name;
+            marker.city = props.city || "";   // used by "Zoom to city"
 
             // Hover tooltip — team name(s), styled for dark map
             const tooltipLabel = marker.teams.length > 1
