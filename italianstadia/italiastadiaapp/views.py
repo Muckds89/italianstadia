@@ -1709,6 +1709,8 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
                                   if force_all else [])
 
         def _search(allow_overlap, allow_cross):
+            best = None
+            best_score = None
             for side in sides:
                 for voff in base_voffs:
                     for gap in base_gaps:
@@ -1731,8 +1733,15 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
                         pts = _route(px, py, side, lx, ly, pill_w, pill_h, allow_cross=allow_cross)
                         if pts is None:
                             continue
-                        return (lx, ly, box, pts)
-            return None
+                        # Prefer EDGE-most placements: score = distance of the pill
+                        # centre to the nearest canvas edge (smaller = hugs an edge).
+                        # Central positions are only chosen when nothing else fits.
+                        cx2 = (box[0] + box[2]) / 2
+                        cy2 = (box[1] + box[3]) / 2
+                        score = min(cx2, W - cx2, cy2, H - cy2)
+                        if best_score is None or score < best_score:
+                            best, best_score = (lx, ly, box, pts), score
+            return best
 
         chosen = _search(allow_overlap=False, allow_cross=False)
         # R4: below 70 badges every label MUST show. Escalate, but the pill never
