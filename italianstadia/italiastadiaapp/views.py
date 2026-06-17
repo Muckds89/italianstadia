@@ -1288,11 +1288,11 @@ def _load_countries():
 
 
 def _load_countries_hi():
-    """Higher-resolution (Natural Earth 50m) borders for the spotlight outline,
-    so a selected country doesn't look blocky. Falls back to 110m if absent."""
+    """High-resolution (Natural Earth 10m, Europe only) borders for the spotlight
+    outline, so a selected country looks crisp. Falls back to 110m if absent."""
     global _countries_hi_cache
     if _countries_hi_cache is None:
-        p = Path(__file__).parent / "static" / "data" / "countries_50m.geojson"
+        p = Path(__file__).parent / "static" / "data" / "countries_hires.geojson"
         try:
             with open(p, encoding="utf-8") as f:
                 _countries_hi_cache = json.load(f)["features"]
@@ -1686,13 +1686,13 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
         primary_side = "left" if px < W / 2 else "right"
         vstep = pill_h + 6
 
-        # Candidate generation: horizontal gaps (ascending → crowded centre pushes
-        # labels outward) × vertical offsets (fan out from badge row). Larger
-        # minimum gaps spread labels toward the edges, using the empty map space
-        # and giving leader lines room to avoid other pills.
-        base_gaps = [70, 110, 160, 220, 290, 370]
+        # Candidate generation: try LARGE gaps first so each label is pushed as far
+        # toward the map edge as it can cleanly go — spreading labels into the empty
+        # margins and using the whole frame instead of clustering near the badges.
+        maxgap = int(min(W, H) * 0.62)
+        base_gaps = [int(maxgap * f) for f in (1.0, 0.74, 0.54, 0.40, 0.29, 0.21, 0.15, 0.10)]
         base_voffs = [0]
-        for k in range(1, 10):
+        for k in range(1, 12):
             base_voffs += [-k * vstep, k * vstep]
         if force_all:
             # R4: widen the search so nothing is ever dropped below 70 badges
