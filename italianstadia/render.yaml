@@ -12,14 +12,15 @@ services:
     envVarGroups:
       - italianstadia-env
 
-  # Automated season refresh — runs every Monday at 05:00 UTC.
-  # Uses the same env group as the web service so DATABASE_URL and other
-  # secrets are automatically available. No DB migrations run here;
-  # they run in build.sh on the web service deploy.
+  # Season refresh — ONCE A YEAR, 05:00 UTC on 5 August (after promotions/
+  # relegations settle, around the start of the European season). Stadiums and
+  # team-league assignments don't change often, so a single seasonal pass is
+  # enough. Locked stadiums are skipped (see Stadium.locked). You can also run it
+  # on demand any time from the Render shell: `python manage.py update_all_leagues`.
   - type: cron
     name: season-refresh
     env: python
-    schedule: "0 5 * * 1"
+    schedule: "0 5 5 8 *"
     buildCommand: pip install -r requirements.txt
     startCommand: python manage.py update_all_leagues
     envVarGroups:
