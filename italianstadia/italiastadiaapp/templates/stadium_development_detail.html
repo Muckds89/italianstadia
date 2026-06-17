@@ -118,7 +118,7 @@
                             </p>
 
                             <div class="mt-auto pt-2 d-flex flex-wrap gap-1">
-                                <a href="{% url 'italiastadiaapp:team_detail' team.pk %}"
+                                <a href="{% url 'italiastadiaapp:team_detail' team.slug %}"
                                    class="btn btn-sm btn-outline-secondary">View team</a>
                                 {% if team.wikipedia_url %}
                                 <a href="{{ team.wikipedia_url }}" target="_blank"

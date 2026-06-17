@@ -4,12 +4,13 @@
 {% block title %}{{ team.name }}{% endblock %}
 
 {% block meta %}
+<link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{% url 'italiastadiaapp:team_detail' team.slug %}">
 <meta name="description" content="{{ page_description }}">
 <meta property="og:title" content="{{ team.name }} — Stadiums of Europe">
 <meta property="og:description" content="{{ page_description }}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Stadiums of Europe">
-<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{% url 'italiastadiaapp:team_detail' team.slug %}">
 {% if team.image_url %}
 <meta property="og:image" content="{{ team.image_url }}">
 <meta name="twitter:image" content="{{ team.image_url }}">

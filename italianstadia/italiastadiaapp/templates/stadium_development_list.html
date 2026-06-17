@@ -172,7 +172,7 @@
                                 {% if team.image_url %}
                                 <img src="{{ team.image_url }}" alt="{{ team.name }}">
                                 {% endif %}
-                                <a href="{% url 'italiastadiaapp:team_detail' team.pk %}"
+                                <a href="{% url 'italiastadiaapp:team_detail' team.slug %}"
                                    class="text-decoration-none text-dark">{{ team.name }}</a>
                             </div>
                             {% endfor %}

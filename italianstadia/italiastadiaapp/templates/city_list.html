@@ -128,7 +128,7 @@
                 {% if city_teams %}
                 <div class="city-team-logos">
                     {% for team in city_teams %}
-                    <a href="{% url 'italiastadiaapp:team_detail' team.pk %}"
+                    <a href="{% url 'italiastadiaapp:team_detail' team.slug %}"
                        class="city-team-logo-link"
                        title="{{ team.name }}">
                         {% if team.image_url %}

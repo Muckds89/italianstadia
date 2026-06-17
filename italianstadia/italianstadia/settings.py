@@ -74,6 +74,11 @@ ALLOWED_HOSTS = [
     ".stadiumsofeurope.com",
 ]
 
+# Render terminates TLS at its proxy and forwards X-Forwarded-Proto. Without
+# this, request.scheme/is_secure() return "http" behind the proxy, so canonical
+# tags, og:url and sitemap URLs would wrongly use http:// instead of https://.
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 # Application definition
 
 INSTALLED_APPS = [
