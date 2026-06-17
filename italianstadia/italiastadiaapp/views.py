@@ -502,7 +502,11 @@ def team_detail_redirect(request, pk):
 def team_list(request):
     selected_country = request.GET.get("country", "")
 
-    teams_qs = Team.objects.select_related("city", "stadium", "league__country")
+    teams_qs = (
+        Team.objects
+        .select_related("city", "stadium", "league__country")
+        .exclude(is_national=True)   # hide national teams from the club list
+    )
     if selected_country:
         teams_qs = teams_qs.filter(league__country__name=selected_country)
 
