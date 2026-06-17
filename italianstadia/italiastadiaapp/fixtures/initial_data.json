@@ -9889,42 +9889,25 @@
   "model": "italiastadiaapp.stadium",
   "pk": 61,
   "fields": {
-    "name": "Comunale dei Marmi",
+    "name": "Stadio dei Marmi",
     "capacity": 5587,
-    "address": "Rome",
+    "address": "Carrara",
     "year_of_construction": 1955,
     "city": 56,
-    "latitude": "41.934290",
-    "longitude": "12.457380",
-    "owner_raw": "Sport e Salute",
+    "latitude": "44.065328",
+    "longitude": "10.076805",
+    "owner_raw": "Comune di Carrara",
     "ownership": "PUBLIC",
     "slug": "comunale-dei-marmi",
     "stadium_type": "OPEN",
     "surface": null,
     "architect": null,
     "tournaments": [],
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_dei_Marmi",
+    "wikipedia_url": "https://it.wikipedia.org/wiki/Stadio_dei_Marmi_(Carrara)",
     "transfermarkt_url": "https://www.transfermarkt.com/carrarese-calcio/stadion/verein/4159/saison_id/2025",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Stadio_dei_Marmi_%28cropped%29.jpg",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/CarraraStadioMarmi.JPG",
     "image_credit": "Wikimedia Commons",
-    "extra_images": [
-      {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Beeld_van_een_steenstoter_in_het_Stadio_dei_Marmi_onderdeel_van_het_sportcomplex%2C_Bestanddeelnr_191-1328.jpg",
-        "credit": "Willem van de Poll / Wikimedia Commons / CC0"
-      },
-      {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Olympische_Spelen_te_Rome%2C_sintelbaan_in_het_Stadio_dei_Marmi%2C_Bestanddeelnr_911-5253.jpg",
-        "credit": "Harry Pot for Anefo / Wikimedia Commons / CC0"
-      },
-      {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/6/64/Palazzo_della_Civilt%C3%A0_Italiana_a_EUR_Roma_cropped.jpg",
-        "credit": "Alberti1492 / Wikimedia Commons / CC BY-SA 4.0"
-      },
-      {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/5/50/Roma-foroitalico5.jpg",
-        "credit": "antmoose / Wikimedia Commons / CC BY 2.0"
-      }
-    ],
+    "extra_images": [],
     "description": null
   }
 },

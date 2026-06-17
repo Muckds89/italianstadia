@@ -207,7 +207,10 @@
       "stadium": {
         "name": "Stadio dei Marmi",
         "transfermarkt_url": "https://www.transfermarkt.com/carrarese-calcio/stadion/verein/4159/saison_id/2025",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_dei_Marmi",
+        "wikipedia_url": "https://it.wikipedia.org/wiki/Stadio_dei_Marmi_(Carrara)",
+        "latitude": 44.065328,
+        "longitude": 10.076805,
+        "owner_raw": "Comune di Carrara",
         "city": {
           "name": "Carrara",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Carrara"
