@@ -1984,11 +1984,11 @@ def _draw_pin_icon(d, cx, cy, R, cyan=(0, 229, 255), dark=(10, 14, 22)):
 
 
 def _draw_logo(img, W, H):
-    """Stamp the pin mark + 'Stadiums of Europe' wordmark in the BOTTOM-LEFT
+    """Stamp the pin mark + 'stadiumsofeurope.com' wordmark in the BOTTOM-RIGHT
     corner (Transfermarkt-style), on a translucent pill so it reads over any map."""
     R = 12
     font = _load_font(bold=True, size=20)
-    text = "Stadiums of Europe"
+    text = "stadiumsofeurope.com"
     tmp = ImageDraw.Draw(img)
     try:
         bb = tmp.textbbox((0, 0), text, font=font)
@@ -2002,7 +2002,7 @@ def _draw_logo(img, W, H):
     pill_h = int(R * 2 + R * 0.85 + PAD * 2)          # tall enough for pin + tail
     pill_w = PAD + icon_w + GAP + tw + PAD
     margin = 16
-    lx, ly = margin, H - pill_h - margin
+    lx, ly = W - pill_w - margin, H - pill_h - margin   # bottom-right
 
     # Compose on a small RGBA tile so the pill is genuinely translucent
     tile = Image.new("RGBA", (pill_w, pill_h), (0, 0, 0, 0))
