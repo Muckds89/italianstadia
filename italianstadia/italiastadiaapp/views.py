@@ -1426,7 +1426,7 @@ def _dot_colour(stadium, params, country_index):
     return _SURFACE_COLOURS.get(stadium["surface"], _DEFAULT_DOT_COLOUR)
 
 
-def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
+def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, reserve_box=None):
     BADGE_R   = 13
     RING_W    = 2
     FONT_SZ   = params.get("label_size", 22)
@@ -1611,6 +1611,10 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index):
                         if lx < 2 or ly < 2 or lx + pill_w > W - 2 or ly + pill_h > H - 2:
                             continue
                         box = (lx, ly, lx + pill_w, ly + pill_h)
+                        # Never place a label under the reserved title block (always)
+                        if reserve_box and not (box[2] < reserve_box[0] or box[0] > reserve_box[2]
+                                                or box[3] < reserve_box[1] or box[1] > reserve_box[3]):
+                            continue
                         # A label pill may overlap OTHER pills in the relaxed pass,
                         # but must NEVER cover a badge (badges are the anchors).
                         if _box_overlaps(box, pills=not allow_overlap, badges=True):
@@ -1753,45 +1757,56 @@ def _draw_title(img, title_text, W, subtitle_text=""):
     return img
 
 
-def _title_band_height(params, ref_img=None):
-    """Height of the top header band reserved for the title/subtitle, or 0."""
+def _title_layout(params, W):
+    """Geometry + fonts for the title/subtitle block (top-centre), or None.
+    Used both to reserve the area from labels and to draw the translucent box."""
     if not params.get("title"):
-        return 0
-    th_title = 32
-    th_sub   = 20 if params.get("subtitle") else 0
-    PAD, GAP = 14, 6
-    # box_h + top margin (20) + bottom breathing room (16)
-    box_h = th_title + (GAP + th_sub if th_sub else 0) + PAD * 2
-    return box_h + 20 + 16
+        return None
+    title_text    = params["title"]
+    subtitle_text = params.get("subtitle", "")
+    ft = _load_font(bold=True,  size=32)
+    fs = _load_font(bold=False, size=20)
+    tmp = ImageDraw.Draw(Image.new("RGBA", (1, 1)))
 
-
-def _draw_title_in_band(img, title_text, subtitle_text, W, band_h):
-    """Draw the title/subtitle centred within the top header band so it never
-    overlaps map content (the map is rendered below the band)."""
-    font_title    = _load_font(bold=True,  size=32)
-    font_subtitle = _load_font(bold=False, size=20)
-    d = ImageDraw.Draw(img)
-    PAD, GAP = 14, 6
-
-    def _tw_th(text, font):
+    def _dim(text, font):
         try:
-            bb = d.textbbox((0, 0), text, font=font)
+            bb = tmp.textbbox((0, 0), text, font=font)
             return bb[2] - bb[0], bb[3] - bb[1]
         except AttributeError:
             return len(text) * 16, 28
 
-    tw1, th1 = _tw_th(title_text, font_title)
-    tw2, th2 = (_tw_th(subtitle_text, font_subtitle) if subtitle_text else (0, 0))
+    tw1, th1 = _dim(title_text, ft)
+    tw2, th2 = (_dim(subtitle_text, fs) if subtitle_text else (0, 0))
+    PAD, GAP = 14, 6
     box_w = max(tw1, tw2) + PAD * 2
     box_h = th1 + (GAP + th2 if subtitle_text else 0) + PAD * 2
     rx0 = (W - box_w) // 2
-    ry0 = (band_h - box_h) // 2
-    d.rounded_rectangle([rx0, ry0, rx0 + box_w, ry0 + box_h], radius=8, fill=(10, 12, 22, 230))
-    tx = rx0 + (box_w - tw1) // 2
-    d.text((tx, ry0 + PAD), title_text, font=font_title, fill=(255, 255, 255))
-    if subtitle_text:
-        sx = rx0 + (box_w - tw2) // 2
-        d.text((sx, ry0 + PAD + th1 + GAP), subtitle_text, font=font_subtitle, fill=(0, 220, 255))
+    ry0 = 20
+    return {
+        "title": title_text, "subtitle": subtitle_text, "ft": ft, "fs": fs,
+        "tw1": tw1, "th1": th1, "tw2": tw2, "th2": th2,
+        "x0": rx0, "y0": ry0, "w": box_w, "h": box_h, "PAD": PAD, "GAP": GAP,
+    }
+
+
+def _draw_title_translucent(img, L):
+    """Draw the title/subtitle in a TRANSLUCENT rounded box at top-centre so the
+    map shows through it (no opaque header bar). Composites only the box region,
+    so it's memory-cheap."""
+    x0, y0, bw, bh = L["x0"], L["y0"], L["w"], L["h"]
+    # Build the box on a small RGBA tile and alpha-composite it over the map,
+    # so the fill's alpha actually blends with the map underneath.
+    tile = Image.new("RGBA", (bw, bh), (0, 0, 0, 0))
+    td = ImageDraw.Draw(tile)
+    td.rounded_rectangle([0, 0, bw - 1, bh - 1], radius=8, fill=(10, 12, 22, 140))  # ~55% opacity
+    tx = (bw - L["tw1"]) // 2
+    td.text((tx, L["PAD"]), L["title"], font=L["ft"], fill=(255, 255, 255))
+    if L["subtitle"]:
+        sx = (bw - L["tw2"]) // 2
+        td.text((sx, L["PAD"] + L["th1"] + L["GAP"]), L["subtitle"], font=L["fs"], fill=(0, 220, 255))
+    region = img.crop((x0, y0, x0 + bw, y0 + bh))
+    region = Image.alpha_composite(region, tile)
+    img.paste(region, (x0, y0))
     return img
 
 
@@ -1876,21 +1891,18 @@ def _compose_export_image(params):
     """Shared render core for both the free preview and the paid download.
     Returns (PIL RGBA Image, None) or (None, error_message).
 
-    When a title is set, the map is rendered into the area BELOW a reserved
-    top header band, then composited so the title/subtitle can never cover map
-    content.
+    The map fills the whole canvas. When a title is set, its area is reserved so
+    no LABEL is placed under it, then the title/subtitle are drawn in a
+    TRANSLUCENT box on top — the map shows through, nothing is lost.
     """
     stadiums = _get_export_stadiums(params)
     if not stadiums:
         return None, "No stadiums match the selected filters."
 
     W, H = params["W"], params["H"]
-    band  = _title_band_height(params)     # 0 when no title
-    H_map = H - band
-
     main_stadiums, inset_stadiums = _split_main_inset(stadiums)
     raw_bbox = _bbox_with_padding(main_stadiums if main_stadiums else stadiums)
-    bbox = _expand_bbox_to_aspect(raw_bbox, W, H_map)
+    bbox = _expand_bbox_to_aspect(raw_bbox, W, H)
 
     country_index = {}
     for s in stadiums:
@@ -1898,25 +1910,33 @@ def _compose_export_image(params):
 
     # R1: real CARTO tiles unless a custom land colour selects the diagram view
     use_tiles = params.get("tiles", True) and not params.get("bg_color")
-    img = _make_background(params["style_key"], W, H_map, bbox,
+    img = _make_background(params["style_key"], W, H, bbox,
                            use_tiles=use_tiles, land_color=params.get("bg_color"))
-    img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H_map, country_index)
+
+    # Reserve the title block from label placement (labels route around it),
+    # but the map tiles/badges still render full-canvas underneath it.
+    tlayout = _title_layout(params, W)
+    reserve = None
+    if tlayout:
+        M = 8
+        reserve = (tlayout["x0"] - M, tlayout["y0"] - M,
+                   tlayout["x0"] + tlayout["w"] + M, tlayout["y0"] + tlayout["h"] + M)
+
+    img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index,
+                                reserve_box=reserve)
     if inset_stadiums:
-        img = _draw_inset(img, inset_stadiums, params, W, H_map, country_index, params["style_key"])
+        img = _draw_inset(img, inset_stadiums, params, W, H, country_index, params["style_key"])
     if params["legend"]:
         img = _draw_legend(img, params, stadiums)
     if params["north"]:
-        img = _draw_north_arrow(img, W, H_map)
+        img = _draw_north_arrow(img, W, H)
     if params.get("scale"):
-        img = _draw_scale_bar(img, bbox, W, H_map)
+        img = _draw_scale_bar(img, bbox, W, H)
     if params.get("logo"):
-        img = _draw_logo(img, W, H_map)
+        img = _draw_logo(img, W, H)
 
-    if band:
-        final = Image.new("RGBA", (W, H), _STYLE_BACKGROUNDS[params["style_key"]])
-        final.paste(img, (0, band))
-        _draw_title_in_band(final, params["title"], params.get("subtitle", ""), W, band)
-        img = final
+    if tlayout:
+        img = _draw_title_translucent(img, tlayout)
 
     return img, None
 

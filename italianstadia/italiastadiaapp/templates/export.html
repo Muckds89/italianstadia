@@ -371,6 +371,15 @@ document.getElementById("previewBtn").addEventListener("click", function () {
 
 // ── Pay & Download ────────────────────────────────────────────────────────────
 document.getElementById("payBtn").addEventListener("click", function () {
+    // Confirm before sending the user to checkout — filters lock in at payment.
+    const ok = window.confirm(
+        "Your map will be exported exactly as configured now — these settings " +
+        "lock in at checkout and can't be changed afterwards.\n\n" +
+        "Tip: click \"Generate Preview\" first to check the result.\n\n" +
+        "Proceed to payment?"
+    );
+    if (!ok) return;
+
     const filters = _getFilters();
     const spinner = document.getElementById("paySpinner");
     const errEl   = document.getElementById("payError");
