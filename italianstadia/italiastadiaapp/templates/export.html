@@ -106,12 +106,15 @@
                         <option value="topo">Topo</option>
                     </select>
                 </div>
-                <div class="mb-2">
-                    <label class="form-label small mb-1">Background colour <span class="text-secondary">(overrides base)</span></label>
+                <div class="mb-2" id="bgColorRow">
+                    <label class="form-label small mb-1">Background colour <span class="text-secondary">(flat map)</span></label>
                     <div class="d-flex align-items-center gap-2">
                         <input type="color" id="expBgColor" value="#12151e">
                         <input type="text"  id="expBgHex"   class="form-control form-control-sm" value="#12151e" style="max-width:90px">
                         <button class="btn btn-sm btn-outline-secondary" id="clearBgColor">Clear</button>
+                    </div>
+                    <div class="small text-secondary mt-1" id="bgColorNote" style="display:none">
+                        Not available on Satellite/Topo — a flat colour replaces the imagery.
                     </div>
                 </div>
                 <div class="mb-0">
@@ -142,9 +145,13 @@
                 </div>
             </div>
 
-            <!-- Label Options -->
+            <!-- Markers & Labels -->
             <div class="card mb-3">
-                <p class="section-label">Label Options</p>
+                <p class="section-label">Markers &amp; Labels</p>
+                <div class="mb-3">
+                    <label class="form-label small mb-1">Badge size: <span class="range-val" id="badgeSizeVal">13</span>px</label>
+                    <input type="range" class="form-range" id="expBadgeSize" min="8" max="26" value="13">
+                </div>
                 <div class="form-check mb-2">
                     <input class="form-check-input" type="checkbox" id="expLabels" checked>
                     <label class="form-check-label small" for="expLabels">Show team / stadium labels</label>
@@ -316,13 +323,31 @@ document.getElementById("expLabelHex").addEventListener("input", function () {
         document.getElementById("expLabelColor").value = this.value;
 });
 
-// ── Label size range ──────────────────────────────────────────────────────────
+// ── Label / badge size ranges ─────────────────────────────────────────────────
 document.getElementById("expLabelSize").addEventListener("input", function () {
     document.getElementById("labelSizeVal").textContent = this.value;
+});
+document.getElementById("expBadgeSize").addEventListener("input", function () {
+    document.getElementById("badgeSizeVal").textContent = this.value;
 });
 document.getElementById("expLabels").addEventListener("change", function () {
     document.getElementById("labelOpts").style.display = this.checked ? "" : "none";
 });
+
+// ── Background colour only applies to flat/Dark/Light — not Satellite/Topo ─────
+function _syncBgColorAvailability() {
+    const style = document.getElementById("expStyle").value;
+    const off   = (style === "satellite" || style === "topo");
+    ["expBgColor", "expBgHex", "clearBgColor"].forEach(id => {
+        document.getElementById(id).disabled = off;
+    });
+    const row = document.getElementById("bgColorRow");
+    row.style.opacity = off ? "0.45" : "1";
+    document.getElementById("bgColorNote").style.display = off ? "" : "none";
+    if (off) { _useBgColor = false; }   // ignore any colour when imagery is the base
+}
+document.getElementById("expStyle").addEventListener("change", _syncBgColorAvailability);
+_syncBgColorAvailability();
 
 // ── Build filters object ──────────────────────────────────────────────────────
 function _getFilters() {
@@ -344,8 +369,12 @@ function _getFilters() {
         color_by:    "surface",
         label_size:  document.getElementById("expLabelSize").value,
         label_color: document.getElementById("expLabelColor").value,
+        badge_size:  document.getElementById("expBadgeSize").value,
     };
-    if (_useBgColor) f.bg_color = document.getElementById("expBgHex").value || document.getElementById("expBgColor").value;
+    // Background colour is a flat-map option — never send it for Satellite/Topo
+    const style = document.getElementById("expStyle").value;
+    if (_useBgColor && style !== "satellite" && style !== "topo")
+        f.bg_color = document.getElementById("expBgHex").value || document.getElementById("expBgColor").value;
     return f;
 }
 

@@ -935,6 +935,12 @@ def _parse_export_params(request):
         label_size = 22
     label_color = request.GET.get("label_color", "#ffffff").strip()
 
+    # Badge (club crest) radius on the map
+    try:
+        badge_size = max(7, min(28, int(request.GET.get("badge_size", "13"))))
+    except ValueError:
+        badge_size = 13
+
     return {
         "W": W, "H": H,
         "size_key": size_key,
@@ -944,6 +950,7 @@ def _parse_export_params(request):
         "bg_color": bg_color,
         "label_size": label_size,
         "label_color": label_color,
+        "badge_size": badge_size,
         "legend": request.GET.get("legend", "0") == "1",
         "north": request.GET.get("north", "0") == "1",
         "scale": request.GET.get("scale", "0") == "1",
@@ -1528,7 +1535,7 @@ def _dot_colour(stadium, params, country_index):
 
 
 def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, reserve_boxes=None):
-    BADGE_R   = 13
+    BADGE_R   = params.get("badge_size", 13)
     RING_W    = 2
     FONT_SZ   = params.get("label_size", 22)
     FONT_SZ2  = max(10, int(FONT_SZ * 0.78))
@@ -2165,12 +2172,14 @@ def _compose_export_image(params):
 
 
 def map_export(request):
-    # Rate-limit: 1 request per 10 s per IP
+    # Light rate-limit: the render lock already bounds memory (one render at a
+    # time per worker) and renders take ~2-4s, so a short 3s window is enough to
+    # stop rapid-fire spam without making config tweaks feel laggy.
     ip = request.META.get("HTTP_X_FORWARDED_FOR", request.META.get("REMOTE_ADDR", "")).split(",")[0].strip()
     cache_key = f"map_export_ratelimit_{ip}"
     if cache.get(cache_key):
-        return JsonResponse({"error": "Too many requests. Wait 10 seconds."}, status=429)
-    cache.set(cache_key, True, 10)
+        return JsonResponse({"error": "Please wait a moment before regenerating."}, status=429)
+    cache.set(cache_key, True, 3)
 
     params = _parse_export_params(request)
     # Cap to HD on free tier (512 MB RAM limit — FHD/4K OOM-kills the dyno)
@@ -2249,7 +2258,8 @@ def export_checkout(request):
     allowed_keys = {
         "country", "league", "ownership", "surface", "type",
         "color_by", "style_key", "size_key", "title", "subtitle", "labels",
-        "north", "legend", "scale", "spotlight", "logo", "bg_color", "label_size", "label_color",
+        "north", "legend", "scale", "spotlight", "logo", "bg_color",
+        "label_size", "label_color", "badge_size",
     }
     filters = {k: v for k, v in body.items() if k in allowed_keys}
     filters_json = json.dumps(filters)
