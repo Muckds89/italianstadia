@@ -1708,6 +1708,8 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
         sides = [primary_side] + (["right" if primary_side == "left" else "left"]
                                   if force_all else [])
 
+        EDGE_MARGIN = max(24, int(min(W, H) * 0.035))   # breathing room from edges
+
         def _search(allow_overlap, allow_cross, avoid_lines):
             best = None
             best_score = None
@@ -1723,7 +1725,9 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
                         else:
                             lx = int(px - gap - pill_w)
                         ly = int(py + voff - pill_h / 2)
-                        if lx < 2 or ly < 2 or lx + pill_w > W - 2 or ly + pill_h > H - 2:
+                        if (lx < EDGE_MARGIN or ly < EDGE_MARGIN
+                                or lx + pill_w > W - EDGE_MARGIN
+                                or ly + pill_h > H - EDGE_MARGIN):
                             continue
                         box = (lx, ly, lx + pill_w, ly + pill_h)
                         # Never place a label over a reserved overlay area (title,
@@ -1741,13 +1745,14 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
                                      allow_cross=allow_cross, avoid_boxes=avoid_lines)
                         if pts is None:
                             continue
-                        # Prefer EDGE-most placements: score = distance of the pill
-                        # centre to the nearest canvas edge (smaller = hugs an edge).
-                        # Add a balance penalty for the busier side so labels fill
-                        # BOTH the left and right margins instead of piling on one.
+                        # Prefer the LEFT/RIGHT margins (the side seas) over the
+                        # top/bottom edges: score is mainly horizontal distance to
+                        # the nearer side, with only a light vertical term so the
+                        # top/bottom are used just as a fallback. A balance penalty
+                        # spreads labels across both side margins.
                         cx2 = (box[0] + box[2]) / 2
                         cy2 = (box[1] + box[3]) / 2
-                        edge = min(cx2, W - cx2, cy2, H - cy2)
+                        edge = min(cx2, W - cx2) + 0.25 * min(cy2, H - cy2)
                         crowd = (left_n if cx2 < W / 2 else right_n) * 7
                         score = edge + crowd
                         if best_score is None or score < best_score:
