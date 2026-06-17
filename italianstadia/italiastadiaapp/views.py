@@ -1690,11 +1690,11 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
         primary_side = "left" if px < W / 2 else "right"
         vstep = pill_h + 6
 
-        # Candidate generation: try LARGE gaps first so each label is pushed as far
-        # toward the map edge as it can cleanly go — spreading labels into the empty
-        # margins and using the whole frame instead of clustering near the badges.
-        maxgap = int(min(W, H) * 0.62)
-        base_gaps = [int(maxgap * f) for f in (1.0, 0.74, 0.54, 0.40, 0.29, 0.21, 0.15, 0.10)]
+        # Candidate generation: gaps reach most of the canvas WIDTH so labels can
+        # be pushed all the way into the far left/right margins (e.g. the empty sea
+        # either side of a narrow country), using the whole frame.
+        maxgap = int(W * 0.60)
+        base_gaps = [int(maxgap * f) for f in (1.0, 0.78, 0.60, 0.45, 0.33, 0.24, 0.17, 0.11)]
         base_voffs = [0]
         for k in range(1, 12):
             base_voffs += [-k * vstep, k * vstep]
@@ -1711,6 +1711,10 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
         def _search(allow_overlap, allow_cross, avoid_lines):
             best = None
             best_score = None
+            # Balance the two side margins: count labels already placed on each
+            # half so we can nudge the next one toward the emptier side.
+            left_n = sum(1 for b in placed_boxes if (b[0] + b[2]) / 2 < W / 2)
+            right_n = len(placed_boxes) - left_n
             for side in sides:
                 for voff in base_voffs:
                     for gap in base_gaps:
@@ -1739,10 +1743,13 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
                             continue
                         # Prefer EDGE-most placements: score = distance of the pill
                         # centre to the nearest canvas edge (smaller = hugs an edge).
-                        # Central positions are only chosen when nothing else fits.
+                        # Add a balance penalty for the busier side so labels fill
+                        # BOTH the left and right margins instead of piling on one.
                         cx2 = (box[0] + box[2]) / 2
                         cy2 = (box[1] + box[3]) / 2
-                        score = min(cx2, W - cx2, cy2, H - cy2)
+                        edge = min(cx2, W - cx2, cy2, H - cy2)
+                        crowd = (left_n if cx2 < W / 2 else right_n) * 7
+                        score = edge + crowd
                         if best_score is None or score < best_score:
                             best, best_score = (lx, ly, box, pts), score
             return best
