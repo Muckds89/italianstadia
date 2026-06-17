@@ -678,16 +678,19 @@ function applyFilters(updateStadiumDropdown = true) {
     updateClearButton();
     closeActivePopup();
 
-    // Keep the Export nav link in sync with active filters
-    const exportLink = document.getElementById("exportNavLink");
-    if (exportLink) {
+    // Keep BOTH the desktop and mobile Export links in sync with active filters
+    const exportLinks = document.querySelectorAll(".export-nav-link");
+    if (exportLinks.length) {
         const p = new URLSearchParams();
         if (selectedCountry)   p.set("country",   selectedCountry);
         if (selectedLeague)    p.set("league",    selectedLeague);
         if (selectedSurface)   p.set("surface",   selectedSurface);
         if (selectedOwnership) p.set("ownership", selectedOwnership);
-        const base = exportLink.href.split("?")[0];
-        exportLink.href = p.toString() ? base + "?" + p.toString() : base;
+        const qs = p.toString();
+        exportLinks.forEach(link => {
+            const base = link.href.split("?")[0];
+            link.href = qs ? base + "?" + qs : base;
+        });
     }
 
     return visibleMarkers;
