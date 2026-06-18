@@ -50626,7 +50626,7 @@
     "image_credit": "arup.com",
     "source_url": "https://www.arup.com/news/city-of-florence-unveils-winning-design-for-stadio-artemio-franchi-renovation/",
     "notes": "",
-    "tournaments": []
+    "tournaments": [{"tournament": "UEFA Euro 2032", "year": 2032, "status": "CANDIDATE"}]
   }
 },
 {
@@ -50780,7 +50780,7 @@
     "image_credit": "progettocmr",
     "source_url": "https://www.progettocmr.com/project/stadio-del-cagliari-calcio-2/",
     "notes": "Il progetto del nuovo stadio del Cagliari Calcio, presentato con Sportium, intende dare vita ad una vera e propria smart arena, perfettamente integrata nell’ambiente esterno.\r\n\r\nMorfologicamente coerente con l’ambiente circostante e con la città di Cagliari, lo stadio ne richiama costantemente le peculiarità sia cromatiche che materiche, non astratto ed alieno edificio ma componente sostanziale del paesaggio, di cui riporta armonicamente le linee essenziali e si configura come intervento di efficace ricucitura con i diversi ambiti.",
-    "tournaments": []
+    "tournaments": [{"tournament": "UEFA Euro 2032", "year": 2032, "status": "CANDIDATE"}]
   }
 },
 {

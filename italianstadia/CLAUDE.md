@@ -69,7 +69,11 @@ italiastadiaapp/        ← single Django app
 scripts/                ← standalone data population scripts (not Django management commands)
   populate_data.py
   populate_data_from_transfermrkt.py
-build.sh                ← Render deploy: pip install + collectstatic + migrate + loaddata
+build.sh                ← Render deploy: pip install + migrate + collectstatic (NO loaddata!)
+                          # The fixture is loaded MANUALLY/once, not on deploy. To
+                          # correct production data, write a DATA MIGRATION (runs via
+                          # `migrate` on every deploy) — editing initial_data.json alone
+                          # does NOT reach production.
 ```
 
 ## Data model

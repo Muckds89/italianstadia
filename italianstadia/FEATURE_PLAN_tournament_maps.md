@@ -75,6 +75,13 @@ Adding "UEFA Champions League Final 2027" later = add a `tournaments` entry
 relevant Stadium/StadiumDevelopment via admin. It then appears in the export
 dropdown and renders automatically — **no code change**.
 
+## Data prerequisite (done)
+The tournament venue lists must be complete BEFORE the feature is useful. Migration
+`0048` adds the two missing Euro 2032 candidate venues — Fiorentina's New Artemio
+Franchi and the New Cagliari Stadium (both `StadiumDevelopment`, status CANDIDATE).
+Going forward, completing a tournament's venue list = data edits only (admin / a
+data migration), never export code.
+
 ## Rollback plan
 - Remove the `tournament` param handling + dropdown; the shared `_tournament_venues`
   helper is harmless to keep. No migration to reverse.
