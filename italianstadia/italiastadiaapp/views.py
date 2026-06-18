@@ -710,35 +710,49 @@ def tournament_list(request):
     return redirect("italiastadiaapp:home")
 
 
-@cache_page(60 * 60)
-def tournament_detail(request, slug):
-    """Show all venues for a single tournament (Stadium + StadiumDevelopment)."""
+# Tournament venue status: 3-way. Blank/unknown is treated as CANDIDATE.
+_TOURNAMENT_STATUS_ORDER = {"CONFIRMED": 0, "CANDIDATE": 1, "DISCARDED": 2}
+
+
+def _norm_tournament_status(s):
+    s = (s or "").upper()
+    return s if s in _TOURNAMENT_STATUS_ORDER else "CANDIDATE"
+
+
+def _tournament_venues(slug):
+    """Return (tournament_name, tournament_year, venues) for a tournament slug.
+
+    Sources venues from BOTH operational Stadiums and under-development
+    StadiumDevelopments. Each venue dict carries a 3-way `status`
+    (CONFIRMED / CANDIDATE / DISCARDED). Shared by the tournament detail page and
+    the export tool so the two can never drift.
+    """
     tournament_name = None
     tournament_year = None
     venues = []
 
-    # Pull from operational stadiums
-    for stadium in Stadium.objects.select_related("city").exclude(tournaments=[]):
+    for stadium in Stadium.objects.select_related("city").prefetch_related("teams").exclude(tournaments=[]):
         for entry in stadium.tournaments:
             name = entry.get("tournament", "")
             if slugify(name) == slug:
                 tournament_name = name
                 tournament_year = entry.get("year")
+                primary_team = next(iter(stadium.teams.all()), None)
                 venues.append({
                     "name": stadium.name,
                     "city": stadium.city,
                     "capacity": stadium.capacity,
                     "image_url": stadium.image_url,
+                    "badge_url": (primary_team.image_url or "") if primary_team else "",
                     "latitude": stadium.latitude,
                     "longitude": stadium.longitude,
                     "detail_url": reverse("italiastadiaapp:stadium_detail", kwargs={"slug": stadium.slug}),
-                    "status": entry.get("status", ""),
+                    "status": _norm_tournament_status(entry.get("status")),
                     "matches": entry.get("matches"),
                     "is_development": False,
                 })
                 break
 
-    # Pull from development stadiums
     for dev in StadiumDevelopment.objects.select_related("stadium__city").exclude(tournaments=[]):
         for entry in dev.tournaments:
             name = entry.get("tournament", "")
@@ -756,18 +770,27 @@ def tournament_detail(request, slug):
                     "latitude": dev.latitude,
                     "longitude": dev.longitude,
                     "detail_url": reverse("italiastadiaapp:stadium_development_detail", kwargs={"pk": dev.id}),
-                    "status": entry.get("status", ""),
+                    "badge_url": "",   # future venue — no club crest, drawn as a status dot
+                    "status": _norm_tournament_status(entry.get("status")),
                     "matches": entry.get("matches"),
                     "is_development": True,
                 })
                 break
 
+    return tournament_name, tournament_year, venues
+
+
+@cache_page(60 * 60)
+def tournament_detail(request, slug):
+    """Show all venues for a single tournament (Stadium + StadiumDevelopment)."""
+    tournament_name, tournament_year, venues = _tournament_venues(slug)
+
     if not tournament_name:
         raise Http404
 
-    # CONFIRMED first, then CANDIDATE, each group sorted by capacity desc
+    # CONFIRMED, then CANDIDATE, then DISCARDED; each group by capacity desc
     venues.sort(key=lambda v: (
-        0 if v["status"] == "CONFIRMED" else 1,
+        _TOURNAMENT_STATUS_ORDER.get(v["status"], 1),
         -(v["capacity"] or 0),
     ))
 
@@ -941,6 +964,17 @@ def _parse_export_params(request):
     except ValueError:
         badge_size = 13
 
+    # Tournament mode: slug + which statuses to show (default confirmed+candidate)
+    tournament = request.GET.get("tournament", "").strip()
+    tstatus_raw = request.GET.get("tstatus", "").strip().lower()
+    if tstatus_raw:
+        tstatus = {s.strip().upper() for s in tstatus_raw.split(",")
+                   if s.strip().upper() in _TOURNAMENT_STATUS_ORDER}
+    else:
+        tstatus = {"CONFIRMED", "CANDIDATE"}
+    if not tstatus:
+        tstatus = {"CONFIRMED", "CANDIDATE"}
+
     return {
         "W": W, "H": H,
         "size_key": size_key,
@@ -965,6 +999,8 @@ def _parse_export_params(request):
         "country":   request.GET.get("country", "").strip(),
         "league":    request.GET.get("league", "").strip(),
         "ownership": request.GET.get("ownership", "").strip().upper(),
+        "tournament": tournament,
+        "tstatus":    tstatus,
     }
 
 
@@ -997,6 +1033,43 @@ def _get_export_stadiums(params):
             "image_url":  image_url,
         })
     return results
+
+
+# Venue-status colours for tournament maps (green / orange / red)
+_TOURNAMENT_STATUS_COLOR = {
+    "CONFIRMED": (40, 199, 111),
+    "CANDIDATE": (255, 159, 28),
+    "DISCARDED": (231, 76, 60),
+}
+_TOURNAMENT_STATUS_LABEL = {
+    "CONFIRMED": "Confirmed",
+    "CANDIDATE": "Candidate",
+    "DISCARDED": "Discarded",
+}
+
+
+def _get_tournament_export_stadiums(params):
+    """Export venue dicts for a single tournament, filtered by selected statuses.
+    Shape matches _get_export_stadiums plus a `tournament_status` key."""
+    _name, _year, venues = _tournament_venues(params["tournament"])
+    out = []
+    for v in venues:
+        if v["latitude"] is None or v["longitude"] is None:
+            continue
+        if v["status"] not in params["tstatus"]:
+            continue
+        country = v.get("country_override") or (v["city"].country if v.get("city") else "")
+        out.append({
+            "name":       v["name"],
+            "team_name":  "",
+            "lat":        float(v["latitude"]),
+            "lon":        float(v["longitude"]),
+            "surface":    "",
+            "country":    country,
+            "image_url":  v.get("badge_url", ""),
+            "tournament_status": v["status"],
+        })
+    return out
 
 
 def _bbox_with_padding(stadiums, pad=0.06):
@@ -1525,6 +1598,9 @@ def _prefetch_badges(stadiums, size=20):
 
 
 def _dot_colour(stadium, params, country_index):
+    if params["color_by"] == "tournament_status":
+        return _TOURNAMENT_STATUS_COLOR.get(
+            stadium.get("tournament_status", "CANDIDATE"), _DEFAULT_DOT_COLOUR)
     if params["color_by"] == "single":
         return params["single_color"]
     if params["color_by"] == "country":
@@ -1601,14 +1677,17 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
                     return True
         return False
 
-    # First pass: draw all badges
+    # First pass: draw all badges. In tournament mode the ring is the status
+    # colour (green/orange/red); otherwise it's white.
+    tournament_mode = params.get("color_by") == "tournament_status"
     dot_positions = []
     for s in stadiums:
         px, py = _lon_lat_to_px(s["lon"], s["lat"], bbox, W, H)
         colour    = _dot_colour(s, params, country_index)
         badge_img = badges.get(s["name"])
+        ring_colour = colour if tournament_mode else (255, 255, 255)
 
-        draw.ellipse([px - rr, py - rr, px + rr, py + rr], fill=(255, 255, 255))
+        draw.ellipse([px - rr, py - rr, px + rr, py + rr], fill=ring_colour)
         if badge_img:
             mask = Image.new("L", (BADGE_R * 2, BADGE_R * 2), 0)
             ImageDraw.Draw(mask).ellipse([0, 0, BADGE_R * 2 - 1, BADGE_R * 2 - 1], fill=255)
@@ -1798,6 +1877,12 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
 
 def _build_legend_entries(params, stadiums):
     """Return list of (colour_tuple, label_str) for the legend."""
+    if params["color_by"] == "tournament_status":
+        present = {s.get("tournament_status", "CANDIDATE") for s in stadiums}
+        return [
+            (_TOURNAMENT_STATUS_COLOR[st], _TOURNAMENT_STATUS_LABEL[st])
+            for st in ("CONFIRMED", "CANDIDATE", "DISCARDED") if st in present
+        ]
     if params["color_by"] == "single":
         return [(params["single_color"], "Stadium")]
     if params["color_by"] == "surface":
@@ -2110,9 +2195,15 @@ def _compose_export_image(params):
     no LABEL is placed under it, then the title/subtitle are drawn in a
     TRANSLUCENT box on top — the map shows through, nothing is lost.
     """
-    stadiums = _get_export_stadiums(params)
-    if not stadiums:
-        return None, "No stadiums match the selected filters."
+    if params.get("tournament"):
+        stadiums = _get_tournament_export_stadiums(params)
+        params["color_by"] = "tournament_status"   # colour badges by venue status
+        if not stadiums:
+            return None, "No venues match the selected tournament/status."
+    else:
+        stadiums = _get_export_stadiums(params)
+        if not stadiums:
+            return None, "No stadiums match the selected filters."
 
     W, H = params["W"], params["H"]
     main_stadiums, inset_stadiums = _split_main_inset(stadiums)
@@ -2259,7 +2350,7 @@ def export_checkout(request):
         "country", "league", "ownership", "surface", "type",
         "color_by", "style_key", "size_key", "title", "subtitle", "labels",
         "north", "legend", "scale", "spotlight", "logo", "bg_color",
-        "label_size", "label_color", "badge_size",
+        "label_size", "label_color", "badge_size", "tournament", "tstatus",
     }
     filters = {k: v for k, v in body.items() if k in allowed_keys}
     filters_json = json.dumps(filters)
@@ -2540,8 +2631,19 @@ def export_options(request):
     for c in leagues_by_country:
         leagues_by_country[c].sort()
 
+    # Tournaments present in the data (Stadium + StadiumDevelopment tournaments JSON)
+    tour_map = {}   # slug -> label
+    for obj in list(Stadium.objects.exclude(tournaments=[]).only("tournaments")) + \
+               list(StadiumDevelopment.objects.exclude(tournaments=[]).only("tournaments")):
+        for entry in (obj.tournaments or []):
+            nm = entry.get("tournament", "")
+            if nm:
+                tour_map.setdefault(slugify(nm), nm)
+    tournaments = [{"slug": s, "label": tour_map[s]} for s in sorted(tour_map, key=lambda k: tour_map[k])]
+
     return JsonResponse({
         "countries":          list(countries),
         "leagues":            sorted(leagues_set),
         "leagues_by_country": leagues_by_country,
+        "tournaments":        tournaments,
     })

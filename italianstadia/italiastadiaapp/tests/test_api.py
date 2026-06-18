@@ -316,3 +316,37 @@ def test_api_status_with_refresh(client):
     assert data["last_refresh"] is not None
     assert data["last_refresh_status"] == "SUCCESS"
     assert data["last_refresh_detail"] == "3/3 leagues OK"
+
+@pytest.mark.django_db
+def test_tournament_export(client):
+    from italiastadiaapp.views import _tournament_venues
+    from django.utils.text import slugify
+
+    city = City.objects.create(name="Florence", population=380000, country="Italy")
+    Stadium.objects.create(
+        name="Test Arena", city=city, latitude=43.78, longitude=11.20,
+        ownership="PUBLIC",
+        tournaments=[{"tournament": "Test Cup 2099", "year": 2099, "status": "CONFIRMED"}],
+    )
+    StadiumDevelopment.objects.create(
+        name="Future Test Ground", latitude=39.20, longitude=9.14,
+        tournaments=[{"tournament": "Test Cup 2099", "year": 2099, "status": "CANDIDATE"}],
+    )
+
+    slug = slugify("Test Cup 2099")
+    name, year, venues = _tournament_venues(slug)
+    assert name == "Test Cup 2099"
+    assert {v["status"] for v in venues} == {"CONFIRMED", "CANDIDATE"}
+    assert any(v["is_development"] for v in venues)
+
+    url = reverse("italiastadiaapp:map_export")
+    # both statuses
+    r = client.get(url + f"?tournament={slug}&tstatus=confirmed,candidate&tiles=0")
+    assert r.status_code == 200
+    assert r["Content-Type"] == "image/png"
+    # confirmed only → still a valid PNG (1 venue)
+    r2 = client.get(url + f"?tournament={slug}&tstatus=confirmed&tiles=0")
+    assert r2.status_code == 200
+    # discarded only → none exist → 400 no venues
+    r3 = client.get(url + f"?tournament={slug}&tstatus=discarded&tiles=0")
+    assert r3.status_code == 400

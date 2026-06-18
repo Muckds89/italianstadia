@@ -77,8 +77,36 @@
         <!-- ── LEFT PANEL: filters + style ─────────────────────────────── -->
         <div class="col-lg-4">
 
-            <!-- Filters -->
+            <!-- Tournament -->
             <div class="card mb-3">
+                <p class="section-label">Tournament map</p>
+                <div class="mb-2">
+                    <label class="form-label small mb-1">Tournament</label>
+                    <select id="expTournament" class="form-select form-select-sm">
+                        <option value="">— None (use filters below) —</option>
+                    </select>
+                </div>
+                <div id="tstatusGroup" style="display:none">
+                    <label class="form-label small mb-1">Show venues</label>
+                    <div class="d-flex flex-column gap-1">
+                        <div class="form-check mb-0">
+                            <input class="form-check-input" type="checkbox" id="tsConfirmed" value="confirmed" checked>
+                            <label class="form-check-label small" for="tsConfirmed"><span style="color:#28c76f">●</span> Confirmed</label>
+                        </div>
+                        <div class="form-check mb-0">
+                            <input class="form-check-input" type="checkbox" id="tsCandidate" value="candidate" checked>
+                            <label class="form-check-label small" for="tsCandidate"><span style="color:#ff9f1c">●</span> Candidate</label>
+                        </div>
+                        <div class="form-check mb-0">
+                            <input class="form-check-input" type="checkbox" id="tsDiscarded" value="discarded">
+                            <label class="form-check-label small" for="tsDiscarded"><span style="color:#e74c3c">●</span> Discarded</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="card mb-3" id="filtersCard">
                 <p class="section-label">Filters</p>
                 <div class="mb-2 ac-wrap">
                     <label class="form-label small mb-1">Country</label>
@@ -252,8 +280,25 @@ let _acData = {countries: [], leagues: [], leagues_by_country: {}};
 
 fetch("{% url 'italiastadiaapp:export_options' %}")
     .then(r => r.json())
-    .then(d => { _acData = d; })
+    .then(d => {
+        _acData = d;
+        const sel = document.getElementById("expTournament");
+        (d.tournaments || []).forEach(t => {
+            const o = document.createElement("option");
+            o.value = t.slug; o.textContent = t.label;
+            sel.appendChild(o);
+        });
+    })
     .catch(() => {});
+
+// Tournament mode: hide the plain filters and reveal the status checkboxes.
+document.getElementById("expTournament").addEventListener("change", function () {
+    const on = !!this.value;
+    document.getElementById("tstatusGroup").style.display = on ? "" : "none";
+    const fc = document.getElementById("filtersCard");
+    fc.style.opacity = on ? "0.4" : "1";
+    fc.style.pointerEvents = on ? "none" : "";
+});
 
 function _showAC(input, list, items) {
     list.innerHTML = "";
@@ -390,6 +435,17 @@ function _getFilters() {
     const style = document.getElementById("expStyle").value;
     if (_useBgColor && style !== "satellite" && style !== "topo")
         f.bg_color = document.getElementById("expBgHex").value || document.getElementById("expBgColor").value;
+
+    // Tournament mode overrides the country/league/surface/ownership filters
+    const tour = document.getElementById("expTournament").value;
+    if (tour) {
+        f.tournament = tour;
+        const st = ["tsConfirmed", "tsCandidate", "tsDiscarded"]
+            .filter(id => document.getElementById(id).checked)
+            .map(id => document.getElementById(id).value);
+        f.tstatus = (st.length ? st : ["confirmed", "candidate"]).join(",");
+        delete f.country; delete f.league; delete f.surface; delete f.ownership;
+    }
     return f;
 }
 

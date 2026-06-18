@@ -55,15 +55,15 @@ code changes.
 | `italiastadiaapp/tests/test_api.py` | Edit | Tests for `_tournament_venues` + `map_export?tournament=` |
 
 ## Implementation steps (bottom-up)
-1. [ ] Refactor: extract `_tournament_venues(slug)` from `tournament_detail`, returning each venue's `status` as a 3-way value (CONFIRMED / CANDIDATE / DISCARDED; blank → CANDIDATE). Update the detail view + its sorting/grouping to handle 3 statuses (e.g. a status-order map) — verify the page still renders, now also showing any DISCARDED venues in red.
-2. [ ] `export_options`: return `tournaments` = sorted unique `{slug, label}` from Stadium + StadiumDevelopment `tournaments` JSON.
-3. [ ] `_parse_export_params`: parse `tournament` (slug) and `tstatus` (comma list → set of {confirmed,candidate,discarded}; default {confirmed,candidate}).
-4. [ ] Export assembly (`_compose_export_image` / `_get_export_stadiums`): if `tournament` set, build the list from `_tournament_venues(slug)`, keep only venues whose status ∈ `tstatus`, attach `tournament_status`, set `color_by="tournament_status"`; else current path.
-5. [ ] `_dot_colour` / `_draw_dots_and_labels`: ring colour by status — green `#28c76f` / orange `#ff9f1c` / red `#e74c3c`; dev venues (no badge) → filled status dot.
-6. [ ] `_build_legend_entries`: one entry per DISPLAYED status (only the ticked ones) when `color_by=="tournament_status"`.
-7. [ ] `export.html`: Tournament `<select>` + a Confirmed/Candidate/Discarded checkbox group (the status selector); when a tournament is set, grey out country/league/surface/ownership and omit them from `_getFilters`; include `tournament` + `tstatus`.
-8. [ ] `export_checkout` `allowed_keys`: add `tournament`, `tstatus`.
-9. [ ] Tests + manual check.
+1. [x] Refactor: extract `_tournament_venues(slug)` from `tournament_detail`, returning each venue's `status` as a 3-way value (CONFIRMED / CANDIDATE / DISCARDED; blank → CANDIDATE). Update the detail view + its sorting/grouping to handle 3 statuses (e.g. a status-order map) — verify the page still renders, now also showing any DISCARDED venues in red.
+2. [x] `export_options`: return `tournaments` = sorted unique `{slug, label}` from Stadium + StadiumDevelopment `tournaments` JSON.
+3. [x] `_parse_export_params`: parse `tournament` (slug) and `tstatus` (comma list → set of {confirmed,candidate,discarded}; default {confirmed,candidate}).
+4. [x] Export assembly (`_compose_export_image` / `_get_export_stadiums`): if `tournament` set, build the list from `_tournament_venues(slug)`, keep only venues whose status ∈ `tstatus`, attach `tournament_status`, set `color_by="tournament_status"`; else current path.
+5. [x] `_dot_colour` / `_draw_dots_and_labels`: ring colour by status — green `#28c76f` / orange `#ff9f1c` / red `#e74c3c`; dev venues (no badge) → filled status dot.
+6. [x] `_build_legend_entries`: one entry per DISPLAYED status (only the ticked ones) when `color_by=="tournament_status"`.
+7. [x] `export.html`: Tournament `<select>` + a Confirmed/Candidate/Discarded checkbox group (the status selector); when a tournament is set, grey out country/league/surface/ownership and omit them from `_getFilters`; include `tournament` + `tstatus`.
+8. [x] `export_checkout` `allowed_keys`: add `tournament`, `tstatus`.
+9. [x] Tests + manual check.
 
 ## PostgreSQL safety check
 - [x] No new model fields — uses the existing `tournaments` JSONField on Stadium & StadiumDevelopment.

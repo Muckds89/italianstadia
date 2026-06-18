@@ -24,6 +24,7 @@
     .venue-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.13); }
     .confirmed-bar { border-left: 4px solid #198754; }
     .candidate-bar { border-left: 4px solid #ffc107; }
+    .discarded-bar { border-left: 4px solid #dc3545; }
     .match-count { font-size: 2rem; font-weight: 700; color: #0d6efd; line-height: 1; }
     .country-section-header {
         font-size: 1.1rem;
@@ -112,7 +113,7 @@
             {% for v in group.venues %}
             <div class="col-12 col-md-6 col-lg-4">
                 <a href="{{ v.detail_url }}" class="text-decoration-none text-dark">
-                    <div class="card venue-card h-100 shadow-sm {% if v.status == 'CONFIRMED' %}confirmed-bar{% else %}candidate-bar{% endif %}">
+                    <div class="card venue-card h-100 shadow-sm {% if v.status == 'CONFIRMED' %}confirmed-bar{% elif v.status == 'DISCARDED' %}discarded-bar{% else %}candidate-bar{% endif %}">
                         {% if v.image_url %}
                         <img src="{{ v.image_url }}" class="card-img-top" alt="{{ v.name }}"
                              style="height:160px;object-fit:cover;">
@@ -130,6 +131,8 @@
                             <div class="d-flex flex-wrap gap-2 align-items-center">
                                 {% if v.status == 'CONFIRMED' %}
                                 <span class="badge bg-success">Confirmed</span>
+                                {% elif v.status == 'DISCARDED' %}
+                                <span class="badge bg-danger">Discarded</span>
                                 {% else %}
                                 <span class="badge bg-warning text-dark">Candidate</span>
                                 {% endif %}
@@ -156,7 +159,7 @@
             {% for v in venues %}
             <div class="col-12 col-md-6 col-lg-4">
                 <a href="{{ v.detail_url }}" class="text-decoration-none text-dark">
-                    <div class="card venue-card h-100 shadow-sm {% if v.status == 'CONFIRMED' %}confirmed-bar{% else %}candidate-bar{% endif %}">
+                    <div class="card venue-card h-100 shadow-sm {% if v.status == 'CONFIRMED' %}confirmed-bar{% elif v.status == 'DISCARDED' %}discarded-bar{% else %}candidate-bar{% endif %}">
                         {% if v.image_url %}
                         <img src="{{ v.image_url }}" class="card-img-top" alt="{{ v.name }}"
                              style="height:160px;object-fit:cover;">
@@ -174,6 +177,8 @@
                             <div class="d-flex flex-wrap gap-2 align-items-center">
                                 {% if v.status == 'CONFIRMED' %}
                                 <span class="badge bg-success">Confirmed</span>
+                                {% elif v.status == 'DISCARDED' %}
+                                <span class="badge bg-danger">Discarded</span>
                                 {% else %}
                                 <span class="badge bg-warning text-dark">Candidate</span>
                                 {% endif %}
@@ -234,11 +239,12 @@
     geojson.features.forEach(function (f) {
         const [lng, lat] = f.geometry.coordinates;
         const props = f.properties;
-        const isConfirmed = props.status === "CONFIRMED";
+        const _statusColor = props.status === "CONFIRMED" ? "#198754"
+            : props.status === "DISCARDED" ? "#dc3545" : "#ffc107";
         const circle = L.circleMarker([lat, lng], {
             radius: 8,
-            color: isConfirmed ? "#198754" : "#ffc107",
-            fillColor: isConfirmed ? "#198754" : "#ffc107",
+            color: _statusColor,
+            fillColor: _statusColor,
             fillOpacity: 0.8,
             weight: 2,
         }).addTo(map);
