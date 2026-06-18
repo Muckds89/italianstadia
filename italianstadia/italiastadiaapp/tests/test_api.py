@@ -350,3 +350,34 @@ def test_tournament_export(client):
     # discarded only → none exist → 400 no venues
     r3 = client.get(url + f"?tournament={slug}&tstatus=discarded&tiles=0")
     assert r3.status_code == 400
+
+
+@pytest.mark.django_db
+def test_euro2028_ghost_host_northern_ireland(client):
+    """Northern Ireland must appear as a Euro 2028 co-host even with no venue."""
+    city = City.objects.create(name="London", population=9000000, country="England")
+    Stadium.objects.create(
+        name="Wembley", city=city, latitude=51.556, longitude=-0.2796, ownership="PUBLIC",
+        tournaments=[{"tournament": "UEFA Euro 2028", "year": 2028, "status": "CONFIRMED"}],
+    )
+    url = reverse("italiastadiaapp:tournament_detail", args=["uefa-euro-2028"])
+    body = client.get(url).content.decode("utf-8", "ignore")
+    assert "Northern Ireland" in body
+    assert "still to be confirmed" in body
+
+
+@pytest.mark.django_db
+def test_export_download_single_use_atomic(client):
+    """A used token cannot be downloaded again (atomic claim guards double-spend)."""
+    from django.utils import timezone
+    from datetime import timedelta
+    from italiastadiaapp.models import ExportToken
+
+    tok = ExportToken.objects.create(
+        stripe_session="cs_test_x", filters_json="{}", paid=True, used=True,
+        expires_at=timezone.now() + timedelta(hours=1),
+    )
+    url = reverse("italiastadiaapp:export_download", args=[str(tok.token)])
+    r = client.get(url)
+    assert r.status_code == 410          # already used
+    assert b"already been used" in r.content

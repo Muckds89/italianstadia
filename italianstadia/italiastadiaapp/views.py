@@ -4,11 +4,18 @@ import io
 import json
 import logging
 import math
+import os as _os
+import threading as _threading
+import time as _time
 import traceback
+import uuid
 from collections import defaultdict, OrderedDict
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import timedelta
+from pathlib import Path
 
 import requests as _requests
+import stripe
 from PIL import Image, ImageDraw, ImageFont
 
 from django.conf import settings
@@ -17,9 +24,13 @@ from django.db.models import Avg, Count, F, Max, Sum
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.text import slugify
+from django.core.mail import EmailMessage
 from django.views.decorators.cache import cache_page
-from .models import City, LastRefresh, League, Stadium, Team, StadiumDevelopment
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_GET, require_POST
+from .models import City, ExportToken, LastRefresh, League, Stadium, Team, StadiumDevelopment
 
 
 def _trim(text, limit=155):
@@ -1332,13 +1343,12 @@ def _fetch_one_tile(z, x, y, style_key):
     to OOM on the 512 MB dyno. The /tmp disk cache is enough and is shared across
     workers on the same instance.
     """
-    import os as _o
     disk_path = None
     try:
-        disk_dir = _o.path.join(_o.path.sep, "tmp", "soe_tiles")
-        _o.makedirs(disk_dir, exist_ok=True)
-        disk_path = _o.path.join(disk_dir, f"{style_key}_{z}_{x}_{y}.png")
-        if _o.path.exists(disk_path):
+        disk_dir = _os.path.join(_os.path.sep, "tmp", "soe_tiles")
+        _os.makedirs(disk_dir, exist_ok=True)
+        disk_path = _os.path.join(disk_dir, f"{style_key}_{z}_{x}_{y}.png")
+        if _os.path.exists(disk_path):
             return Image.open(disk_path).convert("RGBA")
     except Exception:
         disk_path = None
@@ -1355,9 +1365,6 @@ def _fetch_one_tile(z, x, y, style_key):
             pass
     return Image.open(io.BytesIO(resp.content)).convert("RGBA")
 
-
-import json
-from pathlib import Path
 
 _LAND_COLOURS = {
     "dark":      (38,  46,  72,  255),   # noticeably brighter than bg (18,22,36)
@@ -1536,9 +1543,6 @@ def _make_background(style_key, W, H, bbox, use_tiles=True, land_color=None):
                 pass
     return out
 
-
-import os as _os
-import time as _time
 
 _BADGE_DISK_CACHE = _os.path.join(_os.path.sep, "tmp", "soe_badges")
 try:
@@ -2195,8 +2199,6 @@ def _draw_watermark(img, W, H, text="stadiumsofeurope.com", text_alpha=95, gap=7
     return img
 
 
-import threading as _threading
-
 # Only ONE map render may run at a time per worker process. Each render allocates
 # tens of MB of PIL buffers; with --threads >1 (or multiple workers), simultaneous
 # renders stack and OOM-kill the 512 MB Render dyno → HTTP 502. Serializing them
@@ -2333,13 +2335,6 @@ def map_export(request):
 # ─────────────────────────────────────────────────────────────────────────────
 # PAID EXPORT — Stripe pay-per-download
 # ─────────────────────────────────────────────────────────────────────────────
-import stripe
-import uuid
-from datetime import timedelta
-from django.utils import timezone
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST, require_GET
-from .models import ExportToken
 
 EXPORT_PRICE_EUR = 50  # cents (Stripe EUR minimum) — removes watermark + logo
 
@@ -2546,8 +2541,6 @@ def _render_export_png(token_obj):
 @require_GET
 def export_download(request, token):
     """Validate token → generate PNG → email it to the buyer → mark used."""
-    from django.core.mail import EmailMessage
-
     try:
         token_uuid = uuid.UUID(str(token))
     except ValueError:
@@ -2558,12 +2551,22 @@ def export_download(request, token):
     except ExportToken.DoesNotExist:
         raise Http404
 
+    already_used_msg = ("This download link has already been used. Check your email — "
+                        "the map was sent after your first click.")
     if not token_obj.paid:
         return render(request, "export_error.html", {"msg": "Payment not confirmed."}, status=402)
     if token_obj.used:
-        return render(request, "export_error.html", {"msg": "This download link has already been used. Check your email — the map was sent after your first click."}, status=410)
+        return render(request, "export_error.html", {"msg": already_used_msg}, status=410)
     if timezone.now() > token_obj.expires_at:
         return render(request, "export_error.html", {"msg": "This download link has expired."}, status=410)
+
+    # Atomically CLAIM the single-use token: only one concurrent request can flip
+    # used False→True, so a double-click can't generate/email the map twice.
+    claimed = ExportToken.objects.filter(
+        token=token_uuid, paid=True, used=False
+    ).update(used=True)
+    if not claimed:
+        return render(request, "export_error.html", {"msg": already_used_msg}, status=410)
 
     # Get buyer email from Stripe
     buyer_email = ""
@@ -2574,14 +2577,11 @@ def export_download(request, token):
     except Exception:
         pass
 
-    # Generate PNG
+    # Generate PNG. If it fails, RELEASE the claim so the buyer can retry.
     png_bytes, err = _render_export_png(token_obj)
     if err:
+        ExportToken.objects.filter(token=token_uuid).update(used=False)
         return render(request, "export_error.html", {"msg": err})
-
-    # Mark used before sending email (generation succeeded)
-    token_obj.used = True
-    token_obj.save(update_fields=["used"])
 
     # Email PNG to buyer
     filename = "stadiums-of-europe-map.png"

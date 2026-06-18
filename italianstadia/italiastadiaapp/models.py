@@ -1,3 +1,5 @@
+import uuid as _uuid
+
 from django.db import models
 from django.utils.text import slugify
 
@@ -259,9 +261,6 @@ class LastRefresh(models.Model):
 
     def __str__(self):
         return f"{self.status} @ {self.ran_at}" if self.ran_at else "Never run"
-
-
-import uuid as _uuid
 
 
 class ExportToken(models.Model):
