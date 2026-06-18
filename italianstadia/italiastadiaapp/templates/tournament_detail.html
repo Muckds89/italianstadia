@@ -214,11 +214,11 @@
 
 {% if multi_country %}
   {% for country, group in venues_by_country.items %}{% for v in group.venues %}{% if v.status == 'CONFIRMED' %}
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SportsEvent","name":"{{ tournament_name|escapejs }}","startDate":"{{ tournament_year }}","sport":"Football","organizer":{"@type":"Organization","name":"UEFA","url":"https://www.uefa.com"},"location":{"@type":"StadiumOrArena","name":"{{ v.name|escapejs }}"{% if v.city %},"address":{"@type":"PostalAddress","addressLocality":"{{ v.city.name|escapejs }}"}{% endif %}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SportsEvent","name":"{{ tournament_name|escapejs }}","startDate":"{{ tournament_year }}","endDate":"{{ tournament_year }}","eventStatus":"https://schema.org/EventScheduled","description":"{{ tournament_name|escapejs }} football — match venue {{ v.name|escapejs }}{% if v.city %}, {{ v.city.name|escapejs }}{% endif %}.","sport":"Football"{% if v.image_url %},"image":"{{ v.image_url|escapejs }}"{% endif %},"organizer":{"@type":"Organization","name":"UEFA","url":"https://www.uefa.com"},"location":{"@type":"StadiumOrArena","name":"{{ v.name|escapejs }}"{% if v.city %},"address":{"@type":"PostalAddress","addressLocality":"{{ v.city.name|escapejs }}"}{% endif %}}}</script>
   {% endif %}{% endfor %}{% endfor %}
 {% else %}
   {% for v in venues %}{% if v.status == 'CONFIRMED' %}
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SportsEvent","name":"{{ tournament_name|escapejs }}","startDate":"{{ tournament_year }}","sport":"Football","organizer":{"@type":"Organization","name":"UEFA","url":"https://www.uefa.com"},"location":{"@type":"StadiumOrArena","name":"{{ v.name|escapejs }}"{% if v.city %},"address":{"@type":"PostalAddress","addressLocality":"{{ v.city.name|escapejs }}"}{% endif %}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SportsEvent","name":"{{ tournament_name|escapejs }}","startDate":"{{ tournament_year }}","endDate":"{{ tournament_year }}","eventStatus":"https://schema.org/EventScheduled","description":"{{ tournament_name|escapejs }} football — match venue {{ v.name|escapejs }}{% if v.city %}, {{ v.city.name|escapejs }}{% endif %}.","sport":"Football"{% if v.image_url %},"image":"{{ v.image_url|escapejs }}"{% endif %},"organizer":{"@type":"Organization","name":"UEFA","url":"https://www.uefa.com"},"location":{"@type":"StadiumOrArena","name":"{{ v.name|escapejs }}"{% if v.city %},"address":{"@type":"PostalAddress","addressLocality":"{{ v.city.name|escapejs }}"}{% endif %}}}</script>
   {% endif %}{% endfor %}
 {% endif %}
 <script>
