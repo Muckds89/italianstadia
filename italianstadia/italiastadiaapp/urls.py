@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic.base import RedirectView
 from . import views
 from .views import (
     api_status, city_list, country_stats, export_stadiums,
@@ -11,6 +12,9 @@ from .views import (
 
 app_name = "italiastadiaapp"
 urlpatterns = [
+    # Serve the pin favicon at the well-known path so browsers and Google's
+    # fallback get it site-wide (shows the pin next to search results).
+    path("favicon.ico", RedirectView.as_view(url="/static/icons/favicon.ico", permanent=True)),
     path('', views.index, name='home'),
     path('cities/', city_list, name='city_list'),
     path('stadiums/', stadium_list, name='stadium_list'),
