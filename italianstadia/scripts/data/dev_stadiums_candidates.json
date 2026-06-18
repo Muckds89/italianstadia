@@ -1,0 +1,85 @@
+{
+  "_note": "REVIEW BEFORE IMPORT. Curated starter (knowledge cutoff Jan 2026), >=15000 seats, Europe, NOT already in add_european_developments.py. Verify each source_url — status/capacity/opening change often; some may have completed or been cancelled. lat/lon/architect/developer are left to the pipeline (scraped from source_url). This is NOT exhaustive — run the deep-research pass for a complete, cited list.",
+  "candidates": [
+    {
+      "name": "Stadio della Roma",
+      "country": "Italy",
+      "team": "AS Roma",
+      "project_type": "NEW",
+      "status": "APPROVED",
+      "future_capacity": 55000,
+      "estimated_opening": 2028,
+      "source_url": "https://en.wikipedia.org/wiki/Stadio_della_Roma"
+    },
+    {
+      "name": "Manchester United new stadium",
+      "country": "England",
+      "team": "Manchester United",
+      "project_type": "NEW",
+      "status": "PLANNING",
+      "future_capacity": 100000,
+      "estimated_opening": 2031,
+      "source_url": "https://en.wikipedia.org/wiki/Old_Trafford"
+    },
+    {
+      "name": "Nou Mestalla",
+      "country": "Spain",
+      "team": "Valencia CF",
+      "project_type": "NEW",
+      "status": "UNDER_CONSTRUCTION",
+      "future_capacity": 70000,
+      "estimated_opening": 2027,
+      "source_url": "https://en.wikipedia.org/wiki/Nou_Mestalla"
+    },
+    {
+      "name": "Casement Park",
+      "country": "Northern Ireland",
+      "team": "",
+      "project_type": "REDEVELOPMENT",
+      "status": "ON_HOLD",
+      "future_capacity": 34500,
+      "estimated_opening": null,
+      "source_url": "https://en.wikipedia.org/wiki/Casement_Park"
+    },
+    {
+      "name": "Estadio Benito Villamarin redevelopment",
+      "country": "Spain",
+      "team": "Real Betis",
+      "project_type": "REDEVELOPMENT",
+      "status": "UNDER_CONSTRUCTION",
+      "future_capacity": 70000,
+      "estimated_opening": 2027,
+      "source_url": "https://en.wikipedia.org/wiki/Estadio_Benito_Villamar%C3%ADn"
+    },
+    {
+      "name": "Elland Road Expansion",
+      "country": "England",
+      "team": "Leeds United",
+      "project_type": "EXPANSION",
+      "status": "PLANNING",
+      "future_capacity": 53000,
+      "estimated_opening": null,
+      "source_url": "https://en.wikipedia.org/wiki/Elland_Road"
+    },
+    {
+      "name": "Stadio Diego Armando Maradona renovation",
+      "country": "Italy",
+      "team": "SSC Napoli",
+      "project_type": "REDEVELOPMENT",
+      "status": "PLANNING",
+      "future_capacity": 55000,
+      "estimated_opening": 2032,
+      "source_url": "https://en.wikipedia.org/wiki/Stadio_Diego_Armando_Maradona"
+    },
+    {
+      "name": "National Stadium (Serbia)",
+      "country": "Serbia",
+      "team": "",
+      "project_type": "NEW",
+      "status": "UNDER_CONSTRUCTION",
+      "future_capacity": 52000,
+      "estimated_opening": 2027,
+      "source_url": "https://en.wikipedia.org/wiki/National_Stadium_(Serbia)"
+    }
+  ]
+}
