@@ -697,12 +697,20 @@ def api_status(request):
 
 
 COUNTRY_FLAGS = {
-    "England":  "🇬🇧",
-    "Wales":    "🇬🇧",
-    "Scotland": "🇬🇧",
-    "Ireland":  "🇮🇪",
-    "Italy":    "🇮🇹",
-    "Turkey":   "🇹🇷",
+    "England":          "🇬🇧",
+    "Wales":            "🇬🇧",
+    "Scotland":         "🇬🇧",
+    "Northern Ireland": "🇬🇧",
+    "Ireland":          "🇮🇪",
+    "Italy":            "🇮🇹",
+    "Turkey":           "🇹🇷",
+}
+
+# Host nations that must always appear on a tournament page even if they have no
+# venue in the data yet (e.g. Northern Ireland co-hosts Euro 2028 but its only
+# candidate ground, Casement Park, is unresolved).
+TOURNAMENT_EXTRA_HOSTS = {
+    "uefa-euro-2028": ["Northern Ireland"],
 }
 
 
@@ -812,6 +820,11 @@ def tournament_detail(request, slug):
         if country not in _country_groups:
             _country_groups[country] = {"flag": flag, "venues": []}
         _country_groups[country]["venues"].append(v)
+
+    # Always show co-host nations even with no venues yet (e.g. N. Ireland @ Euro 2028)
+    for host in TOURNAMENT_EXTRA_HOSTS.get(slug, []):
+        if host not in _country_groups:
+            _country_groups[host] = {"flag": COUNTRY_FLAGS.get(host, ""), "venues": []}
 
     venues_by_country = OrderedDict(sorted(_country_groups.items(), key=lambda item: item[0]))
     multi_country = len(venues_by_country) > 1
@@ -1066,7 +1079,7 @@ def _get_tournament_export_stadiums(params):
             "lon":        float(v["longitude"]),
             "surface":    "",
             "country":    country,
-            "image_url":  v.get("badge_url", ""),
+            "image_url":  "",   # tournament maps use colour-coded points, not club badges
             "tournament_status": v["status"],
         })
     return out
@@ -1677,24 +1690,28 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
                     return True
         return False
 
-    # First pass: draw all badges. In tournament mode the ring is the status
-    # colour (green/orange/red); otherwise it's white.
+    # First pass: tournament maps draw colour-coded POINTS (status colour + white
+    # halo, no club badge); all other maps draw the club badge with a white ring.
     tournament_mode = params.get("color_by") == "tournament_status"
     dot_positions = []
     for s in stadiums:
         px, py = _lon_lat_to_px(s["lon"], s["lat"], bbox, W, H)
         colour    = _dot_colour(s, params, country_index)
-        badge_img = badges.get(s["name"])
-        ring_colour = colour if tournament_mode else (255, 255, 255)
 
-        draw.ellipse([px - rr, py - rr, px + rr, py + rr], fill=ring_colour)
-        if badge_img:
-            mask = Image.new("L", (BADGE_R * 2, BADGE_R * 2), 0)
-            ImageDraw.Draw(mask).ellipse([0, 0, BADGE_R * 2 - 1, BADGE_R * 2 - 1], fill=255)
-            img.paste(badge_img, (px - BADGE_R, py - BADGE_R), mask)
-            draw = ImageDraw.Draw(img)
-        else:
+        if tournament_mode:
+            # white halo for contrast on satellite/dark, then the status dot
+            draw.ellipse([px - rr, py - rr, px + rr, py + rr], fill=(255, 255, 255))
             draw.ellipse([px - BADGE_R, py - BADGE_R, px + BADGE_R, py + BADGE_R], fill=colour)
+        else:
+            badge_img = badges.get(s["name"])
+            draw.ellipse([px - rr, py - rr, px + rr, py + rr], fill=(255, 255, 255))
+            if badge_img:
+                mask = Image.new("L", (BADGE_R * 2, BADGE_R * 2), 0)
+                ImageDraw.Draw(mask).ellipse([0, 0, BADGE_R * 2 - 1, BADGE_R * 2 - 1], fill=255)
+                img.paste(badge_img, (px - BADGE_R, py - BADGE_R), mask)
+                draw = ImageDraw.Draw(img)
+            else:
+                draw.ellipse([px - BADGE_R, py - BADGE_R, px + BADGE_R, py + BADGE_R], fill=colour)
 
         badge_circles.append((px, py, rr))
         dot_positions.append((px, py, s))
