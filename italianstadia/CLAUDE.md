@@ -340,6 +340,44 @@ Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 f
 - JSON `stadium.owner_raw` fires only when Wikipedia infobox has no owner/operator row; it does not override Wikipedia data
 - Stadium images must be non-null — `og:image` is the fallback if infobox image not found; images stored at full resolution (no `/thumb/` in URL)
 
+## Link & name validation (MANDATORY post-scrape QA)
+
+The scraper has assigned wrong external IDs/pages — e.g. a German club's Transfermarkt
+verein ID (and its crest) to a Maltese team, or a German stadium's name to a Maltese
+ground. We must never send users to the wrong club/stadium. After **every** scrape, run
+these two audits and resolve all findings before considering the data clean:
+
+```bash
+python -X utf8 manage.py audit_stadium_names            # stadium name vs its Wikipedia title
+python -X utf8 manage.py audit_team_links --country <C> # team Transfermarkt link vs real club
+python -X utf8 manage.py audit_stadium_names --fix      # adopt wiki titles for SUSPECT names
+python -X utf8 manage.py audit_team_links --country <C> --fix  # clear wrong TM links + crests
+```
+
+**Detection rules (embed in the scrape itself, not just the audit):**
+1. **Stadium name ↔ Wikipedia title.** If the scraped `name` shares ZERO significant
+   tokens with its own Wikipedia page title, it's suspect. SPONSOR renames (both names
+   fit the country, e.g. Signal Iduna Park = Westfalenstadion) are OK; a name in a
+   language FOREIGN to the country (German "Stadion Rehberge" for Malta) is wrong → adopt
+   the Wikipedia title.
+2. **Team name ↔ Transfermarkt page title.** Fetch the TM page `<title>` (the real club
+   name) and compare to the team name. Zero overlap ⇒ wrong verein ID; the crest
+   (`tmssl …/wappen/<id>.png`) is wrong too → clear both. TM is fetchable with a desktop
+   browser User-Agent.
+3. **Comparison must transliterate AND substring-match** to avoid false positives:
+   ð→d, þ→th, ø→o, æ→ae, ł→l, đ→d; and treat a token as matching if it is a
+   substring/prefix of the other (so "Breiðablik"=="Breidablik", "KuPS Kuopio"~="Kuopion
+   Palloseura", "Vaasa"~="Vaasan", "Grobiņas"~="Grobina" are NOT flagged).
+4. **Fix direction = trust the field that matches the country/coords.** Usually the
+   Wikipedia URL/title is right and the name/TM-ID is wrong; but the reverse happens
+   (e.g. "Hybel Arena Horsens" had the right name but a Romanian wiki link + Bucharest
+   coords). Don't blanket-overwrite — verify which side is consistent with the country.
+5. **Run TM fetches SEQUENTIALLY** (concurrency triggers 429/502/504); the audit retries
+   with backoff and treats HTTP 404 as a dead (wrong) link.
+
+Production data corrections go in a **data migration** (see migrations 0057–0059), since
+`build.sh` does not `loaddata`.
+
 ## Ownership integrity contract (NON-NEGOTIABLE)
 
 Ownership is factual, legal information. Publishing incorrect ownership damages the credibility of the entire project. These rules are binding:

@@ -60,14 +60,29 @@ def _related(a, b):
 
 
 def _tm_club_name(url):
-    """Fetch the Transfermarkt page and return the real club name from <title>."""
-    r = requests.get(url, headers={"User-Agent": UA}, timeout=20)
-    r.raise_for_status()
-    m = re.search(r"<title>(.*?)</title>", r.text, re.S)
-    if not m:
-        return None
-    # "BSC Rehberge - Club profile | Transfermarkt" -> "BSC Rehberge"
-    return re.split(r"\s[-|]\s", m.group(1).strip())[0].strip()
+    """Fetch the Transfermarkt page and return the real club name from <title>.
+    Returns "__404__" for a dead link, or None if unreachable after retries.
+    Retries on timeouts / 5xx (TM rate-limits under load)."""
+    last = None
+    for attempt in range(4):
+        try:
+            r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
+            if r.status_code == 404:
+                return "__404__"
+            if r.status_code in (429, 502, 503, 504):
+                last = f"HTTP {r.status_code}"
+                time.sleep(6 + attempt * 6)
+                continue
+            r.raise_for_status()
+            m = re.search(r"<title>(.*?)</title>", r.text, re.S)
+            if not m:
+                return None
+            # "BSC Rehberge - Club profile | Transfermarkt" -> "BSC Rehberge"
+            return re.split(r"\s[-|]\s", m.group(1).strip())[0].strip()
+        except requests.exceptions.RequestException as e:
+            last = str(e)[:50]
+            time.sleep(6 + attempt * 6)
+    raise RuntimeError(last or "unreachable")
 
 
 class Command(BaseCommand):
@@ -89,14 +104,22 @@ class Command(BaseCommand):
             qs = qs.filter(league__country__name=opts["country"])
 
         bad = []
-        for t in qs:
+        total = qs.count()
+        for i, t in enumerate(qs, 1):
+            if i % 25 == 0:
+                self.stdout.write(f"  …{i}/{total} checked, {len(bad)} wrong so far")
             name_sig = _sig(t.name)
             try:
                 real = _tm_club_name(t.transfermarkt_url)
             except Exception as e:
-                self.stdout.write(f"  [fetch error] {t.name}: {e}")
+                self.stdout.write(f"  [unreachable] {t.name}: {e}  ({t.transfermarkt_url})")
                 continue
             time.sleep(opts["delay"])
+            if real == "__404__":
+                bad.append((t, "dead 404"))
+                self.stdout.write(self.style.ERROR(
+                    f"  WRONG (404): {t.name}  ({t.transfermarkt_url})"))
+                continue
             if not real:
                 continue
             if name_sig and _sig(real) and not _related(name_sig, _sig(real)):
@@ -104,7 +127,7 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.ERROR(
                     f"  WRONG: {t.name}  ->  TM shows '{real}'  ({t.transfermarkt_url})"))
 
-        self.stdout.write(self.style.WARNING(f"\nWrong Transfermarkt links: {len(bad)}"))
+        self.stdout.write(self.style.WARNING(f"\nWrong Transfermarkt links: {len(bad)} / {total}"))
 
         if opts["fix"]:
             for t, _real in bad:

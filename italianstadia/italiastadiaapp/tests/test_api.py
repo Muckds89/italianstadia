@@ -38,8 +38,10 @@ def test_stadiums_geojson_returns_valid_feature_collection(client):
     data = response.json()
 
     assert data["type"] == "FeatureCollection"
-    assert len(data["features"]) == 1
-    feature = data["features"][0]
+    # Migrations seed real stadiums into the test DB — assert on our own row.
+    feature = next(
+        f for f in data["features"] if f["properties"]["name"] == "Test Stadium"
+    )
     assert feature["geometry"]["coordinates"] == [9.0, 45.0]
     assert "country" in feature["properties"]
 
@@ -63,7 +65,11 @@ def test_stadiums_geojson_team_league_fields(client):
     response = client.get(reverse("italiastadiaapp:stadiums_geojson"))
     assert response.status_code == 200
 
-    teams = response.json()["features"][0]["properties"]["teams"]
+    feature = next(
+        f for f in response.json()["features"]
+        if f["properties"]["name"] == "San Siro"
+    )
+    teams = feature["properties"]["teams"]
     assert len(teams) == 1
     t = teams[0]
     assert "league_id" in t
@@ -205,8 +211,10 @@ def test_export_json_returns_list(client, export_data):
     assert response["Content-Type"] == "application/json"
     rows = response.json()
     assert isinstance(rows, list)
-    assert len(rows) == 2
-    keys = set(rows[0].keys())
+    names = {r["name"] for r in rows}
+    assert {"Olimpico", "Allianz"} <= names   # our rows present (DB also has seeded data)
+    row = next(r for r in rows if r["name"] == "Olimpico")
+    keys = set(row.keys())
     for field in ("id", "name", "city", "country", "league", "capacity", "ownership", "latitude", "longitude"):
         assert field in keys, f"missing field: {field}"
 
@@ -219,7 +227,8 @@ def test_export_csv_returns_valid_csv(client, export_data):
     assert "text/csv" in response["Content-Type"]
     reader = csv.DictReader(io.StringIO(response.content.decode("utf-8")))
     rows = list(reader)
-    assert len(rows) == 2
+    names = {r["name"] for r in rows}
+    assert {"Olimpico", "Allianz"} <= names   # our rows present (DB also has seeded data)
     assert "name" in rows[0]
     assert "capacity" in rows[0]
 

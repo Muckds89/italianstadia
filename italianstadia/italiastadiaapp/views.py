@@ -398,6 +398,7 @@ _FLAG_CODE_OVERRIDES = {
     "GB": "gb-eng",   # England uses GB-ENG subdivision flag
     "SC": "gb-sct",   # Scotland
     "WL": "gb-wls",   # Wales
+    "NI": "gb-nir",   # Northern Ireland
 }
 
 
@@ -1108,7 +1109,14 @@ def _get_export_stadiums(params):
             primary_team = next((t for t in teams if t.is_national), None)
         if primary_team is None:
             primary_team = next(iter(teams), None)
-        image_url  = (primary_team.image_url or "") if primary_team else ""
+        # National sides: use the reliable flagcdn flag (non-free Wikipedia crests
+        # often fail the server-side badge fetch — see the live map fix).
+        if (primary_team and primary_team.is_national and primary_team.league
+                and primary_team.league.country and primary_team.league.country.code):
+            image_url = (f"https://flagcdn.com/w160/"
+                         f"{_country_flag_code(primary_team.league.country.code)}.png")
+        else:
+            image_url = (primary_team.image_url or "") if primary_team else ""
         team_name  = (primary_team.name or "") if primary_team else ""
         results.append({
             "name":       s.name,

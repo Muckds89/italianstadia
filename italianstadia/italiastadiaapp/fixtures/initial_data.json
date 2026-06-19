@@ -459,6 +459,15 @@
   }
 },
 {
+  "model": "italiastadiaapp.country",
+  "pk": 53,
+  "fields": {
+    "name": "Northern Ireland",
+    "code": "NI",
+    "uefa_rank": null
+  }
+},
+{
   "model": "italiastadiaapp.league",
   "pk": 1,
   "fields": {
@@ -968,6 +977,78 @@
   "fields": {
     "name": "National Football Team",
     "country": 44,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 60,
+  "fields": {
+    "name": "National Football Team",
+    "country": 24,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 61,
+  "fields": {
+    "name": "National Football Team",
+    "country": 53,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 62,
+  "fields": {
+    "name": "National Football Team",
+    "country": 39,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 63,
+  "fields": {
+    "name": "National Football Team",
+    "country": 40,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 64,
+  "fields": {
+    "name": "National Football Team",
+    "country": 7,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 65,
+  "fields": {
+    "name": "National Football Team",
+    "country": 9,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 66,
+  "fields": {
+    "name": "National Football Team",
+    "country": 22,
+    "division_level": 0
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 67,
+  "fields": {
+    "name": "National Football Team",
+    "country": 11,
     "division_level": 0
   }
 },
@@ -9000,6 +9081,71 @@
     "population": null,
     "country": "Portugal",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Sert%C3%A3",
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 645,
+  "fields": {
+    "name": "Belfast",
+    "population": null,
+    "country": "Northern Ireland",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 646,
+  "fields": {
+    "name": "Brussels",
+    "population": null,
+    "country": "Belgium",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 647,
+  "fields": {
+    "name": "Yerevan",
+    "population": null,
+    "country": "Armenia",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 648,
+  "fields": {
+    "name": "Tbilisi",
+    "population": null,
+    "country": "Georgia",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 649,
+  "fields": {
+    "name": "Baku",
+    "population": null,
+    "country": "Azerbaijan",
+    "wikipedia_url": null,
     "image_url": null,
     "image_credit": null,
     "description": null
@@ -32922,6 +33068,195 @@
   }
 },
 {
+  "model": "italiastadiaapp.stadium",
+  "pk": 786,
+  "fields": {
+    "name": "Puskás Aréna",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 440,
+    "latitude": "47.503000",
+    "longitude": "19.097900",
+    "owner_raw": null,
+    "ownership": "PUBLIC",
+    "slug": "puskas-arena",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Pusk%C3%A1s_Ar%C3%A9na",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 787,
+  "fields": {
+    "name": "Windsor Park",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 645,
+    "latitude": "54.582500",
+    "longitude": "-5.955278",
+    "owner_raw": null,
+    "ownership": "PUBLIC",
+    "slug": "windsor-park",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Windsor_Park",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 788,
+  "fields": {
+    "name": "King Baudouin Stadium",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 646,
+    "latitude": "50.895833",
+    "longitude": "4.334167",
+    "owner_raw": null,
+    "ownership": "PUBLIC",
+    "slug": "king-baudouin-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/King_Baudouin_Stadium",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 789,
+  "fields": {
+    "name": "PGE Narodowy",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 186,
+    "latitude": "52.239444",
+    "longitude": "21.045556",
+    "owner_raw": null,
+    "ownership": "PUBLIC",
+    "slug": "pge-narodowy",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/PGE_Narodowy",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 790,
+  "fields": {
+    "name": "Vazgen Sargsyan Republican Stadium",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 647,
+    "latitude": "40.174722",
+    "longitude": "44.523611",
+    "owner_raw": null,
+    "ownership": "PUBLIC",
+    "slug": "vazgen-sargsyan-republican-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Republican_Stadium_(Yerevan)",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 791,
+  "fields": {
+    "name": "Boris Paichadze Dinamo Arena",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 648,
+    "latitude": "41.723056",
+    "longitude": "44.789722",
+    "owner_raw": null,
+    "ownership": "PUBLIC",
+    "slug": "boris-paichadze-dinamo-arena",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Boris_Paichadze_Dinamo_Arena",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 792,
+  "fields": {
+    "name": "Baku Olympic Stadium",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 649,
+    "latitude": "40.429800",
+    "longitude": "49.919800",
+    "owner_raw": null,
+    "ownership": "PUBLIC",
+    "slug": "baku-olympic-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Baku_Olympic_Stadium",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
   "model": "italiastadiaapp.team",
   "pk": 7,
   "fields": {
@@ -51394,6 +51729,231 @@
     "under_development_stadium": 18,
     "uefa_coefficient": null,
     "slug": "serbia"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 812,
+  "fields": {
+    "is_national": true,
+    "name": "Hungary",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 786,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 440,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Hungary_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://flagcdn.com/w160/hu.png",
+    "image_credit": null,
+    "description": null,
+    "league": 60,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "hungary"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 813,
+  "fields": {
+    "is_national": true,
+    "name": "Northern Ireland",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 787,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 645,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Northern_Ireland_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://flagcdn.com/w160/gb-nir.png",
+    "image_credit": null,
+    "description": null,
+    "league": 61,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "northern-ireland"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 814,
+  "fields": {
+    "is_national": true,
+    "name": "Belgium",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 788,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 646,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Belgium_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://flagcdn.com/w160/be.png",
+    "image_credit": null,
+    "description": null,
+    "league": 57,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "belgium"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 815,
+  "fields": {
+    "is_national": true,
+    "name": "Poland",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 789,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 186,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Poland_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://flagcdn.com/w160/pl.png",
+    "image_credit": null,
+    "description": null,
+    "league": 62,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "poland"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 816,
+  "fields": {
+    "is_national": true,
+    "name": "Romania",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 346,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 300,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Romania_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://flagcdn.com/w160/ro.png",
+    "image_credit": null,
+    "description": null,
+    "league": 63,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "romania"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 817,
+  "fields": {
+    "is_national": true,
+    "name": "Albania",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 713,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 613,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Albania_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://flagcdn.com/w160/al.png",
+    "image_credit": null,
+    "description": null,
+    "league": 64,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "albania"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 818,
+  "fields": {
+    "is_national": true,
+    "name": "Armenia",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 790,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 647,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Armenia_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://flagcdn.com/w160/am.png",
+    "image_credit": null,
+    "description": null,
+    "league": 65,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "armenia"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 819,
+  "fields": {
+    "is_national": true,
+    "name": "Georgia",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 791,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 648,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Georgia_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://flagcdn.com/w160/ge.png",
+    "image_credit": null,
+    "description": null,
+    "league": 66,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "georgia"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 820,
+  "fields": {
+    "is_national": true,
+    "name": "Azerbaijan",
+    "founded": null,
+    "tier": null,
+    "girone": null,
+    "stadium": 792,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 649,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Azerbaijan_national_football_team",
+    "transfermarkt_url": null,
+    "image_url": "https://flagcdn.com/w160/az.png",
+    "image_credit": null,
+    "description": null,
+    "league": 67,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "azerbaijan"
   }
 },
 {
