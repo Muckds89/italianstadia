@@ -319,7 +319,13 @@ def _build_stadium_features(qs=None):
                             if t.league and t.league.country
                             else None
                         ),
-                        "image_url": t.image_url or "",
+                        # National sides show their country flag (reliable PD flagcdn,
+                        # GB-subdivision aware) instead of a non-free crest that may not load.
+                        "image_url": (
+                            f"https://flagcdn.com/w160/{_country_flag_code(t.league.country.code)}.png"
+                            if t.is_national and t.league and t.league.country and t.league.country.code
+                            else (t.image_url or "")
+                        ),
                         "wikipedia_url": t.wikipedia_url or "",
                         "transfermarkt_url": t.transfermarkt_url or "",
                     }
