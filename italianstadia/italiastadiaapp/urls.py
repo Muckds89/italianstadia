@@ -5,7 +5,8 @@ from .views import (
     api_status, city_list, country_stats, export_stadiums,
     stadium_developments_geojson, stadium_development_list, stadium_list, team_list,
     stadium_detail, stadium_detail_redirect, stadiums_geojson,
-    stadium_development_detail, team_detail, team_detail_redirect,
+    stadium_development_detail, stadium_development_detail_redirect,
+    team_detail, team_detail_redirect,
     tournament_list, tournament_detail, map_export,
     export_page, export_checkout, export_webhook, export_success, export_download, export_options,
 )
@@ -32,7 +33,8 @@ urlpatterns = [
     path("api/export/stadiums/", export_stadiums, name="export_stadiums"),
     path("api/export/map/", map_export, name="map_export"),
     path("api/status/", api_status, name="api_status"),
-    path("stadium-development/<int:pk>/", stadium_development_detail, name="stadium_development_detail"),
+    path("stadium-development/<int:pk>/", stadium_development_detail_redirect, name="stadium_development_detail_by_id"),
+    path("stadium-development/<slug:slug>/", stadium_development_detail, name="stadium_development_detail"),
     path("privacy/", views.privacy, name="privacy"),
     # Paid export
     path("export/", export_page, name="export_page"),

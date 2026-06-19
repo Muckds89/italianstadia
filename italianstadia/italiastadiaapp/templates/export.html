@@ -105,9 +105,47 @@
                 </div>
             </div>
 
+            <!-- Under-development map -->
+            <div class="card mb-3">
+                <p class="section-label">Under-development map</p>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="expDevLayer">
+                    <label class="form-check-label small" for="expDevLayer">Show under-development projects</label>
+                </div>
+                <div id="dstatusGroup" style="display:none">
+                    <label class="form-label small mb-1">Show projects</label>
+                    <div class="d-flex flex-column gap-1">
+                        <div class="form-check mb-0">
+                            <input class="form-check-input ds-check" type="checkbox" id="dsPlanning" value="PLANNING" checked>
+                            <label class="form-check-label small" for="dsPlanning"><span style="color:#db2777">●</span> Planning</label>
+                        </div>
+                        <div class="form-check mb-0">
+                            <input class="form-check-input ds-check" type="checkbox" id="dsApproved" value="APPROVED" checked>
+                            <label class="form-check-label small" for="dsApproved"><span style="color:#3b82f6">●</span> Approved</label>
+                        </div>
+                        <div class="form-check mb-0">
+                            <input class="form-check-input ds-check" type="checkbox" id="dsUnderConstruction" value="UNDER_CONSTRUCTION" checked>
+                            <label class="form-check-label small" for="dsUnderConstruction"><span style="color:#ff9f1c">●</span> Under construction</label>
+                        </div>
+                        <div class="form-check mb-0">
+                            <input class="form-check-input ds-check" type="checkbox" id="dsOnHold" value="ON_HOLD">
+                            <label class="form-check-label small" for="dsOnHold"><span style="color:#9ca3af">●</span> On hold</label>
+                        </div>
+                        <div class="form-check mb-0">
+                            <input class="form-check-input ds-check" type="checkbox" id="dsCompleted" value="COMPLETED">
+                            <label class="form-check-label small" for="dsCompleted"><span style="color:#28c76f">●</span> Completed</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Filters -->
             <div class="card mb-3" id="filtersCard">
                 <p class="section-label">Filters</p>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="expNational">
+                    <label class="form-check-label small" for="expNational">National-team stadiums only (Wembley, Stade de France…)</label>
+                </div>
                 <div class="mb-2 ac-wrap">
                     <label class="form-label small mb-1">Country</label>
                     <input type="text" id="expCountry" class="form-control form-control-sm" placeholder="e.g. Norway" autocomplete="off">
@@ -292,6 +330,15 @@ fetch("{% url 'italiastadiaapp:export_options' %}")
     .catch(() => {});
 
 // Tournament mode: hide the plain filters and reveal the status checkboxes.
+document.getElementById("expDevLayer").addEventListener("change", function () {
+    const on = this.checked;
+    document.getElementById("dstatusGroup").style.display = on ? "" : "none";
+    // Dev layer owns the map; dim the tournament + filter cards while it's active.
+    document.getElementById("expTournament").disabled = on;
+    document.getElementById("filtersCard").style.opacity = on ? "0.5" : "";
+    document.getElementById("filtersCard").style.pointerEvents = on ? "none" : "";
+});
+
 document.getElementById("expTournament").addEventListener("change", function () {
     const on = !!this.value;
     document.getElementById("tstatusGroup").style.display = on ? "" : "none";
@@ -436,6 +483,15 @@ function _getFilters() {
     if (_useBgColor && style !== "satellite" && style !== "topo")
         f.bg_color = document.getElementById("expBgHex").value || document.getElementById("expBgColor").value;
 
+    // Under-development layer overrides everything else (own status palette).
+    if (document.getElementById("expDevLayer").checked) {
+        f.layer = "development";
+        const ds = [...document.querySelectorAll(".ds-check:checked")].map(el => el.value);
+        if (ds.length) f.dstatus = ds.join(",");
+        delete f.country; delete f.league; delete f.surface; delete f.ownership;
+        return f;
+    }
+
     // Tournament mode overrides the country/league/surface/ownership filters
     const tour = document.getElementById("expTournament").value;
     if (tour) {
@@ -445,7 +501,11 @@ function _getFilters() {
             .map(id => document.getElementById(id).value);
         f.tstatus = (st.length ? st : ["confirmed", "candidate"]).join(",");
         delete f.country; delete f.league; delete f.surface; delete f.ownership;
+        return f;
     }
+
+    // National-stadiums-only is a modifier on the operational filters.
+    if (document.getElementById("expNational").checked) f.national = "1";
     return f;
 }
 

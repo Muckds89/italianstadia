@@ -201,6 +201,8 @@ class StadiumDevelopment(models.Model):
 
     name = models.CharField(max_length=255)
 
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
+
     project_type = models.CharField(
         max_length=30,
         choices=[
@@ -235,11 +237,24 @@ class StadiumDevelopment(models.Model):
 
     image_url = models.URLField(max_length=1000, blank=True, null=True)
     image_credit =models.TextField(blank=True, null=True)
+    extra_images = models.JSONField(default=list, blank=True)  # gallery: [{url, credit}]
     source_url = models.URLField(max_length=500, blank=True, null=True)
+    instagram_url = models.URLField(max_length=500, blank=True, null=True)  # architect IG post to embed
 
 
     notes = models.TextField(blank=True, null=True)
     tournaments = models.JSONField(default=list, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base = slugify(self.name) or f"development-{self.pk or 0}"
+            slug = base
+            n = 2
+            while StadiumDevelopment.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base}-{n}"
+                n += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name

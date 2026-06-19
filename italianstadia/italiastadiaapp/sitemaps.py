@@ -27,6 +27,17 @@ class TeamSitemap(Sitemap):
         return reverse("italiastadiaapp:team_detail", args=[obj.slug])
 
 
+class DevelopmentSitemap(Sitemap):
+    changefreq = "weekly"  # dev projects change status often
+    priority = 0.7
+
+    def items(self):
+        return StadiumDevelopment.objects.exclude(slug="").order_by("id")
+
+    def location(self, obj):
+        return reverse("italiastadiaapp:stadium_development_detail", args=[obj.slug])
+
+
 class CitySitemap(Sitemap):
     changefreq = "yearly"
     priority = 0.4
@@ -74,7 +85,7 @@ class StaticViewSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return ["home", "stadium_list", "team_list", "city_list"]
+        return ["home", "stadium_list", "team_list", "city_list", "stadium_development_list"]
 
     def location(self, item):
         return reverse(f"italiastadiaapp:{item}")

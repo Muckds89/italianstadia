@@ -62,6 +62,12 @@ const countryRankMap = {};
 // Badge DivIcon sizes (px) per role — use numbers, not strings
 const BADGE_SIZE = { active: 32, context2: 24, context3: 20 };
 
+// Stadiums with no linked team (we don't maintain their lower leagues) only show on
+// the map if they carry a tournament tag (e.g. UEFA Euro 2032 candidate venues) — a
+// curated signal. This keeps scrape-orphaned grounds AND large-but-untagged stadiums
+// (Goodison Park, Ion Oblemenco) off the map while surfacing the Euro 2032 venues.
+// See applyFilters().
+
 function createBadgeIcon(imageUrl, sizePx) {
     const inner = imageUrl
         ? `<img src="${imageUrl}" alt="">`
@@ -606,8 +612,15 @@ function applyFilters(updateStadiumDropdown = true) {
     let visibleMarkers = [];
 
     markers.forEach(marker => {
-        const inSelectedCountry = selectedCountry &&
-            marker.leagues.some(l => l.country === selectedCountry);
+        // Teamless stadiums (e.g. Euro 2032 grounds we don't maintain leagues for) carry
+        // no leagues — match country via their derived Stadium.city.country instead, but
+        // only surface ones with a tournament tag (curated signal; hides scrape clutter).
+        const isNotableTeamless =
+            marker.teams.length === 0 && marker.tournaments.length > 0;
+        const inSelectedCountry = selectedCountry && (
+            marker.leagues.some(l => l.country === selectedCountry) ||
+            (isNotableTeamless && marker.country === selectedCountry)
+        );
         const inSelectedLeague  = selectedLeague &&
             marker.leagues.some(l => l.id === selectedLeague);
         const isTopTier    = marker.primaryLeague?.divisionLevel === 1;
@@ -628,8 +641,9 @@ function applyFilters(updateStadiumDropdown = true) {
         let role; // "active" | "context-2" | "context-3" | "hidden"
 
         if (!selectedCountry && !selectedLeague) {
-            // Default: show tier-1 clubs + national team stadiums
-            role = (isTopTier || isNational) ? "active" : "hidden";
+            // Default: show tier-1 clubs + national team stadiums.
+            // Notable teamless stadiums (e.g. Euro 2032 grounds) also show by default.
+            role = (isTopTier || isNational || isNotableTeamless) ? "active" : "hidden";
         } else if (selectedLeague) {
             // League selected: show ONLY that league — no context markers from other tiers
             role = inSelectedLeague ? "active" : "hidden";
@@ -637,7 +651,7 @@ function applyFilters(updateStadiumDropdown = true) {
             // Country only: all tiers visible with hierarchy
             if (!inSelectedCountry) {
                 role = "hidden";
-            } else if (isTopTier || isNational) {
+            } else if (isTopTier || isNational || isNotableTeamless) {
                 role = "active";
             } else {
                 role = (marker.primaryLeague?.divisionLevel ?? 99) <= 2 ? "context-2" : "context-3";
@@ -806,7 +820,7 @@ function loadDevelopmentStadiums() {
                     ` : ""}
 
                     <a class="popup-btn popup-primary"
-                    href="/stadium-development/${props.id}/">
+                    href="/stadium-development/${props.slug || props.id}/">
                         View project
                     </a>
 
@@ -916,8 +930,15 @@ function applyDevelopmentFilters() {
 }
 
 function populateCountryFilter() {
+    // Teamless stadiums have no leagues — fall back to their derived country
+    // (Stadium.city.country) so they still populate the dropdown, but only when
+    // they clear the capacity gate (otherwise scrape clutter would add countries).
     const countries = [...new Set(
-        markers.flatMap(m => m.leagues.map(l => l.country)).filter(Boolean)
+        markers.flatMap(m =>
+            m.leagues.length
+                ? m.leagues.map(l => l.country)
+                : (m.tournaments.length > 0 ? [m.country] : [])
+        ).filter(Boolean)
     )].sort((a, b) => (countryRankMap[a] ?? 99) - (countryRankMap[b] ?? 99));
     countryFilter.innerHTML = `<option value="">All countries</option>`;
     countries.forEach(c => {
@@ -1140,6 +1161,7 @@ fetch(document.getElementById("map").dataset.stadiumsUrl)
             marker.country = marker.primaryLeague
                 ? marker.primaryLeague.country
                 : (props.country || "");
+            marker.tournaments = props.tournaments || [];   // teamless visibility gate
 
             marker.gironi = marker.teams.map(t => t.girone || "");
             marker.isNational = marker.teams.some(t => t.is_national);

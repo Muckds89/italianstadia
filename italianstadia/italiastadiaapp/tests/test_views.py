@@ -16,16 +16,34 @@ def test_stadium_development_detail_loads(client):
         longitude=9.0,
     )
     response = client.get(
-        reverse("italiastadiaapp:stadium_development_detail", args=[dev.pk])
+        reverse("italiastadiaapp:stadium_development_detail", args=[dev.slug])
     )
     assert response.status_code == 200
     assert b"New Stadio" in response.content
 
 
 @pytest.mark.django_db
+def test_stadium_development_detail_redirects_pk_to_slug(client):
+    dev = StadiumDevelopment.objects.create(
+        name="Redirect Stadio",
+        project_type="NEW",
+        status="PLANNING",
+        latitude=45.0,
+        longitude=9.0,
+    )
+    response = client.get(
+        reverse("italiastadiaapp:stadium_development_detail_by_id", args=[dev.pk])
+    )
+    assert response.status_code == 301
+    assert response.url == reverse(
+        "italiastadiaapp:stadium_development_detail", args=[dev.slug]
+    )
+
+
+@pytest.mark.django_db
 def test_stadium_development_detail_404(client):
     response = client.get(
-        reverse("italiastadiaapp:stadium_development_detail", args=[99999])
+        reverse("italiastadiaapp:stadium_development_detail", args=["no-such-slug"])
     )
     assert response.status_code == 404
 

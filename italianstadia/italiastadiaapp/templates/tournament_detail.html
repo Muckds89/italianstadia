@@ -47,12 +47,16 @@
 
     <h1 class="mb-1">{{ tournament_name }}</h1>
     {% if host_country_flags %}
-    <p class="text-muted mb-4">
+    <p class="text-muted mb-2">
         Hosted in:
         {% for country, flag in host_country_flags.items %}
         <strong>{{ flag }} {{ country }}</strong>{% if not forloop.last %} &amp; {% endif %}
         {% endfor %}
     </p>
+    {% endif %}
+
+    {% if tournament_intro %}
+    <p class="lead text-secondary mb-4">{{ tournament_intro }}</p>
     {% endif %}
 
     <!-- Stat cards -->
@@ -221,15 +225,6 @@
   </div>
 </div>
 
-{% if multi_country %}
-  {% for country, group in venues_by_country.items %}{% for v in group.venues %}{% if v.status == 'CONFIRMED' %}
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SportsEvent","name":"{{ tournament_name|escapejs }}","startDate":"{{ tournament_year }}","endDate":"{{ tournament_year }}","eventStatus":"https://schema.org/EventScheduled","description":"{{ tournament_name|escapejs }} football — match venue {{ v.name|escapejs }}{% if v.city %}, {{ v.city.name|escapejs }}{% endif %}.","sport":"Football"{% if v.image_url %},"image":"{{ v.image_url|escapejs }}"{% endif %},"organizer":{"@type":"Organization","name":"UEFA","url":"https://www.uefa.com"},"location":{"@type":"StadiumOrArena","name":"{{ v.name|escapejs }}"{% if v.city %},"address":{"@type":"PostalAddress","addressLocality":"{{ v.city.name|escapejs }}"}{% endif %}}}</script>
-  {% endif %}{% endfor %}{% endfor %}
-{% else %}
-  {% for v in venues %}{% if v.status == 'CONFIRMED' %}
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SportsEvent","name":"{{ tournament_name|escapejs }}","startDate":"{{ tournament_year }}","endDate":"{{ tournament_year }}","eventStatus":"https://schema.org/EventScheduled","description":"{{ tournament_name|escapejs }} football — match venue {{ v.name|escapejs }}{% if v.city %}, {{ v.city.name|escapejs }}{% endif %}.","sport":"Football"{% if v.image_url %},"image":"{{ v.image_url|escapejs }}"{% endif %},"organizer":{"@type":"Organization","name":"UEFA","url":"https://www.uefa.com"},"location":{"@type":"StadiumOrArena","name":"{{ v.name|escapejs }}"{% if v.city %},"address":{"@type":"PostalAddress","addressLocality":"{{ v.city.name|escapejs }}"}{% endif %}}}</script>
-  {% endif %}{% endfor %}
-{% endif %}
 <script>
 (function () {
     const geojson = {{ geojson|safe }};
@@ -264,6 +259,27 @@
         map.setView([48, 15], 4);
     }
 })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsEvent",
+  "name": "{{ tournament_name|escapejs }}",
+  "description": "{{ tournament_intro|escapejs }}",
+  "sport": "Football",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "organizer": {"@type": "Organization", "name": "UEFA", "url": "https://www.uefa.com"},
+  "url": "{{ request.scheme }}://{{ request.get_host }}{{ request.path }}",
+  {% if tournament_year %}"startDate": "{{ tournament_year }}",{% endif %}
+  "location": [
+    {% for v in venues %}{
+      "@type": "StadiumOrArena",
+      "name": "{{ v.name|escapejs }}"{% if v.city %},
+      "address": {"@type": "PostalAddress", "addressLocality": "{{ v.city.name|escapejs }}"{% if v.city.country %}, "addressCountry": "{{ v.city.country|escapejs }}"{% endif %}}{% endif %}{% if v.capacity %},
+      "maximumAttendeeCapacity": {{ v.capacity }}{% endif %}
+    }{% if not forloop.last %},{% endif %}{% endfor %}
+  ]
+}
 </script>
 </body>
 </html>

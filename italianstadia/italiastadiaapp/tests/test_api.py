@@ -161,9 +161,13 @@ def test_stadium_developments_geojson(client):
     data = response.json()
 
     assert data["type"] == "FeatureCollection"
-    assert len(data["features"]) == 1
-
-    props = data["features"][0]["properties"]
+    # The dev table is seeded with curated rows via migration, so don't assume an
+    # empty table — assert on the row this test created instead of an absolute count.
+    feature = next(
+        f for f in data["features"]
+        if f["properties"]["name"] == "Test New Stadium"
+    )
+    props = feature["properties"]
     assert "country" in props
     assert "city" in props
     assert "future_tenants" in props

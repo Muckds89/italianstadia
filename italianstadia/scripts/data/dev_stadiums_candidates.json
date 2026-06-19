@@ -1,5 +1,29 @@
 {
-  "_note": "REVIEW BEFORE IMPORT. Curated starter (knowledge cutoff Jan 2026), >=15000 seats, Europe, NOT already in add_european_developments.py. Verify each source_url — status/capacity/opening change often; some may have completed or been cancelled. lat/lon/architect/developer are left to the pipeline (scraped from source_url). This is NOT exhaustive — run the deep-research pass for a complete, cited list.",
+  "_note": "REVIEW BEFORE IMPORT. Curated starter (>=15000 seats, Europe), NOT already in add_european_developments.py. Each entry now carries a `sources` block: `architect_firm` is the DEEP, authoritative link to verify (the firm's own project page) and is the field you manually confirm before flipping `verified` to true. `official` (club/city/federation) and `wikipedia` are secondary cross-checks. lat/lon are filled by the pipeline from sources. `seo_description` is ORIGINAL English copy written from facts (not copied from any source) — see _seo_rules below.",
+  "_schema": {
+    "name": "string",
+    "country": "string",
+    "team": "string (optional; links future_tenants)",
+    "project_type": "NEW | REDEVELOPMENT | EXPANSION",
+    "status": "PLANNING | APPROVED | UNDER_CONSTRUCTION | ON_HOLD | COMPLETED",
+    "future_capacity": "int (>=15000)",
+    "estimated_opening": "int year | null",
+    "architect": "string firm name | '' (only when confident)",
+    "sources": {
+      "architect_firm": "URL to the design firm's own project page — PRIMARY deep source to verify | ''",
+      "official": "URL to club / city / federation announcement | ''",
+      "wikipedia": "URL | ''"
+    },
+    "verified": "bool — set true only after you confirm sources.architect_firm by hand",
+    "seo_description": "original English copy (see _seo_rules)"
+  },
+  "_seo_rules": [
+    "Write from FACTS, never copy sentences from Wikipedia/news (Wikipedia is CC BY-SA — reuse needs attribution + relicensing).",
+    "Front-load the entity + the queries people type: '<club> new stadium', '<stadium> capacity', 'when will <stadium> open'.",
+    "Each sentence should stand alone as a quotable fact with numbers inline (capacity, year, what it replaces) — this is what AI answer engines cite.",
+    "Add one sentence of unique framing no source has (a comparison, the urban/regeneration context) so Google treats the page as a primary source.",
+    "Render this text on the detail page inside a real <h1>/<p>, add <title> + <meta name=description>, and JSON-LD schema.org StadiumOrArena (name, maximumAttendeeCapacity, architect, geo)."
+  ],
   "candidates": [
     {
       "name": "Stadio della Roma",
@@ -9,7 +33,14 @@
       "status": "APPROVED",
       "future_capacity": 55000,
       "estimated_opening": 2028,
-      "source_url": "https://en.wikipedia.org/wiki/Stadio_della_Roma"
+      "architect": "Populous",
+      "sources": {
+        "architect_firm": "https://populous.com/article/a-s-roma-unveils-populous-designs-for-new-stadium-and-community-district",
+        "official": "https://www.comune.roma.it/web/it/nuovo-stadio-a-pietralata.page",
+        "wikipedia": "https://en.wikipedia.org/wiki/Stadio_della_Roma"
+      },
+      "verified": false,
+      "seo_description": "Stadio della Roma is AS Roma's planned new 55,000-seat club-owned stadium in the Pietralata district of Rome, ending decades of ground-sharing at the publicly owned Stadio Olimpico. Approved for construction with a target opening around 2028, it would become the first stadium fully owned by Roma and one of Italy's first purpose-built football-only grounds of its size."
     },
     {
       "name": "Manchester United new stadium",
@@ -19,7 +50,14 @@
       "status": "PLANNING",
       "future_capacity": 100000,
       "estimated_opening": 2031,
-      "source_url": "https://en.wikipedia.org/wiki/Old_Trafford"
+      "architect": "Foster + Partners",
+      "sources": {
+        "architect_firm": "https://www.fosterandpartners.com/news/designs-for-old-trafford-stadium-district-revealed",
+        "official": "https://www.manutd.com/",
+        "wikipedia": "https://en.wikipedia.org/wiki/New_Trafford_Stadium"
+      },
+      "verified": false,
+      "seo_description": "Manchester United's proposed new stadium is a 100,000-seat ground designed by Foster + Partners, set beside the existing Old Trafford site as the centrepiece of a wider regeneration of the Trafford Wharfside district. If built to plan it would be the largest football stadium in the United Kingdom, overtaking Wembley, with a target opening near 2031."
     },
     {
       "name": "Nou Mestalla",
@@ -29,17 +67,31 @@
       "status": "UNDER_CONSTRUCTION",
       "future_capacity": 70000,
       "estimated_opening": 2027,
-      "source_url": "https://en.wikipedia.org/wiki/Nou_Mestalla"
+      "architect": "Fenwick Iribarren Architects",
+      "sources": {
+        "architect_firm": "https://www.fenwickiribarren.com/project/estadio-del-valencia-c-f/",
+        "official": "https://www.valenciacf.com/en",
+        "wikipedia": "https://en.wikipedia.org/wiki/Nou_Mestalla"
+      },
+      "verified": false,
+      "seo_description": "Nou Mestalla is Valencia CF's long-stalled new stadium in northern Valencia, with construction resuming after more than a decade frozen since the 2009 financial crisis. The completed ground is planned to hold around 70,000 spectators, which would make it one of La Liga's largest venues and the replacement for the historic Mestalla, open since 1923."
     },
     {
       "name": "Casement Park",
       "country": "Northern Ireland",
       "team": "",
       "project_type": "REDEVELOPMENT",
-      "status": "ON_HOLD",
+      "status": "PLANNING",
       "future_capacity": 34500,
       "estimated_opening": null,
-      "source_url": "https://en.wikipedia.org/wiki/Casement_Park"
+      "architect": "Populous",
+      "sources": {
+        "architect_firm": "https://populous.com/projects/casement-park/",
+        "official": "https://www.gaa.ie/",
+        "wikipedia": "https://en.wikipedia.org/wiki/Casement_Park"
+      },
+      "verified": false,
+      "seo_description": "Casement Park is a planned 34,500-capacity GAA stadium redevelopment in west Belfast, Northern Ireland, designed by Populous on the site of the demolished original ground. The project has been repeatedly delayed over funding and was dropped from the UK and Ireland's UEFA Euro 2028 host venues, leaving its timeline on hold."
     },
     {
       "name": "Estadio Benito Villamarin redevelopment",
@@ -49,7 +101,14 @@
       "status": "UNDER_CONSTRUCTION",
       "future_capacity": 70000,
       "estimated_opening": 2027,
-      "source_url": "https://en.wikipedia.org/wiki/Estadio_Benito_Villamar%C3%ADn"
+      "architect": "Fenwick Iribarren Architects",
+      "sources": {
+        "architect_firm": "https://www.fenwickiribarren.com/project/estadio-benito-villamarin/",
+        "official": "https://www.realbetisbalompie.es/en",
+        "wikipedia": "https://en.wikipedia.org/wiki/Estadio_Benito_Villamar%C3%ADn"
+      },
+      "verified": false,
+      "seo_description": "Real Betis are redeveloping the Estadio Benito Villamarin in Seville, rebuilding the Gol Sur (south) stand to lift capacity toward 70,000 and close the bowl into a continuous tier. The work keeps the club at its historic home while making it one of the largest stadiums in Andalusia and southern Spain."
     },
     {
       "name": "Elland Road Expansion",
@@ -59,7 +118,14 @@
       "status": "PLANNING",
       "future_capacity": 53000,
       "estimated_opening": null,
-      "source_url": "https://en.wikipedia.org/wiki/Elland_Road"
+      "architect": "BDP",
+      "sources": {
+        "architect_firm": "https://www.bdp.com/uk/projects/elland-road-masterplan",
+        "official": "https://www.leedsunited.com/",
+        "wikipedia": "https://en.wikipedia.org/wiki/Elland_Road"
+      },
+      "verified": false,
+      "seo_description": "Leeds United plan to expand Elland Road from roughly 37,600 to about 53,000 seats, redeveloping the West Stand and increasing capacity across the ground following the club's renewed Premier League ambitions. The expansion would keep Leeds at the home it has occupied since 1919 while making it one of the larger club stadiums in the north of England."
     },
     {
       "name": "Stadio Diego Armando Maradona renovation",
@@ -69,17 +135,48 @@
       "status": "PLANNING",
       "future_capacity": 55000,
       "estimated_opening": 2032,
-      "source_url": "https://en.wikipedia.org/wiki/Stadio_Diego_Armando_Maradona"
+      "architect": "GAU Arena",
+      "sources": {
+        "architect_firm": "https://www.gauarena.com/progetti/napoli-stadium/",
+        "official": "https://www.sscnapoli.it/en/",
+        "wikipedia": "https://en.wikipedia.org/wiki/Stadio_Diego_Armando_Maradona"
+      },
+      "verified": false,
+      "seo_description": "The Stadio Diego Armando Maradona in Naples is set for a major renovation as one of Italy's candidate venues for UEFA Euro 2032, with plans to modernise the bowl named after the late Argentine and bring it toward a 55,000 capacity. The upgrade would refresh SSC Napoli's home, originally opened in 1959, for top-tier European tournament standards."
     },
     {
       "name": "National Stadium (Serbia)",
       "country": "Serbia",
-      "team": "",
+      "team": "Serbia national football team",
       "project_type": "NEW",
       "status": "UNDER_CONSTRUCTION",
       "future_capacity": 52000,
       "estimated_opening": 2027,
-      "source_url": "https://en.wikipedia.org/wiki/National_Stadium_(Serbia)"
+      "architect": "Fenwick Iribarren Architects",
+      "sources": {
+        "architect_firm": "https://www.fenwickiribarren.com/project/serbian-national-stadium/",
+        "official": "https://www.srbija.gov.rs/",
+        "wikipedia": null
+      },
+      "verified": false,
+      "seo_description": "Serbia's National Stadium is a new 52,000-seat national football ground under construction in Surcin, near Belgrade, intended to host the Serbia national team and major international fixtures. Backed by the Serbian government, it is planned as the country's largest stadium and a centrepiece for Serbia's bid to co-host UEFA Euro 2028 alongside neighbouring nations."
+    },
+    {
+      "name": "Stadio Euganeo renovation",
+      "country": "Italy",
+      "team": "Calcio Padova",
+      "project_type": "REDEVELOPMENT",
+      "status": "UNDER_CONSTRUCTION",
+      "future_capacity": 40000,
+      "estimated_opening": "UNKNOWN",
+      "architect": "GAU Arena",
+      "sources": {
+        "architect_firm": "https://www.gauarena.com/progetti/euganeo-stadium/",
+        "official": "https://www.padovacalcio.it/",
+        "wikipedia": "https://it.wikipedia.org/wiki/Stadio_Euganeo"
+      },
+      "verified": false,
+      "seo_description": "Calcio Padova plans to redevelop their home stadium, the Stadio Euganeo, to modernize the facility and increase seating capacity. The expansion aims to enhance the matchday experience while maintaining the club's connection to their historic ground."
     }
   ]
 }

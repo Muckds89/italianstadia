@@ -214,7 +214,7 @@
                                 {{ team.under_development_stadium.estimated_opening }}
                             </p>
                             {% endif %}
-                            <a href="{% url 'italiastadiaapp:stadium_development_detail' team.under_development_stadium.pk %}"
+                            <a href="{% url 'italiastadiaapp:stadium_development_detail' team.under_development_stadium.slug %}"
                                class="btn btn-sm btn-outline-warning">View project</a>
                         </div>
                     </div>

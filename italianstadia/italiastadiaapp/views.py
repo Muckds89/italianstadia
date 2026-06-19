@@ -188,15 +188,25 @@ def country_stats(request, country_name):
         "geojson": geojson,
     })
 
-def stadium_development_detail(request, pk):
+def stadium_development_detail(request, slug):
     development = get_object_or_404(
         StadiumDevelopment.objects.prefetch_related("future_tenants"),
-        pk=pk
+        slug=slug
     )
 
     return render(request, "stadium_development_detail.html", {
         "development": development
     })
+
+
+def stadium_development_detail_redirect(request, pk):
+    """301 old /stadium-development/<int:pk>/ URLs to the new slug URL."""
+    development = get_object_or_404(StadiumDevelopment, pk=pk)
+    return redirect(
+        "italiastadiaapp:stadium_development_detail",
+        slug=development.slug,
+        permanent=True,
+    )
 
 @cache_page(60 * 60)
 def stadium_developments_geojson(request):
@@ -223,6 +233,7 @@ def stadium_developments_geojson(request):
             },
             "properties": {
                 "id": s.id,
+                "slug": s.slug or str(s.id),
                 "stadium_id": s.stadium_id,
                 "name": s.name,
                 "project_type": s.get_project_type_display(),
@@ -283,6 +294,7 @@ def _build_stadium_features(qs=None):
                 "architect": s.architect or "",
                 "ownership": s.ownership,
                 "owner_raw": s.owner_raw or "",
+                "tournaments": s.tournaments or [],
                 "wikipedia_url": s.wikipedia_url or "",
                 "transfermarkt_url": s.transfermarkt_url or "",
                 "teams": [
@@ -788,7 +800,7 @@ def _tournament_venues(slug):
                     "image_url": dev.image_url,
                     "latitude": dev.latitude,
                     "longitude": dev.longitude,
-                    "detail_url": reverse("italiastadiaapp:stadium_development_detail", kwargs={"pk": dev.id}),
+                    "detail_url": reverse("italiastadiaapp:stadium_development_detail", kwargs={"slug": dev.slug or str(dev.id)}),
                     "badge_url": "",   # future venue — no club crest, drawn as a status dot
                     "status": _norm_tournament_status(entry.get("status")),
                     "matches": entry.get("matches"),
@@ -870,15 +882,33 @@ def tournament_detail(request, slug):
         host_str = f"{host_countries[0]} and {host_countries[1]}"
     else:
         host_str = ", ".join(host_countries[:-1]) + f" and {host_countries[-1]}"
-    desc_parts = [f"{tournament_name} — {len(confirmed_venues)} confirmed venue{'s' if len(confirmed_venues) != 1 else ''}"]
+    # Original prose description — used both as a visible on-page intro (good for
+    # ranking + AI answers) and, trimmed, as the <meta name="description">.
+    sample_names = [v["name"] for v in confirmed_venues[:3]] or [v["name"] for v in venues[:3]]
+    n_total = len(venues)
+    intro_parts = []
     if host_str:
-        desc_parts.append(f"across {host_str}")
-    if total_matches:
-        desc_parts.append(f"{total_matches} matches")
-    sample_names = [v["name"] for v in confirmed_venues[:3]]
-    if sample_names:
-        desc_parts.append(", ".join(sample_names))
-    tournament_description = _trim(". ".join(desc_parts) + ".")
+        intro_parts.append(f"{tournament_name} will be hosted in {host_str}.")
+    else:
+        intro_parts.append(f"{tournament_name} host stadiums.")
+    if n_total:
+        intro_parts.append(
+            f"Explore all {n_total} candidate and confirmed host "
+            f"stadium{'s' if n_total != 1 else ''} on an interactive map, with "
+            f"capacities, host cities and match details."
+        )
+    if confirmed_venues:
+        sentence = (
+            f"The {len(confirmed_venues)} confirmed venue"
+            f"{'s' if len(confirmed_venues) != 1 else ''} include {', '.join(sample_names)}"
+        )
+        sentence += (
+            f" and offer a combined capacity of {total_capacity:,} seats."
+            if total_capacity else "."
+        )
+        intro_parts.append(sentence)
+    tournament_intro = " ".join(intro_parts)
+    tournament_description = _trim(tournament_intro)
 
     return render(request, "tournament_detail.html", {
         "tournament_name": tournament_name,
@@ -894,6 +924,7 @@ def tournament_detail(request, slug):
         "host_country_flags": host_country_flags,
         "geojson": geojson,
         "page_description": tournament_description,
+        "tournament_intro": tournament_intro,
     })
 
 
@@ -999,6 +1030,21 @@ def _parse_export_params(request):
     if not tstatus:
         tstatus = {"CONFIRMED", "CANDIDATE"}
 
+    # Layer: operational stadiums (default) or under-development projects.
+    layer = request.GET.get("layer", "operational").strip().lower()
+    if layer not in ("operational", "development"):
+        layer = "operational"
+    dstatus_raw = request.GET.get("dstatus", "").strip().upper()
+    if dstatus_raw:
+        dstatus = {s.strip() for s in dstatus_raw.split(",") if s.strip() in _DEV_STATUSES}
+    else:
+        dstatus = set(_DEV_STATUSES)
+    if not dstatus:
+        dstatus = set(_DEV_STATUSES)
+
+    # National-stadiums-only mode (operational layer): venues that host a national side.
+    national = request.GET.get("national", "0") == "1"
+
     return {
         "W": W, "H": H,
         "size_key": size_key,
@@ -1025,6 +1071,9 @@ def _parse_export_params(request):
         "ownership": request.GET.get("ownership", "").strip().upper(),
         "tournament": tournament,
         "tstatus":    tstatus,
+        "layer":      layer,
+        "dstatus":    dstatus,
+        "national":   national,
     }
 
 
@@ -1039,12 +1088,20 @@ def _get_export_stadiums(params):
         qs = qs.filter(teams__league__name=params["league"])
     if params["ownership"]:
         qs = qs.filter(ownership=params["ownership"])
+    if params.get("national"):
+        qs = qs.filter(teams__is_national=True)
     qs = qs.exclude(latitude=None).exclude(longitude=None).distinct()
 
     results = []
     for s in qs:
         country = s.city.country if s.city else ""
-        primary_team = next(iter(s.teams.all()), None)
+        teams = list(s.teams.all())
+        # In national mode, prefer the national side's crest/name as the badge.
+        primary_team = None
+        if params.get("national"):
+            primary_team = next((t for t in teams if t.is_national), None)
+        if primary_team is None:
+            primary_team = next(iter(teams), None)
         image_url  = (primary_team.image_url or "") if primary_team else ""
         team_name  = (primary_team.name or "") if primary_team else ""
         results.append({
@@ -1071,6 +1128,23 @@ _TOURNAMENT_STATUS_LABEL = {
     "DISCARDED": "Discarded",
 }
 
+# Under-development venue status colours (distinct from tournament green/orange/red)
+_DEV_STATUSES = ("PLANNING", "APPROVED", "UNDER_CONSTRUCTION", "ON_HOLD", "COMPLETED")
+_DEV_STATUS_COLOR = {
+    "PLANNING": (219, 39, 119),             # pink/magenta (distinct from Approved blue)
+    "APPROVED": (59, 130, 246),             # blue
+    "UNDER_CONSTRUCTION": (255, 159, 28),   # orange
+    "ON_HOLD": (156, 163, 175),             # grey
+    "COMPLETED": (40, 199, 111),            # green
+}
+_DEV_STATUS_LABEL = {
+    "PLANNING": "Planning",
+    "APPROVED": "Approved",
+    "UNDER_CONSTRUCTION": "Under construction",
+    "ON_HOLD": "On hold",
+    "COMPLETED": "Completed",
+}
+
 
 def _get_tournament_export_stadiums(params):
     """Export venue dicts for a single tournament, filtered by selected statuses.
@@ -1092,6 +1166,34 @@ def _get_tournament_export_stadiums(params):
             "country":    country,
             "image_url":  "",   # tournament maps use colour-coded points, not club badges
             "tournament_status": v["status"],
+        })
+    return out
+
+
+def _get_development_export_stadiums(params):
+    """Export venue dicts for under-development projects, filtered by selected
+    statuses. Shape matches _get_export_stadiums plus a `dev_status` key."""
+    qs = (
+        StadiumDevelopment.objects
+        .select_related("stadium__city")
+        .exclude(latitude=None).exclude(longitude=None)
+    )
+    out = []
+    for d in qs:
+        if d.status not in params["dstatus"]:
+            continue
+        country = d.country or (
+            d.stadium.city.country if d.stadium and d.stadium.city else ""
+        )
+        out.append({
+            "name":       d.name,
+            "team_name":  "",
+            "lat":        float(d.latitude),
+            "lon":        float(d.longitude),
+            "surface":    "",
+            "country":    country,
+            "image_url":  "",   # status-coloured points, not club badges
+            "dev_status": d.status,
         })
     return out
 
@@ -1618,6 +1720,9 @@ def _dot_colour(stadium, params, country_index):
     if params["color_by"] == "tournament_status":
         return _TOURNAMENT_STATUS_COLOR.get(
             stadium.get("tournament_status", "CANDIDATE"), _DEFAULT_DOT_COLOUR)
+    if params["color_by"] == "dev_status":
+        return _DEV_STATUS_COLOR.get(
+            stadium.get("dev_status", "PLANNING"), _DEFAULT_DOT_COLOUR)
     if params["color_by"] == "single":
         return params["single_color"]
     if params["color_by"] == "country":
@@ -1903,6 +2008,12 @@ def _build_legend_entries(params, stadiums):
         return [
             (_TOURNAMENT_STATUS_COLOR[st], _TOURNAMENT_STATUS_LABEL[st])
             for st in ("CONFIRMED", "CANDIDATE", "DISCARDED") if st in present
+        ]
+    if params["color_by"] == "dev_status":
+        present = {s.get("dev_status", "PLANNING") for s in stadiums}
+        return [
+            (_DEV_STATUS_COLOR[st], _DEV_STATUS_LABEL[st])
+            for st in _DEV_STATUSES if st in present
         ]
     if params["color_by"] == "single":
         return [(params["single_color"], "Stadium")]
@@ -2214,7 +2325,12 @@ def _compose_export_image(params):
     no LABEL is placed under it, then the title/subtitle are drawn in a
     TRANSLUCENT box on top — the map shows through, nothing is lost.
     """
-    if params.get("tournament"):
+    if params.get("layer") == "development":
+        stadiums = _get_development_export_stadiums(params)
+        params["color_by"] = "dev_status"          # colour points by project status
+        if not stadiums:
+            return None, "No development projects match the selected statuses."
+    elif params.get("tournament"):
         stadiums = _get_tournament_export_stadiums(params)
         params["color_by"] = "tournament_status"   # colour badges by venue status
         if not stadiums:
@@ -2363,6 +2479,7 @@ def export_checkout(request):
         "color_by", "style_key", "size_key", "title", "subtitle", "labels",
         "north", "legend", "scale", "spotlight", "logo", "bg_color",
         "label_size", "label_color", "badge_size", "tournament", "tstatus",
+        "layer", "dstatus", "national",
     }
     filters = {k: v for k, v in body.items() if k in allowed_keys}
     filters_json = json.dumps(filters)

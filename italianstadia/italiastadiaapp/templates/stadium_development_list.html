@@ -181,7 +181,7 @@
                         {% endwith %}
 
                         <div class="mt-auto d-flex flex-wrap gap-2">
-                            <a href="{% url 'italiastadiaapp:stadium_development_detail' dev.pk %}"
+                            <a href="{% url 'italiastadiaapp:stadium_development_detail' dev.slug %}"
                                class="btn btn-primary btn-sm">View project</a>
                             {% if dev.source_url %}
                             <a href="{{ dev.source_url }}" target="_blank"

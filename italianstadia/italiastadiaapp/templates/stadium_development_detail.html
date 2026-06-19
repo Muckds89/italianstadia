@@ -1,7 +1,54 @@
 {% extends "base_detail.html" %}
 {% load static %}
 
-{% block title %}{{ development.name }}{% endblock %}
+{% block title %}{{ development.name }} — {{ development.get_status_display }} stadium project | Stadiums of Europe{% endblock %}
+
+{% block meta %}
+<meta name="description" content="{% if development.notes %}{{ development.notes|striptags|truncatechars:160 }}{% else %}{{ development.name }} — {{ development.get_project_type_display }} football stadium project in {{ development.country }}{% if development.future_capacity %}, {{ development.future_capacity }} capacity{% endif %}.{% endif %}">
+<meta property="og:site_name" content="Stadiums of Europe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ development.name }} — {{ development.get_status_display }} stadium project">
+<meta property="og:description" content="{% if development.notes %}{{ development.notes|striptags|truncatechars:160 }}{% else %}{{ development.name }} football stadium project in {{ development.country }}.{% endif %}">
+<meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+{% if development.image_url %}<meta property="og:image" content="{{ development.image_url }}">{% endif %}
+{% endblock %}
+
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "StadiumOrArena",
+  "name": "{{ development.name|escapejs }}",
+  {% if development.notes %}"description": "{{ development.notes|striptags|escapejs }}",{% endif %}
+  {% if development.future_capacity %}"maximumAttendeeCapacity": {{ development.future_capacity }},{% endif %}
+  {% if development.image_url %}"image": "{{ development.image_url|escapejs }}",{% endif %}
+  {% if development.architect %}"architect": {"@type": "Organization", "name": "{{ development.architect|escapejs }}"},{% endif %}
+  {% if development.country %}"address": {"@type": "PostalAddress", "addressCountry": "{{ development.country|escapejs }}"},{% endif %}
+  {% if development.latitude and development.longitude %}"geo": {"@type": "GeoCoordinates", "latitude": {{ development.latitude }}, "longitude": {{ development.longitude }}},{% endif %}
+  "url": "{{ request.scheme }}://{{ request.get_host }}{{ request.path }}"
+}
+</script>
+{% if development.future_capacity or development.estimated_opening %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% if development.future_capacity %}{
+      "@type": "Question",
+      "name": "What will the capacity of {{ development.name|escapejs }} be?",
+      "acceptedAnswer": {"@type": "Answer", "text": "{{ development.name|escapejs }} is planned to hold approximately {{ development.future_capacity }} spectators."}
+    }{% if development.estimated_opening %},{% endif %}{% endif %}
+    {% if development.estimated_opening %}{
+      "@type": "Question",
+      "name": "When will {{ development.name|escapejs }} open?",
+      "acceptedAnswer": {"@type": "Answer", "text": "{{ development.name|escapejs }} has an estimated opening year of {{ development.estimated_opening }}. Current status: {{ development.get_status_display|escapejs }}."}
+    }{% endif %}
+  ]
+}
+</script>
+{% endif %}
+{% endblock %}
 
 {% block extra_nav %}
     <a href="{% url 'italiastadiaapp:home' %}?mode=development" class="btn btn-sm btn-outline-light ms-auto">
@@ -14,15 +61,29 @@
 
     <div class="card shadow-sm overflow-hidden">
 
-        {% if development.image_url %}
-        <img src="{{ development.image_url }}"
-             class="card-img-top stadium-hero-img"
-             alt="{{ development.name }}">
-        {% endif %}
-        {% if development.image_credit %}
-        <div class="image-credit">
-            Image © {{ development.image_credit }}
+        {% if development.image_url or development.extra_images %}
+        <div class="gallery-hero" id="galleryHero">
+            <div class="gallery-track" id="galleryTrack">
+                {% if development.image_url %}
+                <div class="gallery-slide" data-credit="{{ development.image_credit|default:'' }}">
+                    <img src="{{ development.image_url }}" alt="{{ development.name }}">
+                </div>
+                {% endif %}
+                {% for img in development.extra_images %}
+                <div class="gallery-slide" data-credit="{{ img.credit|default:'' }}">
+                    <img src="{{ img.url }}" alt="{{ development.name }}">
+                </div>
+                {% endfor %}
+            </div>
+            <div class="gallery-name-overlay">{{ development.name }}</div>
+            <button class="gallery-arrow gallery-arrow-prev" id="galleryPrev" aria-label="Previous">&#8249;</button>
+            <button class="gallery-arrow gallery-arrow-next" id="galleryNext" aria-label="Next">&#8250;</button>
+            <div class="gallery-dots" id="galleryDots"></div>
         </div>
+        <p class="image-credit" id="galleryCredit"
+           {% if not development.image_credit %}style="display:none"{% endif %}>
+            {% if development.image_credit %}📷 {{ development.image_credit }}{% endif %}
+        </p>
         {% endif %}
 
         <div class="card-body p-4">
@@ -136,7 +197,25 @@
             </div>
             {% endif %}
 
+            {% if development.instagram_url %}
+            <hr>
+            <h5>From the architects</h5>
+            <div class="d-flex justify-content-center">
+                <blockquote class="instagram-media"
+                            data-instgrm-permalink="{{ development.instagram_url }}"
+                            data-instgrm-version="14"
+                            style="max-width:540px; width:100%;"></blockquote>
+            </div>
+            {% endif %}
+
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/stadium-detail-gallery.js' %}"></script>
+{% if development.instagram_url %}
+<script async src="//www.instagram.com/embed.js"></script>
+{% endif %}
 {% endblock %}
