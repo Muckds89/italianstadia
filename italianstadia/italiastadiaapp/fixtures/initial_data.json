@@ -9152,6 +9152,45 @@
   }
 },
 {
+  "model": "italiastadiaapp.city",
+  "pk": 650,
+  "fields": {
+    "name": "Chorzów",
+    "population": null,
+    "country": "Poland",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 651,
+  "fields": {
+    "name": "Wrocław",
+    "population": null,
+    "country": "Poland",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 652,
+  "fields": {
+    "name": "Zenica",
+    "population": null,
+    "country": "Bosnia and Herzegovina",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
   "model": "italiastadiaapp.stadium",
   "pk": 8,
   "fields": {
@@ -14685,7 +14724,14 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": "JSK Architekci",
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Poland"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Polish_Army_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/legia-warschau/stadion/verein/255",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadion-miejski-im-marszalka-jozefa-pilsudskiego-shakhtar-donetsk-champions-league-1678195557-103254.jpg?lm=1678195570",
@@ -14729,7 +14775,14 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": "Modern Construction Design Sp. z o.o.",
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Poland"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Pozna%C5%84_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/lech-posen/stadion/verein/238",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadion-poznan-lech-poznan-2013-1678194961-103250.jpg?lm=1678194974",
@@ -14863,7 +14916,14 @@
     "stadium_type": "OPEN",
     "surface": null,
     "architect": "Gustav Allinger (old stadium)",
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Poland"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Ernest_Pohl_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/gornik-zabrze/stadion/verein/428",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Ernest_Pohl_Stadium_-_Zabrze_2.jpg",
@@ -14890,7 +14950,14 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": "RKW Rhode Kellermann Wawrowsky",
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Poland"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Polsat_Plus_Arena_Gda%C5%84sk",
     "transfermarkt_url": "https://www.transfermarkt.com/lechia-gdansk/stadion/verein/4000",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/polsat-plus-arena-1686751925-109218.jpeg?lm=1686751966",
@@ -14976,7 +15043,14 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": null,
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Poland"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Widzewa_%C5%81%C3%B3d%C5%BA",
     "transfermarkt_url": "https://www.transfermarkt.com/widzew-lodz/stadion/verein/88",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Stadion_Widzewa_29-07-2017.jpg",
@@ -15934,7 +16008,14 @@
     "stadium_type": "RETRACTABLE",
     "surface": "GRASS",
     "architect": ":sv:Arkitekterna Krook & Tjäder, :sv:Berg Arkitektkontor, Populous (architects)",
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Nordic"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Nationalarenan_f%C3%B6r_fotboll",
     "transfermarkt_url": "https://www.transfermarkt.com/aik/stadion/verein/272",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/friends-arena-in-stockholm-1495629563-10408.jpg?lm=1495629582",
@@ -22941,7 +23022,14 @@
     "stadium_type": "OPEN",
     "surface": "HYBRID",
     "architect": "Gert Andersson",
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Nordic"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Parken_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/fc-kopenhagen/stadion/verein/190",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/parken-1762425087-182178.jpg?lm=1762425112",
@@ -24080,7 +24168,14 @@
     "stadium_type": "OPEN",
     "surface": "HYBRID",
     "architect": "Vladimir Turina, Branko Kincl",
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Balkan"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Maksimir",
     "transfermarkt_url": "https://www.transfermarkt.com/gnk-dinamo-zagreb/stadion/verein/419",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/maksimir-dinamo-zagreb-2021-1725975238-147672.jpg?lm=1725975242",
@@ -24107,7 +24202,14 @@
     "stadium_type": "OPEN",
     "surface": null,
     "architect": null,
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Balkan"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Poljud",
     "transfermarkt_url": "https://www.transfermarkt.com/hnk-hajduk-split/stadion/verein/447",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Poljud_Stadium_with_the_Kozjak_Mountains_in_the_distance.jpg",
@@ -25151,7 +25253,14 @@
     "stadium_type": "OPEN",
     "surface": "HYBRID",
     "architect": null,
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Balkan"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Red_Star_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/roter-stern-belgrad/stadion/verein/159",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/rajko-mitic-stadium-roter-stern-belgrad-22-23-1667302335-95342.jpg?lm=1667302345",
@@ -28575,7 +28684,14 @@
     "stadium_type": "OPEN",
     "surface": "ARTIFICIAL",
     "architect": null,
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Nordic"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Bolt_Arena",
     "transfermarkt_url": "https://www.transfermarkt.com/hjk-helsinki/stadion/verein/1008/saison_id/2025",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Finnair_Stadium_Helsinki.JPG",
@@ -28918,7 +29034,14 @@
     "stadium_type": "OPEN",
     "surface": "HYBRID",
     "architect": null,
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Balkan"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Ko%C5%A1evo_City_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/fk-sarajevo/stadion/verein/282/saison_id/2025",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Asim_Ferhatovi%C4%87_Hase_Stadium.jpg",
@@ -32486,7 +32609,14 @@
     "stadium_type": "OPEN",
     "surface": "HYBRID",
     "architect": null,
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Balkan"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/To%C5%A1e_Proeski_Arena",
     "transfermarkt_url": "https://www.transfermarkt.com/vardar-skopje/stadion/verein/77/saison_id/2025",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/To%C5%A1e_Proeski_Arena_1.jpg",
@@ -33153,7 +33283,7 @@
   "pk": 789,
   "fields": {
     "name": "PGE Narodowy",
-    "capacity": null,
+    "capacity": 58274,
     "address": null,
     "year_of_construction": null,
     "city": 186,
@@ -33165,11 +33295,18 @@
     "stadium_type": null,
     "surface": null,
     "architect": null,
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Poland"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/PGE_Narodowy",
     "transfermarkt_url": null,
-    "image_url": null,
-    "image_credit": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f8/National_Stadium_Warsaw_aerial_view_2.jpg",
+    "image_credit": "Arne Müseler / Wikimedia Commons / CC BY-SA 3.0 de",
     "extra_images": [],
     "description": null,
     "locked": false
@@ -33248,6 +33385,176 @@
     "architect": null,
     "tournaments": [],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Baku_Olympic_Stadium",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 793,
+  "fields": {
+    "name": "Stadion Śląski",
+    "capacity": 54378,
+    "address": null,
+    "year_of_construction": null,
+    "city": 650,
+    "latitude": "50.288333",
+    "longitude": "18.973056",
+    "owner_raw": null,
+    "ownership": "PUBLIC",
+    "slug": "stadion-slaski",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Poland"
+      }
+    ],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Silesian_Stadium",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Widok_bramka.jpg",
+    "image_credit": "DzejKej86 / Wikimedia Commons / CC BY-SA 4.0",
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 794,
+  "fields": {
+    "name": "Tarczyński Arena",
+    "capacity": 42771,
+    "address": null,
+    "year_of_construction": null,
+    "city": 651,
+    "latitude": "51.141111",
+    "longitude": "16.943889",
+    "owner_raw": null,
+    "ownership": "PUBLIC",
+    "slug": "tarczynski-arena",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Poland"
+      }
+    ],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Wroc%C5%82aw",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/56/Wroclaw_Munincipal_Stadium_2019_%28cropped%29.jpg",
+    "image_credit": "Arne Müseler / Wikimedia Commons / CC BY-SA 3.0 de",
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 795,
+  "fields": {
+    "name": "Stadion Miejski (Kraków)",
+    "capacity": 33130,
+    "address": null,
+    "year_of_construction": null,
+    "city": 197,
+    "latitude": "50.063611",
+    "longitude": "19.911944",
+    "owner_raw": null,
+    "ownership": "PUBLIC",
+    "slug": "stadion-miejski-krakow",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Poland"
+      }
+    ],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Henryk_Reyman_Municipal_Stadium",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 796,
+  "fields": {
+    "name": "Ullevaal Stadion",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 238,
+    "latitude": "59.948889",
+    "longitude": "10.734167",
+    "owner_raw": null,
+    "ownership": "PUBLIC",
+    "slug": "ullevaal-stadion",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Nordic"
+      }
+    ],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ullevaal_Stadion",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 797,
+  "fields": {
+    "name": "Bilino Polje",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 652,
+    "latitude": "44.201667",
+    "longitude": "17.900556",
+    "owner_raw": null,
+    "ownership": "PUBLIC",
+    "slug": "bilino-polje",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Balkan"
+      }
+    ],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bilino_Polje_Stadium",
     "transfermarkt_url": null,
     "image_url": null,
     "image_credit": null,
@@ -36771,8 +37078,8 @@
     "city": 160,
     "average_attendance": null,
     "wikipedia_url": "https://en.wikipedia.org/wiki/F.C._Famalic%C3%A3o",
-    "transfermarkt_url": "https://www.transfermarkt.com/fc-famalicao/startseite/verein/3664",
-    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3664.png",
+    "transfermarkt_url": "",
+    "image_url": "",
     "image_credit": null,
     "description": "Futebol Clube de Famalicão , commonly known as Famalicão , is a Portuguese professional football club from Vila Nova de Famalicão . Founded on 21 August 1931, [ 1 ] its senior team currently plays in the Primeira Liga , the top tier of Portuguese football .",
     "league": 7,
@@ -36871,8 +37178,8 @@
     "city": 155,
     "average_attendance": null,
     "wikipedia_url": "https://en.wikipedia.org/wiki/Casa_Pia_A.C.",
-    "transfermarkt_url": "https://www.transfermarkt.com/casa-pia-ac/startseite/verein/9607",
-    "image_url": "https://tmssl.akamaized.net/images/wappen/head/9607.png",
+    "transfermarkt_url": "",
+    "image_url": "",
     "image_credit": null,
     "description": "Casa Pia Atlético Clube , commonly known as Casa Pia , is a Portuguese multi- sports club founded in 1920 and based in Lisbon , Portugal, best known for its professional football team , that competes in the Primeira Liga . The club is named after Casa Pia , a Portuguese children's charity , and many of its athletes come from that institution. Its football stadium is Estádio Pina Manique , named in honor of Pina Manique , the founder of Casa Pia children's charity. Casa Pia AC was one of the most versatile Portuguese clubs, having played 25 sports, with the curiosity of having been the only one who practiced baseball regularly, beating the strong team of the American Colony on 4 July 1923 at Campo das Laranjeiras by 25–24. [ 1 ]",
     "league": 7,
@@ -52415,7 +52722,14 @@
     "source_url": "https://www.fenwickiribarren.com/project/serbian-national-stadium/",
     "instagram_url": null,
     "notes": "Serbia's National Stadium is a new 52,000-seat national football ground under construction in Surcin, near Belgrade, intended to host the Serbia national team and major international fixtures. Backed by the Serbian government, it is planned as the country's largest stadium and a centrepiece for Serbia's bid to co-host UEFA Euro 2028 alongside neighbouring nations.",
-    "tournaments": []
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2036",
+        "year": 2036,
+        "status": "CANDIDATE",
+        "bid": "Balkan"
+      }
+    ]
   }
 },
 {

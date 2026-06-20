@@ -27,7 +27,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument("--slug", default="", help="Render only this tournament slug.")
-        parser.add_argument("--size", default="instagram", help="Export size key (default square).")
+        parser.add_argument("--size", default="landscape", help="Export size key (wide, fits all venues).")
 
     def handle(self, *args, **opts):
         from italiastadiaapp.models import Stadium, StadiumDevelopment
@@ -57,8 +57,9 @@ class Command(BaseCommand):
         for slug, name in sorted(tour.items()):
             query = {
                 "tournament": slug,
-                "style_key": "satellite",
-                "size_key": opts["size"],
+                "style_key": "satellite",   # satellite imagery base
+                "size_key": opts["size"],   # landscape — fits the full geographic spread
+                "spotlight": "1",           # dim & outline the host countries
                 "legend": "1", "labels": "1", "north": "1", "scale": "0",
                 "title": name,
                 "subtitle": "Candidate and confirmed host stadiums",

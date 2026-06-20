@@ -916,7 +916,9 @@ def tournament_detail(request, slug):
                 "kind": "joint bid" if is_joint else "solo bid",
                 "color": _BID_COLOR_HEX.get(bid_name, "#6c757d"),
             })
-        bids.sort(key=lambda b: -b["venue_count"])
+        # Fixed running order (Poland leads — strongest chances), then by size.
+        _BID_ORDER = {"Poland": 0, "Nordic": 1, "Balkan": 2}
+        bids.sort(key=lambda b: (_BID_ORDER.get(b["name"], 9), -b["venue_count"]))
 
     # GeoJSON for mini-map
     features = []
@@ -954,6 +956,12 @@ def tournament_detail(request, slug):
     bid_blurbs = []   # rich per-bid editorial paragraphs (also good for SEO/AEO)
     bid_analysis = ""   # standing editorial on the joint-bid trend (SEO long-form)
     tournament_about = ""   # data-aware long-form for single-host tournaments
+    # UEFA stadium-portfolio requirement, woven into the page description text.
+    req_text = (
+        " To stage the tournament a host must field around 10 stadiums meeting UEFA's "
+        "capacity tiers — at least 3 of 50,000–60,000+ seats (for the opening match, "
+        "semi-finals and final), 4 of at least 40,000 and 3 of at least 30,000."
+    )
     if has_bids:
         # Competing-bids tournament (host not yet chosen).
         intro_parts.append(
@@ -1011,6 +1019,7 @@ def tournament_detail(request, slug):
                 "simply the new reality of staging a modern Euro? For now, teaming up looks "
                 "like the winning strategy."
             )
+        bid_analysis += req_text
     else:
         if host_str:
             intro_parts.append(f"{tournament_name} will be hosted in {host_str}.")
@@ -1048,7 +1057,7 @@ def tournament_detail(request, slug):
         if total_capacity:
             about.append(
                 f"Together the confirmed venues seat around {total_capacity:,} spectators.")
-        tournament_about = " ".join(about)
+        tournament_about = " ".join(about) + req_text
     tournament_intro = " ".join(intro_parts)
     tournament_description = _trim(tournament_intro)
 

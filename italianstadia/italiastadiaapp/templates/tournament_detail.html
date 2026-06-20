@@ -55,17 +55,19 @@
     </p>
     {% endif %}
 
+    <!-- Back-end-rendered tournament map FIRST — gives the user the geography of the
+         tournament at a glance (satellite, host countries spotlit, watermark + logo).
+         Regenerated when the data changes; hidden gracefully if not yet generated. -->
+    <div class="card shadow-sm mb-4" id="exportMapCard">
+        <img src="/static/exports/tournament_{{ tournament_slug }}.png"
+             alt="{{ tournament_name }} host stadium map"
+             style="width:100%;height:auto;display:block;border-radius:.5rem;"
+             loading="lazy" onerror="document.getElementById('exportMapCard').remove()">
+    </div>
+
     {% if tournament_intro %}
     <p class="lead text-secondary mb-4">{{ tournament_intro }}</p>
     {% endif %}
-
-    <!-- Back-end-rendered tournament map (regenerated when the data changes;
-         carries the watermark + logo). Hidden gracefully if not yet generated. -->
-    <div class="card shadow-sm mb-4" id="exportMapCard">
-        <img src="/static/exports/tournament_{{ tournament_slug }}.png"
-             class="card-img-top" alt="{{ tournament_name }} stadium map"
-             loading="lazy" onerror="document.getElementById('exportMapCard').remove()">
-    </div>
 
     {% if tournament_about %}
     <div class="card shadow-sm mb-4">
@@ -73,6 +75,7 @@
         <div class="card-body"><p class="mb-0">{{ tournament_about }}</p></div>
     </div>
     {% endif %}
+
 
     <!-- Stat cards -->
     <div class="row g-3 mb-4">
@@ -176,8 +179,6 @@
         <div class="card-header bg-white"><strong>The rise of the joint bid</strong></div>
         <div class="card-body">
             <p class="mb-0">{{ bid_analysis }}</p>
-            {# Future: embed a back-end-generated bid map here, e.g.
-               <img src="/api/export/map/?tournament={{ tournament_slug }}&legend=1&size=hd"> #}
         </div>
     </div>
     {% endif %}
