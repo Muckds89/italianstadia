@@ -59,6 +59,21 @@
     <p class="lead text-secondary mb-4">{{ tournament_intro }}</p>
     {% endif %}
 
+    <!-- Back-end-rendered tournament map (regenerated when the data changes;
+         carries the watermark + logo). Hidden gracefully if not yet generated. -->
+    <div class="card shadow-sm mb-4" id="exportMapCard">
+        <img src="/static/exports/tournament_{{ tournament_slug }}.png"
+             class="card-img-top" alt="{{ tournament_name }} stadium map"
+             loading="lazy" onerror="document.getElementById('exportMapCard').remove()">
+    </div>
+
+    {% if tournament_about %}
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>About {{ tournament_name }}</strong></div>
+        <div class="card-body"><p class="mb-0">{{ tournament_about }}</p></div>
+    </div>
+    {% endif %}
+
     <!-- Stat cards -->
     <div class="row g-3 mb-4">
         <div class="col-6 col-md-3">
@@ -109,7 +124,67 @@
         </div>
     </div>
 
-    <!-- Venue cards — grouped by country when multi-host -->
+    <!-- Competing bids (Euro 2036-style): one box per bid, coloured, with rich text -->
+    {% if has_bids %}
+    <div class="alert alert-secondary small mb-4">
+        <strong>Host not yet decided.</strong> The bids below are proposals discussed by
+        national associations, media and fans — none has been awarded by UEFA. Stadiums are
+        colour-coded by bid on the map and in the cards.
+    </div>
+    {% for bid in bids %}
+    <div class="card shadow-sm mb-4" style="border-left:6px solid {{ bid.color }}">
+        <div class="card-header bg-white d-flex flex-wrap align-items-center gap-2">
+            <span style="color:{{ bid.color }};font-size:1.2rem;line-height:1">●</span>
+            <strong class="me-1">{{ bid.name }} bid</strong>
+            <span class="badge {% if bid.is_joint %}bg-primary{% else %}bg-secondary{% endif %}">{{ bid.kind }}</span>
+            <span class="text-muted small ms-auto">
+                {{ bid.venue_count }} venue{{ bid.venue_count|pluralize }}{% if bid.total_capacity %} · {{ bid.total_capacity|intcomma }} seats{% endif %}
+            </span>
+        </div>
+        <div class="card-body">
+            {% if bid.blurb %}<p class="mb-3">{{ bid.blurb }}</p>{% endif %}
+            {% for c in bid.countries %}
+            <h6 class="country-section-header">{{ c.flag }} {{ c.country }}</h6>
+            <div class="row g-3 mb-3">
+                {% for v in c.venues %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <a href="{{ v.detail_url }}" class="text-decoration-none text-dark">
+                        <div class="card venue-card h-100 shadow-sm" style="border-left:4px solid {{ bid.color }}">
+                            {% if v.image_url %}
+                            <img src="{{ v.image_url }}" class="card-img-top" alt="{{ v.name }}" style="height:160px;object-fit:cover;">
+                            {% endif %}
+                            <div class="card-body">
+                                <h6 class="card-title mb-1">{{ v.name }}</h6>
+                                {% if v.city %}<div class="text-muted small mb-2">{{ v.city.name }}, {{ v.city.country }}</div>{% endif %}
+                                <div class="d-flex flex-wrap gap-2 align-items-center">
+                                    {% if v.is_development %}<span class="badge bg-info text-dark">Under Development</span>{% endif %}
+                                    {% if v.capacity %}<span class="text-muted small">{{ v.capacity|intcomma }} seats</span>{% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+
+    {% if bid_analysis %}
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>The rise of the joint bid</strong></div>
+        <div class="card-body">
+            <p class="mb-0">{{ bid_analysis }}</p>
+            {# Future: embed a back-end-generated bid map here, e.g.
+               <img src="/api/export/map/?tournament={{ tournament_slug }}&legend=1&size=hd"> #}
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+
+    <!-- Venue cards — grouped by country when multi-host (non-bid tournaments) -->
+    {% if not has_bids %}
     {% if multi_country %}
         {% for country, group in venues_by_country.items %}
         <h5 class="country-section-header">{{ group.flag }} {{ country }}</h5>
@@ -207,6 +282,7 @@
             {% endfor %}
         </div>
     {% endif %}
+    {% endif %}{# /not has_bids #}
 
 </div>
 
@@ -238,7 +314,9 @@
     geojson.features.forEach(function (f) {
         const [lng, lat] = f.geometry.coordinates;
         const props = f.properties;
-        const _statusColor = props.status === "CONFIRMED" ? "#198754"
+        // Competing-bid tournaments colour markers by bid; otherwise by venue status.
+        const _statusColor = props.bid_color ? props.bid_color
+            : props.status === "CONFIRMED" ? "#198754"
             : props.status === "DISCARDED" ? "#dc3545" : "#ffc107";
         const circle = L.circleMarker([lat, lng], {
             radius: 8,

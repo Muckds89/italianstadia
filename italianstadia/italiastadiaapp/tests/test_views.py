@@ -268,3 +268,30 @@ def test_tournament_detail_page_loads(client, euro_2028_venue):
 def test_tournament_detail_404_unknown_slug(client):
     response = client.get(reverse("italiastadiaapp:tournament_detail", args=["no-such-tournament"]))
     assert response.status_code == 404
+
+
+@pytest.mark.django_db
+def test_euro2036_groups_by_competing_bids(client):
+    # Euro 2036 venues are seeded with `bid` labels by migration 0062.
+    response = client.get(reverse("italiastadiaapp:tournament_detail", args=["uefa-euro-2036"]))
+    assert response.status_code == 200
+    html = response.content.decode()
+    assert "Poland bid" in html
+    assert "Nordic bid" in html
+    assert "Balkan bid" in html
+    assert "Host not yet decided" in html   # competing-bids explainer
+
+
+@pytest.mark.django_db
+def test_single_host_tournament_not_bid_grouped(client):
+    # Regression: a tournament whose venues carry no `bid` keeps country grouping,
+    # with no bid boxes (the 2036 bid layer must not leak into normal tournaments).
+    city = City.objects.create(name="Testville", country="Italy")
+    Stadium.objects.create(
+        name="Regression Arena", slug="regression-arena", city=city,
+        latitude=45.0, longitude=9.0, ownership="PUBLIC",
+        tournaments=[{"tournament": "Test Cup 2040", "year": 2040, "status": "CONFIRMED"}],
+    )
+    response = client.get(reverse("italiastadiaapp:tournament_detail", args=["test-cup-2040"]))
+    assert response.status_code == 200
+    assert "Host not yet decided" not in response.content.decode()

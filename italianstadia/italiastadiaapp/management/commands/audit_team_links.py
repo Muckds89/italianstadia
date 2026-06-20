@@ -38,6 +38,7 @@ NOISE = {"fc", "f", "c", "sc", "sv", "bsc", "ac", "as", "ssc", "cf", "club",
 _TRANSLIT = str.maketrans({
     "ð": "d", "Ð": "d", "þ": "th", "Þ": "th", "ø": "o", "Ø": "o",
     "æ": "ae", "Æ": "ae", "ß": "ss", "ł": "l", "Ł": "l", "đ": "d", "Đ": "d",
+    "ı": "i", "İ": "i",  # Turkish dotless/dotted i (NFKD won't fold ı)
 })
 
 

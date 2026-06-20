@@ -734,6 +734,28 @@ COUNTRY_FLAGS = {
     "Ireland":          "🇮🇪",
     "Italy":            "🇮🇹",
     "Turkey":           "🇹🇷",
+    # Euro 2036 bid nations
+    "Poland":           "🇵🇱",
+    "Denmark":          "🇩🇰",
+    "Sweden":           "🇸🇪",
+    "Norway":           "🇳🇴",
+    "Finland":          "🇫🇮",
+    "Croatia":          "🇭🇷",
+    "Serbia":           "🇷🇸",
+    "Bosnia and Herzegovina": "🇧🇦",
+    "North Macedonia":  "🇲🇰",
+}
+
+# Euro 2036-style competing-bid colours (hex for web/legend, RGB for the PNG export)
+_BID_COLOR_HEX = {
+    "Poland": "#dc2626",   # red
+    "Nordic": "#2563eb",   # blue
+    "Balkan": "#d97706",   # amber
+}
+_BID_COLOR = {
+    "Poland": (220, 38, 38),
+    "Nordic": (37, 99, 235),
+    "Balkan": (217, 119, 6),
 }
 
 # Host nations that must always appear on a tournament page even if they have no
@@ -787,6 +809,7 @@ def _tournament_venues(slug):
                     "detail_url": reverse("italiastadiaapp:stadium_detail", kwargs={"slug": stadium.slug}),
                     "status": _norm_tournament_status(entry.get("status")),
                     "matches": entry.get("matches"),
+                    "bid": entry.get("bid", ""),
                     "is_development": False,
                 })
                 break
@@ -811,6 +834,7 @@ def _tournament_venues(slug):
                     "badge_url": "",   # future venue — no club crest, drawn as a status dot
                     "status": _norm_tournament_status(entry.get("status")),
                     "matches": entry.get("matches"),
+                    "bid": entry.get("bid", ""),
                     "is_development": True,
                 })
                 break
@@ -863,6 +887,37 @@ def tournament_detail(request, slug):
         (c, grp["flag"]) for c, grp in venues_by_country.items()
     )
 
+    # Bid grouping — for tournaments with competing bids (e.g. Euro 2036). Auto-
+    # activates when any venue carries a `bid` label; otherwise the page keeps the
+    # country grouping above. Shape: bid → countries → venues.
+    has_bids = any(v.get("bid") for v in venues)
+    bids = []
+    if has_bids:
+        _bid_groups = OrderedDict()
+        for v in venues:
+            bid_name = v.get("bid") or "Other"
+            country = _venue_country(v)
+            grp = _bid_groups.setdefault(bid_name, OrderedDict())
+            grp.setdefault(country, {"flag": COUNTRY_FLAGS.get(country, ""), "venues": []})
+            grp[country]["venues"].append(v)
+        for bid_name, countries in _bid_groups.items():
+            country_list = [{"country": c, "flag": g["flag"], "venues": g["venues"]}
+                            for c, g in sorted(countries.items())]
+            vcount = sum(len(c["venues"]) for c in country_list)
+            cap = sum(v["capacity"] or 0 for c in country_list for v in c["venues"])
+            is_joint = len(country_list) > 1
+            bids.append({
+                "name": bid_name,
+                "countries": country_list,
+                "country_names": [c["country"] for c in country_list],
+                "venue_count": vcount,
+                "total_capacity": cap,
+                "is_joint": is_joint,
+                "kind": "joint bid" if is_joint else "solo bid",
+                "color": _BID_COLOR_HEX.get(bid_name, "#6c757d"),
+            })
+        bids.sort(key=lambda b: -b["venue_count"])
+
     # GeoJSON for mini-map
     features = []
     for v in venues:
@@ -877,6 +932,8 @@ def tournament_detail(request, slug):
                 "capacity": v["capacity"],
                 "status": v["status"],
                 "matches": v["matches"],
+                "bid": v.get("bid", ""),
+                "bid_color": _BID_COLOR_HEX.get(v.get("bid", ""), ""),
             },
         })
     geojson = json.dumps({"type": "FeatureCollection", "features": features})
@@ -894,26 +951,104 @@ def tournament_detail(request, slug):
     sample_names = [v["name"] for v in confirmed_venues[:3]] or [v["name"] for v in venues[:3]]
     n_total = len(venues)
     intro_parts = []
-    if host_str:
-        intro_parts.append(f"{tournament_name} will be hosted in {host_str}.")
-    else:
-        intro_parts.append(f"{tournament_name} host stadiums.")
-    if n_total:
+    bid_blurbs = []   # rich per-bid editorial paragraphs (also good for SEO/AEO)
+    bid_analysis = ""   # standing editorial on the joint-bid trend (SEO long-form)
+    tournament_about = ""   # data-aware long-form for single-host tournaments
+    if has_bids:
+        # Competing-bids tournament (host not yet chosen).
         intro_parts.append(
-            f"Explore all {n_total} candidate and confirmed host "
-            f"stadium{'s' if n_total != 1 else ''} on an interactive map, with "
-            f"capacities, host cities and match details."
+            f"{tournament_name} does not yet have a host nation — several rival bids are "
+            f"competing to stage the tournament. This page maps every proposed host "
+            f"stadium grouped by bid, so you can compare who is bidding and with which "
+            f"grounds."
         )
-    if confirmed_venues:
-        sentence = (
-            f"The {len(confirmed_venues)} confirmed venue"
-            f"{'s' if len(confirmed_venues) != 1 else ''} include {', '.join(sample_names)}"
+        intro_parts.append(
+            f"{len(bids)} bids are in the running across {n_total} proposed venues: "
+            + ", ".join(
+                f"{b['name']} ({b['kind']}, {b['venue_count']} venue"
+                f"{'s' if b['venue_count'] != 1 else ''})" for b in bids
+            ) + "."
         )
-        sentence += (
-            f" and offer a combined capacity of {total_capacity:,} seats."
-            if total_capacity else "."
+        for b in bids:
+            who = (" and ".join([", ".join(b["country_names"][:-1]), b["country_names"][-1]])
+                   if b["is_joint"] else b["country_names"][0])
+            vnames = ", ".join(v["name"] for c in b["countries"] for v in c["venues"][:3])
+            blurb = (
+                f"The {b['name']} {b['kind']} is led by {who}, proposing "
+                f"{b['venue_count']} stadium{'s' if b['venue_count'] != 1 else ''}"
+            )
+            if b["total_capacity"]:
+                blurb += f" with a combined capacity of about {b['total_capacity']:,} seats"
+            blurb += f". Proposed venues include {vnames}."
+            b["blurb"] = blurb
+            bid_blurbs.append({"name": b["name"], "color": b["color"], "text": blurb})
+
+        # Standing editorial on the joint-bid trend — long-form, data-aware (the
+        # tournament pages are the site's top traffic, so this is worth the words).
+        joint = [b for b in bids if b["is_joint"]]
+        solo = [b for b in bids if not b["is_joint"]]
+        bid_analysis = (
+            "The joint, multi-country bid is fast becoming the norm for the European "
+            "Championship. Rather than carrying the cost, security and infrastructure "
+            "demands alone, national federations are teaming up to spread the financial "
+            "risk, pool a wider set of world-class stadiums and strengthen both the appeal "
+            "and the likelihood of success of their bid. The last single-nation host was "
+            "Germany at UEFA Euro 2024; the next two editions are already co-hosted — Euro "
+            "2028 by the United Kingdom and Ireland, and Euro 2032 by Italy and Turkey."
         )
-        intro_parts.append(sentence)
+        if bids:
+            count_phrase = (
+                f"{len(joint)} joint multi-country bid{'s' if len(joint) != 1 else ''}"
+                if joint else "no joint bids yet"
+            )
+            if solo:
+                count_phrase += (
+                    f" and {len(solo)} solo bid{'s' if len(solo) != 1 else ''}"
+                )
+            bid_analysis += (
+                f" Of the {len(bids)} Euro 2036 bids tracked on this page, {count_phrase}. "
+                "Will UEFA return to a single-country host model, or is shared hosting "
+                "simply the new reality of staging a modern Euro? For now, teaming up looks "
+                "like the winning strategy."
+            )
+    else:
+        if host_str:
+            intro_parts.append(f"{tournament_name} will be hosted in {host_str}.")
+        else:
+            intro_parts.append(f"{tournament_name} host stadiums.")
+        if n_total:
+            intro_parts.append(
+                f"Explore all {n_total} candidate and confirmed host "
+                f"stadium{'s' if n_total != 1 else ''} on an interactive map, with "
+                f"capacities, host cities and match details."
+            )
+        if confirmed_venues:
+            sentence = (
+                f"The {len(confirmed_venues)} confirmed venue"
+                f"{'s' if len(confirmed_venues) != 1 else ''} include {', '.join(sample_names)}"
+            )
+            sentence += (
+                f" and offer a combined capacity of {total_capacity:,} seats."
+                if total_capacity else "."
+            )
+            intro_parts.append(sentence)
+
+        # Data-aware long-form "About" for single-host tournaments (SEO; top traffic).
+        about = [f"{tournament_name} is one of the showpiece events of European football."]
+        if host_str:
+            yr = f" {tournament_year}" if tournament_year else ""
+            about.append(f"The{yr} edition is set to be hosted by {host_str}.")
+        if n_total:
+            about.append(
+                f"This page tracks all {n_total} stadium{'s' if n_total != 1 else ''} linked "
+                f"to the tournament — {len(confirmed_venues)} confirmed and "
+                f"{len(venues) - len(confirmed_venues)} candidate — mapped with capacities, "
+                f"host cities and, where known, how many matches each is set to stage."
+            )
+        if total_capacity:
+            about.append(
+                f"Together the confirmed venues seat around {total_capacity:,} spectators.")
+        tournament_about = " ".join(about)
     tournament_intro = " ".join(intro_parts)
     tournament_description = _trim(tournament_intro)
 
@@ -932,6 +1067,11 @@ def tournament_detail(request, slug):
         "geojson": geojson,
         "page_description": tournament_description,
         "tournament_intro": tournament_intro,
+        "has_bids": has_bids,
+        "bids": bids,
+        "bid_blurbs": bid_blurbs,
+        "bid_analysis": bid_analysis,
+        "tournament_about": tournament_about,
     })
 
 
@@ -1180,6 +1320,7 @@ def _get_tournament_export_stadiums(params):
             "country":    country,
             "image_url":  "",   # tournament maps use colour-coded points, not club badges
             "tournament_status": v["status"],
+            "bid": v.get("bid", ""),
         })
     return out
 
@@ -1737,6 +1878,8 @@ def _dot_colour(stadium, params, country_index):
     if params["color_by"] == "dev_status":
         return _DEV_STATUS_COLOR.get(
             stadium.get("dev_status", "PLANNING"), _DEFAULT_DOT_COLOUR)
+    if params["color_by"] == "bid":
+        return _BID_COLOR.get(stadium.get("bid", ""), _DEFAULT_DOT_COLOUR)
     if params["color_by"] == "single":
         return params["single_color"]
     if params["color_by"] == "country":
@@ -2029,6 +2172,9 @@ def _build_legend_entries(params, stadiums):
             (_DEV_STATUS_COLOR[st], _DEV_STATUS_LABEL[st])
             for st in _DEV_STATUSES if st in present
         ]
+    if params["color_by"] == "bid":
+        present = [b for b in _BID_COLOR if any(s.get("bid") == b for s in stadiums)]
+        return [(_BID_COLOR[b], f"{b} bid") for b in present]
     if params["color_by"] == "single":
         return [(params["single_color"], "Stadium")]
     if params["color_by"] == "surface":
@@ -2346,7 +2492,8 @@ def _compose_export_image(params):
             return None, "No development projects match the selected statuses."
     elif params.get("tournament"):
         stadiums = _get_tournament_export_stadiums(params)
-        params["color_by"] = "tournament_status"   # colour badges by venue status
+        # Competing-bid tournaments (Euro 2036) colour by bid; otherwise by venue status.
+        params["color_by"] = "bid" if any(s.get("bid") for s in stadiums) else "tournament_status"
         if not stadiums:
             return None, "No venues match the selected tournament/status."
     else:

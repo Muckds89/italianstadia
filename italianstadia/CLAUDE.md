@@ -340,6 +340,14 @@ Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 f
 - JSON `stadium.owner_raw` fires only when Wikipedia infobox has no owner/operator row; it does not override Wikipedia data
 - Stadium images must be non-null — `og:image` is the fallback if infobox image not found; images stored at full resolution (no `/thumb/` in URL)
 
+## Regenerate derived artifacts after data changes
+Two pre-rendered artifacts must be regenerated whenever the data they show changes, then
+committed (they are served as static files, NOT rendered per request — Render 512 MB limit):
+- `python manage.py generate_stadiums_json` → `static/data/stadiums_map.json` (operational map)
+- `python manage.py generate_tournament_maps` → `static/exports/tournament_<slug>.png`
+  (the back-end tournament maps embedded on each `/tournaments/<slug>/` page, with logo +
+  watermark; re-run after any tournament-venue/bid change). Add `--slug <slug>` for one.
+
 ## Link & name validation (MANDATORY post-scrape QA)
 
 The scraper has assigned wrong external IDs/pages — e.g. a German club's Transfermarkt
