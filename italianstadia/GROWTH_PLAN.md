@@ -80,6 +80,29 @@ Next (the heavier engineering — backend topic maps, reuses the tournament-map 
 - If a social post lands, expect a one-day spike of 500–2,000; convert that into lasting
   rankings via the on-page work above.
 
+## 7-day query data — demand is capacity, Euro 2032, club facts (not the current insights)
+Re-reading Search Console (last 7 days) changes the priority order:
+1. **Stadium capacity is the dominant long-tail intent** — `fk auda stadium` (30 impr, pos 5.8),
+   `marsaxlokk fc stadium` (21), `marsaxlokk stadium` (13), plus a stream of
+   `<club> capacity` (goztepe, psv eindhoven, lotto park, aik, karlsruher, cremonese,
+   wigan, ail arena, bryne…). All page-1, ~0 clicks → snippet not leading with the number.
+2. **Euro 2032 is the only converter** — `euro 2032 stadiums` 6 clicks / 42 impr / pos 4.9;
+   many page-1 variants. Climb to #1.
+3. **FC Nantes factoid storm** — ~15 variants of "FC Nantes founded 1943 merger of five
+   local clubs", pos ~4–6, zero clicks. Quiz/LLM-driven; we rank but don't surface the fact.
+4. **"where is X" / "X from which country"** and **"<country> football stadiums"** (romanian).
+
+Action reprioritisation (do these BEFORE more social-bait insights):
+- **Capacity-led titles + answer block + FAQ on every stadium page** — biggest sitewide CTR
+  win (converts the dozens of page-1 zero-click capacity queries).
+- **NEW insight: "Biggest & smallest stadiums in Europe" (ranked, by league/country)** —
+  matches the capacity intent at scale and is highly shareable.
+- **Founding/history answer block + FAQ on team pages** (the Nantes pattern).
+- **Euro 2032**: make the page the definitive guide; internal-link every venue.
+- **Country hub pages** for "<country> football stadiums".
+Note: the current three insights (national-only, surface, density) are SOCIAL link-bait, not
+search-demand matches — keep them for promotion, but the search money is capacity + Euro 2032.
+
 ## Honest caveat
 333/day in 30 days is achievable ONLY if (a) the CTR/snippet work ships in week 1 and (b) at
 least one insight post gets traction on Reddit/X. SEO ranking gains take 2–6 weeks to register;
