@@ -201,6 +201,9 @@
                 <a class="nav-link px-2" href="{% url 'italiastadiaapp:city_list' %}">Cities</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link px-2" href="{% url 'italiastadiaapp:insights_index' %}">Insights</a>
+            </li>
+            <li class="nav-item">
                 <a id="exportNavLink" class="nav-link px-2 export-nav-link" href="{% url 'italiastadiaapp:export_page' %}" style="color:#00e5ff;font-weight:600;">⬇ Export</a>
             </li>
             <li class="nav-item dropdown nav-hover-dropdown">
@@ -382,7 +385,10 @@
 </nav>
 <div id="map"
      data-countries-url="{% static 'data/ne_110m_admin_0_countries.geojson' %}"
-     data-stadiums-url="{% url 'italiastadiaapp:stadiums_geojson' %}"
+     {# Pre-built static file (WhiteNoise, no DB hit) — the live /api/stadiums/ endpoint
+        OOMs/times out on the 512 MB tier with the full dataset. Regenerate with
+        `manage.py generate_stadiums_json` after data changes. #}
+     data-stadiums-url="{% static 'data/stadiums_map.json' %}"
      data-developments-url="{% url 'italiastadiaapp:stadium_developments_geojson' %}">
     <div id="map-overlay" aria-hidden="true">
         <div class="map-spinner"></div>
