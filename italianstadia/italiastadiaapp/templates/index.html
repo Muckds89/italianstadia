@@ -388,7 +388,7 @@
      {# Pre-built static file (WhiteNoise, no DB hit) — the live /api/stadiums/ endpoint
         OOMs/times out on the 512 MB tier with the full dataset. Regenerate with
         `manage.py generate_stadiums_json` after data changes. #}
-     data-stadiums-url="{% static 'data/stadiums_map.json' %}"
+     data-stadiums-url="{% static 'data/stadiums_map.json' %}?v={{ map_version }}"
      data-developments-url="{% url 'italiastadiaapp:stadium_developments_geojson' %}">
     <div id="map-overlay" aria-hidden="true">
         <div class="map-spinner"></div>

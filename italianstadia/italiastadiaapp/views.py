@@ -380,7 +380,15 @@ def stadiums_geojson(request):
     })
 
 def index(request):
-    return render(request, "index.html")
+    # Cache-bust the pre-built static map file: its mtime changes on every
+    # `generate_stadiums_json` / deploy, so the browser refetches instead of
+    # serving a stale copy (which made newly-scraped leagues look "missing").
+    map_path = Path(__file__).parent / "static" / "data" / "stadiums_map.json"
+    try:
+        map_version = int(map_path.stat().st_mtime)
+    except OSError:
+        map_version = 0
+    return render(request, "index.html", {"map_version": map_version})
 
 def _available_countries():
     """Countries that appear in the DB, ordered by UEFA 5-year coefficient rank.
