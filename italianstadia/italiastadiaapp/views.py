@@ -987,6 +987,18 @@ _TOURNAMENT_EDITORIAL = {
             {"label": "Reuters — Čeferin threatens to remove Italy as Euro 2032 co-host over infrastructure",
              "url": "https://www.reuters.com/sports/soccer/uefa-chief-ceferin-threatens-remove-italy-euro-2032-co-host-over-infrastructure-2026-04-02/"},
         ],
+        "faq": [
+            ("Where will UEFA Euro 2032 be held?",
+             "UEFA Euro 2032 will be co-hosted by Italy and Turkey, the first time the two "
+             "countries have staged the tournament together."),
+            ("Why are Italy and Turkey hosting Euro 2032 together?",
+             "Italy and Turkey merged their separate bids into a single joint candidacy during "
+             "the bidding process; UEFA awarded them the 2032 finals unopposed in October 2023."),
+            ("How many stadiums will Euro 2032 use?",
+             "UEFA requires each host to provide around 10 stadiums meeting its capacity tiers, "
+             "so the Italy–Turkey edition is expected to use roughly 20 venues split between the "
+             "two countries, narrowed from a longer candidate list."),
+        ],
     },
 }
 
@@ -1210,6 +1222,39 @@ def tournament_detail(request, slug):
     tournament_intro = " ".join(intro_parts)
     tournament_description = _trim(tournament_intro)
 
+    # Data-aware FAQ (captures "where is <T> / which stadiums / how many / biggest") —
+    # the exact tournament search intent. Editorial may add custom Q&A via the "faq" key.
+    cap_venues = [v for v in venues if v.get("capacity")]
+    biggest_venue = max(cap_venues, key=lambda v: v["capacity"]) if cap_venues else None
+    sample_confirmed = [v["name"] for v in confirmed_venues[:5]] or [v["name"] for v in venues[:5]]
+    faq = []
+    if host_str and not has_bids:
+        faq.append((f"Where will {tournament_name} be held?",
+                    f"{tournament_name} will be held in {host_str}."))
+    elif has_bids:
+        faq.append((f"Who is bidding to host {tournament_name}?",
+                    f"{', '.join(b['name'] for b in bids)} "
+                    f"{'are' if len(bids) != 1 else 'is'} bidding to host {tournament_name}."))
+    if tournament_year:
+        faq.append((f"When is {tournament_name}?",
+                    f"{tournament_name} is scheduled for {tournament_year}."))
+    if n_total:
+        faq.append((f"How many stadiums will host {tournament_name}?",
+                    f"{n_total} stadiums are linked to {tournament_name} "
+                    f"({len(confirmed_venues)} confirmed and "
+                    f"{n_total - len(confirmed_venues)} candidate)."))
+    if sample_confirmed:
+        faq.append((f"Which stadiums will host {tournament_name}?",
+                    f"Host venues include {', '.join(sample_confirmed)}."))
+    if biggest_venue:
+        faq.append((f"What is the biggest stadium at {tournament_name}?",
+                    f"{biggest_venue['name']} is the largest, with a capacity of "
+                    f"{biggest_venue['capacity']:,}."))
+    _ed = _TOURNAMENT_EDITORIAL.get(slug) or {}
+    for q, a in _ed.get("faq", []):
+        faq.append((q, a))
+    faq = [{"q": q, "a": a} for q, a in faq]
+
     return render(request, "tournament_detail.html", {
         "tournament_name": tournament_name,
         "tournament_year": tournament_year,
@@ -1231,6 +1276,10 @@ def tournament_detail(request, slug):
         "bid_analysis": bid_analysis,
         "tournament_about": tournament_about,
         "tournament_editorial": _TOURNAMENT_EDITORIAL.get(slug),
+        "faq": faq,
+        "faq_json": json.dumps([{"@type": "Question", "name": f["q"],
+                                 "acceptedAnswer": {"@type": "Answer", "text": f["a"]}}
+                                for f in faq]),
     })
 
 
