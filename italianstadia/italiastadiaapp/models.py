@@ -8,6 +8,7 @@ class Country(models.Model):
     name = models.CharField(max_length=255, unique=True)
     code = models.CharField(max_length=2, unique=True)  # ISO 3166-1 alpha-2
     uefa_rank = models.IntegerField(null=True, blank=True)  # 5-year country coefficient rank
+    population = models.IntegerField(null=True, blank=True)  # for stadium-density insight
 
     def __str__(self):
         return self.name
@@ -204,7 +205,7 @@ class StadiumDevelopment(models.Model):
     slug = models.SlugField(max_length=255, unique=True, blank=True)
 
     project_type = models.CharField(
-        max_length=30,
+        max_length=30, blank=True,
         choices=[
             ("NEW", "New Stadium"),
             ("REDEVELOPMENT", "Redevelopment"),
@@ -213,7 +214,7 @@ class StadiumDevelopment(models.Model):
     )
 
     status = models.CharField(
-        max_length=30,
+        max_length=30, blank=True,
         choices=[
             ("PLANNING", "Planning"),
             ("APPROVED", "Approved"),

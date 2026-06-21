@@ -30,6 +30,7 @@ class TeamSitemap(Sitemap):
 class DevelopmentSitemap(Sitemap):
     changefreq = "weekly"  # dev projects change status often
     priority = 0.7
+    cache_timeout = 86400  # 24 h — avoid full table scan on every sitemap request
 
     def items(self):
         return StadiumDevelopment.objects.exclude(slug="").order_by("id")

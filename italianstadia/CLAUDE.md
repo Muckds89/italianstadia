@@ -188,9 +188,9 @@ Scraped fields that may be missing **must** have `blank=True, null=True` — a `
 
 `COUNTRY_FLAGS` in `views.py` maps country names to emoji flags for the tournament detail page. It currently covers England, Wales, Scotland, Ireland, Italy, Turkey. **Extend this dict whenever a new host country is added to a tournament** — missing entries render as an empty string (no flag shown, not an error).
 
-### Auto-slug constraint (Stadium and Team)
+### Auto-slug constraint (Stadium, Team, and StadiumDevelopment)
 
-`Stadium.slug` and `Team.slug` are both `unique=True` but not `null=True`. Each model's `save()` auto-generates the slug, so normal ORM usage (`create()`, `get_or_create()`, `save()`) is safe. **Never use `bulk_create()` on Stadium or Team** — it bypasses `save()`, leaving slugs as `""`, and the second such row violates the `UNIQUE` constraint.
+`Stadium.slug`, `Team.slug`, and `StadiumDevelopment.slug` are all `unique=True` but not `null=True`. Each model's `save()` auto-generates the slug, so normal ORM usage (`create()`, `get_or_create()`, `save()`) is safe. **Never use `bulk_create()` on Stadium, Team, or StadiumDevelopment** — it bypasses `save()`, leaving slugs as `""`, and the second such row violates the `UNIQUE` constraint.
 
 ### N+1 query prevention
 
@@ -330,6 +330,13 @@ Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 f
 - Luxembourgish clubs: @title = "Luxembourgian Champion"  ← TM uses "Luxembourgian" (not "Luxembourgish"), verified via static HTML
 - Maltese clubs: @title = "Maltese Champion"  ← unverified; TM may not track in header
 - Welsh clubs: @title = "Welsh Champion"  ← unverified; TM may not track in header
+- Belarusian clubs: @title = "Belarusian Champion"  ← unverified; TM may not track in header
+- Russian clubs: @title = "Russian Champion"  ← unverified; TM may not track in header
+- Azerbaijani clubs: @title = "Azerbaijani Champion"  ← unverified
+- Armenian clubs: @title = "Armenian Champion"  ← unverified
+- Kosovan clubs: @title = "Kosovan Champion"  ← unverified; TM may not track Kosovo
+- Israeli clubs: @title = "Israeli Champion"  ← unverified
+- Georgian clubs: @title = "Georgian Champion"  ← unverified
 
 ## Data quality rules
 

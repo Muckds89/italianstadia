@@ -20,7 +20,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 from django.conf import settings
 from django.core.cache import cache
-from django.db.models import Avg, Count, F, Max, Sum
+from django.db.models import Avg, Count, F, Max, Q, Sum
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -353,6 +353,7 @@ def stadiums_geojson(request):
     param_country   = request.GET.get("country",   "").strip()
     param_league    = request.GET.get("league",     "").strip()
     param_ownership = request.GET.get("ownership",  "").strip().upper()
+    param_view      = request.GET.get("view",       "").strip().lower()
 
     qs = Stadium.objects.select_related("city").prefetch_related(
         "teams__league__country"
@@ -363,6 +364,15 @@ def stadiums_geojson(request):
         qs = qs.filter(teams__league__name=param_league).distinct()
     if param_country:
         qs = qs.filter(teams__league__country__name=param_country).distinct()
+    # Insight views (see /insights/) — preset filters reused by the shared insights map JS.
+    if param_view == "national":
+        # Grounds used EXCLUSIVELY by a national side (>=1 national team, 0 club teams).
+        qs = qs.annotate(
+            _nat=Count("teams", filter=Q(teams__is_national=True), distinct=True),
+            _club=Count("teams", filter=Q(teams__is_national=False), distinct=True),
+        ).filter(_nat__gte=1, _club=0)
+    elif param_view == "surface":
+        qs = qs.exclude(surface__isnull=True).exclude(surface="")
 
     return JsonResponse({
         "type": "FeatureCollection",
@@ -1120,6 +1130,183 @@ def tournament_detail(request, slug):
         "bid_analysis": bid_analysis,
         "tournament_about": tournament_about,
         "tournament_editorial": _TOURNAMENT_EDITORIAL.get(slug),
+    })
+
+
+# ── Insights (data-story pages: SEO / CTR) ─────────────────────────────────────
+
+_INSIGHTS = [
+    {
+        "slug": "national-stadiums",
+        "title": "Europe's national-team-only stadiums",
+        "blurb": "Grounds used exclusively by a national side — no club tenant.",
+        "url_name": "insight_national",
+    },
+    {
+        "slug": "stadium-surfaces",
+        "title": "Artificial vs natural grass in European stadiums",
+        "blurb": "How many grounds use real grass, hybrid pitches or full artificial turf.",
+        "url_name": "insight_surface",
+    },
+    {
+        "slug": "stadium-density",
+        "title": "Stadium density per population",
+        "blurb": "Which countries pack in the most football stadiums per million people.",
+        "url_name": "insight_density",
+    },
+]
+
+
+def _insight_others(current_slug):
+    """The other insight cards, for the 'Related insights' footer block."""
+    return [i for i in _INSIGHTS if i["slug"] != current_slug]
+
+
+@cache_page(60 * 60)
+def insights_index(request):
+    return render(request, "insights_index.html", {
+        "insights": _INSIGHTS,
+        "page_description": (
+            "Data insights on European football stadiums — national-team grounds, "
+            "pitch surfaces (grass vs artificial) and stadium density per population."
+        ),
+    })
+
+
+@cache_page(60 * 60)
+def insight_national(request):
+    qs = (Stadium.objects.select_related("city")
+          .prefetch_related("teams__league__country")
+          .annotate(
+              _nat=Count("teams", filter=Q(teams__is_national=True), distinct=True),
+              _club=Count("teams", filter=Q(teams__is_national=False), distinct=True))
+          .filter(_nat__gte=1, _club=0)
+          .exclude(latitude__isnull=True))
+    rows = []
+    for s in qs:
+        nat = next((t for t in s.teams.all() if t.is_national), None)
+        country = nat.league.country.name if (nat and nat.league and nat.league.country) else (
+            s.city.country if s.city else "")
+        rows.append({
+            "stadium": s, "nation": nat.name if nat else "",
+            "country": country, "capacity": s.capacity or 0,
+        })
+    rows.sort(key=lambda r: r["capacity"], reverse=True)
+    total_cap = sum(r["capacity"] for r in rows)
+    intro = (
+        f"Across Europe, {len(rows)} stadiums in our dataset are used exclusively by a "
+        "national team, with no club playing there week to week. These are typically "
+        "purpose-built or symbolic national grounds reserved for international fixtures. "
+        f"Together they seat about {total_cap:,} spectators."
+    )
+    about = (
+        "Most countries share their national stadium with a leading club, so a ground used "
+        "only by the national team is relatively rare and usually significant — a flagship "
+        "venue, a neutral national arena, or a tournament stadium awaiting a permanent "
+        "tenant. The map below shows each of these grounds; the table lists them by capacity."
+    )
+    return render(request, "insight_national.html", {
+        "rows": rows, "count": len(rows), "total_capacity": total_cap,
+        "intro": intro, "about": about,
+        "geojson_url": reverse("italiastadiaapp:stadiums_geojson") + "?view=national",
+        "others": _insight_others("national-stadiums"),
+        "page_description": _trim(intro),
+    })
+
+
+@cache_page(60 * 60)
+def insight_surface(request):
+    qs = Stadium.objects.exclude(surface__isnull=True).exclude(surface="")
+    counts = {"GRASS": 0, "HYBRID": 0, "ARTIFICIAL": 0}
+    by_country = defaultdict(lambda: {"GRASS": 0, "HYBRID": 0, "ARTIFICIAL": 0})
+    for s in qs.select_related("city"):
+        if s.surface in counts:
+            counts[s.surface] += 1
+            country = s.city.country if s.city else "Unknown"
+            by_country[country][s.surface] += 1
+    known = sum(counts.values())
+
+    def pct(n):
+        return round(100 * n / known, 1) if known else 0.0
+    surface_stats = [
+        {"key": "GRASS", "label": "Natural grass", "count": counts["GRASS"], "pct": pct(counts["GRASS"])},
+        {"key": "HYBRID", "label": "Hybrid", "count": counts["HYBRID"], "pct": pct(counts["HYBRID"])},
+        {"key": "ARTIFICIAL", "label": "Artificial", "count": counts["ARTIFICIAL"], "pct": pct(counts["ARTIFICIAL"])},
+    ]
+    # Countries with the highest artificial share (min 4 known grounds, for signal).
+    artificial_rows = []
+    for country, c in by_country.items():
+        tot = c["GRASS"] + c["HYBRID"] + c["ARTIFICIAL"]
+        if tot >= 4:
+            artificial_rows.append({
+                "country": country, "total": tot,
+                "artificial": c["ARTIFICIAL"], "hybrid": c["HYBRID"], "grass": c["GRASS"],
+                "artificial_pct": round(100 * c["ARTIFICIAL"] / tot, 1),
+            })
+    artificial_rows.sort(key=lambda r: (r["artificial_pct"], r["total"]), reverse=True)
+    intro = (
+        f"Of the {known:,} European stadiums in our dataset with a recorded pitch type, "
+        f"{pct(counts['GRASS'])}% use natural grass, {pct(counts['HYBRID'])}% use a hybrid "
+        f"reinforced pitch and {pct(counts['ARTIFICIAL'])}% are fully artificial. Artificial "
+        "and hybrid surfaces are most common in colder northern climates and in lower "
+        "divisions, where year-round playability matters more than top-flight regulations."
+    )
+    about = (
+        "Pitch type is recorded from each stadium's Wikipedia infobox where available. "
+        "Stadiums without a recorded surface are excluded from these percentages so the "
+        "figures reflect only confirmed data. Use the map to see the surface of each "
+        "individual ground."
+    )
+    return render(request, "insight_surface.html", {
+        "surface_stats": surface_stats, "known": known,
+        "artificial_rows": artificial_rows[:15],
+        "intro": intro, "about": about,
+        "geojson_url": reverse("italiastadiaapp:stadiums_geojson") + "?view=surface",
+        "others": _insight_others("stadium-surfaces"),
+        "page_description": _trim(intro),
+    })
+
+
+@cache_page(60 * 60)
+def insight_density(request):
+    # Stadiums per million people, by country. Denominator = ALL stadiums in our dataset
+    # (coverage varies by country — stated as a caveat in the page text).
+    from .models import Country
+    counts = (Stadium.objects.values("city__country")
+              .annotate(n=Count("id")).order_by())
+    count_by_country = {r["city__country"]: r["n"] for r in counts if r["city__country"]}
+    rows = []
+    for c in Country.objects.exclude(population__isnull=True):
+        n = count_by_country.get(c.name, 0)
+        if not n:
+            continue
+        per_m = round(n / (c.population / 1_000_000), 2)
+        rows.append({
+            "country": c.name, "code": c.code, "stadiums": n,
+            "population": c.population, "per_million": per_m,
+        })
+    rows.sort(key=lambda r: r["per_million"], reverse=True)
+    # name -> per_million, for the choropleth JS (keyed by the hi-res geojson 'name').
+    density_by_name = {r["country"]: r["per_million"] for r in rows}
+    top = rows[0] if rows else None
+    intro = (
+        "This map ranks European countries by football-stadium density — the number of "
+        "stadiums in our dataset per million inhabitants. "
+        + (f"{top['country']} leads with {top['per_million']} stadiums per million people. "
+           if top else "")
+        + "Smaller nations tend to rank high simply because even a modest number of grounds "
+        "is large relative to their population."
+    )
+    about = (
+        "Density is stadiums-in-our-dataset divided by national population (per million). "
+        "Coverage is uneven — countries with more leagues scraped will show more stadiums — "
+        "so treat this as a guide to our data, not a definitive national census of grounds."
+    )
+    return render(request, "insight_density.html", {
+        "rows": rows, "intro": intro, "about": about,
+        "density_json": json.dumps(density_by_name),
+        "others": _insight_others("stadium-density"),
+        "page_description": _trim(intro),
     })
 
 
@@ -2999,4 +3186,7 @@ def export_options(request):
         "leagues":            sorted(leagues_set),
         "leagues_by_country": leagues_by_country,
         "tournaments":        tournaments,
+        "dev_statuses": [
+            {"value": s, "label": _DEV_STATUS_LABEL[s]} for s in _DEV_STATUSES
+        ],
     })

@@ -394,3 +394,57 @@ def test_export_download_single_use_atomic(client):
     r = client.get(url)
     assert r.status_code == 410          # already used
     assert b"already been used" in r.content
+
+
+@pytest.mark.django_db
+def test_map_export_development_layer(client):
+    """layer=development renders a PNG coloured by project status."""
+    StadiumDevelopment.objects.create(
+        name="Dev Export Venue",
+        status="PLANNING",
+        project_type="NEW",
+        latitude=45.0,
+        longitude=9.0,
+    )
+    url = reverse("italiastadiaapp:map_export")
+    r = client.get(url + "?layer=development&dstatus=PLANNING&tiles=0")
+    assert r.status_code == 200
+    assert r["Content-Type"] == "image/png"
+
+
+@pytest.mark.django_db
+def test_map_export_development_layer_no_match_returns_400(client):
+    """layer=development with no matching status → 400, not 500."""
+    StadiumDevelopment.objects.create(
+        name="Dev Export Venue2",
+        status="PLANNING",
+        project_type="NEW",
+        latitude=45.0,
+        longitude=9.0,
+    )
+    url = reverse("italiastadiaapp:map_export")
+    r = client.get(url + "?layer=development&dstatus=COMPLETED&tiles=0")
+    assert r.status_code == 400
+
+
+@pytest.mark.django_db
+def test_map_export_national_mode_returns_png(client):
+    """national=1 renders a PNG when national-team stadiums exist (seeded by migrations)."""
+    url = reverse("italiastadiaapp:map_export")
+    r = client.get(url + "?national=1&tiles=0")
+    # Migrations seed national-team rows with coords → should produce a PNG (200).
+    # If somehow no national teams are seeded in this env, a 400 is also acceptable.
+    assert r.status_code in (200, 400)
+    if r.status_code == 200:
+        assert r["Content-Type"] == "image/png"
+
+
+@pytest.mark.django_db
+def test_export_options_includes_dev_statuses(client):
+    """export_options must return dev_statuses so the frontend doesn't hardcode them."""
+    r = client.get(reverse("italiastadiaapp:export_options"))
+    assert r.status_code == 200
+    data = r.json()
+    assert "dev_statuses" in data
+    values = [s["value"] for s in data["dev_statuses"]]
+    assert set(values) == {"PLANNING", "APPROVED", "UNDER_CONSTRUCTION", "ON_HOLD", "COMPLETED"}

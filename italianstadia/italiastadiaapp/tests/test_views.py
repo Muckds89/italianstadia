@@ -295,3 +295,34 @@ def test_single_host_tournament_not_bid_grouped(client):
     response = client.get(reverse("italiastadiaapp:tournament_detail", args=["test-cup-2040"]))
     assert response.status_code == 200
     assert "Host not yet decided" not in response.content.decode()
+
+
+@pytest.mark.django_db
+def test_tournament_editorial_renders_for_euro2032(client):
+    """Euro 2032 page shows the hand-written editorial card (Italy–Turkey joint bid)."""
+    city = City.objects.create(name="Rome", country="Italy")
+    Stadium.objects.create(
+        name="Olimpico Editorial", city=city,
+        latitude=41.93, longitude=12.45,
+        ownership="PUBLIC",
+        tournaments=[{"tournament": "UEFA Euro 2032", "year": 2032, "status": "CONFIRMED"}],
+    )
+    response = client.get(
+        reverse("italiastadiaapp:tournament_detail", args=["uefa-euro-2032"])
+    )
+    assert response.status_code == 200
+    html = response.content.decode()
+    assert "Italy" in html and "Turkey" in html   # editorial mentions both nations
+    assert response.context["tournament_editorial"] is not None
+    assert "heading" in response.context["tournament_editorial"]
+
+
+@pytest.mark.django_db
+def test_export_options_includes_dev_statuses(client):
+    """export_options must return dev_statuses so the frontend doesn't need to hardcode them."""
+    response = client.get(reverse("italiastadiaapp:export_options"))
+    assert response.status_code == 200
+    data = response.json()
+    assert "dev_statuses" in data
+    values = [s["value"] for s in data["dev_statuses"]]
+    assert set(values) == {"PLANNING", "APPROVED", "UNDER_CONSTRUCTION", "ON_HOLD", "COMPLETED"}
