@@ -233,6 +233,16 @@ function closePicker() {
 function buildPickerUI() {
     clpPanel.innerHTML = "";
 
+    // Type-to-filter box (matches country name OR any of its league names)
+    const search = document.createElement("input");
+    search.type = "search";
+    search.className = "form-control form-control-sm clp-search";
+    search.placeholder = "Type a country…";
+    search.style.cssText = "margin:6px;width:calc(100% - 12px)";
+    search.addEventListener("click", e => e.stopPropagation());
+    clpPanel.appendChild(search);
+    const rowPairs = [];
+
     // Gather country → league map directly from marker data
     const countryLeagues = new Map();
     markers.forEach(marker => {
@@ -351,6 +361,19 @@ function buildPickerUI() {
 
         clpPanel.appendChild(countryRow);
         clpPanel.appendChild(leaguesDiv);
+        rowPairs.push({ row: countryRow, leagues: leaguesDiv, country,
+                        names: leagues.map(l => (l.name || "").toLowerCase()) });
+    });
+
+    // Filter rows as the user types
+    search.addEventListener("input", function () {
+        const q = search.value.trim().toLowerCase();
+        rowPairs.forEach(p => {
+            const hit = !q || p.country.toLowerCase().includes(q)
+                || p.names.some(n => n.includes(q));
+            p.row.style.display = hit ? "" : "none";
+            p.leagues.style.display = hit ? "" : "none";
+        });
     });
 }
 
@@ -362,6 +385,8 @@ clpTrigger.addEventListener("click", function (e) {
     } else {
         buildPickerUI();   // rebuild to reflect active state
         clpPanel.style.display = "block";
+        const sb = clpPanel.querySelector(".clp-search");
+        if (sb && window.matchMedia("(hover: hover) and (pointer: fine)").matches) sb.focus();
     }
 });
 
