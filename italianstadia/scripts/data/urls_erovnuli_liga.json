@@ -103,13 +103,15 @@
       "transfermarkt_url": "https://www.transfermarkt.com/fc-kolkheti-1913-poti/startseite/verein/28971",
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-kolkheti-1913-poti/besucherzahlenentwicklung/verein/28971",
       "stadium": {
-        "name": "Poti Central Stadium",
-        "wikipedia_url": "",
+        "name": "Fazisi Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Fazisi_Stadium",
         "transfermarkt_url": "https://www.transfermarkt.com/fc-kolkheti-1913-poti/stadion/verein/28971",
         "city": {
           "name": "Poti",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Poti"
-        }
+        },
+        "latitude": 42.1425,
+        "longitude": 41.665556
       }
     },
     {

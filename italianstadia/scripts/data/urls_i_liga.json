@@ -209,7 +209,7 @@
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/stal-mielec/besucherzahlenentwicklung/verein/22431",
       "stadium": {
         "name": "Grzegorz Lato Stadium",
-        "wikipedia_url": "",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Stali_Mielec",
         "transfermarkt_url": "https://www.transfermarkt.com/stal-mielec/stadion/verein/22431",
         "city": {
           "name": "Mielec",
