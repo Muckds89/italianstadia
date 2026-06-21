@@ -1,0 +1,251 @@
+{
+  "league": {
+    "name": "Russian Premier League",
+    "country": "Russia",
+    "country_code": "RU",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Akhmat Grozny",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Akhmat_Grozny",
+      "transfermarkt_url": "https://www.transfermarkt.com/akhmat-grozny/startseite/verein/3725",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/akhmat-grozny/besucherzahlenentwicklung/verein/3725",
+      "stadium": {
+        "name": "Akhmat Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Akhmat-Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/akhmat-grozny/stadion/verein/3725",
+        "city": {
+          "name": "Grozny",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Grozny"
+        }
+      }
+    },
+    {
+      "name": "Akron Tolyatti",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Akron_Tolyatti",
+      "transfermarkt_url": "https://www.transfermarkt.com/akron-togliatti/startseite/verein/71985",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/akron-togliatti/besucherzahlenentwicklung/verein/71985",
+      "stadium": {
+        "name": "Solidarnost Samara Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Solidarnost_Samara_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/akron-togliatti/stadion/verein/71985",
+        "city": {
+          "name": "Tolyatti",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tolyatti"
+        }
+      }
+    },
+    {
+      "name": "Baltika Kaliningrad",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Baltika_Kaliningrad",
+      "transfermarkt_url": "https://www.transfermarkt.com/baltika-kaliningrad/startseite/verein/2741",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/baltika-kaliningrad/besucherzahlenentwicklung/verein/2741",
+      "stadium": {
+        "name": "Rostec Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kaliningrad_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/baltika-kaliningrad/stadion/verein/2741",
+        "city": {
+          "name": "Kaliningrad",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kaliningrad"
+        }
+      }
+    },
+    {
+      "name": "CSKA Moscow",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/PFC_CSKA_Moscow",
+      "transfermarkt_url": "https://www.transfermarkt.com/cska-moscow/startseite/verein/2410",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cska-moscow/besucherzahlenentwicklung/verein/2410",
+      "stadium": {
+        "name": "VEB Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/VEB_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/cska-moscow/stadion/verein/2410",
+        "city": {
+          "name": "Moscow",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Moscow"
+        }
+      }
+    },
+    {
+      "name": "Dynamo Makhachkala",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dynamo_Makhachkala",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-makhachkala/startseite/verein/75231",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-makhachkala/besucherzahlenentwicklung/verein/75231",
+      "stadium": {
+        "name": "Anzhi Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Anzhi_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-makhachkala/stadion/verein/75231",
+        "city": {
+          "name": "Makhachkala",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Makhachkala"
+        }
+      }
+    },
+    {
+      "name": "Dynamo Moscow",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dynamo_Moscow",
+      "transfermarkt_url": "https://www.transfermarkt.com/dynamo-moscow/startseite/verein/121",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dynamo-moscow/besucherzahlenentwicklung/verein/121",
+      "stadium": {
+        "name": "VTB Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/VTB_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/dynamo-moscow/stadion/verein/121",
+        "city": {
+          "name": "Moscow",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Moscow"
+        }
+      }
+    },
+    {
+      "name": "Krasnodar",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Krasnodar",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-krasnodar/startseite/verein/16704",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-krasnodar/besucherzahlenentwicklung/verein/16704",
+      "stadium": {
+        "name": "Ozon Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Krasnodar_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-krasnodar/stadion/verein/16704",
+        "city": {
+          "name": "Krasnodar",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Krasnodar"
+        }
+      }
+    },
+    {
+      "name": "Krylia Sovetov Samara",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/PFC_Krylia_Sovetov_Samara",
+      "transfermarkt_url": "https://www.transfermarkt.com/krylya-sovetov-samara/startseite/verein/2696",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/krylya-sovetov-samara/besucherzahlenentwicklung/verein/2696",
+      "stadium": {
+        "name": "Solidarnost Samara Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Solidarnost_Samara_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/krylya-sovetov-samara/stadion/verein/2696",
+        "city": {
+          "name": "Samara",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Samara"
+        }
+      }
+    },
+    {
+      "name": "Lokomotiv Moscow",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Lokomotiv_Moscow",
+      "transfermarkt_url": "https://www.transfermarkt.com/lokomotiv-moscow/startseite/verein/932",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/lokomotiv-moscow/besucherzahlenentwicklung/verein/932",
+      "stadium": {
+        "name": "RZD Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Lokomotiv_Stadium_(Moscow)",
+        "transfermarkt_url": "https://www.transfermarkt.com/lokomotiv-moscow/stadion/verein/932",
+        "city": {
+          "name": "Moscow",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Moscow"
+        }
+      }
+    },
+    {
+      "name": "Orenburg",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Orenburg",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-orenburg/startseite/verein/14589",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-orenburg/besucherzahlenentwicklung/verein/14589",
+      "stadium": {
+        "name": "Gazovik",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gazovik_Stadium_(Orenburg)",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-orenburg/stadion/verein/14589",
+        "city": {
+          "name": "Orenburg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Orenburg"
+        }
+      }
+    },
+    {
+      "name": "Pari Nizhny Novgorod",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Pari_Nizhny_Novgorod",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-nizhny-novgorod/startseite/verein/49702",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-nizhny-novgorod/besucherzahlenentwicklung/verein/49702",
+      "stadium": {
+        "name": "Sovcombank Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Nizhny_Novgorod_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-nizhny-novgorod/stadion/verein/49702",
+        "city": {
+          "name": "Nizhny Novgorod",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Nizhny_Novgorod"
+        }
+      }
+    },
+    {
+      "name": "Rostov",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Rostov",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-rostov/startseite/verein/1083",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-rostov/besucherzahlenentwicklung/verein/1083",
+      "stadium": {
+        "name": "Rostov Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Rostov_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-rostov/stadion/verein/1083",
+        "city": {
+          "name": "Rostov-on-Don",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rostov-on-Don"
+        }
+      }
+    },
+    {
+      "name": "Rubin Kazan",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Rubin_Kazan",
+      "transfermarkt_url": "https://www.transfermarkt.com/rubin-kazan/startseite/verein/2698",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rubin-kazan/besucherzahlenentwicklung/verein/2698",
+      "stadium": {
+        "name": "Ak Bars Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ak_Bars_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/rubin-kazan/stadion/verein/2698",
+        "city": {
+          "name": "Kazan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kazan"
+        }
+      }
+    },
+    {
+      "name": "Sochi",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/PFC_Sochi",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-sochi/startseite/verein/41231",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-sochi/besucherzahlenentwicklung/verein/41231",
+      "stadium": {
+        "name": "Fisht Olympic Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Fisht_Olympic_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-sochi/stadion/verein/41231",
+        "city": {
+          "name": "Sochi",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sochi"
+        }
+      }
+    },
+    {
+      "name": "Spartak Moscow",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Spartak_Moscow",
+      "transfermarkt_url": "https://www.transfermarkt.com/spartak-moscow/startseite/verein/232",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/spartak-moscow/besucherzahlenentwicklung/verein/232",
+      "stadium": {
+        "name": "Lukoil Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Lukoil_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/spartak-moscow/stadion/verein/232",
+        "city": {
+          "name": "Moscow",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Moscow"
+        }
+      }
+    },
+    {
+      "name": "Zenit Saint Petersburg",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Zenit_Saint_Petersburg",
+      "transfermarkt_url": "https://www.transfermarkt.com/zenit-st-petersburg/startseite/verein/964",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/zenit-st-petersburg/besucherzahlenentwicklung/verein/964",
+      "stadium": {
+        "name": "Gazprom Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Krestovsky_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/zenit-st-petersburg/stadion/verein/964",
+        "city": {
+          "name": "Saint Petersburg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Saint_Petersburg"
+        }
+      }
+    }
+  ]
+}

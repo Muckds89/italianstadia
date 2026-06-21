@@ -76,6 +76,25 @@
     </div>
     {% endif %}
 
+    {% if tournament_editorial %}
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>{{ tournament_editorial.heading }}</strong></div>
+        <div class="card-body">
+            {% for para in tournament_editorial.paragraphs %}
+            <p{% if forloop.last and not tournament_editorial.sources %} class="mb-0"{% endif %}>{{ para }}</p>
+            {% endfor %}
+            {% if tournament_editorial.sources %}
+            <p class="mb-1 mt-3"><strong>Sources</strong></p>
+            <ul class="mb-0 small">
+                {% for src in tournament_editorial.sources %}
+                <li><a href="{{ src.url }}" target="_blank" rel="nofollow noopener">{{ src.label }}</a></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
 
     <!-- Stat cards -->
     <div class="row g-3 mb-4">

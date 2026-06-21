@@ -184,6 +184,54 @@ def create_driver():
     service = Service(ChromeDriverManager().install())
     return webdriver.Chrome(service=service)
 
+
+# Transfermarkt intermittently returns a Cloudflare/gateway error page (502/503/504)
+# under load — the page loads with HTTP 200 in Selenium but the body is the error,
+# so element lookups silently fail and every team ends up with 0 titles. Detect the
+# gateway-error body and retry with exponential backoff before giving up.
+_GATEWAY_MARKERS = (
+    "502 bad gateway", "bad gateway",
+    "503 service", "service temporarily unavailable", "service unavailable",
+    "504 gateway", "gateway time-out", "gateway timeout",
+    "error code 502", "error code 503", "error code 520", "error code 521",
+    "error code 522", "error code 524",
+    "just a moment",  # Cloudflare challenge interstitial
+)
+
+
+def _is_gateway_error(driver):
+    try:
+        title = (driver.title or "").lower()
+        # Only sniff the start of the body; full source can be large.
+        body = (driver.page_source or "")[:4000].lower()
+    except Exception:
+        return False
+    blob = title + " " + body
+    return any(m in blob for m in _GATEWAY_MARKERS)
+
+
+def get_with_retry(driver, url, retries=5, base_delay=4):
+    """driver.get(url) with backoff on Transfermarkt 502/503/504 gateway pages."""
+    for attempt in range(1, retries + 1):
+        try:
+            driver.get(url)
+        except Exception as exc:
+            if attempt == retries:
+                raise
+            delay = base_delay * attempt
+            logging.warning(f"[HTTP] get failed ({exc}) for {url} — retry {attempt}/{retries} in {delay}s")
+            time.sleep(delay)
+            continue
+        if not _is_gateway_error(driver):
+            return True
+        if attempt == retries:
+            logging.error(f"[HTTP] gateway error persisted after {retries} attempts: {url}")
+            return False
+        delay = base_delay * attempt
+        logging.warning(f"[HTTP] gateway error (502/503/504) for {url} — retry {attempt}/{retries} in {delay}s")
+        time.sleep(delay)
+    return False
+
 def extract_city_population(soup):
     if not soup:
         logging.warning("[City population] No soup provided")
@@ -1215,7 +1263,7 @@ def scrape_stadium(stadium_data, city):
     driver = create_driver()
 
     try:
-        driver.get(transfermarkt_url)
+        get_with_retry(driver, transfermarkt_url)
         time.sleep(2)
 
         accept_consent_if_present(driver)
@@ -1486,7 +1534,7 @@ def scrape_average_attendance(attendance_url, season="24/25"):
     driver = create_driver()
 
     try:
-        driver.get(attendance_url)
+        get_with_retry(driver, attendance_url)
         time.sleep(3)
 
         accept_consent_if_present(driver)
@@ -1684,10 +1732,17 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
         "Luxembourg": "Luxembourgian",
         "Malta": "Maltese",
         "Wales": "Welsh",
+        # New leagues 2026-06-20
+        "Belarus": "Belarusian",
+        "Russia": "Russian",
+        "Azerbaijan": "Azerbaijani",
+        "Armenia": "Armenian",
+        "Kosovo": "Kosovan",
+        "Israel": "Israeli",
     }
 
     try:
-        driver.get(team_url)
+        get_with_retry(driver, team_url)
         time.sleep(2)
 
         accept_consent_if_present(driver)

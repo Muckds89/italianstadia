@@ -1,0 +1,281 @@
+{
+  "league": {
+    "name": "Liga Portugal 2",
+    "country": "Portugal",
+    "country_code": "PT",
+    "division_level": 2,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Académico de Viseu",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Acad%C3%A9mico_de_Viseu_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/academico-viseu-fc/startseite/verein/7788",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/academico-viseu-fc/besucherzahlenentwicklung/verein/7788",
+      "stadium": {
+        "name": "Estádio do Fontelo",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_do_Fontelo",
+        "transfermarkt_url": "https://www.transfermarkt.com/academico-viseu-fc/stadion/verein/7788",
+        "city": {
+          "name": "Viseu",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Viseu"
+        }
+      }
+    },
+    {
+      "name": "Benfica B",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/S.L._Benfica_B",
+      "transfermarkt_url": "https://www.transfermarkt.com/benfica-lissabon-b/startseite/verein/10330",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/benfica-lissabon-b/besucherzahlenentwicklung/verein/10330",
+      "stadium": {
+        "name": "Benfica Campus",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Benfica_Campus",
+        "transfermarkt_url": "https://www.transfermarkt.com/benfica-lissabon-b/stadion/verein/10330",
+        "city": {
+          "name": "Seixal",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Seixal"
+        }
+      }
+    },
+    {
+      "name": "Chaves",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Chaves",
+      "transfermarkt_url": "https://www.transfermarkt.com/gd-chaves/startseite/verein/3325",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gd-chaves/besucherzahlenentwicklung/verein/3325",
+      "stadium": {
+        "name": "Estádio Municipal de Chaves",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Municipal_Eng._Manuel_Branco_Teixeira",
+        "transfermarkt_url": "https://www.transfermarkt.com/gd-chaves/stadion/verein/3325",
+        "city": {
+          "name": "Chaves",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Chaves"
+        }
+      }
+    },
+    {
+      "name": "Farense",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/S.C._Farense",
+      "transfermarkt_url": "https://www.transfermarkt.com/sc-farense/startseite/verein/4294",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sc-farense/besucherzahlenentwicklung/verein/4294",
+      "stadium": {
+        "name": "Estádio de São Luís",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_de_S%C3%A3o_Lu%C3%ADs",
+        "transfermarkt_url": "https://www.transfermarkt.com/sc-farense/stadion/verein/4294",
+        "city": {
+          "name": "Faro",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Faro"
+        }
+      }
+    },
+    {
+      "name": "Feirense",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/C.D._Feirense",
+      "transfermarkt_url": "https://www.transfermarkt.com/cd-feirense/startseite/verein/3349",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cd-feirense/besucherzahlenentwicklung/verein/3349",
+      "stadium": {
+        "name": "Estádio Marcolino de Castro",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Marcolino_de_Castro",
+        "transfermarkt_url": "https://www.transfermarkt.com/cd-feirense/stadion/verein/3349",
+        "city": {
+          "name": "Santa Maria da Feira",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Santa_Maria_da_Feira"
+        }
+      }
+    },
+    {
+      "name": "Felgueiras 1932",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/F.C._Felgueiras_(2006)",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-felgueiras-1932/startseite/verein/1701",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-felgueiras-1932/besucherzahlenentwicklung/verein/1701",
+      "stadium": {
+        "name": "Estádio Dr. Machado de Matos",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-felgueiras-1932/stadion/verein/1701",
+        "city": {
+          "name": "Felgueiras",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Felgueiras"
+        }
+      }
+    },
+    {
+      "name": "Leixões",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Leix%C3%B5es",
+      "transfermarkt_url": "https://www.transfermarkt.com/leixoes-sc/startseite/verein/3345",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/leixoes-sc/besucherzahlenentwicklung/verein/3345",
+      "stadium": {
+        "name": "Estádio do Mar",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_do_Mar",
+        "transfermarkt_url": "https://www.transfermarkt.com/leixoes-sc/stadion/verein/3345",
+        "city": {
+          "name": "Matosinhos",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Matosinhos"
+        }
+      }
+    },
+    {
+      "name": "Lusitânia de Lourosa",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Lusit%C3%A2nia_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/lusitania-fc-lourosa/startseite/verein/8189",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/lusitania-fc-lourosa/besucherzahlenentwicklung/verein/8189",
+      "stadium": {
+        "name": "Estádio do Lusitânia de Lourosa",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/lusitania-fc-lourosa/stadion/verein/8189",
+        "city": {
+          "name": "Lourosa",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lourosa"
+        }
+      }
+    },
+    {
+      "name": "Marítimo",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/C.S._Mar%C3%ADtimo",
+      "transfermarkt_url": "https://www.transfermarkt.com/cs-maritimo/startseite/verein/1301",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cs-maritimo/besucherzahlenentwicklung/verein/1301",
+      "stadium": {
+        "name": "Estádio do Marítimo",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_do_Mar%C3%ADtimo",
+        "transfermarkt_url": "https://www.transfermarkt.com/cs-maritimo/stadion/verein/1301",
+        "city": {
+          "name": "Funchal",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Funchal"
+        }
+      }
+    },
+    {
+      "name": "UD Oliveirense",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/U.D._Oliveirense",
+      "transfermarkt_url": "https://www.transfermarkt.com/ud-oliveirense/startseite/verein/8827",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ud-oliveirense/besucherzahlenentwicklung/verein/8827",
+      "stadium": {
+        "name": "Estádio Carlos Osório",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/ud-oliveirense/stadion/verein/8827",
+        "city": {
+          "name": "Oliveira de Azeméis",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Oliveira_de_Azem%C3%A9is"
+        }
+      }
+    },
+    {
+      "name": "Paços de Ferreira",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Pa%C3%A7os_de_Ferreira",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-pacos-de-ferreira/startseite/verein/2995",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-pacos-de-ferreira/besucherzahlenentwicklung/verein/2995",
+      "stadium": {
+        "name": "Estádio Capital do Móvel",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Capital_do_M%C3%B3vel",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-pacos-de-ferreira/stadion/verein/2995",
+        "city": {
+          "name": "Paços de Ferreira",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pa%C3%A7os_de_Ferreira"
+        }
+      }
+    },
+    {
+      "name": "Penafiel",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Penafiel",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-penafiel/startseite/verein/3327",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-penafiel/besucherzahlenentwicklung/verein/3327",
+      "stadium": {
+        "name": "Estádio Municipal 25 de Abril",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-penafiel/stadion/verein/3327",
+        "city": {
+          "name": "Penafiel",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Penafiel"
+        }
+      }
+    },
+    {
+      "name": "Portimonense",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Portimonense_S.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/portimonense-sc/startseite/verein/7378",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/portimonense-sc/besucherzahlenentwicklung/verein/7378",
+      "stadium": {
+        "name": "Estádio Municipal de Portimão",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Municipal_de_Portim%C3%A3o",
+        "transfermarkt_url": "https://www.transfermarkt.com/portimonense-sc/stadion/verein/7378",
+        "city": {
+          "name": "Portimão",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Portim%C3%A3o"
+        }
+      }
+    },
+    {
+      "name": "Porto B",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Porto_B",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-porto-b/startseite/verein/10331",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-porto-b/besucherzahlenentwicklung/verein/10331",
+      "stadium": {
+        "name": "Estádio Luís Filipe Menezes",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-porto-b/stadion/verein/10331",
+        "city": {
+          "name": "Vila Nova de Gaia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vila_Nova_de_Gaia"
+        }
+      }
+    },
+    {
+      "name": "Sporting CP B",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sporting_CP_B",
+      "transfermarkt_url": "https://www.transfermarkt.com/sporting-lissabon-b/startseite/verein/10949",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sporting-lissabon-b/besucherzahlenentwicklung/verein/10949",
+      "stadium": {
+        "name": "Estádio Aurélio Pereira",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/sporting-lissabon-b/stadion/verein/10949",
+        "city": {
+          "name": "Alcochete",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Alcochete"
+        }
+      }
+    },
+    {
+      "name": "Torreense",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/S.C.U._Torreense",
+      "transfermarkt_url": "https://www.transfermarkt.com/sc-uniao-torreense/startseite/verein/2432",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sc-uniao-torreense/besucherzahlenentwicklung/verein/2432",
+      "stadium": {
+        "name": "Estádio Manuel Marques",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/sc-uniao-torreense/stadion/verein/2432",
+        "city": {
+          "name": "Torres Vedras",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Torres_Vedras"
+        }
+      }
+    },
+    {
+      "name": "União de Leiria",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/U.D._Leiria",
+      "transfermarkt_url": "https://www.transfermarkt.com/uniao-leiria/startseite/verein/2639",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/uniao-leiria/besucherzahlenentwicklung/verein/2639",
+      "stadium": {
+        "name": "Estádio Dr. Magalhães Pessoa",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Dr._Magalh%C3%A3es_Pessoa",
+        "transfermarkt_url": "https://www.transfermarkt.com/uniao-leiria/stadion/verein/2639",
+        "city": {
+          "name": "Leiria",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Leiria"
+        }
+      }
+    },
+    {
+      "name": "Vizela",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Vizela",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-vizela/startseite/verein/6912",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-vizela/besucherzahlenentwicklung/verein/6912",
+      "stadium": {
+        "name": "Estádio do FC Vizela",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-vizela/stadion/verein/6912",
+        "city": {
+          "name": "Vizela",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vizela"
+        }
+      }
+    }
+  ]
+}

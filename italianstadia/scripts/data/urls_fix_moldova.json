@@ -1,0 +1,28 @@
+{
+  "league": {
+    "name": "Moldovan Super Liga",
+    "country": "Moldova",
+    "country_code": "MD",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "CSF Spartanii Sportul Selemet",
+      "transfermarkt_url": "https://www.transfermarkt.com/cf-spartanii-selemet/startseite/verein/73711",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cf-spartanii-selemet/besucherzahlenentwicklung/verein/73711",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/CSF_Spartanii_Sportul",
+      "stadium": {
+        "name": "Stadionul Selemet",
+        "transfermarkt_url": "https://www.transfermarkt.com/cf-spartanii-selemet/stadion/verein/73711/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Selemet",
+        "owner_raw": "CSF Spartanii Sportul Selemet",
+        "city": {
+          "name": "Selemet",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Selemet"
+        }
+      },
+      "girone": null
+    }
+  ]
+}

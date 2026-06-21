@@ -1,0 +1,26 @@
+{
+  "league": {
+    "name": "I liga",
+    "country": "Poland",
+    "country_code": "PL",
+    "division_level": 2,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Stal Rzeszów",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Stal_Rzesz%C3%B3w_(football)",
+      "transfermarkt_url": "https://www.transfermarkt.com/stal-rzeszow/startseite/verein/9510",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/stal-rzeszow/besucherzahlenentwicklung/verein/9510",
+      "stadium": {
+        "name": "Stadion Miejski w Rzeszowie",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stal_Rzesz%C3%B3w_Municipal_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/stal-rzeszow/stadion/verein/9510",
+        "city": {
+          "name": "Rzeszów",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rzesz%C3%B3w"
+        }
+      }
+    }
+  ]
+}

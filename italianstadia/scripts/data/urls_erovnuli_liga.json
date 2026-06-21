@@ -1,0 +1,161 @@
+{
+  "league": {
+    "name": "Erovnuli Liga",
+    "country": "Georgia",
+    "country_code": "GE",
+    "division_level": 1,
+    "season": "2025"
+  },
+  "teams": [
+    {
+      "name": "Dila Gori",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dila_Gori",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-dila-gori/startseite/verein/32017",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-dila-gori/besucherzahlenentwicklung/verein/32017",
+      "stadium": {
+        "name": "Tengiz Burjanadze Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tengiz_Burjanadze_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-dila-gori/stadion/verein/32017",
+        "city": {
+          "name": "Gori",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gori"
+        }
+      }
+    },
+    {
+      "name": "Dinamo Batumi",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dinamo_Batumi",
+      "transfermarkt_url": "https://www.transfermarkt.com/dinamo-batumi/startseite/verein/11344",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dinamo-batumi/besucherzahlenentwicklung/verein/11344",
+      "stadium": {
+        "name": "Adjarabet Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Adjarabet_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/dinamo-batumi/stadion/verein/11344",
+        "city": {
+          "name": "Batumi",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Batumi"
+        }
+      }
+    },
+    {
+      "name": "Dinamo Tbilisi",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dinamo_Tbilisi",
+      "transfermarkt_url": "https://www.transfermarkt.com/dinamo-tbilisi/startseite/verein/663",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dinamo-tbilisi/besucherzahlenentwicklung/verein/663",
+      "stadium": {
+        "name": "Boris Paichadze Dinamo Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Boris_Paichadze_Dinamo_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/dinamo-tbilisi/stadion/verein/663",
+        "city": {
+          "name": "Tbilisi",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tbilisi"
+        }
+      }
+    },
+    {
+      "name": "Gagra",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Gagra",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-gagra/startseite/verein/22842",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-gagra/besucherzahlenentwicklung/verein/22842",
+      "stadium": {
+        "name": "David Petriashvili Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-gagra/stadion/verein/22842",
+        "city": {
+          "name": "Tbilisi",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tbilisi"
+        }
+      }
+    },
+    {
+      "name": "Gareji",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Gareji_Sagarejo",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-gareji/startseite/verein/61358",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-gareji/besucherzahlenentwicklung/verein/61358",
+      "stadium": {
+        "name": "Sagarejo Central Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-gareji/stadion/verein/61358",
+        "city": {
+          "name": "Sagarejo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sagarejo"
+        }
+      }
+    },
+    {
+      "name": "Iberia 1999",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Iberia_1999",
+      "transfermarkt_url": "https://www.transfermarkt.com/iberia-1999-tbilisi/startseite/verein/41133",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/iberia-1999-tbilisi/besucherzahlenentwicklung/verein/41133",
+      "stadium": {
+        "name": "Mikheil Meskhi Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Mikheil_Meskhi_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/iberia-1999-tbilisi/stadion/verein/41133",
+        "city": {
+          "name": "Tbilisi",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tbilisi"
+        }
+      }
+    },
+    {
+      "name": "Kolkheti-1913 Poti",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Kolkheti-1913_Poti",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-kolkheti-1913-poti/startseite/verein/28971",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-kolkheti-1913-poti/besucherzahlenentwicklung/verein/28971",
+      "stadium": {
+        "name": "Poti Central Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-kolkheti-1913-poti/stadion/verein/28971",
+        "city": {
+          "name": "Poti",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Poti"
+        }
+      }
+    },
+    {
+      "name": "Samgurali Tskaltubo",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Samgurali_Tskaltubo",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-samgurali-tskaltubo/startseite/verein/29675",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-samgurali-tskaltubo/besucherzahlenentwicklung/verein/29675",
+      "stadium": {
+        "name": "Tskaltubo Central Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-samgurali-tskaltubo/stadion/verein/29675",
+        "city": {
+          "name": "Tsqaltubo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tsqaltubo"
+        }
+      }
+    },
+    {
+      "name": "Telavi",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Telavi",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-telavi/startseite/verein/41310",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-telavi/besucherzahlenentwicklung/verein/41310",
+      "stadium": {
+        "name": "Givi Chokheli Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Municipal_Stadium_(Telavi)",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-telavi/stadion/verein/41310",
+        "city": {
+          "name": "Telavi",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Telavi"
+        }
+      }
+    },
+    {
+      "name": "Torpedo Kutaisi",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Torpedo_Kutaisi",
+      "transfermarkt_url": "https://www.transfermarkt.com/torpedo-kutaisi/startseite/verein/253",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/torpedo-kutaisi/besucherzahlenentwicklung/verein/253",
+      "stadium": {
+        "name": "Ramaz Shengelia Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ramaz_Shengelia_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/torpedo-kutaisi/stadion/verein/253",
+        "city": {
+          "name": "Kutaisi",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kutaisi"
+        }
+      }
+    }
+  ]
+}

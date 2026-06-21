@@ -1,0 +1,161 @@
+{
+  "league": {
+    "name": "Armenian Premier League",
+    "country": "Armenia",
+    "country_code": "AM",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Alashkert",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Alashkert",
+      "transfermarkt_url": "https://www.transfermarkt.com/alashkert-yerevan/startseite/verein/37914",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/alashkert-yerevan/besucherzahlenentwicklung/verein/37914",
+      "stadium": {
+        "name": "Alashkert Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/alashkert-yerevan/stadion/verein/37914",
+        "city": {
+          "name": "Yerevan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Yerevan"
+        }
+      }
+    },
+    {
+      "name": "Ararat Yerevan",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ararat_Yerevan",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-ararat-erewan/startseite/verein/11912",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-ararat-erewan/besucherzahlenentwicklung/verein/11912",
+      "stadium": {
+        "name": "Vazgen Sargsyan Republican Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Vazgen_Sargsyan_Republican_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-ararat-erewan/stadion/verein/11912",
+        "city": {
+          "name": "Yerevan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Yerevan"
+        }
+      }
+    },
+    {
+      "name": "Ararat-Armenia",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ararat-Armenia",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-ararat-armenia/startseite/verein/53453",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-ararat-armenia/besucherzahlenentwicklung/verein/53453",
+      "stadium": {
+        "name": "Yerevan Football Academy Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Yerevan_Football_Academy_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-ararat-armenia/stadion/verein/53453",
+        "city": {
+          "name": "Yerevan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Yerevan"
+        }
+      }
+    },
+    {
+      "name": "BKMA Yerevan",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_BKMA_Yerevan",
+      "transfermarkt_url": "https://www.transfermarkt.com/zska-erewan/startseite/verein/46507",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/zska-erewan/besucherzahlenentwicklung/verein/46507",
+      "stadium": {
+        "name": "Yerevan Football Academy Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Yerevan_Football_Academy_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/zska-erewan/stadion/verein/46507",
+        "city": {
+          "name": "Yerevan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Yerevan"
+        }
+      }
+    },
+    {
+      "name": "Gandzasar Kapan",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Gandzasar_Kapan",
+      "transfermarkt_url": "https://www.transfermarkt.com/gandzasar-kapan/startseite/verein/23911",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gandzasar-kapan/besucherzahlenentwicklung/verein/23911",
+      "stadium": {
+        "name": "Gandzasar Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kapan_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/gandzasar-kapan/stadion/verein/23911",
+        "city": {
+          "name": "Kapan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kapan"
+        }
+      }
+    },
+    {
+      "name": "Noah",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Noah",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-noah-erewan/startseite/verein/60368",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-noah-erewan/besucherzahlenentwicklung/verein/60368",
+      "stadium": {
+        "name": "Abovyan City Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Vahagn_Tumasyan_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-noah-erewan/stadion/verein/60368",
+        "city": {
+          "name": "Abovyan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Abovyan"
+        }
+      }
+    },
+    {
+      "name": "Pyunik",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Pyunik",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-pyunik-yerevan/startseite/verein/10301",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-pyunik-yerevan/besucherzahlenentwicklung/verein/10301",
+      "stadium": {
+        "name": "Republican Stadium (Yerevan)",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Vazgen_Sargsyan_Republican_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-pyunik-yerevan/stadion/verein/10301",
+        "city": {
+          "name": "Yerevan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Yerevan"
+        }
+      }
+    },
+    {
+      "name": "Shirak",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Shirak_SC",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-shirak-gyumri/startseite/verein/4807",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-shirak-gyumri/besucherzahlenentwicklung/verein/4807",
+      "stadium": {
+        "name": "Gyumri City Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gyumri_City_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-shirak-gyumri/stadion/verein/4807",
+        "city": {
+          "name": "Gyumri",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gyumri"
+        }
+      }
+    },
+    {
+      "name": "Urartu",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Urartu",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-urartu-erewan/startseite/verein/11411",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-urartu-erewan/besucherzahlenentwicklung/verein/11411",
+      "stadium": {
+        "name": "Urartu Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Urartu_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-urartu-erewan/stadion/verein/11411",
+        "city": {
+          "name": "Yerevan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Yerevan"
+        }
+      }
+    },
+    {
+      "name": "Van",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Van",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-van/startseite/verein/74661",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-van/besucherzahlenentwicklung/verein/74661",
+      "stadium": {
+        "name": "Charentsavan City Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Charentsavan_City_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-van/stadion/verein/74661",
+        "city": {
+          "name": "Charentsavan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Charentsavan"
+        }
+      }
+    }
+  ]
+}

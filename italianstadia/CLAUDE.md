@@ -362,6 +362,35 @@ python -X utf8 manage.py audit_stadium_names --fix      # adopt wiki titles for 
 python -X utf8 manage.py audit_team_links --country <C> --fix  # clear wrong TM links + crests
 ```
 
+**One consolidated link audit — run this after building OR scraping any `urls_*.json`:**
+
+```bash
+python -X utf8 scripts/_audit_club_wikis.py scripts/data/urls_<league>.json --tm
+#   --quiet  print only the teams that have a problem
+#   --tm     also HTTP-check Transfermarkt links (slower; omit for a quick wiki-only pass)
+```
+
+It checks, per team AND per stadium, and reports four states so nothing is silently
+skipped:
+- `MISSING` — the `wikipedia_url`/`transfermarkt_url` is empty (the scrape found nothing)
+- `DEAD` / `DEAD-404` — the article / TM verein id does not exist
+- `SUSPECT` — wrong KIND of page: a team link that is not a football-club article
+  (falls back to the *city/region/concept* page — `Orenburg` city, `Karabakh` region,
+  `Noah` the biblical figure, `Llapi River` — instead of `FC Orenburg`, `Qarabağ FK`,
+  `FC Noah`, `KF Llapi`), or a stadium link that is not a venue article
+- TM `BUSY-5xx` — transient 502/503/504 (TM under load), NOT a data error: the slug is
+  cosmetic, the `verein/<id>` is canonical, and the scraper's `get_with_retry` handles it
+
+Gotchas learned the hard way:
+- Pass DECODED titles to the Wikipedia API (`urllib.parse.unquote` first) — sending the
+  percent-encoded slug (`Fortuna_D%C3%BCsseldorf`) makes every accented club a false
+  positive.
+- Use the descriptive Wikipedia API UA `stadiamap/1.0 (email)` — the browser UA is blocked.
+- A TM 502 is NOT caught by a wiki audit (different site) and is transient/slug-independent
+  (the same id 502s on one slug and 200s on another, minute to minute). The fix is the
+  scraper retry, not the slug — but prefer the ENGLISH TM slug for an English dataset
+  (`lokomotiv-moscow`, not the German `lokomotiv-moskau`).
+
 **Detection rules (embed in the scrape itself, not just the audit):**
 1. **Stadium name ↔ Wikipedia title.** If the scraped `name` shares ZERO significant
    tokens with its own Wikipedia page title, it's suspect. SPONSOR renames (both names

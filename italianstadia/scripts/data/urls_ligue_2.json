@@ -1,0 +1,281 @@
+{
+  "league": {
+    "name": "Ligue 2",
+    "country": "France",
+    "country_code": "FR",
+    "division_level": 2,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Amiens SC",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Amiens_SC",
+      "transfermarkt_url": "https://www.transfermarkt.com/amiens-sc/startseite/verein/1416",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/amiens-sc/besucherzahlenentwicklung/verein/1416",
+      "stadium": {
+        "name": "Stade de la Licorne",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_la_Licorne",
+        "transfermarkt_url": "https://www.transfermarkt.com/amiens-sc/stadion/verein/1416",
+        "city": {
+          "name": "Amiens",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Amiens"
+        }
+      }
+    },
+    {
+      "name": "FC Annecy",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Annecy",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-annecy/startseite/verein/30204",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-annecy/besucherzahlenentwicklung/verein/30204",
+      "stadium": {
+        "name": "Parc des Sports",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Parc_des_Sports_(Annecy)",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-annecy/stadion/verein/30204",
+        "city": {
+          "name": "Annecy",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Annecy"
+        }
+      }
+    },
+    {
+      "name": "SC Bastia",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Bastia",
+      "transfermarkt_url": "https://www.transfermarkt.com/sc-bastia/startseite/verein/595",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sc-bastia/besucherzahlenentwicklung/verein/595",
+      "stadium": {
+        "name": "Stade Armand Cesari",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Armand-Cesari",
+        "transfermarkt_url": "https://www.transfermarkt.com/sc-bastia/stadion/verein/595",
+        "city": {
+          "name": "Bastia",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bastia"
+        }
+      }
+    },
+    {
+      "name": "US Boulogne",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/US_Boulogne",
+      "transfermarkt_url": "https://www.transfermarkt.com/us-boulogne/startseite/verein/7042",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/us-boulogne/besucherzahlenentwicklung/verein/7042",
+      "stadium": {
+        "name": "Stade de la Libération",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_la_Lib%C3%A9ration",
+        "transfermarkt_url": "https://www.transfermarkt.com/us-boulogne/stadion/verein/7042",
+        "city": {
+          "name": "Boulogne-sur-Mer",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Boulogne-sur-Mer"
+        }
+      }
+    },
+    {
+      "name": "Clermont Foot",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Clermont_Foot_63",
+      "transfermarkt_url": "https://www.transfermarkt.com/clermont-foot-63/startseite/verein/3524",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/clermont-foot-63/besucherzahlenentwicklung/verein/3524",
+      "stadium": {
+        "name": "Stade Gabriel Montpied",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Gabriel-Montpied",
+        "transfermarkt_url": "https://www.transfermarkt.com/clermont-foot-63/stadion/verein/3524",
+        "city": {
+          "name": "Clermont-Ferrand",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Clermont-Ferrand"
+        }
+      }
+    },
+    {
+      "name": "USL Dunkerque",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/USL_Dunkerque",
+      "transfermarkt_url": "https://www.transfermarkt.com/usl-dunkerque/startseite/verein/9202",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/usl-dunkerque/besucherzahlenentwicklung/verein/9202",
+      "stadium": {
+        "name": "Stade Marcel Tribut",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Marcel-Tribut",
+        "transfermarkt_url": "https://www.transfermarkt.com/usl-dunkerque/stadion/verein/9202",
+        "city": {
+          "name": "Dunkirk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Dunkirk"
+        }
+      }
+    },
+    {
+      "name": "Grenoble Foot 38",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Grenoble_Foot_38",
+      "transfermarkt_url": "https://www.transfermarkt.com/grenoble-foot-38/startseite/verein/1290",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/grenoble-foot-38/besucherzahlenentwicklung/verein/1290",
+      "stadium": {
+        "name": "Stade des Alpes",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_des_Alpes",
+        "transfermarkt_url": "https://www.transfermarkt.com/grenoble-foot-38/stadion/verein/1290",
+        "city": {
+          "name": "Grenoble",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Grenoble"
+        }
+      }
+    },
+    {
+      "name": "En Avant Guingamp",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/En_Avant_Guingamp",
+      "transfermarkt_url": "https://www.transfermarkt.com/ea-guingamp/startseite/verein/855",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ea-guingamp/besucherzahlenentwicklung/verein/855",
+      "stadium": {
+        "name": "Stade de Roudourou",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_Roudourou",
+        "transfermarkt_url": "https://www.transfermarkt.com/ea-guingamp/stadion/verein/855",
+        "city": {
+          "name": "Guingamp",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Guingamp"
+        }
+      }
+    },
+    {
+      "name": "Stade Lavallois",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Lavallois",
+      "transfermarkt_url": "https://www.transfermarkt.com/stade-laval/startseite/verein/1080",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/stade-laval/besucherzahlenentwicklung/verein/1080",
+      "stadium": {
+        "name": "Stade Francis Le Basser",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Francis_Le_Basser",
+        "transfermarkt_url": "https://www.transfermarkt.com/stade-laval/stadion/verein/1080",
+        "city": {
+          "name": "Laval",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Laval"
+        }
+      }
+    },
+    {
+      "name": "Le Mans FC",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Le_Mans_FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/le-mans-fc/startseite/verein/1164",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/le-mans-fc/besucherzahlenentwicklung/verein/1164",
+      "stadium": {
+        "name": "Stade Marie-Marvingt",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Marie-Marvingt",
+        "transfermarkt_url": "https://www.transfermarkt.com/le-mans-fc/stadion/verein/1164",
+        "city": {
+          "name": "Le Mans",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Le_Mans"
+        }
+      }
+    },
+    {
+      "name": "Montpellier HSC",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Montpellier_HSC",
+      "transfermarkt_url": "https://www.transfermarkt.com/montpellier-hsc/startseite/verein/969",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/montpellier-hsc/besucherzahlenentwicklung/verein/969",
+      "stadium": {
+        "name": "Stade de la Mosson",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_la_Mosson",
+        "transfermarkt_url": "https://www.transfermarkt.com/montpellier-hsc/stadion/verein/969",
+        "city": {
+          "name": "Montpellier",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Montpellier"
+        }
+      }
+    },
+    {
+      "name": "AS Nancy Lorraine",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AS_Nancy_Lorraine",
+      "transfermarkt_url": "https://www.transfermarkt.com/as-nancy-lorraine/startseite/verein/1159",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/as-nancy-lorraine/besucherzahlenentwicklung/verein/1159",
+      "stadium": {
+        "name": "Stade Marcel Picot",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Marcel_Picot",
+        "transfermarkt_url": "https://www.transfermarkt.com/as-nancy-lorraine/stadion/verein/1159",
+        "city": {
+          "name": "Nancy",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Nancy"
+        }
+      }
+    },
+    {
+      "name": "Pau FC",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Pau_FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/pau-fc/startseite/verein/3166",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/pau-fc/besucherzahlenentwicklung/verein/3166",
+      "stadium": {
+        "name": "Nouste Camp",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_du_Hameau",
+        "transfermarkt_url": "https://www.transfermarkt.com/pau-fc/stadion/verein/3166",
+        "city": {
+          "name": "Pau",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pau"
+        }
+      }
+    },
+    {
+      "name": "Red Star FC",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Red_Star_FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/red-star-fc/startseite/verein/1154",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/red-star-fc/besucherzahlenentwicklung/verein/1154",
+      "stadium": {
+        "name": "Stade Bauer",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Bauer",
+        "transfermarkt_url": "https://www.transfermarkt.com/red-star-fc/stadion/verein/1154",
+        "city": {
+          "name": "Saint-Ouen-sur-Seine",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Saint-Ouen-sur-Seine"
+        }
+      }
+    },
+    {
+      "name": "Stade de Reims",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_Reims",
+      "transfermarkt_url": "https://www.transfermarkt.com/stade-reims/startseite/verein/1421",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/stade-reims/besucherzahlenentwicklung/verein/1421",
+      "stadium": {
+        "name": "Stade Auguste-Delaune",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Auguste-Delaune",
+        "transfermarkt_url": "https://www.transfermarkt.com/stade-reims/stadion/verein/1421",
+        "city": {
+          "name": "Reims",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Reims"
+        }
+      }
+    },
+    {
+      "name": "Rodez AF",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Rodez_AF",
+      "transfermarkt_url": "https://www.transfermarkt.com/rodez-af/startseite/verein/11273",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rodez-af/besucherzahlenentwicklung/verein/11273",
+      "stadium": {
+        "name": "Stade Paul Lignon",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Paul-Lignon",
+        "transfermarkt_url": "https://www.transfermarkt.com/rodez-af/stadion/verein/11273",
+        "city": {
+          "name": "Rodez",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rodez"
+        }
+      }
+    },
+    {
+      "name": "AS Saint-Étienne",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AS_Saint-%C3%89tienne",
+      "transfermarkt_url": "https://www.transfermarkt.com/as-saint-etienne/startseite/verein/618",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/as-saint-etienne/besucherzahlenentwicklung/verein/618",
+      "stadium": {
+        "name": "Stade Geoffroy Guichard",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Geoffroy-Guichard",
+        "transfermarkt_url": "https://www.transfermarkt.com/as-saint-etienne/stadion/verein/618",
+        "city": {
+          "name": "Saint-Étienne",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Saint-%C3%89tienne"
+        }
+      }
+    },
+    {
+      "name": "ES Troyes AC",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/ES_Troyes_AC",
+      "transfermarkt_url": "https://www.transfermarkt.com/es-troyes-ac/startseite/verein/1095",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/es-troyes-ac/besucherzahlenentwicklung/verein/1095",
+      "stadium": {
+        "name": "Stade de l'Aube",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_l%27Aube",
+        "transfermarkt_url": "https://www.transfermarkt.com/es-troyes-ac/stadion/verein/1095",
+        "city": {
+          "name": "Troyes",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Troyes"
+        }
+      }
+    }
+  ]
+}

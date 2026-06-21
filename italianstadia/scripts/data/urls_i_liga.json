@@ -1,0 +1,281 @@
+{
+  "league": {
+    "name": "I liga",
+    "country": "Poland",
+    "country_code": "PL",
+    "division_level": 2,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Chrobry Głogów",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Chrobry_G%C5%82og%C3%B3w",
+      "transfermarkt_url": "https://www.transfermarkt.com/chrobry-glogow/startseite/verein/8377",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/chrobry-glogow/besucherzahlenentwicklung/verein/8377",
+      "stadium": {
+        "name": "Stadion przy ulicy Rudnowskiej",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/chrobry-glogow/stadion/verein/8377",
+        "city": {
+          "name": "Głogów",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/G%C5%82og%C3%B3w"
+        }
+      }
+    },
+    {
+      "name": "GKS Tychy",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/GKS_Tychy",
+      "transfermarkt_url": "https://www.transfermarkt.com/gks-tychy/startseite/verein/1750",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gks-tychy/besucherzahlenentwicklung/verein/1750",
+      "stadium": {
+        "name": "Tychy City Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tychy_Municipal_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/gks-tychy/stadion/verein/1750",
+        "city": {
+          "name": "Tychy",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tychy"
+        }
+      }
+    },
+    {
+      "name": "Górnik Łęczna",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/GKS_G%C3%B3rnik_%C5%81%C4%99czna",
+      "transfermarkt_url": "https://www.transfermarkt.com/gornik-leczna/startseite/verein/3291",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gornik-leczna/besucherzahlenentwicklung/verein/3291",
+      "stadium": {
+        "name": "Górnik Łęczna Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/gornik-leczna/stadion/verein/3291",
+        "city": {
+          "name": "Łęczna",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%81%C4%99czna"
+        }
+      }
+    },
+    {
+      "name": "ŁKS Łódź",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%81KS_%C5%81%C3%B3d%C5%BA",
+      "transfermarkt_url": "https://www.transfermarkt.com/lks-lodz/startseite/verein/256",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/lks-lodz/besucherzahlenentwicklung/verein/256",
+      "stadium": {
+        "name": "Władysław Król Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/W%C5%82adys%C5%82aw_Kr%C3%B3l_Municipal_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/lks-lodz/stadion/verein/256",
+        "city": {
+          "name": "Łódź",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%81%C3%B3d%C5%BA"
+        }
+      }
+    },
+    {
+      "name": "Miedź Legnica",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Mied%C5%BA_Legnica",
+      "transfermarkt_url": "https://www.transfermarkt.com/miedz-legnica/startseite/verein/8936",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/miedz-legnica/besucherzahlenentwicklung/verein/8936",
+      "stadium": {
+        "name": "Stadion im. Orła Białego",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/White_Eagle_Municipal_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/miedz-legnica/stadion/verein/8936",
+        "city": {
+          "name": "Legnica",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Legnica"
+        }
+      }
+    },
+    {
+      "name": "Odra Opole",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Odra_Opole",
+      "transfermarkt_url": "https://www.transfermarkt.com/odra-opole/startseite/verein/5699",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/odra-opole/besucherzahlenentwicklung/verein/5699",
+      "stadium": {
+        "name": "Stadion Miejski w Opolu",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Itaka_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/odra-opole/stadion/verein/5699",
+        "city": {
+          "name": "Opole",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Opole"
+        }
+      }
+    },
+    {
+      "name": "Pogoń Grodzisk Mazowiecki",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Pogo%C5%84_Grodzisk_Mazowiecki",
+      "transfermarkt_url": "https://www.transfermarkt.com/pogon-grodzisk-mazowiecki/startseite/verein/30998",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/pogon-grodzisk-mazowiecki/besucherzahlenentwicklung/verein/30998",
+      "stadium": {
+        "name": "Stadion MOSiR w Grodzisku Mazowieckim",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/pogon-grodzisk-mazowiecki/stadion/verein/30998",
+        "city": {
+          "name": "Grodzisk Mazowiecki",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Grodzisk_Mazowiecki"
+        }
+      }
+    },
+    {
+      "name": "Pogoń Siedlce",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/MKP_Pogo%C5%84_Siedlce",
+      "transfermarkt_url": "https://www.transfermarkt.com/pogon-siedlce/startseite/verein/4896",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/pogon-siedlce/besucherzahlenentwicklung/verein/4896",
+      "stadium": {
+        "name": "Stadion Miejski w Siedlcach",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/pogon-siedlce/stadion/verein/4896",
+        "city": {
+          "name": "Siedlce",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Siedlce"
+        }
+      }
+    },
+    {
+      "name": "Polonia Bytom",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Polonia_Bytom",
+      "transfermarkt_url": "https://www.transfermarkt.com/polonia-bytom/startseite/verein/7976",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/polonia-bytom/besucherzahlenentwicklung/verein/7976",
+      "stadium": {
+        "name": "Stadion Polonii Bytom",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/polonia-bytom/stadion/verein/7976",
+        "city": {
+          "name": "Bytom",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bytom"
+        }
+      }
+    },
+    {
+      "name": "Polonia Warsaw",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Polonia_Warsaw",
+      "transfermarkt_url": "https://www.transfermarkt.com/polonia-warschau/startseite/verein/2745",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/polonia-warschau/besucherzahlenentwicklung/verein/2745",
+      "stadium": {
+        "name": "Konwiktorska Street Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/General_Kazimierz_Sosnkowski_Municipal_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/polonia-warschau/stadion/verein/2745",
+        "city": {
+          "name": "Warsaw",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Warsaw"
+        }
+      }
+    },
+    {
+      "name": "Puszcza Niepołomice",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Puszcza_Niepo%C5%82omice",
+      "transfermarkt_url": "https://www.transfermarkt.com/puszcza-niepolomice/startseite/verein/28893",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/puszcza-niepolomice/besucherzahlenentwicklung/verein/28893",
+      "stadium": {
+        "name": "Stadion Miejski w Niepołomicach",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/puszcza-niepolomice/stadion/verein/28893",
+        "city": {
+          "name": "Niepołomice",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Niepo%C5%82omice"
+        }
+      }
+    },
+    {
+      "name": "Ruch Chorzów",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ruch_Chorz%C3%B3w",
+      "transfermarkt_url": "https://www.transfermarkt.com/ruch-chorzow/startseite/verein/318",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ruch-chorzow/besucherzahlenentwicklung/verein/318",
+      "stadium": {
+        "name": "Stadion Śląski",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Silesian_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/ruch-chorzow/stadion/verein/318",
+        "city": {
+          "name": "Chorzów",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Chorz%C3%B3w"
+        }
+      }
+    },
+    {
+      "name": "Stal Rzeszów",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Stal_Rzesz%C3%B3w_(football)",
+      "transfermarkt_url": "https://www.transfermarkt.com/stal-rzeszow/startseite/verein/9510",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/stal-rzeszow/besucherzahlenentwicklung/verein/9510",
+      "stadium": {
+        "name": "Stadion Miejski w Rzeszowie",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stal_Rzesz%C3%B3w_Municipal_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/stal-rzeszow/stadion/verein/9510",
+        "city": {
+          "name": "Rzeszów",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rzesz%C3%B3w"
+        }
+      }
+    },
+    {
+      "name": "Stal Mielec",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Stal_Mielec",
+      "transfermarkt_url": "https://www.transfermarkt.com/stal-mielec/startseite/verein/22431",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/stal-mielec/besucherzahlenentwicklung/verein/22431",
+      "stadium": {
+        "name": "Grzegorz Lato Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/stal-mielec/stadion/verein/22431",
+        "city": {
+          "name": "Mielec",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Mielec"
+        }
+      }
+    },
+    {
+      "name": "Śląsk Wrocław",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%9Al%C4%85sk_Wroc%C5%82aw",
+      "transfermarkt_url": "https://www.transfermarkt.com/slask-wroclaw/startseite/verein/759",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/slask-wroclaw/besucherzahlenentwicklung/verein/759",
+      "stadium": {
+        "name": "Tarczyński Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Wroc%C5%82aw_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/slask-wroclaw/stadion/verein/759",
+        "city": {
+          "name": "Wrocław",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Wroc%C5%82aw"
+        }
+      }
+    },
+    {
+      "name": "Wieczysta Kraków",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Wieczysta_Krak%C3%B3w",
+      "transfermarkt_url": "https://www.transfermarkt.com/wieczysta-krakow/startseite/verein/30974",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/wieczysta-krakow/besucherzahlenentwicklung/verein/30974",
+      "stadium": {
+        "name": "ArcelorMittal Park",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/wieczysta-krakow/stadion/verein/30974",
+        "city": {
+          "name": "Sosnowiec",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sosnowiec"
+        }
+      }
+    },
+    {
+      "name": "Wisła Kraków",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Wis%C5%82a_Krak%C3%B3w",
+      "transfermarkt_url": "https://www.transfermarkt.com/wisla-krakau/startseite/verein/422",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/wisla-krakau/besucherzahlenentwicklung/verein/422",
+      "stadium": {
+        "name": "Stadion Miejski (Kraków)",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Henryk_Reyman_Municipal_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/wisla-krakau/stadion/verein/422",
+        "city": {
+          "name": "Kraków",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Krak%C3%B3w"
+        }
+      }
+    },
+    {
+      "name": "Znicz Pruszków",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Znicz_Pruszk%C3%B3w",
+      "transfermarkt_url": "https://www.transfermarkt.com/znicz-pruszkow/startseite/verein/9109",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/znicz-pruszkow/besucherzahlenentwicklung/verein/9109",
+      "stadium": {
+        "name": "Znicz Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/znicz-pruszkow/stadion/verein/9109",
+        "city": {
+          "name": "Pruszków",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pruszk%C3%B3w"
+        }
+      }
+    }
+  ]
+}

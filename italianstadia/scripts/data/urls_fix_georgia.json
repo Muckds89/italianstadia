@@ -1,0 +1,71 @@
+{
+  "league": {
+    "name": "Erovnuli Liga",
+    "country": "Georgia",
+    "country_code": "GE",
+    "division_level": 1,
+    "season": "2025"
+  },
+  "teams": [
+    {
+      "name": "Dinamo Tbilisi",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dinamo_Tbilisi",
+      "transfermarkt_url": "https://www.transfermarkt.com/dinamo-tbilisi/startseite/verein/663",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dinamo-tbilisi/besucherzahlenentwicklung/verein/663",
+      "stadium": {
+        "name": "Boris Paichadze Dinamo Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Boris_Paichadze_Dinamo_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/dinamo-tbilisi/stadion/verein/663",
+        "city": {
+          "name": "Tbilisi",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tbilisi"
+        }
+      }
+    },
+    {
+      "name": "Gagra",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Gagra",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-gagra/startseite/verein/22842",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-gagra/besucherzahlenentwicklung/verein/22842",
+      "stadium": {
+        "name": "David Petriashvili Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-gagra/stadion/verein/22842",
+        "city": {
+          "name": "Tbilisi",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tbilisi"
+        }
+      }
+    },
+    {
+      "name": "Gareji",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Gareji_Sagarejo",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-gareji/startseite/verein/61358",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-gareji/besucherzahlenentwicklung/verein/61358",
+      "stadium": {
+        "name": "Sagarejo Central Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-gareji/stadion/verein/61358",
+        "city": {
+          "name": "Sagarejo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sagarejo"
+        }
+      }
+    },
+    {
+      "name": "Telavi",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Telavi",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-telavi/startseite/verein/41310",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-telavi/besucherzahlenentwicklung/verein/41310",
+      "stadium": {
+        "name": "Givi Chokheli Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Municipal_Stadium_(Telavi)",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-telavi/stadion/verein/41310",
+        "city": {
+          "name": "Telavi",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Telavi"
+        }
+      }
+    }
+  ]
+}

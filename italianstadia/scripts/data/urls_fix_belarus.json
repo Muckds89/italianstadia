@@ -1,0 +1,101 @@
+{
+  "league": {
+    "name": "Belarusian Premier League",
+    "country": "Belarus",
+    "country_code": "BY",
+    "division_level": 1,
+    "season": "2025"
+  },
+  "teams": [
+    {
+      "name": "Dinamo Minsk",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dinamo_Minsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/dinamo-minsk/startseite/verein/1180",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dinamo-minsk/besucherzahlenentwicklung/verein/1180",
+      "stadium": {
+        "name": "Dinamo Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Dinamo_Stadium_(Minsk)",
+        "transfermarkt_url": "https://www.transfermarkt.com/dinamo-minsk/stadion/verein/1180",
+        "city": {
+          "name": "Minsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Minsk"
+        }
+      }
+    },
+    {
+      "name": "Torpedo-BelAZ Zhodino",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Torpedo-BelAZ_Zhodino",
+      "transfermarkt_url": "https://www.transfermarkt.com/torpedo-belaz-zhodino/startseite/verein/7964",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/torpedo-belaz-zhodino/besucherzahlenentwicklung/verein/7964",
+      "stadium": {
+        "name": "Torpedo Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Torpedo_Stadium_(Zhodino)",
+        "transfermarkt_url": "https://www.transfermarkt.com/torpedo-belaz-zhodino/stadion/verein/7964",
+        "city": {
+          "name": "Zhodzina",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Zhodzina"
+        }
+      }
+    },
+    {
+      "name": "Gomel",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Gomel",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-gomel/startseite/verein/10694",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-gomel/besucherzahlenentwicklung/verein/10694",
+      "stadium": {
+        "name": "Central Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Central_Stadium_(Gomel)",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-gomel/stadion/verein/10694",
+        "city": {
+          "name": "Gomel",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gomel"
+        }
+      }
+    },
+    {
+      "name": "Neman Grodno",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Neman_Grodno",
+      "transfermarkt_url": "https://www.transfermarkt.com/neman-grodno/startseite/verein/14178",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/neman-grodno/besucherzahlenentwicklung/verein/14178",
+      "stadium": {
+        "name": "Neman Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Neman_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/neman-grodno/stadion/verein/14178",
+        "city": {
+          "name": "Grodno",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Grodno"
+        }
+      }
+    },
+    {
+      "name": "Vitebsk",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Vitebsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-vitebsk/startseite/verein/17959",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-vitebsk/besucherzahlenentwicklung/verein/17959",
+      "stadium": {
+        "name": "Vitebsky CSK",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Vitebsky_Central_Sport_Complex",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-vitebsk/stadion/verein/17959",
+        "city": {
+          "name": "Vitebsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vitebsk"
+        }
+      }
+    },
+    {
+      "name": "Naftan Novopolotsk",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Naftan_Novopolotsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/naftan-novopolotsk/startseite/verein/8563",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/naftan-novopolotsk/besucherzahlenentwicklung/verein/8563",
+      "stadium": {
+        "name": "Atlant Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Atlant_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/naftan-novopolotsk/stadion/verein/8563",
+        "city": {
+          "name": "Novopolotsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Novopolotsk"
+        }
+      }
+    }
+  ]
+}

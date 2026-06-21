@@ -1,0 +1,311 @@
+{
+  "league": {
+    "name": "3. Liga",
+    "country": "Germany",
+    "country_code": "DE",
+    "division_level": 3,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Alemannia Aachen",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Alemannia_Aachen",
+      "transfermarkt_url": "https://www.transfermarkt.com/alemannia-aachen/startseite/verein/8",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/alemannia-aachen/besucherzahlenentwicklung/verein/8",
+      "stadium": {
+        "name": "New Tivoli",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/alemannia-aachen/stadion/verein/8",
+        "city": {
+          "name": "Aachen",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Aachen"
+        }
+      }
+    },
+    {
+      "name": "Erzgebirge Aue",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Erzgebirge_Aue",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-erzgebirge-aue/startseite/verein/94",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-erzgebirge-aue/besucherzahlenentwicklung/verein/94",
+      "stadium": {
+        "name": "Erzgebirgsstadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Eins_Erzgebirgsstadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-erzgebirge-aue/stadion/verein/94",
+        "city": {
+          "name": "Aue",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Aue"
+        }
+      }
+    },
+    {
+      "name": "Energie Cottbus",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Energie_Cottbus",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-energie-cottbus/startseite/verein/25",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-energie-cottbus/besucherzahlenentwicklung/verein/25",
+      "stadium": {
+        "name": "Stadion der Freundschaft",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_der_Freundschaft_(Cottbus)",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-energie-cottbus/stadion/verein/25",
+        "city": {
+          "name": "Cottbus",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Cottbus"
+        }
+      }
+    },
+    {
+      "name": "MSV Duisburg",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/MSV_Duisburg",
+      "transfermarkt_url": "https://www.transfermarkt.com/msv-duisburg/startseite/verein/52",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/msv-duisburg/besucherzahlenentwicklung/verein/52",
+      "stadium": {
+        "name": "Schauinsland-Reisen-Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/MSV-Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/msv-duisburg/stadion/verein/52",
+        "city": {
+          "name": "Duisburg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Duisburg"
+        }
+      }
+    },
+    {
+      "name": "Rot-Weiss Essen",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Rot-Weiss_Essen",
+      "transfermarkt_url": "https://www.transfermarkt.com/rot-weiss-essen/startseite/verein/56",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rot-weiss-essen/besucherzahlenentwicklung/verein/56",
+      "stadium": {
+        "name": "Stadion an der Hafenstraße",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_an_der_Hafenstra%C3%9Fe",
+        "transfermarkt_url": "https://www.transfermarkt.com/rot-weiss-essen/stadion/verein/56",
+        "city": {
+          "name": "Essen",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Essen"
+        }
+      }
+    },
+    {
+      "name": "TSV Havelse",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/TSV_Havelse",
+      "transfermarkt_url": "https://www.transfermarkt.com/tsv-havelse/startseite/verein/476",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/tsv-havelse/besucherzahlenentwicklung/verein/476",
+      "stadium": {
+        "name": "Eilenriedestadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Eilenriedestadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/tsv-havelse/stadion/verein/476",
+        "city": {
+          "name": "Hanover",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Hanover"
+        }
+      }
+    },
+    {
+      "name": "TSG Hoffenheim II",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/TSG_1899_Hoffenheim_II",
+      "transfermarkt_url": "https://www.transfermarkt.com/tsg-1899-hoffenheim-ii/startseite/verein/983",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/tsg-1899-hoffenheim-ii/besucherzahlenentwicklung/verein/983",
+      "stadium": {
+        "name": "Dietmar-Hopp-Stadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Dietmar-Hopp-Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/tsg-1899-hoffenheim-ii/stadion/verein/983",
+        "city": {
+          "name": "Sinsheim",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sinsheim"
+        }
+      }
+    },
+    {
+      "name": "FC Ingolstadt",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ingolstadt_04",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-ingolstadt-04/startseite/verein/4795",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-ingolstadt-04/besucherzahlenentwicklung/verein/4795",
+      "stadium": {
+        "name": "Audi Sportpark",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Audi_Sportpark",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-ingolstadt-04/stadion/verein/4795",
+        "city": {
+          "name": "Ingolstadt",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ingolstadt"
+        }
+      }
+    },
+    {
+      "name": "Viktoria Köln",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Viktoria_K%C3%B6ln",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-viktoria-koln/startseite/verein/1622",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-viktoria-koln/besucherzahlenentwicklung/verein/1622",
+      "stadium": {
+        "name": "Sportpark Höhenberg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sportpark_H%C3%B6henberg",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-viktoria-koln/stadion/verein/1622",
+        "city": {
+          "name": "Cologne",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Cologne"
+        }
+      }
+    },
+    {
+      "name": "SV Waldhof Mannheim",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SV_Waldhof_Mannheim",
+      "transfermarkt_url": "https://www.transfermarkt.com/sv-waldhof-mannheim/startseite/verein/85",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sv-waldhof-mannheim/besucherzahlenentwicklung/verein/85",
+      "stadium": {
+        "name": "Carl-Benz-Stadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Carl-Benz-Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/sv-waldhof-mannheim/stadion/verein/85",
+        "city": {
+          "name": "Mannheim",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Mannheim"
+        }
+      }
+    },
+    {
+      "name": "1860 Munich",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/TSV_1860_Munich",
+      "transfermarkt_url": "https://www.transfermarkt.com/tsv-1860-munchen/startseite/verein/72",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/tsv-1860-munchen/besucherzahlenentwicklung/verein/72",
+      "stadium": {
+        "name": "Grünwalder Stadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gr%C3%BCnwalder_Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/tsv-1860-munchen/stadion/verein/72",
+        "city": {
+          "name": "Munich",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Munich"
+        }
+      }
+    },
+    {
+      "name": "VfL Osnabrück",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/VfL_Osnabr%C3%BCck",
+      "transfermarkt_url": "https://www.transfermarkt.com/vfl-osnabruck/startseite/verein/81",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/vfl-osnabruck/besucherzahlenentwicklung/verein/81",
+      "stadium": {
+        "name": "Stadion an der Bremer Brücke",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_an_der_Bremer_Br%C3%BCcke",
+        "transfermarkt_url": "https://www.transfermarkt.com/vfl-osnabruck/stadion/verein/81",
+        "city": {
+          "name": "Osnabrück",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Osnabr%C3%BCck"
+        }
+      }
+    },
+    {
+      "name": "Jahn Regensburg",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SSV_Jahn_Regensburg",
+      "transfermarkt_url": "https://www.transfermarkt.com/ssv-jahn-regensburg/startseite/verein/109",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ssv-jahn-regensburg/besucherzahlenentwicklung/verein/109",
+      "stadium": {
+        "name": "Jahnstadion Regensburg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Jahnstadion_Regensburg",
+        "transfermarkt_url": "https://www.transfermarkt.com/ssv-jahn-regensburg/stadion/verein/109",
+        "city": {
+          "name": "Regensburg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Regensburg"
+        }
+      }
+    },
+    {
+      "name": "Hansa Rostock",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Hansa_Rostock",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-hansa-rostock/startseite/verein/30",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-hansa-rostock/besucherzahlenentwicklung/verein/30",
+      "stadium": {
+        "name": "Ostseestadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ostseestadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-hansa-rostock/stadion/verein/30",
+        "city": {
+          "name": "Rostock",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rostock"
+        }
+      }
+    },
+    {
+      "name": "1. FC Saarbrücken",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/1._FC_Saarbr%C3%BCcken",
+      "transfermarkt_url": "https://www.transfermarkt.com/1-fc-saarbrucken/startseite/verein/1",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/1-fc-saarbrucken/besucherzahlenentwicklung/verein/1",
+      "stadium": {
+        "name": "Ludwigsparkstadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ludwigsparkstadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/1-fc-saarbrucken/stadion/verein/1",
+        "city": {
+          "name": "Saarbrücken",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Saarbr%C3%BCcken"
+        }
+      }
+    },
+    {
+      "name": "1. FC Schweinfurt 05",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/1._FC_Schweinfurt_05",
+      "transfermarkt_url": "https://www.transfermarkt.com/1-fc-schweinfurt-05/startseite/verein/103",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/1-fc-schweinfurt-05/besucherzahlenentwicklung/verein/103",
+      "stadium": {
+        "name": "Willy-Sachs-Stadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sachs-Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/1-fc-schweinfurt-05/stadion/verein/103",
+        "city": {
+          "name": "Schweinfurt",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Schweinfurt"
+        }
+      }
+    },
+    {
+      "name": "VfB Stuttgart II",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/VfB_Stuttgart_II",
+      "transfermarkt_url": "https://www.transfermarkt.com/vfb-stuttgart-ii/startseite/verein/102",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/vfb-stuttgart-ii/besucherzahlenentwicklung/verein/102",
+      "stadium": {
+        "name": "WIRmachenDRUCK Arena",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/vfb-stuttgart-ii/stadion/verein/102",
+        "city": {
+          "name": "Aspach",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Aspach"
+        }
+      }
+    },
+    {
+      "name": "SSV Ulm",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SSV_Ulm_1846",
+      "transfermarkt_url": "https://www.transfermarkt.com/ssv-ulm-1846/startseite/verein/69",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ssv-ulm-1846/besucherzahlenentwicklung/verein/69",
+      "stadium": {
+        "name": "Donaustadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Donaustadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/ssv-ulm-1846/stadion/verein/69",
+        "city": {
+          "name": "Ulm",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ulm"
+        }
+      }
+    },
+    {
+      "name": "SC Verl",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Verl",
+      "transfermarkt_url": "https://www.transfermarkt.com/sc-verl/startseite/verein/93",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sc-verl/besucherzahlenentwicklung/verein/93",
+      "stadium": {
+        "name": "Sportclub Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sportclub_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/sc-verl/stadion/verein/93",
+        "city": {
+          "name": "Verl",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Verl"
+        }
+      }
+    },
+    {
+      "name": "SV Wehen Wiesbaden",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SV_Wehen_Wiesbaden",
+      "transfermarkt_url": "https://www.transfermarkt.com/sv-wehen-wiesbaden/startseite/verein/108",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sv-wehen-wiesbaden/besucherzahlenentwicklung/verein/108",
+      "stadium": {
+        "name": "BRITA-Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Brita-Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/sv-wehen-wiesbaden/stadion/verein/108",
+        "city": {
+          "name": "Wiesbaden",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Wiesbaden"
+        }
+      }
+    }
+  ]
+}

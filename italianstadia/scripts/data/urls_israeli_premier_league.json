@@ -1,0 +1,221 @@
+{
+  "league": {
+    "name": "Israeli Premier League",
+    "country": "Israel",
+    "country_code": "IL",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Beitar Jerusalem",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Beitar_Jerusalem_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/beitar-jerusalem/startseite/verein/3793",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/beitar-jerusalem/besucherzahlenentwicklung/verein/3793",
+      "stadium": {
+        "name": "Teddy Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Teddy_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/beitar-jerusalem/stadion/verein/3793",
+        "city": {
+          "name": "Jerusalem",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Jerusalem"
+        }
+      }
+    },
+    {
+      "name": "Bnei Sakhnin",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Bnei_Sakhnin_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/ihud-bnei-sachnin/startseite/verein/4769",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ihud-bnei-sachnin/besucherzahlenentwicklung/verein/4769",
+      "stadium": {
+        "name": "Doha Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Doha_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/ihud-bnei-sachnin/stadion/verein/4769",
+        "city": {
+          "name": "Sakhnin",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sakhnin"
+        }
+      }
+    },
+    {
+      "name": "F.C. Ashdod",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/F.C._Ashdod",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-ashdod/startseite/verein/6105",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-ashdod/besucherzahlenentwicklung/verein/6105",
+      "stadium": {
+        "name": "Yud-Alef Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Yud-Alef_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-ashdod/stadion/verein/6105",
+        "city": {
+          "name": "Ashdod",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ashdod"
+        }
+      }
+    },
+    {
+      "name": "Hapoel Be'er Sheva",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Hapoel_Be%27er_Sheva_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/hapoel-beer-sheva/startseite/verein/2976",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hapoel-beer-sheva/besucherzahlenentwicklung/verein/2976",
+      "stadium": {
+        "name": "Turner Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Turner_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/hapoel-beer-sheva/stadion/verein/2976",
+        "city": {
+          "name": "Beersheba",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Beersheba"
+        }
+      }
+    },
+    {
+      "name": "Hapoel Haifa",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Hapoel_Haifa_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/hapoel-haifa/startseite/verein/810",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hapoel-haifa/besucherzahlenentwicklung/verein/810",
+      "stadium": {
+        "name": "Sammy Ofer Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sammy_Ofer_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/hapoel-haifa/stadion/verein/810",
+        "city": {
+          "name": "Haifa",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Haifa"
+        }
+      }
+    },
+    {
+      "name": "Hapoel Jerusalem",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Hapoel_Jerusalem_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/hapoel-jerusalem/startseite/verein/43119",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hapoel-jerusalem/besucherzahlenentwicklung/verein/43119",
+      "stadium": {
+        "name": "Teddy Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Teddy_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/hapoel-jerusalem/stadion/verein/43119",
+        "city": {
+          "name": "Jerusalem",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Jerusalem"
+        }
+      }
+    },
+    {
+      "name": "Hapoel Petah Tikva",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Hapoel_Petah_Tikva_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/hapoel-petah-tikva/startseite/verein/262",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hapoel-petah-tikva/besucherzahlenentwicklung/verein/262",
+      "stadium": {
+        "name": "HaMoshava Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/HaMoshava_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/hapoel-petah-tikva/stadion/verein/262",
+        "city": {
+          "name": "Petah Tikva",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Petah_Tikva"
+        }
+      }
+    },
+    {
+      "name": "Hapoel Tel Aviv",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Hapoel_Tel_Aviv_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/hapoel-tel-aviv/startseite/verein/1017",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hapoel-tel-aviv/besucherzahlenentwicklung/verein/1017",
+      "stadium": {
+        "name": "Bloomfield Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bloomfield_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/hapoel-tel-aviv/stadion/verein/1017",
+        "city": {
+          "name": "Tel Aviv",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tel_Aviv"
+        }
+      }
+    },
+    {
+      "name": "Ironi Kiryat Shmona",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Hapoel_Ironi_Kiryat_Shmona_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/ironi-kiryat-shmona/startseite/verein/6028",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ironi-kiryat-shmona/besucherzahlenentwicklung/verein/6028",
+      "stadium": {
+        "name": "Netanya Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Netanya_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/ironi-kiryat-shmona/stadion/verein/6028",
+        "city": {
+          "name": "Kiryat Shmona",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kiryat_Shmona"
+        }
+      }
+    },
+    {
+      "name": "Ironi Tiberias",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ironi_Tiberias_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/ironi-tiberias/startseite/verein/51070",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ironi-tiberias/besucherzahlenentwicklung/verein/51070",
+      "stadium": {
+        "name": "Green Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/ironi-tiberias/stadion/verein/51070",
+        "city": {
+          "name": "Nof HaGalil",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Nof_HaGalil"
+        }
+      }
+    },
+    {
+      "name": "Maccabi Bnei Reineh",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Maccabi_Bnei_Reineh_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/maccabi-bnei-reineh/startseite/verein/70178",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/maccabi-bnei-reineh/besucherzahlenentwicklung/verein/70178",
+      "stadium": {
+        "name": "Green Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/maccabi-bnei-reineh/stadion/verein/70178",
+        "city": {
+          "name": "Nof HaGalil",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Nof_HaGalil"
+        }
+      }
+    },
+    {
+      "name": "Maccabi Haifa",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Maccabi_Haifa_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/maccabi-haifa/startseite/verein/1064",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/maccabi-haifa/besucherzahlenentwicklung/verein/1064",
+      "stadium": {
+        "name": "Sammy Ofer Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sammy_Ofer_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/maccabi-haifa/stadion/verein/1064",
+        "city": {
+          "name": "Haifa",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Haifa"
+        }
+      }
+    },
+    {
+      "name": "Maccabi Netanya",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Maccabi_Netanya_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/maccabi-netanya/startseite/verein/5223",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/maccabi-netanya/besucherzahlenentwicklung/verein/5223",
+      "stadium": {
+        "name": "Netanya Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Netanya_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/maccabi-netanya/stadion/verein/5223",
+        "city": {
+          "name": "Netanya",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Netanya"
+        }
+      }
+    },
+    {
+      "name": "Maccabi Tel Aviv",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Maccabi_Tel_Aviv_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/maccabi-tel-aviv/startseite/verein/119",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/maccabi-tel-aviv/besucherzahlenentwicklung/verein/119",
+      "stadium": {
+        "name": "Bloomfield Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bloomfield_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/maccabi-tel-aviv/stadion/verein/119",
+        "city": {
+          "name": "Tel Aviv",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tel_Aviv"
+        }
+      }
+    }
+  ]
+}

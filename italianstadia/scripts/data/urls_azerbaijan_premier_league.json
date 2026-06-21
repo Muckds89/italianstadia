@@ -1,0 +1,191 @@
+{
+  "league": {
+    "name": "Azerbaijan Premier League",
+    "country": "Azerbaijan",
+    "country_code": "AZ",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Araz-Naxçıvan",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Araz-Nax%C3%A7%C4%B1van_PFK",
+      "transfermarkt_url": "https://www.transfermarkt.com/araz-naxcivan-nakchivan/startseite/verein/44360",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/araz-naxcivan-nakchivan/besucherzahlenentwicklung/verein/44360",
+      "stadium": {
+        "name": "Dalga Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Dalga_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/araz-naxcivan-nakchivan/stadion/verein/44360",
+        "city": {
+          "name": "Baku",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Baku"
+        }
+      }
+    },
+    {
+      "name": "Gabala",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Qabala_%C4%B0K",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-qabala/startseite/verein/22010",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-qabala/besucherzahlenentwicklung/verein/22010",
+      "stadium": {
+        "name": "Gabala City Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gabala_City_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-qabala/stadion/verein/22010",
+        "city": {
+          "name": "Qabala",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Qabala"
+        }
+      }
+    },
+    {
+      "name": "İmişli",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/%C4%B0mi%C5%9Fli_FK",
+      "transfermarkt_url": "https://www.transfermarkt.com/imishli/startseite/verein/103512",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/imishli/besucherzahlenentwicklung/verein/103512",
+      "stadium": {
+        "name": "Heydar Aliyev Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Heydar_Aliyev_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/imishli/stadion/verein/103512",
+        "city": {
+          "name": "Imishli",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Imishli_District"
+        }
+      }
+    },
+    {
+      "name": "Kapaz",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Kapaz_PFK",
+      "transfermarkt_url": "https://www.transfermarkt.com/kapaz-pfk/startseite/verein/7090",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kapaz-pfk/besucherzahlenentwicklung/verein/7090",
+      "stadium": {
+        "name": "Ganja City Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ganja_City_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/kapaz-pfk/stadion/verein/7090",
+        "city": {
+          "name": "Ganja",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ganja"
+        }
+      }
+    },
+    {
+      "name": "Karvan",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Karvan_%C4%B0K",
+      "transfermarkt_url": "https://www.transfermarkt.com/karvan-yevlakh/startseite/verein/9796",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/karvan-yevlakh/besucherzahlenentwicklung/verein/9796",
+      "stadium": {
+        "name": "Yevlakh City Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Yevlakh_City_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/karvan-yevlakh/stadion/verein/9796",
+        "city": {
+          "name": "Yevlakh",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Yevlakh"
+        }
+      }
+    },
+    {
+      "name": "Neftçi",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Neft%C3%A7i_PFK",
+      "transfermarkt_url": "https://www.transfermarkt.com/neftchi-baku/startseite/verein/8031",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/neftchi-baku/besucherzahlenentwicklung/verein/8031",
+      "stadium": {
+        "name": "Neftchi Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Neft%C3%A7i_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/neftchi-baku/stadion/verein/8031",
+        "city": {
+          "name": "Baku",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Baku"
+        }
+      }
+    },
+    {
+      "name": "Qarabağ",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Qaraba%C4%9F_FK",
+      "transfermarkt_url": "https://www.transfermarkt.com/qarabag-fk/startseite/verein/10625",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/qarabag-fk/besucherzahlenentwicklung/verein/10625",
+      "stadium": {
+        "name": "Tofiq Bahramov Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tofiq_Bahramov_Republican_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/qarabag-fk/stadion/verein/10625",
+        "city": {
+          "name": "Baku",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Baku"
+        }
+      }
+    },
+    {
+      "name": "Sabah",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sabah_FK_(Azerbaijan)",
+      "transfermarkt_url": "https://www.transfermarkt.com/sabah-fk/startseite/verein/63993",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sabah-fk/besucherzahlenentwicklung/verein/63993",
+      "stadium": {
+        "name": "Bank Respublika Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bank_Respublika_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/sabah-fk/stadion/verein/63993",
+        "city": {
+          "name": "Baku",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Baku"
+        }
+      }
+    },
+    {
+      "name": "Şamaxı",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%9Eamax%C4%B1_FK",
+      "transfermarkt_url": "https://www.transfermarkt.com/keshla-fk/startseite/verein/8956",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/keshla-fk/besucherzahlenentwicklung/verein/8956",
+      "stadium": {
+        "name": "Shamakhi City Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Shamakhi_City_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/keshla-fk/stadion/verein/8956",
+        "city": {
+          "name": "Shamakhi",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Shamakhi"
+        }
+      }
+    },
+    {
+      "name": "Sumgayit",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sumgayit_FK",
+      "transfermarkt_url": "https://www.transfermarkt.com/sumqayit-pfk/startseite/verein/36999",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sumqayit-pfk/besucherzahlenentwicklung/verein/36999",
+      "stadium": {
+        "name": "Mehdi Huseynzade Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sumgayit_City_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/sumqayit-pfk/stadion/verein/36999",
+        "city": {
+          "name": "Sumgayit",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sumgait"
+        }
+      }
+    },
+    {
+      "name": "Turan Tovuz",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Turan_Tovuz",
+      "transfermarkt_url": "https://www.transfermarkt.com/turan-tovuz/startseite/verein/9526",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/turan-tovuz/besucherzahlenentwicklung/verein/9526",
+      "stadium": {
+        "name": "Tovuz City Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Tovuz_City_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/turan-tovuz/stadion/verein/9526",
+        "city": {
+          "name": "Tovuz",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tovuz"
+        }
+      }
+    },
+    {
+      "name": "Zira",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Zira_FK",
+      "transfermarkt_url": "https://www.transfermarkt.com/zira-fk/startseite/verein/46710",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/zira-fk/besucherzahlenentwicklung/verein/46710",
+      "stadium": {
+        "name": "Zira Olympic Sport Complex",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Zira_Olympic_Sport_Complex_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/zira-fk/stadion/verein/46710",
+        "city": {
+          "name": "Baku",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Baku"
+        }
+      }
+    }
+  ]
+}

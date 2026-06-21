@@ -1,0 +1,161 @@
+{
+  "league": {
+    "name": "Football Superleague of Kosovo",
+    "country": "Kosovo",
+    "country_code": "XK",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Ballkani",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ballkani",
+      "transfermarkt_url": "https://www.transfermarkt.com/kf-ballkani/startseite/verein/28082",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kf-ballkani/besucherzahlenentwicklung/verein/28082",
+      "stadium": {
+        "name": "Suva Reka City Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/kf-ballkani/stadion/verein/28082",
+        "city": {
+          "name": "Suharekë",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Suva_Reka"
+        }
+      }
+    },
+    {
+      "name": "Drenica",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Drenica",
+      "transfermarkt_url": "https://www.transfermarkt.com/kf-drenica/startseite/verein/19697",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kf-drenica/besucherzahlenentwicklung/verein/19697",
+      "stadium": {
+        "name": "Bajram Aliu Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bajram_Aliu_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/kf-drenica/stadion/verein/19697",
+        "city": {
+          "name": "Skenderaj",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Skenderaj"
+        }
+      }
+    },
+    {
+      "name": "Drita",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Drita",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-drita/startseite/verein/33741",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-drita/besucherzahlenentwicklung/verein/33741",
+      "stadium": {
+        "name": "Gjilan City Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gjilan_City_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-drita/stadion/verein/33741",
+        "city": {
+          "name": "Gjilan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gjilan"
+        }
+      }
+    },
+    {
+      "name": "Dukagjini",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Dukagjini",
+      "transfermarkt_url": "https://www.transfermarkt.com/kf-dukagjini/startseite/verein/46887",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kf-dukagjini/besucherzahlenentwicklung/verein/46887",
+      "stadium": {
+        "name": "18 June Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/kf-dukagjini/stadion/verein/46887",
+        "city": {
+          "name": "Klinë",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Klina"
+        }
+      }
+    },
+    {
+      "name": "Ferizaj",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ferizaj",
+      "transfermarkt_url": "https://www.transfermarkt.com/kf-ferizaj/startseite/verein/29051",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kf-ferizaj/besucherzahlenentwicklung/verein/29051",
+      "stadium": {
+        "name": "Ferizaj City Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/kf-ferizaj/stadion/verein/29051",
+        "city": {
+          "name": "Ferizaj",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ferizaj"
+        }
+      }
+    },
+    {
+      "name": "Gjilani",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Gjilani",
+      "transfermarkt_url": "https://www.transfermarkt.com/sc-gjilani/startseite/verein/29053",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sc-gjilani/besucherzahlenentwicklung/verein/29053",
+      "stadium": {
+        "name": "Gjilan City Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Gjilan_City_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/sc-gjilani/stadion/verein/29053",
+        "city": {
+          "name": "Gjilan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gjilan"
+        }
+      }
+    },
+    {
+      "name": "Llapi",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Llapi",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-llapi/startseite/verein/33206",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-llapi/besucherzahlenentwicklung/verein/33206",
+      "stadium": {
+        "name": "Zahir Pajaziti Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Zahir_Pajaziti_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-llapi/stadion/verein/33206",
+        "city": {
+          "name": "Podujevë",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Podujev%C3%AB"
+        }
+      }
+    },
+    {
+      "name": "Malisheva",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Malisheva",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-malisheva/startseite/verein/80996",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-malisheva/besucherzahlenentwicklung/verein/80996",
+      "stadium": {
+        "name": "Liman Gegaj Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-malisheva/stadion/verein/80996",
+        "city": {
+          "name": "Malishevë",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Malisheva"
+        }
+      }
+    },
+    {
+      "name": "Prishtina",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Prishtina",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-prishtina/startseite/verein/1918",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-prishtina/besucherzahlenentwicklung/verein/1918",
+      "stadium": {
+        "name": "Fadil Vokrri Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Fadil_Vokrri_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-prishtina/stadion/verein/1918",
+        "city": {
+          "name": "Pristina",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pristina"
+        }
+      }
+    },
+    {
+      "name": "Prishtina e Re",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Prishtina_e_Re",
+      "transfermarkt_url": "https://www.transfermarkt.com/kf-shkendija-hajvali/startseite/verein/95597",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kf-shkendija-hajvali/besucherzahlenentwicklung/verein/95597",
+      "stadium": {
+        "name": "Sami Kelmendi Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/kf-shkendija-hajvali/stadion/verein/95597",
+        "city": {
+          "name": "Pristina",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pristina"
+        }
+      }
+    }
+  ]
+}

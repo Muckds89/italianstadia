@@ -1,0 +1,26 @@
+{
+  "league": {
+    "name": "La Liga",
+    "country": "Spain",
+    "country_code": "ES",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Athletic Club",
+      "transfermarkt_url": "https://www.transfermarkt.com/athletic-bilbao/startseite/verein/621",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/athletic-bilbao/besucherzahlenentwicklung/verein/621",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Athletic_Bilbao",
+      "stadium": {
+        "name": "San Mamés",
+        "transfermarkt_url": "https://www.transfermarkt.com/athletic-bilbao/stadion/verein/621",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/San_Mam%C3%A9s_Stadium",
+        "city": {
+          "name": "Bilbao",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bilbao"
+        }
+      }
+    }
+  ]
+}

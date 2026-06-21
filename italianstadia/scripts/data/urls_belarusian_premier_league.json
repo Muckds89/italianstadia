@@ -1,0 +1,251 @@
+{
+  "league": {
+    "name": "Belarusian Premier League",
+    "country": "Belarus",
+    "country_code": "BY",
+    "division_level": 1,
+    "season": "2025"
+  },
+  "teams": [
+    {
+      "name": "Maxline Vitebsk",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Maxline_Vitebsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/ml-vitebsk/startseite/verein/36596",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ml-vitebsk/besucherzahlenentwicklung/verein/36596",
+      "stadium": {
+        "name": "Vitebsky CSK",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Vitebsky_Central_Sport_Complex",
+        "transfermarkt_url": "https://www.transfermarkt.com/ml-vitebsk/stadion/verein/36596",
+        "city": {
+          "name": "Vitebsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vitebsk"
+        }
+      }
+    },
+    {
+      "name": "BATE Borisov",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_BATE_Borisov",
+      "transfermarkt_url": "https://www.transfermarkt.com/bate-borisov/startseite/verein/713",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/bate-borisov/besucherzahlenentwicklung/verein/713",
+      "stadium": {
+        "name": "Borisov Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Borisov_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/bate-borisov/stadion/verein/713",
+        "city": {
+          "name": "Barysaw",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Barysaw"
+        }
+      }
+    },
+    {
+      "name": "Dinamo Minsk",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dinamo_Minsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/dinamo-minsk/startseite/verein/1180",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dinamo-minsk/besucherzahlenentwicklung/verein/1180",
+      "stadium": {
+        "name": "Dinamo Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Dinamo_Stadium_(Minsk)",
+        "transfermarkt_url": "https://www.transfermarkt.com/dinamo-minsk/stadion/verein/1180",
+        "city": {
+          "name": "Minsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Minsk"
+        }
+      }
+    },
+    {
+      "name": "Dynamo Brest",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dynamo_Brest",
+      "transfermarkt_url": "https://www.transfermarkt.com/dynamo-brest/startseite/verein/6131",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dynamo-brest/besucherzahlenentwicklung/verein/6131",
+      "stadium": {
+        "name": "OSK Brestsky",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Regional_Sport_Complex_Brestsky",
+        "transfermarkt_url": "https://www.transfermarkt.com/dynamo-brest/stadion/verein/6131",
+        "city": {
+          "name": "Brest",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Brest"
+        }
+      }
+    },
+    {
+      "name": "Torpedo-BelAZ Zhodino",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Torpedo-BelAZ_Zhodino",
+      "transfermarkt_url": "https://www.transfermarkt.com/torpedo-belaz-zhodino/startseite/verein/7964",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/torpedo-belaz-zhodino/besucherzahlenentwicklung/verein/7964",
+      "stadium": {
+        "name": "Torpedo Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Torpedo_Stadium_(Zhodino)",
+        "transfermarkt_url": "https://www.transfermarkt.com/torpedo-belaz-zhodino/stadion/verein/7964",
+        "city": {
+          "name": "Zhodzina",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Zhodzina"
+        }
+      }
+    },
+    {
+      "name": "Slavia Mozyr",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Slavia_Mozyr",
+      "transfermarkt_url": "https://www.transfermarkt.com/slavia-mozyr/startseite/verein/6423",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/slavia-mozyr/besucherzahlenentwicklung/verein/6423",
+      "stadium": {
+        "name": "Yunost Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Yunost_Stadium_(Mazyr)",
+        "transfermarkt_url": "https://www.transfermarkt.com/slavia-mozyr/stadion/verein/6423",
+        "city": {
+          "name": "Mazyr",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Mazyr"
+        }
+      }
+    },
+    {
+      "name": "Gomel",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Gomel",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-gomel/startseite/verein/10694",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-gomel/besucherzahlenentwicklung/verein/10694",
+      "stadium": {
+        "name": "Central Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Central_Stadium_(Gomel)",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-gomel/stadion/verein/10694",
+        "city": {
+          "name": "Gomel",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Gomel"
+        }
+      }
+    },
+    {
+      "name": "Neman Grodno",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Neman_Grodno",
+      "transfermarkt_url": "https://www.transfermarkt.com/neman-grodno/startseite/verein/14178",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/neman-grodno/besucherzahlenentwicklung/verein/14178",
+      "stadium": {
+        "name": "Neman Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Neman_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/neman-grodno/stadion/verein/14178",
+        "city": {
+          "name": "Grodno",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Grodno"
+        }
+      }
+    },
+    {
+      "name": "FC Minsk",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Minsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-minsk/startseite/verein/23664",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-minsk/besucherzahlenentwicklung/verein/23664",
+      "stadium": {
+        "name": "FC Minsk Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Minsk_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-minsk/stadion/verein/23664",
+        "city": {
+          "name": "Minsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Minsk"
+        }
+      }
+    },
+    {
+      "name": "Dnepr Mogilev",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dnepr_Mogilev",
+      "transfermarkt_url": "https://www.transfermarkt.com/dnepr-mogilev/startseite/verein/4394",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dnepr-mogilev/besucherzahlenentwicklung/verein/4394",
+      "stadium": {
+        "name": "Spartak Stadium Mogilev",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Spartak_Stadium_(Mogilev)",
+        "transfermarkt_url": "https://www.transfermarkt.com/dnepr-mogilev/stadion/verein/4394",
+        "city": {
+          "name": "Mogilev",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Mogilev"
+        }
+      }
+    },
+    {
+      "name": "Vitebsk",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Vitebsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-vitebsk/startseite/verein/17959",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-vitebsk/besucherzahlenentwicklung/verein/17959",
+      "stadium": {
+        "name": "Vitebsky CSK",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Vitebsky_Central_Sport_Complex",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-vitebsk/stadion/verein/17959",
+        "city": {
+          "name": "Vitebsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vitebsk"
+        }
+      }
+    },
+    {
+      "name": "Isloch Minsk Raion",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Isloch_Minsk_Raion",
+      "transfermarkt_url": "https://www.transfermarkt.com/isloch-minskiy-rayon/startseite/verein/36755",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/isloch-minskiy-rayon/besucherzahlenentwicklung/verein/36755",
+      "stadium": {
+        "name": "FC Minsk Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Minsk_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/isloch-minskiy-rayon/stadion/verein/36755",
+        "city": {
+          "name": "Minsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Minsk"
+        }
+      }
+    },
+    {
+      "name": "Arsenal Dzerzhinsk",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Arsenal_Dzerzhinsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/arsenal-dzerzhinsk/startseite/verein/72822",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/arsenal-dzerzhinsk/besucherzahlenentwicklung/verein/72822",
+      "stadium": {
+        "name": "City Stadium Dzerzhinsk",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/arsenal-dzerzhinsk/stadion/verein/72822",
+        "city": {
+          "name": "Dzerzhinsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Dzerzhinsk"
+        }
+      }
+    },
+    {
+      "name": "FK Baranovichi",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Baranovichi",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-baranovichi/startseite/verein/24009",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-baranovichi/besucherzahlenentwicklung/verein/24009",
+      "stadium": {
+        "name": "Lokomotiv Stadium",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-baranovichi/stadion/verein/24009",
+        "city": {
+          "name": "Baranavichy",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Baranavichy"
+        }
+      }
+    },
+    {
+      "name": "Naftan Novopolotsk",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Naftan_Novopolotsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/naftan-novopolotsk/startseite/verein/8563",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/naftan-novopolotsk/besucherzahlenentwicklung/verein/8563",
+      "stadium": {
+        "name": "Atlant Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Atlant_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/naftan-novopolotsk/stadion/verein/8563",
+        "city": {
+          "name": "Novopolotsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Novopolotsk"
+        }
+      }
+    },
+    {
+      "name": "Belshina Bobruisk",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Belshina_Bobruisk",
+      "transfermarkt_url": "https://www.transfermarkt.com/belshina-bobruisk/startseite/verein/3886",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/belshina-bobruisk/besucherzahlenentwicklung/verein/3886",
+      "stadium": {
+        "name": "Spartak Stadium Bobruisk",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Spartak_Stadium_(Bobruisk)",
+        "transfermarkt_url": "https://www.transfermarkt.com/belshina-bobruisk/stadion/verein/3886",
+        "city": {
+          "name": "Babruysk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Babruysk"
+        }
+      }
+    }
+  ]
+}

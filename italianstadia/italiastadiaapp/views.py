@@ -842,6 +842,44 @@ def _tournament_venues(slug):
     return tournament_name, tournament_year, venues
 
 
+# Hand-written, per-tournament editorial. Keyed by slug so a single shared template
+# can still carry tournament-specific analysis (the auto-generated `tournament_about`
+# / `bid_analysis` text is data-driven and cannot say things like "Italy and Turkey
+# merged their bids"). Rendered as its own card; `paragraphs` is a list of prose
+# blocks and `sources` a list of {label, url} citations.
+_TOURNAMENT_EDITORIAL = {
+    "uefa-euro-2032": {
+        "heading": "Bid analysis: how the Italy–Turkey joint bid came about",
+        "paragraphs": [
+            "UEFA Euro 2032 will be co-hosted by Italy and Turkey, but the joint bid was "
+            "not the original plan. During the bidding process the two federations merged "
+            "what had been separate, competing candidacies into a single dual-host bid.",
+            "From Italy's point of view the move made strategic sense. A standalone Italian "
+            "bid was considered highly unlikely to succeed, largely because of long-standing "
+            "doubts over its ageing stadium infrastructure, so joining forces with Turkey was "
+            "a pragmatic way to stay in the race. The decision was also consequential: it led "
+            "Italy to drop its involvement in the Euro 2028 bid in order to concentrate on 2032.",
+            "From Turkey's point of view the logic is less obvious. Turkey already has a deep "
+            "portfolio of modern stadiums that comfortably satisfy UEFA's hosting requirements "
+            "and could plausibly have staged the tournament alone. One widely-discussed theory "
+            "is that Turkey is betting on Italy's lack of preparedness: should Italy fail to "
+            "deliver the required venues in time, it could be excluded from the joint bid, "
+            "leaving Turkey to be awarded the tournament as sole host. Those concerns are not "
+            "merely hypothetical — UEFA president Aleksander Čeferin has publicly warned that "
+            "Italy risks being removed as co-host if its infrastructure plans do not progress.",
+        ],
+        "sources": [
+            {"label": "Calcio e Finanza — Italy–Turkey joint candidacy for Euro 2032",
+             "url": "https://www.calcioefinanza.it/2023/07/28/gravina-candidatura-italia-turchia-per-euro-2032-svolta-storica/"},
+            {"label": "Football Italia — Gravina on Italy, Euro 2032 and Turkey",
+             "url": "https://football-italia.net/gravina-italy-lost-euro-2032-turkey-mancini/"},
+            {"label": "Reuters — Čeferin threatens to remove Italy as Euro 2032 co-host over infrastructure",
+             "url": "https://www.reuters.com/sports/soccer/uefa-chief-ceferin-threatens-remove-italy-euro-2032-co-host-over-infrastructure-2026-04-02/"},
+        ],
+    },
+}
+
+
 @cache_page(60 * 60)
 def tournament_detail(request, slug):
     """Show all venues for a single tournament (Stadium + StadiumDevelopment)."""
@@ -1081,6 +1119,7 @@ def tournament_detail(request, slug):
         "bid_blurbs": bid_blurbs,
         "bid_analysis": bid_analysis,
         "tournament_about": tournament_about,
+        "tournament_editorial": _TOURNAMENT_EDITORIAL.get(slug),
     })
 
 
@@ -1561,6 +1600,9 @@ def _spotlight_country(img, stadiums, bbox, W, H, dim=165):
     md = ImageDraw.Draw(mask)
     border_rings = []
     try:
+        # Use the hi-res Natural Earth 10m set: one named MultiPolygon per country
+        # (Italy incl. Sicily/Sardinia, Serbia incl. Vojvodina, Bosnia whole, Denmark
+        # incl. its islands), so the spotlight outline is crisp and never drops a region.
         feats = _load_countries_hi()
     except Exception:
         return img
@@ -1573,18 +1615,25 @@ def _spotlight_country(img, stadiums, bbox, W, H, dim=165):
             rings = [poly[0] for poly in geom["coordinates"]]
         else:
             continue
+        # Does ANY ring of this country contain a displayed stadium?
+        matched = False
         for ring in rings:
-            # bbox pre-check: skip rings that can't contain any stadium
             rlons = [c[0] for c in ring]; rlats = [c[1] for c in ring]
             rl0, rl1, ra0, ra1 = min(rlons), max(rlons), min(rlats), max(rlats)
             cand = [(lo, la) for lo, la in pts if rl0 <= lo <= rl1 and ra0 <= la <= ra1]
-            if not cand:
-                continue
-            if any(_point_in_ring(lo, la, ring) for lo, la in cand):
-                pix = [_lon_lat_to_px(lo, la, bbox, W, H) for lo, la in ring]
-                if len(pix) >= 3:
-                    md.polygon(pix, fill=255)
-                    border_rings.append(pix)
+            if cand and any(_point_in_ring(lo, la, ring) for lo, la in cand):
+                matched = True
+                break
+        if not matched:
+            continue
+        # Draw the WHOLE country (every island / region), not just the part that
+        # happens to hold a stadium — so Denmark keeps Jutland, Serbia keeps
+        # Vojvodina, Bosnia stays whole, etc.
+        for ring in rings:
+            pix = [_lon_lat_to_px(lo, la, bbox, W, H) for lo, la in ring]
+            if len(pix) >= 3:
+                md.polygon(pix, fill=255)
+                border_rings.append(pix)
 
     if not border_rings:
         return img  # no polygon matched — leave the map untouched

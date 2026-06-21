@@ -1,0 +1,27 @@
+{
+  "league": {
+    "name": "Kategoria Superiore",
+    "country": "Albania",
+    "country_code": "AL",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Flamurtari FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/flamurtari-fc/startseite/verein/12460",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/flamurtari-fc/besucherzahlenentwicklung/verein/12460",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Flamurtari_FC",
+      "stadium": {
+        "name": "Stadiumi Flamurtari",
+        "transfermarkt_url": "https://www.transfermarkt.com/flamurtari-fc/stadion/verein/12460/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Flamurtari_Stadium",
+        "city": {
+          "name": "Vlorë",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vlor%C3%AB"
+        }
+      },
+      "girone": null
+    }
+  ]
+}
