@@ -1,3 +1,6 @@
+from datetime import date, datetime, timezone
+from pathlib import Path
+
 from django.contrib.sitemaps import Sitemap
 from django.utils.text import slugify
 from django.urls import reverse
@@ -5,7 +8,27 @@ from django.urls import reverse
 from .models import City, Stadium, StadiumDevelopment, Team
 
 
-class StadiumSitemap(Sitemap):
+def _data_lastmod():
+    """Single sitewide 'content changed' date = the data fixture's mtime. It is rewritten
+    by `dumpdata` on every data change, so re-crawling is signalled without a per-row
+    updated_at column. Falls back to None if the file is missing."""
+    f = Path(__file__).parent / "fixtures" / "initial_data.json"
+    try:
+        return datetime.fromtimestamp(f.stat().st_mtime, tz=timezone.utc).date()
+    except OSError:
+        return None
+
+
+_LASTMOD = _data_lastmod()
+
+
+class _DataLastmodMixin:
+    """Stamp every URL in the sitemap with the dataset's last-changed date."""
+    def lastmod(self, obj):
+        return _LASTMOD
+
+
+class StadiumSitemap(_DataLastmodMixin, Sitemap):
     changefreq = "monthly"
     priority = 0.8
 
@@ -16,7 +39,7 @@ class StadiumSitemap(Sitemap):
         return reverse("italiastadiaapp:stadium_detail", args=[obj.slug])
 
 
-class TeamSitemap(Sitemap):
+class TeamSitemap(_DataLastmodMixin, Sitemap):
     changefreq = "monthly"
     priority = 0.7
 
@@ -27,7 +50,7 @@ class TeamSitemap(Sitemap):
         return reverse("italiastadiaapp:team_detail", args=[obj.slug])
 
 
-class DevelopmentSitemap(Sitemap):
+class DevelopmentSitemap(_DataLastmodMixin, Sitemap):
     changefreq = "weekly"  # dev projects change status often
     priority = 0.7
     cache_timeout = 86400  # 24 h — avoid full table scan on every sitemap request
@@ -39,7 +62,7 @@ class DevelopmentSitemap(Sitemap):
         return reverse("italiastadiaapp:stadium_development_detail", args=[obj.slug])
 
 
-class CitySitemap(Sitemap):
+class CitySitemap(_DataLastmodMixin, Sitemap):
     changefreq = "yearly"
     priority = 0.4
 
@@ -50,7 +73,7 @@ class CitySitemap(Sitemap):
         return reverse("italiastadiaapp:city_list") + f"?country={obj.country}"
 
 
-class TournamentSitemap(Sitemap):
+class TournamentSitemap(_DataLastmodMixin, Sitemap):
     changefreq = "monthly"
     priority = 0.9
     cache_timeout = 86400  # 24 h — tournament venues change rarely
@@ -81,7 +104,7 @@ class TournamentSitemap(Sitemap):
         return reverse("italiastadiaapp:tournament_detail", args=[slug])
 
 
-class StaticViewSitemap(Sitemap):
+class StaticViewSitemap(_DataLastmodMixin, Sitemap):
     changefreq = "weekly"
     priority = 1.0
 
