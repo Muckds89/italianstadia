@@ -1159,6 +1159,24 @@
   }
 },
 {
+  "model": "italiastadiaapp.league",
+  "pk": 74,
+  "fields": {
+    "name": "Ligue 2",
+    "country": 3,
+    "division_level": 2
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 75,
+  "fields": {
+    "name": "Eerste Divisie",
+    "country": 36,
+    "division_level": 2
+  }
+},
+{
   "model": "italiastadiaapp.city",
   "pk": 6,
   "fields": {
@@ -4457,7 +4475,7 @@
     "wikipedia_url": "https://en.wikipedia.org/wiki/Eindhoven",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Hoogbouw_Eindhoven_overzicht.jpg",
     "image_credit": null,
-    "description": "Eindhoven ( / ˈ aɪ n t h oʊ v ən / EYENT -hoh-vən ; [ 8 ] ; Dutch: [ˈɛintˌɦoːvə(n)] ⓘ ) is a city and municipality in the Netherlands , it is the largest city in the southern province of North Brabant , and is also located in the Dutch part of the Campine natural region . With a population of 249,054 (1 January 2025) on a territory of 88.92 km 2 , [ 9 ] it is the fifth-largest city of the Netherlands and the largest outside the Randstad conurbation."
+    "description": "Eindhoven ( / ˈ aɪ n t h oʊ v ən / EYENT -hoh-vən ; [ 8 ] ; Dutch: [ˈɛintˌɦoːvə(n)] ⓘ ) is a city and municipality in the Netherlands . It is the largest city in the southern province of North Brabant , and is also located in the Dutch part of the Campine natural region . With a population of 249,054 (1 January 2025) on a territory of 88.92 km 2 , [ 9 ] it is the fifth-largest city of the Netherlands and the largest outside the Randstad conurbation."
   }
 },
 {
@@ -10009,6 +10027,552 @@
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Blick_auf_das_Rathaus_und_den_Dom_Aachens_aufgenommen_von_St_Jakob.jpg",
     "image_credit": null,
     "description": "Aachen [ a ] is the 13th-largest city in North Rhine-Westphalia and the 27th-largest city of Germany, with around 261,000 inhabitants. [ 4 ] It is the westernmost major city in Germany, lying approximately 61 km (38 mi) west of Cologne and Bonn , directly bordering Belgium in the southwest, and the Netherlands in the northwest. The city lies in the Meuse–Rhine Euroregion and is the seat of the district of Aachen (Städteregion Aachen) ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 708,
+  "fields": {
+    "name": "Aue",
+    "population": null,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Aue",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 709,
+  "fields": {
+    "name": "Cottbus",
+    "population": 95123,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Cottbus",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4b/View-over-cottbus.jpg",
+    "image_credit": null,
+    "description": "Cottbus ( German pronunciation: [ˈkɔtbʊs] ⓘ ) or Chóśebuz ( Lower Sorbian pronunciation: [ˈxɨɕɛbus] ) [ 3 ] [ 4 ] [ 5 ] is a university city and the second-largest city in the German state of Brandenburg after the state capital, Potsdam . With around 100,000 inhabitants, Cottbus is the most populous city in Lusatia . Cottbus lies in the Sorbian settlement area ( Serbski sedleński rum ) of Lower Lusatia , and is the second-largest city on the River Spree after Berlin , which is situated around 125 km (78 mi) downstream. The city is located on the shores of Germany's largest artificial lake, the Cottbuser Ostsee ( Chóśebuski pódzajtšny jazor )."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 710,
+  "fields": {
+    "name": "Duisburg",
+    "population": 502270,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Duisburg",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/23/Innenhafen_Duisburg_Blaue_Stunde_2014.jpg",
+    "image_credit": null,
+    "description": "Duisburg ( German: [ˈdyːsbʊʁk] ⓘ ; Low German : Duisborg [ˈdʏsbɔɐ̯χ] ) is a major city in western Germany , located in the state of North Rhine-Westphalia . With around half a million inhabitants, it is one of the largest cities in the Ruhr area and part of the larger Rhine-Ruhr metropolitan region , one of the biggest population centers in Europe. Duisburg is situated at the confluence of the Ruhr and the Rhine , a geographic position that has historically made it an important center of trade, industry, and transportation. Administratively, Duisburg forms an independent city ( kreisfreie Stadt )."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 711,
+  "fields": {
+    "name": "Essen",
+    "population": 574682,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Essen",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Essen_Panorama.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 712,
+  "fields": {
+    "name": "Ingolstadt",
+    "population": 141185,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ingolstadt",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/51/Flagge_Ingolstadt.svg",
+    "image_credit": null,
+    "description": "Ingolstadt ( German: [ˈɪŋɡɔlˌʃtat] ⓘ ; Austro-Bavarian : [ˈɪŋl̩ʃtɔːd] ) is an independent city [ a ] on the Danube , in Upper Bavaria , Germany, with 142,308 inhabitants (as of 31 December 2023). [ 3 ] Around half a million people live in the metropolitan area. Ingolstadt is the second largest city in Upper Bavaria after Munich and the fifth largest city in Bavaria after Munich, Nuremberg , Augsburg and Regensburg . The city passed the mark of 100,000 inhabitants in 1989 and has since been one of the major cities in Germany. After Regensburg, Ingolstadt is the second largest German city on the Danube ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 713,
+  "fields": {
+    "name": "Mannheim",
+    "population": 318035,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Mannheim",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/de/Altes_Rathaus_und_Sankt_Sebastianskirche_auf_dem_Mannheimer_Marktplatz.jpg",
+    "image_credit": null,
+    "description": "Mannheim ( German pronunciation: [ˈmanhaɪm] ⓘ ; Palatine German : Mannem [ 4 ] or Monnem ), officially the University City of Mannheim ( German : Universitätsstadt Mannheim ), is the second-largest city in Baden-Württemberg after Stuttgart , the state capital, and Germany 's 21st-largest city , with a population of over 315,000. It is located at the border with Rhineland-Palatinate . The city is the cultural and economic centre of the Rhine-Neckar , Germany's seventh-largest metropolitan region , with nearly 2.4 million inhabitants. [ 5 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 714,
+  "fields": {
+    "name": "Osnabrück",
+    "population": 166057,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Osnabr%C3%BCck",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Osnabr%C3%BCck_aerial.jpg",
+    "image_credit": null,
+    "description": "Osnabrück ( German: [ɔsnaˈbʁʏk] ⓘ ; Westphalian : Ossenbrügge ; archaic English: Osnaburg ) is a city in Lower Saxony in western Germany . It is situated on the river Hase in a valley penned between the Wiehen Hills and the northern tip of the Teutoburg Forest . With a population of 166,057 [ 3 ] Osnabrück is the fourth largest city in Lower Saxony."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 715,
+  "fields": {
+    "name": "Regensburg",
+    "population": 151389,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Regensburg",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Regensburger_Altstadt_von_oben_.jpg",
+    "image_credit": null,
+    "description": "Regensburg [ a ] (historically known in English as Ratisbon , / ˈ r æ t ɪ s b ɒ n / RAT -is-bon ) [ 3 ] [ b ] is a city in eastern Bavaria , at the confluence of the rivers Danube , Naab and Regen , Danube's northernmost point. It is the capital of the Upper Palatinate subregion of the state. With more than 150,000 inhabitants, Regensburg is the fourth-largest city in the State of Bavaria after Munich , Nuremberg and Augsburg and the eighth-largest of all cities on the river Danube . From its foundation as an imperial Roman river fort, the city has been the political, economic, and cultural centre of the surrounding region. Later, under the rule of the Holy Roman Empire , it housed the Perpetual Diet of Regensburg ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 716,
+  "fields": {
+    "name": "Rostock",
+    "population": 205307,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Rostock",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/b8/2018_-_Petrikirche_-_Rostock.jpg",
+    "image_credit": null,
+    "description": "Rostock ( / ˈ r ɒ s t ɒ k / ; [ 2 ] German: [ˈʁɔstɔk] ⓘ ), officially the Hanseatic and University City of Rostock (German: Hanse- und Universitätsstadt Rostock ), is the largest city in the German state of Mecklenburg-Western Pomerania and lies in the Mecklenburgian part of the state, close to the border with Pomerania . [ a ] With around 210,000 inhabitants, it is the third-largest city on the German Baltic coast after Kiel and Lübeck , the eighth-largest city in the area of former East Germany , as well as the 39th-largest city of Germany. Rostock was the largest coastal and most important port city in East Germany."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 717,
+  "fields": {
+    "name": "Saarbrücken",
+    "population": 182971,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Saarbr%C3%BCcken",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Saarland_Rathaus_Saarbr%C3%BCcken_01.jpg",
+    "image_credit": null,
+    "description": "Saarbrücken [ a ] is the capital and largest city of the state of Saarland , Germany. The city has 181,959 inhabitants and is Saarland's administrative, commercial and cultural centre. It is located on the Saar River (a tributary of the Moselle ), and directly borders the French department of Moselle ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 718,
+  "fields": {
+    "name": "Schweinfurt",
+    "population": 54481,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Schweinfurt",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Schweinfurt_und_der_Main_bei_Nacht.jpg",
+    "image_credit": null,
+    "description": "Schweinfurt ( / ˈ ʃ v aɪ n f ʊər t / SHVYNE -foort , German: [ˈʃvaɪnfʊʁt] ⓘ ; lit. ' Swine Ford ' ) is a city in the district of Lower Franconia in Bavaria , Germany. It is the administrative centre of the surrounding district ( Landkreis ) of Schweinfurt and a major industrial, cultural and educational hub. The urban agglomeration has 100,200 (2018) [ 3 ] and the city's catchment area , including the Main-Rhön region and parts of South Thuringia , 759,000 inhabitants. [ citation needed ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 719,
+  "fields": {
+    "name": "Aspach",
+    "population": null,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Aspach",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/5/5f/Disambig_gray.svg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 720,
+  "fields": {
+    "name": "Ulm",
+    "population": 129882,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ulm",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Ulm_Panorama_01.jpg",
+    "image_credit": null,
+    "description": "Ulm ( German pronunciation: [ʊlm] ⓘ ) is the sixth-largest city of the southwestern German state of Baden-Württemberg , and with around 130,000 inhabitants, it is Germany's 60th-largest city ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 721,
+  "fields": {
+    "name": "Verl",
+    "population": 25762,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Verl",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Verl_-_St._Anna_Kirche_-_Blick_auf_den_Turm.jpg",
+    "image_credit": null,
+    "description": "Verl ( German: [fɛʁl] ⓘ ) is a town in the district of Gütersloh in the state of North Rhine-Westphalia , Germany . It is approximately 15 km south of Bielefeld and 10 km east of Gütersloh ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 722,
+  "fields": {
+    "name": "Wiesbaden",
+    "population": 288850,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Wiesbaden",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/85/Wiesbaden_BW_2017-04-24_20-51-36.jpg",
+    "image_credit": null,
+    "description": "Wiesbaden ( German pronunciation: [ˈviːsˌbaːdn̩] ⓘ ; lit. ' meadow baths ' ) is the capital of the German state of Hesse , and the second-largest Hessian city after Frankfurt am Main . With around 283,000 inhabitants, it is Germany's 24th-largest city . Wiesbaden forms a conurbation with a population of around 500,000 with the neighbouring city of Mainz . This conurbation is in turn embedded in the Rhine-Main Metropolitan Region —Germany's second-largest metropolitan region after Rhine-Ruhr —which also includes the nearby cities of Frankfurt am Main , Darmstadt , Offenbach am Main , and Hanau , and has a combined population exceeding 5.8 million."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 723,
+  "fields": {
+    "name": "Amiens",
+    "population": 136449,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Amiens",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/0_Amiens_-_Place_du_Don_-_Cath%C3%A9drale_%281%29.JPG",
+    "image_credit": null,
+    "description": "Amiens ( English: / æ ˈ m j æ̃ / [ 3 ] or / ˈ æ m i ə n z / AM -ee-ənz ; [ 4 ] French: [amjɛ̃] ⓘ ; Picard : Anmien , Anmiens or Anmyin ) is a city and commune in northern France, located 120 km (75 mi) north of Paris and 100 km (62 mi) south-west of Lille . With 136,449 inhabitants (2023), [ 5 ] it is the capital of the Somme department in the region of Hauts-de-France . A central landmark of the city is Amiens Cathedral , the largest Gothic cathedral in France. Amiens also has one of the largest university hospitals in France, with a capacity of 1,200 beds. The author Jules Verne lived in Amiens from 1871 until his death in 1905, and served on the city council for 15 years. Amiens is the birthplace of French president Emmanuel Macron ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 724,
+  "fields": {
+    "name": "Annecy",
+    "population": 132117,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Annecy",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Lac_d%27Annecy.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 725,
+  "fields": {
+    "name": "Bastia",
+    "population": 46867,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bastia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Bastia%2C_A_Marina%2C_Vechju_Portu.jpg",
+    "image_credit": null,
+    "description": "Bastia ( UK : / ˈ b æ s t j ə , ˈ b ɑː s -/ BA(H)SS -tyə , US : / ˈ b ɑː s t i ə , ˈ b æ s -, b ɑː ˈ s t iː ə / BA(H)SS -tee-ə, bahss- TEE - ; [ 3 ] [ 4 ] [ 5 ] [ 6 ] French: [bastja] ⓘ , Italian: [baˈstiːa] ; Corsican : Bastìa [baˈsti.a] ) is a commune in the department of Haute-Corse , Corsica , France. [ 7 ] It is in the northeast of the island of Corsica at the base of Cap Corse . It also has the second-highest population of any commune on the island after Ajaccio and is the capital of the Bagnaja region and of the department."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 726,
+  "fields": {
+    "name": "Boulogne-sur-Mer",
+    "population": 40539,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Boulogne-sur-Mer",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/56/Boulogne_vue_generale_phare_beffroi_mer.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 727,
+  "fields": {
+    "name": "Clermont-Ferrand",
+    "population": 146351,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Clermont-Ferrand",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Ville_de_Clermont-Ferrand.jpg",
+    "image_credit": null,
+    "description": "Clermont-Ferrand [ a ] is a city and commune of France , in the Auvergne-Rhône-Alpes region , [ 7 ] with a population of 146,351 (2023). Its metropolitan area ( aire d'attraction ) had 510,669 inhabitants in 2022. [ 3 ] It is the prefecture (capital) of the Puy-de-Dôme département . Julien Bony is its current mayor ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 728,
+  "fields": {
+    "name": "Dunkirk",
+    "population": 86263,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Dunkirk",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Dunkerque_hotel_de_ville_vu_port.jpg",
+    "image_credit": null,
+    "description": "Dunkirk ( UK : / d ʌ n ˈ k ɜːr k / dun- KURK ; US : / ˈ d ʌ n k ɜːr k / DUN -kurk ; [ 3 ] [ 4 ] French : Dunkerque [dœ̃kɛʁk] ⓘ ; Picard : Dunkèke ; West Flemish : Duunkerke ; Dutch : Duinkerke or Duinkerken ) is a major port city in the department of Nord in northern France. [ 5 ] It lies on the North Sea , 10 kilometres (6.2 mi) from the Belgian border. It has the third-largest French harbour. The population of the commune is about 86,000."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 729,
+  "fields": {
+    "name": "Grenoble",
+    "population": 156140,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Grenoble",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/23/Panorama_grenoble.png",
+    "image_credit": null,
+    "description": "Grenoble ( / ɡ r ə ˈ n oʊ b əl / grə- NOH -bəl ; [ 4 ] French: [ɡʁənɔbl] ⓘ ; Arpitan : Grenoblo or Grainóvol ; Occitan : Graçanòbol or Grenòble ) is the prefecture and largest city of the Isère department in the Auvergne-Rhône-Alpes region of southeastern France. [ 5 ] It was the capital of the Dauphiné historical province and lies where the river Drac flows into the Isère at the foot of the French Alps ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 730,
+  "fields": {
+    "name": "Guingamp",
+    "population": 7111,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Guingamp",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Guingamp_%2822%29_H%C3%B4tel_de_Ville_08.JPG",
+    "image_credit": null,
+    "description": "Guingamp ( French: [ɡɛ̃ɡɑ̃] ⓘ ; Breton : Gwengamp [ˈɡwɛ̃ŋɡãmp] ) is a commune in the Côtes-d'Armor department in Brittany in northwestern France . With a population of 7,115 as of 2020, Guingamp is one of the smallest towns in Europe to have had a top-tier professional football team: En Avant Guingamp , which played in Ligue 1 from 2013 until 2019 . The Guingamp station is served by high-speed trains to Brest, Rennes and Paris, and regional trains to Brest, Lannion, Carhaix, Paimpol and Rennes."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 731,
+  "fields": {
+    "name": "Laval",
+    "population": null,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Laval",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 732,
+  "fields": {
+    "name": "Le Mans",
+    "population": 146249,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Le_Mans",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Montage_du_Mans.jpg",
+    "image_credit": null,
+    "description": "Le Mans ( / l ə ˈ m ɒ̃ / ; French: [lə mɑ̃] ⓘ ) is a city in northwestern France on the Sarthe River where it meets the Huisne . Traditionally the capital of the province of Maine , it is now the capital of the Sarthe department and the seat of the Roman Catholic diocese of Le Mans . Le Mans is a part of the Pays de la Loire region ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 733,
+  "fields": {
+    "name": "Montpellier",
+    "population": 310240,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Montpellier",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Montpellier_Place_de_la_Com%C3%A9die.jpg",
+    "image_credit": null,
+    "description": "Montpellier ( UK : / m ɒ n t ˈ p ɛ l i eɪ / ; US : / ˌ m oʊ n p ɛ l ˈ j eɪ / ) [ a ] is a city in southern France near the Mediterranean Sea . One of the largest urban centres in the region of Occitania , Montpellier is the prefecture of the department of Hérault . As of 2023, 310,240 people live in the city proper, [ 7 ] while its metropolitan area has a population of 813,272 as of 2020. [ 3 ] Montpellier is the third-largest French city near the Mediterranean coast, behind Marseille and Nice , and the seventh-largest city of France overall. The inhabitants are called Montpelliérains and Montpelliéraines ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 734,
+  "fields": {
+    "name": "Nancy",
+    "population": null,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Nancy",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 735,
+  "fields": {
+    "name": "Pau",
+    "population": null,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Pau",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 736,
+  "fields": {
+    "name": "Saint-Ouen-sur-Seine",
+    "population": 53615,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Saint-Ouen-sur-Seine",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Hotel_de_ville_de_saint_ouen.JPG",
+    "image_credit": null,
+    "description": "Saint-Ouen-sur-Seine ( French pronunciation: [sɛ̃t‿wɛ̃ syʁ sɛn] ⓘ ; literally \" St. Audoin on Seine \") is a commune in the northern suburbs of Paris , France , located 6.6 kilometres (4.1 miles) from the centre of Paris . It is part of the Seine-Saint-Denis department , in the Île-de-France region , and of the Métropole du Grand Paris . The commune was called Saint-Ouen until 2018, when it obtained a change of name by ministerial order. [ 3 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 737,
+  "fields": {
+    "name": "Reims",
+    "population": 177674,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Reims",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Sub%C3%A9_Fountain%2C_Reims%2C_France.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 738,
+  "fields": {
+    "name": "Rodez",
+    "population": 23981,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Rodez",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Rodez_view.jpg",
+    "image_credit": null,
+    "description": "Rodez ( French pronunciation: [ʁɔdɛs] ⓘ , [ʁɔdɛz] ⓘ , locally: [ʁoˈðɛs] ; Occitan : Rodés , [rruˈðes] ) is a small city and commune in the South of France , about 150 km (93 mi) northeast of Toulouse . It is the prefecture of the Aveyron department in the Occitania region (formerly Midi-Pyrénées ). In 2023 its population was 23,981. The capital of the former Rouergue province, [ 3 ] Rodez is the seat of the communauté d'agglomération Rodez Agglomération , the Diocese of Rodez and Vabres , the Departmental Council of Aveyron , as well as the main settlement of the 1st constituency of Aveyron ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 739,
+  "fields": {
+    "name": "Saint-Étienne",
+    "population": 173136,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Saint-%C3%89tienne",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Saint_Etienne_views.png",
+    "image_credit": null,
+    "description": "Saint-Étienne ( French pronunciation: [sɛ̃t‿etjɛn] ⓘ ; Franco-Provençal : Sant-Etiève ), also written St. Etienne , is a city and the prefecture of the Loire département , in eastern-central France, in the Massif Central , 60 km (37 mi) southwest of Lyon , in the Auvergne-Rhône-Alpes region . [ 4 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 740,
+  "fields": {
+    "name": "Troyes",
+    "population": 62088,
+    "country": "France",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Troyes",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Troyes_centre_ville1.JPG",
+    "image_credit": null,
+    "description": "Troyes ( French pronunciation: [tʁwa] ⓘ ) is a commune and the capital of the department of Aube in the Grand Est region of northeastern France. It is located on the Seine river about 140 km (87 mi) south-east of Paris. Troyes is situated within the Champagne wine region and is near the Orient Forest Regional Natural Park ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 741,
+  "fields": {
+    "name": "The Hague",
+    "population": 549163,
+    "country": "Netherlands",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/The_Hague",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Den_Haag_Skyline_1.jpg",
+    "image_credit": null,
+    "description": "The Hague [ b ] ( Dutch : Den Haag , [ c ] short for 's-Gravenhage ) [ d ] is the capital city of the South Holland province of the Netherlands . With a population of over half a million, it is the third-largest city in the Netherlands. Situated on the west coast facing the North Sea , The Hague is the country's administrative centre and its seat of government , and has been described as the country's de facto capital since the time of the Dutch Republic , while Amsterdam is the official capital of the Netherlands . [ 8 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 742,
+  "fields": {
+    "name": "Almere",
+    "population": 214715,
+    "country": "Netherlands",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Almere",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Skyline_Almere.jpg",
+    "image_credit": null,
+    "description": "Almere ( Dutch pronunciation: [ɑlˈmeːrə] ⓘ ) is a planned city and municipality in Flevoland , Netherlands, across the IJmeer from Amsterdam ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 743,
+  "fields": {
+    "name": "Leeuwarden",
+    "population": 124481,
+    "country": "Netherlands",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Leeuwarden",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/88/Nieuwestad-_Leeuwarden.jpg",
+    "image_credit": null,
+    "description": "Leeuwarden ( Dutch: [ˈleːu.ɑrdə(n)] ⓘ ; West Frisian : Ljouwert [ˈljɔu(ə)t] ⓘ ; Stadsfries Dutch : Liwwadden ; Leeuwarder dialect: Leewarden ) is a city and municipality in Friesland , Netherlands, with a population of 127,073 (2023). It is the provincial capital and seat of the Provincial Council of Friesland ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 744,
+  "fields": {
+    "name": "Doetinchem",
+    "population": 58270,
+    "country": "Netherlands",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Doetinchem",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Doetinchem%2C_Sint_Catharinakerk_RM13084_in_straatzicht_foto7_2012-07-22_14.54.jpg",
+    "image_credit": null,
+    "description": "Doetinchem ( Dutch pronunciation: [ˈdutɪŋxəm] ⓘ ; Low Saxon : Deutekem ) is a city and municipality in the east of the Netherlands . It is situated along the Oude IJssel (Old IJssel) river in a part of the province of Gelderland called the Achterhoek . The municipality had a population of 58,270 in 2021 and consists of an area of 79.66 km 2 (30.76 sq mi) of which 0.61 km 2 (0.24 sq mi) is water. This makes Doetinchem the largest town (by population) in the Achterhoek."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 745,
+  "fields": {
+    "name": "'s-Hertogenbosch",
+    "population": 160783,
+    "country": "Netherlands",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/%27s-Hertogenbosch",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/82/%27s-Hertogenbosch_-_Panorama_-_Gezicht_op_Sint_Jan_vanaf_Sint_Jacobskerktoren_-_RCE.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 746,
+  "fields": {
+    "name": "Dordrecht",
+    "population": 123000,
+    "country": "Netherlands",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Dordrecht",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Augustijnenkamp%2C_3311_Dordrecht%2C_Netherlands_-_panoramio_%282%29.jpg",
+    "image_credit": null,
+    "description": "Dordrecht ( Dutch: [ˈdɔrdrɛxt] ⓘ ), historically known in English as Dordt (still colloquially used in Dutch, pronounced [dɔrt] ⓘ ) or Dort , is a city and municipality in the Western Netherlands , located in the province of South Holland . It is the province's fifth-largest city after Rotterdam , The Hague , Leiden , and Zoetermeer , with a population of 123,000 (2025)."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 747,
+  "fields": {
+    "name": "Emmen",
+    "population": null,
+    "country": "Netherlands",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Emmen",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/5/5f/Disambig_gray.svg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 748,
+  "fields": {
+    "name": "Helmond",
+    "population": 92627,
+    "country": "Netherlands",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Helmond",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Kasteel_Helmond_rechtsom_rond_06%2C_zuidzijde_%28achterkant%29.JPG",
+    "image_credit": null,
+    "description": "Helmond ( Dutch pronunciation: [ˈɦɛlmɔnt] ⓘ ; called Hèllemond in the local dialect) is a city and municipality in the Metropoolregio Eindhoven of the province of North Brabant in the Southern Netherlands ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 749,
+  "fields": {
+    "name": "Maastricht",
+    "population": 120227,
+    "country": "Netherlands",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Maastricht",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Maastricht_sunset.jpg",
+    "image_credit": null,
+    "description": "Maastricht ( / ˈ m ɑː s t r ɪ x t / MAH -strikht , US also / m ɑː ˈ s t r ɪ x t / [ dubious – discuss ] mah- STRIKHT , [ 8 ] [ 9 ] [ 10 ] Dutch: [maːˈstrɪxt] ⓘ ; Limburgish : Mestreech [məˈstʀeːx] ) is a city and a municipality in the southeastern Netherlands . It is the capital and largest city of the province of Limburg . Maastricht is located on both sides of the Meuse ( Dutch : Maas ), at the point where the river is joined by the Jeker . Mount Saint Peter ( Sint-Pietersberg ) is largely situated within the city's municipal borders. Maastricht is adjacent to the border with Belgium and is part of the Meuse-Rhine Euroregion , an international metropolis with a population of about 3.9 million, which includes the nearby German and Belgian cities of Aachen , Liège , and Hasselt ."
   }
 },
 {
@@ -35646,6 +36210,1598 @@
   }
 },
 {
+  "model": "italiastadiaapp.stadium",
+  "pk": 867,
+  "fields": {
+    "name": "Erzgebirgsstadion",
+    "capacity": 15500,
+    "address": "Gerd-Schädlich-Platz 1 08280 Aue-Bad Schlema",
+    "year_of_construction": 1928,
+    "city": 708,
+    "latitude": "50.597780",
+    "longitude": "12.711110",
+    "owner_raw": "Town of Aue-Bad Schlema",
+    "ownership": "PUBLIC",
+    "slug": "erzgebirgsstadion",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Eins_Erzgebirgsstadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-erzgebirge-aue/stadion/verein/94",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/erzgebirgsstadion-erzgebirge-aue-2022-1657802959-88431.jpg?lm=1657802977",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/50/Erzgebirgsstadion_%281%29.jpg",
+        "credit": "Aagnverglaser / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Erzgebirgsstadion_im_Juni_2018_1.jpeg",
+        "credit": "MAyo / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/39/Panorama_Erzgebirgsstadion_Block_A-B_24.01.2006.jpg",
+        "credit": "The original uploader was DorNilo at German Wikipedia. / Wikimedia Commons / CC BY-SA 2.0 de"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/dc/ZwingerCrown.jpg",
+        "credit": "Dirgela / Wikimedia Commons / Public domain"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 868,
+  "fields": {
+    "name": "Stadion der Freundschaft",
+    "capacity": 20602,
+    "address": "Cottbus , Germany",
+    "year_of_construction": 1925,
+    "city": 709,
+    "latitude": "51.751390",
+    "longitude": "14.345560",
+    "owner_raw": "City of Cottbus",
+    "ownership": "PUBLIC",
+    "slug": "stadion-der-freundschaft",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_der_Freundschaft_(Cottbus)",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-energie-cottbus/stadion/verein/25",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadion-der-freundschaft-leag-energie-stadion-energie-cottbus-2024-1730289663-152932.jpg?lm=1730289682",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/36/Bronzelettern_Sanssouci.jpg",
+        "credit": "Suse / Wikimedia Commons / CC BY-SA 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Cottbus_Stadion_der_Freundschaft.jpg",
+        "credit": "Sane / Wikimedia Commons / CC BY-SA 3.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 869,
+  "fields": {
+    "name": "Schauinsland-Reisen-Arena",
+    "capacity": 31502,
+    "address": "Duisburg , Germany",
+    "year_of_construction": 2005,
+    "city": 710,
+    "latitude": "51.409170",
+    "longitude": "6.778610",
+    "owner_raw": "MSV Duisburg Stadionprojekt GmbH & Co. KG",
+    "ownership": "MIXED",
+    "slug": "schauinsland-reisen-arena",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/MSV-Arena",
+    "transfermarkt_url": "https://www.transfermarkt.com/msv-duisburg/stadion/verein/52",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadion-msv-duisburg-1721826486-143269.jpg?lm=1721826499",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Duesseldorf_1951sw.jpg",
+        "credit": "Mbdortmund / Wikimedia Commons / GFDL 1.2"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/MSV-Arena_Panorama.jpg",
+        "credit": "Raimond Spekking / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/93/Wedau_MSV-Arena.jpg",
+        "credit": "Vargasz92 / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 870,
+  "fields": {
+    "name": "Stadion an der Hafenstraße",
+    "capacity": 19962,
+    "address": "Essen , Germany",
+    "year_of_construction": 2012,
+    "city": 711,
+    "latitude": "51.486670",
+    "longitude": "6.976390",
+    "owner_raw": "City of Essen",
+    "ownership": "PUBLIC",
+    "slug": "stadion-an-der-hafenstrae",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_an_der_Hafenstra%C3%9Fe",
+    "transfermarkt_url": "https://www.transfermarkt.com/rot-weiss-essen/stadion/verein/56",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadion-rw-essen-1680614390-104886.png?lm=1680614406",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Stadion_essen.jpg",
+        "credit": "Blue-Letter at German Wikipedia / Wikimedia Commons / Public domain"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 871,
+  "fields": {
+    "name": "Eilenriedestadion",
+    "capacity": 18500,
+    "address": null,
+    "year_of_construction": 1922,
+    "city": 358,
+    "latitude": "52.376589",
+    "longitude": "9.772900",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "eilenriedestadion",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Eilenriedestadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/tsv-havelse/stadion/verein/476",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Eilenriedestadion.jpeg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Eilenriede_Stadium_Grandstand.jpg",
+        "credit": "AxelHH at German Wikipedia / Wikimedia Commons / Public domain"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 872,
+  "fields": {
+    "name": "Dietmar-Hopp-Stadion",
+    "capacity": 6350,
+    "address": null,
+    "year_of_construction": null,
+    "city": 126,
+    "latitude": "49.278278",
+    "longitude": "8.842111",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "dietmar-hopp-stadion",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Dietmar-Hopp-Stadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/tsg-1899-hoffenheim-ii/stadion/verein/983",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/46/Hoffenheim-hoppstadion.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 873,
+  "fields": {
+    "name": "Audi Sportpark",
+    "capacity": 15200,
+    "address": "Ingolstadt , Germany",
+    "year_of_construction": 2009,
+    "city": 712,
+    "latitude": "48.745560",
+    "longitude": "11.485560",
+    "owner_raw": "Audi Immobilien Verwaltung GmbH",
+    "ownership": "PRIVATE",
+    "slug": "audi-sportpark",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Audi_Sportpark",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-ingolstadt-04/stadion/verein/4795",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/audi-sportpark-fc-ingolstadt-2017-1657806705-88442.jpg?lm=1657806714",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/2020-11-21_Audi_Sportpark_Ingolstadt_by_Sandro_Halank%E2%80%937.jpg",
+        "credit": "Sandro Halank, Wikimedia Commons / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Olympic_Park_Munich_21.jpg",
+        "credit": "Dave Morris from Edinburgh, UK / Wikimedia Commons / CC BY 2.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 874,
+  "fields": {
+    "name": "Sportpark Höhenberg",
+    "capacity": 8343,
+    "address": "Cologne , Germany",
+    "year_of_construction": 1939,
+    "city": 185,
+    "latitude": "50.945200",
+    "longitude": "7.030400",
+    "owner_raw": "City of Cologne (1931–1999) Kölner Sportstätten GmbH (1999–present)",
+    "ownership": "MIXED",
+    "slug": "sportpark-hohenberg",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Sportpark_H%C3%B6henberg",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-viktoria-koln/stadion/verein/1622",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadion-im-sportpark-hohenberg-viktoria-koln-2022-1657803321-88432.jpg?lm=1657803333",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9d/K%C3%B6ln-Merheimer-Heide-07-SCB-Viktoria-K%C3%B6ln-Stadion.JPG",
+        "credit": "HOWI / Wikimedia Commons / CC BY 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Sportpark_Hoehenberg_07-2021.jpg",
+        "credit": "Nick-4711 / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 875,
+  "fields": {
+    "name": "Carl-Benz-Stadion",
+    "capacity": 25721,
+    "address": "Mannheim , Germany",
+    "year_of_construction": 1994,
+    "city": 713,
+    "latitude": "49.479440",
+    "longitude": "8.502500",
+    "owner_raw": "Mannheim",
+    "ownership": "PRIVATE",
+    "slug": "carl-benz-stadion",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Carl-Benz-Stadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/sv-waldhof-mannheim/stadion/verein/85",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/carl-benz-stadion-mannheim-2020-1662973860-92166.jpg?lm=1662973871",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Carl-Benz-Stadion_2016.JPG",
+        "credit": "Kramer96 / Wikimedia Commons / CC BY 3.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 876,
+  "fields": {
+    "name": "Grünwalder Stadion",
+    "capacity": 15000,
+    "address": "Grünwalder Straße 4, Munich , Germany",
+    "year_of_construction": 1911,
+    "city": 120,
+    "latitude": "48.110830",
+    "longitude": "11.574440",
+    "owner_raw": "City of Munich",
+    "ownership": "PUBLIC",
+    "slug": "grunwalder-stadion",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Gr%C3%BCnwalder_Stadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/tsv-1860-munchen/stadion/verein/72",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/turkgucu-munchen-logo-symbol-2021-stadion-an-der-grunwalder-strasse-1629905350-69714.jpg?lm=1629905371",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Innenansicht_des_Gr%C3%BCnwalder_Stadion.jpg",
+        "credit": "ObschtTea / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Olympic_Park_Munich_21.jpg",
+        "credit": "Dave Morris from Edinburgh, UK / Wikimedia Commons / CC BY 2.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 877,
+  "fields": {
+    "name": "Stadion an der Bremer Brücke",
+    "capacity": 16098,
+    "address": "Osnabrück , Germany",
+    "year_of_construction": 1938,
+    "city": 714,
+    "latitude": "52.280830",
+    "longitude": "8.071110",
+    "owner_raw": "VfL Osnabrück Stadion GmbH & Co. KG",
+    "ownership": "MIXED",
+    "slug": "stadion-an-der-bremer-brucke",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_an_der_Bremer_Br%C3%BCcke",
+    "transfermarkt_url": "https://www.transfermarkt.com/vfl-osnabruck/stadion/verein/81",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadion-an-der-bremer-brucke-vfl-osnabruck-2019-1689616854-111761.jpg?lm=1689616866",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/Bremer_Br%C3%BCcke_12_2023.jpg",
+        "credit": "Owski97 / Wikimedia Commons / CC0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 878,
+  "fields": {
+    "name": "Jahnstadion Regensburg",
+    "capacity": 15210,
+    "address": "Regensburg , Germany",
+    "year_of_construction": 2015,
+    "city": 715,
+    "latitude": "48.990830",
+    "longitude": "12.107220",
+    "owner_raw": "City of Regensburg",
+    "ownership": "PUBLIC",
+    "slug": "jahnstadion-regensburg",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Jahnstadion_Regensburg",
+    "transfermarkt_url": "https://www.transfermarkt.com/ssv-jahn-regensburg/stadion/verein/109",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/continental-arena-regensburg-1490272989-9100.jpg?lm=1490273001",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Westtrib%C3%BCne_2.JPG",
+        "credit": "Zeddi2k6 / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 879,
+  "fields": {
+    "name": "Ostseestadion",
+    "capacity": 29000,
+    "address": "Rostock , Mecklenburg-Vorpommern , Germany",
+    "year_of_construction": 1954,
+    "city": 716,
+    "latitude": "54.084950",
+    "longitude": "12.095189",
+    "owner_raw": "Ostseestadion GmbH & Co. KG",
+    "ownership": "PRIVATE",
+    "slug": "ostseestadion",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ostseestadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-hansa-rostock/stadion/verein/30",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/hansa-rostock-ostseestadion-2025-1764071332-183518.jpg?lm=1764071351",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flug_073.jpg",
+        "credit": "Lauchi / Wikimedia Commons / CC BY 2.5"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Ostsee_Stadion.jpg",
+        "credit": "Thomas Kohler / Wikimedia Commons / CC BY 2.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Ostsee_Stadion_2.jpg",
+        "credit": "Thomas Kohler / Wikimedia Commons / CC BY 2.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Ostsee_Stadion_Interior.jpg",
+        "credit": "User: SAVV / Wikimedia Commons / CC BY-SA 2.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 880,
+  "fields": {
+    "name": "Ludwigsparkstadion",
+    "capacity": 16003,
+    "address": "Saarbrücken , Germany",
+    "year_of_construction": 1952,
+    "city": 717,
+    "latitude": "49.247500",
+    "longitude": "6.984170",
+    "owner_raw": "Saarbrücken",
+    "ownership": "PRIVATE",
+    "slug": "ludwigsparkstadion",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ludwigsparkstadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/1-fc-saarbrucken/stadion/verein/1",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/1-fc-saarbrucken-ludwigparkstadion-2024-1711972094-133217.jpg?lm=1711972113",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Ludwigspark_Oktober_2020.jpg",
+        "credit": "Saar-Seb / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ludwigsparkstadion%2C_Blick_von_der_Osttrib%C3%BCne_%28Juli_2021%29.JPG",
+        "credit": "Saar-Seb / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/18/Ludwigsparkstadion_Saarbr%C3%BCcken_001.jpg",
+        "credit": "Wikimedia Commons / CC BY-SA 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Saarschleife.jpg",
+        "credit": "Niesefrosch / Wikimedia Commons / CC BY-SA 3.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 881,
+  "fields": {
+    "name": "Willy-Sachs-Stadion",
+    "capacity": 16500,
+    "address": "Schweinfurt , Germany",
+    "year_of_construction": 1936,
+    "city": 718,
+    "latitude": "50.051278",
+    "longitude": "10.203028",
+    "owner_raw": "City of Schweinfurt",
+    "ownership": "PUBLIC",
+    "slug": "willy-sachs-stadion",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Sachs-Stadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/1-fc-schweinfurt-05/stadion/verein/103",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/54/Ander-Kupfer-Platz_2%2C_Trib%C3%BCne_Schweinfurt_20190913_007.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 882,
+  "fields": {
+    "name": "WIRmachenDRUCK Arena",
+    "capacity": 7768,
+    "address": null,
+    "year_of_construction": null,
+    "city": 719,
+    "latitude": "48.980696",
+    "longitude": "9.393015",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "wirmachendruck-arena",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/vfb-stuttgart-ii/stadion/verein/102",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 883,
+  "fields": {
+    "name": "Donaustadion",
+    "capacity": 17400,
+    "address": "Ulm , Germany",
+    "year_of_construction": 1925,
+    "city": 720,
+    "latitude": "48.404440",
+    "longitude": "10.009720",
+    "owner_raw": "City of Ulm",
+    "ownership": "PUBLIC",
+    "slug": "donaustadion",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Donaustadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/ssv-ulm-1846/stadion/verein/69",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/donaustadion-ssv-ulm-2025-1740643025-162155.jpg?lm=1740643040",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Ulm_Donaustadion_1.jpg",
+        "credit": "Photo: Andreas Praefcke / Wikimedia Commons / CC BY 3.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 884,
+  "fields": {
+    "name": "Sportclub Arena",
+    "capacity": 5153,
+    "address": "Verl , Germany",
+    "year_of_construction": 1994,
+    "city": 721,
+    "latitude": "51.883400",
+    "longitude": "8.513400",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "sportclub-arena",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Sportclub_Arena",
+    "transfermarkt_url": "https://www.transfermarkt.com/sc-verl/stadion/verein/93",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/sportclub-arena-verl-stadion-1594893288-43608.jpg?lm=1594893265",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/SPORTCLUB_ARENA.jpg",
+        "credit": "Ortkemper / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 885,
+  "fields": {
+    "name": "BRITA-Arena",
+    "capacity": 12518,
+    "address": "Wiesbaden , Germany",
+    "year_of_construction": 2007,
+    "city": 722,
+    "latitude": "50.071390",
+    "longitude": "8.256670",
+    "owner_raw": "Stadion Berliner Straße GmbH & Co. KG",
+    "ownership": "PRIVATE",
+    "slug": "brita-arena",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Brita-Arena",
+    "transfermarkt_url": "https://www.transfermarkt.com/sv-wehen-wiesbaden/stadion/verein/108",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/sv-wehen-wiesbaden-stadion-brita-arena-2017-1689616673-111760.jpg?lm=1689616686",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Frankfurt_01.jpg",
+        "credit": "Janusz Recław / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 886,
+  "fields": {
+    "name": "Stade de la Licorne",
+    "capacity": 12999,
+    "address": "Rue du Chapître, Amiens",
+    "year_of_construction": 1999,
+    "city": 723,
+    "latitude": "49.894209",
+    "longitude": "2.263312",
+    "owner_raw": "Communauté d'agglomération Amiens Métropole",
+    "ownership": "PUBLIC",
+    "slug": "stade-de-la-licorne",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_la_Licorne",
+    "transfermarkt_url": "https://www.transfermarkt.com/amiens-sc/stadion/verein/1416",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Stadlic3.JPG",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 887,
+  "fields": {
+    "name": "Parc des Sports",
+    "capacity": 13634,
+    "address": "Annecy , France",
+    "year_of_construction": 1964,
+    "city": 724,
+    "latitude": "45.916497",
+    "longitude": "6.118054",
+    "owner_raw": "Annecy F.C.",
+    "ownership": "PRIVATE",
+    "slug": "parc-des-sports",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Parc_des_Sports_(Annecy)",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-annecy/stadion/verein/30204",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Parc_des_Sports_d%27Annecy_Manpower_1.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 888,
+  "fields": {
+    "name": "Stade Armand Cesari",
+    "capacity": 16480,
+    "address": "Furiani , France",
+    "year_of_construction": 1932,
+    "city": 725,
+    "latitude": "42.651390",
+    "longitude": "9.442780",
+    "owner_raw": "Communauté d'agglomération de Bastia",
+    "ownership": "PUBLIC",
+    "slug": "stade-armand-cesari",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Armand-Cesari",
+    "transfermarkt_url": "https://www.transfermarkt.com/sc-bastia/stadion/verein/595",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Stade_Armand-Cesari_vu_du_ciel.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 889,
+  "fields": {
+    "name": "Stade de la Libération",
+    "capacity": 15004,
+    "address": "Boulevard Eurvin 62200 Boulogne-sur-mer",
+    "year_of_construction": 1956,
+    "city": 726,
+    "latitude": "50.723742",
+    "longitude": "1.619411",
+    "owner_raw": "Ville de Boulogne-sur-Mer",
+    "ownership": "PUBLIC",
+    "slug": "stade-de-la-liberation",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_la_Lib%C3%A9ration",
+    "transfermarkt_url": "https://www.transfermarkt.com/us-boulogne/stadion/verein/7042",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Boulogne-sur-Mer_Stade_de_la_Liberation_%285%29.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 890,
+  "fields": {
+    "name": "Stade Gabriel Montpied",
+    "capacity": 10800,
+    "address": "Clermont-Ferrand , France",
+    "year_of_construction": 1995,
+    "city": 727,
+    "latitude": "45.815820",
+    "longitude": "3.121651",
+    "owner_raw": "City of Clermont-Ferrand",
+    "ownership": "PUBLIC",
+    "slug": "stade-gabriel-montpied",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Gabriel-Montpied",
+    "transfermarkt_url": "https://www.transfermarkt.com/clermont-foot-63/stadion/verein/3524",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/clermont-foot-2022-1690799380-112800.jpg?lm=1690799394",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 891,
+  "fields": {
+    "name": "Stade Marcel Tribut",
+    "capacity": 4933,
+    "address": "267 Avenue de Rosendaël 59240 Dunkirk , Hauts-de-France , France",
+    "year_of_construction": 1933,
+    "city": 728,
+    "latitude": "51.035560",
+    "longitude": "2.390280",
+    "owner_raw": "City of Dunkirk",
+    "ownership": "PUBLIC",
+    "slug": "stade-marcel-tribut",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Marcel-Tribut",
+    "transfermarkt_url": "https://www.transfermarkt.com/usl-dunkerque/stadion/verein/9202",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/17/Stade_Tribut.JPG",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 892,
+  "fields": {
+    "name": "Stade des Alpes",
+    "capacity": 20068,
+    "address": "Grenoble, France",
+    "year_of_construction": 2008,
+    "city": 729,
+    "latitude": "45.187428",
+    "longitude": "5.740099",
+    "owner_raw": "Grenoble Alpes Metropole",
+    "ownership": "PRIVATE",
+    "slug": "stade-des-alpes",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_des_Alpes",
+    "transfermarkt_url": "https://www.transfermarkt.com/grenoble-foot-38/stadion/verein/1290",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Stade_des_Alpes_nc38.JPG",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 893,
+  "fields": {
+    "name": "Stade de Roudourou",
+    "capacity": 18462,
+    "address": "Guingamp , France",
+    "year_of_construction": 1990,
+    "city": 730,
+    "latitude": "48.566285",
+    "longitude": "-3.164599",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "stade-de-roudourou",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_Roudourou",
+    "transfermarkt_url": "https://www.transfermarkt.com/ea-guingamp/stadion/verein/855",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stade-de-roudourou-2022-2023-ea-guingamp-1717580010-138519.jpg?lm=1717580056",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 894,
+  "fields": {
+    "name": "Stade Francis Le Basser",
+    "capacity": 11107,
+    "address": null,
+    "year_of_construction": 1971,
+    "city": 731,
+    "latitude": "48.082500",
+    "longitude": "-0.754720",
+    "owner_raw": "Laval Agglomeration",
+    "ownership": "PUBLIC",
+    "slug": "stade-francis-le-basser",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Francis_Le_Basser",
+    "transfermarkt_url": "https://www.transfermarkt.com/stade-laval/stadion/verein/1080",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/91/STADE_FRANCIS_LE_BASSER.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 895,
+  "fields": {
+    "name": "Stade Marie-Marvingt",
+    "capacity": 25064,
+    "address": "Chemin aux Bœufs",
+    "year_of_construction": 2011,
+    "city": 732,
+    "latitude": "47.959000",
+    "longitude": "0.223400",
+    "owner_raw": "Ville du Mans",
+    "ownership": "PRIVATE",
+    "slug": "stade-marie-marvingt",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Marie-Marvingt",
+    "transfermarkt_url": "https://www.transfermarkt.com/le-mans-fc/stadion/verein/1164",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/le-mans-fc-and-paris-saint-germain-at-stade-marie-marvingt-2025-1754137195-173851.jpg?lm=1754137220",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/20110514163046089_ULM.jpg",
+        "credit": "duky.duke / Wikimedia Commons / CC BY-SA 2.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 896,
+  "fields": {
+    "name": "Stade de la Mosson",
+    "capacity": 22000,
+    "address": "Montpellier , France",
+    "year_of_construction": 1972,
+    "city": 733,
+    "latitude": "43.622220",
+    "longitude": "3.811940",
+    "owner_raw": "Montpellier Méditerranée Métropole",
+    "ownership": "PUBLIC",
+    "slug": "stade-de-la-mosson",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_la_Mosson",
+    "transfermarkt_url": "https://www.transfermarkt.com/montpellier-hsc/stadion/verein/969",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stade-de-la-mosson-1509704410-12567.jpg?lm=1509704418",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Australie-Fidji.4.JPG",
+        "credit": "Ben.83 / Wikimedia Commons / CC BY-SA 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Australie-Fidji.5.JPG",
+        "credit": "Ben.83 / Wikimedia Commons / CC BY-SA 3.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 897,
+  "fields": {
+    "name": "Stade Marcel Picot",
+    "capacity": 20087,
+    "address": "90, Boulevard Jean-Jaurès, 54510 Tomblaine",
+    "year_of_construction": 1926,
+    "city": 734,
+    "latitude": "48.695500",
+    "longitude": "6.210687",
+    "owner_raw": "Communauté Urbaine du Grand Nancy",
+    "ownership": "PUBLIC",
+    "slug": "stade-marcel-picot",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Marcel_Picot",
+    "transfermarkt_url": "https://www.transfermarkt.com/as-nancy-lorraine/stadion/verein/1159",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stade-marcel-picot-1509704464-12568.jpg?lm=1509704472",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Amiti%C3%A9NancySaarebruck.jpg",
+        "credit": "AstonRaptor / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Nancy_2010_12.JPG",
+        "credit": "EPei / Wikimedia Commons / CC BY-SA 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Picot.jpg",
+        "credit": "Stanislas54 / Wikimedia Commons / CC0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Stade_Marcel-Picot_panorama_interieur.jpg",
+        "credit": "Jejecam / Wikimedia Commons / CC BY-SA 3.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 898,
+  "fields": {
+    "name": "Nouste Camp",
+    "capacity": 4144,
+    "address": "Pau , France",
+    "year_of_construction": 2018,
+    "city": 735,
+    "latitude": "43.309440",
+    "longitude": "-0.316940",
+    "owner_raw": "City of Pau , France",
+    "ownership": "PUBLIC",
+    "slug": "nouste-camp",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_du_Hameau",
+    "transfermarkt_url": "https://www.transfermarkt.com/pau-fc/stadion/verein/3166",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/17/Stade_du_Hameau_06-08-22.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/But_et_Club_bpt6k5178634h_6.jpg",
+        "credit": "But et Club / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/56/Inauguration_Stade_du_Hameau.jpg",
+        "credit": "L'Athlète / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/67/Stade_du_Hameau_1949.jpg",
+        "credit": "L'Athlète / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 899,
+  "fields": {
+    "name": "Stade Bauer",
+    "capacity": 5600,
+    "address": "Saint-Ouen-sur-Seine , France",
+    "year_of_construction": 1909,
+    "city": 736,
+    "latitude": "48.905830",
+    "longitude": "2.340830",
+    "owner_raw": "Groupe Réalités",
+    "ownership": "PRIVATE",
+    "slug": "stade-bauer",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Bauer",
+    "transfermarkt_url": "https://www.transfermarkt.com/red-star-fc/stadion/verein/1154",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stade-bauer-red-star-fc-paris-2013-1713283651-134411.jpg?lm=1713283665",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Match_Football_Red_Star_FC_x_FBBP01_-_Stade_Bauer_-_Saint-Ouen-sur-Seine_%28FR93%29_-_2022-10-12_-_1.jpg",
+        "credit": "Chabe01 / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 900,
+  "fields": {
+    "name": "Stade Auguste-Delaune",
+    "capacity": 20519,
+    "address": "33, Chaussée Bocquaine 51100 Reims",
+    "year_of_construction": 1935,
+    "city": 737,
+    "latitude": "49.246670",
+    "longitude": "4.025000",
+    "owner_raw": "Ville de Reims",
+    "ownership": "PUBLIC",
+    "slug": "stade-auguste-delaune",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Auguste-Delaune",
+    "transfermarkt_url": "https://www.transfermarkt.com/stade-reims/stadion/verein/1421",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stade-auguste-delaune-1573461515-27304.jpg?lm=1573461526",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Reims_-_stade_Delaune.JPG",
+        "credit": "Fab5669 / Wikimedia Commons / CC BY-SA 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Stade_Auguste_Delaune_-_Reims_%28FR51%29_-_2024-01-28_-_6.jpg",
+        "credit": "Chabe01 / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Stade_Delaune_857.JPG",
+        "credit": "Garitan / Wikimedia Commons / CC BY-SA 3.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 901,
+  "fields": {
+    "name": "Stade Paul Lignon",
+    "capacity": 6761,
+    "address": "Rodez , France",
+    "year_of_construction": null,
+    "city": 738,
+    "latitude": "44.351670",
+    "longitude": "2.563610",
+    "owner_raw": "City of Rodez",
+    "ownership": "PUBLIC",
+    "slug": "stade-paul-lignon",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Paul-Lignon",
+    "transfermarkt_url": "https://www.transfermarkt.com/rodez-af/stadion/verein/11273",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Rodez_AF_v_FC_Nantes_B%2C_31_March_2007.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 902,
+  "fields": {
+    "name": "Stade Geoffroy Guichard",
+    "capacity": 41965,
+    "address": "14 rue Paul-et-Pierre-Guichard, Saint-Étienne , Loire , France",
+    "year_of_construction": 1931,
+    "city": 739,
+    "latitude": "45.460830",
+    "longitude": "4.390280",
+    "owner_raw": "municipality of Saint-Étienne / AS Saint-Étienne / Saint-Étienne Métropole",
+    "ownership": "MIXED",
+    "slug": "stade-geoffroy-guichard",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Geoffroy-Guichard",
+    "transfermarkt_url": "https://www.transfermarkt.com/as-saint-etienne/stadion/verein/618",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stade-geoffroy-guichard-as-saint-etienne-1629195785-69080.jpg?lm=1629195795",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 903,
+  "fields": {
+    "name": "Stade de l'Aube",
+    "capacity": 20460,
+    "address": "Avenue Robert-Schumann",
+    "year_of_construction": 1924,
+    "city": 740,
+    "latitude": "48.307561",
+    "longitude": "4.098458",
+    "owner_raw": "Grand Troyes",
+    "ownership": "PRIVATE",
+    "slug": "stade-de-laube",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_l%27Aube",
+    "transfermarkt_url": "https://www.transfermarkt.com/es-troyes-ac/stadion/verein/1095",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stade-de-laube-1509704607-12570.jpg?lm=1509704616",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Stade_de_l%27Aube.jpg",
+        "credit": "TaraO / Wikimedia Commons / CC BY 2.5"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 904,
+  "fields": {
+    "name": "Bingoal Stadion",
+    "capacity": 15000,
+    "address": "Haags Kwartier 55, 2491 BM The Hague Netherlands",
+    "year_of_construction": 2007,
+    "city": 741,
+    "latitude": "52.062800",
+    "longitude": "4.383100",
+    "owner_raw": "ADO Den Haag",
+    "ownership": "PRIVATE",
+    "slug": "bingoal-stadion",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/ADO_Den_Haag_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/ado-den-haag/stadion/verein/1268",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/69/Cars_Jeans_Stadion_%2836995264265%29.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/ADO-MVV_0-3_%282094236220%29.jpg",
+        "credit": "FaceMePLS from The Hague, The Netherlands / Wikimedia Commons / CC BY 2.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/7c/PL_Happy_Crowd.jpg",
+        "credit": "PvT / Wikimedia Commons / CC BY-SA 3.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 905,
+  "fields": {
+    "name": "Yanmar Stadion",
+    "capacity": 4501,
+    "address": "Competitieweg 20 1318 EA Almere",
+    "year_of_construction": 2005,
+    "city": 742,
+    "latitude": "52.394400",
+    "longitude": "5.240500",
+    "owner_raw": "Almere City FC",
+    "ownership": "PRIVATE",
+    "slug": "yanmar-stadion",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Yanmar_Stadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/almere-city-fc/stadion/verein/723",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/03/Almere_City_FC_Stadion.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 906,
+  "fields": {
+    "name": "Cambuur Stadion",
+    "capacity": 14504,
+    "address": "Cambuurplein 44, Leeuwarden , Netherlands",
+    "year_of_construction": 2024,
+    "city": 743,
+    "latitude": "53.205280",
+    "longitude": "5.814720",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "cambuur-stadion",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Cambuur_Stadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/sc-cambuur-leeuwarden/stadion/verein/133",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/19/Cambuurstadion.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 907,
+  "fields": {
+    "name": "Stadion De Vijverberg",
+    "capacity": 12600,
+    "address": "Doetinchem , Netherlands",
+    "year_of_construction": 1954,
+    "city": 744,
+    "latitude": "51.955830",
+    "longitude": "6.309720",
+    "owner_raw": "Doetinchem Municipality",
+    "ownership": "PUBLIC",
+    "slug": "stadion-de-vijverberg",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/De_Vijverberg",
+    "transfermarkt_url": "https://www.transfermarkt.com/de-graafschap-doetinchem/stadion/verein/642",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/de-vijverberg-de-graafschap-1761038274-180919.jpg?lm=1761038286",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/De_Vijverberg.JPG",
+        "credit": "User:Switchblade / Wikimedia Commons / Public domain"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/De_Vijverberg_2017.jpg",
+        "credit": "Arnhemcity12 / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 908,
+  "fields": {
+    "name": "Stadion De Vliert",
+    "capacity": 6936,
+    "address": null,
+    "year_of_construction": 1951,
+    "city": 745,
+    "latitude": "51.701670",
+    "longitude": "5.329720",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "stadion-de-vliert",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/De_Vliert",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-den-bosch/stadion/verein/404",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/De_Vliert_stadium.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 909,
+  "fields": {
+    "name": "Stadion Krommedijk",
+    "capacity": 4235,
+    "address": "Dordrecht , South Holland",
+    "year_of_construction": 1958,
+    "city": 746,
+    "latitude": "51.802500",
+    "longitude": "4.689170",
+    "owner_raw": "FC Dordrecht [ 1 ]",
+    "ownership": "PRIVATE",
+    "slug": "stadion-krommedijk",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Krommedijk",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-dordrecht/stadion/verein/1455",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/De_Krommedijk_4.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 910,
+  "fields": {
+    "name": "Jan Louwers Stadion",
+    "capacity": 4200,
+    "address": null,
+    "year_of_construction": 1934,
+    "city": 280,
+    "latitude": "51.411670",
+    "longitude": "5.479440",
+    "owner_raw": "FC Eindhoven",
+    "ownership": "PRIVATE",
+    "slug": "jan-louwers-stadion",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Jan_Louwers_Stadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-eindhoven/stadion/verein/3892",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Jan_Louwers_Stadion_1.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 911,
+  "fields": {
+    "name": "De Oude Meerdijk",
+    "capacity": 8309,
+    "address": "Emmen , Drenthe , Netherlands",
+    "year_of_construction": 1977,
+    "city": 747,
+    "latitude": "52.774720",
+    "longitude": "6.945560",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "de-oude-meerdijk",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/De_Oude_Meerdijk",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-emmen/stadion/verein/1283",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/De_Oude_Meerdijk_-_Emmen_-_2018_02.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Meerdijk_Panorama.jpg",
+        "credit": "Emmenaar / Wikimedia Commons / CC BY-SA 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/56/Stadion_Meerdijk_klein.png",
+        "credit": "Emmenaar / Wikimedia Commons / CC BY-SA 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Univestadion3.jpg",
+        "credit": "Hans055 / Wikimedia Commons / Public domain"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Univestadion5.jpg",
+        "credit": "Hans055 / Wikimedia Commons / Public domain"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 912,
+  "fields": {
+    "name": "Lavans Stadion",
+    "capacity": 3600,
+    "address": null,
+    "year_of_construction": 2025,
+    "city": 748,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "lavans-stadion",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/helmond-sport/stadion/verein/500",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 913,
+  "fields": {
+    "name": "Sportpark De Toekomst",
+    "capacity": 2250,
+    "address": null,
+    "year_of_construction": 1996,
+    "city": 268,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "sportpark-de-toekomst",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/ajax-amsterdam-ii/stadion/verein/8817",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 914,
+  "fields": {
+    "name": "AFAS Trainingscomplex",
+    "capacity": 2000,
+    "address": null,
+    "year_of_construction": 2016,
+    "city": 269,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "afas-trainingscomplex",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/az-alkmaar-ii/stadion/verein/11368",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 915,
+  "fields": {
+    "name": "De Herdgang",
+    "capacity": 2500,
+    "address": "Oirschotsedijk 12 Eindhoven , Netherlands",
+    "year_of_construction": 1952,
+    "city": 280,
+    "latitude": "51.460830",
+    "longitude": "5.438890",
+    "owner_raw": "PSV",
+    "ownership": "PRIVATE",
+    "slug": "de-herdgang",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/De_Herdgang",
+    "transfermarkt_url": "https://www.transfermarkt.com/psv-eindhoven-ii/stadion/verein/9715",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/De_Herdgang_jeugdcomplex.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 916,
+  "fields": {
+    "name": "Sportcomplex Zoudenbalch",
+    "capacity": 1000,
+    "address": null,
+    "year_of_construction": null,
+    "city": 273,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "sportcomplex-zoudenbalch",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-utrecht-ii/stadion/verein/17596",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
   "model": "italiastadiaapp.team",
   "pk": 7,
   "fields": {
@@ -56121,6 +58277,1281 @@
   }
 },
 {
+  "model": "italiastadiaapp.team",
+  "pk": 893,
+  "fields": {
+    "is_national": false,
+    "name": "Alemannia Aachen",
+    "founded": "1900-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 866,
+    "manager": "Mersad Selimbegović",
+    "num_of_titles": 0,
+    "city": 707,
+    "average_attendance": 23096,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Alemannia_Aachen",
+    "transfermarkt_url": "https://www.transfermarkt.com/alemannia-aachen/startseite/verein/8",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/8.png",
+    "image_credit": null,
+    "description": "Aachener Turn- und Sportverein Alemannia 1900 e. V. , short Alemannia Aachen ( German pronunciation: [aleˈmani̯aː ˈʔaːxn̩] ), is a German football club from the western city of Aachen , North Rhine-Westphalia. A long-term fixture of the country's second division , Alemannia enjoyed a three-year turn in the Bundesliga in the late 1960s and, after a successful 2005–06 campaign, returned to the first division for a single season . The club slipped to third-division play and in late 2012 entered into bankruptcy. They finished their 2012–13 3. Liga schedule before resuming play in the tier IV Regionalliga West in 2013–14. [ 1 ]",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "alemannia-aachen"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 894,
+  "fields": {
+    "is_national": false,
+    "name": "Erzgebirge Aue",
+    "founded": "1946-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 867,
+    "manager": "Khvicha Shubitidze / Enrico Kern",
+    "num_of_titles": 0,
+    "city": 708,
+    "average_attendance": 8437,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Erzgebirge_Aue",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-erzgebirge-aue/startseite/verein/94",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/94.png",
+    "image_credit": null,
+    "description": "Fußball Club Erzgebirge Aue e.V. , commonly known as simply FC Erzgebirge Aue or Erzgebirge Aue ( German pronunciation: [ˌeːɐ̯t͡sɡəbɪʁɡə ˈaʊ̯ə] ⓘ ), is a German football club based in Aue-Bad Schlema , Saxony . The former East German side was a founding member of the 3. Liga in 2008–09, after being relegated from the 2. Bundesliga in 2007–08. The Club will compete in the Regionalliga Nordost in 2026–27, following relegation. The city of Aue-Bad Schlema has a population of about 20,800, making it one of the smallest cities to ever host a club playing at the second highest level of German football. However, the team attracts supporters from a larger urban area that includes Chemnitz and Zwickau , whose own football sides ( CFC and FSV ) are among Aue's traditional rivals.",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "erzgebirge-aue"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 895,
+  "fields": {
+    "is_national": false,
+    "name": "Energie Cottbus",
+    "founded": "1966-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 868,
+    "manager": "Claus-Dieter Wollitz",
+    "num_of_titles": 0,
+    "city": 709,
+    "average_attendance": 12858,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Energie_Cottbus",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-energie-cottbus/startseite/verein/25",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/25.png",
+    "image_credit": null,
+    "description": "FC Energie Cottbus ( Lower Sorbian : Energija Chóśebuz ) is a German football club based in Cottbus , Brandenburg . It was founded in 1963 as SC Cottbus in what was East Germany . After the reunification of Germany , Energie played six seasons in the third tier of the German football league system before floating between the 2. Bundesliga and Bundesliga for 17 years between 1997 and 2014. From 2014 to 2016, the club played in the third tier, 3. Liga , and were then relegated to the Regionalliga Nordost . In 2018, they were promoted back into the 3. Liga, only to be relegated again the next season, returning to 3. Liga in 2024.  Following the completion of the 2025-2026 season, Energie Cottbus has been promoted back to Bundesliga 2.",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "energie-cottbus"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 896,
+  "fields": {
+    "is_national": false,
+    "name": "MSV Duisburg",
+    "founded": "1902-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 869,
+    "manager": "Dietmar Hirsch",
+    "num_of_titles": 0,
+    "city": 710,
+    "average_attendance": 22956,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/MSV_Duisburg",
+    "transfermarkt_url": "https://www.transfermarkt.com/msv-duisburg/startseite/verein/52",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/52.png",
+    "image_credit": null,
+    "description": "Meidericher Spielverein 02 e. V. Duisburg , commonly known as simply MSV Duisburg ( German pronunciation: [ʔɛm ʔɛs faʊ ˈdyːsbʊɐ̯k] ), is a German association football club based in Duisburg , North Rhine-Westphalia . Nicknamed Die Zebras for their traditional striped jerseys, the club was one of the original members of the Bundesliga when it was formed in 1963.",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "msv-duisburg"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 897,
+  "fields": {
+    "is_national": false,
+    "name": "Rot-Weiss Essen",
+    "founded": "1907-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 870,
+    "manager": "Uwe Koschinat",
+    "num_of_titles": 1,
+    "city": 711,
+    "average_attendance": 17319,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Rot-Weiss_Essen",
+    "transfermarkt_url": "https://www.transfermarkt.com/rot-weiss-essen/startseite/verein/56",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/56.png",
+    "image_credit": null,
+    "description": "Rot-Weiss Essen is a German association football club based in Essen , North Rhine-Westphalia. The club plays in the 3. Liga, at the Stadion an der Hafenstraße .",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "rot-weiss-essen"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 898,
+  "fields": {
+    "is_national": false,
+    "name": "TSV Havelse",
+    "founded": "1912-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 871,
+    "manager": "Samir Ferchichi",
+    "num_of_titles": 0,
+    "city": 358,
+    "average_attendance": 1787,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/TSV_Havelse",
+    "transfermarkt_url": "https://www.transfermarkt.com/tsv-havelse/startseite/verein/476",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/476.png",
+    "image_credit": null,
+    "description": "TSV Havelse is a German association football club based in Garbsen , Lower Saxony, near Hanover .",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "tsv-havelse"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 899,
+  "fields": {
+    "is_national": false,
+    "name": "TSG Hoffenheim II",
+    "founded": "1899-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 872,
+    "manager": "Stefan Kleineheismann",
+    "num_of_titles": 0,
+    "city": 126,
+    "average_attendance": 1616,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/TSG_1899_Hoffenheim_II",
+    "transfermarkt_url": "https://www.transfermarkt.com/tsg-1899-hoffenheim-ii/startseite/verein/983",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/983.png",
+    "image_credit": null,
+    "description": "TSG 1899 Hoffenheim II is the reserve team of German association football club TSG 1899 Hoffenheim , based in Hoffenheim , Baden-Württemberg . The team was promoted to the third-tier 3. Liga for the first time for the 2025–26 season.",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "tsg-hoffenheim-ii"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 900,
+  "fields": {
+    "is_national": false,
+    "name": "FC Ingolstadt",
+    "founded": "2004-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 873,
+    "manager": "Sabrina Wittmann",
+    "num_of_titles": 0,
+    "city": 712,
+    "average_attendance": 5063,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ingolstadt_04",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-ingolstadt-04/startseite/verein/4795",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/4795.png",
+    "image_credit": null,
+    "description": "Fußballclub Ingolstadt 04 e. V. , commonly known as FC Ingolstadt 04 or FC Ingolstadt , is a German football club based in Ingolstadt , Bavaria . The club was founded in 2004 out of the merger of the football sides of two other clubs: ESV Ingolstadt-Ringsee 1919 and MTV Ingolstadt 1881 . [ 1 ]",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "fc-ingolstadt"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 901,
+  "fields": {
+    "is_national": false,
+    "name": "Viktoria Köln",
+    "founded": "2010-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 874,
+    "manager": "Marian Wilhelm",
+    "num_of_titles": 0,
+    "city": 185,
+    "average_attendance": 4356,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Viktoria_K%C3%B6ln",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-viktoria-koln/startseite/verein/1622",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1622.png",
+    "image_credit": null,
+    "description": "FC Viktoria Köln 1904 e. V. , commonly known as Viktoria Köln ( German pronunciation: [vɪkˈtoːʁi̯a kœln] ) or Viktoria Cologne in English , is a German professional football club based on the right bank of the river Rhine in the Höhenberg district of Cologne , North Rhine-Westphalia . The club competes in the 3. Liga , the third tier of German football.",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "viktoria-koln"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 902,
+  "fields": {
+    "is_national": false,
+    "name": "SV Waldhof Mannheim",
+    "founded": "1907-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 875,
+    "manager": "Luc Holtz",
+    "num_of_titles": 0,
+    "city": 713,
+    "average_attendance": 12075,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/SV_Waldhof_Mannheim",
+    "transfermarkt_url": "https://www.transfermarkt.com/sv-waldhof-mannheim/startseite/verein/85",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/85.png",
+    "image_credit": null,
+    "description": "SV Waldhof Mannheim is a multi-sports club , located in Mannheim , Baden-Württemberg . It is most known for its association football team; however, there are also professional handball and table-tennis sides. The club today [ when? ] has a membership of over 2,400.",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "sv-waldhof-mannheim"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 903,
+  "fields": {
+    "is_national": false,
+    "name": "1860 Munich",
+    "founded": "1860-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 876,
+    "manager": "Markus Kauczinski",
+    "num_of_titles": 1,
+    "city": 120,
+    "average_attendance": 15000,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/TSV_1860_Munich",
+    "transfermarkt_url": "https://www.transfermarkt.com/tsv-1860-munchen/startseite/verein/72",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/72.png",
+    "image_credit": null,
+    "description": "Turn- und Sportverein München von 1860 , commonly known as TSV 1860 Munich ( German pronunciation: [ˌteːʔɛsˈfaʊ ˌʔaxtseːnˈhʊndɐt ˈzɛçtsɪç ˈmʏnçn̩] ; sechzig locally [ˈzɛçtsɪk] ; lettered as Achtzehnhundertsechzig München ) or 1860 Munich , is a sports club based in Munich . The club's football team plays in the 3. Liga , the third tier of the German football pyramid . Their current home ground is the Grünwalder Stadion , having first moved there in 1911 and spent much of their history there.",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "1860-munich"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 904,
+  "fields": {
+    "is_national": false,
+    "name": "VfL Osnabrück",
+    "founded": "1899-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 877,
+    "manager": "Timo Schultz",
+    "num_of_titles": 0,
+    "city": 714,
+    "average_attendance": 14844,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/VfL_Osnabr%C3%BCck",
+    "transfermarkt_url": "https://www.transfermarkt.com/vfl-osnabruck/startseite/verein/81",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/81.png",
+    "image_credit": null,
+    "description": "VfL Osnabrück is a German multi-sport club in Osnabrück , Lower Saxony. It currently fields teams in basketball, gymnastics, swimming, table tennis, and tennis but is by far best known for its football section.",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "vfl-osnabruck"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 905,
+  "fields": {
+    "is_national": false,
+    "name": "Jahn Regensburg",
+    "founded": "1907-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 878,
+    "manager": "Sascha Hildmann",
+    "num_of_titles": 0,
+    "city": 715,
+    "average_attendance": 8882,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/SSV_Jahn_Regensburg",
+    "transfermarkt_url": "https://www.transfermarkt.com/ssv-jahn-regensburg/startseite/verein/109",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/109.png",
+    "image_credit": null,
+    "description": "Sport- und Schwimmverein Jahn Regensburg e. V. , commonly known as SSV Jahn Regensburg , Jahn Regensburg , SSV Jahn or simply Jahn , is a German football club based in Regensburg , Bavaria .",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "jahn-regensburg"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 906,
+  "fields": {
+    "is_national": false,
+    "name": "Hansa Rostock",
+    "founded": "1965-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 879,
+    "manager": "Daniel Brinkmann",
+    "num_of_titles": 0,
+    "city": 716,
+    "average_attendance": 24993,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Hansa_Rostock",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-hansa-rostock/startseite/verein/30",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/30.png",
+    "image_credit": null,
+    "description": null,
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "hansa-rostock"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 907,
+  "fields": {
+    "is_national": false,
+    "name": "1. FC Saarbrücken",
+    "founded": "1903-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 880,
+    "manager": "Argirios Giannikis",
+    "num_of_titles": 0,
+    "city": 717,
+    "average_attendance": 12862,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/1._FC_Saarbr%C3%BCcken",
+    "transfermarkt_url": "https://www.transfermarkt.com/1-fc-saarbrucken/startseite/verein/1",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1.png",
+    "image_credit": null,
+    "description": "1. Fußball-Club Saarbrücken ( German : 1. Fußball-Club Saarbrücken e. V. ) is a German football club based in Saarbrücken , Saarland . The club plays in the 3. Liga , which is the third tier of football in Germany. [ 4 ]",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "1-fc-saarbrucken"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 908,
+  "fields": {
+    "is_national": false,
+    "name": "1. FC Schweinfurt 05",
+    "founded": "1905-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 881,
+    "manager": "Jermaine Jones",
+    "num_of_titles": 0,
+    "city": 718,
+    "average_attendance": 4180,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/1._FC_Schweinfurt_05",
+    "transfermarkt_url": "https://www.transfermarkt.com/1-fc-schweinfurt-05/startseite/verein/103",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/103.png",
+    "image_credit": null,
+    "description": "1. Fussball-Club Schweinfurt 1905, Verein für Leibesübungen e.V. , called 1. FC Schweinfurt 05 , Schweinfurt 05 , or simply FC 05 , is a German association football club established in Schweinfurt ( Bavaria ) in 1905. Besides men’s and women‘s football , it also has a section for athletics .",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "1-fc-schweinfurt-05"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 909,
+  "fields": {
+    "is_national": false,
+    "name": "VfB Stuttgart II",
+    "founded": "1893-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 882,
+    "manager": "Nico Willig",
+    "num_of_titles": 0,
+    "city": 719,
+    "average_attendance": 1610,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/VfB_Stuttgart_II",
+    "transfermarkt_url": "https://www.transfermarkt.com/vfb-stuttgart-ii/startseite/verein/102",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/102.png",
+    "image_credit": null,
+    "description": "VfB Stuttgart II is a German football team located in Stuttgart , currently playing in the 3. Liga . They are the reserve team of VfB Stuttgart . Until 2005 the team played under the name of VfB Stuttgart Amateure .",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "vfb-stuttgart-ii"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 910,
+  "fields": {
+    "is_national": false,
+    "name": "SSV Ulm",
+    "founded": "1970-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 883,
+    "manager": "Pavel Dochev",
+    "num_of_titles": 0,
+    "city": 720,
+    "average_attendance": 10014,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/SSV_Ulm_1846",
+    "transfermarkt_url": "https://www.transfermarkt.com/ssv-ulm-1846/startseite/verein/69",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/69.png",
+    "image_credit": null,
+    "description": "SSV Ulm 1846 FUSSBALL e.V. , commonly known as SSV Ulm 1846 or SSV Ulm , is a German football club based in Ulm , Baden-Württemberg. SSV Ulm 1846 FUSSBALL was formed on 7 March 2009 as new independent club  through the separation of the football department from the present-day multi-sports club SSV Ulm 1846 e.V. After finishing in first place and earning promotion from 3. Liga in 2023–24, the club played in 2. Bundesliga in the 2024–25 season ; a 17th-place finish in 2. Bundesliga meant relegation back to 3. Liga for the 2025–26 season. [ 1 ]",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "ssv-ulm"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 911,
+  "fields": {
+    "is_national": false,
+    "name": "SC Verl",
+    "founded": "1924-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 884,
+    "manager": "Tobias Strobl",
+    "num_of_titles": 0,
+    "city": 721,
+    "average_attendance": 3003,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Verl",
+    "transfermarkt_url": "https://www.transfermarkt.com/sc-verl/startseite/verein/93",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/93.png",
+    "image_credit": null,
+    "description": "SC Verl is a German association football club based in Verl , North Rhine-Westphalia . The club was founded on 6 September 1924, [ 2 ] and since 1970 has consistently played in the higher echelons of amateur football. The club was promoted to the professional 3. Liga in 2020.",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "sc-verl"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 912,
+  "fields": {
+    "is_national": false,
+    "name": "SV Wehen Wiesbaden",
+    "founded": "1926-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 885,
+    "manager": "Daniel Scherning",
+    "num_of_titles": 0,
+    "city": 722,
+    "average_attendance": 4439,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/SV_Wehen_Wiesbaden",
+    "transfermarkt_url": "https://www.transfermarkt.com/sv-wehen-wiesbaden/startseite/verein/108",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/108.png",
+    "image_credit": null,
+    "description": "SV Wehen Wiesbaden is a German association football club based in Wiesbaden , Hesse . The club was previously known as SV Wehen but added Wiesbaden to its name during the summer of 2007. They left their previous ground, the Taunusstein, that same summer and have played at the BRITA-Arena ever since.",
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "sv-wehen-wiesbaden"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 913,
+  "fields": {
+    "is_national": false,
+    "name": "Amiens SC",
+    "founded": "1901-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 886,
+    "manager": "Omar Daf",
+    "num_of_titles": 0,
+    "city": 723,
+    "average_attendance": 7717,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Amiens_SC",
+    "transfermarkt_url": "https://www.transfermarkt.com/amiens-sc/startseite/verein/1416",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1416.png",
+    "image_credit": null,
+    "description": null,
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "amiens-sc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 914,
+  "fields": {
+    "is_national": false,
+    "name": "FC Annecy",
+    "founded": "1927-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 887,
+    "manager": "Laurent Guyot",
+    "num_of_titles": 0,
+    "city": 724,
+    "average_attendance": 5108,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Annecy",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-annecy/startseite/verein/30204",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/30204.png",
+    "image_credit": null,
+    "description": "Football Club d'Annecy is a French football club based in the town of Annecy , Haute-Savoie . The team plays its home matches at the Parc des Sports , where the club and its predecessor have been based since 1964. It currently competes in the Ligue 2 .",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "fc-annecy"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 915,
+  "fields": {
+    "is_national": false,
+    "name": "SC Bastia",
+    "founded": "1905-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 888,
+    "manager": "Réginald Ray",
+    "num_of_titles": 0,
+    "city": 725,
+    "average_attendance": 9771,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Bastia",
+    "transfermarkt_url": "https://www.transfermarkt.com/sc-bastia/startseite/verein/595",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/595.png",
+    "image_credit": null,
+    "description": "Sporting Club Bastia ( Corsican : Sporting Club di Bastia , commonly referred to as SC Bastia or simply Bastia ; French: [bastja] ⓘ ) is a French professional football club based in Bastia on the island of Corsica . The club plays in Ligue 2 , the second tier of French football , having won the 2020–21 Championnat National . [ 3 ] The club plays its home matches at the Stade Armand Cesari located within the city. SC Bastia is known for its strong association with Corsican nationalism . [ 4 ]",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "sc-bastia"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 916,
+  "fields": {
+    "is_national": false,
+    "name": "US Boulogne",
+    "founded": "1898-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 889,
+    "manager": "Fabien Dagneaux",
+    "num_of_titles": 0,
+    "city": 726,
+    "average_attendance": 4244,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/US_Boulogne",
+    "transfermarkt_url": "https://www.transfermarkt.com/us-boulogne/startseite/verein/7042",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/7042.png",
+    "image_credit": null,
+    "description": "Union Sportive Boulogne Côte d'Opale ( French pronunciation: [ynjɔ̃ spɔʁtiv bulɔɲ kot dɔpal] ; commonly referred to as US Boulogne , USBCO ( French pronunciation: [y.ɛs.be.se.o] ) or frequently, simply Boulogne ) is a French association football club based in the commune of Boulogne-sur-Mer . The club was founded in 1898 and currently plays in Ligue 2 , the second level of French football , having been promoted from the Championnat National at the end of 2024–25 season due to AC Ajaccio being relegated for financial reasons.",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "us-boulogne"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 917,
+  "fields": {
+    "is_national": false,
+    "name": "Clermont Foot",
+    "founded": "1990-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 890,
+    "manager": "Sébastien Mazeyrat Grégory Proment",
+    "num_of_titles": 0,
+    "city": 727,
+    "average_attendance": 4855,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Clermont_Foot_63",
+    "transfermarkt_url": "https://www.transfermarkt.com/clermont-foot-63/startseite/verein/3524",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3524.png",
+    "image_credit": null,
+    "description": "Clermont Foot 63 (commonly referred to as Clermont Foot ) is a French professional football club based in Clermont-Ferrand , France. It competes in Ligue 2 . The first incarnation of the club was formed in 1911 and the current club was created in 1990 as a result of a merger.",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "clermont-foot"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 918,
+  "fields": {
+    "is_national": false,
+    "name": "USL Dunkerque",
+    "founded": "1908-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 891,
+    "manager": "Albert Sánchez [ 3 ]",
+    "num_of_titles": 0,
+    "city": 728,
+    "average_attendance": 4079,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/USL_Dunkerque",
+    "transfermarkt_url": "https://www.transfermarkt.com/usl-dunkerque/startseite/verein/9202",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/9202.png",
+    "image_credit": null,
+    "description": "Union Sportive du Littoral de Dunkerque ( French pronunciation: [ynjɔ̃ spɔʁtiv dy litɔʁal də dœ̃kɛʁk] ) is a football club based in Dunkirk , France. It competes in Ligue 2 , having achieved promotion from the Championnat National in the 2022–23 season . The club colours are blue and white, and home matches are played at the Stade Marcel-Tribut .",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "usl-dunkerque"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 919,
+  "fields": {
+    "is_national": false,
+    "name": "Grenoble Foot 38",
+    "founded": "1892-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 892,
+    "manager": "Frédéric Gueguen",
+    "num_of_titles": 0,
+    "city": 729,
+    "average_attendance": 4113,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Grenoble_Foot_38",
+    "transfermarkt_url": "https://www.transfermarkt.com/grenoble-foot-38/startseite/verein/1290",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1290.png",
+    "image_credit": null,
+    "description": "Grenoble Foot 38 , commonly referred to as simply Grenoble or GF38 , is a French association football club based in Grenoble . The club plays its home matches at the Stade des Alpes , a sports complex based in the heart of the city, and wears white and blue.",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "grenoble-foot-38"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 920,
+  "fields": {
+    "is_national": false,
+    "name": "En Avant Guingamp",
+    "founded": "1912-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 893,
+    "manager": "Sylvain Ripoll",
+    "num_of_titles": 0,
+    "city": 730,
+    "average_attendance": 8193,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/En_Avant_Guingamp",
+    "transfermarkt_url": "https://www.transfermarkt.com/ea-guingamp/startseite/verein/855",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/855.png",
+    "image_credit": null,
+    "description": "En Avant Guingamp ( Breton : War-raok Gwengamp , English: Forward Guingamp ), commonly referred to as EA Guingamp , EAG , or simply Guingamp ( French: [ɡɛ̃ɡɑ̃] ), is a French professional football club based in the commune of Guingamp , in France's Brittany region. The club was founded in 1912 and play in Ligue 2 , the second tier of French football . The club has appeared in the Ligue 1 , the top flight of French football, for 13 seasons, and is known for its relative success given Guingamp's small population of only 7,000 people.",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "en-avant-guingamp"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 921,
+  "fields": {
+    "is_national": false,
+    "name": "Stade Lavallois",
+    "founded": "1902-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 894,
+    "manager": "Olivier Frapolli",
+    "num_of_titles": 0,
+    "city": 731,
+    "average_attendance": 6428,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Lavallois",
+    "transfermarkt_url": "https://www.transfermarkt.com/stade-laval/startseite/verein/1080",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1080.png",
+    "image_credit": null,
+    "description": "Stade Lavallois Mayenne Football Club ( French : Stade lavallois Mayenne Football Club ; French pronunciation: [stɑd lavalwa majɛn] ), also referred to as Stade Lavallois or simply Laval , [ a ] is a French association football club based in Laval in western France. The club was formed on 17 July 1902 and currently plays in Ligue 2 , the second level of French football . Laval plays its home matches at the Stade Francis Le Basser located in the city.",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "stade-lavallois"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 922,
+  "fields": {
+    "is_national": false,
+    "name": "Le Mans FC",
+    "founded": "1985-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 895,
+    "manager": "Patrick Videira",
+    "num_of_titles": 0,
+    "city": 732,
+    "average_attendance": 12033,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Le_Mans_FC",
+    "transfermarkt_url": "https://www.transfermarkt.com/le-mans-fc/startseite/verein/1164",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1164.png",
+    "image_credit": null,
+    "description": "Le Mans Football Club ( French pronunciation: [ləmɑ̃] ; commonly referred to as Le Mans FC ) is a French professional football club based in Le Mans . The club is set to compete in Ligue 1 from 2026–27 , the first tier of French football after successive promotions from Championnat National in 2024–25 and Ligue 2 in 2025–26 .",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "le-mans-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 923,
+  "fields": {
+    "is_national": false,
+    "name": "Montpellier HSC",
+    "founded": "1974-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 896,
+    "manager": "Zoumana Camara",
+    "num_of_titles": 1,
+    "city": 733,
+    "average_attendance": 8768,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Montpellier_HSC",
+    "transfermarkt_url": "https://www.transfermarkt.com/montpellier-hsc/startseite/verein/969",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/969.png",
+    "image_credit": null,
+    "description": "Montpellier Hérault Sport Club ( French: [mɔ̃pəlje eʁo spɔʁ klœb] ; Occitan : Montpelhièr Erau Sport Club ), commonly referred to as Montpellier HSC , is a French professional football club based in Montpellier , Occitanie , France . The club's origins date back to 1919, but it was officially founded in 1974 through a merger of both Stade Olympique Montpelliérain and AS Paillade . [ 2 ]",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "montpellier-hsc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 924,
+  "fields": {
+    "is_national": false,
+    "name": "AS Nancy Lorraine",
+    "founded": "1967-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 897,
+    "manager": "Pablo Correa",
+    "num_of_titles": 0,
+    "city": 734,
+    "average_attendance": 11635,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/AS_Nancy_Lorraine",
+    "transfermarkt_url": "https://www.transfermarkt.com/as-nancy-lorraine/startseite/verein/1159",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1159.png",
+    "image_credit": null,
+    "description": "Association Sportive Nancy Lorraine ( French pronunciation: [asɔsjɑsjɔ̃ spɔʁtiv nɑ̃si lɔʁɛn] ), known as AS Nancy Lorraine , and more commonly as Nancy or ASNL , is a French football club founded in 1967 and based in Nancy , Grand Est . The club plays its home matches at the Stade Marcel Picot located in Tomblaine in the inner suburbs of Nancy, where its head office is also located. The infrastructure of the training center is located within the forest of Haye business park, in Bois-de-Haye . It currently competes in the second tier of French football , Ligue 2 , from 2025–26 after being crowned champions on May 2, 2025 and securing promotion from Championnat National in 2024–25 . [ 4 ]",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "as-nancy-lorraine"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 925,
+  "fields": {
+    "is_national": false,
+    "name": "Pau FC",
+    "founded": "2016-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 898,
+    "manager": "Thierry Debès",
+    "num_of_titles": 0,
+    "city": 735,
+    "average_attendance": 3182,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Pau_FC",
+    "transfermarkt_url": "https://www.transfermarkt.com/pau-fc/startseite/verein/3166",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3166.png",
+    "image_credit": null,
+    "description": "Pau Football Club ( French pronunciation: [po futbol klœb] ), commonly referred to as Pau FC , is a professional football club based in Pau , capital of Béarn , France. Pau FC plays its home matches at the Nouste Camp and competes in Ligue 2 , the second tier of French football . Nicknamed Les Maynats, Pau FC traces its origins to the patronage of the Bleuets de Notre-Dame , officially founded in 1920 in the Mayolis district. By the onset of the 1958–59 season, the Bleuets had ascended to the highest amateur division in the French football league system . [ citation needed ] Under the stewardship of its founding president, José Bidegain, the Bleuets de Notre-Dame's senior team transitioned into the Football-Club de Pau . By the 60s, they had settled in the Stade du Hameau , harbouring ambitions of turning professional.",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "pau-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 926,
+  "fields": {
+    "is_national": false,
+    "name": "Red Star FC",
+    "founded": "1897-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 899,
+    "manager": "Grégory Poirier",
+    "num_of_titles": 0,
+    "city": 736,
+    "average_attendance": 4561,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Red_Star_FC",
+    "transfermarkt_url": "https://www.transfermarkt.com/red-star-fc/startseite/verein/1154",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1154.png",
+    "image_credit": null,
+    "description": "Red Star Football Club ( French pronunciation: [ʁɛd staʁ futbol klœb] ), commonly referred to as Red Star FC or simply Red Star , is a French professional football club founded in Paris in 1897. The club plays its home matches at the Stade Bauer . [ 2 ] They currently compete in Ligue 2 , the second tier of French football , having been promoted from the third tier Championnat National at the end of the 2023–24 season . The club is the fourth oldest football club in France after Standard AC of Paris, [ 3 ] Le Havre AC and Girondins de Bordeaux .",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "red-star-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 927,
+  "fields": {
+    "is_national": false,
+    "name": "Stade de Reims",
+    "founded": "1931-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 900,
+    "manager": "Karel Geraerts",
+    "num_of_titles": 6,
+    "city": 737,
+    "average_attendance": 10877,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_de_Reims",
+    "transfermarkt_url": "https://www.transfermarkt.com/stade-reims/startseite/verein/1421",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1421.png",
+    "image_credit": null,
+    "description": "Stade de Reims ( French pronunciation: [stad də ʁɛ̃s] ) is a French professional football club based in Reims . The club was formed in 1931 and plays in Ligue 2 , the second tier of football in France . Reims plays home matches at the Stade Auguste Delaune .",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "stade-de-reims"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 928,
+  "fields": {
+    "is_national": false,
+    "name": "Rodez AF",
+    "founded": "1929-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 901,
+    "manager": "Didier Santini",
+    "num_of_titles": 0,
+    "city": 738,
+    "average_attendance": 5921,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Rodez_AF",
+    "transfermarkt_url": "https://www.transfermarkt.com/rodez-af/startseite/verein/11273",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/11273.png",
+    "image_credit": null,
+    "description": "Rodez Aveyron Football ( Occitan : Rodés Avairon ) is a French association football club based in Rodez . The club was founded in 1929 and currently plays in Ligue 2 , the second level of French football . The club plays its home matches at the Stade Paul Lignon located within the city. The women's squad was founded in 1993 and are known as the Rafettes . [ 1 ] They play in the Division 1 Féminine , the top division in France.",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "rodez-af"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 929,
+  "fields": {
+    "is_national": false,
+    "name": "AS Saint-Étienne",
+    "founded": "1933-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 902,
+    "manager": "Ian Cathro",
+    "num_of_titles": 0,
+    "city": 739,
+    "average_attendance": 31305,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/AS_Saint-%C3%89tienne",
+    "transfermarkt_url": "https://www.transfermarkt.com/as-saint-etienne/startseite/verein/618",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/618.png",
+    "image_credit": null,
+    "description": null,
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "as-saint-etienne"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 930,
+  "fields": {
+    "is_national": false,
+    "name": "ES Troyes AC",
+    "founded": "1986-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 903,
+    "manager": "Stéphane Dumont",
+    "num_of_titles": 0,
+    "city": 740,
+    "average_attendance": 7969,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/ES_Troyes_AC",
+    "transfermarkt_url": "https://www.transfermarkt.com/es-troyes-ac/startseite/verein/1095",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1095.png",
+    "image_credit": null,
+    "description": "Espérance Sportive Troyes Aube Champagne ( ESTAC ), commonly known as Troyes , is a French professional association football club based in Troyes that competes in Ligue 2 , but will play in the 2026-27 Ligue 1 following promotion . It plays its home matches at the Stade de l'Aube . Founded in 1986, it is the third professional club from the city, after AS Troyes-Savinienne and Troyes AF. The club is part of the City Football Group .",
+    "league": 74,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "es-troyes-ac"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 931,
+  "fields": {
+    "is_national": false,
+    "name": "ADO Den Haag",
+    "founded": "1905-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 904,
+    "manager": "Robin Peter",
+    "num_of_titles": 2,
+    "city": 741,
+    "average_attendance": 11502,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/ADO_Den_Haag",
+    "transfermarkt_url": "https://www.transfermarkt.com/ado-den-haag/startseite/verein/1268",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1268.png",
+    "image_credit": null,
+    "description": "Alles Door Oefening Den Haag ( Dutch pronunciation: [ˈɑləz doːr ˈufənɪŋ dɛn ˈɦaːx] ), commonly known by the abbreviated name ADO Den Haag ( [ˈaːdoː dɛn ˈɦaːx] ), is a Dutch association football club from the city of The Hague . They play in the Eerste Divisie , the second tier of Dutch football , but will play in the Eredivisie from the 2026–27 season following promotion. The club was for a time known as FC Den Haag ( [ɛfˈseː dɛn ˈɦaːx] ), with ADO representing the amateur branch of the club. Despite being from one of the traditional three large Dutch cities, it has not been able to match Ajax , Feyenoord or PSV in terms of success in the Eredivisie or in European competition. There is nonetheless a big rivalry with Ajax and Feyenoord. The Dutch words \"Alles Door Oefening\" translate into Everything Through Practice .",
+    "league": 75,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "ado-den-haag"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 932,
+  "fields": {
+    "is_national": false,
+    "name": "Almere City",
+    "founded": "2001-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 905,
+    "manager": "Jeroen Rijsdijk",
+    "num_of_titles": 0,
+    "city": 742,
+    "average_attendance": 3210,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Almere_City_FC",
+    "transfermarkt_url": "https://www.transfermarkt.com/almere-city-fc/startseite/verein/723",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/723.png",
+    "image_credit": null,
+    "description": "Almere City Football Club is a professional football club based in Almere , Netherlands. While the current organization was founded in 2001, it has roots dating back to 1959. The club currently compete in the Eerste Divisie , following relegation from the Eredivisie in 2024–25 . They play their home matches at the 4,501-capacity Yanmar Stadion .",
+    "league": 75,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "almere-city"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 933,
+  "fields": {
+    "is_national": false,
+    "name": "SC Cambuur",
+    "founded": "1964-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 906,
+    "manager": "Johan Plat",
+    "num_of_titles": 0,
+    "city": 743,
+    "average_attendance": 13654,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Cambuur",
+    "transfermarkt_url": "https://www.transfermarkt.com/sc-cambuur-leeuwarden/startseite/verein/133",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/133.png",
+    "image_credit": null,
+    "description": "Sportclub Cambuur , most often styled SC Cambuur ( Dutch pronunciation: [ɛsˈseː ˈkɑmbyːr] ) and sometimes Cambuur Leeuwarden , is a Dutch professional football club in Leeuwarden , the capital of Friesland . Founded on 19 June 1964, the team compete in the Eerste Divisie , the second tier of the Dutch football league system , but will play in the Eredivisie from the 2026–27 season following promotion. Since August 2024, they have played their home games at the 15,000‑seat Kooi Stadion , a purpose‑built stadium that replaced Cambuur Stadion . [ 1 ]",
+    "league": 75,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "sc-cambuur"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 934,
+  "fields": {
+    "is_national": false,
+    "name": "De Graafschap",
+    "founded": "1954-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 907,
+    "manager": "Marinus Dijkhuizen",
+    "num_of_titles": 0,
+    "city": 744,
+    "average_attendance": 10613,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/De_Graafschap",
+    "transfermarkt_url": "https://www.transfermarkt.com/de-graafschap-doetinchem/startseite/verein/642",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/642.png",
+    "image_credit": null,
+    "description": "Vereniging Betaald Voetbal De Graafschap ( Dutch: [vəˈreːnɪɣɪŋ bəˈtaːlt ˈvutbɑl də ˈɣraːfsxɑp] ), simply known as De Graafschap ( [də ˈɣraːfsxɑp] ), is a professional association football club based in Doetinchem , Netherlands. The team competes in the Eerste Divisie , the second level of the Dutch football league system .",
+    "league": 75,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "de-graafschap"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 935,
+  "fields": {
+    "is_national": false,
+    "name": "FC Den Bosch",
+    "founded": "1965-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 908,
+    "manager": "Bart Schreuder",
+    "num_of_titles": 1,
+    "city": 745,
+    "average_attendance": 5382,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Den_Bosch",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-den-bosch/startseite/verein/404",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/404.png",
+    "image_credit": null,
+    "description": "FC Den Bosch ( Dutch pronunciation: [ɛfˈseː dɛmˈbɔs] ) is a professional football club from 's-Hertogenbosch , Netherlands. They currently compete in the Eerste Divisie .",
+    "league": 75,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "fc-den-bosch"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 936,
+  "fields": {
+    "is_national": false,
+    "name": "FC Dordrecht",
+    "founded": "1972-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 909,
+    "manager": "Dirk Kuyt",
+    "num_of_titles": 0,
+    "city": 746,
+    "average_attendance": 2543,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dordrecht",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-dordrecht/startseite/verein/1455",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1455.png",
+    "image_credit": null,
+    "description": "Football Club Dordrecht , or simply FC Dordrecht ( Dutch pronunciation: [ɛfˈseː ˈdɔrdrɛxt] ) is a professional Dutch association football club based in Dordrecht , a city in the Western Netherlands, located in the province of South Holland . They currently compete in the Eerste Divisie , the second tier of the Dutch football league system.",
+    "league": 75,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "fc-dordrecht"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 937,
+  "fields": {
+    "is_national": false,
+    "name": "FC Eindhoven",
+    "founded": "1909-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 910,
+    "manager": "Jan Poortvliet",
+    "num_of_titles": 1,
+    "city": 280,
+    "average_attendance": 2599,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Eindhoven",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-eindhoven/startseite/verein/3892",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3892.png",
+    "image_credit": null,
+    "description": "Football Club Eindhoven , commonly known as FC Eindhoven , is a professional football club based in Eindhoven , NED, that competes in the Eerste Divisie , the second tier of Dutch football . They are one of two professional clubs which are based in the city of Eindhoven, the other one being PSV .",
+    "league": 75,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "fc-eindhoven"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 938,
+  "fields": {
+    "is_national": false,
+    "name": "FC Emmen",
+    "founded": "1925-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 911,
+    "manager": "Menno van Dam",
+    "num_of_titles": 0,
+    "city": 747,
+    "average_attendance": 7313,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Emmen",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-emmen/startseite/verein/1283",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1283.png",
+    "image_credit": null,
+    "description": "FC Emmen is a Dutch professional football club based in Emmen , Netherlands. It currently plays in the Eerste Divisie , the second tier of Dutch football , following relegation from the Eredivisie in the 2022–23 season. Founded in 1925, the club entered the professional Eerste Divisie in 1985. In 2018, FC Emmen was promoted to the Eredivisie for the first time. Home games are played at De Oude Meerdijk .",
+    "league": 75,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "fc-emmen"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 939,
+  "fields": {
+    "is_national": false,
+    "name": "Helmond Sport",
+    "founded": "1967-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 912,
+    "manager": "Jurgen Seegers",
+    "num_of_titles": 0,
+    "city": 748,
+    "average_attendance": 2269,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Helmond_Sport",
+    "transfermarkt_url": "https://www.transfermarkt.com/helmond-sport/startseite/verein/500",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/500.png",
+    "image_credit": null,
+    "description": "Helmond Sport ( Dutch pronunciation: [ˈɦɛlmɔnt ˈspɔrt] ) is a Dutch professional football club based in Helmond , North Brabant .",
+    "league": 75,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "helmond-sport"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 940,
+  "fields": {
+    "is_national": false,
+    "name": "Jong Ajax",
+    "founded": "1900-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 913,
+    "manager": "Paul Nuijten",
+    "num_of_titles": 0,
+    "city": 268,
+    "average_attendance": 1201,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Jong_Ajax",
+    "transfermarkt_url": "https://www.transfermarkt.com/ajax-amsterdam-ii/startseite/verein/8817",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/8817.png",
+    "image_credit": null,
+    "description": "Jong Ajax ( Dutch pronunciation: [jɔŋ ˈaːjɑks] ; lit. ' Young Ajax ' ), also referred to as Ajax II , Ajax 2 or 'Ajax Dos', is the reserve team of Ajax . Based at the club's training complex, Sportpark De Toekomst , in Amsterdam , it has competed in the Eerste Divisie , the second tier of Dutch professional football, since 2013. [ 3 ]",
+    "league": 75,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "jong-ajax"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 941,
+  "fields": {
+    "is_national": false,
+    "name": "Jong AZ",
+    "founded": "1967-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 914,
+    "manager": "Leeroy Echteld",
+    "num_of_titles": 0,
+    "city": 269,
+    "average_attendance": 545,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Jong_AZ",
+    "transfermarkt_url": "https://www.transfermarkt.com/az-alkmaar-ii/startseite/verein/11368",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/11368.png",
+    "image_credit": null,
+    "description": "Jong AZ is a Dutch association football team, based in Wijdewormer in the Zaanstreek . It is the reserve team of AZ , based in Alkmaar , and plays in the Eerste Divisie . [ 1 ]",
+    "league": 75,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "jong-az"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 942,
+  "fields": {
+    "is_national": false,
+    "name": "Jong PSV",
+    "founded": "1913-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 915,
+    "manager": "Marcel Brands",
+    "num_of_titles": 0,
+    "city": 280,
+    "average_attendance": 931,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Jong_PSV",
+    "transfermarkt_url": "https://www.transfermarkt.com/psv-eindhoven-ii/startseite/verein/9715",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/9715.png",
+    "image_credit": null,
+    "description": "Jong PSV is a Dutch football team based in Eindhoven . It is the reserve team of PSV Eindhoven and plays in the Eerste Divisie since the 2013–14 season .",
+    "league": 75,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "jong-psv"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 943,
+  "fields": {
+    "is_national": false,
+    "name": "Jong FC Utrecht",
+    "founded": "1970-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 916,
+    "manager": "Mark Otten",
+    "num_of_titles": 0,
+    "city": 273,
+    "average_attendance": 476,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Jong_FC_Utrecht",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-utrecht-ii/startseite/verein/17596",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/17596.png",
+    "image_credit": null,
+    "description": "Jong FC Utrecht (U23) is a Dutch football team , based in Utrecht . It is the reserve team of FC Utrecht and plays in the Eerste Divisie since the 2016–17 Eerste Divisie season. [ 1 ]",
+    "league": 75,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "jong-fc-utrecht"
+  }
+},
+{
   "model": "italiastadiaapp.stadiumdevelopment",
   "pk": 1,
   "fields": {
@@ -56646,799 +60077,6 @@
     "instagram_url": null,
     "notes": "The new Spotify Camp Nou is the redeveloped home of FC Barcelona in Barcelona, Spain, raising capacity to about 105,000 to remain the largest football stadium in Europe. Part of the Espai Barca project, the rebuild adds a new third tier and a signature panoramic rooftop canopy that will fully enclose the bowl, with a 360-degree video scoreboard beneath it. FC Barcelona is playing through phased construction, with the completed, fully roofed stadium targeted for 2026.",
     "tournaments": []
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "app_label": "italiastadiaapp",
-    "model": "city"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "app_label": "italiastadiaapp",
-    "model": "stadium"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "app_label": "italiastadiaapp",
-    "model": "team"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "app_label": "italiastadiaapp",
-    "model": "stadiumdevelopment"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "app_label": "admin",
-    "model": "logentry"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "app_label": "auth",
-    "model": "permission"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "app_label": "auth",
-    "model": "group"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "app_label": "auth",
-    "model": "user"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "app_label": "contenttypes",
-    "model": "contenttype"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "app_label": "sessions",
-    "model": "session"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "app_label": "italiastadiaapp",
-    "model": "league"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "app_label": "italiastadiaapp",
-    "model": "country"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "app_label": "italiastadiaapp",
-    "model": "lastrefresh"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "fields": {
-    "app_label": "italiastadiaapp",
-    "model": "exporttoken"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "1w6vhxfooohgb315qdga3whh9euo9qlt",
-  "fields": {
-    "session_data": ".eJxVjMsOwiAQRf-FtSE8WgZcuvcbyAwMUjU0Ke3K-O_apAvd3nPOfYmI21rj1nmJUxZnocXpdyNMD247yHdst1mmua3LRHJX5EG7vM6Zn5fD_Tuo2Ou3LgBBD-wM2wDkTBhpUIqoBHAKM6NirymPxhatTXDgU7Eue4ASlMUk3h_RUzeF:1wO7kc:tqny-td2SH-mxHTmdzYFf1uC5j41iiC4c42tRTXQerc",
-    "expire_date": "2026-05-30T05:39:50.517Z"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can add city",
-    "content_type": [
-      "italiastadiaapp",
-      "city"
-    ],
-    "codename": "add_city"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can change city",
-    "content_type": [
-      "italiastadiaapp",
-      "city"
-    ],
-    "codename": "change_city"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can delete city",
-    "content_type": [
-      "italiastadiaapp",
-      "city"
-    ],
-    "codename": "delete_city"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can view city",
-    "content_type": [
-      "italiastadiaapp",
-      "city"
-    ],
-    "codename": "view_city"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can add stadium",
-    "content_type": [
-      "italiastadiaapp",
-      "stadium"
-    ],
-    "codename": "add_stadium"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can change stadium",
-    "content_type": [
-      "italiastadiaapp",
-      "stadium"
-    ],
-    "codename": "change_stadium"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can delete stadium",
-    "content_type": [
-      "italiastadiaapp",
-      "stadium"
-    ],
-    "codename": "delete_stadium"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can view stadium",
-    "content_type": [
-      "italiastadiaapp",
-      "stadium"
-    ],
-    "codename": "view_stadium"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can add team",
-    "content_type": [
-      "italiastadiaapp",
-      "team"
-    ],
-    "codename": "add_team"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can change team",
-    "content_type": [
-      "italiastadiaapp",
-      "team"
-    ],
-    "codename": "change_team"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can delete team",
-    "content_type": [
-      "italiastadiaapp",
-      "team"
-    ],
-    "codename": "delete_team"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can view team",
-    "content_type": [
-      "italiastadiaapp",
-      "team"
-    ],
-    "codename": "view_team"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can add stadium development",
-    "content_type": [
-      "italiastadiaapp",
-      "stadiumdevelopment"
-    ],
-    "codename": "add_stadiumdevelopment"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can change stadium development",
-    "content_type": [
-      "italiastadiaapp",
-      "stadiumdevelopment"
-    ],
-    "codename": "change_stadiumdevelopment"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can delete stadium development",
-    "content_type": [
-      "italiastadiaapp",
-      "stadiumdevelopment"
-    ],
-    "codename": "delete_stadiumdevelopment"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can view stadium development",
-    "content_type": [
-      "italiastadiaapp",
-      "stadiumdevelopment"
-    ],
-    "codename": "view_stadiumdevelopment"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can add log entry",
-    "content_type": [
-      "admin",
-      "logentry"
-    ],
-    "codename": "add_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can change log entry",
-    "content_type": [
-      "admin",
-      "logentry"
-    ],
-    "codename": "change_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can delete log entry",
-    "content_type": [
-      "admin",
-      "logentry"
-    ],
-    "codename": "delete_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can view log entry",
-    "content_type": [
-      "admin",
-      "logentry"
-    ],
-    "codename": "view_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can add permission",
-    "content_type": [
-      "auth",
-      "permission"
-    ],
-    "codename": "add_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can change permission",
-    "content_type": [
-      "auth",
-      "permission"
-    ],
-    "codename": "change_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can delete permission",
-    "content_type": [
-      "auth",
-      "permission"
-    ],
-    "codename": "delete_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can view permission",
-    "content_type": [
-      "auth",
-      "permission"
-    ],
-    "codename": "view_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can add group",
-    "content_type": [
-      "auth",
-      "group"
-    ],
-    "codename": "add_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can change group",
-    "content_type": [
-      "auth",
-      "group"
-    ],
-    "codename": "change_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can delete group",
-    "content_type": [
-      "auth",
-      "group"
-    ],
-    "codename": "delete_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can view group",
-    "content_type": [
-      "auth",
-      "group"
-    ],
-    "codename": "view_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can add user",
-    "content_type": [
-      "auth",
-      "user"
-    ],
-    "codename": "add_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can change user",
-    "content_type": [
-      "auth",
-      "user"
-    ],
-    "codename": "change_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can delete user",
-    "content_type": [
-      "auth",
-      "user"
-    ],
-    "codename": "delete_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can view user",
-    "content_type": [
-      "auth",
-      "user"
-    ],
-    "codename": "view_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can add content type",
-    "content_type": [
-      "contenttypes",
-      "contenttype"
-    ],
-    "codename": "add_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can change content type",
-    "content_type": [
-      "contenttypes",
-      "contenttype"
-    ],
-    "codename": "change_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can delete content type",
-    "content_type": [
-      "contenttypes",
-      "contenttype"
-    ],
-    "codename": "delete_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can view content type",
-    "content_type": [
-      "contenttypes",
-      "contenttype"
-    ],
-    "codename": "view_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can add session",
-    "content_type": [
-      "sessions",
-      "session"
-    ],
-    "codename": "add_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can change session",
-    "content_type": [
-      "sessions",
-      "session"
-    ],
-    "codename": "change_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can delete session",
-    "content_type": [
-      "sessions",
-      "session"
-    ],
-    "codename": "delete_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can view session",
-    "content_type": [
-      "sessions",
-      "session"
-    ],
-    "codename": "view_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can add league",
-    "content_type": [
-      "italiastadiaapp",
-      "league"
-    ],
-    "codename": "add_league"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can change league",
-    "content_type": [
-      "italiastadiaapp",
-      "league"
-    ],
-    "codename": "change_league"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can delete league",
-    "content_type": [
-      "italiastadiaapp",
-      "league"
-    ],
-    "codename": "delete_league"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can view league",
-    "content_type": [
-      "italiastadiaapp",
-      "league"
-    ],
-    "codename": "view_league"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can add country",
-    "content_type": [
-      "italiastadiaapp",
-      "country"
-    ],
-    "codename": "add_country"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can change country",
-    "content_type": [
-      "italiastadiaapp",
-      "country"
-    ],
-    "codename": "change_country"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can delete country",
-    "content_type": [
-      "italiastadiaapp",
-      "country"
-    ],
-    "codename": "delete_country"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can view country",
-    "content_type": [
-      "italiastadiaapp",
-      "country"
-    ],
-    "codename": "view_country"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can add Last Refresh",
-    "content_type": [
-      "italiastadiaapp",
-      "lastrefresh"
-    ],
-    "codename": "add_lastrefresh"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can change Last Refresh",
-    "content_type": [
-      "italiastadiaapp",
-      "lastrefresh"
-    ],
-    "codename": "change_lastrefresh"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can delete Last Refresh",
-    "content_type": [
-      "italiastadiaapp",
-      "lastrefresh"
-    ],
-    "codename": "delete_lastrefresh"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can view Last Refresh",
-    "content_type": [
-      "italiastadiaapp",
-      "lastrefresh"
-    ],
-    "codename": "view_lastrefresh"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can add export token",
-    "content_type": [
-      "italiastadiaapp",
-      "exporttoken"
-    ],
-    "codename": "add_exporttoken"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can change export token",
-    "content_type": [
-      "italiastadiaapp",
-      "exporttoken"
-    ],
-    "codename": "change_exporttoken"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can delete export token",
-    "content_type": [
-      "italiastadiaapp",
-      "exporttoken"
-    ],
-    "codename": "delete_exporttoken"
-  }
-},
-{
-  "model": "auth.permission",
-  "fields": {
-    "name": "Can view export token",
-    "content_type": [
-      "italiastadiaapp",
-      "exporttoken"
-    ],
-    "codename": "view_exporttoken"
-  }
-},
-{
-  "model": "auth.user",
-  "fields": {
-    "password": "pbkdf2_sha256$870000$ZKkCAiwjoOAGQKK5Pm2kvA$7AvJvewa46XD34wTYzqpjBpx2MUJo5GFd2prnTirGKA=",
-    "last_login": "2026-05-16T05:39:50.510Z",
-    "is_superuser": true,
-    "username": "marco",
-    "first_name": "",
-    "last_name": "",
-    "email": "destavola.marco@gmail.com",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2026-05-16T05:37:55.245Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 1,
-  "fields": {
-    "action_time": "2026-05-16T05:41:12.808Z",
-    "user": [
-      "marco"
-    ],
-    "content_type": [
-      "italiastadiaapp",
-      "stadiumdevelopment"
-    ],
-    "object_id": "2",
-    "object_repr": "New Artemio Franchi",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Image url\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 2,
-  "fields": {
-    "action_time": "2026-05-16T05:41:25.831Z",
-    "user": [
-      "marco"
-    ],
-    "content_type": [
-      "italiastadiaapp",
-      "stadiumdevelopment"
-    ],
-    "object_id": "5",
-    "object_repr": "Stadio Giuseppe Sinigaglia Redevelopment",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Notes\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 3,
-  "fields": {
-    "action_time": "2026-05-16T05:45:01.419Z",
-    "user": [
-      "marco"
-    ],
-    "content_type": [
-      "italiastadiaapp",
-      "stadiumdevelopment"
-    ],
-    "object_id": "10",
-    "object_repr": "Nuovo Stadio Erasmo Iacovone",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
   }
 }
 ]

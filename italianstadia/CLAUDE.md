@@ -69,11 +69,19 @@ italiastadiaapp/        ← single Django app
 scripts/                ← standalone data population scripts (not Django management commands)
   populate_data.py
   populate_data_from_transfermrkt.py
-build.sh                ← Render deploy: pip install + migrate + collectstatic (NO loaddata!)
-                          # The fixture is loaded MANUALLY/once, not on deploy. To
-                          # correct production data, write a DATA MIGRATION (runs via
-                          # `migrate` on every deploy) — editing initial_data.json alone
-                          # does NOT reach production.
+build.sh                ← Render deploy: pip install + migrate + loaddata + collectstatic
+                          # Prod data is SYNCED FROM THE FIXTURE on every deploy:
+                          # `loaddata initial_data` (upsert by PK, idempotent). Scraped
+                          # league data lives only in local SQLite and reaches prod ONLY
+                          # via this fixture. WORKFLOW after any data change (scrape, fix):
+                          #   1. python manage.py dumpdata italiastadiaapp \
+                          #        --exclude italiastadiaapp.exporttoken \
+                          #        --exclude italiastadiaapp.lastrefresh \
+                          #        --indent 2 -o italiastadiaapp/fixtures/initial_data.json
+                          #   2. python manage.py generate_stadiums_json   (static map)
+                          #   3. commit both, then deploy.
+                          # Prefer fixing data LOCALLY + re-dumping over write-only data
+                          # migrations now that loaddata is the source of truth on deploy.
 ```
 
 ## Data model
