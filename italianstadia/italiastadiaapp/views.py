@@ -1213,9 +1213,18 @@ def insight_national(request):
         "venue, a neutral national arena, or a tournament stadium awaiting a permanent "
         "tenant. The map below shows each of these grounds; the table lists them by capacity."
     )
+    debate = (
+        "The list could grow. Several countries are actively debating a dedicated national "
+        "stadium: in Croatia there is a long-running discussion about finally building a "
+        "national ground in Zagreb rather than relying on club stadiums. In Italy, Rome's "
+        "Stadio Olimpico could effectively become a national-team venue once Lazio and Roma "
+        "move into their own purpose-built club stadiums, leaving the Olimpico without a "
+        "permanent club tenant. As those projects progress, expect more purely national "
+        "grounds to appear on this map."
+    )
     return render(request, "insight_national.html", {
         "rows": rows, "count": len(rows), "total_capacity": total_cap,
-        "intro": intro, "about": about,
+        "intro": intro, "about": about, "debate": debate,
         "geojson_url": reverse("italiastadiaapp:stadiums_geojson") + "?view=national",
         "others": _insight_others("national-stadiums"),
         "page_description": _trim(intro),
@@ -1265,10 +1274,22 @@ def insight_surface(request):
         "figures reflect only confirmed data. Use the map to see the surface of each "
         "individual ground."
     )
+    debate = (
+        "This map was prompted by a very Italian debate. After Andrea Cambiaso said he hadn't "
+        "played on artificial turf since he was 17, and Cristian Chivu's Inter were knocked "
+        "out of Europe by Bodø/Glimt — whose synthetic pitch and remarkable home record drew "
+        "intense scrutiny — fans and pundits in Italy openly questioned whether UEFA should "
+        "ban artificial surfaces in its competitions. So how unusual is Bodø/Glimt's pitch "
+        "really? The data is clear: artificial turf is overwhelmingly a Scandinavian "
+        "phenomenon — Norway, Finland and Sweden dominate the table below, driven by climate "
+        "and year-round playability. An Italian club drawn against a Nordic side in Europe "
+        "will almost certainly face it. Is the pitch a valid excuse, or just poor "
+        "preparation? Explore every artificial-turf ground on the map and judge for yourself."
+    )
     return render(request, "insight_surface.html", {
         "surface_stats": surface_stats, "known": known,
         "artificial_rows": artificial_rows[:15],
-        "intro": intro, "about": about,
+        "intro": intro, "about": about, "debate": debate,
         "geojson_url": reverse("italiastadiaapp:stadiums_geojson") + "?view=surface",
         "others": _insight_others("stadium-surfaces"),
         "page_description": _trim(intro),
@@ -1277,24 +1298,16 @@ def insight_surface(request):
 
 @cache_page(60 * 60)
 def insight_density(request):
-    # Stadiums per million people, by country. Denominator = ALL stadiums in our dataset
-    # (coverage varies by country — stated as a caveat in the page text).
+    # TOP-FLIGHT stadiums per million people, by country. Restricting to the top division
+    # makes this comparable across countries regardless of how many lower leagues we've
+    # scraped — it answers "how many top-tier grounds does a nation support per capita".
     from .models import Country
-    # Some City.country free-text values don't match Country.name — normalize them so the
-    # stadiums are counted against the right country.
-    _COUNTRY_ALIAS = {
-        "Czech Republic": "Czechia",
-        "Republic of Cyprus": "Cyprus",
-        "Moldova ( de jure) Transnistria ( de facto ) [ a ]": "Moldova",
-    }
-    counts = (Stadium.objects.values("city__country")
-              .annotate(n=Count("id")).order_by())
-    count_by_country = defaultdict(int)
-    for r in counts:
-        name = r["city__country"]
-        if not name:
-            continue
-        count_by_country[_COUNTRY_ALIAS.get(name, name)] += r["n"]
+    counts = (Stadium.objects
+              .filter(teams__league__division_level=1)
+              .values("teams__league__country__name")
+              .annotate(n=Count("id", distinct=True)).order_by())
+    count_by_country = {r["teams__league__country__name"]: r["n"]
+                        for r in counts if r["teams__league__country__name"]}
     rows = []
     for c in Country.objects.exclude(population__isnull=True):
         n = count_by_country.get(c.name, 0)
@@ -1323,20 +1336,29 @@ def insight_density(request):
         density_by_name["United Kingdom"] = round(uk_stadiums / (uk_pop / 1_000_000), 2)
     top = rows[0] if rows else None
     intro = (
-        "This map ranks European countries by football-stadium density — the number of "
-        "stadiums in our dataset per million inhabitants. "
-        + (f"{top['country']} leads with {top['per_million']} stadiums per million people. "
-           if top else "")
-        + "Smaller nations tend to rank high simply because even a modest number of grounds "
-        "is large relative to their population."
+        "This map ranks European countries by TOP-FLIGHT football-stadium density — the number "
+        "of first-division grounds per million inhabitants. "
+        + (f"{top['country']} leads with {top['per_million']} top-tier stadiums per million "
+           f"people. " if top else "")
+        + "Smaller nations rank high because even a normal-sized top division is large "
+        "relative to their population."
     )
     about = (
-        "Density is stadiums-in-our-dataset divided by national population (per million). "
-        "Coverage is uneven — countries with more leagues scraped will show more stadiums — "
-        "so treat this as a guide to our data, not a definitive national census of grounds."
+        "Density here is the number of first-division (top-flight) stadiums divided by national "
+        "population, per million. Restricting to the top division keeps countries comparable "
+        "regardless of how many lower leagues are in our dataset."
+    )
+    debate = (
+        "League size is part of this story. A bigger top flight means more top-tier stadiums "
+        "per capita — and Italy's Serie A is at the centre of a long-running debate about "
+        "shrinking from 20 clubs to 18, or even 16, to ease fixture congestion, raise quality "
+        "and give the national team more rest. England, Spain and Germany have all weighed "
+        "similar moves. If Serie A cut to 18, Italy's top-flight density on this map would drop "
+        "accordingly — a reminder that these numbers reflect competition design as much as "
+        "football culture."
     )
     return render(request, "insight_density.html", {
-        "rows": rows, "intro": intro, "about": about,
+        "rows": rows, "intro": intro, "about": about, "debate": debate,
         "density_json": json.dumps(density_by_name),
         "others": _insight_others("stadium-density"),
         "page_description": _trim(intro),

@@ -34,6 +34,13 @@
         <div class="card-body"><p class="mb-0">{{ about }}</p></div>
     </div>
 
+    {% if debate %}
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>Should Serie A shrink?</strong></div>
+        <div class="card-body"><p class="mb-0">{{ debate }}</p></div>
+    </div>
+    {% endif %}
+
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-white"><strong>Ranking — stadiums per million people</strong></div>
         <div class="table-responsive">

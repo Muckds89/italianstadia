@@ -24,6 +24,13 @@
     <h1 class="mb-2">Artificial vs natural grass in European stadiums</h1>
     <p class="lead text-secondary mb-4">{{ intro }}</p>
 
+    {% if debate %}
+    <div class="card shadow-sm mb-4 border-warning">
+        <div class="card-header bg-white"><strong>The Cambiaso / Bodø-Glimt debate</strong></div>
+        <div class="card-body"><p class="mb-0">{{ debate }}</p></div>
+    </div>
+    {% endif %}
+
     <div class="row g-3 mb-4">
         {% for s in surface_stats %}
         <div class="col-md-4">
