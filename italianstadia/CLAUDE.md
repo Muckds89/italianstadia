@@ -74,11 +74,14 @@ build.sh                ← Render deploy: pip install + migrate + loaddata + co
                           # `loaddata initial_data` (upsert by PK, idempotent). Scraped
                           # league data lives only in local SQLite and reaches prod ONLY
                           # via this fixture. WORKFLOW after any data change (scrape, fix):
-                          #   1. python manage.py dumpdata italiastadiaapp \
+                          #   1. python -X utf8 manage.py dumpdata italiastadiaapp \
                           #        --exclude italiastadiaapp.exporttoken \
                           #        --exclude italiastadiaapp.lastrefresh \
                           #        --indent 2 -o italiastadiaapp/fixtures/initial_data.json
-                          #   2. python manage.py generate_stadiums_json   (static map)
+                          #      (-X utf8 is REQUIRED on Windows — without it dumpdata's
+                          #       -o writes with cp1252 and dies on names like 'ț'/'ș',
+                          #       leaving a corrupt fixture.)
+                          #   2. python -X utf8 manage.py generate_stadiums_json   (static map)
                           #   3. commit both, then deploy.
                           # Prefer fixing data LOCALLY + re-dumping over write-only data
                           # migrations now that loaddata is the source of truth on deploy.
