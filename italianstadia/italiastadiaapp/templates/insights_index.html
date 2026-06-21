@@ -1,0 +1,37 @@
+{% extends "base_detail.html" %}
+{% load static %}
+
+{% block title %}Stadium Insights — Stadiums of Europe{% endblock %}
+
+{% block meta %}
+<meta name="description" content="{{ page_description }}">
+<meta property="og:title" content="Stadium Insights — Stadiums of Europe">
+<meta property="og:description" content="{{ page_description }}">
+<meta property="og:type" content="website">
+{% endblock %}
+
+{% block extra_nav %}
+<a href="{% url 'italiastadiaapp:home' %}" class="btn btn-outline-light btn-sm">← Map</a>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-2">Stadium Insights</h1>
+    <p class="lead text-secondary mb-4">{{ page_description }}</p>
+
+    <div class="row g-4">
+        {% for i in insights %}
+        <div class="col-md-4">
+            <a href="{% url 'italiastadiaapp:'|add:i.url_name %}" class="text-decoration-none text-reset">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h5 card-title">{{ i.title }}</h2>
+                        <p class="card-text text-secondary mb-0">{{ i.blurb }}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

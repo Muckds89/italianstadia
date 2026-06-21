@@ -86,7 +86,8 @@ class StaticViewSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return ["home", "stadium_list", "team_list", "city_list", "stadium_development_list"]
+        return ["home", "stadium_list", "team_list", "city_list", "stadium_development_list",
+                "insights_index", "insight_national", "insight_surface", "insight_density"]
 
     def location(self, item):
         return reverse(f"italiastadiaapp:{item}")

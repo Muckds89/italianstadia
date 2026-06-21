@@ -1,0 +1,71 @@
+{% extends "base_detail.html" %}
+{% load static %}
+
+{% block title %}Stadium density per population in Europe — Stadiums of Europe{% endblock %}
+
+{% block meta %}
+<meta name="description" content="{{ page_description }}">
+<meta property="og:title" content="Stadium density per population in Europe">
+<meta property="og:description" content="{{ page_description }}">
+<meta property="og:type" content="article">
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>#insight-map{height:520px;border-radius:8px}</style>
+{% endblock %}
+
+{% block extra_nav %}
+<a href="{% url 'italiastadiaapp:insights_index' %}" class="btn btn-outline-light btn-sm">← Insights</a>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-2">Stadium density per population</h1>
+    <p class="lead text-secondary mb-4">{{ intro }}</p>
+
+    <div id="insight-map" class="mb-4"
+         data-mode="choropleth"
+         data-countries-url="{% static 'data/countries_hires.geojson' %}"
+         data-density="{{ density_json }}"></div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>About this data</strong></div>
+        <div class="card-body"><p class="mb-0">{{ about }}</p></div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>Ranking — stadiums per million people</strong></div>
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead><tr><th>#</th><th>Country</th><th class="text-end">Stadiums / million</th><th class="text-end">Stadiums</th><th class="text-end">Population</th></tr></thead>
+                <tbody>
+                {% for r in rows %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ r.country }}</td>
+                        <td class="text-end fw-semibold">{{ r.per_million }}</td>
+                        <td class="text-end">{{ r.stadiums }}</td>
+                        <td class="text-end">{{ r.population|floatformat:0 }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% include "_insight_related.html" %}
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset",
+ "name":"Stadium density per population in Europe",
+ "description":"{{ page_description|escapejs }}",
+ "url":"{{ request.scheme }}://{{ request.get_host }}{{ request.path }}"}
+</script>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{% static 'js/insights-map.js' %}"></script>
+{% endblock %}

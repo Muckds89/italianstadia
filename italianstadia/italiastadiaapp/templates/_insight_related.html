@@ -1,0 +1,17 @@
+{% if others %}
+<h2 class="h5 mt-5 mb-3">Related insights</h2>
+<div class="row g-3">
+    {% for i in others %}
+    <div class="col-md-6">
+        <a href="{% url 'italiastadiaapp:'|add:i.url_name %}" class="text-decoration-none text-reset">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h3 class="h6 card-title mb-1">{{ i.title }}</h3>
+                    <p class="card-text small text-secondary mb-0">{{ i.blurb }}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

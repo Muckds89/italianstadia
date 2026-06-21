@@ -1272,9 +1272,21 @@ def insight_density(request):
     # Stadiums per million people, by country. Denominator = ALL stadiums in our dataset
     # (coverage varies by country — stated as a caveat in the page text).
     from .models import Country
+    # Some City.country free-text values don't match Country.name — normalize them so the
+    # stadiums are counted against the right country.
+    _COUNTRY_ALIAS = {
+        "Czech Republic": "Czechia",
+        "Republic of Cyprus": "Cyprus",
+        "Moldova ( de jure) Transnistria ( de facto ) [ a ]": "Moldova",
+    }
     counts = (Stadium.objects.values("city__country")
               .annotate(n=Count("id")).order_by())
-    count_by_country = {r["city__country"]: r["n"] for r in counts if r["city__country"]}
+    count_by_country = defaultdict(int)
+    for r in counts:
+        name = r["city__country"]
+        if not name:
+            continue
+        count_by_country[_COUNTRY_ALIAS.get(name, name)] += r["n"]
     rows = []
     for c in Country.objects.exclude(population__isnull=True):
         n = count_by_country.get(c.name, 0)
@@ -1286,8 +1298,21 @@ def insight_density(request):
             "population": c.population, "per_million": per_m,
         })
     rows.sort(key=lambda r: r["per_million"], reverse=True)
-    # name -> per_million, for the choropleth JS (keyed by the hi-res geojson 'name').
-    density_by_name = {r["country"]: r["per_million"] for r in rows}
+    # name -> per_million for the choropleth JS, keyed to match the hi-res geojson polygon
+    # names. The geojson has ONE "United Kingdom" polygon (not the four home nations) and
+    # uses "Czech Republic", so reconcile those here. The ranking table stays granular.
+    _GEOJSON_ALIAS = {"Czechia": "Czech Republic"}
+    _UK = {"England", "Scotland", "Wales", "Northern Ireland"}
+    density_by_name = {}
+    uk_stadiums = uk_pop = 0
+    for r in rows:
+        if r["country"] in _UK:
+            uk_stadiums += r["stadiums"]
+            uk_pop += r["population"]
+            continue
+        density_by_name[_GEOJSON_ALIAS.get(r["country"], r["country"])] = r["per_million"]
+    if uk_pop:
+        density_by_name["United Kingdom"] = round(uk_stadiums / (uk_pop / 1_000_000), 2)
     top = rows[0] if rows else None
     intro = (
         "This map ranks European countries by football-stadium density — the number of "

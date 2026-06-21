@@ -9,6 +9,7 @@ from .views import (
     team_detail, team_detail_redirect,
     tournament_list, tournament_detail, map_export,
     export_page, export_checkout, export_webhook, export_success, export_download, export_options,
+    insights_index, insight_national, insight_surface, insight_density,
 )
 
 app_name = "italiastadiaapp"
@@ -28,6 +29,10 @@ urlpatterns = [
     path("country/<str:country_name>/", country_stats, name="country_stats"),
     path("tournaments/", tournament_list, name="tournament_list"),
     path("tournaments/<slug:slug>/", tournament_detail, name="tournament_detail"),
+    path("insights/", insights_index, name="insights_index"),
+    path("insights/national-stadiums/", insight_national, name="insight_national"),
+    path("insights/stadium-surfaces/", insight_surface, name="insight_surface"),
+    path("insights/stadium-density/", insight_density, name="insight_density"),
     path("api/stadiums/", stadiums_geojson, name="stadiums_geojson"),
     path("api/stadium-developments/", stadium_developments_geojson, name="stadium_developments_geojson"),
     path("api/export/stadiums/", export_stadiums, name="export_stadiums"),

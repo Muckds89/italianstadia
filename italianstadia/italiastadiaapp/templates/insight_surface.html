@@ -1,0 +1,85 @@
+{% extends "base_detail.html" %}
+{% load static %}
+
+{% block title %}Artificial vs grass pitches in European stadiums — Stadiums of Europe{% endblock %}
+
+{% block meta %}
+<meta name="description" content="{{ page_description }}">
+<meta property="og:title" content="Artificial vs natural grass in European stadiums">
+<meta property="og:description" content="{{ page_description }}">
+<meta property="og:type" content="article">
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>#insight-map{height:480px;border-radius:8px}</style>
+{% endblock %}
+
+{% block extra_nav %}
+<a href="{% url 'italiastadiaapp:insights_index' %}" class="btn btn-outline-light btn-sm">← Insights</a>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-2">Artificial vs natural grass in European stadiums</h1>
+    <p class="lead text-secondary mb-4">{{ intro }}</p>
+
+    <div class="row g-3 mb-4">
+        {% for s in surface_stats %}
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center h-100">
+                <div class="card-body">
+                    <div class="display-6">{{ s.pct }}%</div>
+                    <div class="fw-semibold">{{ s.label }}</div>
+                    <div class="text-secondary small">{{ s.count }} stadiums</div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="insight-map" class="mb-4"
+         data-mode="markers" data-color-by="surface"
+         data-geojson-url="{{ geojson_url }}"></div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>About this data</strong></div>
+        <div class="card-body"><p class="mb-0">{{ about }}</p></div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>Highest artificial-pitch share (by country)</strong></div>
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead><tr><th>Country</th><th class="text-end">Artificial %</th><th class="text-end">Artificial</th><th class="text-end">Hybrid</th><th class="text-end">Grass</th><th class="text-end">Total</th></tr></thead>
+                <tbody>
+                {% for r in artificial_rows %}
+                    <tr>
+                        <td>{{ r.country }}</td>
+                        <td class="text-end">{{ r.artificial_pct }}%</td>
+                        <td class="text-end">{{ r.artificial }}</td>
+                        <td class="text-end">{{ r.hybrid }}</td>
+                        <td class="text-end">{{ r.grass }}</td>
+                        <td class="text-end">{{ r.total }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% include "_insight_related.html" %}
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset",
+ "name":"Artificial vs natural grass in European stadiums",
+ "description":"{{ page_description|escapejs }}",
+ "url":"{{ request.scheme }}://{{ request.get_host }}{{ request.path }}"}
+</script>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{% static 'js/insights-map.js' %}"></script>
+{% endblock %}
