@@ -68,6 +68,85 @@ def _stadium_description(stadium):
     return _trim(sentence)
 
 
+def _stadium_answer_faq(stadium):
+    """A snippet-friendly answer sentence + FAQ Q&A pairs for a stadium page.
+    Targets the dominant 'X capacity / where is X / what pitch' search intent."""
+    city = stadium.city
+    loc = (f"{city.name}, {city.country}" if city and city.country
+           else (city.name if city else ""))
+    teams = list(stadium.teams.all())
+    team_names = ", ".join(t.name for t in teams[:3])
+
+    bits = [f"{stadium.name} is a football stadium"]
+    if loc:
+        bits.append(f"in {loc}")
+    if stadium.capacity:
+        bits.append(f"with a capacity of {stadium.capacity:,}")
+    answer = " ".join(bits) + "."
+    if stadium.year_of_construction:
+        answer += f" It opened in {stadium.year_of_construction}."
+    if stadium.surface:
+        answer += f" The pitch is {stadium.get_surface_display().lower()}."
+    if team_names:
+        answer += f" It is home to {team_names}."
+
+    faq = []
+    if stadium.capacity:
+        faq.append((f"What is the capacity of {stadium.name}?",
+                    f"{stadium.name} has a capacity of {stadium.capacity:,} spectators."))
+    if loc:
+        faq.append((f"Where is {stadium.name} located?",
+                    f"{stadium.name} is located in {loc}."))
+    if stadium.year_of_construction:
+        faq.append((f"When did {stadium.name} open?",
+                    f"{stadium.name} opened in {stadium.year_of_construction}."))
+    if stadium.surface:
+        faq.append((f"What kind of pitch does {stadium.name} have?",
+                    f"{stadium.name} has a {stadium.get_surface_display().lower()} pitch."))
+    if team_names:
+        faq.append((f"Which teams play at {stadium.name}?",
+                    f"{stadium.name} is the home ground of {team_names}."))
+    return answer, [{"q": q, "a": a} for q, a in faq]
+
+
+def _team_answer_faq(team):
+    """Snippet-friendly answer + FAQ for a team page (full name, ground, country, founded)."""
+    country = team.league.country.name if team.league and team.league.country else (
+        team.city.country if team.city else "")
+    where = team.city.name if team.city else ""
+    if where and country:
+        where = f"{where}, {country}"
+    elif country:
+        where = country
+    ground = team.stadium.name if team.stadium else ""
+
+    bits = [f"{team.name} is a football club"]
+    if where:
+        bits.append(f"based in {where}")
+    answer = " ".join(bits) + "."
+    if team.founded:
+        answer += f" It was founded in {team.founded.year}."
+    if ground:
+        cap = f" ({team.stadium.capacity:,} capacity)" if team.stadium.capacity else ""
+        answer += f" The club plays at {ground}{cap}."
+
+    faq = []
+    if where:
+        faq.append((f"Where is {team.name} from?", f"{team.name} is based in {where}."))
+    if ground:
+        faq.append((f"What stadium does {team.name} play at?",
+                    f"{team.name} plays at {ground}."
+                    + (f" Its capacity is {team.stadium.capacity:,}." if team.stadium.capacity else "")))
+    if team.founded:
+        faq.append((f"When was {team.name} founded?",
+                    f"{team.name} was founded in {team.founded.year}."))
+    if team.num_of_titles:
+        faq.append((f"How many league titles has {team.name} won?",
+                    f"{team.name} has won {team.num_of_titles} domestic league "
+                    f"title{'s' if team.num_of_titles != 1 else ''}."))
+    return answer, [{"q": q, "a": a} for q, a in faq]
+
+
 def _team_description(team):
     parts = [team.name]
     if team.league:
@@ -118,6 +197,7 @@ def stadium_detail(request, slug):
         if team_flag_urls.get(t.pk) or t.image_url
     ]
 
+    answer, faq = _stadium_answer_faq(stadium)
     return render(request, "stadium_detail.html", {
         "stadium": stadium,
         "has_coords": stadium.latitude is not None and stadium.longitude is not None,
@@ -127,6 +207,11 @@ def stadium_detail(request, slug):
         "team_logos_json": json.dumps(team_logos),
         "team_flag_urls": team_flag_urls,
         "page_description": _stadium_description(stadium),
+        "answer": answer,
+        "faq": faq,
+        "faq_json": json.dumps([{"@type": "Question", "name": f["q"],
+                                 "acceptedAnswer": {"@type": "Answer", "text": f["a"]}}
+                                for f in faq]),
     })
 
 
@@ -534,11 +619,17 @@ def team_detail(request, slug):
     )
     from_list    = request.GET.get("from_list", None)
     back_country = from_list if from_list else ""
+    answer, faq = _team_answer_faq(team)
     return render(request, "team_detail.html", {
         "team": team,
         "from_list": from_list is not None,
         "back_country": back_country,
         "page_description": _team_description(team),
+        "answer": answer,
+        "faq": faq,
+        "faq_json": json.dumps([{"@type": "Question", "name": f["q"],
+                                 "acceptedAnswer": {"@type": "Answer", "text": f["a"]}}
+                                for f in faq]),
     })
 
 

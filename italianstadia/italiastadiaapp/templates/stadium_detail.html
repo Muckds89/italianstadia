@@ -1,7 +1,7 @@
 {% extends "base_detail.html" %}
 {% load static stadium_extras %}
 
-{% block title %}{{ stadium.name }}{% endblock %}
+{% block title %}{{ stadium.name }}{% if stadium.capacity %} — {{ stadium.capacity }} Capacity{% endif %} | Stadiums of Europe{% endblock %}
 
 {% block meta %}
 <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{% url 'italiastadiaapp:stadium_detail' stadium.slug %}">
@@ -83,8 +83,12 @@
         <div class="card-body p-4">
             <h1 class="card-title mb-3">{{ stadium.name }}</h1>
 
+            {% if answer %}
+            <p class="lead">{{ answer }}</p>
+            {% endif %}
+
             {% if stadium.description %}
-            <p class="lead">{{ stadium.description }}</p>
+            <p>{{ stadium.description }}</p>
             {% endif %}
 
             <hr>
@@ -283,6 +287,18 @@
         </div>
     </div>
     {% endwith %}
+
+    {% if faq %}
+    <div class="card shadow-sm mt-4">
+        <div class="card-header bg-white"><strong>Frequently asked questions</strong></div>
+        <div class="card-body">
+            {% for item in faq %}
+            <h2 class="h6 mb-1">{{ item.q }}</h2>
+            <p class="{% if not forloop.last %}mb-3{% else %}mb-0{% endif %}">{{ item.a }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 </div>
 
 {% endblock %}
@@ -311,4 +327,9 @@
       "sameAs": "{{ stadium.wikipedia_url|escapejs }}"{% endif %}
     }
     </script>
+    {% if faq %}
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":{{ faq_json|safe }}}
+    </script>
+    {% endif %}
 {% endblock %}

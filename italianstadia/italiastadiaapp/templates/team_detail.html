@@ -1,7 +1,7 @@
 {% extends "base_detail.html" %}
 {% load static %}
 
-{% block title %}{{ team.name }}{% endblock %}
+{% block title %}{{ team.name }} — Stadium, Founded & Country | Stadiums of Europe{% endblock %}
 
 {% block meta %}
 <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{% url 'italiastadiaapp:team_detail' team.slug %}">
@@ -54,8 +54,12 @@
             <h1 class="card-title mb-3">{{ team.name }}</h1>
             {% endif %}
 
+            {% if answer %}
+            <p class="lead">{{ answer }}</p>
+            {% endif %}
+
             {% if team.description %}
-            <p class="lead">{{ team.description }}</p>
+            <p>{{ team.description }}</p>
             {% endif %}
 
             <hr>
@@ -223,6 +227,15 @@
                 </div>
             </div>
 
+            {% if faq %}
+            <hr>
+            <h2 class="h5 mt-3">Frequently asked questions</h2>
+            {% for item in faq %}
+            <h3 class="h6 mb-1">{{ item.q }}</h3>
+            <p class="{% if not forloop.last %}mb-3{% else %}mb-0{% endif %}">{{ item.a }}</p>
+            {% endfor %}
+            {% endif %}
+
         </div>
     </div>
 </div>
@@ -230,6 +243,11 @@
 {% endblock %}
 
 {% block extra_scripts %}
+{% if faq %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":{{ faq_json|safe }}}
+</script>
+{% endif %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
