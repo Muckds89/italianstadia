@@ -520,6 +520,16 @@
   }
 },
 {
+  "model": "italiastadiaapp.country",
+  "pk": 54,
+  "fields": {
+    "name": "Israel",
+    "code": "IL",
+    "uefa_rank": null,
+    "population": null
+  }
+},
+{
   "model": "italiastadiaapp.league",
   "pk": 1,
   "fields": {
@@ -1192,6 +1202,33 @@
     "name": "Primera Federación",
     "country": 47,
     "division_level": 3
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 78,
+  "fields": {
+    "name": "Armenian Premier League",
+    "country": 9,
+    "division_level": 1
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 79,
+  "fields": {
+    "name": "Football Superleague of Kosovo",
+    "country": 27,
+    "division_level": 1
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 80,
+  "fields": {
+    "name": "Israeli Premier League",
+    "country": 54,
+    "division_level": 1
   }
 },
 {
@@ -3541,7 +3578,7 @@
     "name": "Villarreal",
     "population": 53623,
     "country": "Spain",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Vila-real",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Villarreal",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Vila-real_Vila_Square_10.JPG",
     "image_credit": null,
     "description": "Villarreal , [ a ] officially Vila-real [ b ] in Catalan and officially Villarreal in English and Spanish, is a town and municipality in the province of Castellón which is part of the Valencian Community in the east of Spain ."
@@ -9259,12 +9296,12 @@
   "pk": 647,
   "fields": {
     "name": "Yerevan",
-    "population": null,
+    "population": 1086677,
     "country": "Armenia",
-    "wikipedia_url": null,
-    "image_url": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Yerevan",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/45/Mount_Ararat_and_the_Yerevan_skyline_%28June_2018%29.jpg",
     "image_credit": null,
-    "description": null
+    "description": "Yerevan ( UK : / ˌ j ɛr ə ˈ v æ n / YERR -ə- VAN , US : /- ˈ v ɑː n / , -⁠ VAHN ; Armenian : Երևան [ c ] [jɛɾɛˈvɑn] ⓘ ; sometimes spelled Erevan ) [ d ] is the capital and largest city of Armenia , as well as one of the world's oldest continuously inhabited cities . [ 28 ] Situated along the Hrazdan River , Yerevan is the administrative, cultural, and industrial centre of the country, as its primate city . It has been the capital since 1918, the fourteenth in the history of Armenia and the seventh located in or around the Ararat Plain . The city also serves as the seat of the Araratian Pontifical Diocese , which is the largest diocese of the Armenian Apostolic Church and one of the oldest dioceses in the world. [ 29 ]"
   }
 },
 {
@@ -11280,6 +11317,305 @@
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Vista_de_Tarazona%2C_Espa%C3%B1a%2C_2015-01-02%2C_DD_07.JPG",
     "image_credit": null,
     "description": "Tarazona is a town and municipality in the Tarazona y el Moncayo comarca, province of Zaragoza , in Aragon , Spain. It is the capital of the Tarazona y el Moncayo Aragonese comarca. [ 2 ] It is also the seat of the Roman Catholic Diocese of Tarazona . [ 3 ] Located on the river Queiles , a tributary of the Ebro , [ 4 ] Tarazona was an important regional centre of ancient Rome, known as Turiaso , located around 60 kilometres (37 mi) from Bilbilis . The city later came under the rule of the Visigoths , who called it Tirasona . [ 5 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 803,
+  "fields": {
+    "name": "Teruel",
+    "population": 36655,
+    "country": "Spain",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Teruel",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Plaza_del_Torico_%28Teruel%29.jpg",
+    "image_credit": null,
+    "description": "Teruel ( Spanish: [teˈɾwel] ⓘ ) is a city in Aragon , located in eastern Spain, and is also the capital of Teruel Province . It had a population of 35,900 as of 2022, making it the least populated provincial capital in Spain. It is noted for its harsh climate , with a wide daily variation on temperatures and its renowned jamón serrano (cured ham), its pottery , its surrounding archaeological sites , rock outcrops containing some of the oldest dinosaur remains of the Iberian Peninsula , and its famous events: La Vaquilla del Ángel [ 2 ] during the weekend (Friday to Monday) closest to 10 July and \"Bodas de Isabel de Segura\" around the third weekend of February."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 804,
+  "fields": {
+    "name": "Kapan",
+    "population": 32780,
+    "country": "Armenia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Kapan",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Kapan_collage.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 805,
+  "fields": {
+    "name": "Abovyan",
+    "population": 46434,
+    "country": "Armenia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Abovyan",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Abovyan_new_collection_2016.jpg",
+    "image_credit": null,
+    "description": "40°16′26″N 44°37′32″E ﻿ / ﻿ 40.27389°N 44.62556°E ﻿ / 40.27389; 44.62556 Abovyan or Abovian ( Armenian : Աբովյան [ɑbɔvˈjɑn] ) is a town and urban municipal community in Armenia within the Kotayk Province . It is located 16 kilometres (10 miles) northeast of Yerevan and 32 kilometres (20 miles) southeast of the province centre Hrazdan . As of the 2022 census, the population of the town was 46,434. [ 1 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 806,
+  "fields": {
+    "name": "Gyumri",
+    "population": 112301,
+    "country": "Armenia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Gyumri",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Abovyan_street_Gyumri.jpg",
+    "image_credit": null,
+    "description": "Gyumri ( Armenian : Գյումրի , [ a ] pronounced [ɡjumˈɾi] ) is an urban municipal community and the second-largest city in Armenia , serving as the administrative center of Shirak Province in the northwestern part of the country. By the end of the 19th century, when the city was known as Alexandropol , [ b ] it became the largest city of Russian-ruled Eastern Armenia with a population above that of Yerevan . The city became renowned as a cultural hub, while also carrying significance as a major center of Russian troops during Russo-Turkish wars of the 19th century."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 807,
+  "fields": {
+    "name": "Charentsavan",
+    "population": 22071,
+    "country": "Armenia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Charentsavan",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Charentsavan_town1.jpg",
+    "image_credit": null,
+    "description": "Charentsavan ( Armenian : Չարենցավան ), is a town and urban municipal community in the Kotayk Province of Armenia . It was founded in 1947 as Lusavan , and renamed in 1967 after the Armenian poet Yeghishe Charents . [ 3 ] According to the 2022 census, Charentsavan had a population of 22,071. [ 1 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 808,
+  "fields": {
+    "name": "Suva Reka",
+    "population": 45713,
+    "country": "Kosovo",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Suva_Reka",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Theranda_2023.jpg",
+    "image_credit": null,
+    "description": "Suva Reka ( Serbian Cyrillic : Сува Река ) or Suharekë ( Albanian definite form : Suhareka ) or Therandë ( Albanian definite form : Theranda )  is a town and municipality located in the Prizren district of central-southern Kosovo . According to the 2011 census, the town has 10,422 inhabitants, while the municipality has 59,722 inhabitants mostly Kosovo Albanians ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 809,
+  "fields": {
+    "name": "Skenderaj",
+    "population": 40664,
+    "country": "Kosovo",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Skenderaj",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/04/CenterSkenderaj.JPG",
+    "image_credit": null,
+    "description": "Skenderaj ( Albanian definite form : Skënderaji ) or Srbica ( Serbian Cyrillic : Србица ), is a town and municipality located in the district of Mitrovica , Kosovo . According to the 2024 census, the municipality of Skënderaj has 40,664 inhabitants. [ 4 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 810,
+  "fields": {
+    "name": "Gjilan",
+    "population": 82901,
+    "country": "Kosovo",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Gjilan",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Gjilani_pas_dite.jpg",
+    "image_credit": null,
+    "description": "Gjilan ( Albanian definite form : Gjilani ) or Gnjilane ( Serbian Cyrillic : Гњилане ), is the fourth-largest city in Kosovo, functioning as both a municipality and the administrative centre of the Gjilan District . According to the 2024 census, the municipality has a population of 82,901, with the majority of residents living in the city itself. [ 2 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 811,
+  "fields": {
+    "name": "Klina",
+    "population": 30574,
+    "country": "Kosovo",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Klina",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Qendra_kline.jpg",
+    "image_credit": null,
+    "description": "Klina ( Albanian definite form : Klinë ; Serbian Cyrillic : Клина ) is a town and municipality located in the District of Peja of north-western Kosovo . According to the 2011 census, the town of Klina has 5,542 inhabitants, while the municipality has 38,496 inhabitants. It is located at the confluence of the river Klina into the White Drin . A symbol of Klina are the Mirusha Waterfalls . \nOn 25 July 2025 a temperature of 42.5 °C (108.5 °F) was registered in Klina, the highest ever temperature registered in Kosovo. [ 2 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 812,
+  "fields": {
+    "name": "Ferizaj",
+    "population": 109345,
+    "country": "Kosovo",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ferizaj",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Ferizaj_Church_and_Mosque.JPG",
+    "image_credit": null,
+    "description": "Ferizaj , or Uroševac , [ a ] is a city and a municipality in Kosovo. It is the third largest city in Kosovo by population and also the seat of Ferizaj Municipality and the Ferizaj District . [ 2 ] According to the last census of 2024, the municipality of Ferizaj has 109,255 inhabitants."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 813,
+  "fields": {
+    "name": "Podujevë",
+    "population": 70975,
+    "country": "Kosovo",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Podujev%C3%AB",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/05/Ura.jpg",
+    "image_credit": null,
+    "description": "Podujevë or Besianë ( Albanian definite form : Podujeva or Besiana ) or Podujevo ( Serbian Cyrillic : Подујево ) is a city and municipality in the Pristina District in Kosovo . Podujevë is the largest municipality of Kosovo since it covers 632.59 km 2 (244 sq mi) and is located in the historical and geographical region of Llap , named after the Llapi River , which flows through the city. According to the 2024 census, Podujevë has 70,975 inhabitants, making it the seventh most populous city in Kosovo after Peja and Gjakova . [ 1 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 814,
+  "fields": {
+    "name": "Malisheva",
+    "population": 43888,
+    "country": "Kosovo",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Malisheva",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/db/Sahatkulla_n%C3%AB_Malishev%C3%AB.jpg",
+    "image_credit": null,
+    "description": "Malisheva [ a ] or Mališevo ( Serbian Cyrillic : Малишево , pronounced [mali'ʃevo] , Albanian : Malishevë ) is a town and municipality in Kosovo . The municipality is part of the District of Prizren and it is located in the central part of Kosovo. Malisheva has a population of 43,888 inhabitants."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 815,
+  "fields": {
+    "name": "Pristina",
+    "population": 227466,
+    "country": "Kosovo",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Pristina",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/03/Prishtina_seen_from_Mother_Theresa_Cathedral.jpg",
+    "image_credit": null,
+    "description": "Pristina (or Prishtina [ a ] ; UK : / ˈ p r iː ʃ t ɪ n ə , p r ɪ ʃ ˈ t iː n ə / PREE -shtin-ə, prish- TEE -nə , [ 4 ] [ 5 ] US : / ˈ p r ɪ ʃ t ɪ n ə / PRISHT -in-ə ) [ 6 ] [ b ] is the capital and largest city of Kosovo . It is the administrative center of the eponymous municipality and district . [ 7 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 816,
+  "fields": {
+    "name": "Jerusalem",
+    "population": 1541,
+    "country": "Israel",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Jerusalem",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Dome_of_the_Rock_seen_from_the_Mount_of_Olives_%2812395649153%29_%28cropped%29.jpg",
+    "image_credit": null,
+    "description": "Jerusalem [ note 2 ] is a city in the Southern Levant , on a plateau in the Judaean Mountains between the Mediterranean and the Dead Sea . It is one of the oldest cities in the world and is considered a holy city to the three major Abrahamic religions : Judaism , Christianity and Islam . Both Israel and Palestine claim Jerusalem as their capital city ; Israel maintains its primary governmental institutions there, while Palestine ultimately foresees it as its seat of power. Neither claim is widely recognised internationally . [ note 3 ] [ 8 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 817,
+  "fields": {
+    "name": "Sakhnin",
+    "population": 33728,
+    "country": "Israel",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Sakhnin",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/13/PikiWiki_Israel_17664_Cities_in_Israel.jpg",
+    "image_credit": null,
+    "description": "Sakhnin ( Arabic : سخنين ; Hebrew : סַחְ'נִין or סִכְנִין ‎ Sikhnin ) is a city in Israel 's Northern District . It is located in the Lower Galilee , about 23 kilometres (14 mi) east of Acre . Sakhnin was declared a city in 1995. In 2024 its population was 33,728; [ 1 ] 95% of the population was Muslim and 5% was Christian. [ 3 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 818,
+  "fields": {
+    "name": "Ashdod",
+    "population": 228562,
+    "country": "Israel",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ashdod",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/33/%D7%A4%D7%90%D7%A8%D7%A7_%D7%95%D7%90%D7%92%D7%9D_%D7%94%D7%9E%D7%A8%D7%99%D7%A0%D7%94_%D7%9C%D7%A7%D7%A8%D7%90%D7%AA_%D7%A1%D7%95%D7%A3_%D7%A2%D7%91%D7%95%D7%93%D7%95%D7%AA_%D7%94%D7%91%D7%A0%D7%99%D7%99%D7%94%2C_%D7%9E%D7%A8%D7%A5_2024.jpg_03.jpg",
+    "image_credit": null,
+    "description": "Ashdod ( Hebrew : אַשְׁדּוֹד , romanized : ʾašdōḏ , pronounced [ʔaʃˈdod] ⓘ ; Arabic : أسدود , romanized : ʾasdūd , pronounced [ʔasˈduːd] , or إسدود , ʾisdūd [ʔɪsˈduːd] ; Philistine : 𐤀𐤔𐤃𐤃 ‎, romanized: * ʾašdūd ) is the sixth-largest city in Israel . Located in the country's Southern District , it lies on the Mediterranean coast 32 kilometres (20 miles) south of Tel Aviv and 20 km (12 mi) north of Ashkelon . Ashdod's port is the largest in Israel, handling 60% of the country's imported goods."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 819,
+  "fields": {
+    "name": "Beersheba",
+    "population": 223587,
+    "country": "Israel",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Beersheba",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Beersheba_City_Hall_6.jpg",
+    "image_credit": null,
+    "description": "Beersheba ( / b ɪər ˈ ʃ iː b ə / beer- SHEE -bə ), officially Be'er-Sheva ( / b ɛər ˈ ʃ ɛ v ə / bair- SHEV -ə ), [ 2 ] [ a ] is the largest city in the Negev desert of southern Israel . Often referred to as the \"Capital of the Negev\", it is the centre of the fourth-most populous metropolitan area in Israel, the eighth-most populous Israeli city with a population of 223,587, [ 1 ] and the second-largest city in the area (after Jerusalem ), with a total area of 117,500 dunams (117.5 square kilometres)."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 820,
+  "fields": {
+    "name": "Haifa",
+    "population": 297082,
+    "country": "Israel",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Haifa",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/The_Hanging_Gardens_of_Haifa%2C_Israel_%2850099173503%29_%28cropped%29.jpg",
+    "image_credit": null,
+    "description": "Haifa ( / ˈ h aɪ f ə / HY -fə ; Hebrew : חיפה , romanized : Ḥayfā , IPA: [ˈχajfa] ; Arabic : حيفا , romanized : Ḥayfā , IPA: [ħaj.faː] ) [ 2 ] is the third-largest city in Israel—after Jerusalem and Tel Aviv —with a population of 297,082 in 2024. The city of Haifa forms part of the Haifa metropolitan area , the third-most populous metropolitan area in Israel. [ 3 ] It is home to the Baháʼí Faith 's Baháʼí World Centre , a UNESCO World Heritage Site and destination for Baháʼí pilgrimage . [ 4 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 821,
+  "fields": {
+    "name": "Petah Tikva",
+    "population": 270403,
+    "country": "Israel",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Petah_Tikva",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/56/Jabotinsky_Skyline_Petah_Tikva_01.jpg",
+    "image_credit": null,
+    "description": "Petah Tikva ( Hebrew : פתח תקווה , pronounced [ˈpetaχ ˈtikva] ⓘ ), also spelt Petah Tiqwa and known informally as Em HaMoshavot ( lit. ' Mother of the Moshavot , or colonies ' ), is a city in the Central District of Israel , 10.6 km (6.6 mi) east of Tel Aviv . It was founded in 1878, mainly by Haredi Jews of the Old Yishuv , and became a permanent settlement in 1883 with the financial help of Edmond Rothschild ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 822,
+  "fields": {
+    "name": "Tel Aviv",
+    "population": 494900,
+    "country": "Israel",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Tel_Aviv",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/69/Sarona_CBD_01_%28cropped%29.jpg",
+    "image_credit": null,
+    "description": "Tel Aviv , [ a ] officially Tel Aviv-Yafo , [ b ] and also known as Tel Aviv-Jaffa , is the most populous city in the Gush Dan metropolitan area of Israel . Located on the Israeli Mediterranean coastline and with a population of 494,900, it is the economic and technological center of the country and a global high-tech hub . If East Jerusalem is considered part of Israel , Tel Aviv is the country's second-most-populous city, after Jerusalem ; if not, Tel Aviv is the most populous city, ahead of West Jerusalem . [ c ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 823,
+  "fields": {
+    "name": "Kiryat Shmona",
+    "population": 24437,
+    "country": "Israel",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Kiryat_Shmona",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/46/Qiryat_Shemona_2007.JPG",
+    "image_credit": null,
+    "description": "Kiryat Shmona ( Hebrew : קריית שמונה , lit. ' City of the Eight ' ) is a city in the Northern District of Israel on the western slopes of the Hula Valley near the Lebanese border."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 824,
+  "fields": {
+    "name": "Nof HaGalil",
+    "population": 45805,
+    "country": "Israel",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Nof_HaGalil",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/79/Bengurion_nil.jpeg",
+    "image_credit": null,
+    "description": "Nof HaGalil [ 2 ] [ a ] is a city in the Northern District of Israel with a population of 45,805. [ 1 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 825,
+  "fields": {
+    "name": "Netanya",
+    "population": 234813,
+    "country": "Israel",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Netanya",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/20201130_153836_%D7%9E%D7%91%D7%98_%D7%9E%D7%9C%D7%9E%D7%A2%D7%9C%D7%94_%D7%A2%D7%9C_%D7%A9%D7%9C%D7%95%D7%9C%D7%99%D7%AA_%D7%94%D7%97%D7%95%D7%A8%D7%A3_%D7%91%D7%A0%D7%AA%D7%A0%D7%99%D7%94.jpg",
+    "image_credit": null,
+    "description": "Netanya [ 2 ] ( Hebrew : נתניה , IPA: [netanˈja] ), or Natanya ( IPA: [naˈtanja] ), [ 2 ] [ 3 ] is a city in the Central District of Israel , and is the capital of the surrounding Sharon plain . It is 30 kilometres (20 mi) north of Tel Aviv , and 56 km (35 mi) south of Haifa , between the Poleg stream and the Wingate Institute in the south and the Avihayil stream in the north. The 14 km ( 8 + 1 ⁄ 2 mi) of beaches have made the city a popular tourist resort ."
   }
 },
 {
@@ -17498,8 +17834,8 @@
   "model": "italiastadiaapp.stadium",
   "pk": 236,
   "fields": {
-    "name": "La Cerámica",
-    "capacity": 23500,
+    "name": "Estadio de la Cerámica",
+    "capacity": 23008,
     "address": "Villarreal , Spain",
     "year_of_construction": 1923,
     "city": 207,
@@ -17513,7 +17849,7 @@
     "architect": "IDOM",
     "tournaments": [],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Estadio_de_la_Cer%C3%A1mica",
-    "transfermarkt_url": "https://www.transfermarkt.com/villarreal-cf/stadion/verein/1050",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-villarreal-b/stadion/verein/11972",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/estadio-de-la-ceramica-villarreal-cf-1709817271-131232.jpg?lm=1709817295",
     "image_credit": null,
     "extra_images": [
@@ -34551,25 +34887,42 @@
   "model": "italiastadiaapp.stadium",
   "pk": 790,
   "fields": {
-    "name": "Vazgen Sargsyan Republican Stadium",
-    "capacity": null,
-    "address": null,
-    "year_of_construction": null,
+    "name": "Republican Stadium (Yerevan)",
+    "capacity": 14403,
+    "address": "Yerevan , Armenia",
+    "year_of_construction": 1933,
     "city": 647,
-    "latitude": "40.174722",
-    "longitude": "44.523611",
-    "owner_raw": null,
-    "ownership": "PUBLIC",
+    "latitude": "40.171940",
+    "longitude": "44.525830",
+    "owner_raw": "Football Federation of Armenia",
+    "ownership": "PRIVATE",
     "slug": "vazgen-sargsyan-republican-stadium",
     "stadium_type": null,
     "surface": null,
     "architect": null,
     "tournaments": [],
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Republican_Stadium_(Yerevan)",
-    "transfermarkt_url": null,
-    "image_url": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Vazgen_Sargsyan_Republican_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-pyunik-yerevan/stadion/verein/10301",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/republican-stadium-named-after-vazgen-sargsyan-1413362456-9419.jpg?lm=1491209213",
     "image_credit": null,
-    "extra_images": [],
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/20/Armenia_vs_Portugal%2C_13_June_2015%2C_V._Sargsyan_Rep._Stad._Yerevan_%2812%29.jpg",
+        "credit": "Spetsnaz1991 / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Armenia_vs_Portugal%2C_13_June_2015%2C_V._Sargsyan_Rep._Stad._Yerevan_%2823%29.jpg",
+        "credit": "Spetsnaz1991 / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Armenia_vs_Portugal%2C_13_June_2015%2C_V._Sargsyan_Rep._Stad._Yerevan_%283%29.jpg",
+        "credit": "Spetsnaz1991 / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Armenia_vs_Portugal%2C_13_June_2015%2C_V._Sargsyan_Rep._Stad._Yerevan_%289%29.jpg",
+        "credit": "Spetsnaz1991 / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
     "description": null,
     "locked": false
   }
@@ -40277,6 +40630,915 @@
     "tournaments": [],
     "wikipedia_url": "",
     "transfermarkt_url": "https://www.transfermarkt.com/sd-tarazona/stadion/verein/41403",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 978,
+  "fields": {
+    "name": "Pinilla",
+    "capacity": 5000,
+    "address": null,
+    "year_of_construction": 1957,
+    "city": 803,
+    "latitude": "40.617445",
+    "longitude": "-0.778100",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "pinilla",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/cd-teruel/stadion/verein/19301",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 979,
+  "fields": {
+    "name": "Nairi Stadium",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 647,
+    "latitude": "40.154605",
+    "longitude": "44.475231",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "nairi-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Nairi_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/alashkert-yerevan/stadion/verein/37914",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Alashkert_stadium_new_pitch.jpg",
+    "image_credit": "Spetsnaz1991 / Wikimedia Commons / CC BY 2.0",
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 980,
+  "fields": {
+    "name": "Yerevan Football Academy Stadium",
+    "capacity": 1428,
+    "address": "Avan District Yerevan , Armenia",
+    "year_of_construction": 2013,
+    "city": 647,
+    "latitude": "40.221110",
+    "longitude": "44.555280",
+    "owner_raw": "Football Federation of Armenia",
+    "ownership": "PRIVATE",
+    "slug": "yerevan-football-academy-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Yerevan_Football_Academy_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/zska-erewan/stadion/verein/46507",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/FFA_Football_Academy_Yerevan.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a4/FFA_academy_stadium_Yerevan%2C_08.08.2015.jpg",
+        "credit": "Govorkov / Wikimedia Commons / CC BY 2.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Yerevan_Football_Academy_Stadium_01.jpg",
+        "credit": "Preacher lad / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Yerevan_Football_Academy_Stadium_02.jpg",
+        "credit": "Preacher lad / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Yerevan_Football_Academy_Stadium_04.jpg",
+        "credit": "Preacher lad / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 981,
+  "fields": {
+    "name": "Gandzasar Stadium",
+    "capacity": 1188,
+    "address": "Kapan , Armenia",
+    "year_of_construction": 2021,
+    "city": 804,
+    "latitude": "39.207787",
+    "longitude": "46.400674",
+    "owner_raw": "Gandzasar Sprts Centre LLC",
+    "ownership": "PRIVATE",
+    "slug": "gandzasar-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Kapan_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/gandzasar-kapan/stadion/verein/23911",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/%D4%BF%D5%A1%D5%BA%D5%A1%D5%B6%D5%AB_%D6%86%D5%B8%D6%82%D5%BF%D5%A2%D5%B8%D5%AC%D5%AB_%D5%B4%D5%A1%D6%80%D5%A6%D5%A1%D5%A4%D5%A1%D5%B7%D5%BF.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Gandzasar_Stadium%2C_Kapan%2C_Armenia%2C_May_2012.jpg",
+        "credit": "https://www.flickr.com/photos/81399520@N00/ / Wikimedia Commons / CC BY 2.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Gandzasar_Stadium%2C_Kapan2%2C_30_August_2015.jpg",
+        "credit": "Wikimedia Commons"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 982,
+  "fields": {
+    "name": "Abovyan City Stadium",
+    "capacity": 3100,
+    "address": "Abovyan , Armenia",
+    "year_of_construction": 1966,
+    "city": 805,
+    "latitude": "40.268400",
+    "longitude": "44.635200",
+    "owner_raw": "Municipality of Abovyan",
+    "ownership": "PUBLIC",
+    "slug": "abovyan-city-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Vahagn_Tumasyan_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-noah-erewan/stadion/verein/60368",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Abovyan_stadium_general_view.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 983,
+  "fields": {
+    "name": "Gyumri City Stadium",
+    "capacity": 2844,
+    "address": "Gyumri , Armenia",
+    "year_of_construction": 1924,
+    "city": 806,
+    "latitude": "40.785830",
+    "longitude": "43.833330",
+    "owner_raw": "Gyumri City Council",
+    "ownership": "PUBLIC",
+    "slug": "gyumri-city-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Gyumri_City_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-shirak-gyumri/stadion/verein/4807",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Gyumri_city_stadium%2C_24_October_2015.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/11/Gyumri_city_stadium_after_renovation.jpg",
+        "credit": "Spetsnaz1991 / Wikimedia Commons / CC BY 2.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 984,
+  "fields": {
+    "name": "Urartu Stadium",
+    "capacity": 4860,
+    "address": "Malatia-Sebastia district Yerevan , Armenia",
+    "year_of_construction": 2006,
+    "city": 647,
+    "latitude": "40.171426",
+    "longitude": "44.449938",
+    "owner_raw": "Urartu",
+    "ownership": "PRIVATE",
+    "slug": "urartu-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Urartu_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-urartu-erewan/stadion/verein/11411",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Banants_stadium_Yerevan%2C_general_view%2C_3_Oct._2015.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Banants_Stadium%2C_Yerevan%2C_18_October_2015.jpg",
+        "credit": "Govorkov / Wikimedia Commons / CC BY 2.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 985,
+  "fields": {
+    "name": "Charentsavan City Stadium",
+    "capacity": 5000,
+    "address": "Charentsavan , Armenia",
+    "year_of_construction": 1970,
+    "city": 807,
+    "latitude": "40.408610",
+    "longitude": "44.645560",
+    "owner_raw": "Charentsavan Town Council",
+    "ownership": "PUBLIC",
+    "slug": "charentsavan-city-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Charentsavan_City_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-van/stadion/verein/74661",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/09/Charentsavan_City_Stadium%2C_September_2017.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/be/Charentsavan_city_stadium.jpg",
+        "credit": "Spetsnaz1991 / Wikimedia Commons / CC BY 2.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 986,
+  "fields": {
+    "name": "Suva Reka City Stadium",
+    "capacity": 2000,
+    "address": null,
+    "year_of_construction": null,
+    "city": 808,
+    "latitude": "42.360600",
+    "longitude": "20.827000",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "suva-reka-city-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ballkani",
+    "transfermarkt_url": "https://www.transfermarkt.com/kf-ballkani/stadion/verein/28082",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 987,
+  "fields": {
+    "name": "Bajram Aliu Stadium",
+    "capacity": 4500,
+    "address": "Skenderaj , Kosovo",
+    "year_of_construction": null,
+    "city": 809,
+    "latitude": "42.905000",
+    "longitude": "21.194720",
+    "owner_raw": "Municipality of Skenderaj",
+    "ownership": "PUBLIC",
+    "slug": "bajram-aliu-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bajram_Aliu_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/kf-drenica/stadion/verein/19697",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Bajram_aliu_stadium.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 988,
+  "fields": {
+    "name": "Gjilan City Stadium",
+    "capacity": 9500,
+    "address": "Gjilan , Kosovo",
+    "year_of_construction": 1967,
+    "city": 810,
+    "latitude": "42.466800",
+    "longitude": "21.464500",
+    "owner_raw": "Municipality of Gjilan",
+    "ownership": "PUBLIC",
+    "slug": "gjilan-city-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Gjilan_City_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/sc-gjilani/stadion/verein/29053",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Stadiumi_i_Qytetit_n%C3%AB_Gjilan.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/The_Kosovo_Derby_at_Gjilan_City_Stadium_in_2018.jpg",
+        "credit": "Hakuli / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 989,
+  "fields": {
+    "name": "18 June Stadium",
+    "capacity": 3000,
+    "address": null,
+    "year_of_construction": null,
+    "city": 811,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "18-june-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/kf-dukagjini/stadion/verein/46887",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 990,
+  "fields": {
+    "name": "Ferizaj City Stadium",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 812,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "ferizaj-city-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/kf-ferizaj/stadion/verein/29051",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 991,
+  "fields": {
+    "name": "Zahir Pajaziti Stadium",
+    "capacity": 6000,
+    "address": "Podujevë , Kosovo",
+    "year_of_construction": 2012,
+    "city": 813,
+    "latitude": "42.905073",
+    "longitude": "21.194890",
+    "owner_raw": "Municipality of Podujevë",
+    "ownership": "PUBLIC",
+    "slug": "zahir-pajaziti-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Zahir_Pajaziti_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-llapi/stadion/verein/33206",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Zahir_Pajaziti_Stadium.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 992,
+  "fields": {
+    "name": "Liman Gegaj Stadium",
+    "capacity": 1750,
+    "address": null,
+    "year_of_construction": 2018,
+    "city": 814,
+    "latitude": "42.482059",
+    "longitude": "20.724818",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "liman-gegaj-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-malisheva/stadion/verein/80996",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 993,
+  "fields": {
+    "name": "Fadil Vokrri Stadium",
+    "capacity": 13429,
+    "address": "Enver Zymberi Street, Pristina (near the Palace of Youth and Sports )",
+    "year_of_construction": 1953,
+    "city": 815,
+    "latitude": "42.663000",
+    "longitude": "21.156900",
+    "owner_raw": "Municipality of Pristina",
+    "ownership": "PUBLIC",
+    "slug": "fadil-vokrri-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Fadil_Vokrri_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-prishtina/stadion/verein/1918",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Fadil_Vokrri_Stadium_2024.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 994,
+  "fields": {
+    "name": "Sami Kelmendi Stadium",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 815,
+    "latitude": "42.517515",
+    "longitude": "21.127205",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "sami-kelmendi-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/kf-shkendija-hajvali/stadion/verein/95597",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 995,
+  "fields": {
+    "name": "Teddy Stadium",
+    "capacity": 31733,
+    "address": "Jerusalem , Israel",
+    "year_of_construction": 1990,
+    "city": 816,
+    "latitude": "31.751167",
+    "longitude": "35.190617",
+    "owner_raw": "Jerusalem Municipality",
+    "ownership": "PUBLIC",
+    "slug": "teddy-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Teddy_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/hapoel-jerusalem/stadion/verein/43119",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/TeddyStadiumJerusalem%D9%90Apr172023_03.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Teddy_Stadium%2C_Jerusalem_%28cropped%29.jpg",
+        "credit": "Dindia / Wikimedia Commons / CC BY-SA 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/%D7%94%D7%A6%D7%98%D7%93%D7%99%D7%95%D7%9F_%D7%98%D7%93%D7%99.jpg",
+        "credit": "Maorshitrit - מאור שטרית / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 996,
+  "fields": {
+    "name": "Doha Stadium",
+    "capacity": 8500,
+    "address": "Sakhnin , Israel",
+    "year_of_construction": 2006,
+    "city": 817,
+    "latitude": "32.866692",
+    "longitude": "35.310850",
+    "owner_raw": "Town of Sakhnin",
+    "ownership": "PUBLIC",
+    "slug": "doha-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Doha_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/ihud-bnei-sachnin/stadion/verein/4769",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Doha_Stadium01.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 997,
+  "fields": {
+    "name": "Yud-Alef Stadium",
+    "capacity": 8200,
+    "address": "6 HaHistadrut Street, Neighborhood A, Ashdod , Israel 77401",
+    "year_of_construction": 1966,
+    "city": 818,
+    "latitude": "31.810280",
+    "longitude": "34.648330",
+    "owner_raw": "Municipality of Ashdod",
+    "ownership": "PUBLIC",
+    "slug": "yud-alef-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Yud-Alef_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-ashdod/stadion/verein/6105",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/98/Yod_alef1.JPG",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 998,
+  "fields": {
+    "name": "Turner Stadium",
+    "capacity": 16126,
+    "address": "Be'er Sheva , Israel",
+    "year_of_construction": 2015,
+    "city": 819,
+    "latitude": "31.273150",
+    "longitude": "34.779361",
+    "owner_raw": "Be'er Sheva Municipality",
+    "ownership": "PUBLIC",
+    "slug": "turner-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Turner_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/hapoel-beer-sheva/stadion/verein/2976",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/34/%D7%90%D7%A6%D7%98%D7%93%D7%99%D7%95%D7%9F_%D7%98%D7%95%D7%98%D7%95_%D7%91%D7%90%D7%A8_%D7%A9%D7%91%D7%A2_%D7%A2%22%D7%A9_%D7%99%D7%A2%D7%A7%D7%91_%D7%98%D7%A8%D7%A0%D7%A8_-_panoramio.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/Turner_Stadium_04.jpg",
+        "credit": "Little Savage / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Turner_Stadium_06.jpg",
+        "credit": "Little Savage / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Turner_Stadium_08.jpg",
+        "credit": "Little Savage / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Turner_Stadium_on_February_27th_2017_Beer_Sheva_vs._Kfar_Saba.jpg",
+        "credit": "The devious diesel / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 999,
+  "fields": {
+    "name": "Sammy Ofer Stadium",
+    "capacity": 30955,
+    "address": "2 Pinchas and Abraham Rotenberg Street",
+    "year_of_construction": 2014,
+    "city": 820,
+    "latitude": "32.783330",
+    "longitude": "34.965280",
+    "owner_raw": "Haifa Municipality",
+    "ownership": "PUBLIC",
+    "slug": "sammy-ofer-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Sammy_Ofer_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/maccabi-haifa/stadion/verein/1064",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/sammy-ofer-stadium-maccabi-haifa-1678191534-103241.jpg?lm=1678191544",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/PikiWiki_Israel_33070_World_Peace_Statue_in_Haifa.JPG",
+        "credit": "Dr. Avishai  Teicher / Wikimedia Commons / CC BY 2.5"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/PikiWiki_Israel_49197_Sports_in_Israel.jpg",
+        "credit": "יאסר שוואהנה / Wikimedia Commons / Public domain"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/PikiWiki_Israel_59466_sami_ofer_stadium_%28cropped_3%29.jpg",
+        "credit": "נדב ברקאי / Wikimedia Commons / CC BY 2.5"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/SammyOferSTD.jpg",
+        "credit": "איתי צורף / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1000,
+  "fields": {
+    "name": "HaMoshava Stadium",
+    "capacity": 11500,
+    "address": "Petah Tikva , Israel",
+    "year_of_construction": 2011,
+    "city": 821,
+    "latitude": "32.104197",
+    "longitude": "34.865078",
+    "owner_raw": "Petah Tikva Municipality",
+    "ownership": "PUBLIC",
+    "slug": "hamoshava-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/HaMoshava_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/hapoel-petah-tikva/stadion/verein/262",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/35/YUVAL_CHEN_061121SIXT_03134.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/HaMoshava_Stadium_%2812%29.jpg",
+        "credit": "Little Savage / Wikimedia Commons / CC BY-SA 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Petah_Tikva_HaMoshava_Stadium_2.jpg",
+        "credit": "Валерий Дед / Wikimedia Commons / CC BY 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/82/%D7%90%D7%A6%D7%98%D7%93%D7%99%D7%95%D7%9F_%D7%94%D7%9E%D7%95%D7%A9%D7%91%D7%94_%D7%91%D7%A4%D7%AA%D7%97_%D7%AA%D7%A7%D7%95%D7%94_%D7%97%D7%AA%D7%95%D7%9A.JPG",
+        "credit": "Dvirraz, retouch: Neukoln / Wikimedia Commons / CC BY-SA 3.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1001,
+  "fields": {
+    "name": "Bloomfield Stadium",
+    "capacity": 29400,
+    "address": "5 Hatkuma Street",
+    "year_of_construction": 1962,
+    "city": 822,
+    "latitude": "32.051728",
+    "longitude": "34.761439",
+    "owner_raw": "Tel Aviv-Yafo Municipality",
+    "ownership": "PUBLIC",
+    "slug": "bloomfield-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bloomfield_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/maccabi-tel-aviv/stadion/verein/119",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Bloomfield_Stadium%2C_January_2022_-_42.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/63/Bloomfield_Stadium%2C_January_2022_-_29_%28cropped%29.jpg",
+        "credit": "Little Savage / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/01/Bloomfield_Stadium21.jpg",
+        "credit": "Little Savage / Wikimedia Commons / Public domain"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Bloomfield_Stadium_2_Tel_Aviv.jpg",
+        "credit": "LeRenartQuiPense / Wikimedia Commons / CC BY 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Bloomfield_Stadium_Maccabi_2019_2.jpg",
+        "credit": "מחסל האגדות / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1002,
+  "fields": {
+    "name": "Netanya Stadium",
+    "capacity": 13800,
+    "address": "Netanya , Israel",
+    "year_of_construction": 2012,
+    "city": 823,
+    "latitude": "32.294333",
+    "longitude": "34.864575",
+    "owner_raw": "Netanya Municipality",
+    "ownership": "PUBLIC",
+    "slug": "netanya-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Netanya_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/ironi-kiryat-shmona/stadion/verein/6028",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/72/WikiAir_IL-13-05_A18.JPG",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Netanya-Stadium_16.JPG",
+        "credit": "Little Savage / Wikimedia Commons / CC BY-SA 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/23/Netanya-Stadium_39_%28cropped_2%29.jpg",
+        "credit": "Little Savage / Wikimedia Commons / CC BY-SA 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/PikiWiki_Israel_33576_Netanya_Stadium.JPG",
+        "credit": "Dr. Avishai  Teicher / Wikimedia Commons / CC BY 2.5"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/PikiWiki_Israel_33578_Golden_Ball_sculpture_in_Netanya_Stadium.JPG",
+        "credit": "Dr. Avishai  Teicher / Wikimedia Commons / CC BY 2.5"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1003,
+  "fields": {
+    "name": "Green Stadium",
+    "capacity": 5200,
+    "address": null,
+    "year_of_construction": 1965,
+    "city": 824,
+    "latitude": "32.689800",
+    "longitude": "35.311325",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "green-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Green_Stadium,_Nof_HaGalil",
+    "transfermarkt_url": "https://www.transfermarkt.com/maccabi-bnei-reineh/stadion/verein/70178",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/%D7%90%D7%A6%D7%98%D7%93%D7%99%D7%95%D7%9F_%D7%92%D7%A8%D7%99%D7%9F.jpg",
+    "image_credit": "Maorbehcer / Wikimedia Commons / CC BY-SA 4.0",
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1004,
+  "fields": {
+    "name": "Netanya Stadium",
+    "capacity": 13610,
+    "address": "Netanya , Israel",
+    "year_of_construction": 2012,
+    "city": 825,
+    "latitude": "32.294333",
+    "longitude": "34.864575",
+    "owner_raw": "Netanya Municipality",
+    "ownership": "PUBLIC",
+    "slug": "netanya-stadium-2",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Netanya_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/maccabi-netanya/stadion/verein/5223",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/72/WikiAir_IL-13-05_A18.JPG",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Netanya-Stadium_16.JPG",
+        "credit": "Little Savage / Wikimedia Commons / CC BY-SA 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/23/Netanya-Stadium_39_%28cropped_2%29.jpg",
+        "credit": "Little Savage / Wikimedia Commons / CC BY-SA 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/PikiWiki_Israel_33576_Netanya_Stadium.JPG",
+        "credit": "Dr. Avishai  Teicher / Wikimedia Commons / CC BY 2.5"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/PikiWiki_Israel_33578_Golden_Ball_sculpture_in_Netanya_Stadium.JPG",
+        "credit": "Dr. Avishai  Teicher / Wikimedia Commons / CC BY 2.5"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1005,
+  "fields": {
+    "name": "Tiberias Municipal Stadium",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 824,
+    "latitude": "32.797028",
+    "longitude": "35.521139",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "tiberias-municipal-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Tiberias_Municipal_Stadium",
+    "transfermarkt_url": null,
     "image_url": null,
     "image_credit": null,
     "extra_images": [],
@@ -63557,6 +64819,931 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "sevilla-atletico"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1005,
+  "fields": {
+    "is_national": false,
+    "name": "SD Tarazona",
+    "founded": "2020-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 977,
+    "manager": "Juanma",
+    "num_of_titles": 0,
+    "city": 802,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/SD_Tarazona",
+    "transfermarkt_url": "https://www.transfermarkt.com/sd-tarazona/startseite/verein/41403",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/41403.png",
+    "image_credit": null,
+    "description": "Sociedad Deportiva Tarazona is a Spanish football team based in Tarazona , in the autonomous community of Aragon . Founded in 1969, it plays in Primera Federación – Group 2, holding home games at Municipal , with a 1,500-seat capacity. [ 2 ]",
+    "league": 77,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "sd-tarazona"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1006,
+  "fields": {
+    "is_national": false,
+    "name": "CD Teruel",
+    "founded": "1943-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 978,
+    "manager": "Vicente Parras",
+    "num_of_titles": 0,
+    "city": 803,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/CD_Teruel",
+    "transfermarkt_url": "https://www.transfermarkt.com/cd-teruel/startseite/verein/19301",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/19301.png",
+    "image_credit": null,
+    "description": "Club Deportivo Teruel is a Spanish football team based in Teruel , in the autonomous community of Aragon . Founded in 1954, the club plays in the Primera Federación – Group 2, and holds home games at Estadio Pinilla , with a capacity of 4,500 seats. [ 2 ]",
+    "league": 77,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "cd-teruel"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1007,
+  "fields": {
+    "is_national": false,
+    "name": "Villarreal B",
+    "founded": "1923-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 236,
+    "manager": "David Albelda",
+    "num_of_titles": 0,
+    "city": 207,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Villarreal_CF_B",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-villarreal-b/startseite/verein/11972",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/11972.png",
+    "image_credit": null,
+    "description": "Villarreal Club de Fútbol \"B\" is a Spanish football team based in Villarreal , in the autonomous community of Valencia . Founded in 1999, it is the reserve team of Villarreal CF and plays in Primera Federación – Group 2, holding home games at Estadio de la Cerámica , with a 23,008-seat capacity.",
+    "league": 77,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "villarreal-b"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1008,
+  "fields": {
+    "is_national": false,
+    "name": "Alashkert",
+    "founded": "1990-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 979,
+    "manager": "Vahe Gevorgyan",
+    "num_of_titles": 4,
+    "city": 647,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Alashkert",
+    "transfermarkt_url": "https://www.transfermarkt.com/alashkert-yerevan/startseite/verein/37914",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/37914.png",
+    "image_credit": null,
+    "description": "Football Club Alashkert ( Armenian : Ֆուտբոլային Ակումբ Ալաշկերտ , romanized : Futbolayin Akumb Alashkert ), commonly known as Alashkert , is an Armenian football club based in the capital Yerevan , founded in 1990 in Martuni and after folding in 2000 re-founded in 2011. They currently play in the Armenian Premier League . The home stadium of the team is the Alashkert Stadium in Yerevan . The club headquarters are located on Saryan street 25, Yerevan. [ 1 ] Although based in Yerevan they are in fact named after the historic town of Alashkert in the Western Armenia , now Eleşkirt .",
+    "league": 78,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "alashkert"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1009,
+  "fields": {
+    "is_national": false,
+    "name": "Ararat Yerevan",
+    "founded": "1935-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 790,
+    "manager": "Ricardo Dionísio",
+    "num_of_titles": 1,
+    "city": 647,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ararat_Yerevan",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-ararat-erewan/startseite/verein/11912",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/11912.png",
+    "image_credit": null,
+    "description": "Football Club Ararat Yerevan ( Armenian : Ֆուտբոլային Ակումբ Արարատ Երևան ), commonly known as Ararat Yerevan , is an Armenian professional football club based in Yerevan that plays in the Armenian Premier League . [ 2 ]",
+    "league": 78,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "ararat-yerevan"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1010,
+  "fields": {
+    "is_national": false,
+    "name": "Ararat-Armenia",
+    "founded": "2017-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 980,
+    "manager": "Tulipa",
+    "num_of_titles": 3,
+    "city": 647,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ararat-Armenia",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-ararat-armenia/startseite/verein/53453",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/53453.png",
+    "image_credit": null,
+    "description": "FC Ararat-Armenia ( Armenian : Ֆուտբոլային Ակումբ Արարատ-Արմենիա ) is an Armenian professional football club based in Yerevan , founded in 2017.",
+    "league": 78,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "ararat-armenia"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1011,
+  "fields": {
+    "is_national": false,
+    "name": "BKMA Yerevan",
+    "founded": "2021-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 980,
+    "manager": "Rafael Nazaryan",
+    "num_of_titles": 0,
+    "city": 647,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_BKMA_Yerevan",
+    "transfermarkt_url": "https://www.transfermarkt.com/zska-erewan/startseite/verein/46507",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/46507.png",
+    "image_credit": null,
+    "description": "FC BKMA Yerevan ( Armenian : ԲԿՄԱ Երևան or Armenian : Բանակի Կենտրոնական Մարզական Ակումբ Երևան ; Banaki Kentronakan Marzakan Akumb Yerevan ; lit. ' Central Sport Club of the Army Yerevan ' ) is an Armenian professional football club based in Yerevan .",
+    "league": 78,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "bkma-yerevan"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1012,
+  "fields": {
+    "is_national": false,
+    "name": "Gandzasar Kapan",
+    "founded": "1962-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 981,
+    "manager": "Karen Barseghyan [ 1 ]",
+    "num_of_titles": 0,
+    "city": 804,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Gandzasar_Kapan",
+    "transfermarkt_url": "https://www.transfermarkt.com/gandzasar-kapan/startseite/verein/23911",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/23911.png",
+    "image_credit": null,
+    "description": "FC Gandzasar Kapan is an Armenian football club based in the town of Kapan , Syunik Province . The team plays in Armenian Premier League . The club headquarters are located on 18 Garegin Nzhdeh street, Kapan. [ 2 ] The Gandzasar Kapan Training Centre is located at the eastern outskirts of the town of Kapan.",
+    "league": 78,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "gandzasar-kapan"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1013,
+  "fields": {
+    "is_national": false,
+    "name": "Noah",
+    "founded": "2017-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 982,
+    "manager": "Sandro Perković",
+    "num_of_titles": 1,
+    "city": 805,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Noah",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-noah-erewan/startseite/verein/60368",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/60368.png",
+    "image_credit": null,
+    "description": "Football Club Noah ( Armenian : Ֆուտբոլային Ակումբ Նոա , romanized : Futbolayin Akumb Noa ), commonly known as Noah , is an Armenian professional football club based in Abovyan . Founded in 2017 as FC Artsakh , they currently play in the Armenian Premier League . [ 1 ]",
+    "league": 78,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "noah"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1014,
+  "fields": {
+    "is_national": false,
+    "name": "Pyunik",
+    "founded": "1991-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 790,
+    "manager": "Artak Oseyan",
+    "num_of_titles": 16,
+    "city": 647,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Pyunik",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-pyunik-yerevan/startseite/verein/10301",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/10301.png",
+    "image_credit": null,
+    "description": "Football Club Pyunik ( Armenian : Փյունիկ Ֆուտբոլային ակումբ ), commonly known as Pyunik ( lit. ' Phoenix ' ), is an Armenian professional sports club based in the Kentron neighbourhood of Yerevan . Pyunik is mostly known for its professional football team which, since its creation in 1992 , has always played in the Armenian Premier League , becoming the most successful team of Armenia in number of official titles, with 34 won to date. [ 1 ] [ 2 ] [ 3 ] [ 4 ]",
+    "league": 78,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "pyunik"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1015,
+  "fields": {
+    "is_national": false,
+    "name": "Shirak",
+    "founded": "1958-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 983,
+    "manager": "Tigran Davtyan",
+    "num_of_titles": 4,
+    "city": 806,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Shirak_SC",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-shirak-gyumri/startseite/verein/4807",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/4807.png",
+    "image_credit": null,
+    "description": "Football Club Shirak [ 1 ] ( Armenian : Շիրակ Ֆուտբոլային Ակումբ ), commonly known as Shirak , is an Armenian professional sports club based in Gyumri . Shirak is known for its professional football team which is one of the oldest football clubs in Armenia , having been created in 1958. The club is the only team that participated in all seasons of the Armenian Premier League since its creation in 1992 until 2021 . Shirak is one of the more successful clubs in Armenia, having won a total of 11 domestic titles including four Armenian Premier League titles, [ 2 ] two Armenian Cup , [ 3 ] and five Armenian Super Cup .",
+    "league": 78,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "shirak"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1016,
+  "fields": {
+    "is_national": false,
+    "name": "Urartu",
+    "founded": "1992-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 984,
+    "manager": "Robert Arzumanyan",
+    "num_of_titles": 2,
+    "city": 647,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Urartu",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-urartu-erewan/startseite/verein/11411",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/11411.png",
+    "image_credit": null,
+    "description": "Football Club Urartu ( Armenian : Ուրարտու Ֆուտբոլային Ակումբ , translated Futbolayin Akumb Urartu ), commonly known as Urartu , is an Armenian professional football team based in the capital Yerevan that currently plays in the Armenian Premier League . The club won the Armenian Cup four times, in 1992, 2007, 2016, and 2023. In 2013–2014, they won the Armenian Premier League for the first time in their history.",
+    "league": 78,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "urartu"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1017,
+  "fields": {
+    "is_national": false,
+    "name": "Van",
+    "founded": "2019-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 985,
+    "manager": "Artur Asoyan",
+    "num_of_titles": 0,
+    "city": 807,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Van",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-van/startseite/verein/74661",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/74661.png",
+    "image_credit": null,
+    "description": "Football Club Van ( Armenian : Ֆուտբոլային Ակումբ Վան ) is an Armenian professional football club based in Charentsavan , Kotayk Province.",
+    "league": 78,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "van"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1018,
+  "fields": {
+    "is_national": false,
+    "name": "Ballkani",
+    "founded": "1947-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 986,
+    "manager": "Mislav Karoglan",
+    "num_of_titles": 3,
+    "city": 808,
+    "average_attendance": 717,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ballkani",
+    "transfermarkt_url": "https://www.transfermarkt.com/kf-ballkani/startseite/verein/28082",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/28082.png",
+    "image_credit": null,
+    "description": "Football Club Ballkani ( Albanian : Klubi Futbollistik Ballkani ), commonly known as Ballkani , is a professional football club based in Suhareka , Kosovo . The club plays in the Kosovo Superleague , which is the top tier of football in the country.",
+    "league": 79,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "ballkani"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1019,
+  "fields": {
+    "is_national": false,
+    "name": "Drenica",
+    "founded": "1957-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 987,
+    "manager": "Thomas Brdarić",
+    "num_of_titles": 0,
+    "city": 809,
+    "average_attendance": 786,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Drenica",
+    "transfermarkt_url": "https://www.transfermarkt.com/kf-drenica/startseite/verein/19697",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/19697.png",
+    "image_credit": null,
+    "description": "KF Drenica ( Albanian : Klubi Futbollistik Drenica ), commonly known as Drenica , is a professional football club based in Skënderaj , Kosovo . The club plays in the Kosovo Superleague , which is the top tier of football in the country.",
+    "league": 79,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "drenica"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1020,
+  "fields": {
+    "is_national": false,
+    "name": "Drita",
+    "founded": "1947-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 988,
+    "manager": "Zekirija Ramadani",
+    "num_of_titles": 5,
+    "city": 810,
+    "average_attendance": 303,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Drita",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-drita/startseite/verein/33741",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/33741.png",
+    "image_credit": null,
+    "description": "Football Club Drita ( Albanian : Klubi Futbollistik Drita ), commonly known as Drita , is a professional football club based in Gjilan , Kosovo . The club competes in the Kosovo Superleague .",
+    "league": 79,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "drita"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1021,
+  "fields": {
+    "is_national": false,
+    "name": "Dukagjini",
+    "founded": "1958-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 989,
+    "manager": "Arsim Thaqi",
+    "num_of_titles": 1,
+    "city": 811,
+    "average_attendance": 486,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Dukagjini",
+    "transfermarkt_url": "https://www.transfermarkt.com/kf-dukagjini/startseite/verein/46887",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/46887.png",
+    "image_credit": null,
+    "description": "KF Dukagjini ( Albanian : Klubi Futbollistik Dukagjini Klinë ) is a professional football club based in the city of Klina , Kosovo . The club compete in the top tier of football in Kosovo the Kosovo Superleague .",
+    "league": 79,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "dukagjini"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1022,
+  "fields": {
+    "is_national": false,
+    "name": "Ferizaj",
+    "founded": "1923-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 990,
+    "manager": "Alban Dragusha",
+    "num_of_titles": 0,
+    "city": 812,
+    "average_attendance": 606,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ferizaj",
+    "transfermarkt_url": "https://www.transfermarkt.com/kf-ferizaj/startseite/verein/29051",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/29051.png",
+    "image_credit": null,
+    "description": "Football Club Ferizaj ( Albanian : Klubi Futbollistik Ferizaj ), commonly known as Ferizaj , is a professional football club based in Ferizaj , Kosovo . Founded in 1923, [ 1 ] they are the oldest football club in Kosovo, and in 1953 it was re-established with its current name. [ 2 ] They currently play in the Kosovo Superleague , the top tier of football in the country.",
+    "league": 79,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "ferizaj"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1023,
+  "fields": {
+    "is_national": false,
+    "name": "Gjilani",
+    "founded": "1945-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 988,
+    "manager": "Debatik Curri",
+    "num_of_titles": 0,
+    "city": 810,
+    "average_attendance": 231,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Gjilani",
+    "transfermarkt_url": "https://www.transfermarkt.com/sc-gjilani/startseite/verein/29053",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/29053.png",
+    "image_credit": null,
+    "description": "Sport Club Gjilani ( Albanian : Klubi Futbollistik Gjilani ), commonly known as Gjilani , is a professional football club based in Gjilan , Kosovo . The club plays in the Kosovo Superleague , which is the top tier of football in the country.",
+    "league": 79,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "gjilani"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1024,
+  "fields": {
+    "is_national": false,
+    "name": "Llapi",
+    "founded": "1932-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 991,
+    "manager": "Tahir Batatina",
+    "num_of_titles": 0,
+    "city": 813,
+    "average_attendance": 833,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Llapi",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-llapi/startseite/verein/33206",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/33206.png",
+    "image_credit": null,
+    "description": "Klubi Futbollistik Llapi (Football Club Llapi), commonly known as Llapi , is a professional football club based in Podujevë , Kosovo .",
+    "league": 79,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "llapi"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1025,
+  "fields": {
+    "is_national": false,
+    "name": "Malisheva",
+    "founded": "2016-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 992,
+    "manager": "Bylbyl Sokoli",
+    "num_of_titles": 0,
+    "city": 814,
+    "average_attendance": 367,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Malisheva",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-malisheva/startseite/verein/80996",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/80996.png",
+    "image_credit": null,
+    "description": "Klubi Futbollistik Malisheva ( transl. Football Club Malisheva ), commonly known as Malisheva , is a professional football club based in Malisheva , Kosovo . Their home ground is Liman Gegaj Stadium which has a seating capacity of 1,800. The club plays in the Kosovo Superleague , which is the top tier of football in the country.",
+    "league": 79,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "malisheva"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1026,
+  "fields": {
+    "is_national": false,
+    "name": "Prishtina",
+    "founded": "1922-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 993,
+    "manager": "Orges Shehi",
+    "num_of_titles": 11,
+    "city": 815,
+    "average_attendance": 1182,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Prishtina",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-prishtina/startseite/verein/1918",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1918.png",
+    "image_credit": null,
+    "description": "Football Club Prishtina ( Albanian : Klubi Futbollistik Prishtina , IPA: [ˈklubi futboɫisˈtik ˈpɾiʃtina] ), commonly known as Prishtina , is a professional football club based in Pristina , Kosovo . The club plays in the Kosovo Superleague . It is the most successful domestic club.",
+    "league": 79,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "prishtina"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1027,
+  "fields": {
+    "is_national": false,
+    "name": "Prishtina e Re",
+    "founded": "2020-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 994,
+    "manager": "Qëndrim Kida",
+    "num_of_titles": 0,
+    "city": 815,
+    "average_attendance": 233,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/KF_Prishtina_e_Re",
+    "transfermarkt_url": "https://www.transfermarkt.com/kf-shkendija-hajvali/startseite/verein/95597",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/95597.png",
+    "image_credit": null,
+    "description": "Klubi Futbollistik Prishtina e Re ( transl. Football Club Prishtina e Re ), commonly known as Prishtina e Re , is a professional football club based in the village Hajvalia of Pristina , Kosovo . From 2025–26 season the club plays in the Kosovo Superleague , the top tier of football in the country.",
+    "league": 79,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "prishtina-e-re"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1028,
+  "fields": {
+    "is_national": false,
+    "name": "Beitar Jerusalem",
+    "founded": "1936-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 995,
+    "manager": "Barak Yitzhaki",
+    "num_of_titles": 6,
+    "city": 816,
+    "average_attendance": 24217,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Beitar_Jerusalem_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/beitar-jerusalem/startseite/verein/3793",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3793.png",
+    "image_credit": null,
+    "description": "Beitar Jerusalem Football Club ( Hebrew : מועדון כדורגל בית״ר ירושלים , romanized : Moadon Kaduregel Beitar Yerushalayim ), commonly known as Beitar Jerusalem ( Hebrew : בית״ר ירושלים , romanized : Beitar Yerushalayim ) or simply Beitar ( בית״ר ), is an Israeli professional football club based in the city of Jerusalem , that plays in the Israeli Premier League , the top tier in Israeli football . The club has traditionally worn kit colours of yellow and black and plays its home matches in Teddy Stadium . The stadium is the largest stadium in Israel, with a capacity of 31,733.",
+    "league": 80,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "beitar-jerusalem"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1029,
+  "fields": {
+    "is_national": false,
+    "name": "Bnei Sakhnin",
+    "founded": "1991-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 996,
+    "manager": "Yossi Abukasis",
+    "num_of_titles": 0,
+    "city": 817,
+    "average_attendance": 2426,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bnei_Sakhnin_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/ihud-bnei-sachnin/startseite/verein/4769",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/4769.png",
+    "image_credit": null,
+    "description": "Bnei Sakhnin F.C. ( Arabic : اتحاد أبناء سخنين , romanized : Ittiḥād ’Abnā’ Saḫnīn , Hebrew : איחוד בני סכנין , romanized : Iḥud Bnei Sakhnin , lit. ' Sons of Sakhnin United ' ) is an Israeli professional football club based at the Doha Stadium in Sakhnin . They are the most successful club among the Arab-Israeli clubs in the country, having won the State Cup in 2004.",
+    "league": 80,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "bnei-sakhnin"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1030,
+  "fields": {
+    "is_national": false,
+    "name": "F.C. Ashdod",
+    "founded": "1999-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 997,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 818,
+    "average_attendance": 2997,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/F.C._Ashdod",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-ashdod/startseite/verein/6105",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/6105.png",
+    "image_credit": null,
+    "description": "Moadon Sport Ashdod ( Hebrew : מועדון ספורט אשדוד , lit. ' Sport Club Ashdod ' ), commonly referred to as F.C Ashdod ( מ.ס. אשדוד ), is an Israeli professional football club, playing in the port city of Ashdod . The unusual name of the team (unlike most Israeli football teams, this one only indicates the club's home city without any specific Jewish sporting association, such as Hapoel , Maccabi , or Beitar ) is the result of the union of two city rivals, Hapoel Ashdod and Maccabi Ironi Ashdod in 1999. The club currently plays in the Israeli Premier League .",
+    "league": 80,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "fc-ashdod"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1031,
+  "fields": {
+    "is_national": false,
+    "name": "Hapoel Be'er Sheva",
+    "founded": "1949-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 998,
+    "manager": "Ran Kozuch",
+    "num_of_titles": 6,
+    "city": 819,
+    "average_attendance": 13963,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Hapoel_Be%27er_Sheva_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/hapoel-beer-sheva/startseite/verein/2976",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/2976.png",
+    "image_credit": null,
+    "description": "Hapoel Be'er Sheva Football Club ( Hebrew : מועדון הכדורגל הפועל באר שבע , Moadon HaKaduregel Hapoel Be'er Sheva ) is an Israeli professional football club from the city of Be'er Sheva , that competes in the Israeli Premier League . The club was established in 1949, and since 2007 it has been run by businesswoman Alona Barkat , who serves as the club's owner. The club also fields youth teams, and a women's side. There is also a football academy. [ 1 ]",
+    "league": 80,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "hapoel-beer-sheva"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1032,
+  "fields": {
+    "is_national": false,
+    "name": "Hapoel Haifa",
+    "founded": "1924-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 999,
+    "manager": "Haim Silvas",
+    "num_of_titles": 1,
+    "city": 820,
+    "average_attendance": 5197,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Hapoel_Haifa_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/hapoel-haifa/startseite/verein/810",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/810.png",
+    "image_credit": null,
+    "description": null,
+    "league": 80,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "hapoel-haifa"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1033,
+  "fields": {
+    "is_national": false,
+    "name": "Hapoel Jerusalem",
+    "founded": "1926-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 995,
+    "manager": "Ziv Arie",
+    "num_of_titles": 0,
+    "city": 816,
+    "average_attendance": 3955,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Hapoel_Jerusalem_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/hapoel-jerusalem/startseite/verein/43119",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/43119.png",
+    "image_credit": null,
+    "description": "Hapoel Jerusalem Football Club ( Hebrew : מועדון כדורגל הפועל ירושלים , Mo'adon Kaduregel Hapoel Yerushalayim ) is an Israeli professional football club based in Jerusalem . It competes in the Israeli Premier League , the top flight of Israeli football . Founded in 1926, their home ground is the Teddy Stadium .\nAs a protest against the conduct of the club's owners since the 1990s, the Hapoel Katamon Jerusalem football club was established in 2007, the first football club in Israel owned by its fans. The club was named after Katamon Stadium, which was formerly used by Hapoel Jerusalem. The club existed in parallel with Hapoel Jerusalem for 12 years.",
+    "league": 80,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "hapoel-jerusalem"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1034,
+  "fields": {
+    "is_national": false,
+    "name": "Hapoel Petah Tikva",
+    "founded": "1934-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1000,
+    "manager": "Omer Peretz",
+    "num_of_titles": 6,
+    "city": 821,
+    "average_attendance": 5504,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Hapoel_Petah_Tikva_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/hapoel-petah-tikva/startseite/verein/262",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/262.png",
+    "image_credit": null,
+    "description": "Hapoel Petah Tikva F.C. ( Hebrew : הפועל פתח תקווה ) is an Israeli professional football club based in the city of Petah Tikva , currently playing in Israeli Premier League .\nIts most successful period was throughout the 1950s and 1960s, in which the club won six League Championships and one State Cups . The club holds to this day the record for most consecutive championships – five – and was ranked in the top three of the league for 14 years between 1954 and 1968. Hapoel Petah Tikva has not won the championship since 1963, and its last titles were the State Cup in 1992 and the Toto Cup in 2005.",
+    "league": 80,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "hapoel-petah-tikva"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1035,
+  "fields": {
+    "is_national": false,
+    "name": "Hapoel Tel Aviv",
+    "founded": "1923-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1001,
+    "manager": "Elyaniv Barda",
+    "num_of_titles": 13,
+    "city": 822,
+    "average_attendance": 17347,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Hapoel_Tel_Aviv_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/hapoel-tel-aviv/startseite/verein/1017",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1017.png",
+    "image_credit": null,
+    "description": "Hapoel Tel Aviv Football Club ( Hebrew : מועדון כדורגל הפועל תל אביב ) is an Israeli professional football club based in Tel Aviv that competes in the Israeli Premier League . The club's traditional home ground is Bloomfield Stadium . To date, the club has won 13 championships and 16 State Cups . In 1967, Hapoel Tel Aviv became the first club to win the Asian Champion Club Tournament .",
+    "league": 80,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "hapoel-tel-aviv"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1036,
+  "fields": {
+    "is_national": false,
+    "name": "Ironi Kiryat Shmona",
+    "founded": "2000-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1002,
+    "manager": "Shay Barda",
+    "num_of_titles": 1,
+    "city": 823,
+    "average_attendance": 3450,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Hapoel_Ironi_Kiryat_Shmona_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/ironi-kiryat-shmona/startseite/verein/6028",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/6028.png",
+    "image_credit": null,
+    "description": "Hapoel Ironi Kiryat Shmona Football Club ( Hebrew : מועדון כדורגל הפועל עירוני קרית שמונה ) known as Ironi Kiryat Shmona is a professional football club based in Kiryat Shmona , [ 2 ] in the northern district of Israel . The club is a current member of the Israeli Premier League , and plays at the Ironi Stadium . [ 1 ] They won their first league title in 2011–12 .",
+    "league": 80,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "ironi-kiryat-shmona"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1037,
+  "fields": {
+    "is_national": false,
+    "name": "Ironi Tiberias",
+    "founded": "2006-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1005,
+    "manager": "Eliran Hudeda",
+    "num_of_titles": 0,
+    "city": 824,
+    "average_attendance": 2159,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ironi_Tiberias_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/ironi-tiberias/startseite/verein/51070",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/51070.png",
+    "image_credit": null,
+    "description": "Ironi Tiberias ( Hebrew : עירוני טבריה ) is an Israeli professional football club based in Tiberias . The club is not connected to Hapoel Tiberias , a former club which spent several seasons in the top division of Israeli football in the 1960s and the 1980s, making its last appearance in the top flight in 1989.",
+    "league": 80,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "ironi-tiberias"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1038,
+  "fields": {
+    "is_national": false,
+    "name": "Maccabi Bnei Reineh",
+    "founded": "2021-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1003,
+    "manager": "Lior Reuven",
+    "num_of_titles": 0,
+    "city": 824,
+    "average_attendance": 2102,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Maccabi_Bnei_Reineh_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/maccabi-bnei-reineh/startseite/verein/70178",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/70178.png",
+    "image_credit": null,
+    "description": "Maccabi Bnei Reineh ( Hebrew : מכבי בני ריינה ; Arabic : مكابي ابناء الرينة ) is an Israeli football club based in Reineh . The club played its home matches at the Municipal Stadium. They were promoted to play with Bnei Sakhnin in the Israeli Premier League as its second Arab-Israeli football club for the 2022–23 season .",
+    "league": 80,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "maccabi-bnei-reineh"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1039,
+  "fields": {
+    "is_national": false,
+    "name": "Maccabi Haifa",
+    "founded": "1913-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 999,
+    "manager": "Barak Bakhar",
+    "num_of_titles": 15,
+    "city": 820,
+    "average_attendance": 26358,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Maccabi_Haifa_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/maccabi-haifa/startseite/verein/1064",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1064.png",
+    "image_credit": null,
+    "description": "Maccabi Haifa Football Club ( Hebrew : מועדון הכדורגל מכבי חיפה , romanized : Moadon haKaduregel Makabi Ḥefa ) is an Israeli professional football club based in the city of Haifa , Israel , a section of Maccabi Haifa sports club. The club plays in the Israeli Premier League . Maccabi Haifa home games are played at Sammy Ofer Stadium . The stadium, which is shared with rivals Hapoel Haifa , is the second largest in Israeli football, with a capacity of 30,950. [ 2 ]",
+    "league": 80,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "maccabi-haifa"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1040,
+  "fields": {
+    "is_national": false,
+    "name": "Maccabi Netanya",
+    "founded": "1934-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1004,
+    "manager": "Ronny Levy",
+    "num_of_titles": 5,
+    "city": 825,
+    "average_attendance": 7916,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Maccabi_Netanya_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/maccabi-netanya/startseite/verein/5223",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/5223.png",
+    "image_credit": null,
+    "description": "Maccabi Netanya F.C. ( Hebrew : מועדון כדורגל מכבי נתניה , romanized : Moadon kaduregel Maccabi Netanya ) is an Israeli professional football club based in Netanya . Established in 1934, the club was a founding member of the Israeli League in 1949. After winning their first championship in 1971, the club's golden period lasted until the late 80s, including four more league titles and a double in 1978.",
+    "league": 80,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "maccabi-netanya"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1041,
+  "fields": {
+    "is_national": false,
+    "name": "Maccabi Tel Aviv",
+    "founded": "1906-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1001,
+    "manager": "Kenny Miller",
+    "num_of_titles": 26,
+    "city": 822,
+    "average_attendance": 19531,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Maccabi_Tel_Aviv_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/maccabi-tel-aviv/startseite/verein/119",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/119.png",
+    "image_credit": null,
+    "description": "Maccabi Tel Aviv Football Club ( Hebrew : מועדון כדורגל מכבי תל אביב ; Moadon Kaduregel Maccabi Tel Aviv ) is an Israeli professional football club from Tel Aviv and part of the Maccabi Tel Aviv Sport Club .",
+    "league": 80,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "maccabi-tel-aviv"
   }
 },
 {
