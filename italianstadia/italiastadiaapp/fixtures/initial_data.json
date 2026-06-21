@@ -9218,7 +9218,7 @@
   "pk": 641,
   "fields": {
     "name": "Pitești",
-    "population": null,
+    "population": 141275,
     "country": "Romania",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Pite%C8%99ti",
     "image_url": null,
@@ -9231,7 +9231,7 @@
   "pk": 642,
   "fields": {
     "name": "Horsens",
-    "population": null,
+    "population": 64418,
     "country": "Denmark",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Horsens",
     "image_url": null,
@@ -9244,7 +9244,7 @@
   "pk": 643,
   "fields": {
     "name": "Irschen",
-    "population": null,
+    "population": 2022,
     "country": "Austria",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Irschen",
     "image_url": null,
@@ -9257,7 +9257,7 @@
   "pk": 644,
   "fields": {
     "name": "Sertã",
-    "population": null,
+    "population": 15880,
     "country": "Portugal",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Sert%C3%A3",
     "image_url": null,
@@ -9270,7 +9270,7 @@
   "pk": 645,
   "fields": {
     "name": "Belfast",
-    "population": null,
+    "population": 345006,
     "country": "Northern Ireland",
     "wikipedia_url": null,
     "image_url": null,
@@ -9283,7 +9283,7 @@
   "pk": 646,
   "fields": {
     "name": "Brussels",
-    "population": null,
+    "population": 195546,
     "country": "Belgium",
     "wikipedia_url": null,
     "image_url": null,
@@ -9361,7 +9361,7 @@
   "pk": 652,
   "fields": {
     "name": "Zenica",
-    "population": null,
+    "population": 70553,
     "country": "Bosnia and Herzegovina",
     "wikipedia_url": null,
     "image_url": null,
@@ -9400,7 +9400,7 @@
   "pk": 655,
   "fields": {
     "name": "Łęczna",
-    "population": null,
+    "population": 17826,
     "country": "Poland",
     "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%81%C4%99czna",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/%C5%81%C4%99czy%C5%84ski_ratusz.jpg",
@@ -9543,7 +9543,7 @@
   "pk": 666,
   "fields": {
     "name": "Grozny",
-    "population": null,
+    "population": 331402,
     "country": "Russia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Grozny",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/%D0%9C%D0%B5%D1%87%D0%B5%D1%82%D1%8C_%22%D0%A1%D0%B5%D1%80%D0%B4%D1%86%D0%B5_%D0%A7%D0%B5%D1%87%D0%BD%D0%B8%22.jpg",
@@ -9556,7 +9556,7 @@
   "pk": 667,
   "fields": {
     "name": "Tolyatti",
-    "population": null,
+    "population": 662683,
     "country": "Russia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Tolyatti",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%92._%D0%9D._%D0%A2%D0%B0%D1%82%D0%B8%D1%89%D0%B5%D0%B2%D1%83%2C_%D0%9F%D0%BE%D1%80%D1%82%D0%BF%D0%BE%D1%81%D1%91%D0%BB%D0%BE%D0%BA%2C_%D0%A2%D0%BE%D0%BB%D1%8C%D1%8F%D1%82%D1%82%D0%B8%2C_%D0%A1%D0%B0%D0%BC%D0%B0%D1%80%D1%81%D0%BA%D0%B0%D1%8F_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C.jpg",
@@ -9712,7 +9712,7 @@
   "pk": 679,
   "fields": {
     "name": "Vitebsk",
-    "population": null,
+    "population": 357899,
     "country": "Belarus",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Vitebsk",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/%D0%92%D1%96%D1%86%D0%B5%D0%B1%D1%81%D0%BA%D1%96%D1%8F_%D0%BA%D1%80%D0%B0%D1%8F%D0%B2%D1%96%D0%B4%D1%8B_03.jpg",
@@ -9751,7 +9751,7 @@
   "pk": 682,
   "fields": {
     "name": "Brest",
-    "population": null,
+    "population": 347138,
     "country": "Belarus",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Brest",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
@@ -9829,7 +9829,7 @@
   "pk": 688,
   "fields": {
     "name": "Dzerzhinsk",
-    "population": null,
+    "population": 29607,
     "country": "Belarus",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Dzerzhinsk",
     "image_url": "https://upload.wikimedia.org/wikipedia/en/5/5f/Disambig_gray.svg",
@@ -9855,7 +9855,7 @@
   "pk": 690,
   "fields": {
     "name": "Novopolotsk",
-    "population": null,
+    "population": 94666,
     "country": "Belarus",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Novopolotsk",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/42/Navapolack_Montage_%282017%29.jpg",
@@ -9907,7 +9907,7 @@
   "pk": 694,
   "fields": {
     "name": "Ganja",
-    "population": null,
+    "population": 331400,
     "country": "Azerbaijan",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Ganja",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/15/Graffiti_streetart_rastafari.png",
@@ -9959,7 +9959,7 @@
   "pk": 698,
   "fields": {
     "name": "Tovuz",
-    "population": null,
+    "population": 13520,
     "country": "Azerbaijan",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Tovuz",
     "image_url": "https://upload.wikimedia.org/wikipedia/en/5/5f/Disambig_gray.svg",
@@ -9972,7 +9972,7 @@
   "pk": 699,
   "fields": {
     "name": "Gori",
-    "population": null,
+    "population": 44524,
     "country": "Georgia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Gori",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
@@ -10063,7 +10063,7 @@
   "pk": 706,
   "fields": {
     "name": "Nisporeni",
-    "population": null,
+    "population": 9140,
     "country": "Moldova",
     "wikipedia_url": null,
     "image_url": null,
@@ -10089,7 +10089,7 @@
   "pk": 708,
   "fields": {
     "name": "Aue",
-    "population": null,
+    "population": 19698,
     "country": "Germany",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Aue",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
@@ -10232,7 +10232,7 @@
   "pk": 719,
   "fields": {
     "name": "Aspach",
-    "population": null,
+    "population": 8217,
     "country": "Germany",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Aspach",
     "image_url": "https://upload.wikimedia.org/wikipedia/en/5/5f/Disambig_gray.svg",
@@ -10388,7 +10388,7 @@
   "pk": 731,
   "fields": {
     "name": "Laval",
-    "population": null,
+    "population": 49400,
     "country": "France",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Laval",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
@@ -10427,7 +10427,7 @@
   "pk": 734,
   "fields": {
     "name": "Nancy",
-    "population": null,
+    "population": 103671,
     "country": "France",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Nancy",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
@@ -10440,7 +10440,7 @@
   "pk": 735,
   "fields": {
     "name": "Pau",
-    "population": null,
+    "population": 80441,
     "country": "France",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Pau",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
@@ -10596,7 +10596,7 @@
   "pk": 747,
   "fields": {
     "name": "Emmen",
-    "population": null,
+    "population": 107024,
     "country": "Netherlands",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Emmen",
     "image_url": "https://upload.wikimedia.org/wikipedia/en/5/5f/Disambig_gray.svg",
@@ -10726,7 +10726,7 @@
   "pk": 757,
   "fields": {
     "name": "Chaves",
-    "population": null,
+    "population": 41243,
     "country": "Portugal",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Chaves",
     "image_url": "https://upload.wikimedia.org/wikipedia/en/5/5f/Disambig_gray.svg",
@@ -10739,7 +10739,7 @@
   "pk": 758,
   "fields": {
     "name": "Faro",
-    "population": null,
+    "population": 64560,
     "country": "Portugal",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Faro",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
@@ -10791,7 +10791,7 @@
   "pk": 762,
   "fields": {
     "name": "Lourosa",
-    "population": null,
+    "population": 8003,
     "country": "Portugal",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Lourosa",
     "image_url": "https://upload.wikimedia.org/wikipedia/en/5/5f/Disambig_gray.svg",
@@ -10973,7 +10973,7 @@
   "pk": 776,
   "fields": {
     "name": "Cáceres",
-    "population": null,
+    "population": 96651,
     "country": "Spain",
     "wikipedia_url": "https://en.wikipedia.org/wiki/C%C3%A1ceres",
     "image_url": "https://upload.wikimedia.org/wikipedia/en/5/5f/Disambig_gray.svg",
@@ -11012,7 +11012,7 @@
   "pk": 779,
   "fields": {
     "name": "Merida",
-    "population": null,
+    "population": 60225,
     "country": "Spain",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Merida",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
@@ -11116,7 +11116,7 @@
   "pk": 787,
   "fields": {
     "name": "Zamora",
-    "population": null,
+    "population": 59815,
     "country": "Spain",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Zamora",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
@@ -11194,7 +11194,7 @@
   "pk": 793,
   "fields": {
     "name": "Cartagena",
-    "population": null,
+    "population": 220704,
     "country": "Spain",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Cartagena",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiktionary-logo-en-v2.svg",
