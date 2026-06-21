@@ -1,5 +1,5 @@
 {% extends "base_detail.html" %}
-{% load static %}
+{% load static humanize %}
 
 {% block title %}Biggest football stadiums in Europe by capacity | Stadiums of Europe{% endblock %}
 
@@ -26,7 +26,8 @@
 
     <div id="insight-map" class="mb-4"
          data-mode="markers" data-color-by="capacity"
-         data-geojson-url="{{ geojson_url }}"></div>
+         data-geojson-url="{{ geojson_url }}"
+         data-stadium-url-prefix="/stadium/"></div>
 
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-white"><strong>About this data</strong></div>
@@ -46,7 +47,7 @@
                         <td>{{ r.city }}</td>
                         <td>{{ r.country }}</td>
                         <td>{{ r.team }}</td>
-                        <td class="text-end fw-semibold">{{ r.capacity|floatformat:0 }}</td>
+                        <td class="text-end fw-semibold">{{ r.capacity|intcomma }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -65,7 +66,7 @@
                         <td>{{ r.country }}</td>
                         <td><a href="{% url 'italiastadiaapp:stadium_detail' r.slug %}">{{ r.name }}</a></td>
                         <td>{{ r.city }}</td>
-                        <td class="text-end">{{ r.capacity|floatformat:0 }}</td>
+                        <td class="text-end">{{ r.capacity|intcomma }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -85,7 +86,7 @@
                         <td>{{ r.city }}</td>
                         <td>{{ r.country }}</td>
                         <td>{{ r.team }}</td>
-                        <td class="text-end">{{ r.capacity|floatformat:0 }}</td>
+                        <td class="text-end">{{ r.capacity|intcomma }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

@@ -18,6 +18,7 @@
     ARTIFICIAL: { color: "#f59e0b", label: "Artificial" },
   };
   var mode = el.dataset.mode || "markers";
+  var stadiumUrlPrefix = el.dataset.stadiumUrlPrefix || "/stadium/";
 
   function legend(items) {
     var lg = L.control({ position: "bottomright" });
@@ -59,7 +60,7 @@
           L.circleMarker(ll, {
             radius: radius, color: "#111", weight: 1, fillColor: color, fillOpacity: 0.85,
           }).addTo(map).bindPopup(
-            '<strong><a href="/stadium/' + (p.slug || p.id) + '/">' + p.name + "</a></strong><br>" +
+            '<strong><a href="' + stadiumUrlPrefix + (p.slug || p.id) + '/">' + p.name + "</a></strong><br>" +
             (p.city ? p.city + (p.country ? ", " + p.country : "") + "<br>" : "") +
             (colorBy === "surface" && p.surface ? (SURFACE[p.surface] || {}).label + "<br>" : "") + cap
           );
