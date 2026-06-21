@@ -5,7 +5,8 @@
   "fields": {
     "name": "Italy",
     "code": "IT",
-    "uefa_rank": 2
+    "uefa_rank": 2,
+    "population": 58900000
   }
 },
 {
@@ -14,7 +15,8 @@
   "fields": {
     "name": "Germany",
     "code": "DE",
-    "uefa_rank": 4
+    "uefa_rank": 4,
+    "population": 84500000
   }
 },
 {
@@ -23,7 +25,8 @@
   "fields": {
     "name": "France",
     "code": "FR",
-    "uefa_rank": 5
+    "uefa_rank": 5,
+    "population": 68200000
   }
 },
 {
@@ -32,7 +35,8 @@
   "fields": {
     "name": "Portugal",
     "code": "PT",
-    "uefa_rank": 6
+    "uefa_rank": 6,
+    "population": 10300000
   }
 },
 {
@@ -41,7 +45,8 @@
   "fields": {
     "name": "England",
     "code": "GB",
-    "uefa_rank": 1
+    "uefa_rank": 1,
+    "population": 56500000
   }
 },
 {
@@ -50,7 +55,8 @@
   "fields": {
     "name": "Albania",
     "code": "AL",
-    "uefa_rank": 32
+    "uefa_rank": 32,
+    "population": 2740000
   }
 },
 {
@@ -59,7 +65,8 @@
   "fields": {
     "name": "Andorra",
     "code": "AD",
-    "uefa_rank": 49
+    "uefa_rank": 49,
+    "population": 80000
   }
 },
 {
@@ -68,7 +75,8 @@
   "fields": {
     "name": "Armenia",
     "code": "AM",
-    "uefa_rank": 44
+    "uefa_rank": 44,
+    "population": 2780000
   }
 },
 {
@@ -77,7 +85,8 @@
   "fields": {
     "name": "Austria",
     "code": "AT",
-    "uefa_rank": 10
+    "uefa_rank": 10,
+    "population": 9100000
   }
 },
 {
@@ -86,7 +95,8 @@
   "fields": {
     "name": "Azerbaijan",
     "code": "AZ",
-    "uefa_rank": 30
+    "uefa_rank": 30,
+    "population": 10140000
   }
 },
 {
@@ -95,7 +105,8 @@
   "fields": {
     "name": "Belarus",
     "code": "BY",
-    "uefa_rank": 33
+    "uefa_rank": 33,
+    "population": 9200000
   }
 },
 {
@@ -104,7 +115,8 @@
   "fields": {
     "name": "Belgium",
     "code": "BE",
-    "uefa_rank": 8
+    "uefa_rank": 8,
+    "population": 11700000
   }
 },
 {
@@ -113,7 +125,8 @@
   "fields": {
     "name": "Bosnia and Herzegovina",
     "code": "BA",
-    "uefa_rank": 42
+    "uefa_rank": 42,
+    "population": 3200000
   }
 },
 {
@@ -122,7 +135,8 @@
   "fields": {
     "name": "Bulgaria",
     "code": "BG",
-    "uefa_rank": 26
+    "uefa_rank": 26,
+    "population": 6400000
   }
 },
 {
@@ -131,7 +145,8 @@
   "fields": {
     "name": "Croatia",
     "code": "HR",
-    "uefa_rank": 15
+    "uefa_rank": 15,
+    "population": 3850000
   }
 },
 {
@@ -140,7 +155,8 @@
   "fields": {
     "name": "Cyprus",
     "code": "CY",
-    "uefa_rank": 25
+    "uefa_rank": 25,
+    "population": 1260000
   }
 },
 {
@@ -149,7 +165,8 @@
   "fields": {
     "name": "Czechia",
     "code": "CZ",
-    "uefa_rank": 9
+    "uefa_rank": 9,
+    "population": 10900000
   }
 },
 {
@@ -158,7 +175,8 @@
   "fields": {
     "name": "Denmark",
     "code": "DK",
-    "uefa_rank": 16
+    "uefa_rank": 16,
+    "population": 5960000
   }
 },
 {
@@ -167,7 +185,8 @@
   "fields": {
     "name": "Estonia",
     "code": "EE",
-    "uefa_rank": 39
+    "uefa_rank": 39,
+    "population": 1370000
   }
 },
 {
@@ -176,7 +195,8 @@
   "fields": {
     "name": "Finland",
     "code": "FI",
-    "uefa_rank": 41
+    "uefa_rank": 41,
+    "population": 5550000
   }
 },
 {
@@ -185,7 +205,8 @@
   "fields": {
     "name": "Georgia",
     "code": "GE",
-    "uefa_rank": 34
+    "uefa_rank": 34,
+    "population": 3700000
   }
 },
 {
@@ -194,7 +215,8 @@
   "fields": {
     "name": "Greece",
     "code": "GR",
-    "uefa_rank": 18
+    "uefa_rank": 18,
+    "population": 10400000
   }
 },
 {
@@ -203,7 +225,8 @@
   "fields": {
     "name": "Hungary",
     "code": "HU",
-    "uefa_rank": 23
+    "uefa_rank": 23,
+    "population": 9600000
   }
 },
 {
@@ -212,7 +235,8 @@
   "fields": {
     "name": "Iceland",
     "code": "IS",
-    "uefa_rank": 31
+    "uefa_rank": 31,
+    "population": 390000
   }
 },
 {
@@ -221,7 +245,8 @@
   "fields": {
     "name": "Ireland",
     "code": "IE",
-    "uefa_rank": 27
+    "uefa_rank": 27,
+    "population": 5150000
   }
 },
 {
@@ -230,7 +255,8 @@
   "fields": {
     "name": "Kosovo",
     "code": "XK",
-    "uefa_rank": 35
+    "uefa_rank": 35,
+    "population": 1760000
   }
 },
 {
@@ -239,7 +265,8 @@
   "fields": {
     "name": "Latvia",
     "code": "LV",
-    "uefa_rank": 36
+    "uefa_rank": 36,
+    "population": 1880000
   }
 },
 {
@@ -248,7 +275,8 @@
   "fields": {
     "name": "Liechtenstein",
     "code": "LI",
-    "uefa_rank": 48
+    "uefa_rank": 48,
+    "population": 40000
   }
 },
 {
@@ -257,7 +285,8 @@
   "fields": {
     "name": "Lithuania",
     "code": "LT",
-    "uefa_rank": 38
+    "uefa_rank": 38,
+    "population": 2860000
   }
 },
 {
@@ -266,7 +295,8 @@
   "fields": {
     "name": "Luxembourg",
     "code": "LU",
-    "uefa_rank": 37
+    "uefa_rank": 37,
+    "population": 660000
   }
 },
 {
@@ -275,7 +305,8 @@
   "fields": {
     "name": "Malta",
     "code": "MT",
-    "uefa_rank": 47
+    "uefa_rank": 47,
+    "population": 540000
   }
 },
 {
@@ -284,7 +315,8 @@
   "fields": {
     "name": "Moldova",
     "code": "MD",
-    "uefa_rank": 45
+    "uefa_rank": 45,
+    "population": 2510000
   }
 },
 {
@@ -293,7 +325,8 @@
   "fields": {
     "name": "Monaco",
     "code": "MC",
-    "uefa_rank": 51
+    "uefa_rank": 51,
+    "population": 38000
   }
 },
 {
@@ -302,7 +335,8 @@
   "fields": {
     "name": "Montenegro",
     "code": "ME",
-    "uefa_rank": 43
+    "uefa_rank": 43,
+    "population": 620000
   }
 },
 {
@@ -311,7 +345,8 @@
   "fields": {
     "name": "Netherlands",
     "code": "NL",
-    "uefa_rank": 7
+    "uefa_rank": 7,
+    "population": 17800000
   }
 },
 {
@@ -320,7 +355,8 @@
   "fields": {
     "name": "North Macedonia",
     "code": "MK",
-    "uefa_rank": 40
+    "uefa_rank": 40,
+    "population": 1830000
   }
 },
 {
@@ -329,7 +365,8 @@
   "fields": {
     "name": "Norway",
     "code": "NO",
-    "uefa_rank": 19
+    "uefa_rank": 19,
+    "population": 5500000
   }
 },
 {
@@ -338,7 +375,8 @@
   "fields": {
     "name": "Poland",
     "code": "PL",
-    "uefa_rank": 22
+    "uefa_rank": 22,
+    "population": 37700000
   }
 },
 {
@@ -347,7 +385,8 @@
   "fields": {
     "name": "Romania",
     "code": "RO",
-    "uefa_rank": 21
+    "uefa_rank": 21,
+    "population": 19000000
   }
 },
 {
@@ -356,7 +395,8 @@
   "fields": {
     "name": "Russia",
     "code": "RU",
-    "uefa_rank": 28
+    "uefa_rank": 28,
+    "population": 143800000
   }
 },
 {
@@ -365,7 +405,8 @@
   "fields": {
     "name": "San Marino",
     "code": "SM",
-    "uefa_rank": 50
+    "uefa_rank": 50,
+    "population": 34000
   }
 },
 {
@@ -374,7 +415,8 @@
   "fields": {
     "name": "Scotland",
     "code": "SC",
-    "uefa_rank": 12
+    "uefa_rank": 12,
+    "population": 5450000
   }
 },
 {
@@ -383,7 +425,8 @@
   "fields": {
     "name": "Serbia",
     "code": "RS",
-    "uefa_rank": 17
+    "uefa_rank": 17,
+    "population": 6600000
   }
 },
 {
@@ -392,7 +435,8 @@
   "fields": {
     "name": "Slovakia",
     "code": "SK",
-    "uefa_rank": 24
+    "uefa_rank": 24,
+    "population": 5430000
   }
 },
 {
@@ -401,7 +445,8 @@
   "fields": {
     "name": "Slovenia",
     "code": "SI",
-    "uefa_rank": 29
+    "uefa_rank": 29,
+    "population": 2120000
   }
 },
 {
@@ -410,7 +455,8 @@
   "fields": {
     "name": "Spain",
     "code": "ES",
-    "uefa_rank": 3
+    "uefa_rank": 3,
+    "population": 48400000
   }
 },
 {
@@ -419,7 +465,8 @@
   "fields": {
     "name": "Sweden",
     "code": "SE",
-    "uefa_rank": 20
+    "uefa_rank": 20,
+    "population": 10500000
   }
 },
 {
@@ -428,7 +475,8 @@
   "fields": {
     "name": "Switzerland",
     "code": "CH",
-    "uefa_rank": 14
+    "uefa_rank": 14,
+    "population": 8850000
   }
 },
 {
@@ -437,7 +485,8 @@
   "fields": {
     "name": "Turkey",
     "code": "TR",
-    "uefa_rank": 11
+    "uefa_rank": 11,
+    "population": 85300000
   }
 },
 {
@@ -446,7 +495,8 @@
   "fields": {
     "name": "Ukraine",
     "code": "UA",
-    "uefa_rank": 13
+    "uefa_rank": 13,
+    "population": 38000000
   }
 },
 {
@@ -455,7 +505,8 @@
   "fields": {
     "name": "Wales",
     "code": "WL",
-    "uefa_rank": 46
+    "uefa_rank": 46,
+    "population": 3130000
   }
 },
 {
@@ -464,7 +515,8 @@
   "fields": {
     "name": "Northern Ireland",
     "code": "NI",
-    "uefa_rank": null
+    "uefa_rank": null,
+    "population": 1910000
   }
 },
 {
@@ -1095,6 +1147,15 @@
     "name": "Erovnuli Liga",
     "country": 22,
     "division_level": 1
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 73,
+  "fields": {
+    "name": "3. Liga",
+    "country": 2,
+    "division_level": 3
   }
 },
 {
@@ -9922,6 +9983,32 @@
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/40/Downtown_Kutaisi_%26_White_Bridge_as_seen_from_Mt_Gora_%28August_2011%29-cropped.jpg",
     "image_credit": null,
     "description": "Kutaisi ( / k uː ˈ t aɪ s iː / koo- TY -see ; [ 5 ] Georgian : ქუთაისი pronounced [ˈkʰut̪ʰais̪i] ⓘ ) is a city in the Imereti region of the Republic of Georgia . One of the oldest continuously inhabited cities in the world, it is the 3rd-largest city in Georgia after Tbilisi and Batumi with a population of 123,000 as of 2025. [ 3 ] It lies 221 kilometres (137 miles) west of Tbilisi, on the Rioni River , and is the capital of Imereti."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 706,
+  "fields": {
+    "name": "Nisporeni",
+    "population": null,
+    "country": "Moldova",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 707,
+  "fields": {
+    "name": "Aachen",
+    "population": 262670,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Aachen",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Blick_auf_das_Rathaus_und_den_Dom_Aachens_aufgenommen_von_St_Jakob.jpg",
+    "image_credit": null,
+    "description": "Aachen [ a ] is the 13th-largest city in North Rhine-Westphalia and the 27th-largest city of Germany, with around 261,000 inhabitants. [ 4 ] It is the westernmost major city in Germany, lying approximately 61 km (38 mi) west of Cologne and Bonn , directly bordering Belgium in the southwest, and the Netherlands in the northwest. The city lies in the Meuse–Rhine Euroregion and is the seat of the district of Aachen (Städteregion Aachen) ."
   }
 },
 {
@@ -20035,8 +20122,8 @@
     "address": "Sfântu Gheorghe , Romania",
     "year_of_construction": 2021,
     "city": 302,
-    "latitude": null,
-    "longitude": null,
+    "latitude": "45.883611",
+    "longitude": "25.806111",
     "owner_raw": "Sfântu Gheorghe Town Hall",
     "ownership": "PRIVATE",
     "slug": "sepsi-duna-arena",
@@ -20055,7 +20142,7 @@
       }
     ],
     "description": null,
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -30539,12 +30626,12 @@
     "architect": null,
     "tournaments": [],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Torfnesv%C3%B6llur",
-    "transfermarkt_url": "https://www.transfermarkt.com/uf-vestri/stadion/verein/18940/saison_id/2025",
+    "transfermarkt_url": "https://www.transfermarkt.com/vestri-isafjordur/stadion/verein/29224",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Torfnesv%C3%B6llur_2025_0975.jpg",
     "image_credit": null,
     "extra_images": [],
     "description": null,
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -31767,7 +31854,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 732,
   "fields": {
-    "name": "Tatnam Ground",
+    "name": "Cricova teren sintetic",
     "capacity": null,
     "address": "Chișinău , Moldova",
     "year_of_construction": 1952,
@@ -31776,18 +31863,18 @@
     "longitude": "28.839455",
     "owner_raw": null,
     "ownership": "UNKNOWN",
-    "slug": "tatnam-ground",
+    "slug": "cricova-teren-sintetic",
     "stadium_type": "OPEN",
-    "surface": null,
+    "surface": "ARTIFICIAL",
     "architect": null,
     "tournaments": [],
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Republican_Stadium_(Chi%C8%99in%C4%83u)",
-    "transfermarkt_url": "https://www.transfermarkt.com/cstc-saksan/stadion/verein/90107/saison_id/2025",
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/cstc-saksan/stadion/verein/90107",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/23/...%D0%B4%D0%BE_%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%2C_%D0%B0_%D0%B7%D0%B0%D1%82%D0%B5%D0%BC..._-_panoramio.jpg",
     "image_credit": null,
     "extra_images": [],
     "description": null,
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -33827,13 +33914,13 @@
     "surface": null,
     "architect": null,
     "tournaments": [],
-    "wikipedia_url": "",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Stali_Mielec",
     "transfermarkt_url": "https://www.transfermarkt.com/stal-mielec/stadion/verein/22431",
     "image_url": null,
     "image_credit": null,
     "extra_images": [],
     "description": null,
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -34875,7 +34962,7 @@
   "pk": 843,
   "fields": {
     "name": "Dalga Arena",
-    "capacity": 9258,
+    "capacity": 6502,
     "address": "Mardakan , Azerbaijan",
     "year_of_construction": 2011,
     "city": 649,
@@ -34902,7 +34989,7 @@
   "pk": 844,
   "fields": {
     "name": "Gabala City Stadium",
-    "capacity": 3500,
+    "capacity": 3748,
     "address": "Gabala , Azerbaijan",
     "year_of_construction": 1985,
     "city": 692,
@@ -34956,7 +35043,7 @@
   "pk": 846,
   "fields": {
     "name": "Ganja City Stadium",
-    "capacity": 5000,
+    "capacity": 15343,
     "address": "Ganja , Azerbaijan",
     "year_of_construction": 2005,
     "city": 694,
@@ -35019,7 +35106,7 @@
   "pk": 848,
   "fields": {
     "name": "Neftchi Arena",
-    "capacity": 10260,
+    "capacity": 11000,
     "address": "8th Kilometer, Nizami raion , Baku , Azerbaijan",
     "year_of_construction": 2012,
     "city": 649,
@@ -35046,7 +35133,7 @@
   "pk": 849,
   "fields": {
     "name": "Tofiq Bahramov Stadium",
-    "capacity": 4677,
+    "capacity": 31090,
     "address": "Baku , Azerbaijan",
     "year_of_construction": 2015,
     "city": 649,
@@ -35091,11 +35178,11 @@
   "fields": {
     "name": "Bank Respublika Arena",
     "capacity": 13000,
-    "address": null,
+    "address": "Masazır , Azerbaijan",
     "year_of_construction": 2014,
     "city": 649,
-    "latitude": null,
-    "longitude": null,
+    "latitude": "40.486186",
+    "longitude": "49.766262",
     "owner_raw": null,
     "ownership": "UNKNOWN",
     "slug": "bank-respublika-arena",
@@ -35103,9 +35190,9 @@
     "surface": null,
     "architect": null,
     "tournaments": [],
-    "wikipedia_url": "",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bank_Respublika_Arena",
     "transfermarkt_url": "https://www.transfermarkt.com/sabah-fk/stadion/verein/63993",
-    "image_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Bank_Respubika_Arena.jpg",
     "image_credit": null,
     "extra_images": [],
     "description": null,
@@ -35117,7 +35204,7 @@
   "pk": 851,
   "fields": {
     "name": "Shamakhi City Stadium",
-    "capacity": 2200,
+    "capacity": 2176,
     "address": "Shamakhi , Azerbaijan",
     "year_of_construction": 2021,
     "city": 696,
@@ -35144,7 +35231,7 @@
   "pk": 852,
   "fields": {
     "name": "Mehdi Huseynzade Stadium",
-    "capacity": 9502,
+    "capacity": 10047,
     "address": "Sumgayit , Azerbaijan",
     "year_of_construction": 2024,
     "city": 697,
@@ -35180,7 +35267,7 @@
   "pk": 853,
   "fields": {
     "name": "Tovuz City Stadium",
-    "capacity": 6500,
+    "capacity": 6800,
     "address": "Tovuz , Azerbaijan",
     "year_of_construction": 1979,
     "city": 698,
@@ -35207,7 +35294,7 @@
   "pk": 854,
   "fields": {
     "name": "Zira Olympic Sport Complex",
-    "capacity": 1200,
+    "capacity": 1500,
     "address": "Azerbaijan",
     "year_of_construction": 2015,
     "city": 649,
@@ -35373,27 +35460,27 @@
   "model": "italiastadiaapp.stadium",
   "pk": 860,
   "fields": {
-    "name": "Poti Central Stadium",
+    "name": "Fazisi Stadium",
     "capacity": 5500,
     "address": null,
     "year_of_construction": null,
     "city": 702,
-    "latitude": null,
-    "longitude": null,
+    "latitude": "42.142500",
+    "longitude": "41.665556",
     "owner_raw": null,
     "ownership": "UNKNOWN",
-    "slug": "poti-central-stadium",
+    "slug": "fazisi-stadium",
     "stadium_type": null,
     "surface": null,
     "architect": null,
     "tournaments": [],
-    "wikipedia_url": "",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Fazisi_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/fc-kolkheti-1913-poti/stadion/verein/28971",
     "image_url": null,
     "image_credit": null,
     "extra_images": [],
     "description": null,
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -35471,6 +35558,87 @@
     "wikipedia_url": "https://en.wikipedia.org/wiki/Ramaz_Shengelia_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/torpedo-kutaisi/stadion/verein/253",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a6/SHENGELIA_ARENA.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 864,
+  "fields": {
+    "name": "Nisporeni Central Stadium",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 706,
+    "latitude": "47.076444",
+    "longitude": "28.179333",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "nisporeni-central-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Nisporeni_Central_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/dacia-buiucani/stadion/verein/39003",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Nisporeni_stadium_3.jpg",
+    "image_credit": "Andrei Anghelov / Wikimedia Commons / CC BY 4.0",
+    "extra_images": [],
+    "description": null,
+    "locked": true
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 865,
+  "fields": {
+    "name": "Heydar Aliyev Stadium",
+    "capacity": 7000,
+    "address": "Imishli , Azerbaijan",
+    "year_of_construction": 2006,
+    "city": 693,
+    "latitude": "39.869700",
+    "longitude": "48.060000",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "heydar-aliyev-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Heydar_Aliyev_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/imishli/stadion/verein/103512",
+    "image_url": "https://maps.wikimedia.org/img/osm-intl,13,a,a,250x200.png?lang=en&domain=en.wikipedia.org&title=Heydar_Aliyev_Stadium&revid=1327981037&groups=_54d5ec4067dc33f82ce519b1dd358ecd1677d670&parser=legacy",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 866,
+  "fields": {
+    "name": "New Tivoli",
+    "capacity": 32960,
+    "address": null,
+    "year_of_construction": 2009,
+    "city": 707,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "new-tivoli",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/alemannia-aachen/stadion/verein/8",
+    "image_url": null,
     "image_credit": null,
     "extra_images": [],
     "description": null,
@@ -51317,9 +51485,9 @@
     "city": 575,
     "average_attendance": null,
     "wikipedia_url": "https://en.wikipedia.org/wiki/Vestri_(men%27s_football)",
-    "transfermarkt_url": "",
-    "image_url": "",
-    "image_credit": null,
+    "transfermarkt_url": "https://www.transfermarkt.com/vestri-isafjordur/startseite/verein/29224",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/3/3b/Vestri_%28men%27s_football%29_logo.png",
+    "image_credit": "Vestri (men's football) crest (fair use)",
     "description": "The Vestri men's football team, commonly known as Vestri, is the men's football department of the Íþróttafélagið Vestri multi-sport club and is based in Ísafjarðarbær , Iceland. [ 1 ] In 2025, the team won the Icelandic Cup after defeating Valur in the Cup final. As of 2026, it plays in the Icelandic second-tier 1. deild karla .",
     "league": 40,
     "under_development_stadium": null,
@@ -52861,7 +53029,7 @@
     "founded": "1997-01-01",
     "tier": 1,
     "girone": null,
-    "stadium": 732,
+    "stadium": 864,
     "manager": "Igor Negrescu",
     "num_of_titles": 0,
     "city": 628,
@@ -55437,15 +55605,15 @@
     "tier": 1,
     "girone": null,
     "stadium": 844,
-    "manager": null,
+    "manager": "Kakhaber Tskhadadze",
     "num_of_titles": 0,
     "city": 692,
     "average_attendance": 578,
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Gabala",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Qabala_%C4%B0K",
     "transfermarkt_url": "https://www.transfermarkt.com/fk-qabala/startseite/verein/22010",
     "image_url": "https://tmssl.akamaized.net/images/wappen/head/22010.png",
     "image_credit": null,
-    "description": null,
+    "description": "Qəbələ İdman Klubu ( pronounced [ɡæbæˈlæ] ), [ 1 ] [ 2 ] is an Azerbaijani professional football club based in Qabala , which have competed in the Azerbaijan Premier League since 2006. They will be set to play in Azerbaijan Premier League from 2025–26 season following their promotion from the Azerbaijan First Division in 2024–25. Gabala has been the runner up in the Premier League three times and has won the national cup twice, in 2019 and 2023.\nGabala is one of the 2 teams that started the first qualifying round of the UEFA Europa League for 2 seasons and managed to move on to the group stage. [ 3 ] [ 4 ]",
     "league": 71,
     "under_development_stadium": null,
     "uefa_coefficient": null,
@@ -55458,19 +55626,19 @@
   "fields": {
     "is_national": false,
     "name": "İmişli",
-    "founded": null,
+    "founded": "2022-01-01",
     "tier": 1,
     "girone": null,
-    "stadium": 845,
-    "manager": null,
+    "stadium": 865,
+    "manager": "Jorge Casquilha",
     "num_of_titles": 0,
     "city": 693,
     "average_attendance": 485,
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Imishli_(city)",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/%C4%B0mi%C5%9Fli_FK",
     "transfermarkt_url": "https://www.transfermarkt.com/imishli/startseite/verein/103512",
     "image_url": "https://tmssl.akamaized.net/images/wappen/head/103512.png",
     "image_credit": null,
-    "description": "Imishli ( Azerbaijani : İmişli ) is a city and the capital of the Imishli District of Azerbaijan .",
+    "description": "İmişli Futbol Klubu ( pronounced [imiʃli] ) is an Azerbaijani professional football club based in Imishli , that participates in the Azerbaijan Premier League , after promotion from the Azerbaijan First Division in 2025.",
     "league": 71,
     "under_development_stadium": null,
     "uefa_coefficient": null,
@@ -55487,15 +55655,15 @@
     "tier": 1,
     "girone": null,
     "stadium": 846,
-    "manager": null,
-    "num_of_titles": 0,
+    "manager": "Vacant",
+    "num_of_titles": 3,
     "city": 694,
     "average_attendance": 822,
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Kapaz",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Kapaz_PFK",
     "transfermarkt_url": "https://www.transfermarkt.com/kapaz-pfk/startseite/verein/7090",
     "image_url": "https://tmssl.akamaized.net/images/wappen/head/7090.png",
     "image_credit": null,
-    "description": "Kapaz ( Persian : كپز ) [ 3 ] is a village in Anguran Rural District [ 4 ] of Anguran District in Mahneshan County , Zanjan province, Iran .",
+    "description": "Kapaz PFK ( Azerbaijani : Kəpəz Peşəkar Futbol Klubu , pronounced [cæˈpæz] ), is an Azerbaijani football club based in Ganja , which competes in the Azerbaijan Premier League , the highest tier of Azerbaijan football . The club was founded as Toxucu in 1959. They have won the Azerbaijani Championship 3 times and the Azerbaijani Football Cup 4 times.",
     "league": 71,
     "under_development_stadium": null,
     "uefa_coefficient": null,
@@ -55508,19 +55676,19 @@
   "fields": {
     "is_national": false,
     "name": "Karvan",
-    "founded": null,
+    "founded": "1990-01-01",
     "tier": 1,
     "girone": null,
     "stadium": 847,
-    "manager": null,
+    "manager": "Vacant",
     "num_of_titles": 0,
     "city": 695,
     "average_attendance": 1611,
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Karvan",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Karvan_%C4%B0K",
     "transfermarkt_url": "https://www.transfermarkt.com/karvan-yevlakh/startseite/verein/9796",
     "image_url": "https://tmssl.akamaized.net/images/wappen/head/9796.png",
     "image_credit": null,
-    "description": null,
+    "description": "Karvan İdman Klubu ( pronounced [carvan] ) is an Azerbaijani professional football club based in Yevlakh that participates in the Azerbaijan Premier League , after promotion from the Azerbaijan First Division in 2025. It was the first Azerbaijani club to pass the  first qualification stage in the UEFA Cup . [ 1 ]",
     "league": 71,
     "under_development_stadium": null,
     "uefa_coefficient": null,
@@ -55537,15 +55705,15 @@
     "tier": 1,
     "girone": null,
     "stadium": 848,
-    "manager": null,
-    "num_of_titles": 0,
+    "manager": "Yuriy Vernydub",
+    "num_of_titles": 9,
     "city": 649,
     "average_attendance": 2793,
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Neft%C3%A7i",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Neft%C3%A7i_PFK",
     "transfermarkt_url": "https://www.transfermarkt.com/neftchi-baku/startseite/verein/8031",
     "image_url": "https://tmssl.akamaized.net/images/wappen/head/8031.png",
     "image_credit": null,
-    "description": null,
+    "description": "Neftçi Peşəkar Futbol Klubu , known simply as Neftçi ( pronounced [nefˈtʃi] , lit. ' Oilmen ' ) or Neftchi Baku , is an Azerbaijani professional football club based in the capital Baku , that plays in the Azerbaijan Premier League , the highest tier of Azerbaijan football . The club was founded on 18 March 1937 and played under the name of Neftyanik until 1968. Since then, the club has been competing under the name of Neftçi.",
     "league": 71,
     "under_development_stadium": null,
     "uefa_coefficient": null,
@@ -55562,15 +55730,15 @@
     "tier": 1,
     "girone": null,
     "stadium": 849,
-    "manager": null,
-    "num_of_titles": 0,
+    "manager": "Qurban Qurbanov",
+    "num_of_titles": 12,
     "city": 649,
     "average_attendance": 3010,
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Karabakh",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Qaraba%C4%9F_FK",
     "transfermarkt_url": "https://www.transfermarkt.com/qarabag-fk/startseite/verein/10625",
     "image_url": "https://tmssl.akamaized.net/images/wappen/head/10625.png",
     "image_credit": null,
-    "description": "Karabakh ( Azerbaijani : Qarabağ [ɡɑɾɑˈbɑɣ] ; Armenian : Ղարաբաղ , romanized : Ġarabaġ [ʁɑɾɑˈbɑʁ] ) is a geographic region in southwestern Azerbaijan and eastern Armenia , extending from the highlands of the Lesser Caucasus down to the lowlands between the rivers Kura and Aras . It is divided into three regions: Highland Karabakh , Lowland Karabakh (the steppes between the Kura and Aras rivers), and the eastern slopes of the Zangezur Mountains (roughly Syunik and Kalbajar–Lachin ). [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ]",
+    "description": "Qarabağ Futbol Klubu ( pronounced [ɡɑˈrɑbɑɣ] ) is an Azerbaijani professional football club that competes in the Azerbaijan Premier League , the top flight of Azerbaijani football . The club originates from Aghdam in the Karabakh region, but has not played in its hometown since 1993 due to the First Nagorno-Karabakh War . The club now plays in Baku , the capital city of Azerbaijan, [ 3 ] at the Azersun Arena and Tofiq Bahramov Republican Stadium , which also serves as the venue for Azerbaijan national team matches.",
     "league": 71,
     "under_development_stadium": null,
     "uefa_coefficient": null,
@@ -55587,15 +55755,15 @@
     "tier": 1,
     "girone": null,
     "stadium": 850,
-    "manager": null,
-    "num_of_titles": 0,
+    "manager": "Valdas Dambrauskas",
+    "num_of_titles": 1,
     "city": 649,
     "average_attendance": 1390,
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Sabah",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Sabah_FK_(Azerbaijan)",
     "transfermarkt_url": "https://www.transfermarkt.com/sabah-fk/startseite/verein/63993",
     "image_url": "https://tmssl.akamaized.net/images/wappen/head/63993.png",
     "image_credit": null,
-    "description": "Sabah ( Malay pronunciation: [ˈsabah] ) is a state of Malaysia located in northern Borneo , in the region of East Malaysia . Sabah has land borders with the Malaysian state of Sarawak to the southwest and Indonesia 's North Kalimantan province to the south. The Federal Territory of Labuan is an island just off Sabah's west coast. Sabah shares maritime borders with Vietnam to the west and the Philippines to the north and east. Kota Kinabalu is the state capital and the economic centre of the state, and the seat of the Sabah State government . Other major towns in Sabah include Sandakan and Tawau . The 2020 census recorded a population of 3,418,785 in the state. [ 9 ] It has an equatorial climate with tropical rainforests , abundant with animal and plant species. The state has long mountain ranges on the west side which forms part of the Crocker Range National Park . Kinabatangan River , the second longest river in Malaysia runs through Sabah. The highest point of Sabah, Mount Kinabalu is also the highest point of Malaysia.",
+    "description": "Sabah Futbol Klubu ( pronounced [sɑbɑh] ), commonly known as Sabah FK , Sabah FC , or simply Sabah , is a professional football club based in Masazir , Azerbaijan . The team plays in the Azerbaijan Premier League , the top tier of Azerbaijani football league system . Its home ground is the Bank Respublika Arena in Masazir.",
     "league": 71,
     "under_development_stadium": null,
     "uefa_coefficient": null,
@@ -55612,15 +55780,15 @@
     "tier": 1,
     "girone": null,
     "stadium": 851,
-    "manager": null,
-    "num_of_titles": 0,
+    "manager": "Azer Bagirov",
+    "num_of_titles": 2,
     "city": 696,
     "average_attendance": 1068,
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Shamakhi",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%9Eamax%C4%B1_FK",
     "transfermarkt_url": "https://www.transfermarkt.com/keshla-fk/startseite/verein/8956",
     "image_url": "https://tmssl.akamaized.net/images/wappen/head/8956.png",
     "image_credit": null,
-    "description": "Shamakhi ( Azerbaijani : Şamaxı , pronounced [ʃɑmɑˈxɯ] ) is a city in Azerbaijan and the administrative centre of the Shamakhi District . The city's estimated population as of 2010 [update] was 31,704. [ 1 ] It is famous for its traditional dancers , and also for perhaps giving its name to the Soumak rugs . [ 2 ]",
+    "description": "Şamaxı Futbol Klubu ( pronounced [ʃɑmɑˈxɯ] , lit. ' Shamakhi Football Club ' ) is an Azerbaijani professional football club based in Shamakhi , which competes in the Azerbaijan Premier League . The club has won the Premier League title twice. [ 1 ] Previously the club was known as Xəzər Universiteti FK (1999–2004), İnter Bakı PİK (2004–2017) and Keşlə FK (2017–2022).",
     "league": 71,
     "under_development_stadium": null,
     "uefa_coefficient": null,
@@ -55637,15 +55805,15 @@
     "tier": 1,
     "girone": null,
     "stadium": 852,
-    "manager": null,
+    "manager": "Vacant",
     "num_of_titles": 0,
     "city": 697,
     "average_attendance": 2473,
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Sumgait",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Sumgayit_FK",
     "transfermarkt_url": "https://www.transfermarkt.com/sumqayit-pfk/startseite/verein/36999",
     "image_url": "https://tmssl.akamaized.net/images/wappen/head/36999.png",
     "image_credit": null,
-    "description": "Sumgait , officially Sumqayit ; / ˌ s uː m ɡ ɑː ˈ iː t / ; [ 2 ] ( Azerbaijani : Sumqayıt , Azerbaijani: [sumɡɑˈjɯt] ⓘ ) is a city in Azerbaijan , located near the Caspian Sea , on the Absheron Peninsula , about 31 kilometres (19 miles) away from the capital Baku . The city had a population of 427,000 at the beginning of 2024, [ 3 ] making it the second largest city in Azerbaijan after Baku.",
+    "description": "Sumqayıt FK ( Azerbaijani : \"Sumqayıt\" futbol klubu , pronounced [sumɡɑˈjɯt] ⓘ ) is an Azerbaijani professional football club based in Sumgait , that plays in the Azerbaijan Premier League , the top tier of football in the country . [ 2 ]",
     "league": 71,
     "under_development_stadium": null,
     "uefa_coefficient": null,
@@ -55687,15 +55855,15 @@
     "tier": 1,
     "girone": null,
     "stadium": 854,
-    "manager": null,
+    "manager": "Rashad Sadygov",
     "num_of_titles": 0,
     "city": 649,
     "average_attendance": 726,
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Zira",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Zira_FK",
     "transfermarkt_url": "https://www.transfermarkt.com/zira-fk/startseite/verein/46710",
     "image_url": "https://tmssl.akamaized.net/images/wappen/head/46710.png",
     "image_credit": null,
-    "description": null,
+    "description": "Zirə Futbol Klubu ( pronounced [ziɾæ] ) is an Azerbaijani professional football club based in Zirə , Baku . The club competes in the Azerbaijan Premier League .",
     "league": 71,
     "under_development_stadium": null,
     "uefa_coefficient": null,
