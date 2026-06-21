@@ -45,11 +45,19 @@
           var p = f.properties || {};
           var color = "#3b82f6";
           if (colorBy === "surface") color = (SURFACE[p.surface] || {}).color || "#9ca3af";
+          var radius = 6;
+          if (colorBy === "capacity") {
+            // scale radius 4–16 by capacity; warmer colour for bigger grounds
+            var cap0 = p.capacity || 0;
+            radius = Math.max(4, Math.min(16, 4 + Math.sqrt(cap0) / 50));
+            color = cap0 >= 60000 ? "#ef4444" : cap0 >= 40000 ? "#f59e0b"
+                  : cap0 >= 20000 ? "#22c55e" : "#3b82f6";
+          }
           var ll = [c[1], c[0]];
           bounds.push(ll);
           var cap = p.capacity ? p.capacity.toLocaleString() + " seats" : "";
           L.circleMarker(ll, {
-            radius: 6, color: "#111", weight: 1, fillColor: color, fillOpacity: 0.9,
+            radius: radius, color: "#111", weight: 1, fillColor: color, fillOpacity: 0.85,
           }).addTo(map).bindPopup(
             '<strong><a href="/stadium/' + (p.slug || p.id) + '/">' + p.name + "</a></strong><br>" +
             (p.city ? p.city + (p.country ? ", " + p.country : "") + "<br>" : "") +
@@ -61,6 +69,13 @@
           legend(Object.keys(SURFACE).map(function (k) {
             return { color: SURFACE[k].color, label: SURFACE[k].label };
           }));
+        } else if (colorBy === "capacity") {
+          legend([
+            { color: "#ef4444", label: "60,000+" },
+            { color: "#f59e0b", label: "40,000–60,000" },
+            { color: "#22c55e", label: "20,000–40,000" },
+            { color: "#3b82f6", label: "Under 20,000" },
+          ]);
         }
       });
   } else if (mode === "choropleth") {

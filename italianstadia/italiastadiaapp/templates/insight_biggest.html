@@ -1,0 +1,110 @@
+{% extends "base_detail.html" %}
+{% load static %}
+
+{% block title %}Biggest football stadiums in Europe by capacity | Stadiums of Europe{% endblock %}
+
+{% block meta %}
+<meta name="description" content="{{ page_description }}">
+<meta property="og:title" content="Biggest & smallest football stadiums in Europe">
+<meta property="og:description" content="{{ page_description }}">
+<meta property="og:type" content="article">
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>#insight-map{height:500px;border-radius:8px}</style>
+{% endblock %}
+
+{% block extra_nav %}
+<a href="{% url 'italiastadiaapp:insights_index' %}" class="btn btn-outline-light btn-sm">← Insights</a>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-2">Biggest &amp; smallest stadiums in Europe</h1>
+    <p class="lead text-secondary mb-4">{{ intro }}</p>
+
+    <div id="insight-map" class="mb-4"
+         data-mode="markers" data-color-by="capacity"
+         data-geojson-url="{{ geojson_url }}"></div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>About this data</strong></div>
+        <div class="card-body"><p class="mb-0">{{ about }}</p></div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>50 biggest stadiums by capacity</strong></div>
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead><tr><th>#</th><th>Stadium</th><th>City</th><th>Country</th><th>Main tenant</th><th class="text-end">Capacity</th></tr></thead>
+                <tbody>
+                {% for r in biggest %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href="{% url 'italiastadiaapp:stadium_detail' r.slug %}">{{ r.name }}</a></td>
+                        <td>{{ r.city }}</td>
+                        <td>{{ r.country }}</td>
+                        <td>{{ r.team }}</td>
+                        <td class="text-end fw-semibold">{{ r.capacity|floatformat:0 }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>Biggest stadium in each country</strong></div>
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead><tr><th>Country</th><th>Stadium</th><th>City</th><th class="text-end">Capacity</th></tr></thead>
+                <tbody>
+                {% for r in country_top %}
+                    <tr>
+                        <td>{{ r.country }}</td>
+                        <td><a href="{% url 'italiastadiaapp:stadium_detail' r.slug %}">{{ r.name }}</a></td>
+                        <td>{{ r.city }}</td>
+                        <td class="text-end">{{ r.capacity|floatformat:0 }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>15 smallest grounds in the dataset</strong></div>
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead><tr><th>Stadium</th><th>City</th><th>Country</th><th>Main tenant</th><th class="text-end">Capacity</th></tr></thead>
+                <tbody>
+                {% for r in smallest %}
+                    <tr>
+                        <td><a href="{% url 'italiastadiaapp:stadium_detail' r.slug %}">{{ r.name }}</a></td>
+                        <td>{{ r.city }}</td>
+                        <td>{{ r.country }}</td>
+                        <td>{{ r.team }}</td>
+                        <td class="text-end">{{ r.capacity|floatformat:0 }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% include "_insight_related.html" %}
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset",
+ "name":"Biggest and smallest football stadiums in Europe by capacity",
+ "description":"{{ page_description|escapejs }}",
+ "url":"{{ request.scheme }}://{{ request.get_host }}{{ request.path }}"}
+</script>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{% static 'js/insights-map.js' %}"></script>
+{% endblock %}

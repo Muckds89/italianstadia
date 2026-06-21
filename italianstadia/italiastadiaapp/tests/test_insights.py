@@ -66,6 +66,26 @@ def test_geojson_view_national(client, insight_data):
 
 
 @pytest.mark.django_db
+def test_insight_biggest_page(client, insight_data):
+    r = client.get(reverse("italiastadiaapp:insight_biggest"))
+    assert r.status_code == 200
+    assert b"biggest stadiums by capacity" in r.content.lower()
+
+
+@pytest.mark.django_db
+def test_geojson_view_capacity(client, insight_data):
+    # insight_data stadiums have no capacity, so add one with capacity
+    from italiastadiaapp.models import City, Stadium
+    city = City.objects.create(name="Capville", country="Testland")
+    Stadium.objects.create(name="Big Bowl", city=city, latitude=1.0, longitude=2.0, capacity=50000)
+    url = reverse("italiastadiaapp:stadiums_geojson") + "?view=capacity"
+    r = client.get(url)
+    assert r.status_code == 200
+    feats = json.loads(r.content)["features"]
+    assert feats and all(f["properties"]["capacity"] for f in feats)
+
+
+@pytest.mark.django_db
 def test_geojson_view_surface(client, insight_data):
     url = reverse("italiastadiaapp:stadiums_geojson") + "?view=surface"
     r = client.get(url)

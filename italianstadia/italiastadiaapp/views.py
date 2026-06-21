@@ -458,6 +458,8 @@ def stadiums_geojson(request):
         ).filter(_nat__gte=1, _club=0)
     elif param_view == "surface":
         qs = qs.exclude(surface__isnull=True).exclude(surface="")
+    elif param_view == "capacity":
+        qs = qs.exclude(capacity__isnull=True).exclude(capacity=0)
 
     return JsonResponse({
         "type": "FeatureCollection",
@@ -1253,6 +1255,12 @@ _INSIGHTS = [
         "blurb": "Which countries pack in the most football stadiums per million people.",
         "url_name": "insight_density",
     },
+    {
+        "slug": "biggest-stadiums",
+        "title": "Biggest & smallest stadiums in Europe",
+        "blurb": "The largest football stadiums in Europe by capacity — and the smallest.",
+        "url_name": "insight_biggest",
+    },
 ]
 
 
@@ -1452,6 +1460,53 @@ def insight_density(request):
         "rows": rows, "intro": intro, "about": about, "debate": debate,
         "density_json": json.dumps(density_by_name),
         "others": _insight_others("stadium-density"),
+        "page_description": _trim(intro),
+    })
+
+
+def _cap_row(s):
+    teams = list(s.teams.all())
+    country = next((t.league.country.name for t in teams
+                    if t.league and t.league.country), s.city.country if s.city else "")
+    return {
+        "name": s.name, "slug": s.slug, "capacity": s.capacity,
+        "city": s.city.name if s.city else "", "country": country,
+        "team": ", ".join(t.name for t in teams[:2]),
+    }
+
+
+@cache_page(60 * 60)
+def insight_biggest(request):
+    base = (Stadium.objects.exclude(capacity__isnull=True).exclude(capacity=0)
+            .select_related("city").prefetch_related("teams__league__country"))
+    biggest = [_cap_row(s) for s in base.order_by("-capacity")[:50]]
+    smallest = [_cap_row(s) for s in base.order_by("capacity")[:15]]
+    # Largest ground per country
+    per_country = {}
+    for s in base.order_by("-capacity"):
+        r = _cap_row(s)
+        if r["country"] and r["country"] not in per_country:
+            per_country[r["country"]] = r
+    country_top = sorted(per_country.values(), key=lambda r: r["capacity"], reverse=True)
+    top = biggest[0] if biggest else None
+    intro = (
+        (f"The biggest football stadium in our European dataset is {top['name']} in "
+         f"{top['city']}, {top['country']}, holding {top['capacity']:,} spectators. "
+         if top else "")
+        + "This page ranks the largest football stadiums in Europe by capacity, the biggest "
+        "ground in each country, and the smallest grounds in the dataset — on an interactive "
+        "map and in sortable tables."
+    )
+    about = (
+        "Capacities are the all-seated figures recorded for each stadium. The map plots every "
+        "ground with a known capacity, scaled by size; the tables list the top 50 overall, the "
+        "largest per country, and the 15 smallest."
+    )
+    return render(request, "insight_biggest.html", {
+        "biggest": biggest, "smallest": smallest, "country_top": country_top,
+        "intro": intro, "about": about,
+        "geojson_url": reverse("italiastadiaapp:stadiums_geojson") + "?view=capacity",
+        "others": _insight_others("biggest-stadiums"),
         "page_description": _trim(intro),
     })
 
