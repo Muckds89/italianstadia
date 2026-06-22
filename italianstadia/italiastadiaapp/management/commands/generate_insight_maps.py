@@ -30,6 +30,12 @@ class Command(BaseCommand):
             "title": "National stadiums of Europe",
             "subtitle": "Each country's main national-team venue",
         },
+        "surface": {
+            "color_by": "surface", "style_key": "satellite", "size_key": "landscape",
+            "labels": "0", "legend": "1", "north": "1",
+            "title": "Artificial vs natural grass in Europe",
+            "subtitle": "Pitch surface of every stadium",
+        },
     }
 
     def handle(self, *args, **opts):

@@ -1380,6 +1380,7 @@ _INSIGHTS = [
         "title": "Artificial vs natural grass in European stadiums",
         "blurb": "How many grounds use real grass, hybrid pitches or full artificial turf.",
         "url_name": "insight_surface",
+        "image": "exports/insight_surface.png",
     },
     {
         "slug": "stadium-density",
@@ -1531,6 +1532,7 @@ def insight_surface(request):
         "geojson_url": reverse("italiastadiaapp:stadiums_geojson") + "?view=surface",
         "others": _insight_others("stadium-surfaces"),
         "page_description": _trim(intro),
+        "hero_image": "exports/insight_surface.png",
     })
 
 

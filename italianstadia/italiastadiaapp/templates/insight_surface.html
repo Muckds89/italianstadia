@@ -8,6 +8,11 @@
 <meta property="og:title" content="Artificial vs natural grass in European stadiums">
 <meta property="og:description" content="{{ page_description }}">
 <meta property="og:type" content="article">
+{% if hero_image %}
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static hero_image %}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static hero_image %}">
+{% endif %}
 {% endblock %}
 
 {% block extra_head %}
@@ -23,6 +28,11 @@
 <div class="container my-5">
     <h1 class="mb-2">Artificial vs natural grass in European stadiums</h1>
     <p class="lead text-secondary mb-4">{{ intro }}</p>
+
+    {% if hero_image %}
+    <img src="{% static hero_image %}" alt="Map of artificial vs grass stadiums in Europe"
+         class="img-fluid rounded shadow-sm mb-4" style="width:100%;height:auto;">
+    {% endif %}
 
     {% if debate %}
     <div class="card shadow-sm mb-4 border-warning">
