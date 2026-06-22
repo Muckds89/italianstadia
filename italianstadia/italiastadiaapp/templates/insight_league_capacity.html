@@ -1,11 +1,11 @@
 {% extends "base_detail.html" %}
 {% load static humanize %}
 
-{% block title %}Stadium capacity by league, average stadium size | Stadiums of Europe{% endblock %}
+{% block title %}Big five leagues: attendance & stadium capacity compared | Stadiums of Europe{% endblock %}
 
 {% block meta %}
 <meta name="description" content="{{ page_description }}">
-<meta property="og:title" content="Stadium capacity by league in Europe">
+<meta property="og:title" content="Big five leagues compared: attendance & capacity">
 <meta property="og:description" content="{{ page_description }}">
 <meta property="og:type" content="article">
 <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'exports/insight_overview.png' %}">
@@ -19,28 +19,96 @@
 
 {% block content %}
 <div class="container my-5">
-    <h1 class="mb-2">Stadium capacity by league</h1>
+    <h1 class="mb-2">Big five leagues: attendance &amp; capacity</h1>
     <p class="lead text-secondary mb-4">{{ intro_html|safe }}</p>
 
-    <!-- Big five comparison -->
+    <!-- Grouped bar chart: avg attendance + occupancy % -->
     {% if big5 %}
-    <div class="card shadow-sm mb-4 border-primary">
-        <div class="card-header bg-white"><strong>The big five compared</strong></div>
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <thead><tr><th>League</th><th>Clubs</th><th class="text-end">Avg capacity</th><th class="text-end">Total seats</th><th>Biggest ground</th></tr></thead>
-                <tbody>
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <strong>Average attendance vs occupancy</strong>
+            <span class="small">
+                <span class="badge" style="background:#0d6efd">&nbsp;</span> Avg attendance
+                <span class="badge ms-2" style="background:#28a745">&nbsp;</span> Occupancy %
+            </span>
+        </div>
+        <div class="card-body">
+            <div class="d-flex justify-content-around align-items-end" style="gap:8px">
                 {% for b in big5 %}
-                    <tr>
-                        <td><strong>{{ b.league }}</strong> <span class="text-muted small">{{ b.country }}</span></td>
-                        <td>{{ b.clubs }}</td>
-                        <td class="text-end fw-semibold">{{ b.avg|intcomma }}</td>
-                        <td class="text-end">{{ b.total|intcomma }}</td>
-                        <td>{{ b.biggest }} <span class="text-muted small">({{ b.biggest_cap|intcomma }})</span></td>
-                    </tr>
+                <div class="text-center" style="flex:1;min-width:0">
+                    <div class="d-flex justify-content-center align-items-end gap-1" style="height:200px">
+                        <div title="Avg attendance: {{ b.avg_att|intcomma }}"
+                             style="width:24px;background:#0d6efd;height:{{ b.att_bar }}%;border-radius:4px 4px 0 0"></div>
+                        <div title="Occupancy: {{ b.fill }}%"
+                             style="width:24px;background:#28a745;height:{{ b.fill }}%;border-radius:4px 4px 0 0"></div>
+                    </div>
+                    <img src="{{ b.logo }}" alt="{{ b.league }}" loading="lazy"
+                         style="height:34px;max-width:90%;object-fit:contain;margin:8px 0 2px">
+                    <div class="small fw-semibold">{{ b.avg_att|intcomma }}</div>
+                    <div class="small text-muted">{{ b.fill }}% full</div>
+                </div>
                 {% endfor %}
-                </tbody>
-            </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Carousel: one slide per big-five league -->
+    {% if big5 %}
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>Explore each league</strong></div>
+        <div class="card-body">
+            <div id="leagueCarousel" class="carousel carousel-dark slide">
+                <div class="carousel-indicators">
+                    {% for b in big5 %}
+                    <button type="button" data-bs-target="#leagueCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
+                            {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="{{ b.league }}"></button>
+                    {% endfor %}
+                </div>
+                <div class="carousel-inner">
+                    {% for b in big5 %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="px-5">
+                            <div class="text-center mb-3">
+                                <img src="{{ b.logo }}" alt="{{ b.league }}" style="height:56px;object-fit:contain">
+                                <div class="text-muted small mt-1">{{ b.country }} · {{ b.clubs }} clubs</div>
+                            </div>
+                            <div class="row text-center g-2 mb-3">
+                                <div class="col-4"><div class="h4 mb-0">{{ b.avg_att|intcomma }}</div><div class="small text-muted">avg attendance</div></div>
+                                <div class="col-4"><div class="h4 mb-0">{{ b.avg_cap|intcomma }}</div><div class="small text-muted">avg capacity</div></div>
+                                <div class="col-4"><div class="h4 mb-0">{{ b.fill }}%</div><div class="small text-muted">occupancy</div></div>
+                            </div>
+                            <div class="table-responsive" style="max-height:360px;overflow:auto">
+                                <table class="table table-sm table-hover align-middle mb-0">
+                                    <thead><tr><th>Club</th><th>Stadium</th><th class="text-end">Capacity</th><th class="text-end">Attendance</th><th class="text-end">Full</th></tr></thead>
+                                    <tbody>
+                                    {% for c in b.club_rows %}
+                                        <tr>
+                                            <td>
+                                                {% if c.badge %}<img src="{{ c.badge }}" alt="" loading="lazy"
+                                                    onerror="this.style.display='none'"
+                                                    style="height:20px;width:20px;object-fit:contain;margin-right:6px">{% endif %}{{ c.name }}
+                                            </td>
+                                            <td class="text-muted">{{ c.stadium }}</td>
+                                            <td class="text-end">{% if c.capacity %}{{ c.capacity|intcomma }}{% else %}—{% endif %}</td>
+                                            <td class="text-end">{% if c.attendance %}{{ c.attendance|intcomma }}{% else %}—{% endif %}</td>
+                                            <td class="text-end">{% if c.fill %}{{ c.fill }}%{% else %}—{% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#leagueCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#leagueCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
     </div>
     {% endif %}
@@ -50,7 +118,7 @@
         <div class="card-body"><p class="mb-0">{{ about_html|safe }}</p></div>
     </div>
 
-    <!-- All leagues ranked by average capacity -->
+    <!-- All leagues ranked by average stadium capacity -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-white"><strong>All leagues by average stadium capacity</strong></div>
         <div class="table-responsive">
