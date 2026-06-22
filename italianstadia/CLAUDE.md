@@ -365,6 +365,9 @@ committed (they are served as static files, NOT rendered per request — Render 
 - `python manage.py generate_tournament_maps` → `static/exports/tournament_<slug>.png`
   (the back-end tournament maps embedded on each `/tournaments/<slug>/` page, with logo +
   watermark; re-run after any tournament-venue/bid change). Add `--slug <slug>` for one.
+- `python manage.py generate_insight_maps` → `static/exports/insight_<key>.png`
+  (insight hero maps, e.g. the national-team-only spotlight map; re-run when the underlying
+  insight data changes — e.g. a new national-team-only ground).
 
 ## Link & name validation (MANDATORY post-scrape QA)
 

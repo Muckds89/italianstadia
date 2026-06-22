@@ -1375,6 +1375,7 @@ _INSIGHTS = [
         "title": "Europe's national-team-only stadiums",
         "blurb": "Grounds used exclusively by a national side — no club tenant.",
         "url_name": "insight_national",
+        "image": "exports/insight_national.png",
     },
     {
         "slug": "stadium-surfaces",
@@ -1460,6 +1461,7 @@ def insight_national(request):
         "geojson_url": reverse("italiastadiaapp:stadiums_geojson") + "?view=national",
         "others": _insight_others("national-stadiums"),
         "page_description": _trim(intro),
+        "hero_image": "exports/insight_national.png",
     })
 
 
@@ -1760,6 +1762,8 @@ def _parse_export_params(request):
 
     # National-stadiums-only mode (operational layer): venues that host a national side.
     national = request.GET.get("national", "0") == "1"
+    # Stricter: only grounds used EXCLUSIVELY by a national team (the insight set).
+    national_only = request.GET.get("national_only", "0") == "1"
 
     return {
         "W": W, "H": H,
@@ -1790,6 +1794,7 @@ def _parse_export_params(request):
         "layer":      layer,
         "dstatus":    dstatus,
         "national":   national,
+        "national_only": national_only,
     }
 
 
@@ -1806,6 +1811,11 @@ def _get_export_stadiums(params):
         qs = qs.filter(ownership=params["ownership"])
     if params.get("national"):
         qs = qs.filter(teams__is_national=True)
+    if params.get("national_only"):
+        qs = qs.annotate(
+            _nat=Count("teams", filter=Q(teams__is_national=True), distinct=True),
+            _club=Count("teams", filter=Q(teams__is_national=False), distinct=True),
+        ).filter(_nat__gte=1, _club=0)
     qs = qs.exclude(latitude=None).exclude(longitude=None).distinct()
 
     results = []
@@ -1814,7 +1824,7 @@ def _get_export_stadiums(params):
         teams = list(s.teams.all())
         # In national mode, prefer the national side's crest/name as the badge.
         primary_team = None
-        if params.get("national"):
+        if params.get("national") or params.get("national_only"):
             primary_team = next((t for t in teams if t.is_national), None)
         if primary_team is None:
             primary_team = next(iter(teams), None)

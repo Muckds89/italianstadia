@@ -24,6 +24,10 @@
         <div class="col-md-4">
             <a href="{% url 'italiastadiaapp:'|add:i.url_name %}" class="text-decoration-none text-reset">
                 <div class="card h-100 shadow-sm">
+                    {% if i.image %}
+                    <img src="{% static i.image %}" alt="{{ i.title }}" class="card-img-top"
+                         style="height:160px;object-fit:cover;">
+                    {% endif %}
                     <div class="card-body">
                         <h2 class="h5 card-title">{{ i.title }}</h2>
                         <p class="card-text text-secondary mb-0">{{ i.blurb }}</p>
