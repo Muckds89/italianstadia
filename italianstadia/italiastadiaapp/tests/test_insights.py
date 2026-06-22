@@ -66,6 +66,15 @@ def test_geojson_view_national(client, insight_data):
 
 
 @pytest.mark.django_db
+def test_country_hub_page(client, insight_data):
+    r = client.get(reverse("italiastadiaapp:country_stats", args=["Testland"]))
+    assert r.status_code == 200
+    assert b"Testland Football Stadiums" in r.content
+    assert b"All football stadiums in Testland" in r.content
+    assert b"FAQPage" in r.content
+
+
+@pytest.mark.django_db
 def test_insight_biggest_page(client, insight_data):
     r = client.get(reverse("italiastadiaapp:insight_biggest"))
     assert r.status_code == 200

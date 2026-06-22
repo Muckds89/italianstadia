@@ -6,6 +6,7 @@ from django.urls import path, include
 
 from italiastadiaapp.sitemaps import (
     CitySitemap,
+    CountryHubSitemap,
     DevelopmentSitemap,
     StadiumSitemap,
     StaticViewSitemap,
@@ -18,6 +19,7 @@ sitemaps = {
     "developments": DevelopmentSitemap,
     "teams":        TeamSitemap,
     "cities":       CitySitemap,
+    "countries":    CountryHubSitemap,
     "tournaments":  TournamentSitemap,
     "static":       StaticViewSitemap,
 }

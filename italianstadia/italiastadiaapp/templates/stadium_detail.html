@@ -101,6 +101,12 @@
                         <li class="list-group-item">
                             <strong>City:</strong> {{ stadium.city }}
                         </li>
+                        {% if stadium.city.country %}
+                        <li class="list-group-item">
+                            <strong>Country:</strong>
+                            <a href="{% url 'italiastadiaapp:country_stats' stadium.city.country %}">{{ stadium.city.country }} football stadiums</a>
+                        </li>
+                        {% endif %}
                         <li class="list-group-item">
                             <strong>Capacity:</strong> {{ stadium.capacity }}
                         </li>

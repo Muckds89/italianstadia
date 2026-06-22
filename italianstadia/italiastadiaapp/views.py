@@ -30,7 +30,7 @@ from django.core.mail import EmailMessage
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
-from .models import City, ExportToken, LastRefresh, League, Stadium, Team, StadiumDevelopment
+from .models import City, Country, ExportToken, LastRefresh, League, Stadium, Team, StadiumDevelopment
 
 
 def _trim(text, limit=155):
@@ -220,57 +220,87 @@ def stadium_detail_redirect(request, id):
     return redirect("italiastadiaapp:stadium_detail", slug=stadium.slug, permanent=True)
 
 
+@cache_page(60 * 60)
 def country_stats(request, country_name):
+    # Canonical display name if it matches a Country row; else use the URL value as-is.
+    country_obj = Country.objects.filter(name__iexact=country_name).first()
+    name = country_obj.name if country_obj else country_name
+
+    # Match stadiums by the city's country OR by the country of any tenant's league —
+    # catches grounds whose free-text City.country differs from the canonical name.
     stadiums = (
         Stadium.objects
         .select_related("city")
         .prefetch_related("teams__league__country")
-        .filter(city__country__iexact=country_name)
+        .filter(Q(city__country__iexact=name) | Q(teams__league__country__name__iexact=name))
+        .distinct()
     )
     agg = stadiums.filter(capacity__isnull=False).aggregate(
-        total_stadiums=Count("id"),
         total_seats=Sum("capacity"),
         avg_capacity=Avg("capacity"),
         max_capacity=Max("capacity"),
     )
     total_stadiums_all = stadiums.count()
-    top10 = (
-        stadiums
-        .filter(capacity__isnull=False)
-        .order_by("-capacity")[:10]
-    )
+    # Full list (largest first) for the hub — every ground is an internal link.
+    all_stadiums = list(stadiums.order_by(
+        F("capacity").desc(nulls_last=True), "name"))
+    top10 = [s for s in all_stadiums if s.capacity][:10]
+    biggest = top10[0] if top10 else None
     leagues = (
-        League.objects
-        .select_related("country")
-        .filter(country__name__iexact=country_name)
-        .order_by("division_level")
+        League.objects.select_related("country")
+        .filter(country__name__iexact=name).order_by("division_level")
     )
-    # GeoJSON for mini-map
+
     map_features = []
-    for s in stadiums:
+    for s in all_stadiums:
         if s.latitude is None or s.longitude is None:
             continue
         map_features.append({
             "type": "Feature",
             "geometry": {"type": "Point", "coordinates": [float(s.longitude), float(s.latitude)]},
-            "properties": {
-                "id": s.id,
-                "slug": s.slug or str(s.id),
-                "name": s.name,
-                "capacity": s.capacity,
-            },
+            "properties": {"id": s.id, "slug": s.slug or str(s.id),
+                           "name": s.name, "capacity": s.capacity},
         })
     geojson = json.dumps({"type": "FeatureCollection", "features": map_features})
 
+    # SEO answer block + FAQ targeting "<country> football stadiums" intent.
+    answer = f"There are {total_stadiums_all} football stadiums in {name} in our database"
+    if biggest and biggest.capacity:
+        answer += (f", the largest being {biggest.name} in {biggest.city.name} "
+                   f"with a capacity of {biggest.capacity:,}")
+    answer += "."
+    if agg.get("total_seats"):
+        answer += f" Combined, they seat about {int(agg['total_seats']):,} spectators."
+    faq = []
+    faq.append((f"How many football stadiums are there in {name}?",
+                f"Our database lists {total_stadiums_all} football stadiums in {name}."))
+    if biggest and biggest.capacity:
+        faq.append((f"What is the biggest stadium in {name}?",
+                    f"The biggest football stadium in {name} is {biggest.name} in "
+                    f"{biggest.city.name}, with a capacity of {biggest.capacity:,}."))
+    if leagues:
+        faq.append((f"What are the main football leagues in {name}?",
+                    f"The main leagues in {name} include "
+                    f"{', '.join(l.name for l in leagues[:4])}."))
+    faq = [{"q": q, "a": a} for q, a in faq]
+    page_description = _trim(answer)
+
     return render(request, "country_stats.html", {
-        "country_name": country_name,
+        "country_name": name,
         "total_stadiums": total_stadiums_all,
         "total_seats": agg.get("total_seats") or 0,
         "avg_capacity": int(agg.get("avg_capacity") or 0),
         "max_capacity": agg.get("max_capacity") or 0,
         "top10": top10,
+        "all_stadiums": all_stadiums,
         "leagues": leagues,
         "geojson": geojson,
+        "answer": answer,
+        "faq": faq,
+        "faq_json": json.dumps([{"@type": "Question", "name": f["q"],
+                                 "acceptedAnswer": {"@type": "Answer", "text": f["a"]}}
+                                for f in faq]),
+        "page_description": page_description,
     })
 
 def stadium_development_detail(request, slug):

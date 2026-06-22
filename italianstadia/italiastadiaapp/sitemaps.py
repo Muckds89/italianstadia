@@ -5,7 +5,7 @@ from django.contrib.sitemaps import Sitemap
 from django.utils.text import slugify
 from django.urls import reverse
 
-from .models import City, Stadium, StadiumDevelopment, Team
+from .models import City, Country, Stadium, StadiumDevelopment, Team
 
 
 def _data_lastmod():
@@ -102,6 +102,21 @@ class TournamentSitemap(_DataLastmodMixin, Sitemap):
 
     def location(self, slug):
         return reverse("italiastadiaapp:tournament_detail", args=[slug])
+
+
+class CountryHubSitemap(_DataLastmodMixin, Sitemap):
+    changefreq = "weekly"
+    priority = 0.6
+
+    def items(self):
+        # Countries that actually have at least one stadium (by league country).
+        return list(
+            Country.objects.filter(leagues__isnull=False)
+            .distinct().order_by("name").values_list("name", flat=True)
+        )
+
+    def location(self, name):
+        return reverse("italiastadiaapp:country_stats", args=[name])
 
 
 class StaticViewSitemap(_DataLastmodMixin, Sitemap):
