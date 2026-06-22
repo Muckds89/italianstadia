@@ -86,29 +86,42 @@
     function fill(v) {
       if (v == null) return "#374151";
       var t = Math.min(1, v / max);
-      // dark teal -> bright yellow ramp
-      var r = Math.round(20 + t * 235), g = Math.round(80 + t * 175), b = Math.round(90 - t * 60);
+      // light amber -> deep red ramp (higher density = redder)
+      var r = Math.round(254 - t * 75);            // 254 -> 179
+      var g = Math.round(237 - t * 237);           // 237 -> 0
+      var b = Math.round(160 - t * 122);           // 160 -> 38
       return "rgb(" + r + "," + g + "," + b + ")";
     }
+    // Russia's polygon stretches to the Pacific; keep it shaded but exclude it (and any
+    // far-flung sliver east of ~lon 45) from the auto-zoom so the view stays on Europe.
+    var EUROPE = L.latLngBounds([34, -11], [71, 45]);
     fetch(el.dataset.countriesUrl)
       .then(function (r) { return r.json(); })
       .then(function (gj) {
-        var layer = L.geoJSON(gj, {
+        var dataBounds = L.latLngBounds([]);
+        L.geoJSON(gj, {
           style: function (feat) {
             var v = density[feat.properties.name];
-            return { color: "#111", weight: 1, fillColor: fill(v), fillOpacity: v == null ? 0.15 : 0.8 };
+            return { color: "#111", weight: 1, fillColor: fill(v), fillOpacity: v == null ? 0.12 : 0.82 };
           },
           onEachFeature: function (feat, lyr) {
             var v = density[feat.properties.name];
             lyr.bindPopup("<strong>" + feat.properties.name + "</strong><br>" +
               (v == null ? "no data" : v + " stadiums / million people"));
+            // extend zoom bounds only for countries with data, excluding Russia
+            if (v != null && feat.properties.name !== "Russia") {
+              try { dataBounds.extend(lyr.getBounds().pad(-0.0)); } catch (e) {}
+            }
           },
         }).addTo(map);
-        try { map.fitBounds(layer.getBounds(), { padding: [20, 20] }); } catch (e) {}
+        var b = (dataBounds.isValid() ? dataBounds : EUROPE);
+        // clamp to the European window so an outlier never zooms the world out
+        try { map.fitBounds(b.pad(0.05), { maxZoom: 5 }); } catch (e) { map.fitBounds(EUROPE); }
       });
     legend([
       { color: fill(max), label: "More stadiums per capita" },
-      { color: fill(max * 0.4), label: "Fewer" },
+      { color: fill(max * 0.45), label: "Mid" },
+      { color: fill(0.0001), label: "Fewer" },
       { color: "#374151", label: "No data" },
     ]);
   }
