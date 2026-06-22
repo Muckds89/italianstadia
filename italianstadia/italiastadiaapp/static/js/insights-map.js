@@ -101,20 +101,29 @@
       });
   } else if (mode === "choropleth") {
     var density = JSON.parse(el.dataset.density || "{}");
-    var vals = Object.keys(density).map(function (k) { return density[k]; });
-    var max = vals.length ? Math.max.apply(null, vals) : 1;
-    function fill(v) {
-      if (v == null) return "#374151";
-      var t = Math.min(1, v / max);
-      // light amber -> deep red ramp (higher density = redder)
-      var r = Math.round(254 - t * 75);            // 254 -> 179
-      var g = Math.round(237 - t * 237);           // 237 -> 0
-      var b = Math.round(160 - t * 122);           // 160 -> 38
-      return "rgb(" + r + "," + g + "," + b + ")";
+    // 11-class blue -> red palette (low -> high density). Quantile classes give every
+    // class roughly equal countries, so the map uses the full colour range.
+    var PALETTE = ["#3288bd", "#5aa0c4", "#85c0a8", "#abdda4", "#d6ef9b", "#ffffbf",
+                   "#fee08b", "#fdae61", "#f46d43", "#e34a33", "#b2182b"];
+    var N = PALETTE.length;
+    // Assign each country with data to a quantile bucket (0 = lowest .. N-1 = highest).
+    var withData = Object.keys(density).sort(function (a, b) { return density[a] - density[b]; });
+    var bucketOf = {};
+    withData.forEach(function (nm, i) {
+      bucketOf[nm] = Math.min(N - 1, Math.floor(i / withData.length * N));
+    });
+    // Quantile thresholds (min value entering each bucket) for the legend.
+    var thresholds = [];
+    for (var k = 0; k < N; k++) {
+      var idx = Math.floor(k / N * withData.length);
+      thresholds.push(density[withData[idx]]);
     }
-    // Russia's polygon stretches to the Pacific; keep it shaded but exclude it (and any
-    // far-flung sliver east of ~lon 45) from the auto-zoom so the view stays on Europe.
+    function fill(name) {
+      if (density[name] == null) return "#374151";
+      return PALETTE[bucketOf[name]];
+    }
     var EUROPE = L.latLngBounds([34, -11], [71, 45]);
+    var selected = null;
     fetch(el.dataset.countriesUrl)
       .then(function (r) { return r.json(); })
       .then(function (gj) {
@@ -122,27 +131,33 @@
         L.geoJSON(gj, {
           style: function (feat) {
             var v = density[feat.properties.name];
-            return { color: "#111", weight: 1, fillColor: fill(v), fillOpacity: v == null ? 0.12 : 0.82 };
+            return { color: "#111", weight: 1, fillColor: fill(feat.properties.name),
+                     fillOpacity: v == null ? 0.12 : 0.85 };
           },
           onEachFeature: function (feat, lyr) {
             var v = density[feat.properties.name];
             lyr.bindPopup("<strong>" + feat.properties.name + "</strong><br>" +
               (v == null ? "no data" : v + " stadiums / million people"));
-            // extend zoom bounds only for countries with data, excluding Russia
+            lyr.on("click", function () {
+              if (selected) selected.setStyle({ color: "#111", weight: 1 });
+              lyr.setStyle({ color: "#00e5ff", weight: 3 });
+              lyr.bringToFront();
+              selected = lyr;
+            });
             if (v != null && feat.properties.name !== "Russia") {
-              try { dataBounds.extend(lyr.getBounds().pad(-0.0)); } catch (e) {}
+              try { dataBounds.extend(lyr.getBounds()); } catch (e) {}
             }
           },
         }).addTo(map);
         var b = (dataBounds.isValid() ? dataBounds : EUROPE);
-        // clamp to the European window so an outlier never zooms the world out
         try { map.fitBounds(b.pad(0.05), { maxZoom: 5 }); } catch (e) { map.fitBounds(EUROPE); }
       });
-    legend([
-      { color: fill(max), label: "More stadiums per capita" },
-      { color: fill(max * 0.45), label: "Mid" },
-      { color: fill(0.0001), label: "Fewer" },
-      { color: "#374151", label: "No data" },
-    ]);
+    // Legend: a few representative quantile bins (high -> low) + no-data.
+    var leg = [];
+    [N - 1, Math.round(N * 0.7), Math.round(N * 0.4), 0].forEach(function (k) {
+      leg.push({ color: PALETTE[k], label: "≥ " + thresholds[k] + " / M" });
+    });
+    leg.push({ color: "#374151", label: "No data" });
+    legend(leg);
   }
 })();
