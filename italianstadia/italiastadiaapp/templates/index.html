@@ -11,6 +11,9 @@
     <meta property="og:description" content="Interactive map of football stadiums across Europe — capacity, ownership, leagues and 3D views.">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Stadiums of Europe">
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'exports/insight_overview.png' %}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'exports/insight_overview.png' %}">
     <link rel="manifest" href="{% static 'manifest.json' %}">
     <link rel="preload" href="{% static 'js/map.js' %}" as="script">
     <title>Stadiums of Europe</title>

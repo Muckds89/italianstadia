@@ -36,6 +36,12 @@ class Command(BaseCommand):
             "title": "Artificial vs natural grass in Europe",
             "subtitle": "Pitch surface of every stadium",
         },
+        "overview": {
+            "color_by": "country", "style_key": "satellite", "size_key": "landscape",
+            "labels": "0", "legend": "0", "north": "1",
+            "title": "Football Stadiums of Europe",
+            "subtitle": "Every ground on one interactive map",
+        },
     }
 
     def handle(self, *args, **opts):

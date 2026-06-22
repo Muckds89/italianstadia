@@ -8,6 +8,9 @@
 <meta property="og:title" content="Stadium density per population in Europe">
 <meta property="og:description" content="{{ page_description }}">
 <meta property="og:type" content="article">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'exports/insight_overview.png' %}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'exports/insight_overview.png' %}">
 {% endblock %}
 
 {% block extra_head %}
