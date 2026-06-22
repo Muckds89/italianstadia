@@ -2006,13 +2006,32 @@ def _load_font(bold=False, size=20):
     return ImageFont.load_default()
 
 
-_INSET_LON_THRESHOLD = -14  # stadiums west of here go into the Iceland inset
-
-
 def _split_main_inset(stadiums):
-    main  = [s for s in stadiums if s["lon"] >= _INSET_LON_THRESHOLD]
-    inset = [s for s in stadiums if s["lon"] <  _INSET_LON_THRESHOLD]
-    return main, inset
+    # The Iceland inset was removed — everything is drawn on the main map.
+    return stadiums, []
+
+
+def _percentile(sorted_vals, q):
+    if not sorted_vals:
+        return 0.0
+    i = q * (len(sorted_vals) - 1)
+    lo, hi = int(math.floor(i)), int(math.ceil(i))
+    if lo == hi:
+        return sorted_vals[lo]
+    return sorted_vals[lo] + (sorted_vals[hi] - sorted_vals[lo]) * (i - lo)
+
+
+def _trimmed_bbox(stadiums, pad=0.06, qlon=0.02):
+    """Frame the bulk of the points, trimming far E/W longitude outliers (e.g. Iceland in
+    the west, Ural Russia in the east) so the broad Europe export isn't stretched across
+    empty ocean/Asia. Latitude is kept full so northern/southern grounds still show."""
+    lons = sorted(s["lon"] for s in stadiums)
+    lats = [s["lat"] for s in stadiums]
+    lon_min, lon_max = _percentile(lons, qlon), _percentile(lons, 1 - qlon)
+    lat_min, lat_max = min(lats), max(lats)
+    lat_pad = max((lat_max - lat_min) * pad, 0.8)
+    lon_pad = max((lon_max - lon_min) * pad, 0.8)
+    return (lon_min - lon_pad, lat_min - lat_pad, lon_max + lon_pad, lat_max + lat_pad)
 
 
 def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key):
@@ -3096,7 +3115,17 @@ def _compose_export_image(params):
 
     W, H = params["W"], params["H"]
     main_stadiums, inset_stadiums = _split_main_inset(stadiums)
-    raw_bbox = _bbox_with_padding(main_stadiums if main_stadiums else stadiums)
+    # Broad, unfiltered Europe export: trim longitude outliers (Iceland / Ural Russia) so
+    # the frame stays on Europe. Filtered exports (country/league/tournament/dev/national)
+    # keep the full bbox so they're never cropped.
+    is_broad = not (params.get("tournament") or params.get("layer") == "development"
+                    or params.get("country") or params.get("league")
+                    or params.get("surface") or params.get("ownership")
+                    or params.get("national") or params.get("national_only"))
+    if is_broad and len(stadiums) > 30:
+        raw_bbox = _trimmed_bbox(stadiums)
+    else:
+        raw_bbox = _bbox_with_padding(main_stadiums if main_stadiums else stadiums)
     bbox = _expand_bbox_to_aspect(raw_bbox, W, H)
 
     country_index = {}
