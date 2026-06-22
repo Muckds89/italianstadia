@@ -1987,6 +1987,33 @@ def _expand_bbox_to_aspect(bbox, W, H):
     return (lon_min, lat_min, lon_max, lat_max)
 
 
+def _cover_bbox_to_aspect(bbox, W, H):
+    """Match the canvas aspect by CROPPING the over-long dimension (zoom in to fill),
+    rather than padding the short one. Used for the broad Europe export so the frame
+    fills the canvas instead of leaving empty ocean/Asia on the left and right."""
+    lon_min, lat_min, lon_max, lat_max = bbox
+    merc_span_x = (lon_max - lon_min) / 360.0
+    my_n, my_s = _merc_y(lat_max), _merc_y(lat_min)   # north (small) .. south (large)
+    merc_span_y = my_s - my_n
+    if merc_span_x <= 0 or merc_span_y <= 0:
+        return bbox
+    natural_aspect = merc_span_x / merc_span_y
+    target_aspect = W / H
+    if natural_aspect < target_aspect:
+        # too tall for the canvas → crop top/bottom (latitude)
+        new_span_y = merc_span_x / target_aspect
+        mid = (my_n + my_s) / 2
+        lat_max = _merc_y_inv(mid - new_span_y / 2)
+        lat_min = _merc_y_inv(mid + new_span_y / 2)
+    else:
+        # too wide → crop east/west (longitude)
+        new_span_x_deg = merc_span_y * target_aspect * 360.0
+        lon_mid = (lon_min + lon_max) / 2
+        lon_min = lon_mid - new_span_x_deg / 2
+        lon_max = lon_mid + new_span_x_deg / 2
+    return (lon_min, lat_min, lon_max, lat_max)
+
+
 def _load_font(bold=False, size=20):
     """Load a TrueType font, trying Windows names then Linux system paths."""
     candidates = (
@@ -3123,10 +3150,12 @@ def _compose_export_image(params):
                     or params.get("surface") or params.get("ownership")
                     or params.get("national") or params.get("national_only"))
     if is_broad and len(stadiums) > 30:
-        raw_bbox = _trimmed_bbox(stadiums)
+        # Trim E/W outliers, then crop-to-fill so the frame stays on Europe with no empty
+        # ocean/Asia bands on the sides.
+        bbox = _cover_bbox_to_aspect(_trimmed_bbox(stadiums), W, H)
     else:
         raw_bbox = _bbox_with_padding(main_stadiums if main_stadiums else stadiums)
-    bbox = _expand_bbox_to_aspect(raw_bbox, W, H)
+        bbox = _expand_bbox_to_aspect(raw_bbox, W, H)
 
     country_index = {}
     for s in stadiums:
