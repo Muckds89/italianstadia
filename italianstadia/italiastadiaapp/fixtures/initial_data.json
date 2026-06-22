@@ -34773,7 +34773,7 @@
   "pk": 786,
   "fields": {
     "name": "Puskás Aréna",
-    "capacity": null,
+    "capacity": 67215,
     "address": null,
     "year_of_construction": null,
     "city": 440,
@@ -34800,7 +34800,7 @@
   "pk": 787,
   "fields": {
     "name": "Windsor Park",
-    "capacity": null,
+    "capacity": 18500,
     "address": null,
     "year_of_construction": null,
     "city": 645,
@@ -34827,7 +34827,7 @@
   "pk": 788,
   "fields": {
     "name": "King Baudouin Stadium",
-    "capacity": null,
+    "capacity": 50024,
     "address": null,
     "year_of_construction": null,
     "city": 646,
@@ -34959,7 +34959,7 @@
   "pk": 792,
   "fields": {
     "name": "Baku Olympic Stadium",
-    "capacity": null,
+    "capacity": 69870,
     "address": null,
     "year_of_construction": null,
     "city": 649,

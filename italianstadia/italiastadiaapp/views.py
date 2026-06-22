@@ -920,6 +920,21 @@ def _norm_tournament_status(s):
     return s if s in _TOURNAMENT_STATUS_ORDER else "CANDIDATE"
 
 
+def _list_tournaments():
+    """All tournaments in the data as [{slug, name, year}], deduped, oldest first."""
+    seen = {}
+    for model in (Stadium, StadiumDevelopment):
+        for obj in model.objects.exclude(tournaments=[]).only("tournaments"):
+            for e in (obj.tournaments or []):
+                nm = e.get("tournament")
+                if not nm:
+                    continue
+                s = slugify(nm)
+                if s not in seen:
+                    seen[s] = {"slug": s, "name": nm, "year": e.get("year")}
+    return sorted(seen.values(), key=lambda t: (t.get("year") or 0))
+
+
 def _tournament_venues(slug):
     """Return (tournament_name, tournament_year, venues) for a tournament slug.
 
@@ -1310,6 +1325,7 @@ def tournament_detail(request, slug):
         "faq_json": json.dumps([{"@type": "Question", "name": f["q"],
                                  "acceptedAnswer": {"@type": "Answer", "text": f["a"]}}
                                 for f in faq]),
+        "other_tournaments": [t for t in _list_tournaments() if t["slug"] != slug],
     })
 
 

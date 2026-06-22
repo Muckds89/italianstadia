@@ -39,9 +39,24 @@
 </head>
 <body>
 
-<nav class="navbar navbar-dark bg-dark shadow-sm fixed-top px-3">
-    <a href="{% url 'italiastadiaapp:home' %}" class="btn btn-secondary btn-sm">← Map</a>
-    <span class="navbar-brand mb-0 ms-2 h6">{{ tournament_name }}</span>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'italiastadiaapp:home' %}">Stadiums of Europe</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#tNav" aria-controls="tNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="tNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'italiastadiaapp:home' %}">Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'italiastadiaapp:stadium_list' %}">Stadiums</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'italiastadiaapp:team_list' %}">Teams</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'italiastadiaapp:city_list' %}">Cities</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'italiastadiaapp:insights_index' %}">Insights</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'italiastadiaapp:export_page' %}" style="color:#00e5ff;font-weight:600;">⬇ Export</a></li>
+            </ul>
+        </div>
+    </div>
 </nav>
 
 <div class="container mt-4">
@@ -304,6 +319,22 @@
         </div>
     {% endif %}
     {% endif %}{# /not has_bids #}
+
+    {% if other_tournaments %}
+    <div class="card shadow-sm mb-4 mt-4">
+        <div class="card-header bg-white"><strong>Interested in other tournaments?</strong></div>
+        <div class="card-body">
+            <p class="mb-2">Explore host stadiums and venues for the other tournaments we track:</p>
+            <div class="d-flex flex-wrap gap-2">
+                {% for t in other_tournaments %}
+                <a href="{% url 'italiastadiaapp:tournament_detail' t.slug %}" class="btn btn-outline-primary btn-sm">
+                    {{ t.name }}{% if t.year %} {{ t.year }}{% endif %} →
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
     {% if faq %}
     <div class="card shadow-sm mb-4 mt-4">
