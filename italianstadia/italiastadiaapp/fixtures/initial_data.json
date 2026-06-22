@@ -14554,7 +14554,14 @@
     "stadium_type": "OPEN",
     "surface": "HYBRID",
     "architect": null,
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "Champions League Final",
+        "year": 2028,
+        "status": "CANDIDATE",
+        "matches": 1
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Allianz_Arena",
     "transfermarkt_url": "https://www.transfermarkt.com/allianz-arena/stadion/stadion/12",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Allianz_Arena_2008-02-09.jpg",
@@ -17749,7 +17756,14 @@
     "stadium_type": "OPEN",
     "surface": "HYBRID",
     "architect": "Francesc Mitjans and Josep Soteras",
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "Champions League Final",
+        "year": 2029,
+        "status": "CANDIDATE",
+        "matches": 1
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Camp_Nou",
     "transfermarkt_url": "https://www.transfermarkt.com/fc-barcelona/stadion/verein/131",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/spotify-camp-nou-fc-barcelona-2025-1763391077-183033.jpg?lm=1763391095",
@@ -17793,7 +17807,14 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": "Cruz y Ortiz Arquitectos",
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "Champions League Final",
+        "year": 2027,
+        "status": "CONFIRMED",
+        "matches": 1
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Riyadh_Air_Metropolitano",
     "transfermarkt_url": "https://www.transfermarkt.com/atletico-de-madrid/stadion/verein/13",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/metropolitano-2019-1757608545-177399.jpg?lm=1757608558",
@@ -34524,6 +34545,12 @@
         "year": 2028,
         "status": "CONFIRMED",
         "matches": 7
+      },
+      {
+        "tournament": "Champions League Final",
+        "year": 2029,
+        "status": "CANDIDATE",
+        "matches": 1
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Wembley_Stadium",
@@ -34785,7 +34812,14 @@
     "stadium_type": null,
     "surface": null,
     "architect": null,
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "Champions League Final",
+        "year": 2026,
+        "status": "CONFIRMED",
+        "matches": 1
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Pusk%C3%A1s_Ar%C3%A9na",
     "transfermarkt_url": null,
     "image_url": null,

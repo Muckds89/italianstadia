@@ -244,6 +244,9 @@
                             <div class="text-muted small mb-2">{{ v.city.name }}, {{ v.city.country }}</div>
                             {% endif %}
                             <div class="d-flex flex-wrap gap-2 align-items-center">
+                                {% if v.year %}
+                                <span class="badge bg-dark">{{ v.year }}</span>
+                                {% endif %}
                                 {% if v.status == 'CONFIRMED' %}
                                 <span class="badge bg-success">Confirmed</span>
                                 {% elif v.status == 'DISCARDED' %}
@@ -294,6 +297,9 @@
                             <div class="text-muted small mb-2">{{ v.city.name }}, {{ v.city.country }}</div>
                             {% endif %}
                             <div class="d-flex flex-wrap gap-2 align-items-center">
+                                {% if v.year %}
+                                <span class="badge bg-dark">{{ v.year }}</span>
+                                {% endif %}
                                 {% if v.status == 'CONFIRMED' %}
                                 <span class="badge bg-success">Confirmed</span>
                                 {% elif v.status == 'DISCARDED' %}

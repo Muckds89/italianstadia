@@ -885,6 +885,10 @@ COUNTRY_FLAGS = {
     "Serbia":           "🇷🇸",
     "Bosnia and Herzegovina": "🇧🇦",
     "North Macedonia":  "🇲🇰",
+    # Champions League final hosts
+    "Hungary":          "🇭🇺",
+    "Spain":            "🇪🇸",
+    "Germany":          "🇩🇪",
 }
 
 # Euro 2036-style competing-bid colours (hex for web/legend, RGB for the PNG export)
@@ -965,6 +969,7 @@ def _tournament_venues(slug):
                     "detail_url": reverse("italiastadiaapp:stadium_detail", kwargs={"slug": stadium.slug}),
                     "status": _norm_tournament_status(entry.get("status")),
                     "matches": entry.get("matches"),
+                    "year": entry.get("year"),
                     "bid": entry.get("bid", ""),
                     "is_development": False,
                 })
@@ -1043,6 +1048,39 @@ _TOURNAMENT_EDITORIAL = {
              "UEFA requires each host to provide around 10 stadiums meeting its capacity tiers, "
              "so the Italy–Turkey edition is expected to use roughly 20 venues split between the "
              "two countries, narrowed from a longer candidate list."),
+        ],
+    },
+    "champions-league-final": {
+        "heading": "Champions League final venues, 2026–2030",
+        "paragraphs": [
+            "Unlike a Euro, the UEFA Champions League final is played at a single, different "
+            "stadium every year, chosen by UEFA's Executive Committee a few seasons in advance. "
+            "This page maps the venues for the upcoming finals — those already confirmed and "
+            "those still being decided between rival candidate cities.",
+            "The 2026 final is confirmed for the Puskás Aréna in Budapest, and the 2027 final "
+            "for the Estadio Metropolitano (Riyadh Air Metropolitano) in Madrid. The 2028 final "
+            "is expected to head to Munich's Allianz Arena, while 2029 is a contest between "
+            "London's Wembley Stadium and Barcelona's Camp Nou. The 2030 host has not yet been "
+            "announced — bids are still open.",
+            "Final proposals for the 2028 and 2029 editions were submitted in mid-2026, with "
+            "UEFA's host appointments expected to follow. We will update the map as each "
+            "decision is confirmed.",
+        ],
+        "sources": [
+            {"label": "Footbeen — Champions League final venues 2026–2030",
+             "url": "https://footbeen.com/blog/champions-league-final-venues-2026-2030"},
+        ],
+        "faq": [
+            ("Where is the 2026 Champions League final?",
+             "The 2026 UEFA Champions League final will be played at the Puskás Aréna in "
+             "Budapest, Hungary."),
+            ("Where is the 2027 Champions League final?",
+             "The 2027 final is confirmed for the Estadio Metropolitano in Madrid, Spain."),
+            ("Which cities are bidding for the 2028 and 2029 Champions League finals?",
+             "Munich's Allianz Arena is the frontrunner for 2028, while Wembley Stadium "
+             "(London) and Camp Nou (Barcelona) are the candidates for 2029."),
+            ("Where will the 2030 Champions League final be held?",
+             "UEFA has not yet announced the host of the 2030 Champions League final."),
         ],
     },
 }
