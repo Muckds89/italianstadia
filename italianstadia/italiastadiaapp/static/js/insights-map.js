@@ -36,6 +36,16 @@
 
   if (mode === "markers") {
     var colorBy = el.dataset.colorBy || "single";
+    var useBadges = el.dataset.badges === "flag";
+    function badgeIcon(url) {
+      return L.divIcon({
+        className: "insight-badge",
+        html: '<img src="' + url + '" style="width:30px;height:30px;border-radius:50%;'
+            + 'object-fit:cover;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.5);'
+            + 'background:#fff">',
+        iconSize: [30, 30], iconAnchor: [15, 15],
+      });
+    }
     fetch(el.dataset.geojsonUrl)
       .then(function (r) { return r.json(); })
       .then(function (fc) {
@@ -57,9 +67,19 @@
           var ll = [c[1], c[0]];
           bounds.push(ll);
           var cap = p.capacity ? p.capacity.toLocaleString() + " seats" : "";
-          L.circleMarker(ll, {
-            radius: radius, color: "#111", weight: 1, fillColor: color, fillOpacity: 0.85,
-          }).addTo(map).bindPopup(
+          // National-team flag badge when requested (falls back to a dot if no flag)
+          var flag = null;
+          if (useBadges) {
+            var teams = p.teams || [];
+            var nat = teams.filter(function (t) { return t.is_national; })[0] || teams[0];
+            flag = nat && nat.image_url ? nat.image_url : null;
+          }
+          var marker = flag
+            ? L.marker(ll, { icon: badgeIcon(flag) })
+            : L.circleMarker(ll, {
+                radius: radius, color: "#111", weight: 1, fillColor: color, fillOpacity: 0.85,
+              });
+          marker.addTo(map).bindPopup(
             '<strong><a href="' + stadiumUrlPrefix + (p.slug || p.id) + '/">' + p.name + "</a></strong><br>" +
             (p.city ? p.city + (p.country ? ", " + p.country : "") + "<br>" : "") +
             (colorBy === "surface" && p.surface ? (SURFACE[p.surface] || {}).label + "<br>" : "") + cap
