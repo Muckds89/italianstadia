@@ -431,8 +431,8 @@
   "location": [
     {% for v in venues %}{
       "@type": "StadiumOrArena",
-      "name": "{{ v.name|escapejs }}"{% if v.city %},
-      "address": {"@type": "PostalAddress", "addressLocality": "{{ v.city.name|escapejs }}"{% if v.city.country %}, "addressCountry": "{{ v.city.country|escapejs }}"{% endif %}}{% endif %}{% if v.capacity %},
+      "name": "{{ v.name|escapejs }}",
+      "address": {"@type": "PostalAddress"{% if v.city %}, "addressLocality": "{{ v.city.name|escapejs }}"{% endif %}, "addressCountry": "{% if v.city and v.city.country %}{{ v.city.country|escapejs }}{% elif v.country_override %}{{ v.country_override|escapejs }}{% else %}Europe{% endif %}"}{% if v.capacity %},
       "maximumAttendeeCapacity": {{ v.capacity }}{% endif %}
     }{% if not forloop.last %},{% endif %}{% endfor %}
   ]

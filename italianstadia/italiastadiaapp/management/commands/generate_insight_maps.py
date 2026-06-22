@@ -31,8 +31,9 @@ class Command(BaseCommand):
             "subtitle": "Each country's main national-team venue",
         },
         "surface": {
-            "color_by": "surface", "no_badges": "1", "style_key": "satellite",
-            "size_key": "landscape", "labels": "0", "legend": "1", "north": "1",
+            "color_by": "surface", "no_badges": "1", "surface_known": "1",
+            "style_key": "satellite", "size_key": "landscape",
+            "labels": "0", "legend": "1", "north": "1",
             "title": "Artificial vs natural grass in Europe",
             "subtitle": "Pitch surface of every stadium",
         },

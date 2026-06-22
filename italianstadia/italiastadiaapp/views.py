@@ -1909,6 +1909,7 @@ def _parse_export_params(request):
         "national":   national,
         "national_only": national_only,
         "no_badges":  request.GET.get("no_badges", "0") == "1",
+        "surface_known": request.GET.get("surface_known", "0") == "1",
     }
 
 
@@ -1917,6 +1918,8 @@ def _get_export_stadiums(params):
     qs = Stadium.objects.select_related("city").prefetch_related("teams__league__country")
     if params["surface"]:
         qs = qs.filter(surface=params["surface"])
+    if params.get("surface_known"):
+        qs = qs.exclude(surface__isnull=True).exclude(surface="")
     if params["country"]:
         qs = qs.filter(city__country=params["country"])
     if params["league"]:
