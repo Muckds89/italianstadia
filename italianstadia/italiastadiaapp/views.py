@@ -3150,9 +3150,11 @@ def _compose_export_image(params):
                     or params.get("surface") or params.get("ownership")
                     or params.get("national") or params.get("national_only"))
     if is_broad and len(stadiums) > 30:
-        # Trim E/W outliers, then crop-to-fill so the frame stays on Europe with no empty
-        # ocean/Asia bands on the sides.
-        bbox = _cover_bbox_to_aspect(_trimmed_bbox(stadiums), W, H)
+        # Trim E/W outliers, hard-clamp to a European longitude window (so Iceland in the
+        # west and central/eastern Russia never widen the frame), then crop-to-fill.
+        tb = _trimmed_bbox(stadiums)
+        tb = (max(tb[0], -11.0), tb[1], min(tb[2], 45.0), tb[3])
+        bbox = _cover_bbox_to_aspect(tb, W, H)
     else:
         raw_bbox = _bbox_with_padding(main_stadiums if main_stadiums else stadiums)
         bbox = _expand_bbox_to_aspect(raw_bbox, W, H)
