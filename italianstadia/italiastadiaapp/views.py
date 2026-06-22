@@ -5,6 +5,7 @@ import json
 import logging
 import math
 import os as _os
+import re
 import threading as _threading
 import time as _time
 import traceback
@@ -1409,8 +1410,14 @@ _INSIGHTS = [
     {
         "slug": "biggest-stadiums",
         "title": "Biggest & smallest stadiums in Europe",
-        "blurb": "The largest football stadiums in Europe by capacity — and the smallest.",
+        "blurb": "The largest football stadiums in Europe by capacity, and the smallest.",
         "url_name": "insight_biggest",
+    },
+    {
+        "slug": "league-capacity",
+        "title": "Stadium capacity by league",
+        "blurb": "Average stadium size in every league, with the big five compared.",
+        "url_name": "insight_league_capacity",
     },
 ]
 
@@ -1623,6 +1630,87 @@ def insight_density(request):
     })
 
 
+_BIG5 = [("Premier League", "England"), ("La Liga", "Spain"),
+         ("Bundesliga", "Germany"), ("Serie A", "Italy"), ("Ligue 1", "France")]
+
+
+@cache_page(60 * 60)
+def insight_league_capacity(request):
+    """Average / total stadium capacity by league, plus a big-five comparison."""
+    rows = []
+    for l in League.objects.select_related("country").all():
+        agg = (Stadium.objects.filter(teams__league=l, capacity__gt=0).distinct()
+               .aggregate(avg=Avg("capacity"), total=Sum("capacity"),
+                          n=Count("id", distinct=True), mx=Max("capacity")))
+        if not agg["n"]:
+            continue
+        rows.append({
+            "league": l.name, "country": l.country.name if l.country else "",
+            "division": l.division_level, "n": agg["n"],
+            "avg": int(agg["avg"] or 0), "total": int(agg["total"] or 0),
+            "max": agg["mx"] or 0,
+        })
+    rows.sort(key=lambda r: r["avg"], reverse=True)
+    max_avg = rows[0]["avg"] if rows else 1
+    for r in rows:
+        r["bar"] = round(100 * r["avg"] / max_avg) if max_avg else 0
+
+    big5 = []
+    for name, country in _BIG5:
+        l = League.objects.filter(name=name, country__name=country).first()
+        if not l:
+            continue
+        stads = Stadium.objects.filter(teams__league=l, capacity__gt=0).distinct()
+        agg = stads.aggregate(avg=Avg("capacity"), total=Sum("capacity"), n=Count("id", distinct=True))
+        biggest = stads.order_by("-capacity").first()
+        smallest = stads.order_by("capacity").first()
+        big5.append({
+            "league": name, "country": country,
+            "clubs": Team.objects.filter(league=l).count(),
+            "avg": int(agg["avg"] or 0), "total": int(agg["total"] or 0),
+            "biggest": biggest.name if biggest else "", "biggest_cap": biggest.capacity if biggest else 0,
+            "smallest": smallest.name if smallest else "", "smallest_cap": smallest.capacity if smallest else 0,
+        })
+    big5.sort(key=lambda b: b["avg"], reverse=True)
+    big5_top = big5[0] if big5 else None
+
+    top = rows[0] if rows else None
+    intro_html = (
+        "Which football league has the <strong>biggest stadiums</strong>? This page ranks "
+        "every league in our dataset by <strong>average stadium capacity</strong>, with a "
+        "head-to-head of Europe's <strong>big five</strong>. "
+        + (f"{top['league']} ({top['country']}) tops the list at "
+           f"<strong>{top['avg']:,}</strong> average seats. " if top else "")
+        + (f"Among the big five, <strong>{big5_top['league']}</strong> has the highest "
+           f"average at <strong>{big5_top['avg']:,}</strong>." if big5_top else "")
+    )
+    about_html = (
+        "Average capacity is taken across the <strong>home grounds of every club</strong> in a "
+        "league (stadiums with a recorded capacity). It rewards leagues with consistently large "
+        "grounds — not just one or two giants — so a league of mid-sized stadiums can rank below "
+        "a smaller league whose every club plays in a big arena."
+    )
+    plain = re.sub(r"<[^>]+>", "", intro_html)
+    faq = [
+        ("Which league has the biggest stadiums in Europe?",
+         f"By average stadium capacity, {top['league']} ({top['country']}) leads with about "
+         f"{top['avg']:,} seats per ground." if top else ""),
+        ("Which of the big five leagues has the largest stadiums?",
+         f"{big5_top['league']} has the highest average capacity among the big five, at about "
+         f"{big5_top['avg']:,} seats." if big5_top else ""),
+    ]
+    faq = [{"q": q, "a": a} for q, a in faq if a]
+    return render(request, "insight_league_capacity.html", {
+        "rows": rows, "big5": big5, "intro_html": intro_html, "about_html": about_html,
+        "page_description": _trim(plain),
+        "others": _insight_others("league-capacity"),
+        "faq": faq,
+        "faq_json": json.dumps([{"@type": "Question", "name": f["q"],
+                                 "acceptedAnswer": {"@type": "Answer", "text": f["a"]}}
+                                for f in faq]),
+    })
+
+
 def _cap_row(s):
     teams = list(s.teams.all())
     country = next((t.league.country.name for t in teams
@@ -1819,6 +1907,7 @@ def _parse_export_params(request):
         "dstatus":    dstatus,
         "national":   national,
         "national_only": national_only,
+        "no_badges":  request.GET.get("no_badges", "0") == "1",
     }
 
 
@@ -1861,6 +1950,8 @@ def _get_export_stadiums(params):
         else:
             image_url = (primary_team.image_url or "") if primary_team else ""
         team_name  = (primary_team.name or "") if primary_team else ""
+        if params.get("no_badges"):
+            image_url = ""   # render colour-coded dots instead of club crests
         results.append({
             "name":       s.name,
             "team_name":  team_name,

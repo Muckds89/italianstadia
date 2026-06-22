@@ -1,0 +1,103 @@
+{% extends "base_detail.html" %}
+{% load static humanize %}
+
+{% block title %}Stadium capacity by league — average stadium size | Stadiums of Europe{% endblock %}
+
+{% block meta %}
+<meta name="description" content="{{ page_description }}">
+<meta property="og:title" content="Stadium capacity by league in Europe">
+<meta property="og:description" content="{{ page_description }}">
+<meta property="og:type" content="article">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'exports/insight_overview.png' %}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'exports/insight_overview.png' %}">
+{% endblock %}
+
+{% block extra_nav %}
+<a href="{% url 'italiastadiaapp:insights_index' %}" class="btn btn-outline-light btn-sm">← Insights</a>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-2">Stadium capacity by league</h1>
+    <p class="lead text-secondary mb-4">{{ intro_html|safe }}</p>
+
+    <!-- Big five comparison -->
+    {% if big5 %}
+    <div class="card shadow-sm mb-4 border-primary">
+        <div class="card-header bg-white"><strong>The big five compared</strong></div>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead><tr><th>League</th><th>Clubs</th><th class="text-end">Avg capacity</th><th class="text-end">Total seats</th><th>Biggest ground</th></tr></thead>
+                <tbody>
+                {% for b in big5 %}
+                    <tr>
+                        <td><strong>{{ b.league }}</strong> <span class="text-muted small">{{ b.country }}</span></td>
+                        <td>{{ b.clubs }}</td>
+                        <td class="text-end fw-semibold">{{ b.avg|intcomma }}</td>
+                        <td class="text-end">{{ b.total|intcomma }}</td>
+                        <td>{{ b.biggest }} <span class="text-muted small">({{ b.biggest_cap|intcomma }})</span></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>About this data</strong></div>
+        <div class="card-body"><p class="mb-0">{{ about_html|safe }}</p></div>
+    </div>
+
+    <!-- All leagues ranked by average capacity -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>All leagues by average stadium capacity</strong></div>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead><tr><th>#</th><th>League</th><th>Country</th><th>Div</th><th>Grounds</th><th>Average capacity</th><th class="text-end">Total seats</th></tr></thead>
+                <tbody>
+                {% for r in rows %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><strong>{{ r.league }}</strong></td>
+                        <td>{{ r.country }}</td>
+                        <td>{{ r.division }}</td>
+                        <td>{{ r.n }}</td>
+                        <td style="min-width:200px">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="flex-grow-1 bg-light rounded" style="height:14px">
+                                    <div class="rounded" style="height:14px;width:{{ r.bar }}%;background:#0d6efd"></div>
+                                </div>
+                                <span class="small fw-semibold" style="white-space:nowrap">{{ r.avg|intcomma }}</span>
+                            </div>
+                        </td>
+                        <td class="text-end">{{ r.total|intcomma }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% if faq %}
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>Frequently asked questions</strong></div>
+        <div class="card-body">
+            {% for item in faq %}
+            <h2 class="h6 mb-1">{{ item.q }}</h2>
+            <p class="{% if not forloop.last %}mb-3{% else %}mb-0{% endif %}">{{ item.a }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% include "_insight_related.html" %}
+</div>
+
+{% if faq %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":{{ faq_json|safe }}}
+</script>
+{% endif %}
+{% endblock %}
