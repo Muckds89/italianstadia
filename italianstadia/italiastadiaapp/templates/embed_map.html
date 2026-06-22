@@ -1,0 +1,51 @@
+{% load static %}<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Stadiums of Europe — interactive map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  html,body{margin:0;height:100%;background:#0b1020}
+  #m{position:absolute;inset:0}
+  .soe-credit{position:absolute;right:8px;bottom:8px;z-index:1000;background:rgba(15,23,42,.85);
+    color:#fff;font:600 13px system-ui,sans-serif;padding:6px 10px;border-radius:6px;
+    text-decoration:none;box-shadow:0 1px 4px rgba(0,0,0,.5)}
+  .soe-credit:hover{background:#1e293b}
+</style>
+</head>
+<body>
+<div id="m"></div>
+<a class="soe-credit" href="https://www.stadiumsofeurope.com/" target="_blank" rel="noopener">
+  📍 stadiumsofeurope.com
+</a>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+  var map = L.map("m", { scrollWheelZoom: true }).setView([54, 12], 4);
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+    attribution: '&copy; OpenStreetMap &copy; CARTO &middot; <a href="https://www.stadiumsofeurope.com/" target="_blank">Stadiums of Europe</a>',
+    maxZoom: 18,
+  }).addTo(map);
+  fetch("{% static 'data/stadiums_map.json' %}?v={{ map_version }}")
+    .then(function (r) { return r.json(); })
+    .then(function (fc) {
+      var bounds = [];
+      (fc.features || []).forEach(function (f) {
+        var c = f.geometry && f.geometry.coordinates; if (!c) return;
+        var p = f.properties || {}, ll = [c[1], c[0]]; bounds.push(ll);
+        var cap = p.capacity ? p.capacity.toLocaleString() + " seats" : "";
+        L.circleMarker(ll, { radius: 5, color: "#111", weight: 1,
+          fillColor: "#38bdf8", fillOpacity: .9 })
+          .addTo(map)
+          .bindPopup('<strong><a href="https://www.stadiumsofeurope.com/stadium/'
+            + (p.slug || p.id) + '/" target="_blank" rel="noopener">' + p.name + '</a></strong><br>'
+            + (p.city ? p.city + (p.country ? ", " + p.country : "") + "<br>" : "") + cap);
+      });
+      if (bounds.length) map.fitBounds(bounds, { padding: [20, 20], maxZoom: 5 });
+    });
+})();
+</script>
+</body>
+</html>

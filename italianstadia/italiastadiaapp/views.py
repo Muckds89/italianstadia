@@ -28,6 +28,7 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.core.mail import EmailMessage
 from django.views.decorators.cache import cache_page
+from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 from .models import City, Country, ExportToken, LastRefresh, League, Stadium, Team, StadiumDevelopment
@@ -504,6 +505,23 @@ def index(request):
     except OSError:
         map_version = 0
     return render(request, "index.html", {"map_version": map_version})
+
+
+def _map_version():
+    p = Path(__file__).parent / "static" / "data" / "stadiums_map.json"
+    try:
+        return int(p.stat().st_mtime)
+    except OSError:
+        return 0
+
+
+@xframe_options_exempt
+@cache_page(60 * 60)
+def embed_map(request):
+    """Minimal, chrome-free map for embedding on other sites via <iframe>. Each embed is
+    a backlink + referral funnel (the attribution link and marker popups point back here)."""
+    return render(request, "embed_map.html", {"map_version": _map_version()})
+
 
 def _available_countries():
     """Countries that appear in the DB, ordered by UEFA 5-year coefficient rank.
