@@ -5,9 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ tournament_name }} Stadiums &amp; Venues — Host Cities | Stadiums of Europe</title>
+    <title>{{ tournament_name }} Stadiums &amp; Venues, Host Cities | Stadiums of Europe</title>
     <meta name="description" content="{{ page_description }}">
-    <meta property="og:title" content="{{ tournament_name }} Stadiums &amp; Venues — Host Cities">
+    <meta property="og:title" content="{{ tournament_name }} Stadiums &amp; Venues, Host Cities">
     <meta property="og:description" content="{{ page_description }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Stadiums of Europe">
@@ -74,7 +74,7 @@
     </p>
     {% endif %}
 
-    <!-- Back-end-rendered tournament map FIRST — gives the user the geography of the
+    <!-- Back-end-rendered tournament map FIRST, gives the user the geography of the
          tournament at a glance (satellite, host countries spotlit, watermark + logo).
          Regenerated when the data changes; hidden gracefully if not yet generated. -->
     <div class="card shadow-sm mb-4" id="exportMapCard">
@@ -169,7 +169,7 @@
     {% if has_bids %}
     <div class="alert alert-secondary small mb-4">
         <strong>Host not yet decided.</strong> The bids below are proposals discussed by
-        national associations, media and fans — none has been awarded by UEFA. Stadiums are
+        national associations, media and fans, none has been awarded by UEFA. Stadiums are
         colour-coded by bid on the map and in the cards.
     </div>
     {% for bid in bids %}
@@ -222,7 +222,7 @@
     {% endif %}
     {% endif %}
 
-    <!-- Venue cards — grouped by country when multi-host (non-bid tournaments) -->
+    <!-- Venue cards, grouped by country when multi-host (non-bid tournaments) -->
     {% if not has_bids %}
     {% if multi_country %}
         {% for country, group in venues_by_country.items %}
@@ -273,7 +273,7 @@
             </div>
             {% empty %}
             <div class="col-12">
-                <div class="text-muted small fst-italic">Host nation — venue still to be confirmed.</div>
+                <div class="text-muted small fst-italic">Host nation, venue still to be confirmed.</div>
             </div>
             {% endfor %}
         </div>
@@ -347,7 +347,7 @@
 
     {% if faq %}
     <div class="card shadow-sm mb-4 mt-4">
-        <div class="card-header bg-white"><strong>{{ tournament_name }} — frequently asked questions</strong></div>
+        <div class="card-header bg-white"><strong>{{ tournament_name }}, frequently asked questions</strong></div>
         <div class="card-body">
             {% for item in faq %}
             <h2 class="h6 mb-1">{{ item.q }}</h2>

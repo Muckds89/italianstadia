@@ -228,7 +228,7 @@ def country_stats(request, country_name):
     country_obj = Country.objects.filter(name__iexact=country_name).first()
     name = country_obj.name if country_obj else country_name
 
-    # Match stadiums by the city's country OR by the country of any tenant's league —
+    # Match stadiums by the city's country OR by the country of any tenant's league , 
     # catches grounds whose free-text City.country differs from the canonical name.
     stadiums = (
         Stadium.objects
@@ -243,7 +243,7 @@ def country_stats(request, country_name):
         max_capacity=Max("capacity"),
     )
     total_stadiums_all = stadiums.count()
-    # Full list (largest first) for the hub — every ground is an internal link.
+    # Full list (largest first) for the hub, every ground is an internal link.
     all_stadiums = list(stadiums.order_by(
         F("capacity").desc(nulls_last=True), "name"))
     top10 = [s for s in all_stadiums if s.capacity][:10]
@@ -453,17 +453,17 @@ def _build_stadium_features(qs=None):
     return features
 
 
-@cache_page(60 * 60)  # 1-hour cache — data changes only when scraper runs
+@cache_page(60 * 60)  # 1-hour cache, data changes only when scraper runs
 def stadiums_geojson(request):
     """
     GeoJSON endpoint for operational stadiums (server-side filtered queries).
 
     Optional query parameters (all case-sensitive):
-      ?country=Italy          — include only stadiums whose teams play in that country
-      ?league=Serie+A         — include only stadiums whose teams play in that league
-      ?ownership=PUBLIC       — include only stadiums with that ownership value
+      ?country=Italy         , include only stadiums whose teams play in that country
+      ?league=Serie+A        , include only stadiums whose teams play in that league
+      ?ownership=PUBLIC      , include only stadiums with that ownership value
 
-    map.js does NOT call this endpoint for the initial map load — it fetches
+    map.js does NOT call this endpoint for the initial map load, it fetches
     the pre-built static file (data/stadiums_map.json) served by WhiteNoise.
     These params are available for external API consumers only.
     """
@@ -481,10 +481,10 @@ def stadiums_geojson(request):
         qs = qs.filter(teams__league__name=param_league).distinct()
     if param_country:
         qs = qs.filter(teams__league__country__name=param_country).distinct()
-    # Insight views (see /insights/) — preset filters reused by the shared insights map JS.
+    # Insight views (see /insights/), preset filters reused by the shared insights map JS.
     if param_view == "national":
         # Any ground that hosts a national side (a country's national stadium, even if a
-        # club also plays there — e.g. Johan Cruijff ArenA, Rajko Mitić).
+        # club also plays there, e.g. Johan Cruijff ArenA, Rajko Mitić).
         qs = qs.filter(teams__is_national=True).distinct()
     elif param_view == "surface":
         qs = qs.exclude(surface__isnull=True).exclude(surface="")
@@ -584,7 +584,7 @@ def stadium_list(request):
             teams__league__country__name=selected_country
         ).distinct()
 
-    # Build ordered list of leagues to use as sections — ranked countries first,
+    # Build ordered list of leagues to use as sections, ranked countries first,
     # unranked countries last (nulls_last), then alphabetically within each group.
     leagues_qs = League.objects.select_related("country").order_by(
         F("country__uefa_rank").asc(nulls_last=True),
@@ -1009,7 +1009,7 @@ def _tournament_venues(slug):
                     "latitude": dev.latitude,
                     "longitude": dev.longitude,
                     "detail_url": reverse("italiastadiaapp:stadium_development_detail", kwargs={"slug": dev.slug or str(dev.id)}),
-                    "badge_url": "",   # future venue — no club crest, drawn as a status dot
+                    "badge_url": "",   # future venue, no club crest, drawn as a status dot
                     "status": _norm_tournament_status(entry.get("status")),
                     "matches": entry.get("matches"),
                     "bid": entry.get("bid", ""),
@@ -1043,15 +1043,15 @@ _TOURNAMENT_EDITORIAL = {
             "is that Turkey is betting on Italy's lack of preparedness: should Italy fail to "
             "deliver the required venues in time, it could be excluded from the joint bid, "
             "leaving Turkey to be awarded the tournament as sole host. Those concerns are not "
-            "merely hypothetical — UEFA president Aleksander Čeferin has publicly warned that "
+            "merely hypothetical, UEFA president Aleksander Čeferin has publicly warned that "
             "Italy risks being removed as co-host if its infrastructure plans do not progress.",
         ],
         "sources": [
-            {"label": "Calcio e Finanza — Italy–Turkey joint candidacy for Euro 2032",
+            {"label": "Calcio e Finanza, Italy–Turkey joint candidacy for Euro 2032",
              "url": "https://www.calcioefinanza.it/2023/07/28/gravina-candidatura-italia-turchia-per-euro-2032-svolta-storica/"},
-            {"label": "Football Italia — Gravina on Italy, Euro 2032 and Turkey",
+            {"label": "Football Italia, Gravina on Italy, Euro 2032 and Turkey",
              "url": "https://football-italia.net/gravina-italy-lost-euro-2032-turkey-mancini/"},
-            {"label": "Reuters — Čeferin threatens to remove Italy as Euro 2032 co-host over infrastructure",
+            {"label": "Reuters, Čeferin threatens to remove Italy as Euro 2032 co-host over infrastructure",
              "url": "https://www.reuters.com/sports/soccer/uefa-chief-ceferin-threatens-remove-italy-euro-2032-co-host-over-infrastructure-2026-04-02/"},
         ],
         "faq": [
@@ -1072,19 +1072,19 @@ _TOURNAMENT_EDITORIAL = {
         "paragraphs": [
             "Unlike a Euro, the UEFA Champions League final is played at a single, different "
             "stadium every year, chosen by UEFA's Executive Committee a few seasons in advance. "
-            "This page maps the venues for the upcoming finals — those already confirmed and "
+            "This page maps the venues for the upcoming finals, those already confirmed and "
             "those still being decided between rival candidate cities.",
             "The 2026 final is confirmed for the Puskás Aréna in Budapest, and the 2027 final "
             "for the Estadio Metropolitano (Riyadh Air Metropolitano) in Madrid. The 2028 final "
             "is expected to head to Munich's Allianz Arena, while 2029 is a contest between "
             "London's Wembley Stadium and Barcelona's Camp Nou. The 2030 host has not yet been "
-            "announced — bids are still open.",
+            "announced, bids are still open.",
             "Final proposals for the 2028 and 2029 editions were submitted in mid-2026, with "
             "UEFA's host appointments expected to follow. We will update the map as each "
             "decision is confirmed.",
         ],
         "sources": [
-            {"label": "Footbeen — Champions League final venues 2026–2030",
+            {"label": "Footbeen, Champions League final venues 2026–2030",
              "url": "https://footbeen.com/blog/champions-league-final-venues-2026-2030"},
         ],
         "faq": [
@@ -1148,7 +1148,7 @@ def tournament_detail(request, slug):
         (c, grp["flag"]) for c, grp in venues_by_country.items()
     )
 
-    # Bid grouping — for tournaments with competing bids (e.g. Euro 2036). Auto-
+    # Bid grouping, for tournaments with competing bids (e.g. Euro 2036). Auto-
     # activates when any venue carries a `bid` label; otherwise the page keeps the
     # country grouping above. Shape: bid → countries → venues.
     has_bids = any(v.get("bid") for v in venues)
@@ -1177,7 +1177,7 @@ def tournament_detail(request, slug):
                 "kind": "joint bid" if is_joint else "solo bid",
                 "color": _BID_COLOR_HEX.get(bid_name, "#6c757d"),
             })
-        # Fixed running order (Poland leads — strongest chances), then by size.
+        # Fixed running order (Poland leads, strongest chances), then by size.
         _BID_ORDER = {"Poland": 0, "Nordic": 1, "Balkan": 2}
         bids.sort(key=lambda b: (_BID_ORDER.get(b["name"], 9), -b["venue_count"]))
 
@@ -1209,7 +1209,7 @@ def tournament_detail(request, slug):
         host_str = f"{host_countries[0]} and {host_countries[1]}"
     else:
         host_str = ", ".join(host_countries[:-1]) + f" and {host_countries[-1]}"
-    # Original prose description — used both as a visible on-page intro (good for
+    # Original prose description, used both as a visible on-page intro (good for
     # ranking + AI answers) and, trimmed, as the <meta name="description">.
     sample_names = [v["name"] for v in confirmed_venues[:3]] or [v["name"] for v in venues[:3]]
     n_total = len(venues)
@@ -1220,13 +1220,13 @@ def tournament_detail(request, slug):
     # UEFA stadium-portfolio requirement, woven into the page description text.
     req_text = (
         " To stage the tournament a host must field around 10 stadiums meeting UEFA's "
-        "capacity tiers — at least 3 of 50,000–60,000+ seats (for the opening match, "
+        "capacity tiers, at least 3 of 50,000–60,000+ seats (for the opening match, "
         "semi-finals and final), 4 of at least 40,000 and 3 of at least 30,000."
     )
     if has_bids:
         # Competing-bids tournament (host not yet chosen).
         intro_parts.append(
-            f"{tournament_name} does not yet have a host nation — several rival bids are "
+            f"{tournament_name} does not yet have a host nation, several rival bids are "
             f"competing to stage the tournament. This page maps every proposed host "
             f"stadium grouped by bid, so you can compare who is bidding and with which "
             f"grounds."
@@ -1252,7 +1252,7 @@ def tournament_detail(request, slug):
             b["blurb"] = blurb
             bid_blurbs.append({"name": b["name"], "color": b["color"], "text": blurb})
 
-        # Standing editorial on the joint-bid trend — long-form, data-aware (the
+        # Standing editorial on the joint-bid trend, long-form, data-aware (the
         # tournament pages are the site's top traffic, so this is worth the words).
         joint = [b for b in bids if b["is_joint"]]
         solo = [b for b in bids if not b["is_joint"]]
@@ -1262,7 +1262,7 @@ def tournament_detail(request, slug):
             "demands alone, national federations are teaming up to spread the financial "
             "risk, pool a wider set of world-class stadiums and strengthen both the appeal "
             "and the likelihood of success of their bid. The last single-nation host was "
-            "Germany at UEFA Euro 2024; the next two editions are already co-hosted — Euro "
+            "Germany at UEFA Euro 2024; the next two editions are already co-hosted, Euro "
             "2028 by the United Kingdom and Ireland, and Euro 2032 by Italy and Turkey."
         )
         if bids:
@@ -1311,8 +1311,8 @@ def tournament_detail(request, slug):
         if n_total:
             about.append(
                 f"This page tracks all {n_total} stadium{'s' if n_total != 1 else ''} linked "
-                f"to the tournament — {len(confirmed_venues)} confirmed and "
-                f"{len(venues) - len(confirmed_venues)} candidate — mapped with capacities, "
+                f"to the tournament, {len(confirmed_venues)} confirmed and "
+                f"{len(venues) - len(confirmed_venues)} candidate, mapped with capacities, "
                 f"host cities and, where known, how many matches each is set to stage."
             )
         if total_capacity:
@@ -1322,7 +1322,7 @@ def tournament_detail(request, slug):
     tournament_intro = " ".join(intro_parts)
     tournament_description = _trim(tournament_intro)
 
-    # Data-aware FAQ (captures "where is <T> / which stadiums / how many / biggest") —
+    # Data-aware FAQ (captures "where is <T> / which stadiums / how many / biggest") , 
     # the exact tournament search intent. Editorial may add custom Q&A via the "faq" key.
     cap_venues = [v for v in venues if v.get("capacity")]
     biggest_venue = max(cap_venues, key=lambda v: v["capacity"]) if cap_venues else None
@@ -1390,7 +1390,7 @@ _INSIGHTS = [
     {
         "slug": "national-stadiums",
         "title": "National stadiums of Europe",
-        "blurb": "Each country's main national-team venue — and which are club-free.",
+        "blurb": "Each country's main national-team venue, and which are club-free.",
         "url_name": "insight_national",
         "image": "exports/insight_national.png",
     },
@@ -1432,7 +1432,7 @@ def insights_index(request):
     return render(request, "insights_index.html", {
         "insights": _INSIGHTS,
         "page_description": (
-            "Data insights on European football stadiums — national-team grounds, "
+            "Data insights on European football stadiums, national-team grounds, "
             "pitch surfaces (grass vs artificial) and stadium density per population."
         ),
     })
@@ -1464,16 +1464,16 @@ def insight_national(request):
     rows.sort(key=lambda r: r["capacity"], reverse=True)
     total_cap = sum(r["capacity"] for r in rows)
     intro = (
-        f"Across Europe, {len(rows)} stadiums in our dataset host a national team — each "
-        f"country's main international venue. {dedicated} of them are used exclusively by the "
-        "national side; the rest are shared with a leading club. Together they seat about "
-        f"{total_cap:,} spectators."
+        f"Across Europe, <strong>{len(rows)} stadiums</strong> in our dataset host a national "
+        f"team, each country's main international venue. <strong>{dedicated}</strong> of them are "
+        "used <strong>exclusively</strong> by the national side, while the rest are shared with a "
+        f"leading club. Together they seat about <strong>{total_cap:,}</strong> spectators."
     )
     about = (
         "Most countries play their internationals at a stadium that a top club also calls "
-        "home — for example the Netherlands at the Johan Cruijff ArenA (Ajax) or Serbia at "
+        "home, for example the Netherlands at the Johan Cruijff ArenA (Ajax) or Serbia at "
         "the Rajko Mitić Stadium (Red Star). A truly dedicated national ground, used by no "
-        "club, is rarer and usually a flagship — Wembley, the Stade de France, the Puskás "
+        "club, is rarer and usually a flagship, Wembley, the Stade de France, the Puskás "
         "Aréna. The table flags which grounds are dedicated; the map shows them all."
     )
     debate = (
@@ -1490,7 +1490,7 @@ def insight_national(request):
         "intro": intro, "about": about, "debate": debate,
         "geojson_url": reverse("italiastadiaapp:stadiums_geojson") + "?view=national",
         "others": _insight_others("national-stadiums"),
-        "page_description": _trim(intro),
+        "page_description": _trim(re.sub(r"<[^>]+>", "", intro)),
         "hero_image": "exports/insight_national.png",
     })
 
@@ -1527,10 +1527,11 @@ def insight_surface(request):
     artificial_rows.sort(key=lambda r: (r["artificial_pct"], r["total"]), reverse=True)
     intro = (
         f"Of the {known:,} European stadiums in our dataset with a recorded pitch type, "
-        f"{pct(counts['GRASS'])}% use natural grass, {pct(counts['HYBRID'])}% use a hybrid "
-        f"reinforced pitch and {pct(counts['ARTIFICIAL'])}% are fully artificial. Artificial "
-        "and hybrid surfaces are most common in colder northern climates and in lower "
-        "divisions, where year-round playability matters more than top-flight regulations."
+        f"<strong>{pct(counts['GRASS'])}% use natural grass</strong>, "
+        f"<strong>{pct(counts['HYBRID'])}%</strong> use a hybrid reinforced pitch and "
+        f"<strong>{pct(counts['ARTIFICIAL'])}% are fully artificial</strong>. Artificial "
+        "and hybrid surfaces are most common in <strong>colder northern climates</strong> and in "
+        "lower divisions, where year-round playability matters more than top-flight regulations."
     )
     about = (
         "Pitch type is recorded from each stadium's Wikipedia infobox where available. "
@@ -1541,11 +1542,11 @@ def insight_surface(request):
     debate = (
         "This map was prompted by a very Italian debate. After Andrea Cambiaso said he hadn't "
         "played on artificial turf since he was 17, and Cristian Chivu's Inter were knocked "
-        "out of Europe by Bodø/Glimt — whose synthetic pitch and remarkable home record drew "
-        "intense scrutiny — fans and pundits in Italy openly questioned whether UEFA should "
+        "out of Europe by Bodø/Glimt, whose synthetic pitch and remarkable home record drew "
+        "intense scrutiny, fans and pundits in Italy openly questioned whether UEFA should "
         "ban artificial surfaces in its competitions. So how unusual is Bodø/Glimt's pitch "
         "really? The data is clear: artificial turf is overwhelmingly a Scandinavian "
-        "phenomenon — Norway, Finland and Sweden dominate the table below, driven by climate "
+        "phenomenon, Norway, Finland and Sweden dominate the table below, driven by climate "
         "and year-round playability. An Italian club drawn against a Nordic side in Europe "
         "will almost certainly face it. Is the pitch a valid excuse, or just poor "
         "preparation? Explore every artificial-turf ground on the map and judge for yourself."
@@ -1556,7 +1557,7 @@ def insight_surface(request):
         "intro": intro, "about": about, "debate": debate,
         "geojson_url": reverse("italiastadiaapp:stadiums_geojson") + "?view=surface",
         "others": _insight_others("stadium-surfaces"),
-        "page_description": _trim(intro),
+        "page_description": _trim(re.sub(r"<[^>]+>", "", intro)),
         "hero_image": "exports/insight_surface.png",
     })
 
@@ -1565,7 +1566,7 @@ def insight_surface(request):
 def insight_density(request):
     # TOP-FLIGHT stadiums per million people, by country. Restricting to the top division
     # makes this comparable across countries regardless of how many lower leagues we've
-    # scraped — it answers "how many top-tier grounds does a nation support per capita".
+    # scraped, it answers "how many top-tier grounds does a nation support per capita".
     from .models import Country
     counts = (Stadium.objects
               .filter(teams__league__division_level=1)
@@ -1601,10 +1602,10 @@ def insight_density(request):
         density_by_name["United Kingdom"] = round(uk_stadiums / (uk_pop / 1_000_000), 2)
     top = rows[0] if rows else None
     intro = (
-        "This map ranks European countries by TOP-FLIGHT football-stadium density — the number "
-        "of first-division grounds per million inhabitants. "
-        + (f"{top['country']} leads with {top['per_million']} top-tier stadiums per million "
-           f"people. " if top else "")
+        "This map ranks European countries by <strong>top-flight football-stadium density</strong>, "
+        "the number of first-division grounds per million inhabitants. "
+        + (f"<strong>{top['country']}</strong> leads with <strong>{top['per_million']}</strong> "
+           f"top-tier stadiums per million people. " if top else "")
         + "Smaller nations rank high because even a normal-sized top division is large "
         "relative to their population."
     )
@@ -1615,18 +1616,18 @@ def insight_density(request):
     )
     debate = (
         "League size is part of this story. A bigger top flight means more top-tier stadiums "
-        "per capita — and Italy's Serie A is at the centre of a long-running debate about "
+        "per capita, and Italy's Serie A is at the centre of a long-running debate about "
         "shrinking from 20 clubs to 18, or even 16, to ease fixture congestion, raise quality "
         "and give the national team more rest. England, Spain and Germany have all weighed "
         "similar moves. If Serie A cut to 18, Italy's top-flight density on this map would drop "
-        "accordingly — a reminder that these numbers reflect competition design as much as "
+        "accordingly, a reminder that these numbers reflect competition design as much as "
         "football culture."
     )
     return render(request, "insight_density.html", {
         "rows": rows, "intro": intro, "about": about, "debate": debate,
         "density_json": json.dumps(density_by_name),
         "others": _insight_others("stadium-density"),
-        "page_description": _trim(intro),
+        "page_description": _trim(re.sub(r"<[^>]+>", "", intro)),
     })
 
 
@@ -1687,7 +1688,7 @@ def insight_league_capacity(request):
     about_html = (
         "Average capacity is taken across the <strong>home grounds of every club</strong> in a "
         "league (stadiums with a recorded capacity). It rewards leagues with consistently large "
-        "grounds — not just one or two giants — so a league of mid-sized stadiums can rank below "
+        "grounds, not just one or two giants, so a league of mid-sized stadiums can rank below "
         "a smaller league whose every club plays in a big arena."
     )
     plain = re.sub(r"<[^>]+>", "", intro_html)
@@ -1737,12 +1738,12 @@ def insight_biggest(request):
     country_top = sorted(per_country.values(), key=lambda r: r["capacity"], reverse=True)
     top = biggest[0] if biggest else None
     intro = (
-        (f"The biggest football stadium in our European dataset is {top['name']} in "
-         f"{top['city']}, {top['country']}, holding {top['capacity']:,} spectators. "
-         if top else "")
-        + "This page ranks the largest football stadiums in Europe by capacity, the biggest "
-        "ground in each country, and the smallest grounds in the dataset — on an interactive "
-        "map and in sortable tables."
+        (f"The biggest football stadium in our European dataset is <strong>{top['name']}</strong> "
+         f"in {top['city']}, {top['country']}, holding <strong>{top['capacity']:,}</strong> "
+         f"spectators. " if top else "")
+        + "This page ranks the <strong>largest football stadiums in Europe</strong> by capacity, "
+        "the biggest ground in each country, and the smallest grounds in the dataset, on an "
+        "interactive map and in sortable tables."
     )
     about = (
         "Capacities are the all-seated figures recorded for each stadium. The map plots every "
@@ -1754,7 +1755,7 @@ def insight_biggest(request):
         "intro": intro, "about": about,
         "geojson_url": reverse("italiastadiaapp:stadiums_geojson") + "?view=capacity",
         "others": _insight_others("biggest-stadiums"),
-        "page_description": _trim(intro),
+        "page_description": _trim(re.sub(r"<[^>]+>", "", intro)),
     })
 
 
@@ -1769,7 +1770,7 @@ _EXPORT_SIZES = {
     "landscape": (1920, 1080),
 }
 
-# Free tile servers — no API key required
+# Free tile servers, no API key required
 _TILE_SERVERS = {
     "dark":      "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
     "light":     "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
@@ -1942,7 +1943,7 @@ def _get_export_stadiums(params):
         if primary_team is None:
             primary_team = next(iter(teams), None)
         # National sides: use the reliable flagcdn flag (non-free Wikipedia crests
-        # often fail the server-side badge fetch — see the live map fix).
+        # often fail the server-side badge fetch, see the live map fix).
         if (primary_team and primary_team.is_national and primary_team.league
                 and primary_team.league.country and primary_team.league.country.code):
             image_url = (f"https://flagcdn.com/w160/"
@@ -2145,7 +2146,7 @@ def _load_font(bold=False, size=20):
 
 
 def _split_main_inset(stadiums):
-    # The Iceland inset was removed — everything is drawn on the main map.
+    # The Iceland inset was removed, everything is drawn on the main map.
     return stadiums, []
 
 
@@ -2319,7 +2320,7 @@ def _spotlight_country(img, stadiums, bbox, W, H, dim=165):
         if not matched:
             continue
         # Draw the WHOLE country (every island / region), not just the part that
-        # happens to hold a stadium — so Denmark keeps Jutland, Serbia keeps
+        # happens to hold a stadium, so Denmark keeps Jutland, Serbia keeps
         # Vojvodina, Bosnia stays whole, etc.
         for ring in rings:
             pix = [_lon_lat_to_px(lo, la, bbox, W, H) for lo, la in ring]
@@ -2328,7 +2329,7 @@ def _spotlight_country(img, stadiums, bbox, W, H, dim=165):
                 border_rings.append(pix)
 
     if not border_rings:
-        return img  # no polygon matched — leave the map untouched
+        return img  # no polygon matched, leave the map untouched
 
     # Dim the outside: paste a dark colour with per-pixel alpha = dim where mask==0
     from PIL import ImageChops
@@ -2345,7 +2346,7 @@ def _spotlight_country(img, stadiums, bbox, W, H, dim=165):
 def _fetch_one_tile(z, x, y, style_key):
     """Fetch a single 256×256 tile, caching to /tmp only.
 
-    Deliberately does NOT use Django's in-process LocMemCache — holding tile PNG
+    Deliberately does NOT use Django's in-process LocMemCache, holding tile PNG
     bytes in RAM grows the worker's footprint render-after-render and contributes
     to OOM on the 512 MB dyno. The /tmp disk cache is enough and is shared across
     workers on the same instance.
@@ -2435,7 +2436,7 @@ def _draw_countries(img, bbox, W, H, style_key, land_color=None):
                 for lon, lat in ring
             ):
                 continue
-            # Project ALL points — Pillow clips naturally; per-point filtering
+            # Project ALL points, Pillow clips naturally; per-point filtering
             # creates broken polygons for rings that cross the bbox edge
             pts = [_lon_lat_to_px(lon, lat, bbox, W, H) for lon, lat in ring]
             if len(pts) >= 3:
@@ -2458,7 +2459,7 @@ def _make_background(style_key, W, H, bbox, use_tiles=True, land_color=None):
 
     Memory-bounded: pastes each 256×256 tile DIRECTLY into the W×H output image,
     scaled/positioned per the aspect-corrected bbox. Peak memory is just the
-    output image + a handful of in-flight tiles — never a giant stitch canvas,
+    output image + a handful of in-flight tiles, never a giant stitch canvas,
     so it stays well under the 512 MB Render limit (the old stitch+crop approach
     built a ~98 MB intermediate at z=7 and OOM-killed the dyno).
     """
@@ -2560,7 +2561,7 @@ except Exception:
 
 def _fetch_badge_image(url, size=20):
     """Download, resize, and cache a badge image to /tmp only (no in-process
-    Django cache — see _fetch_one_tile for why)."""
+    Django cache, see _fetch_one_tile for why)."""
     if not url:
         return None
     key = hashlib.md5(f"{url}_{size}".encode()).hexdigest()
@@ -2594,12 +2595,12 @@ def _fetch_badge_image(url, size=20):
 
 def _prefetch_badges(stadiums, size=20):
     """Fetch badge images in parallel with a hard 22-second wall-clock budget.
-    Returns whatever loaded in time — uncached badges are skipped gracefully."""
+    Returns whatever loaded in time, uncached badges are skipped gracefully."""
     items = [(s["name"], s.get("image_url", "")) for s in stadiums if s.get("image_url")]
     if not items:
         return {}
 
-    deadline = _time.monotonic() + 22   # hard budget — stay under Render's 30s limit
+    deadline = _time.monotonic() + 22   # hard budget, stay under Render's 30s limit
     result = {}
 
     with ThreadPoolExecutor(max_workers=8) as pool:
@@ -2616,7 +2617,7 @@ def _prefetch_badges(stadiums, size=20):
                 except Exception:
                     pass
         except Exception:
-            pass   # TimeoutError from as_completed — return what we have
+            pass   # TimeoutError from as_completed, return what we have
 
     return result
 
@@ -2648,7 +2649,7 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
     PAD_Y     = 7
     LINE_GAP  = 3
 
-    # Parse label colour — hex string → RGB tuple
+    # Parse label colour, hex string → RGB tuple
     try:
         lc_hex = params.get("label_color", "#ffffff").lstrip("#")
         label_rgb = tuple(int(lc_hex[i:i+2], 16) for i in (0, 2, 4))
@@ -2737,10 +2738,10 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
 
     # Labels never overlap (see placement below). A single league always fits;
     # only very dense multi-league maps drop a few labels that can't be placed
-    # cleanly — no-overlap reads far better than stacked labels.
+    # cleanly, no-overlap reads far better than stacked labels.
 
     def _polyline_clear(pts, own_px, own_py, avoid_boxes=True):
-        """True if no segment of the orthogonal polyline crosses another badge —
+        """True if no segment of the orthogonal polyline crosses another badge , 
         and, when avoid_boxes, no segment crosses an already-placed label pill."""
         for i in range(len(pts) - 1):
             ax, ay = pts[i]
@@ -2758,7 +2759,7 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
         pill's near side. Tries a horizontal-first elbow AND a vertical-first
         elbow (the latter lets a badge in a tight cluster escape up/down before
         going sideways). Returns the first route that clears all other badges
-        (and, when avoid_boxes, other label pills), or — when allow_cross — the
+        (and, when avoid_boxes, other label pills), or, when allow_cross, the
         horizontal elbow regardless."""
         cy = ly + pill_h / 2                      # pill vertical centre
         if side == "right":
@@ -2846,7 +2847,7 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
                             continue
                         box = (lx, ly, lx + pill_w, ly + pill_h)
                         # Never place a label over a reserved overlay area (title,
-                        # logo, legend, scale bar, north arrow) — always enforced.
+                        # logo, legend, scale bar, north arrow), always enforced.
                         if reserve_boxes and any(
                             not (box[2] < rb[0] or box[0] > rb[2] or box[3] < rb[1] or box[1] > rb[3])
                             for rb in reserve_boxes
@@ -2893,7 +2894,7 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
 
         lx, ly, box, pts = chosen
 
-        # ── Orthogonal leader polyline + pill — sharp 90° corners ──
+        # ── Orthogonal leader polyline + pill, sharp 90° corners ──
         draw.line([(int(x), int(y)) for x, y in pts], fill=label_rgb, width=1)
         draw.rounded_rectangle([lx, ly, lx + pill_w, ly + pill_h], radius=5, fill=(8, 10, 20, 220))
 
@@ -3146,7 +3147,7 @@ def _draw_pin_icon(d, cx, cy, R, cyan=(0, 229, 255), dark=(10, 14, 22)):
 
 
 def _logo_metrics(W, H):
-    """Geometry of the bottom-right logo lockup — shared by the drawing code and
+    """Geometry of the bottom-right logo lockup, shared by the drawing code and
     the label-reservation so labels never land on the watermark."""
     R = 12
     font = _load_font(bold=True, size=20)
@@ -3233,7 +3234,7 @@ def _compose_export_image(params):
 
     The map fills the whole canvas. When a title is set, its area is reserved so
     no LABEL is placed under it, then the title/subtitle are drawn in a
-    TRANSLUCENT box on top — the map shows through, nothing is lost.
+    TRANSLUCENT box on top, the map shows through, nothing is lost.
     """
     if params.get("layer") == "development":
         stadiums = _get_development_export_stadiums(params)
@@ -3332,7 +3333,7 @@ def map_export(request):
     cache.set(cache_key, True, 3)
 
     params = _parse_export_params(request)
-    # Cap to HD on free tier (512 MB RAM limit — FHD/4K OOM-kills the dyno)
+    # Cap to HD on free tier (512 MB RAM limit, FHD/4K OOM-kills the dyno)
     if params["size_key"] in ("fhd", "4k"):
         params["size_key"] = "hd"
         params["W"], params["H"] = 1280, 720
@@ -3374,14 +3375,14 @@ def map_export(request):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# PAID EXPORT — Stripe pay-per-download
+# PAID EXPORT, Stripe pay-per-download
 # ─────────────────────────────────────────────────────────────────────────────
 
-EXPORT_PRICE_EUR = 50  # cents (Stripe EUR minimum) — removes watermark + logo
+EXPORT_PRICE_EUR = 50  # cents (Stripe EUR minimum), removes watermark + logo
 
 
 def export_page(request):
-    """The /export/ landing page — shows filter UI and watermarked preview."""
+    """The /export/ landing page, shows filter UI and watermarked preview."""
     return render(request, "export.html", {
         "stripe_publishable_key": settings.STRIPE_SECRET_KEY.replace("sk_", "pk_") if settings.STRIPE_SECRET_KEY else "",
     })
@@ -3420,7 +3421,7 @@ def export_checkout(request):
                     "currency": "eur",
                     "unit_amount": EXPORT_PRICE_EUR,
                     "product_data": {
-                        "name": "Stadium map — clean version",
+                        "name": "Stadium map, clean version",
                         "description": "Removes the watermark + logo. Supports the site. Single use.",
                     },
                 },
@@ -3434,7 +3435,7 @@ def export_checkout(request):
     except stripe.StripeError as e:
         return JsonResponse({"error": str(e)}, status=502)
 
-    # Persist token — paid=False until webhook confirms. If this write fails,
+    # Persist token, paid=False until webhook confirms. If this write fails,
     # export_success recreates it from the Stripe session metadata as a fallback.
     try:
         ExportToken.objects.create(
@@ -3453,7 +3454,7 @@ def export_checkout(request):
 @csrf_exempt
 @require_POST
 def export_webhook(request):
-    """Stripe webhook — reliable second confirmation path. On
+    """Stripe webhook, reliable second confirmation path. On
     checkout.session.completed it marks the token paid, and UPSERTS it (creates
     from session metadata) if the checkout-time write was lost, so the download
     works even if the success page never loaded."""
@@ -3463,7 +3464,7 @@ def export_webhook(request):
     secret = settings.STRIPE_WEBHOOK_SECRET
 
     if not secret:
-        log.error("export_webhook: STRIPE_WEBHOOK_SECRET not set — ignoring event")
+        log.error("export_webhook: STRIPE_WEBHOOK_SECRET not set, ignoring event")
         return HttpResponse(status=400)
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -3478,7 +3479,7 @@ def export_webhook(request):
         session_id = obj["id"]
         updated = ExportToken.objects.filter(stripe_session=session_id).update(paid=True)
         if not updated:
-            # Token row missing (checkout write lost) — recreate it from metadata
+            # Token row missing (checkout write lost), recreate it from metadata
             filters_json = (obj.get("metadata") or {}).get("filters_json", "{}")
             ExportToken.objects.create(
                 stripe_session=session_id,
@@ -3493,7 +3494,7 @@ def export_webhook(request):
 
 @require_GET
 def export_success(request):
-    """Redirect from Stripe success URL — find or create token, show download page."""
+    """Redirect from Stripe success URL, find or create token, show download page."""
     log = logging.getLogger(__name__)
     session_id = request.GET.get("session_id", "")
     if not session_id:
@@ -3501,12 +3502,12 @@ def export_success(request):
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
-    # 1) The token is normally created at checkout time. Look it up first — this
+    # 1) The token is normally created at checkout time. Look it up first, this
     #    does NOT depend on Stripe being reachable.
     token_obj = ExportToken.objects.filter(stripe_session=session_id).first()
 
     # 2) Verify payment with Stripe directly (webhook may not have fired). Retry a
-    #    couple of times — a transient failure (e.g. during a deploy) must not turn
+    #    couple of times, a transient failure (e.g. during a deploy) must not turn
     #    a real payment into "Session not found".
     stripe_session = None
     last_err = None
@@ -3535,7 +3536,7 @@ def export_success(request):
     if token_obj is None:
         log.error("export_success: token missing AND Stripe unreachable for %s", session_id)
         return render(request, "export_error.html", {
-            "msg": "We couldn't verify your session just now. Your payment is safe — "
+            "msg": "We couldn't verify your session just now. Your payment is safe, "
                    "please refresh in a few seconds, or contact support with your Stripe receipt."
         })
 
@@ -3546,7 +3547,7 @@ def export_success(request):
 
     if not token_obj.paid:
         return render(request, "export_error.html", {
-            "msg": "Payment not confirmed yet — please wait a few seconds and refresh this page."
+            "msg": "Payment not confirmed yet, please wait a few seconds and refresh this page."
         })
 
     return render(request, "export_success.html", {"token": str(token_obj.token)})
@@ -3556,7 +3557,7 @@ def _render_export_png(token_obj):
     """Generate the PNG for an ExportToken and return raw bytes."""
     filters = json.loads(token_obj.filters_json)
     if filters.get("size_key") == "4k":
-        filters["size_key"] = "hd"   # cap to HD — free tier 512 MB RAM limit
+        filters["size_key"] = "hd"   # cap to HD, free tier 512 MB RAM limit
 
     class _FakeGET:
         def get(self, key, default=""):
@@ -3566,7 +3567,7 @@ def _render_export_png(token_obj):
         GET = _FakeGET()
 
     params = _parse_export_params(_FakeRequest())
-    params["logo"] = False   # paid version is CLEAN — no logo, no watermark
+    params["logo"] = False   # paid version is CLEAN, no logo, no watermark
     # Serialize with previews to bound peak memory (see _RENDER_LOCK)
     _RENDER_LOCK.acquire()
     try:
@@ -3593,7 +3594,7 @@ def export_download(request, token):
     except ExportToken.DoesNotExist:
         raise Http404
 
-    already_used_msg = ("This download link has already been used. Check your email — "
+    already_used_msg = ("This download link has already been used. Check your email, "
                         "the map was sent after your first click.")
     if not token_obj.paid:
         return render(request, "export_error.html", {"msg": "Payment not confirmed."}, status=402)
@@ -3634,7 +3635,7 @@ def export_download(request, token):
                 body=(
                     "Hi,\n\nThank you for your purchase!\n\n"
                     "Your map is attached to this email as a high-resolution PNG.\n\n"
-                    "— Stadiums of Europe\n"
+                    ",  Stadiums of Europe\n"
                     "stadiumsofeurope.com"
                 ),
                 from_email=settings.DEFAULT_FROM_EMAIL,

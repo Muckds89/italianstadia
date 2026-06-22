@@ -1,7 +1,7 @@
 {% extends "base_detail.html" %}
 {% load static %}
 
-{% block title %}National stadiums of Europe — Stadiums of Europe{% endblock %}
+{% block title %}National stadiums of Europe | Stadiums of Europe{% endblock %}
 
 {% block meta %}
 <meta name="description" content="{{ page_description }}">
@@ -27,7 +27,7 @@
 {% block content %}
 <div class="container my-5">
     <h1 class="mb-2">National stadiums of Europe</h1>
-    <p class="lead text-secondary mb-4">{{ intro }}</p>
+    <p class="lead text-secondary mb-4">{{ intro|safe }}</p>
 
     {% if hero_image %}
     <img src="{% static hero_image %}" alt="Map of national stadiums of Europe"
@@ -41,13 +41,13 @@
 
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-white"><strong>About this data</strong></div>
-        <div class="card-body"><p class="mb-0">{{ about }}</p></div>
+        <div class="card-body"><p class="mb-0">{{ about|safe }}</p></div>
     </div>
 
     {% if debate %}
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-white"><strong>Who might be next</strong></div>
-        <div class="card-body"><p class="mb-0">{{ debate }}</p></div>
+        <div class="card-body"><p class="mb-0">{{ debate|safe }}</p></div>
     </div>
     {% endif %}
 
@@ -63,7 +63,7 @@
                         <td>{{ r.nation }}</td>
                         <td>{{ r.country }}</td>
                         <td>{% if r.dedicated %}<span class="badge bg-success">National-only</span>{% else %}<span class="badge bg-secondary">Shared with club</span>{% endif %}</td>
-                        <td class="text-end">{% if r.capacity %}{{ r.capacity|floatformat:0 }}{% else %}—{% endif %}</td>
+                        <td class="text-end">{% if r.capacity %}{{ r.capacity|floatformat:0 }}{% else %}, {% endif %}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

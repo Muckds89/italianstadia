@@ -1,12 +1,12 @@
 {% extends "base_detail.html" %}
 {% load static stadium_extras %}
 
-{% block title %}{{ stadium.name }}{% if stadium.capacity %} — {{ stadium.capacity }} Capacity{% endif %} | Stadiums of Europe{% endblock %}
+{% block title %}{{ stadium.name }}{% if stadium.capacity %}, {{ stadium.capacity }} Capacity{% endif %} | Stadiums of Europe{% endblock %}
 
 {% block meta %}
 <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{% url 'italiastadiaapp:stadium_detail' stadium.slug %}">
 <meta name="description" content="{{ page_description }}">
-<meta property="og:title" content="{{ stadium.name }} — Stadiums of Europe">
+<meta property="og:title" content="{{ stadium.name }} | Stadiums of Europe">
 <meta property="og:description" content="{{ page_description }}">
 <meta property="og:type" content="place">
 <meta property="og:site_name" content="Stadiums of Europe">
@@ -153,7 +153,7 @@
                                         {% if t.matches %}<span class="text-muted small">{{ t.matches }} match{{ t.matches|pluralize:"es" }}</span>{% endif %}
                                     </div>
                                     <span class="badge {% if t.status == 'CONFIRMED' %}bg-success{% else %}bg-warning text-dark{% endif %}">
-                                        {{ t.status|default:"—" }}
+                                        {{ t.status|default:", " }}
                                     </span>
                                 </div>
                             </li>

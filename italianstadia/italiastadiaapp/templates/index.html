@@ -6,9 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#212529">
-    <meta name="description" content="Stadiums of Europe — interactive map of football stadiums across Europe. Filter by country, league, ownership and construction era.">
+    <meta name="description" content="Stadiums of Europe, interactive map of football stadiums across Europe. Filter by country, league, ownership and construction era.">
     <meta property="og:title" content="Stadiums of Europe">
-    <meta property="og:description" content="Interactive map of football stadiums across Europe — capacity, ownership, leagues and 3D views.">
+    <meta property="og:description" content="Interactive map of football stadiums across Europe, capacity, ownership, leagues and 3D views.">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Stadiums of Europe">
     <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'exports/insight_overview.png' %}">
@@ -286,7 +286,7 @@
         <!-- Flex break: push filters to second row -->
         <div class="w-100"></div>
 
-        <!-- FILTER AREA — second row -->
+        <!-- FILTER AREA, second row -->
         <div id="filterDrawer" class="d-flex align-items-center flex-wrap gap-2 pb-1 w-100">
 
             <!-- Live search -->
@@ -314,7 +314,7 @@
                     <div class="clp-panel" id="clpPanel" style="display:none"></div>
                 </div>
 
-                <!-- Hidden selects — data model, unchanged by this feature -->
+                <!-- Hidden selects, data model, unchanged by this feature -->
                 <select id="countryFilter" class="form-select" style="display:none">
                     <option value="">All countries</option>
                 </select>
@@ -389,7 +389,7 @@
 </nav>
 <div id="map"
      data-countries-url="{% static 'data/ne_110m_admin_0_countries.geojson' %}"
-     {# Pre-built static file (WhiteNoise, no DB hit) — the live /api/stadiums/ endpoint
+     {# Pre-built static file (WhiteNoise, no DB hit), the live /api/stadiums/ endpoint
         OOMs/times out on the 512 MB tier with the full dataset. Regenerate with
         `manage.py generate_stadiums_json` after data changes. #}
      data-stadiums-url="{% static 'data/stadiums_map.json' %}?v={{ map_version }}"
@@ -400,7 +400,7 @@
     </div>
 </div>
 
-<!-- Mobile bottom sheet — must be outside #map to avoid Leaflet's CSS transform stacking context -->
+<!-- Mobile bottom sheet, must be outside #map to avoid Leaflet's CSS transform stacking context -->
 <div id="mobileSheet" role="dialog" aria-modal="true">
     <button id="mobileSheetClose" aria-label="Close">✕</button>
     <div id="mobileSheetInner">

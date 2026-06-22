@@ -1,7 +1,7 @@
 {% extends "base_detail.html" %}
 {% load static %}
 
-{% block title %}Artificial vs grass pitches in European stadiums — Stadiums of Europe{% endblock %}
+{% block title %}Artificial vs grass pitches in European stadiums | Stadiums of Europe{% endblock %}
 
 {% block meta %}
 <meta name="description" content="{{ page_description }}">
@@ -27,7 +27,7 @@
 {% block content %}
 <div class="container my-5">
     <h1 class="mb-2">Artificial vs natural grass in European stadiums</h1>
-    <p class="lead text-secondary mb-4">{{ intro }}</p>
+    <p class="lead text-secondary mb-4">{{ intro|safe }}</p>
 
     {% if hero_image %}
     <img src="{% static hero_image %}" alt="Map of artificial vs grass stadiums in Europe"
@@ -37,7 +37,7 @@
     {% if debate %}
     <div class="card shadow-sm mb-4 border-warning">
         <div class="card-header bg-white"><strong>The Cambiaso / Bodø-Glimt debate</strong></div>
-        <div class="card-body"><p class="mb-0">{{ debate }}</p></div>
+        <div class="card-body"><p class="mb-0">{{ debate|safe }}</p></div>
     </div>
     {% endif %}
 
@@ -62,7 +62,7 @@
 
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-white"><strong>About this data</strong></div>
-        <div class="card-body"><p class="mb-0">{{ about }}</p></div>
+        <div class="card-body"><p class="mb-0">{{ about|safe }}</p></div>
     </div>
 
     <div class="card shadow-sm mb-4">

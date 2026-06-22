@@ -1,7 +1,7 @@
 {% extends "base_detail.html" %}
 {% load static %}
 
-{% block title %}Stadium density per population in Europe — Stadiums of Europe{% endblock %}
+{% block title %}Stadium density per population in Europe | Stadiums of Europe{% endblock %}
 
 {% block meta %}
 <meta name="description" content="{{ page_description }}">
@@ -25,7 +25,7 @@
 {% block content %}
 <div class="container my-5">
     <h1 class="mb-2">Stadium density per population</h1>
-    <p class="lead text-secondary mb-4">{{ intro }}</p>
+    <p class="lead text-secondary mb-4">{{ intro|safe }}</p>
 
     <div id="insight-map" class="mb-4"
          data-mode="choropleth"
@@ -34,18 +34,18 @@
 
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-white"><strong>About this data</strong></div>
-        <div class="card-body"><p class="mb-0">{{ about }}</p></div>
+        <div class="card-body"><p class="mb-0">{{ about|safe }}</p></div>
     </div>
 
     {% if debate %}
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-white"><strong>Should Serie A shrink?</strong></div>
-        <div class="card-body"><p class="mb-0">{{ debate }}</p></div>
+        <div class="card-body"><p class="mb-0">{{ debate|safe }}</p></div>
     </div>
     {% endif %}
 
     <div class="card shadow-sm mb-4">
-        <div class="card-header bg-white"><strong>Ranking — stadiums per million people</strong></div>
+        <div class="card-header bg-white"><strong>Ranking, stadiums per million people</strong></div>
         <div class="table-responsive">
             <table class="table table-hover mb-0">
                 <thead><tr><th>#</th><th>Country</th><th class="text-end">Stadiums / million</th><th class="text-end">Stadiums</th><th class="text-end">Population</th></tr></thead>

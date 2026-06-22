@@ -1,13 +1,13 @@
 {% extends "base_detail.html" %}
 {% load static %}
 
-{% block title %}{{ development.name }} — {{ development.get_status_display }} stadium project | Stadiums of Europe{% endblock %}
+{% block title %}{{ development.name }}, {{ development.get_status_display }} stadium project | Stadiums of Europe{% endblock %}
 
 {% block meta %}
-<meta name="description" content="{% if development.notes %}{{ development.notes|striptags|truncatechars:160 }}{% else %}{{ development.name }} — {{ development.get_project_type_display }} football stadium project in {{ development.country }}{% if development.future_capacity %}, {{ development.future_capacity }} capacity{% endif %}.{% endif %}">
+<meta name="description" content="{% if development.notes %}{{ development.notes|striptags|truncatechars:160 }}{% else %}{{ development.name }}, {{ development.get_project_type_display }} football stadium project in {{ development.country }}{% if development.future_capacity %}, {{ development.future_capacity }} capacity{% endif %}.{% endif %}">
 <meta property="og:site_name" content="Stadiums of Europe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="{{ development.name }} — {{ development.get_status_display }} stadium project">
+<meta property="og:title" content="{{ development.name }}, {{ development.get_status_display }} stadium project">
 <meta property="og:description" content="{% if development.notes %}{{ development.notes|striptags|truncatechars:160 }}{% else %}{{ development.name }} football stadium project in {{ development.country }}.{% endif %}">
 <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
 {% if development.image_url %}<meta property="og:image" content="{{ development.image_url }}">{% endif %}

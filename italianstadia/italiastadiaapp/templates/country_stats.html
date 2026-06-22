@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ country_name }} Football Stadiums — Full List, Map &amp; Capacities | Stadiums of Europe</title>
+    <title>{{ country_name }} Football Stadiums, Full List, Map &amp; Capacities | Stadiums of Europe</title>
     <meta name="description" content="{{ page_description }}">
     <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{% url 'italiastadiaapp:country_stats' country_name %}">
     <meta property="og:title" content="{{ country_name }} Football Stadiums">
@@ -140,7 +140,7 @@
                         <td><a href="{% url 'italiastadiaapp:stadium_detail' s.slug %}">{{ s.name }}</a></td>
                         <td class="text-muted">{{ s.city.name }}</td>
                         <td class="text-muted">{% for t in s.teams.all|slice:":2" %}{{ t.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
-                        <td class="text-end">{% if s.capacity %}{{ s.capacity|floatformat:"0" }}{% else %}—{% endif %}</td>
+                        <td class="text-end">{% if s.capacity %}{{ s.capacity|floatformat:"0" }}{% else %}, {% endif %}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -152,7 +152,7 @@
     <!-- FAQ -->
     {% if faq %}
     <div class="card shadow-sm mb-4">
-        <div class="card-header"><strong>{{ country_name }} stadiums — frequently asked questions</strong></div>
+        <div class="card-header"><strong>{{ country_name }} stadiums, frequently asked questions</strong></div>
         <div class="card-body">
             {% for item in faq %}
             <h2 class="h6 mb-1">{{ item.q }}</h2>
