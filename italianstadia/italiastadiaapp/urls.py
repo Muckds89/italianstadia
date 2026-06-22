@@ -20,6 +20,7 @@ urlpatterns = [
     path("favicon.ico", RedirectView.as_view(url="/static/icons/favicon.ico", permanent=True)),
     path('', views.index, name='home'),
     path('embed/map/', views.embed_map, name='embed_map'),
+    path('map', views.map_page, name='map_page'),
     path('cities/', city_list, name='city_list'),
     path('stadiums/', stadium_list, name='stadium_list'),
     path('under-development/', stadium_development_list, name='stadium_development_list'),

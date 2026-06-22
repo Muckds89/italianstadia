@@ -524,6 +524,13 @@ def embed_map(request):
     return render(request, "embed_map.html", {"map_version": _map_version()})
 
 
+@cache_page(60 * 60)
+def map_page(request):
+    """Dedicated, clean interactive-map landing page at /map — a stable, descriptive URL
+    suitable for linking as an external source (e.g. from Wikipedia)."""
+    return render(request, "map_page.html", {"map_version": _map_version()})
+
+
 def _available_countries():
     """Countries that appear in the DB, ordered by UEFA 5-year coefficient rank.
 
@@ -1045,8 +1052,15 @@ _TOURNAMENT_EDITORIAL = {
             "leaving Turkey to be awarded the tournament as sole host. Those concerns are not "
             "merely hypothetical, UEFA president Aleksander Čeferin has publicly warned that "
             "Italy risks being removed as co-host if its infrastructure plans do not progress.",
+            "The Italian host list is also shifting. Bari's Stadio San Nicola has effectively "
+            "dropped out of the running, while Lecce's Stadio Ettore Giardiniero (Via del Mare) "
+            "has stepped forward: its candidacy was accepted, with a renovation planned to bring "
+            "the ground up to UEFA standard. On the map below Bari is marked as withdrawn and "
+            "Lecce appears as an under-renovation candidate.",
         ],
         "sources": [
+            {"label": "LeccePrima, Via del Mare's Euro 2032 candidacy accepted",
+             "url": "https://www.lecceprima.it/sport/calcio/euro-2032-via-del-mare-candidatura-accettata.html"},
             {"label": "Calcio e Finanza, Italy–Turkey joint candidacy for Euro 2032",
              "url": "https://www.calcioefinanza.it/2023/07/28/gravina-candidatura-italia-turchia-per-euro-2032-svolta-storica/"},
             {"label": "Football Italia, Gravina on Italy, Euro 2032 and Turkey",
@@ -1197,6 +1211,7 @@ def tournament_detail(request, slug):
                 "matches": v["matches"],
                 "bid": v.get("bid", ""),
                 "bid_color": _BID_COLOR_HEX.get(v.get("bid", ""), ""),
+                "is_development": v.get("is_development", False),
             },
         })
     geojson = json.dumps({"type": "FeatureCollection", "features": features})

@@ -1,0 +1,68 @@
+{% extends "base_detail.html" %}
+{% load static %}
+
+{% block title %}Interactive map of European football stadiums | Stadiums of Europe{% endblock %}
+
+{% block meta %}
+<meta name="description" content="An interactive map of football stadiums across 30+ European leagues — capacity, location, pitch surface and clubs for every ground.">
+<link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{% url 'italiastadiaapp:map_page' %}">
+<meta property="og:title" content="Interactive map of European football stadiums">
+<meta property="og:description" content="Every football stadium in Europe on one interactive map — capacity, location, clubs and more.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Stadiums of Europe">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'exports/insight_overview.png' %}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'exports/insight_overview.png' %}">
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>#fullmap{height:78vh;min-height:480px;border-radius:8px;background:#0b1020}</style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h1 class="mb-2">Interactive map of European football stadiums</h1>
+    <p class="text-secondary mb-3">
+        Explore every football stadium across 30+ European leagues on one interactive map.
+        Click any marker for the ground's <strong>capacity, location and clubs</strong>, or open
+        its full profile. Zoom and pan freely; data covers top divisions and many lower tiers.
+    </p>
+
+    <div id="fullmap" class="mb-3"></div>
+
+    <p class="small text-muted">
+        Looking for more? Use the <a href="{% url 'italiastadiaapp:home' %}">filterable map</a>,
+        browse <a href="{% url 'italiastadiaapp:insights_index' %}">data insights</a>,
+        <a href="{% url 'italiastadiaapp:tournament_detail' 'uefa-euro-2032' %}">Euro 2032 venues</a>,
+        or <a href="{% url 'italiastadiaapp:export_page' %}">export a custom map</a>.
+    </p>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+  var map = L.map("fullmap", { scrollWheelZoom: true }).setView([54, 12], 4);
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+    attribution: '&copy; OpenStreetMap &copy; CARTO',
+    maxZoom: 18,
+  }).addTo(map);
+  fetch("{% static 'data/stadiums_map.json' %}?v={{ map_version }}")
+    .then(function (r) { return r.json(); })
+    .then(function (fc) {
+      var bounds = [];
+      (fc.features || []).forEach(function (f) {
+        var c = f.geometry && f.geometry.coordinates; if (!c) return;
+        var p = f.properties || {}, ll = [c[1], c[0]]; bounds.push(ll);
+        var cap = p.capacity ? p.capacity.toLocaleString() + " seats" : "";
+        L.circleMarker(ll, { radius: 5, color: "#111", weight: 1,
+          fillColor: "#38bdf8", fillOpacity: .9 })
+          .addTo(map)
+          .bindPopup('<strong><a href="/stadium/' + (p.slug || p.id) + '/">' + p.name + '</a></strong><br>'
+            + (p.city ? p.city + (p.country ? ", " + p.country : "") + "<br>" : "") + cap);
+      });
+      if (bounds.length) map.fitBounds(bounds, { padding: [20, 20], maxZoom: 5 });
+    });
+})();
+</script>
+{% endblock %}

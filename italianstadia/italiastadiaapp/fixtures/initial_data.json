@@ -12453,7 +12453,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CANDIDATE"
+        "status": "DISCARDED"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_San_Nicola",
@@ -66306,6 +66306,37 @@
     "instagram_url": null,
     "notes": "The new Spotify Camp Nou is the redeveloped home of FC Barcelona in Barcelona, Spain, raising capacity to about 105,000 to remain the largest football stadium in Europe. Part of the Espai Barca project, the rebuild adds a new third tier and a signature panoramic rooftop canopy that will fully enclose the bowl, with a 360-degree video scoreboard beneath it. FC Barcelona is playing through phased construction, with the completed, fully roofed stadium targeted for 2026.",
     "tournaments": []
+  }
+},
+{
+  "model": "italiastadiaapp.stadiumdevelopment",
+  "pk": 21,
+  "fields": {
+    "stadium": 40,
+    "name": "Stadio Via del Mare (Euro 2032 renovation)",
+    "slug": "stadio-via-del-mare-euro-2032-renovation",
+    "project_type": "REDEVELOPMENT",
+    "status": "PLANNING",
+    "future_capacity": 40000,
+    "estimated_opening": null,
+    "latitude": "40.365280",
+    "longitude": "18.208890",
+    "country": "Italy",
+    "architect": null,
+    "developer": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "source_url": "https://www.lecceprima.it/sport/calcio/euro-2032-via-del-mare-candidatura-accettata.html",
+    "instagram_url": null,
+    "notes": "Lecce's Stadio Ettore Giardiniero - Via del Mare put forward for renovation after its Euro 2032 candidacy was accepted, replacing Bari's withdrawn San Nicola.",
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ]
   }
 }
 ]

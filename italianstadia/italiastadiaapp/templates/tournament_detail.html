@@ -394,7 +394,9 @@
         const [lng, lat] = f.geometry.coordinates;
         const props = f.properties;
         // Competing-bid tournaments colour markers by bid; otherwise by venue status.
+        // Under-development / renovation venues get a distinct colour (purple).
         const _statusColor = props.bid_color ? props.bid_color
+            : props.is_development ? "#8b5cf6"
             : props.status === "CONFIRMED" ? "#198754"
             : props.status === "DISCARDED" ? "#dc3545" : "#ffc107";
         const circle = L.circleMarker([lat, lng], {

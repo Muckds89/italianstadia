@@ -124,7 +124,7 @@ class StaticViewSitemap(_DataLastmodMixin, Sitemap):
     priority = 1.0
 
     def items(self):
-        return ["home", "stadium_list", "team_list", "city_list", "stadium_development_list",
+        return ["home", "map_page", "stadium_list", "team_list", "city_list", "stadium_development_list",
                 "insights_index", "insight_national", "insight_surface", "insight_density",
                 "insight_biggest", "insight_league_capacity"]
 
