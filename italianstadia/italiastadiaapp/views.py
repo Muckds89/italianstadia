@@ -481,11 +481,9 @@ def stadiums_geojson(request):
         qs = qs.filter(teams__league__country__name=param_country).distinct()
     # Insight views (see /insights/) — preset filters reused by the shared insights map JS.
     if param_view == "national":
-        # Grounds used EXCLUSIVELY by a national side (>=1 national team, 0 club teams).
-        qs = qs.annotate(
-            _nat=Count("teams", filter=Q(teams__is_national=True), distinct=True),
-            _club=Count("teams", filter=Q(teams__is_national=False), distinct=True),
-        ).filter(_nat__gte=1, _club=0)
+        # Any ground that hosts a national side (a country's national stadium, even if a
+        # club also plays there — e.g. Johan Cruijff ArenA, Rajko Mitić).
+        qs = qs.filter(teams__is_national=True).distinct()
     elif param_view == "surface":
         qs = qs.exclude(surface__isnull=True).exclude(surface="")
     elif param_view == "capacity":
@@ -1372,8 +1370,8 @@ def tournament_detail(request, slug):
 _INSIGHTS = [
     {
         "slug": "national-stadiums",
-        "title": "Europe's national-team-only stadiums",
-        "blurb": "Grounds used exclusively by a national side — no club tenant.",
+        "title": "National stadiums of Europe",
+        "blurb": "Each country's main national-team venue — and which are club-free.",
         "url_name": "insight_national",
         "image": "exports/insight_national.png",
     },
@@ -1421,30 +1419,36 @@ def insight_national(request):
           .annotate(
               _nat=Count("teams", filter=Q(teams__is_national=True), distinct=True),
               _club=Count("teams", filter=Q(teams__is_national=False), distinct=True))
-          .filter(_nat__gte=1, _club=0)
+          .filter(_nat__gte=1)
           .exclude(latitude__isnull=True))
     rows = []
+    dedicated = 0
     for s in qs:
         nat = next((t for t in s.teams.all() if t.is_national), None)
         country = nat.league.country.name if (nat and nat.league and nat.league.country) else (
             s.city.country if s.city else "")
+        is_dedicated = s._club == 0
+        if is_dedicated:
+            dedicated += 1
         rows.append({
             "stadium": s, "nation": nat.name if nat else "",
             "country": country, "capacity": s.capacity or 0,
+            "dedicated": is_dedicated,
         })
     rows.sort(key=lambda r: r["capacity"], reverse=True)
     total_cap = sum(r["capacity"] for r in rows)
     intro = (
-        f"Across Europe, {len(rows)} stadiums in our dataset are used exclusively by a "
-        "national team, with no club playing there week to week. These are typically "
-        "purpose-built or symbolic national grounds reserved for international fixtures. "
-        f"Together they seat about {total_cap:,} spectators."
+        f"Across Europe, {len(rows)} stadiums in our dataset host a national team — each "
+        f"country's main international venue. {dedicated} of them are used exclusively by the "
+        "national side; the rest are shared with a leading club. Together they seat about "
+        f"{total_cap:,} spectators."
     )
     about = (
-        "Most countries share their national stadium with a leading club, so a ground used "
-        "only by the national team is relatively rare and usually significant — a flagship "
-        "venue, a neutral national arena, or a tournament stadium awaiting a permanent "
-        "tenant. The map below shows each of these grounds; the table lists them by capacity."
+        "Most countries play their internationals at a stadium that a top club also calls "
+        "home — for example the Netherlands at the Johan Cruijff ArenA (Ajax) or Serbia at "
+        "the Rajko Mitić Stadium (Red Star). A truly dedicated national ground, used by no "
+        "club, is rarer and usually a flagship — Wembley, the Stade de France, the Puskás "
+        "Aréna. The table flags which grounds are dedicated; the map shows them all."
     )
     debate = (
         "The list could grow. Several countries are actively debating a dedicated national "

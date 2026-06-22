@@ -1,11 +1,11 @@
 {% extends "base_detail.html" %}
 {% load static %}
 
-{% block title %}Europe's national-team-only stadiums — Stadiums of Europe{% endblock %}
+{% block title %}National stadiums of Europe — Stadiums of Europe{% endblock %}
 
 {% block meta %}
 <meta name="description" content="{{ page_description }}">
-<meta property="og:title" content="Europe's national-team-only stadiums">
+<meta property="og:title" content="National stadiums of Europe">
 <meta property="og:description" content="{{ page_description }}">
 <meta property="og:type" content="article">
 {% if hero_image %}
@@ -26,11 +26,11 @@
 
 {% block content %}
 <div class="container my-5">
-    <h1 class="mb-2">Europe's national-team-only stadiums</h1>
+    <h1 class="mb-2">National stadiums of Europe</h1>
     <p class="lead text-secondary mb-4">{{ intro }}</p>
 
     {% if hero_image %}
-    <img src="{% static hero_image %}" alt="Map of Europe's national-team-only stadiums"
+    <img src="{% static hero_image %}" alt="Map of national stadiums of Europe"
          class="img-fluid rounded shadow-sm mb-4" style="width:100%;height:auto;">
     {% endif %}
 
@@ -52,16 +52,17 @@
     {% endif %}
 
     <div class="card shadow-sm mb-4">
-        <div class="card-header bg-white"><strong>{{ count }} national-team-only grounds</strong></div>
+        <div class="card-header bg-white"><strong>{{ count }} national stadiums</strong></div>
         <div class="table-responsive">
             <table class="table table-hover mb-0">
-                <thead><tr><th>Stadium</th><th>National team</th><th>Country</th><th class="text-end">Capacity</th></tr></thead>
+                <thead><tr><th>Stadium</th><th>National team</th><th>Country</th><th>Dedicated?</th><th class="text-end">Capacity</th></tr></thead>
                 <tbody>
                 {% for r in rows %}
                     <tr>
                         <td><a href="{% url 'italiastadiaapp:stadium_detail' r.stadium.slug %}">{{ r.stadium.name }}</a></td>
                         <td>{{ r.nation }}</td>
                         <td>{{ r.country }}</td>
+                        <td>{% if r.dedicated %}<span class="badge bg-success">National-only</span>{% else %}<span class="badge bg-secondary">Shared with club</span>{% endif %}</td>
                         <td class="text-end">{% if r.capacity %}{{ r.capacity|floatformat:0 }}{% else %}—{% endif %}</td>
                     </tr>
                 {% endfor %}
@@ -75,7 +76,7 @@
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Dataset",
- "name":"Europe's national-team-only stadiums",
+ "name":"National stadiums of Europe",
  "description":"{{ page_description|escapejs }}",
  "url":"{{ request.scheme }}://{{ request.get_host }}{{ request.path }}"}
 </script>

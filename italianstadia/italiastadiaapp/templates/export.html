@@ -54,9 +54,14 @@
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark py-2 mb-4">
-    <div class="container-fluid px-4">
-        <a class="navbar-brand" href="/">Stadiums of Europe</a>
-        <a href="/" class="btn btn-sm btn-outline-light">← Map</a>
+    <div class="container-fluid px-4 d-flex flex-wrap align-items-center gap-2">
+        <a class="navbar-brand me-auto" href="/">Stadiums of Europe</a>
+        <a href="{% url 'italiastadiaapp:home' %}" class="nav-link d-inline text-light px-2">Map</a>
+        <a href="{% url 'italiastadiaapp:stadium_list' %}" class="nav-link d-inline text-light px-2">Stadiums</a>
+        <a href="{% url 'italiastadiaapp:team_list' %}" class="nav-link d-inline text-light px-2">Teams</a>
+        <a href="{% url 'italiastadiaapp:city_list' %}" class="nav-link d-inline text-light px-2">Cities</a>
+        <a href="{% url 'italiastadiaapp:tournament_detail' 'uefa-euro-2032' %}" class="nav-link d-inline text-light px-2">Tournaments</a>
+        <a href="{% url 'italiastadiaapp:insights_index' %}" class="nav-link d-inline text-light px-2">Insights</a>
     </div>
 </nav>
 

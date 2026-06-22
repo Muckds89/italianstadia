@@ -25,10 +25,10 @@ class Command(BaseCommand):
     # key -> export query params
     MAPS = {
         "national": {
-            "national_only": "1", "spotlight": "1", "style_key": "satellite",
+            "national": "1", "spotlight": "1", "style_key": "satellite",
             "size_key": "landscape", "labels": "1", "legend": "0", "north": "1",
-            "title": "National-team-only stadiums of Europe",
-            "subtitle": "Grounds used exclusively by a national side",
+            "title": "National stadiums of Europe",
+            "subtitle": "Each country's main national-team venue",
         },
     }
 
