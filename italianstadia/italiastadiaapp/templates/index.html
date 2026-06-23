@@ -188,6 +188,8 @@
         <a class="navbar-brand" href="/">Stadiums of Europe</a>
 
         <!-- DESKTOP nav links: inline on lg+, hidden on mobile -->
+        <!-- SYNC RULE: keep this in sync with the MOBILE menu below. Any link
+             change here must be mirrored there. See "Navigation parity" in CLAUDE.md. -->
         <ul class="navbar-nav flex-row me-auto d-none d-lg-flex">
             <li class="nav-item dropdown nav-hover-dropdown">
                 <a class="nav-link px-2 dropdown-toggle" href="{% url 'italiastadiaapp:stadium_list' %}"
@@ -196,6 +198,9 @@
                     <li><a class="dropdown-item" href="{% url 'italiastadiaapp:stadium_list' %}">Operational</a></li>
                     <li><a class="dropdown-item" href="{% url 'italiastadiaapp:stadium_development_list' %}">Under Development</a></li>
                 </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-2" href="{% url 'italiastadiaapp:map_page' %}">Map</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link px-2" href="{% url 'italiastadiaapp:team_list' %}">Teams</a>
@@ -222,6 +227,9 @@
         </ul>
 
         <!-- MOBILE nav: compact dropdown on < lg, hidden on lg+ -->
+        <!-- SYNC RULE: this menu MUST mirror the DESKTOP nav above. Any link added
+             or removed there has to be mirrored here (and vice-versa). See the
+             "Navigation parity" rule in CLAUDE.md. -->
         <div class="dropdown me-auto d-lg-none">
             <button class="btn btn-sm btn-outline-light dropdown-toggle"
                     type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -232,6 +240,9 @@
                     <a class="dropdown-item export-nav-link" href="{% url 'italiastadiaapp:export_page' %}"
                        style="color:#00e5ff;font-weight:600;">⬇ Export map</a>
                 </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'italiastadiaapp:map_page' %}">Interactive map</a></li>
+                <li><a class="dropdown-item" href="{% url 'italiastadiaapp:insights_index' %}">Insights</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><h6 class="dropdown-header">Stadiums</h6></li>
                 <li>
@@ -269,6 +280,11 @@
                 <li>
                     <a class="dropdown-item" href="{% url 'italiastadiaapp:tournament_detail' 'uefa-euro-2036' %}">
                         🇵🇱🇩🇰🇭🇷 UEFA Euro 2036 <span class="badge bg-secondary">bids</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{% url 'italiastadiaapp:tournament_detail' 'champions-league-final' %}">
+                        🏆 Champions League Finals
                     </a>
                 </li>
             </ul>

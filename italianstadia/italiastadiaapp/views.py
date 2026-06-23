@@ -811,7 +811,7 @@ def stadium_development_list(request):
 
 _EXPORT_FIELDS = [
     "id", "name", "city", "country", "league",
-    "capacity", "ownership", "owner_raw",
+    "capacity", "surface", "ownership", "owner_raw",
     "latitude", "longitude", "year_of_construction", "wikipedia_url",
 ]
 
@@ -834,6 +834,7 @@ def _stadium_to_row(stadium):
             else ""
         ),
         "capacity": stadium.capacity or "",
+        "surface": stadium.get_surface_display() if stadium.surface else "",
         "ownership": stadium.ownership,
         "owner_raw": stadium.owner_raw or "",
         "latitude": float(stadium.latitude) if stadium.latitude else "",

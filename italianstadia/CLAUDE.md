@@ -510,6 +510,17 @@ Public keywords cover ~15 European language families:
   — never as a standalone element in the page body
 - The navbar slot is filled only on detail pages (stadium_detail, team_detail, etc.)
 
+### Navigation parity (desktop ↔ mobile) — MANDATORY
+`index.html` has TWO hand-built nav lists: a DESKTOP one (`d-none d-lg-flex`) and a
+separate MOBILE dropdown (`d-lg-none`). They are NOT generated from a shared source, so
+**any nav link you add, remove, or rename in one MUST be mirrored in the other** (both
+carry a `SYNC RULE` HTML comment). The canonical link set is: Map, Stadiums
+(Operational / Under Development), Teams, Cities, Insights, Export, Tournaments (all
+tournament entries). Detail pages use `base_detail.html`, which has a SINGLE Bootstrap
+`navbar-expand-lg` collapsing list (one source, auto-hamburger) — preferred pattern; just
+keep its links aligned with index. After any nav edit, check the page at a narrow (<992px)
+width to confirm the mobile menu shows the same items.
+
 ### Stadium detail hero
 - Full-width, 480px tall, object-fit: cover
 - Gallery carousel if multiple images exist; single image fallback

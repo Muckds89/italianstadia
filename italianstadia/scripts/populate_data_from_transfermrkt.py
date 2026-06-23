@@ -62,6 +62,54 @@ def get_infobox(soup):
     )
 
 
+# Localized infobox row labels for the native-language Wikipedia fallback. When a
+# stadium's wikipedia_url points at a non-English edition (tr./ru./…), English
+# labels like "owner" never match the infobox, leaving ownership UNKNOWN even
+# though the data is right there (e.g. Turkish "Sahibi"). `infobox_labels()`
+# merges English + the page-language synonyms.
+_INFOBOX_LABELS = {
+    "capacity": {"tr": ["kapasite"], "ru": ["вместимость"], "de": ["kapazität", "plätze"],
+                 "es": ["aforo", "capacidad"], "it": ["capienza", "capacità"],
+                 "fr": ["capacité"], "pt": ["capacidade"]},
+    "opened":   {"tr": ["açılış", "yapım"], "ru": ["открыт", "построен", "открытие"],
+                 "de": ["eröffnung", "baubeginn"], "es": ["inauguración", "apertura"],
+                 "it": ["inaugurazione"], "fr": ["inauguration", "ouverture"],
+                 "pt": ["inauguração"]},
+    "address":  {"tr": ["yer", "adres", "konum"], "ru": ["местоположение", "расположение", "адрес"],
+                 "de": ["ort", "adresse", "lage"], "es": ["ubicación", "dirección"],
+                 "it": ["ubicazione", "indirizzo"], "fr": ["adresse", "localisation"],
+                 "pt": ["localização", "endereço"]},
+    "owner":    {"tr": ["sahibi", "sahip"], "ru": ["владелец", "собственник"],
+                 "de": ["eigentümer", "besitzer"], "es": ["propietario"], "it": ["proprietario"],
+                 "fr": ["propriétaire"], "pt": ["proprietário"]},
+    "operator": {"tr": ["işletmeci", "işletmen"], "ru": ["оператор", "эксплуатант"],
+                 "de": ["betreiber"], "es": ["operador"], "it": ["gestore"],
+                 "fr": ["exploitant", "gestionnaire"], "pt": ["operador"]},
+    "surface":  {"tr": ["zemin"], "ru": ["покрытие", "газон"], "de": ["spielfläche", "rasen"],
+                 "es": ["césped", "superficie"], "it": ["terreno", "manto"],
+                 "fr": ["pelouse", "surface"], "pt": ["gramado", "piso"]},
+}
+
+
+def wiki_lang(wikipedia_url):
+    """Language subdomain of a Wikipedia URL (en, tr, ru …); 'en' if unknown."""
+    try:
+        from urllib.parse import urlparse
+        host = urlparse(wikipedia_url).netloc
+        sub = host.split(".")[0]
+        return sub if sub and sub != "www" else "en"
+    except Exception:
+        return "en"
+
+
+def infobox_labels(field, lang):
+    """English label(s) for `field` plus the page-language synonyms."""
+    base = {"capacity": ["capacity"], "opened": ["opened", "built", "construction", "opened on"],
+            "address": ["address", "location"], "owner": ["owner"], "operator": ["operator"],
+            "surface": ["surface", "pitch", "playing surface"]}[field]
+    return base + _INFOBOX_LABELS.get(field, {}).get(lang, [])
+
+
 def get_infobox_value(soup, labels):
     infobox = get_infobox(soup)
     if not infobox:
@@ -92,13 +140,14 @@ def extract_first_int(value):
     if not value:
         return None
 
-    # captures 1,362,863 or 1362863, but avoids 181.67
-    match = re.search(r"\d{1,3}(?:,\d{3})+|\d{4,}", value)
+    # captures 1,362,863 / 1.362.863 (dot thousands, e.g. Turkish "9.800") / 1362863,
+    # but avoids decimals like 181.67 (the fractional group is not exactly 3 digits)
+    match = re.search(r"\d{1,3}(?:[.,]\d{3})+|\d{4,}", value)
 
     if not match:
         return None
 
-    return int(match.group(0).replace(",", ""))
+    return int(match.group(0).replace(",", "").replace(".", ""))
     #
 def extract_year(value):
     if not value:
@@ -1256,6 +1305,29 @@ def classify_ownership(owner_raw):
     # UNKNOWN is reserved for missing/empty owner_raw only.
     return "PRIVATE"
 
+def classify_surface(text):
+    """Map a multilingual infobox surface value to GRASS / ARTIFICIAL / HYBRID,
+    or None. Covers English + the native-fallback languages (tr 'doğal çim',
+    ru 'газон', de 'rasen', es 'césped', it 'erba', fr 'pelouse', pt 'grama')."""
+    if not text:
+        return None
+    t = text.lower()
+    hybrid = ("hybrid", "hibrit", "desso", "grassmaster", "ibrido", "híbrido", "hybride",
+              "гибрид")
+    artificial = ("artificial", "synthetic", "astroturf", "3g", "4g", "suni", "sentetik",
+                  "kunstrasen", "искусствен", "sintétic", "sintetic", "synthétique",
+                  "artificiel")
+    grass = ("grass", "natural", "doğal çim", "çim", "rasen", "césped", "cesped", "erba",
+             "naturale", "pelouse", "gazon", "grama", "relva", "газон", "трав")
+    if any(w in t for w in hybrid):
+        return "HYBRID"
+    if any(w in t for w in artificial):
+        return "ARTIFICIAL"
+    if any(w in t for w in grass):
+        return "GRASS"
+    return None
+
+
 def scrape_stadium_data(wikipedia_url=None, transfermarkt_url=None):
     wikipedia_soup = get_soup(wikipedia_url) if wikipedia_url else None
     transfermarkt_soup = get_soup(transfermarkt_url) if transfermarkt_url else None
@@ -1265,15 +1337,21 @@ def scrape_stadium_data(wikipedia_url=None, transfermarkt_url=None):
 
     latitude, longitude = extract_coordinates_from_wikipedia(wikipedia_soup)
 
-    capacity_raw = get_infobox_value(wikipedia_soup, ["capacity"])
-    opened_raw = get_infobox_value(wikipedia_soup, ["opened", "built", "construction", "opened on"])
-    address = get_infobox_value(wikipedia_soup, ["address", "location"])
-    owner_raw = get_infobox_value(wikipedia_soup, ["owner", "operator"])
+    # Use the page's own language for infobox labels so the native-language
+    # fallback (tr./ru./… pages) reads owner/capacity/etc. too — not just en.
+    lang = wiki_lang(wikipedia_url)
+    capacity_raw = get_infobox_value(wikipedia_soup, infobox_labels("capacity", lang))
+    opened_raw = get_infobox_value(wikipedia_soup, infobox_labels("opened", lang))
+    address = get_infobox_value(wikipedia_soup, infobox_labels("address", lang))
+    owner_raw = get_infobox_value(
+        wikipedia_soup, infobox_labels("owner", lang) + infobox_labels("operator", lang))
+    surface_raw = get_infobox_value(wikipedia_soup, infobox_labels("surface", lang))
 
     return {
         "wikipedia_url": wikipedia_url,
         "capacity": extract_first_int(capacity_raw),
         "year_of_construction": extract_year(opened_raw),
+        "surface": classify_surface(surface_raw),
         "address": address,
         "latitude": latitude,
         "longitude": longitude,
@@ -1553,6 +1631,12 @@ def scrape_stadium(stadium_data, city):
                         f"Shared stadium '{shared.name}': applied JSON hardcoded "
                         f"coords ({json_lat}, {json_lon}) — was null in DB"
                     )
+            # Backfill surface when missing (from the fresh scrape's infobox)
+            if not shared.surface:
+                new_surface = stadium_data.get("surface") or wiki_data.get("surface")
+                if new_surface:
+                    shared.surface = new_surface
+                    update_fields.append("surface")
             shared.save(update_fields=update_fields)
             logging.info(
                 f"Shared stadium — reused existing '{shared.name}' "
@@ -1567,6 +1651,7 @@ def scrape_stadium(stadium_data, city):
             "capacity": final_capacity,
             "address": final_address,
             "year_of_construction": final_year,
+            "surface": stadium_data.get("surface") or wiki_data.get("surface"),
             "wikipedia_url": wikipedia_url,
             "transfermarkt_url": transfermarkt_url,
             "image_url": final_image_url,
