@@ -329,6 +329,52 @@
     {% endif %}
     {% endif %}{# /not has_bids #}
 
+    {% if eligibility %}
+    <div class="card shadow-sm mb-4 mt-4">
+        <div class="card-header bg-white"><strong>Does {{ tournament_name }} meet UEFA's stadium requirements?</strong></div>
+        <div class="card-body">
+            <p class="text-muted small mb-3">
+                UEFA asks a {{ tournament_name }} host to field roughly ten grounds across a tiered
+                capacity ladder: at least <strong>three of 50,000+</strong> (for the opening match,
+                semi-finals and final), <strong>seven of 40,000+</strong> and <strong>ten of 30,000+</strong>
+                in total. Here is how the proposed venues stack up.
+            </p>
+            <div class="table-responsive mb-3">
+                <table class="table table-sm align-middle mb-0">
+                    <thead><tr><th>Requirement</th><th class="text-center">Have</th><th class="text-center">Need</th><th class="text-center">Status</th></tr></thead>
+                    <tbody>
+                        {% for row in eligibility.rows %}
+                        <tr>
+                            <td>{{ row.label }}</td>
+                            <td class="text-center">{{ row.have }}</td>
+                            <td class="text-center">{{ row.need }}</td>
+                            <td class="text-center">
+                                {% if row.ok %}<span class="badge bg-success">✓ Met</span>
+                                {% else %}<span class="badge bg-danger">✗ Short</span>{% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-sm table-striped align-middle mb-0">
+                    <thead><tr><th>Venue</th><th>Capacity</th><th>Tier</th></tr></thead>
+                    <tbody>
+                        {% for v in eligibility.venues %}
+                        <tr>
+                            <td><a href="{{ v.detail_url }}">{{ v.name }}</a></td>
+                            <td>{{ v.capacity|intcomma }}</td>
+                            <td><span class="text-muted small">{{ v.tier }}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
     {% if other_tournaments %}
     <div class="card shadow-sm mb-4 mt-4">
         <div class="card-header bg-white"><strong>Interested in other tournaments?</strong></div>

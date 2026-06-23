@@ -1337,7 +1337,31 @@ def tournament_detail(request, slug):
     tournament_intro = " ".join(intro_parts)
     tournament_description = _trim(tournament_intro)
 
-    # Data-aware FAQ (captures "where is <T> / which stadiums / how many / biggest") , 
+    # UEFA capacity-tier eligibility (Euro hosts must field ~10 grounds: >=3 of 50k+,
+    # 4 more of 40k+, 3 more of 30k+ -> cumulative 3 / 7 / 10). Not for competing-bid pages.
+    eligibility = None
+    if not has_bids:
+        cap_v = [v for v in venues if v["status"] != "DISCARDED" and v.get("capacity")]
+        for v in cap_v:
+            c = v["capacity"]
+            v["tier"] = ("60,000+" if c >= 60000 else "50,000+" if c >= 50000
+                         else "40,000+" if c >= 40000 else "30,000+" if c >= 30000
+                         else "Below 30,000")
+        if cap_v:
+            def _cnt(th):
+                return sum(1 for v in cap_v if v["capacity"] >= th)
+            eligibility = {
+                "venues": sorted(cap_v, key=lambda v: -(v["capacity"] or 0)),
+                "rows": [
+                    {"label": "50,000+ seats (opening / semis / final)", "have": _cnt(50000), "need": 3},
+                    {"label": "40,000+ seats (cumulative)", "have": _cnt(40000), "need": 7},
+                    {"label": "30,000+ seats (cumulative)", "have": _cnt(30000), "need": 10},
+                ],
+            }
+            for r in eligibility["rows"]:
+                r["ok"] = r["have"] >= r["need"]
+
+    # Data-aware FAQ (captures "where is <T> / which stadiums / how many / biggest") ,
     # the exact tournament search intent. Editorial may add custom Q&A via the "faq" key.
     cap_venues = [v for v in venues if v.get("capacity")]
     biggest_venue = max(cap_venues, key=lambda v: v["capacity"]) if cap_venues else None
@@ -1391,6 +1415,7 @@ def tournament_detail(request, slug):
         "bid_analysis": bid_analysis,
         "tournament_about": tournament_about,
         "tournament_editorial": _TOURNAMENT_EDITORIAL.get(slug),
+        "eligibility": eligibility,
         "faq": faq,
         "faq_json": json.dumps([{"@type": "Question", "name": f["q"],
                                  "acceptedAnswer": {"@type": "Answer", "text": f["a"]}}
