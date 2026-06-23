@@ -159,15 +159,21 @@ logging.basicConfig(
 def resolve_league(config):
     """Resolve Country and League from the JSON league config block.
 
-    Country lookup uses the ISO-2 code as the stable key — names vary
-    ("Czech Republic" vs "Czechia", "Netherlands" vs "Holland", …).
-    update_or_create ensures the canonical name from the JSON wins even when
-    the DB row was seeded under an older name (e.g. from initial_data.json).
+    Country has two UNIQUE columns (code and name), so it must be reconciled
+    against BOTH: a plain update_or_create(code=...) crashes with
+    "UNIQUE constraint failed: country.name" when a row already exists under
+    the same NAME but a different/blank code (e.g. seeded from
+    initial_data.json before codes were assigned). Match on code first, then
+    fall back to name, then create — and keep both fields in sync.
     """
-    country, _ = Country.objects.update_or_create(
-        code=config["country_code"],
-        defaults={"name": config["country"]},
-    )
+    code, name = config["country_code"], config["country"]
+    country = (Country.objects.filter(code=code).first()
+               or Country.objects.filter(name=name).first())
+    if country is None:
+        country = Country.objects.create(code=code, name=name)
+    elif country.code != code or country.name != name:
+        country.code, country.name = code, name
+        country.save(update_fields=["code", "name"])
     league, _ = League.objects.get_or_create(
         name=config["name"],
         country=country,
@@ -181,8 +187,26 @@ def resolve_league(config):
 # --------------------------------------------------
 
 def create_driver():
+    """Chrome with stability flags. The bare driver intermittently dies with
+    'session not created from disconnected: unable to connect to renderer' —
+    Chrome launches but its renderer crashes. These flags fix the usual causes
+    (shared-memory exhaustion, GPU/sandbox issues, devtools origin check).
+    Set HEADLESS=1 to run without a visible window."""
+    options = webdriver.ChromeOptions()
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")   # avoid /dev/shm renderer crash
+    options.add_argument("--disable-gpu")
+    options.add_argument("--remote-allow-origins=*")  # new Chrome / older driver handshake
+    options.add_argument("--disable-extensions")
+    options.add_argument("--no-first-run")
+    options.add_argument("--disable-background-networking")
+    options.add_argument("--window-size=1920,1080")
+    if os.environ.get("HEADLESS") == "1":
+        options.add_argument("--headless=new")
+    # Quieten DevTools/USB log spam on Windows
+    options.add_experimental_option("excludeSwitches", ["enable-logging"])
     service = Service(ChromeDriverManager().install())
-    return webdriver.Chrome(service=service)
+    return webdriver.Chrome(service=service, options=options)
 
 
 # Transfermarkt intermittently returns a Cloudflare/gateway error page (502/503/504)
@@ -605,6 +629,48 @@ def fetch_wikidata_ownership(wikipedia_url):
     except Exception as e:
         logging.error(f"[Wikidata] fetch_wikidata_ownership failed for '{wikipedia_url}': {e}")
         return None
+
+
+def fetch_wikidata_coordinates(wikipedia_url):
+    """Language-independent coordinate fallback. Resolve the Wikipedia page to its
+    Wikidata entity and read P625 (coordinate location). This works even when the
+    linked (e.g. English) article carries no geo markup but the native-language
+    edition does — both share one Wikidata item, and P625 is populated from any
+    edition. Returns (lat, lon) floats or (None, None)."""
+    if not wikipedia_url:
+        return None, None
+    try:
+        from urllib.parse import urlparse, unquote
+        host = urlparse(wikipedia_url).netloc
+        title = unquote(urlparse(wikipedia_url).path.split("/wiki/")[-1])
+        resp = requests.get(f"https://{host}/w/api.php", params={
+            "action": "query", "titles": title, "prop": "pageprops",
+            "ppprop": "wikibase_item", "format": "json",
+        }, headers=HEADERS, timeout=15)
+        resp.raise_for_status()
+        pages = resp.json().get("query", {}).get("pages", {})
+        entity_id = next((p.get("pageprops", {}).get("wikibase_item")
+                          for p in pages.values()), None)
+        if not entity_id:
+            return None, None
+        time.sleep(0.3)
+        resp2 = requests.get("https://www.wikidata.org/w/api.php", params={
+            "action": "wbgetentities", "ids": entity_id, "props": "claims",
+            "format": "json",
+        }, headers=HEADERS, timeout=15)
+        resp2.raise_for_status()
+        claims = (resp2.json().get("entities", {}).get(entity_id, {})
+                  .get("claims", {}).get("P625", []))
+        for claim in claims:
+            val = claim.get("mainsnak", {}).get("datavalue", {}).get("value", {})
+            lat, lon = val.get("latitude"), val.get("longitude")
+            if lat is not None and lon is not None:
+                logging.info(f"[Wikidata] P625 coords for '{title}': {lat}, {lon}")
+                return float(lat), float(lon)
+        return None, None
+    except Exception as e:
+        logging.error(f"[Wikidata] fetch_wikidata_coordinates failed for '{wikipedia_url}': {e}")
+        return None, None
 
 
 # --------------------------------------------------
@@ -1308,7 +1374,15 @@ def scrape_stadium(stadium_data, city):
     final_latitude = wiki_data.get("latitude")
     final_longitude = wiki_data.get("longitude")
 
-    # Nominatim fallback when Wikipedia has no coordinates
+    # Wikidata P625 fallback — language-independent. Catches the case where the
+    # linked (English) article has no geo markup but the native-language edition
+    # does: both share one Wikidata item, so P625 still resolves coordinates.
+    if final_latitude is None or final_longitude is None:
+        wd_lat, wd_lon = fetch_wikidata_coordinates(wikipedia_url)
+        if wd_lat is not None and wd_lon is not None:
+            final_latitude, final_longitude = wd_lat, wd_lon
+
+    # Nominatim fallback when Wikipedia + Wikidata both have no coordinates
     if final_latitude is None or final_longitude is None:
         final_latitude, final_longitude = _nominatim_lookup(final_name, city.name)
 
@@ -1377,7 +1451,10 @@ def scrape_stadium(stadium_data, city):
     final_ownership = classify_ownership(final_owner_raw)
 
     # 6. Fetch gallery images from Wikimedia Commons
-    final_image_url = wiki_data.get("image_url")
+    # A JSON stadium.image_url wins over the scraped one — manual override for
+    # grounds whose Wikipedia infobox/og:image is missing or a poor hero (e.g.
+    # Windsor Park's thin redevelopment panorama).
+    final_image_url = stadium_data.get("image_url") or wiki_data.get("image_url")
     extra_images = fetch_commons_images(wikipedia_url, primary_image_url=final_image_url)
 
     # logging

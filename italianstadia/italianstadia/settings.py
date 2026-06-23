@@ -26,6 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "True") == "True"
 
+# In development, never let @cache_page serve a stale rendered page after a
+# template/view edit. DummyCache is a no-op, so dev always renders fresh; prod
+# (DEBUG=False) keeps the default in-memory LocMemCache.
+if DEBUG:
+    CACHES = {"default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"}}
+
 # Google AdSense publisher ID — set in Render env vars when account is approved.
 # Empty string means no ads are rendered anywhere (safe default for dev/staging).
 # Both vars must be set in Render env for ads to appear.

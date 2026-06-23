@@ -504,7 +504,7 @@
   "pk": 52,
   "fields": {
     "name": "Wales",
-    "code": "WL",
+    "code": "GB-WLS",
     "uefa_rank": 46,
     "population": 3130000
   }
@@ -514,7 +514,7 @@
   "pk": 53,
   "fields": {
     "name": "Northern Ireland",
-    "code": "NI",
+    "code": "GB-NIR",
     "uefa_rank": null,
     "population": 1910000
   }
@@ -1229,6 +1229,42 @@
     "name": "Israeli Premier League",
     "country": 54,
     "division_level": 1
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 81,
+  "fields": {
+    "name": "Cymru Premier",
+    "country": 52,
+    "division_level": 1
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 82,
+  "fields": {
+    "name": "NIFL Premiership",
+    "country": 53,
+    "division_level": 1
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 83,
+  "fields": {
+    "name": "TFF First League",
+    "country": 50,
+    "division_level": 2
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 84,
+  "fields": {
+    "name": "Russian First League",
+    "country": 41,
+    "division_level": 2
   }
 },
 {
@@ -4239,12 +4275,12 @@
   "pk": 258,
   "fields": {
     "name": "Istanbul",
-    "population": 15840900,
+    "population": null,
     "country": "Turkey",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Istanbul",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Historical_peninsula_and_modern_skyline_of_Istanbul.jpg",
     "image_credit": null,
-    "description": "Istanbul [ b ] [ c ] is the largest city in Turkey , constituting the country's economic, cultural, and historical center. With a population of over 15 million, it is home to 18% of the population of Turkey . [ 3 ] Istanbul is among the largest cities in Europe [ d ] and in the world by population. It is a city on two continents; about two-thirds of its population live in Europe and the rest in Asia . [ 9 ] Istanbul straddles the Bosphorus – one of the world's busiest waterways – in northwestern Turkey, between the Sea of Marmara and the Black Sea . Its area of 5,461 square kilometers (2,109 mi 2 ) is coterminous with Istanbul Province. [ 10 ]"
+    "description": "Istanbul [ b ] is the largest city in Turkey , constituting the country's economic, cultural, and historical center. With a population of over 15 million, it is home to 18% of the population of Turkey . [ 3 ] Istanbul is among the largest cities in Europe [ c ] and in the world by population. It is a city on two continents; about two-thirds of its population live in Europe and the rest in Asia . [ 9 ] Istanbul straddles the Bosphorus – one of the world's busiest waterways – in northwestern Turkey, between the Sea of Marmara and the Black Sea . Its area of 5,461 square kilometers (2,109 mi 2 ) is coterminous with Istanbul Province. [ 10 ]"
   }
 },
 {
@@ -4278,7 +4314,7 @@
   "pk": 261,
   "fields": {
     "name": "Ankara",
-    "population": 5747325,
+    "population": null,
     "country": "Turkey",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Ankara",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/44/Ankara_from_bus_station.jpg",
@@ -9270,12 +9306,12 @@
   "pk": 645,
   "fields": {
     "name": "Belfast",
-    "population": 345006,
+    "population": 352390,
     "country": "Northern Ireland",
-    "wikipedia_url": null,
-    "image_url": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Belfast",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Custom_House%2C_River_Lagan%2C_Belfast.jpg",
     "image_credit": null,
-    "description": null
+    "description": "Belfast ( / ˈ b ɛ l f æ s t / ⓘ BEL-fast , /- f ɑː s t / , -⁠fahst ; [ a ] from Irish : Béal Feirste [bʲeːlˠ ˈfʲɛɾˠ(ə)ʃtʲə] ⓘ ) [ 3 ] [ 4 ] is the capital city and main port of Northern Ireland , standing on the banks of the River Lagan and connected to the open sea through Belfast Lough and the North Channel . It is the largest city in Northern Ireland and the second-largest city in Ireland (after Dublin ) with a recorded population in 2021 of 345,418 [ 5 ] and of 704,406 for the greater metropolitan area . [ 6 ]"
   }
 },
 {
@@ -11616,6 +11652,643 @@
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/20201130_153836_%D7%9E%D7%91%D7%98_%D7%9E%D7%9C%D7%9E%D7%A2%D7%9C%D7%94_%D7%A2%D7%9C_%D7%A9%D7%9C%D7%95%D7%9C%D7%99%D7%AA_%D7%94%D7%97%D7%95%D7%A8%D7%A3_%D7%91%D7%A0%D7%AA%D7%A0%D7%99%D7%94.jpg",
     "image_credit": null,
     "description": "Netanya [ 2 ] ( Hebrew : נתניה , IPA: [netanˈja] ), or Natanya ( IPA: [naˈtanja] ), [ 2 ] [ 3 ] is a city in the Central District of Israel , and is the capital of the surrounding Sharon plain . It is 30 kilometres (20 mi) north of Tel Aviv , and 56 km (35 mi) south of Haifa , between the Poleg stream and the Wingate Institute in the south and the Avihayil stream in the north. The 14 km ( 8 + 1 ⁄ 2 mi) of beaches have made the city a popular tourist resort ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 826,
+  "fields": {
+    "name": "Oswestry",
+    "population": 17509,
+    "country": "England",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Oswestry",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Llwyd_Mansion_1604_Oswestry_%288689969578%29.jpg",
+    "image_credit": null,
+    "description": "Oswestry ( / ˈ ɒ z w ə s t r i / OZ -wəss-tree ; Welsh : Croesoswallt ) is a market town, civil parish and historic railway town in Shropshire , England, close to the Welsh border . [ 2 ] It is at the junction of the A5 , A483 and A495 roads."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 827,
+  "fields": {
+    "name": "Connah's Quay",
+    "population": 16771,
+    "country": "Wales",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Connah%27s_Quay",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/High_Street%2C_Connah%27s_Quay_-_geograph.org.uk_-_4091946.jpg",
+    "image_credit": null,
+    "description": "Connah's Quay ( Welsh : Cei Connah ), known locally as \"The Quay\" and formerly known as Wepre , is a town and community in Flintshire , Wales on the River Dee and next to the border with England . \nWith a population of 16,771, it is the largest town in Flintshire. The town is also part of the wider Deeside conurbation and is contiguous with Shotton , Flint and Buckley ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 828,
+  "fields": {
+    "name": "Caernarfon",
+    "population": null,
+    "country": "Wales",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Caernarfon",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Caernarfon_Castle_2017.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 829,
+  "fields": {
+    "name": "Barry, Vale of Glamorgan",
+    "population": 51502,
+    "country": "Wales",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Barry,_Vale_of_Glamorgan",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Trinity_Street%2C_Barry_-_geograph.org.uk_-_513980.jpg",
+    "image_credit": null,
+    "description": "Barry ( / ˈ b ær i / ; [ 2 ] [ 3 ] Welsh : Y Barri ; pronounced [ə ˈbari] ) is a town and community in the Vale of Glamorgan , Wales. It is on the north coast of the Bristol Channel approximately 9 miles (14 km) south-southwest of Cardiff . Barry is a seaside resort , with attractions including several beaches and the resurrected Barry Island Pleasure Park . According to Office for National Statistics 2021 estimate data, the population of Barry was 56,605. [ 4 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 830,
+  "fields": {
+    "name": "Bridgend",
+    "population": 51785,
+    "country": "Wales",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bridgend",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Bridgend_%2C_Town_Scenery_-_geograph.org.uk_-_4153615.jpg",
+    "image_credit": null,
+    "description": "Bridgend ( English: / b r ɪ ˈ dʒ ɛ n d / ; Welsh : Pen-y-bont ar Ogwr or just Pen-y-bont , meaning \"the end of the bridge on the Ogmore\") [ 2 ] is a town in the Bridgend County Borough of Wales , 20 miles (32 km) west of Cardiff and 20 miles (32 km) east of Swansea .  The town is named after the medieval bridge over the River Ogmore . The River Ewenny also flows through the town. The population was 49,597 in 2021. [ 3 ] Bridgend is within the Cardiff Capital Region which in 2019 had a population of approximately 1.54 million."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 831,
+  "fields": {
+    "name": "Haverfordwest",
+    "population": 12042,
+    "country": "Wales",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Haverfordwest",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Castle_Square%2C_Haverfordwest.jpg",
+    "image_credit": null,
+    "description": "Haverfordwest ( / ˌ h æ v ər f ər d ˈ w ɛ s t / HAV -ər-fərd- WEST , locally / ˈ h ɑːr f ər d w ɛ s t / HAR -fərd-west ; Welsh : Hwlffordd [ˈhʊlfɔrð] ) is the county town of Pembrokeshire , Wales , and the most populous urban area in Pembrokeshire with a population of 14,596 in 2011. [ 3 ] It is also a community consisting of 12,042 people, making it the second most populous community in the county after Milford Haven . [ 4 ] The suburbs include the former parish of Prendergast , [ 5 ] Albert Town and the residential and industrial areas of Withybush (housing, retail parks, hospital , airport and showground)."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 832,
+  "fields": {
+    "name": "Bala, Gwynedd",
+    "population": null,
+    "country": "Wales",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bala,_Gwynedd",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/65/Bala_High_Street.jpg",
+    "image_credit": null,
+    "description": "Bala ( Welsh : Y Bala ) is a town and community in Gwynedd , Wales . Formerly an urban district , Bala lies in the historic county of Merionethshire , at the north end of Llyn Tegid . According to the 2021 census , Bala had a population of 1,999 [ 1 ] and 72.5 per cent of the population could speak Welsh . [ 2 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 833,
+  "fields": {
+    "name": "Colwyn Bay",
+    "population": 10576,
+    "country": "Wales",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Colwyn_Bay",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/26/Colwyn_Bay_panorama.jpg",
+    "image_credit": null,
+    "description": "Colwyn Bay ( /ˈkɒlwɪn/ ; Welsh : Bae Colwyn [ˈbai ˈkɔlʊɨn] ⓘ ) is a town , community and seaside resort in Conwy County Borough on the north coast of Wales overlooking the Irish Sea . It lies within the historic county boundaries of Denbighshire . At the 2021 census , the community had a population of 10,576, and the built up area had a population of 29,275. According to the tourist board, it is renowned for its 4.8 kilometre long sandy beach which has been enhanced with millions of tonnes of sand, so therefore 'man-made' and its permanently available irrespective of the tides. [ 3 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 834,
+  "fields": {
+    "name": "Flint, Flintshire",
+    "population": 13736,
+    "country": "Wales",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Flint,_Flintshire",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/St_Mary%27s_church%2C_Flint_-_geograph.org.uk_-_3217861.jpg",
+    "image_credit": null,
+    "description": "Flint ( Welsh : Y Fflint ) is a town and community in Flintshire , Wales , lying on the estuary of the River Dee . It is the former county town of Flintshire. According to the 2011 Census , the population of the community of Flint was 12,953, [ 6 ] increasing to 13,732 at the 2021 census. [ 7 ] [ better source needed ] The urban area including Holywell and Bagillt had a population of 26,442. [ 8 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 835,
+  "fields": {
+    "name": "Llanelli",
+    "population": 25366,
+    "country": "Wales",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Llanelli",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/97/Grade_II_listed_Llanelli_Town_Hall_%28geograph_3054862%29.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 836,
+  "fields": {
+    "name": "Briton Ferry",
+    "population": 5911,
+    "country": "Wales",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Briton_Ferry",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Neath_Road%2C_Briton_Ferry_-_geograph.org.uk_-_127633.jpg",
+    "image_credit": null,
+    "description": "Briton Ferry ( Welsh : Llansawel ) is a town and community in the county borough of Neath Port Talbot , Wales . The Welsh name may indicate that the church, llan , is protected from the wind, awel . Alternatively, Sawel may be a derivative of Saul, St Paul's earlier name, [ 3 ] who, supposedly, once landed at Briton Ferry.  An alternative Welsh name unused today is Rhyd y Brython , [ 4 ] a direct translation of Briton Ferry. The Normans referred to the River crossing as La Brittonne [ 5 ] and Leland in 1540 as Britanne Fery. [ 5 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 837,
+  "fields": {
+    "name": "Larne",
+    "population": 18853,
+    "country": "Northern Ireland",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Larne",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/06/LARNE_TOWN.jpg",
+    "image_credit": null,
+    "description": "Larne (from Irish Latharna , pronounced [ˈl̪ˠahəɾˠn̪ˠə] , the name of a Gaelic territory) [ 1 ] [ 2 ] [ 3 ] is a town on the east coast of County Antrim , Northern Ireland , with a population of 18,853 at the 2021 census . [ 4 ] It is a major passenger and freight roll-on roll-off port. [ 5 ] Larne is within the Mid and East Antrim Borough Council area. Together with parts of the neighbouring districts of Antrim and Newtownabbey and Causeway Coast and Glens , it forms the East Antrim constituency for elections to the Westminster Parliament and Northern Ireland Assembly . The civil parish is in the historic barony of Glenarm Upper . [ 6 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 838,
+  "fields": {
+    "name": "Coleraine",
+    "population": 24483,
+    "country": "Northern Ireland",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Coleraine",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Coleraine_Stadtmitte.jpg",
+    "image_credit": null,
+    "description": "Coleraine ( / k oʊ l ˈ r eɪ n / kohl- RAYN ; from Irish : Cúil Raithin [ˌkuːlʲ ˈɾˠahənʲ] , 'nook of the ferns ' [ 2 ] ) is a town and civil parish near the mouth of the River Bann in County Londonderry , Northern Ireland , of which it is the county town. It is 55 miles (89 km) north-west of Belfast and 30 miles (48 km) east of Derry , both of which are linked by major roads and railway connections. It is part of Causeway Coast and Glens district. Coleraine had a population of 24,483 people in the 2021 census . [ 1 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 839,
+  "fields": {
+    "name": "Lurgan",
+    "population": 38198,
+    "country": "Northern Ireland",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Lurgan",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/United_Kingdom_Northern_Ireland_adm_location_map.svg",
+    "image_credit": null,
+    "description": "Lurgan (from Irish An Lorgain , meaning 'the long low ridge') is a town in County Armagh , Northern Ireland, near the southern shore of Lough Neagh and roughly 18 miles (29 km) southwest of Belfast . The town is linked to Belfast by both the M1 motorway and the Belfast–Dublin railway line . Lurgan had a population of 38,198 at the 2021 UK census , and falls within the Armagh, Banbridge and Craigavon Borough . For certain purposes, Lurgan is treated as part of the \"Craigavon Urban Area\", along with neighbouring Craigavon and Portadown ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 840,
+  "fields": {
+    "name": "Ballymena",
+    "population": 31205,
+    "country": "Northern Ireland",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ballymena",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Ballymena_town_hall.jpg",
+    "image_credit": null,
+    "description": "Ballymena ( / ˌ b æ l i ˈ m iː n ə / BAL -ee- MEE -nə ; [ 1 ] from Irish : an Baile Meánach [ənˠ ˌbˠalʲə ˈmʲaːn̪ˠəx] ⓘ , meaning 'the middle townland') [ 2 ] is a town in County Antrim , Northern Ireland. It had a population of 31,205 at the 2021 United Kingdom census , making it the seventh largest town in Northern Ireland by population. [ 3 ] It is part of the Borough of Mid and East Antrim ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 841,
+  "fields": {
+    "name": "Carrickfergus",
+    "population": 28141,
+    "country": "Northern Ireland",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Carrickfergus",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Carrickfergus_Castle%2C_reflections_at_sunset_-_geograph.org.uk_-_1098306.jpg",
+    "image_credit": null,
+    "description": "Carrickfergus (from Irish Carraig Fhearghais [ˌkaːɾˠəɟ ˈaɾˠɣəʃ] ⓘ , meaning \" Fergus ' rock\") [ 3 ] is a large town in County Antrim , Northern Ireland . It sits on the north shore of Belfast Lough , 11 miles (18 km) from Belfast . The town had a population of 28,141 at the 2021 census . [ 4 ] It is County Antrim's oldest town and one of the oldest towns in Ireland as a whole. [ 5 ] Carrickfergus Castle , built in the late 12th century at the behest of Anglo-Norman knight John de Courcy , was the capital of the Earldom of Ulster . After the earldom's collapse, it remained the only English outpost in Ulster for the next four centuries. Carrickfergus was the administrative centre for Carrickfergus Borough Council , before this was amalgamated into the Mid and East Antrim District Council in 2015, and forms part of the Belfast Metropolitan Area . It is also a townland of 65 acres, a civil parish and a barony . [ 6 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 842,
+  "fields": {
+    "name": "Portadown",
+    "population": 32926,
+    "country": "Northern Ireland",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Portadown",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/St_Mark%27s_Church_of_Ireland%2C_Portadown_-_geograph_-_494290.jpg",
+    "image_credit": null,
+    "description": "Portadown (from Irish Port an Dúnáin ' landing place of the little fort ' pronounced [pɔɾˠt̪ˠ ə ˈd̪ˠuːnˠaːnʲ] ) [ 3 ] [ 4 ] is a town in County Armagh , Northern Ireland . The town is based on the River Bann in the north of the county, about 24 miles (39 km) [ 5 ] southwest of Belfast . It is in the Armagh City, Banbridge and Craigavon Borough Council area and had a population of about 32,000 at the 2021 Census . For some purposes, Portadown is treated as part of the \"Craigavon Urban Area\", alongside Craigavon and Lurgan ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 843,
+  "fields": {
+    "name": "Bangor, County Down",
+    "population": 64596,
+    "country": "Northern Ireland",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bangor,_County_Down",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Bangor_The_Long_Hole_At_Dusk.jpg",
+    "image_credit": null,
+    "description": "Bangor ( / ˈ b æ ŋ ɡ ər / BANG -gər ; [ 2 ] from Irish Beannchar [ˈbʲaːn̪ˠəxəɾˠ] ) [ 1 ] is a city in County Down , Northern Ireland , on the southern side of Belfast Lough . It is within the Belfast metropolitan area and is 13 miles (22 km) east of Belfast city centre, to which it is linked by the A2 road and the Belfast–Bangor railway line . The population was 64,596 at the 2021 census . [ 3 ] Bangor was granted city status in 2022, becoming Northern Ireland's sixth city."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 844,
+  "fields": {
+    "name": "Dungannon",
+    "population": 16282,
+    "country": "Northern Ireland",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Dungannon",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Church_of_St_Patrick%2C_Dungannon_-_geograph.org.uk_-_112576.jpg",
+    "image_credit": null,
+    "description": "Dungannon (from Irish Dún Geanainn , meaning 'Geanann's fort', pronounced [d̪ˠuːn̪ˠ ˈɟan̪ˠən̪ˠ] ) [ 1 ] is a town in County Tyrone , Northern Ireland . It is the second-largest town in the historic county (after Omagh ) and had a population of 16,282 at the 2021 Census . [ 2 ] Since 2015, the town shares local government with Magherafelt and Cookstown in the Mid-Ulster District Council ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 845,
+  "fields": {
+    "name": "Adana",
+    "population": 2280484,
+    "country": "Turkey",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Adana",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Adana_Seyhan_River.png",
+    "image_credit": null,
+    "description": "Adana [ a ] is a large city in southern Turkey . The city is situated on the Seyhan River , 35 km (22 mi) inland from the northeastern shores of the Mediterranean Sea . It is the administrative seat of the Adana province , and has a metro population of 1,816,750 (Seyhan, Yuregir, Cukurova, Saricam). [ 1 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 846,
+  "fields": {
+    "name": "Diyarbakır",
+    "population": null,
+    "country": "Turkey",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Diyarbakır",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Goletli_Park%2C_Diyarbakir.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 847,
+  "fields": {
+    "name": "Bandırma",
+    "population": 167363,
+    "country": "Turkey",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bandırma",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/95/Cumhuriyet_Meydan%C4%B1%E2%80%93IMG_6306.jpg",
+    "image_credit": null,
+    "description": "Bandırma ( Turkish: [banˈdɯɾma] ) is a city, municipality and district of Balıkesir Province , northwestern Turkey . [ 2 ] Its area is 755 km 2 , [ 3 ] and its population is 167,363 (2024). [ 1 ] Bandırma is located in the south of the Marmara Sea , in the bay with the same name, and is an important port city. It is approximately two hours away from Istanbul , İzmir and Bursa ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 848,
+  "fields": {
+    "name": "Bodrum",
+    "population": 198335,
+    "country": "Turkey",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bodrum",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Sunset_over_Bodrum_I.jpg",
+    "image_credit": null,
+    "description": "Bodrum ( Turkish pronunciation: [ˈbodɾum] ) is a town and district of Muğla Province in Turkey . It is a port town at the entrance to the Gulf of Gökova . Known in ancient times as Halicarnassus , the town was once home to the Mausoleum at Halicarnassus , also known as the tomb of Mausolus, one of the Seven Wonders of the Ancient World ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 849,
+  "fields": {
+    "name": "Tula, Russia",
+    "population": 501169,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Tula,_Russia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/64/Tula_collage_2.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 850,
+  "fields": {
+    "name": "Peschanokopskoye",
+    "population": 10593,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Peschanokopskoye",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/%D0%9F%D0%B5%D1%81%D1%87%D0%B0%D0%BD%D0%BE%D0%BA%D0%BE%D0%BF%D1%81%D0%BA%D0%BE%D0%B5_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C_%D1%83%D0%BB._%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0.jpg",
+    "image_credit": null,
+    "description": "Peschanokopskoye ( Russian : Песчанокопское ) is a rural locality (a selo ) and the administrative center of Peschanokopsky District in Rostov Oblast , Russia . Population: 10,593 ( 2010 census ) ; [ 1 ] 11,357 ( 2002 census ) ; [ 4 ] 10,966 ( 1989 Soviet census ) . [ 5 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 851,
+  "fields": {
+    "name": "Chelyabinsk",
+    "population": 1130132,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Chelyabinsk",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/%D0%A4%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%8F_%D0%A7%D0%B5%D0%BB%D1%8F%D0%B1%D0%B8%D0%BD%D1%81%D0%BA%D0%B0_%D1%81_%D0%BE%D1%82%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%D0%BC_%282021%29.jpg",
+    "image_credit": null,
+    "description": "Chelyabinsk [ a ] is the administrative center and largest city of Chelyabinsk Oblast , Russia. It is the seventh-largest city in Russia, with a population of over 1.1 million people, and the second-largest city in the Ural Federal District , after Yekaterinburg . Chelyabinsk is located to the east behind the south part of the Ural Mountains and runs along the Miass River ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 852,
+  "fields": {
+    "name": "Novorossiysk",
+    "population": 241952,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Novorossiysk",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Flag_of_Novorossiysk.svg",
+    "image_credit": null,
+    "description": "Novorossiysk ( Russian : Новоросси́йск , IPA: [nəvərɐˈsʲijsk] ⓘ ; Adyghe : ЦӀэмэз , romanized: C̣ămăz ) is a city in Krasnodar Krai , Russia . The port of Novorossiysk is one of the largest ports on the Black Sea . [ 9 ] [ 10 ] It is one of the cities designated as a Hero City by the Soviet Union. The population is 262,293 ( 2021 census ) ; [ 11 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 853,
+  "fields": {
+    "name": "Voronezh",
+    "population": 889680,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Voronezh",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/91/%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%BE%D0%B5_%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F_%D0%AE%D0%92%D0%96%D0%94.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 854,
+  "fields": {
+    "name": "Naberezhnye Chelny",
+    "population": 513193,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Naberezhnye_Chelny",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Chelny_photos.jpg",
+    "image_credit": null,
+    "description": "Naberezhnye Chelny ( Russian : На́бережные Челны́ , IPA: [ˈnabʲɪrʲɪʐnɨjə tɕɪlˈnɨ] ⓘ ; Tatar : Яр Чаллы , IPA: [ˈjar ɕɑlːɤ̆] ) is the second largest city in the Republic of Tatarstan , Russia . A major industrial center, Naberezhnye Chelny stands on the Kama River 225 kilometers (140 mi) east of Kazan near Nizhnekamsk Reservoir . Population: 548,434 ( 2021 census ) ; [ 8 ] 513,193 ( 2010 census ) ; [ 2 ] 509,870 ( 2002 census ) ; [ 9 ] 500,309 ( 1989 Soviet census ) . [ 10 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 855,
+  "fields": {
+    "name": "Nizhnekamsk",
+    "population": 234044,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Nizhnekamsk",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Nizhnekamsk.jpg",
+    "image_credit": null,
+    "description": "Nizhnekamsk ( Russian : Нижнекамск , IPA: [nʲɪʐnʲɪˈkamsk] ; Tatar : Түбән Кама ) is a city in Tatarstan , Russia , located to the south of the Kama River between the cities of Naberezhnye Chelny and Chistopol . Population: 241,479 ( 2021 census ) ; [ 7 ] 234,044 ( 2010 census ) ; [ 2 ] 225,399 ( 2002 census ) ; [ 8 ] 190,793 ( 1989 Soviet census ) . [ 9 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 856,
+  "fields": {
+    "name": "Volgograd",
+    "population": 1028036,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Volgograd",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/e/ef/MotherlandCalls1984.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 857,
+  "fields": {
+    "name": "Yaroslavl",
+    "population": 591486,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Yaroslavl",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Yaroslavl_Russia_Montage.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 858,
+  "fields": {
+    "name": "Khabarovsk",
+    "population": 577441,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Khabarovsk",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/%D0%A3%D1%81%D1%81%D1%83%D1%80%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D0%B9_%D0%B1%D1%83%D0%BB%D1%8C%D0%B2%D0%B0%D1%80.jpg",
+    "image_credit": null,
+    "description": "Khabarovsk ( Russian : Хабаровск [xɐˈbarəfsk] ⓘ ) is the largest city and the administrative centre of Khabarovsk Krai , Russia , [ 3 ] located 30 kilometers (19 mi) from the China–Russia border , at the confluence of the Amur and Ussuri Rivers , about 800 kilometers (500 mi) north of Vladivostok . As of the 2021 Russian census , it had a population of 617,441. [ 17 ] It was known as Khabarovka until 1893. [ 5 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 859,
+  "fields": {
+    "name": "Saratov",
+    "population": 837900,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Saratov",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Bender_House_in_Saratov_%28July_2025%29.jpg",
+    "image_credit": null,
+    "description": "Saratov [ a ] is the largest city and administrative center of Saratov Oblast , Russia, and a major port on the Volga River . As of the 2021 Census , [update] Saratov had a population of 901,361, making it the 17th-largest city in Russia by population. Saratov is 389 kilometres (242 mi) north of Volgograd , 442 kilometres (275 mi) south of Samara , and 858 kilometres (533 mi) southeast of Moscow."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 860,
+  "fields": {
+    "name": "Kostroma",
+    "population": 268742,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Kostroma",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Kostroma._Fire_Tower_P7140241_2640.jpg",
+    "image_credit": null,
+    "description": "Kostroma ( Russian : Кострома́ , IPA: [kəstrɐˈma] ) is a historic city and the administrative center of Kostroma Oblast , Russia . A part of the Golden Ring of Russian cities, it is located at the confluence of the rivers Volga and Kostroma . In the 2021 census, the population is 267,481."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 861,
+  "fields": {
+    "name": "Ufa",
+    "population": 1062319,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ufa",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/45/Ufa_view_from_Belaya_river_2022-05.jpg",
+    "image_credit": null,
+    "description": "Ufa [ a ] is the capital and largest city of Bashkortostan , Russia . The city lies at the confluence of the Belaya and Ufa rivers, in the centre-north of Bashkortostan, on hills forming the Ufa Plateau to the west of the southern Ural Mountains , with a population of over 1.1 million residents, [ 13 ] up to 1.4 million residents in the urban agglomeration. Ufa is the tenth-most populous city in Russia, and the fourth-most populous city in the Volga Federal District ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 862,
+  "fields": {
+    "name": "Yekaterinburg",
+    "population": 1349772,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Yekaterinburg",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/39/E-burg_asv2019-05_img46_view_from_VysotSky.jpg",
+    "image_credit": null,
+    "description": "Yekaterinburg [ a ] , alternatively romanized as Ekaterinburg and formerly known as Sverdlovsk (1924–1991) [ b ] , is a city and the administrative centre of Sverdlovsk Oblast and the Ural Federal District , Russia. The city is located on the Iset River between the Volga-Ural region and Siberia , with a population of roughly 1.5 million residents, [ 13 ] up to 2.2 million residents in the urban agglomeration. Yekaterinburg is the fourth most populous city in Russia, the largest city in the Ural Federal District, and one of Russia's main cultural and industrial centres. Yekaterinburg has been dubbed the \"third capital of Russia\", as it is ranked third by the size of its economy, culture, transportation and tourism, behind Moscow and Saint Petersburg . [ 14 ] [ 15 ] [ 16 ] [ 17 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 863,
+  "fields": {
+    "name": "Ulyanovsk",
+    "population": 613786,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ulyanovsk",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/da/The_city_of_Ulyanovsk%2C_Russia.jpg",
+    "image_credit": null,
+    "description": "Ulyanovsk , [ a ] known as Simbirsk [ b ] until 1924, is a city and the administrative center of Ulyanovsk Oblast , Russia, located on the Volga River 705 kilometers (438 mi) east of Moscow . Ulyanovsk has been the only Russian UNESCO City of Literature since 2015."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 864,
+  "fields": {
+    "name": "Krasnoyarsk",
+    "population": 1690,
+    "country": "Russia",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Krasnoyarsk",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/22/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D1%8F%D1%80%D1%81%D0%BA_%28%D0%BD%D0%BE%D1%87%D0%BD%D0%BE%D0%B9%29.jpg",
+    "image_credit": null,
+    "description": "Krasnoyarsk [ a ] is the largest city and administrative centre of Krasnoyarsk Krai , Russia . It is situated along the Yenisey River , and is the second-largest city in Siberia after Novosibirsk , with a population of over 1.1 million. [ 20 ] Krasnoyarsk is an important junction of the renowned Trans-Siberian Railway , and is one of the largest producers of aluminum in the country. The city is known for its natural landscape ; author Anton Chekhov judged Krasnoyarsk to be the most beautiful city in Siberia. [ 21 ] The Stolby Nature Sanctuary is located 10 km south of the city. Krasnoyarsk is a major educational centre in Siberia, and hosts the Siberian Federal University . In 2019, Krasnoyarsk was the host city of the 2019 Winter Universiade , the third hosted in Russia."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 865,
+  "fields": {
+    "name": "Bolu",
+    "population": 184682,
+    "country": "Turkey",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bolu",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/TR_Bolu_asv2021-10_img23_Beyaz%C4%B1t_Mosque.jpg",
+    "image_credit": null,
+    "description": "Bolu is a city in northern Turkey , and administrative center of the Bolu Province and of Bolu District , [ 2 ] located on the highway between Istanbul and Ankara . Its population as of 2021 was 184,682. [ 1 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 866,
+  "fields": {
+    "name": "Çorum",
+    "population": 269595,
+    "country": "Turkey",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Çorum",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/52/CorumMuseum1.jpg",
+    "image_credit": null,
+    "description": "Çorum ( Turkish pronunciation: [ˈtʃoɾum] ) is a northern Anatolian city in Turkey . Çorum is located inland in the central Black Sea Region of Turkey and is approximately 244 km (152 mi) from Ankara and 608 km (378 mi) from Istanbul . It is the seat of Çorum Province and of Çorum District . [ 2 ] Its population is 269,595 (2022). [ 1 ] The city has an elevation of 801 m (2,628 ft) above sea level."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 867,
+  "fields": {
+    "name": "Erzurum",
+    "population": null,
+    "country": "Turkey",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Erzurum",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Erzurum_Citadel_-_Erzurum_Kalesi_01.jpg",
+    "image_credit": null,
+    "description": "Erzurum ( Armenian : Կարին , romanized : Karin ; [ 1 ] Kurdish : Erzîrom [ 2 ] ) is a city in eastern Turkey . It is the largest city and capital of Erzurum Province and is 1,900 meters (6,233 feet) above sea level. Erzurum had a population of 367,250 in 2010. It is the site of ancient Theodosiopolis."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 868,
+  "fields": {
+    "name": "Antakya",
+    "population": 399045,
+    "country": "Turkey",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Antakya",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Antakya_Views_from_hill_at_SE_in_1990%27s_05.jpg",
+    "image_credit": null,
+    "description": "Antakya ( Turkish pronunciation: [anˈtakja] ), [ a ] Turkish form of Antioch , [ b ] is a municipality and the capital district of Hatay Province , Turkey , [ 3 ] with an area of 703 km 2 (271 sq mi) [ 4 ] and a population of around 400,000 people as of 2022. [ 1 ] It is in the Hatay Province, which is the southernmost region of Turkey. The city is located in a well-watered and fertile valley on the Orontes River , about 20 kilometres (12 mi) from the Levantine Sea ."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 869,
+  "fields": {
+    "name": "Iğdır",
+    "population": 101700,
+    "country": "Turkey",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Iğdır",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/I%C4%9Fd%C4%B1r_ve_A%C4%9Fr%C4%B1_Da%C4%9F%C4%B1.jpg",
+    "image_credit": null,
+    "description": "Iğdır ( Turkish: [ˈɯːdɯɾ] ⓘ ; Armenian : Իգդիր , romanized : Igdir or Ցոլակերտ , Tsʿolakert ; Azerbaijani : İğdır ; Kurdish : Îdir or Reşqelas ) [ 2 ] is a city in the Eastern Anatolia region of Turkey. It is the seat of Iğdır Province and Iğdır District . [ 3 ] Its population is 101,700 (2022). [ 1 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 870,
+  "fields": {
+    "name": "Manisa",
+    "population": null,
+    "country": "Turkey",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Manisa",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/62/MAN%C4%B0Sa.jpg",
+    "image_credit": null,
+    "description": "Manisa ( Turkish pronunciation: [maˈnisa] ) is a city in Turkey's Aegean Region and the administrative seat of Manisa Province , lying approximately 40 km northeast of the major city of İzmir . The city forms the urban part of the districts Şehzadeler and Yunusemre , with a population of 385,452 in 2022. [ 1 ]"
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 871,
+  "fields": {
+    "name": "Adapazarı",
+    "population": 281489,
+    "country": "Turkey",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Adapazarı",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/TR_Sakarya_asv2021-10_img20_Urban_Park.jpg",
+    "image_credit": null,
+    "description": "Adapazarı ( pronounced [ɑˈdɑpɑzɑɾɯ] ) is a municipality and the capital district of Sakarya Province , Turkey . [ 2 ] Its area is 324 km 2 , [ 3 ] and its population 281,489 (2022). [ 1 ] It covers the central and northern part of the agglomeration of Adapazarı and the adjacent countryside."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 872,
+  "fields": {
+    "name": "Serik",
+    "population": 139545,
+    "country": "Turkey",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Serik",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Belek%2C_07506_Belek-Serik-Antalya%2C_Turkey_-_panoramio_%281%29.jpg",
+    "image_credit": null,
+    "description": "Serik is a municipality and district of Antalya Province , Turkey . [ 2 ] Its area is 1,263 km 2 , [ 3 ] and its population is 139,545 (2022). [ 1 ] It is 39 km (24 mi) east of the city of Antalya , along the Mediterranean coast."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 873,
+  "fields": {
+    "name": "Sivas",
+    "population": 365274,
+    "country": "Turkey",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Sivas",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Sivas_Cumhuriyet_Meydan%C4%B1_in_2011_8145.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 874,
+  "fields": {
+    "name": "Van, Turkey",
+    "population": null,
+    "country": "Turkey",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Van,_Turkey",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Van_Fortress_From_Northwest.JPG",
+    "image_credit": null,
+    "description": "Van [ a ] is a city in eastern Turkey's Van Province , on the eastern shore of Lake Van . It is the capital and largest city of Van Province."
   }
 },
 {
@@ -34834,7 +35507,7 @@
   "pk": 787,
   "fields": {
     "name": "Windsor Park",
-    "capacity": 18500,
+    "capacity": 18434,
     "address": null,
     "year_of_construction": null,
     "city": 645,
@@ -34848,7 +35521,7 @@
     "architect": null,
     "tournaments": [],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Windsor_Park",
-    "transfermarkt_url": null,
+    "transfermarkt_url": "https://www.transfermarkt.com/linfield-fc/stadion/verein/3471/saison_id/2025",
     "image_url": null,
     "image_credit": null,
     "extra_images": [],
@@ -41574,6 +42247,1772 @@
     "wikipedia_url": "https://en.wikipedia.org/wiki/Tiberias_Municipal_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/ironi-tiberias/stadion/verein/51070",
     "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1006,
+  "fields": {
+    "name": "Park Hall",
+    "capacity": 2034,
+    "address": "Oswestry , Shropshire , England",
+    "year_of_construction": 1993,
+    "city": 826,
+    "latitude": "52.875869",
+    "longitude": "-3.026306",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "park-hall",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Park_Hall_(Oswestry)",
+    "transfermarkt_url": "https://www.transfermarkt.com/the-new-saints/stadion/verein/10734/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Ph_day.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1007,
+  "fields": {
+    "name": "Deeside Stadium",
+    "capacity": 1690,
+    "address": "Kelsterton Road, Connah's Quay , Deeside , CH5 4BR",
+    "year_of_construction": 1993,
+    "city": 827,
+    "latitude": "53.225338",
+    "longitude": "-3.076504",
+    "owner_raw": "Flintshire County Council",
+    "ownership": "PUBLIC",
+    "slug": "deeside-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Deeside_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/connah-s-quay-nomads/stadion/verein/22499/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Deeside_Stadium_aerial.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1008,
+  "fields": {
+    "name": "The Oval",
+    "capacity": 3000,
+    "address": "Caernarfon , Gwynedd , Wales",
+    "year_of_construction": null,
+    "city": 828,
+    "latitude": "53.134720",
+    "longitude": "-4.267500",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "the-oval",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/The_Oval,_Caernarfon",
+    "transfermarkt_url": "https://www.transfermarkt.com/caernarfon-town/stadion/verein/25113/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/49/The_Oval_%28Caernarfon%29.JPG",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1009,
+  "fields": {
+    "name": "Jenner Park",
+    "capacity": 2650,
+    "address": "Barry",
+    "year_of_construction": 1912,
+    "city": 829,
+    "latitude": "51.410830",
+    "longitude": "-3.265280",
+    "owner_raw": "Vale of Glamorgan Council",
+    "ownership": "PUBLIC",
+    "slug": "jenner-park",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Jenner_Park_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/barry-town-united/stadion/verein/20017/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Jenner_Park_-_Barry.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1010,
+  "fields": {
+    "name": "Bryntirion Park",
+    "capacity": 4000,
+    "address": null,
+    "year_of_construction": null,
+    "city": 830,
+    "latitude": "51.512749",
+    "longitude": "-3.608902",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "bryntirion-park",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/penybont/stadion/verein/49143/saison_id/2025",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1011,
+  "fields": {
+    "name": "Bridge Meadow",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 831,
+    "latitude": "51.809000",
+    "longitude": "-4.967000",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "bridge-meadow",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bridge_Meadow_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/haverfordwest-county/stadion/verein/49140/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/25/Bridge_Meadow_Stadium_-_geograph.org.uk_-_7725202.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1012,
+  "fields": {
+    "name": "Maes Tegid",
+    "capacity": 1500,
+    "address": "Bala , Gwynedd , Wales",
+    "year_of_construction": 1950,
+    "city": 832,
+    "latitude": "52.912220",
+    "longitude": "-3.601390",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "maes-tegid",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Maes_Tegid",
+    "transfermarkt_url": "https://www.transfermarkt.com/bala-town/stadion/verein/27843/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Maes_Tegid.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1013,
+  "fields": {
+    "name": "Llanelian Road",
+    "capacity": null,
+    "address": "Old Colwyn , Wales",
+    "year_of_construction": 1984,
+    "city": 833,
+    "latitude": "53.282200",
+    "longitude": "-3.699700",
+    "owner_raw": "Colwyn Bay F.C.",
+    "ownership": "PRIVATE",
+    "slug": "llanelian-road",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Llanelian_Road",
+    "transfermarkt_url": "https://www.transfermarkt.com/colwyn-bay/stadion/verein/30524/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/26/Llanelian_Road_-_2021_-_005.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1014,
+  "fields": {
+    "name": "Cae-y-Castell",
+    "capacity": 3000,
+    "address": null,
+    "year_of_construction": 1993,
+    "city": 834,
+    "latitude": "53.249167",
+    "longitude": "-3.125778",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "cae-y-castell",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Cae-y-Castell",
+    "transfermarkt_url": "https://www.transfermarkt.com/flint-town-united/stadion/verein/49137/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/11/Flint_Town_United_v_Vauxhall_Motors_-_12_July_2025_-_01.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1015,
+  "fields": {
+    "name": "Stebonheath Park",
+    "capacity": 3700,
+    "address": "Evans Terrace, Llanelli , Carmarthenshire , Wales SA15 1EY",
+    "year_of_construction": null,
+    "city": 835,
+    "latitude": "51.683900",
+    "longitude": "-4.147600",
+    "owner_raw": "Llanelli Town Council",
+    "ownership": "PUBLIC",
+    "slug": "stebonheath-park",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stebonheath_Park",
+    "transfermarkt_url": "https://www.transfermarkt.com/llanelli-town/stadion/verein/71011/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/61/Stebonheath_Park_-_geograph-265938.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1016,
+  "fields": {
+    "name": "Cardiff International Sports Campus",
+    "capacity": 4953,
+    "address": "Canton , Cardiff , Wales",
+    "year_of_construction": 2007,
+    "city": 507,
+    "latitude": "51.473060",
+    "longitude": "-3.210000",
+    "owner_raw": "Cardiff Council",
+    "ownership": "PUBLIC",
+    "slug": "cardiff-international-sports-campus",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Cardiff_International_Sports_Campus",
+    "transfermarkt_url": "https://www.transfermarkt.com/cardiff-met/stadion/verein/34091/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Cardiff_International_Sports_Stadium_2009-07-25.JPG",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Air_dome%2C_Cardiff_International_Sports_Campus_-_geograph.org.uk_-_5541216.jpg",
+        "credit": "Jaggery / Wikimedia Commons / CC BY-SA 2.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1017,
+  "fields": {
+    "name": "Old Road Ground",
+    "capacity": null,
+    "address": null,
+    "year_of_construction": null,
+    "city": 836,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "old-road-ground",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/briton-ferry-llansawel/stadion/verein/68243/saison_id/2025",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1018,
+  "fields": {
+    "name": "The Oval",
+    "capacity": 5600,
+    "address": "Belfast",
+    "year_of_construction": 1892,
+    "city": 645,
+    "latitude": "54.602964",
+    "longitude": "-5.891319",
+    "owner_raw": "Glentoran Recreation Co Ltd",
+    "ownership": "PRIVATE",
+    "slug": "the-oval-2",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/The_Oval_(Belfast)",
+    "transfermarkt_url": "https://www.transfermarkt.com/glentoran-fc/stadion/verein/9026/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Ovalariel.gif",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/JESUS_at_The_Oval.jpeg",
+        "credit": "Pastor Sam / Wikimedia Commons / CC BY 3.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1019,
+  "fields": {
+    "name": "Solitude",
+    "capacity": 3054,
+    "address": "Cliftonville Street Belfast , Northern Ireland",
+    "year_of_construction": 1890,
+    "city": 645,
+    "latitude": "54.619440",
+    "longitude": "-5.947220",
+    "owner_raw": "Cliftonville FC",
+    "ownership": "PRIVATE",
+    "slug": "solitude",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Solitude_(football_ground)",
+    "transfermarkt_url": "https://www.transfermarkt.com/cliftonville-fc/stadion/verein/1251/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/20190112_Solitude_outside.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/0c/20190112_Solitude_Main.jpg",
+        "credit": "Gruesome Gary / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Solitude_Snow.jpg",
+        "credit": "Riverside Regular / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1020,
+  "fields": {
+    "name": "Seaview",
+    "capacity": 3208,
+    "address": "Belfast , Northern Ireland",
+    "year_of_construction": 1921,
+    "city": 645,
+    "latitude": "54.624170",
+    "longitude": "-5.921940",
+    "owner_raw": "Crusaders",
+    "ownership": "PRIVATE",
+    "slug": "seaview",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Seaview_(football_ground)",
+    "transfermarkt_url": "https://www.transfermarkt.com/crusaders-fc/stadion/verein/21532/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Thumbsea.png",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1021,
+  "fields": {
+    "name": "Inver Park",
+    "capacity": 2732,
+    "address": "Larne , County Antrim , Northern Ireland",
+    "year_of_construction": 1918,
+    "city": 837,
+    "latitude": "54.850000",
+    "longitude": "-5.826940",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "inver-park",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Inver_Park",
+    "transfermarkt_url": "https://www.transfermarkt.com/larne-fc/stadion/verein/3461/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Inver_Park%2C_Larne_%281%29_-_geograph.org.uk_-_2314259.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1022,
+  "fields": {
+    "name": "The Showgrounds",
+    "capacity": 4843,
+    "address": "Coleraine , Northern Ireland",
+    "year_of_construction": 1927,
+    "city": 838,
+    "latitude": "55.132780",
+    "longitude": "-6.660280",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "the-showgrounds-3",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/The_Showgrounds_(Coleraine)",
+    "transfermarkt_url": "https://www.transfermarkt.com/coleraine-fc/stadion/verein/3831/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Coleraine10.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1023,
+  "fields": {
+    "name": "Mourneview Park",
+    "capacity": 3302,
+    "address": "Mourneview Avenue, Lurgan, County Armagh , Northern Ireland",
+    "year_of_construction": 1895,
+    "city": 839,
+    "latitude": "54.453890",
+    "longitude": "-6.336390",
+    "owner_raw": "Glenavon Football Club",
+    "ownership": "PRIVATE",
+    "slug": "mourneview-park",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Mourneview_Park",
+    "transfermarkt_url": "https://www.transfermarkt.com/glenavon-fc/stadion/verein/3463/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Mourneview_Park_2020.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1024,
+  "fields": {
+    "name": "Ballymena Showgrounds",
+    "capacity": 3824,
+    "address": "Ballymena , Northern Ireland",
+    "year_of_construction": 1913,
+    "city": 840,
+    "latitude": "54.870100",
+    "longitude": "-6.265070",
+    "owner_raw": "Mid and East Antrim Borough Council",
+    "ownership": "PUBLIC",
+    "slug": "ballymena-showgrounds",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ballymena_Showgrounds",
+    "transfermarkt_url": "https://www.transfermarkt.com/ballymena-united/stadion/verein/15244/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Showgroundsbufc.JPG",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1025,
+  "fields": {
+    "name": "Loughshore Hotel Arena",
+    "capacity": 2100,
+    "address": "Carrickfergus , Northern Ireland",
+    "year_of_construction": null,
+    "city": 841,
+    "latitude": "54.719720",
+    "longitude": "-5.800280",
+    "owner_raw": "Mid and East Antrim Borough Council",
+    "ownership": "PUBLIC",
+    "slug": "loughshore-hotel-arena",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Taylors_Avenue",
+    "transfermarkt_url": "https://www.transfermarkt.com/carrick-rangers/stadion/verein/8714/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Taylor%27s_Avenue_football_ground%2C_Carrickfergus_-_geograph.org.uk_-_1734307.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1026,
+  "fields": {
+    "name": "Shamrock Park",
+    "capacity": 3940,
+    "address": "Brownstown Road, Portadown, County Armagh , Northern Ireland",
+    "year_of_construction": null,
+    "city": 842,
+    "latitude": "54.413060",
+    "longitude": "-6.457780",
+    "owner_raw": "Portadown Football Club",
+    "ownership": "PRIVATE",
+    "slug": "shamrock-park",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Shamrock_Park",
+    "transfermarkt_url": "https://www.transfermarkt.com/portadown-fc/stadion/verein/5594/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/ShamrockParkSep089.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1027,
+  "fields": {
+    "name": "Clandeboye Park",
+    "capacity": 2000,
+    "address": "Bangor , Northern Ireland",
+    "year_of_construction": 1935,
+    "city": 843,
+    "latitude": "54.651625",
+    "longitude": "-5.684475",
+    "owner_raw": "Bangor F.C.",
+    "ownership": "PRIVATE",
+    "slug": "clandeboye-park",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Clandeboye_Park",
+    "transfermarkt_url": "https://www.transfermarkt.com/bangor-fc/stadion/verein/21531/saison_id/2025",
+    "image_url": "https://maps.wikimedia.org/img/osm-intl,13,a,a,250x200.png?lang=en&domain=en.wikipedia.org&title=Clandeboye_Park&revid=1312149692&groups=_8ae584b162592383c510c292c579ef64bb23dc68&parser=legacy",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1028,
+  "fields": {
+    "name": "Stangmore Park",
+    "capacity": 2000,
+    "address": null,
+    "year_of_construction": 1975,
+    "city": 844,
+    "latitude": "54.489500",
+    "longitude": "-6.746000",
+    "owner_raw": "Dungannon Swifts F.C.",
+    "ownership": "PRIVATE",
+    "slug": "stangmore-park",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stangmore_Park",
+    "transfermarkt_url": "https://www.transfermarkt.com/dungannon-swifts/stadion/verein/21515/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Stangmore_Park%2C_Dungannon_-_geograph.org.uk_-_1389814.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Spectating_at_Stangmore_Park%2C_Dungannon_-_geograph.org.uk_-_1616813.jpg",
+        "credit": "Dean Molyneaux / Wikimedia Commons / CC BY-SA 2.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1029,
+  "fields": {
+    "name": "New Adana Stadium",
+    "capacity": 30960,
+    "address": "Adana , Turkey",
+    "year_of_construction": 2021,
+    "city": 845,
+    "latitude": "37.063330",
+    "longitude": "35.375000",
+    "owner_raw": "Ministry of Youth and Sports (Turkey)",
+    "ownership": "PUBLIC",
+    "slug": "new-adana-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/New_Adana_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/adana-demirspor/stadion/verein/3840/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/New_Adana_Stadium_II.png",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1030,
+  "fields": {
+    "name": "Diyarbakır Stadium",
+    "capacity": 33000,
+    "address": "Diyarbakır , Turkey",
+    "year_of_construction": 2018,
+    "city": 846,
+    "latitude": "37.942500",
+    "longitude": "40.120280",
+    "owner_raw": "Ministry of Youth and Sports (Turkey)",
+    "ownership": "PUBLIC",
+    "slug": "diyarbakr-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Diyarbakır_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/amed-sk/stadion/verein/12382/saison_id/2025",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/amedspor-2023-2024-1723217952-144751.jpeg?lm=1723217982",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Diyarbekirspor-Eskisehirspor1.jpg",
+        "credit": "Chansey / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1031,
+  "fields": {
+    "name": "17 Eylül Stadium",
+    "capacity": 12275,
+    "address": "Bandırma , Balıkesir , Turkey",
+    "year_of_construction": 1940,
+    "city": 847,
+    "latitude": "40.338060",
+    "longitude": "27.984720",
+    "owner_raw": "Bandırmaspor",
+    "ownership": "PRIVATE",
+    "slug": "17-eylul-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/17_Eylül_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/bandirmaspor/stadion/verein/20760/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Western_Turkey_relief_location_map.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1032,
+  "fields": {
+    "name": "Bodrum District Stadium",
+    "capacity": 4243,
+    "address": null,
+    "year_of_construction": null,
+    "city": 848,
+    "latitude": "37.040560",
+    "longitude": "27.431670",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "bodrum-district-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://tr.wikipedia.org/wiki/Bodrum_İlçe_Stadyumu",
+    "transfermarkt_url": "https://www.transfermarkt.com/bodrum-fk/stadion/verein/44006/saison_id/2025",
+    "image_url": "https://maps.wikimedia.org/img/osm-intl,12,a,a,270x200.png?lang=tr&domain=tr.wikipedia.org&title=Bodrum_%C4%B0l%C3%A7e_Stadyumu&revid=37188000&groups=_751a7b298eb89ac504e352e551f254a839b736fe&parser=legacy",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1033,
+  "fields": {
+    "name": "Arsenal Stadium",
+    "capacity": 19241,
+    "address": "Tula , Russia",
+    "year_of_construction": 1959,
+    "city": 849,
+    "latitude": "54.174600",
+    "longitude": "37.602600",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "arsenal-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Arsenal_Stadium_(Tula)",
+    "transfermarkt_url": "https://www.transfermarkt.com/arsenal-tula/stadion/verein/3729/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Arsenal_Stadium_in_Tula.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Moscow_Hippodrome.JPG",
+        "credit": "User:Simm / Wikimedia Commons / CC BY-SA 2.5"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1034,
+  "fields": {
+    "name": "Chayka Stadium",
+    "capacity": 3455,
+    "address": null,
+    "year_of_construction": 1997,
+    "city": 850,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "chayka-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/chaika-peschanokopskoe/stadion/verein/36972/saison_id/2025",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1035,
+  "fields": {
+    "name": "Central Stadium",
+    "capacity": 15000,
+    "address": null,
+    "year_of_construction": 1935,
+    "city": 851,
+    "latitude": "55.166333",
+    "longitude": "61.376123",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "central-stadium-2",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/fk-chelyabinsk/stadion/verein/23110/saison_id/2025",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1036,
+  "fields": {
+    "name": "Central Stadium",
+    "capacity": 12500,
+    "address": null,
+    "year_of_construction": 1930,
+    "city": 852,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "central-stadium-3",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/chernomorets-novorossijsk/stadion/verein/5287/saison_id/2025",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1037,
+  "fields": {
+    "name": "Tsentralny Stadium",
+    "capacity": 10052,
+    "address": null,
+    "year_of_construction": 2024,
+    "city": 853,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "tsentralny-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/fakel-voronezh/stadion/verein/1124/saison_id/2025",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1038,
+  "fields": {
+    "name": "Central Stadium",
+    "capacity": 6248,
+    "address": null,
+    "year_of_construction": 1977,
+    "city": 854,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "central-stadium-4",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/kamaz-naberezhnye-chelny/stadion/verein/3243/saison_id/2025",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1039,
+  "fields": {
+    "name": "Neftekhimik Stadium",
+    "capacity": 3200,
+    "address": null,
+    "year_of_construction": 1978,
+    "city": 855,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "neftekhimik-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/neftekhimik-nizhnekamsk/stadion/verein/3733/saison_id/2025",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1040,
+  "fields": {
+    "name": "Sapsan Arena",
+    "capacity": 2825,
+    "address": "Moscow , Russia",
+    "year_of_construction": 1961,
+    "city": 669,
+    "latitude": "55.806500",
+    "longitude": "37.737700",
+    "owner_raw": "Russian Railways",
+    "ownership": "PRIVATE",
+    "slug": "sapsan-arena",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Sapsan_Arena",
+    "transfermarkt_url": "https://www.transfermarkt.com/rodina-moscow/stadion/verein/59024/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/20190526_Sapsan_Arena_1.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Moscow_Hippodrome.JPG",
+        "credit": "User:Simm / Wikimedia Commons / CC BY-SA 2.5"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1041,
+  "fields": {
+    "name": "Volgograd Arena",
+    "capacity": 45568,
+    "address": "Lenina Ave 76, Volgograd , Russia",
+    "year_of_construction": 2018,
+    "city": 856,
+    "latitude": "48.734440",
+    "longitude": "44.548610",
+    "owner_raw": "Volgograd Oblast",
+    "ownership": "PUBLIC",
+    "slug": "volgograd-arena",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Volgograd_Arena",
+    "transfermarkt_url": "https://www.transfermarkt.com/rotor-volgograd/stadion/verein/3609/saison_id/2025",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadion-volgograd-wolgograd-arena-1525855575-15314.jpg?lm=1525855589",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/25/Scale_model_of_Volgograd_Arena_01.jpg",
+        "credit": "Пресс-служба Волгоградской областной думы / Wikimedia Commons / CC BY 3.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1042,
+  "fields": {
+    "name": "Shinnik Stadium",
+    "capacity": 22990,
+    "address": "Yaroslavl , Russia",
+    "year_of_construction": 1957,
+    "city": 857,
+    "latitude": "57.628729",
+    "longitude": "39.867486",
+    "owner_raw": "City of Yaroslavl",
+    "ownership": "PUBLIC",
+    "slug": "shinnik-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Shinnik_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/shinnik-yaroslavl/stadion/verein/2374/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Shinnik_stadium%2C_Yaroslavl%27%2C_Russia.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Moscow_Hippodrome.JPG",
+        "credit": "User:Simm / Wikimedia Commons / CC BY-SA 2.5"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1043,
+  "fields": {
+    "name": "Lenin Stadium",
+    "capacity": 15200,
+    "address": "Khabarovsk , Russia",
+    "year_of_construction": 1956,
+    "city": 858,
+    "latitude": "48.478890",
+    "longitude": "135.046390",
+    "owner_raw": "Khabarovsk Krai",
+    "ownership": "PRIVATE",
+    "slug": "lenin-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Lenin_Stadium_(Khabarovsk)",
+    "transfermarkt_url": "https://www.transfermarkt.com/ska-khabarovsk/stadion/verein/3690/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Lenin_Stadium%2C_Khabarovsk_vnutri.JPG",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Moscow_Hippodrome.JPG",
+        "credit": "User:Simm / Wikimedia Commons / CC BY-SA 2.5"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1044,
+  "fields": {
+    "name": "Lokomotiv Stadium",
+    "capacity": 15000,
+    "address": null,
+    "year_of_construction": 1962,
+    "city": 859,
+    "latitude": "51.539215",
+    "longitude": "45.998533",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "lokomotiv-stadium-2",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Lokomotiv_Stadium_(Saratov)",
+    "transfermarkt_url": "https://www.transfermarkt.com/sokol-saratov/stadion/verein/3834/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/49/Lokomotiv_Saratov.JPG",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Moscow_Hippodrome.JPG",
+        "credit": "User:Simm / Wikimedia Commons / CC BY-SA 2.5"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1045,
+  "fields": {
+    "name": "Urozhay Stadium",
+    "capacity": 3164,
+    "address": null,
+    "year_of_construction": 1978,
+    "city": 860,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "urozhay-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/spartak-kostroma/stadion/verein/14590/saison_id/2025",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1046,
+  "fields": {
+    "name": "Eduard Streltsov Stadium",
+    "capacity": 81000,
+    "address": "Moscow , Russia",
+    "year_of_construction": 1956,
+    "city": 669,
+    "latitude": "55.716390",
+    "longitude": "37.656390",
+    "owner_raw": "FC Torpedo Moscow",
+    "ownership": "PRIVATE",
+    "slug": "eduard-streltsov-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Eduard_Streltsov_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/torpedo-moscow/stadion/verein/1186/saison_id/2025",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/luzhniki-1590684976-39903.jpg?lm=1590684966",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Eduard_Streltsov_stadium.jpg",
+        "credit": "UMNICK / Wikimedia Commons / CC BY-SA 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Moscow_Hippodrome.JPG",
+        "credit": "User:Simm / Wikimedia Commons / CC BY-SA 2.5"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1047,
+  "fields": {
+    "name": "Neftyanik Stadium",
+    "capacity": 15132,
+    "address": "Komarova 9.",
+    "year_of_construction": 1967,
+    "city": 861,
+    "latitude": "54.826110",
+    "longitude": "56.061670",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "neftyanik-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Neftyanik_Stadium_(Ufa)",
+    "transfermarkt_url": "https://www.transfermarkt.com/fk-ufa/stadion/verein/28095/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Stadium_Neftyanick_Ufa_-_Ural.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1048,
+  "fields": {
+    "name": "Central Stadium",
+    "capacity": 23000,
+    "address": "Ulitsa Repina 5, Yekaterinburg , Russia",
+    "year_of_construction": 1957,
+    "city": 862,
+    "latitude": "56.832500",
+    "longitude": "60.573610",
+    "owner_raw": "FC Ural Yekaterinburg",
+    "ownership": "PRIVATE",
+    "slug": "central-stadium-5",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Central_Stadium_(Yekaterinburg)",
+    "transfermarkt_url": "https://www.transfermarkt.com/ural-yekaterinburg/stadion/verein/11127/saison_id/2025",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadion-ekaterinburg-1525857638-15319.jpg?lm=1525857650",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Estadio_Central_%28Ekaterinburg-arena%29.jpg",
+        "credit": "Фальшивомонетчик / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Muzey_slavy_Centralnogo_stadiona_%28Yekaterinburg%29_07.jpg",
+        "credit": "SysMusDes / Wikimedia Commons / CC BY-SA 3.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Velodrom_Ekaterinburg.jpg",
+        "credit": "Wikimedia Commons / Public domain"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1049,
+  "fields": {
+    "name": "Trud Stadium",
+    "capacity": 10000,
+    "address": null,
+    "year_of_construction": 1963,
+    "city": 863,
+    "latitude": "54.318100",
+    "longitude": "48.394300",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "trud-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Trud_Stadium_(Ulyanovsk)",
+    "transfermarkt_url": "https://www.transfermarkt.com/volga-uljanovsk/stadion/verein/12439/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/%D0%A3%D0%A4%D0%A5%D0%9C%D0%A0_IMG_1299.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Central_Stadion_Trud.jpg",
+        "credit": "FranzkPølse00 / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Moscow_Hippodrome.JPG",
+        "credit": "User:Simm / Wikimedia Commons / CC BY-SA 2.5"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/95/%D0%A3%D0%A4%D0%A5%D0%9C%D0%A0_IMG_1238.jpg",
+        "credit": "Українська федерація хокею з м'ячем (УФХМР) / Wikimedia Commons / CC BY-SA 3.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1050,
+  "fields": {
+    "name": "Central Stadium",
+    "capacity": 15000,
+    "address": "Krasnoyarsk , Russia",
+    "year_of_construction": 1967,
+    "city": 864,
+    "latitude": "55.998403",
+    "longitude": "92.884664",
+    "owner_raw": "Krasnoyarsk Krai",
+    "ownership": "PRIVATE",
+    "slug": "central-stadium-6",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Central_Stadium_(Krasnoyarsk)",
+    "transfermarkt_url": "https://www.transfermarkt.com/enisey-krasnoyarsk/stadion/verein/3714/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Krasnoyarsk_Central_Stadium.JPG",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Moscow_Hippodrome.JPG",
+        "credit": "User:Simm / Wikimedia Commons / CC BY-SA 2.5"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1051,
+  "fields": {
+    "name": "Bolu Atatürk Stadium",
+    "capacity": 8456,
+    "address": "Bolu , Turkey",
+    "year_of_construction": 1958,
+    "city": 865,
+    "latitude": "40.736306",
+    "longitude": "31.606750",
+    "owner_raw": "Boluspor",
+    "ownership": "PRIVATE",
+    "slug": "bolu-ataturk-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bolu_Atatürk_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/boluspor/stadion/verein/3207/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/17/TR_Bolu_asv2021-10_img15_Atat%C3%BCrk_Stadium.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1052,
+  "fields": {
+    "name": "Çorum City Stadium",
+    "capacity": 15000,
+    "address": null,
+    "year_of_construction": 2020,
+    "city": 866,
+    "latitude": "40.534440",
+    "longitude": "34.922780",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "corum-city-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://tr.wikipedia.org/wiki/Çorum_Şehir_Stadyumu",
+    "transfermarkt_url": "https://www.transfermarkt.com/corum-fk/stadion/verein/37951/saison_id/2025",
+    "image_url": "https://maps.wikimedia.org/img/osm-intl,12,a,a,270x200.png?lang=tr&domain=tr.wikipedia.org&title=%C3%87orum_%C5%9Eehir_Stadyumu&revid=37290835&groups=_1f93b92c40c09bf5353eea7ad2a051c3ede58396&parser=legacy",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1053,
+  "fields": {
+    "name": "Kazım Karabekir Stadium",
+    "capacity": 21374,
+    "address": "Erzurum , Turkey",
+    "year_of_construction": 1968,
+    "city": 867,
+    "latitude": "39.911110",
+    "longitude": "41.238060",
+    "owner_raw": "Erzurumspor F.K.",
+    "ownership": "PRIVATE",
+    "slug": "kazm-karabekir-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Kazım_Karabekir_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/erzurumspor-fk/stadion/verein/39722/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Galatasaray-FB_Skupa.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1054,
+  "fields": {
+    "name": "Esenler Stadium",
+    "capacity": 5291,
+    "address": "Esenler , Istanbul , Turkey",
+    "year_of_construction": 2014,
+    "city": 258,
+    "latitude": "41.054280",
+    "longitude": "28.879725",
+    "owner_raw": "Istanbul Metropolitan Municipality",
+    "ownership": "PUBLIC",
+    "slug": "esenler-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Esenler_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/esenler-erokspor/stadion/verein/45269/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/48/Esenler_Stadyumu.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1055,
+  "fields": {
+    "name": "Fuat Tosyalı Stadium",
+    "capacity": 9800,
+    "address": null,
+    "year_of_construction": 2025,
+    "city": 868,
+    "latitude": "36.676390",
+    "longitude": "36.218060",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "fuat-tosyal-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://tr.wikipedia.org/wiki/Fuat_Tosyalı_Stadyumu",
+    "transfermarkt_url": "https://www.transfermarkt.com/hatayspor/stadion/verein/7775/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/84/%C4%B0skenderun_Fuat_Tosyal%C4%B1_Stadyumu.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1056,
+  "fields": {
+    "name": "Iğdır City Stadium",
+    "capacity": 2700,
+    "address": null,
+    "year_of_construction": null,
+    "city": 869,
+    "latitude": "39.910280",
+    "longitude": "44.029440",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "igdr-city-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://tr.wikipedia.org/wiki/Iğdır_Şehir_Stadyumu",
+    "transfermarkt_url": "https://www.transfermarkt.com/igdir-fk/stadion/verein/74664/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Igdir-sehir-stadyumu-1.2025.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/I%C4%9Fd%C4%B1r_%C5%9Eehir_Stadyumu.jpg",
+        "credit": "Sabri76 / Wikimedia Commons / Public domain"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1057,
+  "fields": {
+    "name": "Esenyurt Necmi Kadıoğlu Stadium",
+    "capacity": 4488,
+    "address": "Yunus Emre Mah., OkurlarCad. 270. Sok. Esenyurt , Istanbul Turkey",
+    "year_of_construction": 2012,
+    "city": 258,
+    "latitude": "41.024440",
+    "longitude": "28.697780",
+    "owner_raw": "Esenyurt Municipality",
+    "ownership": "PUBLIC",
+    "slug": "esenyurt-necmi-kadoglu-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Esenyurt_Necmi_Kadıoğlu_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/istanbulspor/stadion/verein/924/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Necmi_Kad%C4%B1o%C4%9Flu_Stadyumu_%28III%29_2019-08-17.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1058,
+  "fields": {
+    "name": "Ankara Aktepe Stadium",
+    "capacity": 5000,
+    "address": "Ankara Turkey",
+    "year_of_construction": 1999,
+    "city": 261,
+    "latitude": "39.999158",
+    "longitude": "32.880739",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "ankara-aktepe-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ankara_Aktepe_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/ankara-keciorengucu/stadion/verein/12388/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/01/Map_of_Ankara.png",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1059,
+  "fields": {
+    "name": "Manisa 19 Mayıs Stadium",
+    "capacity": 16597,
+    "address": "Manisa , Turkey",
+    "year_of_construction": 1974,
+    "city": 870,
+    "latitude": "38.623060",
+    "longitude": "27.440000",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "manisa-19-mays-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Manisa_19_Mayıs_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/manisa-fk/stadion/verein/48913/saison_id/2025",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/manisa-19-mayıs-stadyumu-1488793075-9403.jpg?lm=1491209209",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Manisa_19_May%C4%B1s_Stadyumu.jpg",
+        "credit": "Sabri76 / Wikimedia Commons / CC BY-SA 3.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1060,
+  "fields": {
+    "name": "Pendik Stadium",
+    "capacity": 4105,
+    "address": "Pendik , Istanbul , Turkey",
+    "year_of_construction": 1993,
+    "city": 258,
+    "latitude": "40.888060",
+    "longitude": "29.227780",
+    "owner_raw": "District Municipality of Pendik",
+    "ownership": "PUBLIC",
+    "slug": "pendik-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Pendik_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/pendikspor/stadion/verein/3209/saison_id/2025",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/pendikspor-stadyumu-1715593486-136289.jpg?lm=1715593505",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Silta%C5%9F_Yap%C4%B1_Pendikspor_Stadyumu.jpg",
+        "credit": "Serim81 / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1061,
+  "fields": {
+    "name": "New Sakarya Stadium",
+    "capacity": 28154,
+    "address": "Adapazarı , Sakarya , Turkey",
+    "year_of_construction": 2017,
+    "city": 871,
+    "latitude": "40.780560",
+    "longitude": "30.432220",
+    "owner_raw": "Sakaryaspor",
+    "ownership": "PRIVATE",
+    "slug": "new-sakarya-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/New_Sakarya_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/sakaryaspor/stadion/verein/2463/saison_id/2025",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/TR_Sakarya_asv2021-10_img27_New_Stadium.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1062,
+  "fields": {
+    "name": "Yusuf Ziya Öniş Stadium",
+    "capacity": 4100,
+    "address": "Istanbul , Turkey",
+    "year_of_construction": 1988,
+    "city": 258,
+    "latitude": "41.172500",
+    "longitude": "29.050300",
+    "owner_raw": "Ministry of Youth and Sports",
+    "ownership": "PUBLIC",
+    "slug": "yusuf-ziya-onis-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Yusuf_Ziya_Öniş_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/sariyer/stadion/verein/518/saison_id/2025",
+    "image_url": "https://maps.wikimedia.org/img/osm-intl,13,a,a,250x200.png?lang=en&domain=en.wikipedia.org&title=Yusuf_Ziya_%C3%96ni%C5%9F_Stadium&revid=1350792939&groups=_c925a9495ed4784596f469fe5b5bd43c59f7258e&parser=legacy",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1063,
+  "fields": {
+    "name": "Serik İsmail Oğan Stadium",
+    "capacity": 2250,
+    "address": null,
+    "year_of_construction": null,
+    "city": 872,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "serik-ismail-ogan-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/serik-belediyespor/stadion/verein/50845/saison_id/2025",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1064,
+  "fields": {
+    "name": "New Sivas 4 Eylül Stadium",
+    "capacity": 27734,
+    "address": "Sivas , Turkey",
+    "year_of_construction": 2016,
+    "city": 873,
+    "latitude": "39.728330",
+    "longitude": "36.983890",
+    "owner_raw": "Sivasspor",
+    "ownership": "PRIVATE",
+    "slug": "new-sivas-4-eylul-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/New_Sivas_4_Eylül_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/sivasspor/stadion/verein/2381/saison_id/2025",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/sivasspor-1566307791-24827.jpg?lm=1566307797",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/4eylul2.jpg",
+        "credit": "Recepsivas / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1065,
+  "fields": {
+    "name": "Ümraniye Municipality City Stadium",
+    "capacity": 3513,
+    "address": "Hekimbaşı , Ümraniye , Istanbul",
+    "year_of_construction": 2000,
+    "city": 258,
+    "latitude": null,
+    "longitude": null,
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "umraniye-municipality-city-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ümraniye_Municipality_City_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/umraniyespor/stadion/verein/24245/saison_id/2025",
+    "image_url": "https://maps.wikimedia.org/img/osm-intl,13,a,a,250x200.png?lang=en&domain=en.wikipedia.org&title=%C3%9Cmraniye_Municipality_City_Stadium&revid=1273825153&groups=_c0765175001f789e3f95a5a1c30916e092ffde7a&parser=legacy",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1066,
+  "fields": {
+    "name": "Van Atatürk Stadium",
+    "capacity": 5885,
+    "address": null,
+    "year_of_construction": null,
+    "city": 874,
+    "latitude": "38.496110",
+    "longitude": "43.373060",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "van-ataturk-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://tr.wikipedia.org/wiki/Van_Atatürk_Stadyumu",
+    "transfermarkt_url": "https://www.transfermarkt.com/van-spor-fk/stadion/verein/3173/saison_id/2025",
+    "image_url": "https://maps.wikimedia.org/img/osm-intl,12,a,a,270x200.png?lang=tr&domain=tr.wikipedia.org&title=Van_Atat%C3%BCrk_Stadyumu&revid=37188003&groups=_9f6cf265d1d0a357759196506ca3438e889004bc&parser=legacy",
     "image_credit": null,
     "extra_images": [],
     "description": null,
@@ -65778,6 +68217,1556 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "maccabi-tel-aviv"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1042,
+  "fields": {
+    "is_national": false,
+    "name": "The New Saints FC",
+    "founded": "1958-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1006,
+    "manager": "Craig Harrison",
+    "num_of_titles": 18,
+    "city": 826,
+    "average_attendance": 438,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/The_New_Saints_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/the-new-saints/startseite/verein/10734",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/10734.png",
+    "image_credit": null,
+    "description": "The New Saints of Oswestry Town & Llansantffraid Football Club , commonly known as The New Saints ( Welsh : Clwb Pêl-droed y Seintiau Newydd ) or TNS FC are a professional football club that play in the Cymru Premier , part of the Welsh football system , but are based completely within England, in Oswestry , Shropshire.",
+    "league": 81,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "the-new-saints-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1043,
+  "fields": {
+    "is_national": false,
+    "name": "Connah's Quay Nomads",
+    "founded": "1946-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1007,
+    "manager": "John Disney",
+    "num_of_titles": 2,
+    "city": 827,
+    "average_attendance": 341,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Connah%27s_Quay_Nomads_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/connah-s-quay-nomads/startseite/verein/22499",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/22499.png",
+    "image_credit": null,
+    "description": "Connah's Quay Nomads Football Club ( Welsh : Clwb Pêl-droed Cei Connah [ 1 ] ) is a Welsh professional football club based in Connah's Quay , Flintshire. They play in the Cymru Premier .",
+    "league": 81,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "connahs-quay-nomads"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1044,
+  "fields": {
+    "is_national": false,
+    "name": "Caernarfon Town",
+    "founded": "1937-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1008,
+    "manager": "Richard Davies",
+    "num_of_titles": 0,
+    "city": 828,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Caernarfon_Town_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/caernarfon-town/startseite/verein/25113",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/25113.png",
+    "image_credit": null,
+    "description": "Caernarfon Town Football Club ( Welsh : Clwb Pêl Droed Tref Caernarfon ) is a professional Welsh football club based in Caernarfon , Gwynedd . They play in the Cymru Premier and have qualified for the 2026–27 UEFA Europa Conference League after winning the 2025–26 Welsh Cup .",
+    "league": 81,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "caernarfon-town"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1045,
+  "fields": {
+    "is_national": false,
+    "name": "Barry Town United",
+    "founded": "1905-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1009,
+    "manager": "Andy Legg",
+    "num_of_titles": 0,
+    "city": 829,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Barry_Town_United_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/barry-town-united/startseite/verein/20017",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/20017.png",
+    "image_credit": null,
+    "description": "Barry Town United Football Club ( Welsh : Clwb Pêl-droed Tref Unedig y Barri or Clwb Pêl-droed Tref y Barri ) is a semi-professional association football team based in Barry , Wales. They currently play in the Cymru Premier .",
+    "league": 81,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "barry-town-united"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1046,
+  "fields": {
+    "is_national": false,
+    "name": "Penybont FC",
+    "founded": "2016-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1010,
+    "manager": "Rhys Griffiths",
+    "num_of_titles": 0,
+    "city": 830,
+    "average_attendance": 431,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Penybont_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/penybont/startseite/verein/49143",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/49143.png",
+    "image_credit": null,
+    "description": "Penybont Football Club ( Welsh : Clwb Pêl-droed Penybont ) is a Welsh football club, based in Bridgend ( Welsh : Pen-y-bont ar Ogwr ), that plays in the Cymru Premier . The current club was formed in 2013, following the merger of Bridgend Town and Bryntirion Athletic . Penybont play their home games at Bryntirion Park (known as The DragonBet Stadium for sponsorship reasons).",
+    "league": 81,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "penybont-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1047,
+  "fields": {
+    "is_national": false,
+    "name": "Haverfordwest County",
+    "founded": "1899-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1011,
+    "manager": "Tony Pennock",
+    "num_of_titles": 0,
+    "city": 831,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Haverfordwest_County_A.F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/haverfordwest-county/startseite/verein/49140",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/49140.png",
+    "image_credit": null,
+    "description": "Haverfordwest County Association Football Club ( Welsh : Clwb Pêl-droed Hwlffordd [ 1 ] ) is a Welsh professional football team based in Haverfordwest , Wales . They currently play in the Cymru Premier .",
+    "league": 81,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "haverfordwest-county"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1048,
+  "fields": {
+    "is_national": false,
+    "name": "Bala Town FC",
+    "founded": "1880-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1012,
+    "manager": "Steve Fisher",
+    "num_of_titles": 0,
+    "city": 832,
+    "average_attendance": 346,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bala_Town_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/bala-town/startseite/verein/27843",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/27843.png",
+    "image_credit": null,
+    "description": "Bala Town Football Club ( Welsh : Clwb Pêl-droed y Bala , lit. ' Bala football club ' ) is a Welsh professional football club from Bala, Gwynedd , who play in the Cymru North . [ 1 ] They play their home games at Maes Tegid . [ 2 ]",
+    "league": 81,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "bala-town-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1049,
+  "fields": {
+    "is_national": false,
+    "name": "Colwyn Bay FC",
+    "founded": "1923-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1013,
+    "manager": "Michael Wilde",
+    "num_of_titles": 0,
+    "city": 833,
+    "average_attendance": 350,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Colwyn_Bay_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/colwyn-bay/startseite/verein/30524",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/30524.png",
+    "image_credit": null,
+    "description": "Colwyn Bay Football Club ( Welsh : Clwb Pêl-Droed Bae Colwyn ) is a football club based in Old Colwyn in North Wales . They are currently members of the Cymru Premier . Nicknamed the Seagulls, but also known as 'The Bay', their home ground is Llanelian Road in Old Colwyn .",
+    "league": 81,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "colwyn-bay-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1050,
+  "fields": {
+    "is_national": false,
+    "name": "Flint Town United",
+    "founded": "2016-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1014,
+    "manager": "Steve Evans",
+    "num_of_titles": 0,
+    "city": 834,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Flint_Town_United_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/flint-town-united/startseite/verein/49137",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/49137.png",
+    "image_credit": null,
+    "description": "Flint Town United Football Club is a football club based in Flint , Flintshire , Wales who play in the Cymru Premier .",
+    "league": 81,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "flint-town-united"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1051,
+  "fields": {
+    "is_national": false,
+    "name": "Llanelli Town AFC",
+    "founded": "1896-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1015,
+    "manager": "Kieran Kiely",
+    "num_of_titles": 0,
+    "city": 835,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Llanelli_Town_A.F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/llanelli-town/startseite/verein/71011",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/71011.png",
+    "image_credit": null,
+    "description": "Llanelli Town Association Football Club ( Welsh : Clwb Pêl-droed Llanelli ) are a semi-professional Welsh football club that plays in the Cymru South .",
+    "league": 81,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "llanelli-town-afc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1052,
+  "fields": {
+    "is_national": false,
+    "name": "Cardiff Metropolitan University FC",
+    "founded": "1967-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1016,
+    "manager": "Ryan Jenkins [ 1 ]",
+    "num_of_titles": 0,
+    "city": 507,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Cardiff_Metropolitan_University_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/cardiff-met/startseite/verein/34091",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/34091.png",
+    "image_credit": null,
+    "description": "Cardiff Met Football Club ( Welsh : Clwb Pêl-droed Met Caerdydd ), commonly known as Cardiff Met F.C. , are a Welsh football club, based in Cyncoed , Cardiff that plays in the Cymru Premier . The club badge features the bowman with the words \" I lwyddo, rhaid chwarae \" which is translated as \" To succeed, [one] must play \".",
+    "league": 81,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "cardiff-metropolitan-university-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1053,
+  "fields": {
+    "is_national": false,
+    "name": "Briton Ferry Llansawel AFC",
+    "founded": "2009-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1017,
+    "manager": "Andy Dyer [ 3 ]",
+    "num_of_titles": 0,
+    "city": 836,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Briton_Ferry_Llansawel_A.F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/briton-ferry-llansawel/startseite/verein/68243",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/68243.png",
+    "image_credit": null,
+    "description": "Briton Ferry Llansawel A.F.C. ( Welsh : Clwb Pêl-droed Llansawel [ 4 ] ) is a football club based in Briton Ferry in Wales , currently playing in the Cymru Premier . The club was formed in 2009 after the merger between Briton Ferry Athletic and Llansawel .",
+    "league": 81,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "briton-ferry-llansawel-afc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1054,
+  "fields": {
+    "is_national": false,
+    "name": "Linfield FC",
+    "founded": "1886-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 787,
+    "manager": "David Healy",
+    "num_of_titles": 0,
+    "city": 645,
+    "average_attendance": 3293,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Linfield_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/linfield-fc/startseite/verein/3471",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3471.png",
+    "image_credit": null,
+    "description": "Linfield Football Club is a Northern Irish professional football club, based in south Belfast , which plays in the NIFL Premiership – the highest level of the Northern Ireland Football League . The fourth-oldest club on the island of Ireland , Linfield was founded in 1886 by workers at the Ulster Spinning Company's Linfield Mill. [ 3 ] Since 1905, the club's home ground has been Windsor Park [ 1 ] , which is also the home of the Northern Ireland national team and is the largest football stadium in Northern Ireland . They train at Midgley Park which is beside the stadium. The club's badge displays Windsor Castle , in reference to the ground's namesake. [ 4 ]",
+    "league": 82,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "linfield-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1055,
+  "fields": {
+    "is_national": false,
+    "name": "Glentoran FC",
+    "founded": "1882-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1018,
+    "manager": "Declan Devine",
+    "num_of_titles": 0,
+    "city": 645,
+    "average_attendance": 2641,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Glentoran_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/glentoran-fc/startseite/verein/9026",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/9026.png",
+    "image_credit": null,
+    "description": "Glentoran is a professional football club  based in East Belfast , Northern Ireland , that plays in the NIFL Premiership . The club was founded in 1882 and has since won more than 130 major honours. They are one of three Irish League teams to have never been relegated .",
+    "league": 82,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "glentoran-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1056,
+  "fields": {
+    "is_national": false,
+    "name": "Cliftonville FC",
+    "founded": "1879-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1019,
+    "manager": "Jim Magilton",
+    "num_of_titles": 0,
+    "city": 645,
+    "average_attendance": 1954,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Cliftonville_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/cliftonville-fc/startseite/verein/1251",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1251.png",
+    "image_credit": null,
+    "description": "Cliftonville Football & Athletic Club is a professional association football club playing in the NIFL Premiership – the top division of the Northern Ireland Football League . The club was founded on 20 September 1879 by John McAlery in the suburb of Cliftonville in north Belfast and are the founders of football in Ireland .",
+    "league": 82,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "cliftonville-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1057,
+  "fields": {
+    "is_national": false,
+    "name": "Crusaders FC",
+    "founded": "1898-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1020,
+    "manager": "Declan Caddell",
+    "num_of_titles": 0,
+    "city": 645,
+    "average_attendance": 1634,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Crusaders_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/crusaders-fc/startseite/verein/21532",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/21532.png",
+    "image_credit": null,
+    "description": "Crusaders Football Club is a semi-professional [ 2 ] Northern Irish football club playing in the NIFL Premiership . The club, founded in 1898, is based in north Belfast and plays its home matches at Seaview .",
+    "league": 82,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "crusaders-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1058,
+  "fields": {
+    "is_national": false,
+    "name": "Larne FC",
+    "founded": "1889-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1021,
+    "manager": "Gary Haveron",
+    "num_of_titles": 0,
+    "city": 837,
+    "average_attendance": 1422,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Larne_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/larne-fc/startseite/verein/3461",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3461.png",
+    "image_credit": null,
+    "description": "Larne Football Club is a professional Northern Irish football club based in Larne , County Antrim , that competes in the NIFL Premiership .",
+    "league": 82,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "larne-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1059,
+  "fields": {
+    "is_national": false,
+    "name": "Coleraine FC",
+    "founded": "1927-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1022,
+    "manager": "Ruaidhrí Higgins",
+    "num_of_titles": 0,
+    "city": 838,
+    "average_attendance": 2414,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Coleraine_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/coleraine-fc/startseite/verein/3831",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3831.png",
+    "image_credit": null,
+    "description": "Coleraine Football Club is a Northern Irish football club, playing in the NIFL Premiership , the highest level of the Northern Ireland Football League .",
+    "league": 82,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "coleraine-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1060,
+  "fields": {
+    "is_national": false,
+    "name": "Glenavon FC",
+    "founded": "1989-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1023,
+    "manager": "Michael O'Connor",
+    "num_of_titles": 0,
+    "city": 839,
+    "average_attendance": 1016,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Glenavon_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/glenavon-fc/startseite/verein/3463",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3463.png",
+    "image_credit": null,
+    "description": "Glenavon Football Club is a Northern Irish semi-professional football club that competes in the NIFL Championship . Founded in 1889, the club hails from Lurgan and plays its home matches at Mourneview Park . Club colours are blue and white. Glenavon's bitter rivals are Portadown , with their matches known as the \"Mid-Ulster Derby\". Glenavon are a part of the Mid-Ulster F.A. [ 1 ]",
+    "league": 82,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "glenavon-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1061,
+  "fields": {
+    "is_national": false,
+    "name": "Ballymena United FC",
+    "founded": "1928-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1024,
+    "manager": "Oran Kearney",
+    "num_of_titles": 0,
+    "city": 840,
+    "average_attendance": 1831,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ballymena_United_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/ballymena-united/startseite/verein/15244",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/15244.png",
+    "image_credit": null,
+    "description": "Ballymena United Football Club is a semi-professional football club from Northern Ireland . Based in Ballymena , County Antrim , the team competes in the NIFL Premiership and plays home matches at the Ballymena Showgrounds .",
+    "league": 82,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "ballymena-united-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1062,
+  "fields": {
+    "is_national": false,
+    "name": "Carrick Rangers FC",
+    "founded": "1939-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1025,
+    "manager": "Stephen Baxter",
+    "num_of_titles": 0,
+    "city": 841,
+    "average_attendance": 668,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Carrick_Rangers_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/carrick-rangers/startseite/verein/8714",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/8714.png",
+    "image_credit": null,
+    "description": "Carrick Rangers Football Club is a semi-professional Northern Irish football club playing in NIFL Premiership . The club, founded in 1939, hails from Carrickfergus , County Antrim and plays its home matches at Taylors Avenue which is owned by Mid and East Antrim Borough Council. Carrick Rangers main rivals are Larne , with matches between the sides being known as, \"The East Antrim Derby.\" Ballyclare Comrades are also local rivals.",
+    "league": 82,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "carrick-rangers-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1063,
+  "fields": {
+    "is_national": false,
+    "name": "Portadown FC",
+    "founded": "1887-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1026,
+    "manager": "David Jeffrey MBE",
+    "num_of_titles": 0,
+    "city": 842,
+    "average_attendance": 1332,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Portadown_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/portadown-fc/startseite/verein/5594",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/5594.png",
+    "image_credit": null,
+    "description": "Portadown Football Club is a semi-professional Northern Irish football club who play in the NIFL Premiership .",
+    "league": 82,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "portadown-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1064,
+  "fields": {
+    "is_national": false,
+    "name": "Bangor FC",
+    "founded": "1918-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1027,
+    "manager": "Lee Feeney",
+    "num_of_titles": 0,
+    "city": 843,
+    "average_attendance": 1254,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bangor_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/bangor-fc/startseite/verein/21531",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/21531.png",
+    "image_credit": null,
+    "description": "Bangor Football Club is a semi-professional Northern Irish football club playing in the NIFL Premiership . The club, founded in 1918, hails from Bangor and plays its home matches at Clandeboye Park . Club colours are gold and royal blue.",
+    "league": 82,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "bangor-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1065,
+  "fields": {
+    "is_national": false,
+    "name": "Dungannon Swifts FC",
+    "founded": "1949-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1028,
+    "manager": "Rodney McAree",
+    "num_of_titles": 0,
+    "city": 844,
+    "average_attendance": 744,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Dungannon_Swifts_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/dungannon-swifts/startseite/verein/21515",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/21515.png",
+    "image_credit": null,
+    "description": "Dungannon Swifts Football Club , referred to as Dungannon Swifts , or simply The Swifts , is a Northern Irish semi-professional football club playing in the NIFL Premiership . The club, founded in 1949, has risen from the Mid-Ulster league to the top tier in Northern Ireland since its election to the Irish League First Division in 1997. Dungannon earned promotion from Irish League First Division to the Premier Division in the 2002–03 season. Dungannon Swifts are a part of the Mid-Ulster F.A. [ 1 ]",
+    "league": 82,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "dungannon-swifts-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1066,
+  "fields": {
+    "is_national": false,
+    "name": "Adana Demirspor",
+    "founded": "1940-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1029,
+    "manager": "Kubilayhan Yücel",
+    "num_of_titles": 0,
+    "city": 845,
+    "average_attendance": 642,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Adana_Demirspor",
+    "transfermarkt_url": "https://www.transfermarkt.com/adana-demirspor/startseite/verein/3840",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3840.png",
+    "image_credit": null,
+    "description": "Adana Demirspor Kulübü is a multi-sports club based in Adana , Turkey . The football department is the most popular department, which was relegated to TFF 1. Lig on 16 March 2025 after 4 seasons at the Super Lig . [ 2 ] Founded by railway workers of Turkish State Railways (TCDD) in 1940,  the football team's success at the Adana League and the water polo team's unbeaten National League titles in the club's first three decades built a large worker fan base in the city. Some supporters who were unhappy with the management of the club founded Adanaspor in 1954, and competition among the two clubs for the citywide support and domination since then, created one of the fiercest rivalries of Turkish football which continues to this day as the Adana derby . [ 3 ] They currently play in the TFF 2. Lig , following back-to back relegations.",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "adana-demirspor"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1067,
+  "fields": {
+    "is_national": false,
+    "name": "Amedspor",
+    "founded": "1989-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1030,
+    "manager": "Besnik Hasi [ 2 ]",
+    "num_of_titles": 0,
+    "city": 846,
+    "average_attendance": 18202,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Amedspor",
+    "transfermarkt_url": "https://www.transfermarkt.com/amed-sk/startseite/verein/12382",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/12382.png",
+    "image_credit": null,
+    "description": "Amed Sportif Faaliyetler Kulübü ( Kurmanji Kurdish : Klûba Çalakiyên Sporê ya Amedê , [ 3 ] 'Amed Sports Activities Club'), commonly known as Amedspor [ b ] , is a sports club based in Diyarbakır , Turkey . [ 4 ] The club is widely supported by Kurds in Turkey and abroad for its embrace of Kurdish identity . [ 5 ] Its football section will play in the Süper Lig in the 2026–27 season after having been promoted from the TFF 1. Lig in 2025–26 .",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "amedspor"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1068,
+  "fields": {
+    "is_national": false,
+    "name": "Bandırmaspor",
+    "founded": "1965-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1031,
+    "manager": "Mustafa Gürsel",
+    "num_of_titles": 0,
+    "city": 847,
+    "average_attendance": 1024,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bandırmaspor",
+    "transfermarkt_url": "https://www.transfermarkt.com/bandirmaspor/startseite/verein/20760",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/20760.png",
+    "image_credit": null,
+    "description": "Bandırmaspor is a Turkish professional football club located in the town of Bandırma , Balıkesir Province and currently plays in the TFF First League .",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "bandrmaspor"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1069,
+  "fields": {
+    "is_national": false,
+    "name": "Arsenal Tula",
+    "founded": "1946-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1033,
+    "manager": "Dmitri Gunko",
+    "num_of_titles": 0,
+    "city": 849,
+    "average_attendance": 4910,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Arsenal_Tula",
+    "transfermarkt_url": "https://www.transfermarkt.com/arsenal-tula/startseite/verein/3729",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3729.png",
+    "image_credit": null,
+    "description": "FC Arsenal Tula ( Russian : ФК Арсенал Тула ) is a Russian professional football club from Tula playing in the second-tier Russian First League .",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "arsenal-tula"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1070,
+  "fields": {
+    "is_national": false,
+    "name": "Chayka Peschanokopskoye",
+    "founded": "1997-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1034,
+    "manager": "Dmitri Kombarov",
+    "num_of_titles": 0,
+    "city": 850,
+    "average_attendance": 821,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Chayka_Peschanokopskoye",
+    "transfermarkt_url": "https://www.transfermarkt.com/chaika-peschanokopskoe/startseite/verein/36972",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/36972.png",
+    "image_credit": null,
+    "description": "FC Chayka Peschanokopskoye ( Russian : «Чайка» (Песчанокопское) ) is a Russian football team from Peschanokopskoye .",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "chayka-peschanokopskoye"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1071,
+  "fields": {
+    "is_national": false,
+    "name": "Chelyabinsk",
+    "founded": "1976-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1035,
+    "manager": "Roman Pylypchuk",
+    "num_of_titles": 0,
+    "city": 851,
+    "average_attendance": 5344,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Chelyabinsk",
+    "transfermarkt_url": "https://www.transfermarkt.com/fk-chelyabinsk/startseite/verein/23110",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/23110.png",
+    "image_credit": null,
+    "description": "Football Club Chelyabinsk ( Russian : ФК «Челябинск» ) is a Russian football club from Chelyabinsk that plays in the Russian First League , the second tier of the Russian football league system .",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "chelyabinsk"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1072,
+  "fields": {
+    "is_national": false,
+    "name": "Chernomorets Novorossiysk",
+    "founded": "1907-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1036,
+    "manager": "Eduard Sarkisov",
+    "num_of_titles": 0,
+    "city": 852,
+    "average_attendance": 4960,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Chernomorets_Novorossiysk",
+    "transfermarkt_url": "https://www.transfermarkt.com/chernomorets-novorossijsk/startseite/verein/5287",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/5287.png",
+    "image_credit": null,
+    "description": "FC Chernomorets Novorossiysk ( Russian : ФК \"Черноморец\" Новороссийск ) is the oldest Russian association football club based in Novorossiysk . It will be relegated to the fourth-tier Russian Second League Division B for the 2026–27 season.",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "chernomorets-novorossiysk"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1073,
+  "fields": {
+    "is_national": false,
+    "name": "Fakel Voronezh",
+    "founded": "1947-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1037,
+    "manager": "Oleg Vasilenko",
+    "num_of_titles": 0,
+    "city": 853,
+    "average_attendance": 9165,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Fakel_Voronezh",
+    "transfermarkt_url": "https://www.transfermarkt.com/fakel-voronezh/startseite/verein/1124",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1124.png",
+    "image_credit": null,
+    "description": "FC Fakel Voronezh ( Russian : Футбольный клуб \"Факел\" Воронеж ) is a Russian professional football club based in Voronezh . Founded in 1947, the club has played in the Soviet Top League and the Russian Premier League . The club will return to the Russian Premier League in the 2026–27 season. The club holds the record for fan attendance in Eastern Europe.",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "fakel-voronezh"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1074,
+  "fields": {
+    "is_national": false,
+    "name": "KAMAZ Naberezhnye Chelny",
+    "founded": "1981-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1038,
+    "manager": "Anton Khazov",
+    "num_of_titles": 0,
+    "city": 854,
+    "average_attendance": 2078,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_KAMAZ_Naberezhnye_Chelny",
+    "transfermarkt_url": "https://www.transfermarkt.com/kamaz-naberezhnye-chelny/startseite/verein/3243",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3243.png",
+    "image_credit": null,
+    "description": "KAMAZ ( Russian : Футбольный клуб КАМАЗ Набережные Челны ) is a Russian football club based in Naberezhnye Chelny , Russia. The club plays in the second-tier Russian First League .",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "kamaz-naberezhnye-chelny"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1075,
+  "fields": {
+    "is_national": false,
+    "name": "Neftekhimik Nizhnekamsk",
+    "founded": "1991-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1039,
+    "manager": "Kirill Novikov",
+    "num_of_titles": 0,
+    "city": 855,
+    "average_attendance": 760,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Neftekhimik_Nizhnekamsk",
+    "transfermarkt_url": "https://www.transfermarkt.com/neftekhimik-nizhnekamsk/startseite/verein/3733",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3733.png",
+    "image_credit": null,
+    "description": "FC Neftekhimik Nizhnekamsk ( Russian : ФК «Нефтехимик» Нижнекамск ) is an association football club from Nizhnekamsk , Russia, founded in 1991. It played at the second-highest level in the Russian First League in 1993–1998, 2001–2004, 2012 to 2013–14, 2016–17 and from 2019–to present.  Neftekhimik has won 5 Second Division titles.",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "neftekhimik-nizhnekamsk"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1076,
+  "fields": {
+    "is_national": false,
+    "name": "Rodina Moscow",
+    "founded": "2015-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1040,
+    "manager": "Juan Díaz Quinta",
+    "num_of_titles": 0,
+    "city": 669,
+    "average_attendance": 2051,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Rodina_Moscow",
+    "transfermarkt_url": "https://www.transfermarkt.com/rodina-moscow/startseite/verein/59024",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/59024.png",
+    "image_credit": null,
+    "description": "FC Rodina Moscow ( Russian : ФК «Родина» Москва ) is a Russian professional football team based in Moscow . It will make its debut in the Russian Premier League in the 2026–27 season.",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "rodina-moscow"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1077,
+  "fields": {
+    "is_national": false,
+    "name": "Rotor Volgograd",
+    "founded": "1928-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1041,
+    "manager": "Dmytro Parfyonov",
+    "num_of_titles": 0,
+    "city": 856,
+    "average_attendance": 15406,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Rotor_Volgograd",
+    "transfermarkt_url": "https://www.transfermarkt.com/rotor-volgograd/startseite/verein/3609",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3609.png",
+    "image_credit": null,
+    "description": "SC Rotor Volgograd ( Russian : СK Ротор ) is a Russian professional football club from the large city of Volgograd , Volgograd Oblast (formerly Stalingrad). The club plays in the second-tier Russian First League , and are the largest and best supported Volgograd club. For most of their existence, they have been the city's only representatives in the national league system.",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "rotor-volgograd"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1078,
+  "fields": {
+    "is_national": false,
+    "name": "Shinnik Yaroslavl",
+    "founded": "1957-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1042,
+    "manager": "Denis Boyarintsev",
+    "num_of_titles": 0,
+    "city": 857,
+    "average_attendance": 2287,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Shinnik_Yaroslavl",
+    "transfermarkt_url": "https://www.transfermarkt.com/shinnik-yaroslavl/startseite/verein/2374",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/2374.png",
+    "image_credit": null,
+    "description": "FC Shinnik Yaroslavl ( Russian : Футбольный клуб «Шинник» Ярославль ) is a Russian football club, based in Yaroslavl .",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "shinnik-yaroslavl"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1079,
+  "fields": {
+    "is_national": false,
+    "name": "SKA-Khabarovsk",
+    "founded": "1946-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1043,
+    "manager": "Mikhail Semyonov",
+    "num_of_titles": 0,
+    "city": 858,
+    "average_attendance": 2667,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_SKA-Khabarovsk",
+    "transfermarkt_url": "https://www.transfermarkt.com/ska-khabarovsk/startseite/verein/3690",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3690.png",
+    "image_credit": null,
+    "description": "Football Club SKA-Khabarovsk ( Russian : Футбольный клуб СКА-Хабаровск ) is a Russian professional association football club based in Khabarovsk which plays in the second-tier Russian First League . They played in the Russian Premier League for the first time ever in the 2017–18 season. At more than 6,000 kilometres (3,700 mi) east of Moscow , SKA Khabarovsk are the most Easterly team to have taken part in a UEFA domestic top division.",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "ska-khabarovsk"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1080,
+  "fields": {
+    "is_national": false,
+    "name": "Sokol Saratov",
+    "founded": "1937-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1044,
+    "manager": "Yevgeni Kharlachyov",
+    "num_of_titles": 0,
+    "city": 859,
+    "average_attendance": 2308,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Sokol_Saratov",
+    "transfermarkt_url": "https://www.transfermarkt.com/sokol-saratov/startseite/verein/3834",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3834.png",
+    "image_credit": null,
+    "description": "PFC Sokol ( Russian : ПФК \"Сокол\" ) is a Russian association football club based in Saratov . In 2001 and 2002, Sokol played in the Russian Premier League . The club will play in the third-tier Russian Second League in the 2026–27 season.",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "sokol-saratov"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1081,
+  "fields": {
+    "is_national": false,
+    "name": "Spartak Kostroma",
+    "founded": "1959-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1045,
+    "manager": "Yevgeny Taranukhin",
+    "num_of_titles": 0,
+    "city": 860,
+    "average_attendance": 1610,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Spartak_Kostroma",
+    "transfermarkt_url": "https://www.transfermarkt.com/spartak-kostroma/startseite/verein/14590",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/14590.png",
+    "image_credit": null,
+    "description": "FC Spartak Kostroma ( Russian : ФК «Спартак» Кострома ) is a Russian association football club from Kostroma , founded in 1959.",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "spartak-kostroma"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1082,
+  "fields": {
+    "is_national": false,
+    "name": "Torpedo Moscow",
+    "founded": "1924-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1046,
+    "manager": "Vacant",
+    "num_of_titles": 0,
+    "city": 669,
+    "average_attendance": 1067,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Torpedo_Moscow",
+    "transfermarkt_url": "https://www.transfermarkt.com/torpedo-moscow/startseite/verein/1186",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1186.png",
+    "image_credit": null,
+    "description": "Football Club Torpedo Moscow (Russian: ФК \"Торпедо\" Москва , FK Torpedo Moskva ), known as Torpedo Moscow , is a Russian professional football club based in Moscow . The club plays in the Russian First League . Their colours are white and black , with green also commonly being associated with the club. They play their home games at Eduard Streltsov Stadium , but have been playing at Luzhniki Stadium since their home stadium began a reconstruction project in 2021.",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "torpedo-moscow"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1083,
+  "fields": {
+    "is_national": false,
+    "name": "Ufa",
+    "founded": "2010-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1047,
+    "manager": "Omari Tetradze",
+    "num_of_titles": 0,
+    "city": 861,
+    "average_attendance": 1706,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ufa",
+    "transfermarkt_url": "https://www.transfermarkt.com/fk-ufa/startseite/verein/28095",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/28095.png",
+    "image_credit": null,
+    "description": "FC Ufa ( Russian : ФК «Уфа» , Bashkir : Өфө футбол клубы , romanized : Öfö futbol kluby ) is a Russian football club based in Ufa that plays in the Russian First League . [ 2 ]",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "ufa"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1084,
+  "fields": {
+    "is_national": false,
+    "name": "Ural Yekaterinburg",
+    "founded": "1930-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1048,
+    "manager": "Vasili Berezutski",
+    "num_of_titles": 0,
+    "city": 862,
+    "average_attendance": 8613,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ural_Yekaterinburg",
+    "transfermarkt_url": "https://www.transfermarkt.com/ural-yekaterinburg/startseite/verein/11127",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/11127.png",
+    "image_credit": null,
+    "description": "FC Ural Yekaterinburg ( Russian : ФК Урал ) is a Russian professional association football club based in Yekaterinburg that plays in the Russian First League . [ 1 ]",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "ural-yekaterinburg"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1085,
+  "fields": {
+    "is_national": false,
+    "name": "Volga Ulyanovsk",
+    "founded": "1947-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1049,
+    "manager": "Mikhail Belov",
+    "num_of_titles": 0,
+    "city": 863,
+    "average_attendance": 2568,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Volga_Ulyanovsk",
+    "transfermarkt_url": "https://www.transfermarkt.com/volga-uljanovsk/startseite/verein/12439",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/12439.png",
+    "image_credit": null,
+    "description": "FC Volga Ulyanovsk ( Russian : ФК «Во́лга» Улья́новск ) is a professional association football club based in Ulyanovsk , Russia . It plays in the second-tier Russian First League .",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "volga-ulyanovsk"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1086,
+  "fields": {
+    "is_national": false,
+    "name": "Yenisey Krasnoyarsk",
+    "founded": "1937-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1050,
+    "manager": "Sergei Tashuyev",
+    "num_of_titles": 0,
+    "city": 864,
+    "average_attendance": 4163,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Yenisey_Krasnoyarsk",
+    "transfermarkt_url": "https://www.transfermarkt.com/enisey-krasnoyarsk/startseite/verein/3714",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3714.png",
+    "image_credit": null,
+    "description": "FK Yenisey Krasnoyarsk (ФК Енисей Красноярск) is a Russian football club based in Krasnoyarsk , in Krasnoyarsk Krai . The club plays in the Russian First League .",
+    "league": 84,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "yenisey-krasnoyarsk"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1087,
+  "fields": {
+    "is_national": false,
+    "name": "Bodrum",
+    "founded": "1931-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1032,
+    "manager": "Burhan Eşer",
+    "num_of_titles": 0,
+    "city": 848,
+    "average_attendance": 1205,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bodrum_F.K.",
+    "transfermarkt_url": "https://www.transfermarkt.com/bodrum-fk/startseite/verein/44006",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/44006.png",
+    "image_credit": null,
+    "description": "Bodrum Futbol Kulübü , known as Sipay Bodrumspor due to sponsorship reasons, is a Turkish professional football club based in the resort town of Bodrum , Muğla Province . [ 2 ] Established in 1931, the club spent much of its early existence in amateur leagues before gradually rising through the Turkish football pyramid . [ 3 ]",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "bodrum"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1088,
+  "fields": {
+    "is_national": false,
+    "name": "Boluspor",
+    "founded": "1965-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1051,
+    "manager": "Suat Kaya",
+    "num_of_titles": 0,
+    "city": 865,
+    "average_attendance": 717,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Boluspor",
+    "transfermarkt_url": "https://www.transfermarkt.com/boluspor/startseite/verein/3207",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3207.png",
+    "image_credit": null,
+    "description": "Boluspor , known as Geosis Boluspor due to sponsorship reasons, is a Turkish professional football club located in the city of Bolu . The clubs plays in red and white kits, and have done so since their formation in 1965. [ 3 ] Some of famous players of her were Lütfü Isıgöllü, Sinan Alayoğlu, Sadullah Acele, Rıdvan Dilmen , Sercan Görgülü , Halil İbrahim Eren , Recep Çetin , Ali Beykoz , Şenol Fidan, Müfit İkizoğlu and Faruk Yiğit .",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "boluspor"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1089,
+  "fields": {
+    "is_national": false,
+    "name": "Çorum",
+    "founded": "2015-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1052,
+    "manager": "Uğur Uçar",
+    "num_of_titles": 0,
+    "city": 866,
+    "average_attendance": 10186,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Çorum_F.K.",
+    "transfermarkt_url": "https://www.transfermarkt.com/corum-fk/startseite/verein/37951",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/37951.png",
+    "image_credit": null,
+    "description": "Çorum Futbol Kulübü ( Turkish pronunciation: [ˈtʃoɾum] ) is a Turkish football club located in Çorum , Turkey. The club currently plays in the Süper Lig , the first tier of Turkish football.",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "corum"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1090,
+  "fields": {
+    "is_national": false,
+    "name": "Erzurumspor",
+    "founded": "2015-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1053,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 867,
+    "average_attendance": 3394,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Erzurumspor",
+    "transfermarkt_url": "https://www.transfermarkt.com/erzurumspor-fk/startseite/verein/39722",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/39722.png",
+    "image_credit": null,
+    "description": "Erzurumspor was a sports club located in Erzurum , Turkey . The football club played in the Turkish Regional Amateur League . The club also played in Turkish First League between 1998 and 2001. It fell into money shortage since 2000 and gradually fell into Second League Category A in 2001 and Second league Category B in 2003. It was finally forced to relegate TFF Third League after  not playing an away match at Karsspor on January 31, 2010. Erzurumspor were also relegated from Third League and was dissolved in 2015 and replaced with Erzurum Büyükşehir Belediyespor , which was founded in 1967. Erzurum Büyükşehir Belediyespor was the champion of the 1st Group of Regional Amateur League in 2010–11 season and promoted to the 3rd League.",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "erzurumspor"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1091,
+  "fields": {
+    "is_national": false,
+    "name": "Esenler Erokspor",
+    "founded": "1959-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1054,
+    "manager": "Osman Özköylü",
+    "num_of_titles": 0,
+    "city": 258,
+    "average_attendance": 530,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Esenler_Erokspor",
+    "transfermarkt_url": "https://www.transfermarkt.com/esenler-erokspor/startseite/verein/45269",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/45269.png",
+    "image_credit": null,
+    "description": "Esenler Erokspor Kulübü is a Turkish professional sports club based in Esenler , Istanbul . Founded on 16 November 1959, the club is best known for its football department, which currently competes in the TFF First League , the second tier of the Turkish football league system . [ 2 ] The team plays its home matches at the Esenler Stadium (also known as Esenler Erokspor Stadium), which has an all-seater capacity of 5,291. [ 3 ]",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "esenler-erokspor"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1092,
+  "fields": {
+    "is_national": false,
+    "name": "Hatayspor",
+    "founded": "1966-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1055,
+    "manager": "Bekir İrtegün",
+    "num_of_titles": 0,
+    "city": 868,
+    "average_attendance": 304,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Hatayspor",
+    "transfermarkt_url": "https://www.transfermarkt.com/hatayspor/startseite/verein/7775",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/7775.png",
+    "image_credit": null,
+    "description": "Hatayspor Kulübü , known as Atakaş Hatayspor due to sponsorship reasons, is a Turkish professional football club located in Antakya , Hatay Province . Hatayspor, founded in 1967 through a merger of three local clubs, aimed to promote sports and positive habits among youth. The team's colors symbolize nobility, purity, and peace. They won their first championship in 1969–70, earning promotion. Over the years, they faced relegations and promotions in lower leagues. They reached the Second League in 1989-90 and 1993, and finally promoted to the Süper Lig in the 2019–20 season .",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "hatayspor"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1093,
+  "fields": {
+    "is_national": false,
+    "name": "Iğdır",
+    "founded": "2016-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1056,
+    "manager": "Kenan Koçak",
+    "num_of_titles": 0,
+    "city": 869,
+    "average_attendance": 900,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Iğdır_F.K.",
+    "transfermarkt_url": "https://www.transfermarkt.com/igdir-fk/startseite/verein/74664",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/74664.png",
+    "image_credit": null,
+    "description": "Iğdır Futbol Kulübü , known as Alagöz Holding Iğdır Futbol Kulübü due to sponsorship reasons, is a Turkish professional football club based in Iğdır . They play in the TFF First League . [ 2 ] The club plays in green and white kits.",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "igdr"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1094,
+  "fields": {
+    "is_national": false,
+    "name": "İstanbulspor",
+    "founded": "1926-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1057,
+    "manager": "Barış Kanbak",
+    "num_of_titles": 0,
+    "city": 258,
+    "average_attendance": 314,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/İstanbulspor",
+    "transfermarkt_url": "https://www.transfermarkt.com/istanbulspor/startseite/verein/924",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/924.png",
+    "image_credit": null,
+    "description": "İstanbulspor Kulübü is a Turkish football and sports club founded by Istanbul High School students in 1926. In 2004–05, they were relegated from the Turkish Süper Lig (Super League) to the TFF First League . For many decades, it was the fourth most famous and well-developed professional football club in Istanbul , coming after Beşiktaş , Galatasaray , and Fenerbahçe . After being bought by the Uzan family in 1990, [ 2 ] it has been repossessed by the government and resold to third parties.",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "istanbulspor"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1095,
+  "fields": {
+    "is_national": false,
+    "name": "Keçiörengücü",
+    "founded": "1945-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1058,
+    "manager": "Yalçın Koşukavak",
+    "num_of_titles": 0,
+    "city": 261,
+    "average_attendance": 437,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ankara_Keçiörengücü",
+    "transfermarkt_url": "https://www.transfermarkt.com/ankara-keciorengucu/startseite/verein/12388",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/12388.png",
+    "image_credit": null,
+    "description": "Ankara Keçiörengücü Spor Kulübü , commonly referred to as Keçiörengücü or, due to sponsorship reasons, Emre Gökdemir İnşaat Keçiörengücü , is a Turkish sports club based in the Keçiören district of Ankara . The football club plays in the TFF First League .",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "keciorengucu"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1096,
+  "fields": {
+    "is_national": false,
+    "name": "Manisa",
+    "founded": "1994-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1059,
+    "manager": "Mustafa Dalcı",
+    "num_of_titles": 0,
+    "city": 870,
+    "average_attendance": 1111,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Manisa_FK",
+    "transfermarkt_url": "https://www.transfermarkt.com/manisa-fk/startseite/verein/48913",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/48913.png",
+    "image_credit": null,
+    "description": "Manisa Futbol Kulübü is a Turkish professional football club based in Manisa . The club colours are black and white and they play their home matches at the Manisa 19 Mayıs Stadium .",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "manisa"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1097,
+  "fields": {
+    "is_national": false,
+    "name": "Pendikspor",
+    "founded": "1950-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1060,
+    "manager": "Sinan Kaloğlu",
+    "num_of_titles": 0,
+    "city": 258,
+    "average_attendance": 1552,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Pendikspor",
+    "transfermarkt_url": "https://www.transfermarkt.com/pendikspor/startseite/verein/3209",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3209.png",
+    "image_credit": null,
+    "description": "Pendikspor is a Turkish sports club based in Pendik , Istanbul . The club's homeground is the Pendik Stadium . [ 1 ]",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "pendikspor"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1098,
+  "fields": {
+    "is_national": false,
+    "name": "Sakaryaspor",
+    "founded": "1965-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1061,
+    "manager": "Mustafa Dalcı",
+    "num_of_titles": 0,
+    "city": 871,
+    "average_attendance": 3060,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Sakaryaspor",
+    "transfermarkt_url": "https://www.transfermarkt.com/sakaryaspor/startseite/verein/2463",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/2463.png",
+    "image_credit": null,
+    "description": "Sakaryaspor Kulübü Derneği , commonly known as Sakaryaspor , is a Turkish professional football club based in Adapazarı , the capital of Sakarya Province . Founded in 1965, the club competes in the TFF First League , the second tier of the Turkish football league system . Sakaryaspor play their home matches at the 28,113-capacity New Sakarya Stadium , and traditionally wear green and black striped shirts. The club has a strong regional following and is known for its rivalry with Kocaelispor .",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "sakaryaspor"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1099,
+  "fields": {
+    "is_national": false,
+    "name": "Sarıyer",
+    "founded": "1940-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1062,
+    "manager": "Servet Çetin",
+    "num_of_titles": 0,
+    "city": 258,
+    "average_attendance": 1362,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Sarıyer_S.K.",
+    "transfermarkt_url": "https://www.transfermarkt.com/sariyer/startseite/verein/518",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/518.png",
+    "image_credit": null,
+    "description": "Sarıyer Spor Kulübü , known as SMS Grup Sarıyer Spor Kulübü due to sponsorship reasons, is a Turkish sports club located in Sarıyer , Istanbul . The football team plays in the TFF 1. Lig , the second tier of Turkish football. Sarıyer won the Balkans Cup in 1991–92 season against Romanian club Oțelul Galați with results: 0–0 away and 1–0 after extra time at home.",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "saryer"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1100,
+  "fields": {
+    "is_national": false,
+    "name": "Serikspor",
+    "founded": "1955-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1063,
+    "manager": "Sinan Paşalı",
+    "num_of_titles": 0,
+    "city": 872,
+    "average_attendance": 181,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Serikspor",
+    "transfermarkt_url": "https://www.transfermarkt.com/serik-belediyespor/startseite/verein/50845",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/50845.png",
+    "image_credit": null,
+    "description": "Serik Spor Futbol A.Ş. , commonly simply referred to as Serikspor, is a Turkish professional football club established in the Serik district of Antalya province in 1955. The club colours are green and white and they play their home matches at İsmail Oğan Stadium.",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "serikspor"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1101,
+  "fields": {
+    "is_national": false,
+    "name": "Sivasspor",
+    "founded": "1967-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1064,
+    "manager": "İsmet Taşdemir",
+    "num_of_titles": 0,
+    "city": 873,
+    "average_attendance": 2434,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Sivasspor",
+    "transfermarkt_url": "https://www.transfermarkt.com/sivasspor/startseite/verein/2381",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/2381.png",
+    "image_credit": null,
+    "description": "Sivasspor Kulübü , known as Özbelsan Sivasspor for sponsorship reasons, [ 2 ] is a Turkish professional sports club based in Sivas . The club's primary department is men's football, which currently competes in the 1. Lig , the second tier of the Turkish football league system, following their relegation from the Süper Lig at the end of the 2024–25 season. [ 3 ]",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "sivasspor"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1102,
+  "fields": {
+    "is_national": false,
+    "name": "Ümraniyespor",
+    "founded": "1938-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1065,
+    "manager": "Tayfun Rıdvan Albayrak",
+    "num_of_titles": 0,
+    "city": 258,
+    "average_attendance": 470,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ümraniyespor",
+    "transfermarkt_url": "https://www.transfermarkt.com/umraniyespor/startseite/verein/24245",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/24245.png",
+    "image_credit": null,
+    "description": "Ümraniyespor Kulübü is a Turkish professional football club located in Ümraniye , Istanbul .",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "umraniyespor"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1103,
+  "fields": {
+    "is_national": false,
+    "name": "Vanspor",
+    "founded": "2015-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1066,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 874,
+    "average_attendance": 3252,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Vanspor",
+    "transfermarkt_url": "https://www.transfermarkt.com/van-spor-fk/startseite/verein/3173",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/3173.png",
+    "image_credit": null,
+    "description": "They played in the Süper Lig , top division of Turkish football, between 1994 and 1998, playing once more in 1999–2000 season. After relegation from the first division, Vanspor turned to an economic crisis and were relegated from the 2nd and 3rd divisions between 2000 and 2002. After relegation from the 3rd division in 2003, the club was renamed as İl Özel İdaresi Vanspor and played in Van Super Amateur. They changed name as Van Tuşba Belediyespor in 2013 and also changed colour as black-yellow. They finally withdrew from Van First Amateur League in 2014–15 season and merged with Van Büyükşehir Belediyespor . Due to mismanagement and bad results, almost all supporters of them moved to Van Büyükşehir Belediyespor .",
+    "league": 83,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "vanspor"
   }
 },
 {

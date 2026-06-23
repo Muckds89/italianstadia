@@ -368,6 +368,12 @@ committed (they are served as static files, NOT rendered per request — Render 
 - `python manage.py generate_insight_maps` → `static/exports/insight_<key>.png`
   (insight hero maps, e.g. the national-team-only spotlight map; re-run when the underlying
   insight data changes — e.g. a new national-team-only ground).
+- `python manage.py generate_city_clubs` → `static/data/city_clubs.json`
+  (the clubs-per-city insight: cities with 2+ clubs, logos, tiers, coordinates). Cheap
+  query-only pass; the `insight_city_clubs` view reads this file rather than aggregating
+  per request. **Runs automatically in build.sh after `loaddata`** so prod refreshes on
+  every deploy (data load); re-run locally after any scrape. Pass `--season "2026/2027"`
+  on the August bulk update (default season lives in the command + `CURRENT_SEASON` in views).
 
 ## Link & name validation (MANDATORY post-scrape QA)
 

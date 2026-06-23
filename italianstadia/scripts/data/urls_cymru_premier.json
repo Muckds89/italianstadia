@@ -9,12 +9,12 @@
   "teams": [
     {
       "name": "The New Saints FC",
-      "transfermarkt_url": "https://www.transfermarkt.com/the-new-saints/startseite/verein/3849",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/the-new-saints/besucherzahlenentwicklung/verein/3849",
+      "transfermarkt_url": "https://www.transfermarkt.com/the-new-saints/startseite/verein/10734",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/the-new-saints/besucherzahlenentwicklung/verein/10734",
       "wikipedia_url": "https://en.wikipedia.org/wiki/The_New_Saints_F.C.",
       "stadium": {
         "name": "Park Hall",
-        "transfermarkt_url": "https://www.transfermarkt.com/the-new-saints/stadion/verein/3849/saison_id/2025",
+        "transfermarkt_url": "https://www.transfermarkt.com/the-new-saints/stadion/verein/10734/saison_id/2025",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Park_Hall_(Oswestry)",
         "city": {
           "name": "Oswestry",
@@ -25,12 +25,12 @@
     },
     {
       "name": "Connah's Quay Nomads",
-      "transfermarkt_url": "https://www.transfermarkt.com/connah-s-quay-nomads/startseite/verein/16226",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/connah-s-quay-nomads/besucherzahlenentwicklung/verein/16226",
+      "transfermarkt_url": "https://www.transfermarkt.com/connah-s-quay-nomads/startseite/verein/22499",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/connah-s-quay-nomads/besucherzahlenentwicklung/verein/22499",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Connah%27s_Quay_Nomads_F.C.",
       "stadium": {
         "name": "Deeside Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/connah-s-quay-nomads/stadion/verein/16226/saison_id/2025",
+        "transfermarkt_url": "https://www.transfermarkt.com/connah-s-quay-nomads/stadion/verein/22499/saison_id/2025",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Deeside_Stadium",
         "city": {
           "name": "Connah's Quay",
@@ -41,12 +41,12 @@
     },
     {
       "name": "Caernarfon Town",
-      "transfermarkt_url": "https://www.transfermarkt.com/caernarfon-town/startseite/verein/25113",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/caernarfon-town/besucherzahlenentwicklung/verein/25113",
+      "transfermarkt_url": "https://www.transfermarkt.com/caernarfon-town/startseite/verein/22461",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/caernarfon-town/besucherzahlenentwicklung/verein/22461",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Caernarfon_Town_F.C.",
       "stadium": {
         "name": "The Oval",
-        "transfermarkt_url": "https://www.transfermarkt.com/caernarfon-town/stadion/verein/25113/saison_id/2025",
+        "transfermarkt_url": "https://www.transfermarkt.com/caernarfon-town/stadion/verein/22461/saison_id/2025",
         "wikipedia_url": "https://en.wikipedia.org/wiki/The_Oval,_Caernarfon",
         "city": {
           "name": "Caernarfon",
@@ -57,12 +57,12 @@
     },
     {
       "name": "Barry Town United",
-      "transfermarkt_url": "https://www.transfermarkt.com/barry-town-united/startseite/verein/20017",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/barry-town-united/besucherzahlenentwicklung/verein/20017",
+      "transfermarkt_url": "https://www.transfermarkt.com/barry-town-united-fc/startseite/verein/1115",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/barry-town-united-fc/besucherzahlenentwicklung/verein/1115",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Barry_Town_United_F.C.",
       "stadium": {
         "name": "Jenner Park",
-        "transfermarkt_url": "https://www.transfermarkt.com/barry-town-united/stadion/verein/20017/saison_id/2025",
+        "transfermarkt_url": "https://www.transfermarkt.com/barry-town-united-fc/stadion/verein/1115/saison_id/2025",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Jenner_Park_Stadium",
         "city": {
           "name": "Barry",
@@ -73,13 +73,13 @@
     },
     {
       "name": "Penybont FC",
-      "transfermarkt_url": "https://www.transfermarkt.com/penybont/startseite/verein/49143",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/penybont/besucherzahlenentwicklung/verein/49143",
+      "transfermarkt_url": "https://www.transfermarkt.com/penybont-fc/startseite/verein/62026",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/penybont-fc/besucherzahlenentwicklung/verein/62026",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Penybont_F.C.",
       "stadium": {
         "name": "Bryntirion Park",
-        "transfermarkt_url": "https://www.transfermarkt.com/penybont/stadion/verein/49143/saison_id/2025",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Bridgend",
+        "transfermarkt_url": "https://www.transfermarkt.com/penybont-fc/stadion/verein/62026/saison_id/2025",
+        "wikipedia_url": "",
         "city": {
           "name": "Bridgend",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Bridgend"
@@ -89,12 +89,12 @@
     },
     {
       "name": "Haverfordwest County",
-      "transfermarkt_url": "https://www.transfermarkt.com/haverfordwest-county/startseite/verein/49140",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/haverfordwest-county/besucherzahlenentwicklung/verein/49140",
+      "transfermarkt_url": "https://www.transfermarkt.com/haverfordwest-county/startseite/verein/25232",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/haverfordwest-county/besucherzahlenentwicklung/verein/25232",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Haverfordwest_County_A.F.C.",
       "stadium": {
         "name": "Bridge Meadow",
-        "transfermarkt_url": "https://www.transfermarkt.com/haverfordwest-county/stadion/verein/49140/saison_id/2025",
+        "transfermarkt_url": "https://www.transfermarkt.com/haverfordwest-county/stadion/verein/25232/saison_id/2025",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Bridge_Meadow_Stadium",
         "city": {
           "name": "Haverfordwest",
@@ -105,12 +105,12 @@
     },
     {
       "name": "Bala Town FC",
-      "transfermarkt_url": "https://www.transfermarkt.com/bala-town/startseite/verein/22940",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/bala-town/besucherzahlenentwicklung/verein/22940",
+      "transfermarkt_url": "https://www.transfermarkt.com/bala-town/startseite/verein/27843",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/bala-town/besucherzahlenentwicklung/verein/27843",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Bala_Town_F.C.",
       "stadium": {
         "name": "Maes Tegid",
-        "transfermarkt_url": "https://www.transfermarkt.com/bala-town/stadion/verein/22940/saison_id/2025",
+        "transfermarkt_url": "https://www.transfermarkt.com/bala-town/stadion/verein/27843/saison_id/2025",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Maes_Tegid",
         "city": {
           "name": "Bala",
@@ -121,12 +121,12 @@
     },
     {
       "name": "Colwyn Bay FC",
-      "transfermarkt_url": "https://www.transfermarkt.com/colwyn-bay/startseite/verein/30524",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/colwyn-bay/besucherzahlenentwicklung/verein/30524",
+      "transfermarkt_url": "https://www.transfermarkt.com/colwyn-bay-fc/startseite/verein/22546",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/colwyn-bay-fc/besucherzahlenentwicklung/verein/22546",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Colwyn_Bay_F.C.",
       "stadium": {
         "name": "Llanelian Road",
-        "transfermarkt_url": "https://www.transfermarkt.com/colwyn-bay/stadion/verein/30524/saison_id/2025",
+        "transfermarkt_url": "https://www.transfermarkt.com/colwyn-bay-fc/stadion/verein/22546/saison_id/2025",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Llanelian_Road",
         "city": {
           "name": "Old Colwyn",
@@ -137,12 +137,12 @@
     },
     {
       "name": "Flint Town United",
-      "transfermarkt_url": "https://www.transfermarkt.com/flint-town-united/startseite/verein/49137",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/flint-town-united/besucherzahlenentwicklung/verein/49137",
+      "transfermarkt_url": "https://www.transfermarkt.com/flint-town-united/startseite/verein/31188",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/flint-town-united/besucherzahlenentwicklung/verein/31188",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Flint_Town_United_F.C.",
       "stadium": {
         "name": "Cae-y-Castell",
-        "transfermarkt_url": "https://www.transfermarkt.com/flint-town-united/stadion/verein/49137/saison_id/2025",
+        "transfermarkt_url": "https://www.transfermarkt.com/flint-town-united/stadion/verein/31188/saison_id/2025",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Cae-y-Castell",
         "city": {
           "name": "Flint",
@@ -153,12 +153,12 @@
     },
     {
       "name": "Llanelli Town AFC",
-      "transfermarkt_url": "https://www.transfermarkt.com/llanelli-town/startseite/verein/71011",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/llanelli-town/besucherzahlenentwicklung/verein/71011",
+      "transfermarkt_url": "https://www.transfermarkt.com/llanelli-afc/startseite/verein/11915",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/llanelli-afc/besucherzahlenentwicklung/verein/11915",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Llanelli_Town_A.F.C.",
       "stadium": {
         "name": "Stebonheath Park",
-        "transfermarkt_url": "https://www.transfermarkt.com/llanelli-town/stadion/verein/71011/saison_id/2025",
+        "transfermarkt_url": "https://www.transfermarkt.com/llanelli-afc/stadion/verein/11915/saison_id/2025",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Stebonheath_Park",
         "city": {
           "name": "Llanelli",
@@ -169,13 +169,13 @@
     },
     {
       "name": "Cardiff Metropolitan University FC",
-      "transfermarkt_url": "https://www.transfermarkt.com/cardiff-met/startseite/verein/34091",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cardiff-met/besucherzahlenentwicklung/verein/34091",
+      "transfermarkt_url": "https://www.transfermarkt.com/cardiff-metropolitan-university-fc/startseite/verein/53152",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cardiff-metropolitan-university-fc/besucherzahlenentwicklung/verein/53152",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Cardiff_Metropolitan_University_F.C.",
       "stadium": {
         "name": "Cardiff International Sports Campus",
-        "transfermarkt_url": "https://www.transfermarkt.com/cardiff-met/stadion/verein/34091/saison_id/2025",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Cardiff_Metropolitan_University",
+        "transfermarkt_url": "https://www.transfermarkt.com/cardiff-metropolitan-university-fc/stadion/verein/53152/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Cardiff_International_Sports_Campus",
         "city": {
           "name": "Cardiff",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Cardiff"
@@ -185,13 +185,13 @@
     },
     {
       "name": "Briton Ferry Llansawel AFC",
-      "transfermarkt_url": "https://www.transfermarkt.com/briton-ferry-llansawel/startseite/verein/68243",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/briton-ferry-llansawel/besucherzahlenentwicklung/verein/68243",
+      "transfermarkt_url": "https://www.transfermarkt.com/briton-ferry-llansawel-afc/startseite/verein/29221",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/briton-ferry-llansawel-afc/besucherzahlenentwicklung/verein/29221",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Briton_Ferry_Llansawel_A.F.C.",
       "stadium": {
         "name": "Old Road Ground",
-        "transfermarkt_url": "https://www.transfermarkt.com/briton-ferry-llansawel/stadion/verein/68243/saison_id/2025",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Briton_Ferry",
+        "transfermarkt_url": "https://www.transfermarkt.com/briton-ferry-llansawel-afc/stadion/verein/29221/saison_id/2025",
+        "wikipedia_url": "",
         "city": {
           "name": "Briton Ferry",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Briton_Ferry"

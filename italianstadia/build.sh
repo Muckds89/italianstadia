@@ -8,4 +8,7 @@ python manage.py migrate
 # regenerated from the local DB with `dumpdata` after data changes — see CLAUDE.md.
 # loaddata upserts by PK, so re-running on each deploy is safe/idempotent.
 python manage.py loaddata initial_data
+# Refresh the clubs-per-city insight artifact from the freshly loaded data
+# (cheap, query-only). Must run AFTER loaddata and BEFORE collectstatic.
+python manage.py generate_city_clubs
 python manage.py collectstatic --noinput

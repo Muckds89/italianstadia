@@ -568,13 +568,17 @@ def _country_flag_code(code: str) -> str:
 
 def city_list(request):
     selected_country = request.GET.get("country", "")
+    city_query = request.GET.get("q", "").strip()
     qs = City.objects.prefetch_related("teams").order_by("-population", "name")
     if selected_country:
         qs = qs.filter(country=selected_country)
+    if city_query:
+        qs = qs.filter(name__icontains=city_query)
     return render(request, "city_list.html", {
         "cities": qs,
         "countries": _available_countries(),
         "selected_country": selected_country,
+        "city_query": city_query,
     })
 
 
@@ -1426,6 +1430,9 @@ def tournament_detail(request, slug):
 
 # ── Insights (data-story pages: SEO / CTR) ─────────────────────────────────────
 
+# Current dataset season — bump on the August bulk update for the new season.
+CURRENT_SEASON = "2025/2026"
+
 _INSIGHTS = [
     {
         "slug": "national-stadiums",
@@ -1458,6 +1465,12 @@ _INSIGHTS = [
         "title": "Big five leagues: attendance & capacity",
         "blurb": "Average attendance and how full grounds get, plus capacity by league.",
         "url_name": "insight_league_capacity",
+    },
+    {
+        "slug": "clubs-per-city",
+        "title": "How many football clubs are in each city?",
+        "blurb": "The European cities with the most football clubs, lower tiers included.",
+        "url_name": "insight_city_clubs",
     },
 ]
 
@@ -1819,6 +1832,83 @@ def insight_biggest(request):
         "intro": intro, "about": about,
         "geojson_url": reverse("italiastadiaapp:stadiums_geojson") + "?view=capacity",
         "others": _insight_others("biggest-stadiums"),
+        "page_description": _trim(re.sub(r"<[^>]+>", "", intro)),
+    })
+
+
+def _city_clubs_payload():
+    """Load the pre-generated static/data/city_clubs.json (built by the
+    generate_city_clubs command on every data load). Cheap file read, no
+    per-request DB aggregation."""
+    path = (Path(settings.BASE_DIR) / "italiastadiaapp" / "static"
+            / "data" / "city_clubs.json")
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        version = int(path.stat().st_mtime)
+    except (OSError, ValueError):
+        data, version = {"season": CURRENT_SEASON, "cities": []}, 0
+    return data, version
+
+
+@cache_page(60 * 60)
+def insight_city_clubs(request):
+    """Cities ranked by how many football clubs are based there (excluding
+    national teams), lower divisions included. Reads a precomputed artifact so
+    the request does no heavy aggregation; refreshes whenever data is loaded."""
+    data, version = _city_clubs_payload()
+    rows = data.get("cities", [])
+    season = data.get("season", CURRENT_SEASON)
+    top = rows[0] if rows else None
+
+    intro = (
+        "Have you ever run into a discussion about how many football clubs are within "
+        "<strong>London</strong>? Or <strong>Istanbul</strong>? Here you will get your answer. "
+        "We list the clubs within a city, <strong>including the lower tier ones</strong>, so you "
+        "can see who was right about it."
+    )
+    if top:
+        intro += (f" Right now <strong>{top['city']}</strong> tops our dataset with "
+                  f"<strong>{top['count']}</strong> clubs.")
+    about = (
+        "Every club is counted against the city it is based in, national teams excluded. "
+        "Coverage depth varies by country: the <strong>top five leagues</strong> are covered "
+        "down to the <strong>third tier</strong>, the <strong>next ten</strong> down to the "
+        "<strong>second tier</strong>, and every other country's <strong>top division</strong>. "
+        f"Figures reflect the <strong>{season}</strong> season and refresh with the August update."
+    )
+
+    by_city = {r["city"].lower(): r for r in rows}
+    def _count_for(city):
+        r = by_city.get(city.lower())
+        return r["count"] if r else None
+    faq = []
+    for city_name in ("London", "Istanbul"):
+        n = _count_for(city_name)
+        if n:
+            faq.append((f"How many football clubs are in {city_name}?",
+                        f"Our dataset lists {n} football clubs based in {city_name} across the "
+                        f"divisions we cover ({season} season). See the table for each club."))
+        else:
+            faq.append((f"How many football clubs are in {city_name}?",
+                        f"We list every club based in {city_name} across the divisions we cover; "
+                        f"check the table above for the current {season} count."))
+    if top:
+        faq.append(("Which European city has the most football clubs?",
+                    f"In our dataset {top['city']} has the most, with {top['count']} clubs "
+                    f"({season} season)."))
+    faq.append(("Which leagues and divisions are included?",
+                "The top five leagues are covered down to the third tier, the next ten countries "
+                "down to the second tier, and every other country's top division. All figures are "
+                f"for the {season} season."))
+    faq = [{"q": q, "a": a} for q, a in faq]
+
+    return render(request, "insight_city_clubs.html", {
+        "rows": rows, "season": season, "data_version": version,
+        "intro": intro, "about": about, "faq": faq,
+        "faq_json": json.dumps([{"@type": "Question", "name": f["q"],
+                                 "acceptedAnswer": {"@type": "Answer", "text": f["a"]}}
+                                for f in faq]),
+        "others": _insight_others("clubs-per-city"),
         "page_description": _trim(re.sub(r"<[^>]+>", "", intro)),
     })
 
@@ -3256,6 +3346,33 @@ def _draw_logo(img, W, H):
     return img
 
 
+def _draw_source(img, W, H, legend_entries=0):
+    """Small data-source credit in the BOTTOM-LEFT corner. When a legend is
+    present (also bottom-left) the credit stacks just above it so they don't
+    overlap."""
+    text = "Data: Wikipedia & Transfermarkt"
+    font = _load_font(bold=False, size=13)
+    d = ImageDraw.Draw(img)
+    try:
+        bb = d.textbbox((0, 0), text, font=font)
+        tw, th = bb[2] - bb[0], bb[3] - bb[1]
+    except AttributeError:
+        tw, th = len(text) * 7, 14
+    PAD, margin = 7, 16
+    pill_w, pill_h = tw + PAD * 2, th + PAD * 2
+    # Reserve room for the legend box (padding*2 + entries*line_h) when shown.
+    legend_h = (12 * 2 + legend_entries * 22 + 10) if legend_entries else 0
+    x0 = margin
+    y0 = H - margin - pill_h - legend_h
+    tile = Image.new("RGBA", (pill_w, pill_h), (0, 0, 0, 0))
+    td = ImageDraw.Draw(tile)
+    td.rounded_rectangle([0, 0, pill_w - 1, pill_h - 1], radius=8, fill=(9, 12, 20, 170))
+    td.text((PAD, PAD - 1), text, font=font, fill=(220, 220, 220))
+    region = img.crop((x0, y0, x0 + pill_w, y0 + pill_h))
+    img.paste(Image.alpha_composite(region, tile), (x0, y0))
+    return img
+
+
 def _draw_watermark(img, W, H, text="stadiumsofeurope.com", text_alpha=95, gap=70):
     """Tile a diagonal translucent watermark across the WHOLE image, baked into
     the pixels. Used subtly for the free (branded) download and more strongly for
@@ -3364,7 +3481,9 @@ def _compose_export_image(params):
     if params["north"]:
         reserves.append((W - 100, 0, W, 100))                     # top-right
     if params["legend"]:
-        reserves.append((0, H - 175, 185, H))                     # bottom-left
+        reserves.append((0, H - 205, 200, H))                     # bottom-left (legend + source)
+    else:
+        reserves.append((0, H - 44, 235, H))                      # bottom-left source credit
     if params.get("scale"):
         reserves.append((W // 2 - 135, H - 80, W // 2 + 135, H))  # bottom-centre
     if params.get("logo"):
@@ -3374,14 +3493,17 @@ def _compose_export_image(params):
                                 reserve_boxes=reserves)
     if inset_stadiums:
         img = _draw_inset(img, inset_stadiums, params, W, H, country_index, params["style_key"])
+    legend_n = 0
     if params["legend"]:
         img = _draw_legend(img, params, stadiums)
+        legend_n = len(_build_legend_entries(params, stadiums))
     if params["north"]:
         img = _draw_north_arrow(img, W, H)
     if params.get("scale"):
         img = _draw_scale_bar(img, bbox, W, H)
     if params.get("logo"):
         img = _draw_logo(img, W, H)
+    img = _draw_source(img, W, H, legend_entries=legend_n)   # data-source credit
 
     if tlayout:
         img = _draw_title_translucent(img, tlayout)

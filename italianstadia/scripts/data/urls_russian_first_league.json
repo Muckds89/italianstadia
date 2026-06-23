@@ -1,0 +1,299 @@
+{
+  "league": {
+    "name": "Russian First League",
+    "country": "Russia",
+    "country_code": "RU",
+    "division_level": 2,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Arsenal Tula",
+      "transfermarkt_url": "https://www.transfermarkt.com/arsenal-tula/startseite/verein/3729",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/arsenal-tula/besucherzahlenentwicklung/verein/3729",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Arsenal_Tula",
+      "stadium": {
+        "name": "Arsenal Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/arsenal-tula/stadion/verein/3729/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Arsenal_Stadium_(Tula)",
+        "city": {
+          "name": "Tula",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Tula,_Russia"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Chayka Peschanokopskoye",
+      "transfermarkt_url": "https://www.transfermarkt.com/chaika-peschanokopskoe/startseite/verein/36972",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/chaika-peschanokopskoe/besucherzahlenentwicklung/verein/36972",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Chayka_Peschanokopskoye",
+      "stadium": {
+        "name": "Chayka Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/chaika-peschanokopskoe/stadion/verein/36972/saison_id/2025",
+        "wikipedia_url": "https://ru.wikipedia.org/wiki/Центральный_стадион_имени_И._П._Чайки",
+        "city": {
+          "name": "Peschanokopskoye",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Peschanokopskoye"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Chelyabinsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-chelyabinsk/startseite/verein/23110",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-chelyabinsk/besucherzahlenentwicklung/verein/23110",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Chelyabinsk",
+      "stadium": {
+        "name": "Central Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-chelyabinsk/stadion/verein/23110/saison_id/2025",
+        "wikipedia_url": "https://ru.wikipedia.org/wiki/Центральный_(стадион,_Челябинск)",
+        "city": {
+          "name": "Chelyabinsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Chelyabinsk"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Chernomorets Novorossiysk",
+      "transfermarkt_url": "https://www.transfermarkt.com/chernomorets-novorossijsk/startseite/verein/5287",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/chernomorets-novorossijsk/besucherzahlenentwicklung/verein/5287",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Chernomorets_Novorossiysk",
+      "stadium": {
+        "name": "Central Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/chernomorets-novorossijsk/stadion/verein/5287/saison_id/2025",
+        "wikipedia_url": "https://ru.wikipedia.org/wiki/Центральный_(стадион,_Новороссийск)",
+        "city": {
+          "name": "Novorossiysk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Novorossiysk"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Fakel Voronezh",
+      "transfermarkt_url": "https://www.transfermarkt.com/fakel-voronezh/startseite/verein/1124",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fakel-voronezh/besucherzahlenentwicklung/verein/1124",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Fakel_Voronezh",
+      "stadium": {
+        "name": "Tsentralny Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fakel-voronezh/stadion/verein/1124/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Fakel_Stadium",
+        "city": {
+          "name": "Voronezh",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Voronezh"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "KAMAZ Naberezhnye Chelny",
+      "transfermarkt_url": "https://www.transfermarkt.com/kamaz-naberezhnye-chelny/startseite/verein/3243",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kamaz-naberezhnye-chelny/besucherzahlenentwicklung/verein/3243",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_KAMAZ_Naberezhnye_Chelny",
+      "stadium": {
+        "name": "Central Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/kamaz-naberezhnye-chelny/stadion/verein/3243/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/KAMAZ_Stadium",
+        "city": {
+          "name": "Naberezhnye Chelny",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Naberezhnye_Chelny"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Neftekhimik Nizhnekamsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/neftekhimik-nizhnekamsk/startseite/verein/3733",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/neftekhimik-nizhnekamsk/besucherzahlenentwicklung/verein/3733",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Neftekhimik_Nizhnekamsk",
+      "stadium": {
+        "name": "Neftekhimik Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/neftekhimik-nizhnekamsk/stadion/verein/3733/saison_id/2025",
+        "wikipedia_url": "https://ru.wikipedia.org/wiki/Нефтехимик_(стадион)",
+        "city": {
+          "name": "Nizhnekamsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Nizhnekamsk"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Rodina Moscow",
+      "transfermarkt_url": "https://www.transfermarkt.com/rodina-moscow/startseite/verein/59024",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rodina-moscow/besucherzahlenentwicklung/verein/59024",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Rodina_Moscow",
+      "stadium": {
+        "name": "Sapsan Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/rodina-moscow/stadion/verein/59024/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sapsan_Arena",
+        "city": {
+          "name": "Moscow",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Moscow"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Rotor Volgograd",
+      "transfermarkt_url": "https://www.transfermarkt.com/rotor-volgograd/startseite/verein/3609",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/rotor-volgograd/besucherzahlenentwicklung/verein/3609",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Rotor_Volgograd",
+      "stadium": {
+        "name": "Volgograd Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/rotor-volgograd/stadion/verein/3609/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Volgograd_Arena",
+        "city": {
+          "name": "Volgograd",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Volgograd"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Shinnik Yaroslavl",
+      "transfermarkt_url": "https://www.transfermarkt.com/shinnik-yaroslavl/startseite/verein/2374",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/shinnik-yaroslavl/besucherzahlenentwicklung/verein/2374",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Shinnik_Yaroslavl",
+      "stadium": {
+        "name": "Shinnik Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/shinnik-yaroslavl/stadion/verein/2374/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Shinnik_Stadium",
+        "city": {
+          "name": "Yaroslavl",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Yaroslavl"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "SKA-Khabarovsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/ska-khabarovsk/startseite/verein/3690",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ska-khabarovsk/besucherzahlenentwicklung/verein/3690",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_SKA-Khabarovsk",
+      "stadium": {
+        "name": "Lenin Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/ska-khabarovsk/stadion/verein/3690/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Lenin_Stadium_(Khabarovsk)",
+        "city": {
+          "name": "Khabarovsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Khabarovsk"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Sokol Saratov",
+      "transfermarkt_url": "https://www.transfermarkt.com/sokol-saratov/startseite/verein/3834",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sokol-saratov/besucherzahlenentwicklung/verein/3834",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Sokol_Saratov",
+      "stadium": {
+        "name": "Lokomotiv Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/sokol-saratov/stadion/verein/3834/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Lokomotiv_Stadium_(Saratov)",
+        "city": {
+          "name": "Saratov",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Saratov"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Spartak Kostroma",
+      "transfermarkt_url": "https://www.transfermarkt.com/spartak-kostroma/startseite/verein/14590",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/spartak-kostroma/besucherzahlenentwicklung/verein/14590",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Spartak_Kostroma",
+      "stadium": {
+        "name": "Urozhay Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/spartak-kostroma/stadion/verein/14590/saison_id/2025",
+        "wikipedia_url": "https://ru.wikipedia.org/wiki/Урожай_(стадион,_Караваево)",
+        "city": {
+          "name": "Kostroma",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kostroma"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Torpedo Moscow",
+      "transfermarkt_url": "https://www.transfermarkt.com/torpedo-moscow/startseite/verein/1186",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/torpedo-moscow/besucherzahlenentwicklung/verein/1186",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Torpedo_Moscow",
+      "stadium": {
+        "name": "Eduard Streltsov Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/torpedo-moscow/stadion/verein/1186/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Eduard_Streltsov_Stadium",
+        "city": {
+          "name": "Moscow",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Moscow"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Ufa",
+      "transfermarkt_url": "https://www.transfermarkt.com/fk-ufa/startseite/verein/28095",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fk-ufa/besucherzahlenentwicklung/verein/28095",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ufa",
+      "stadium": {
+        "name": "Neftyanik Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fk-ufa/stadion/verein/28095/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Neftyanik_Stadium_(Ufa)",
+        "city": {
+          "name": "Ufa",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ufa"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Ural Yekaterinburg",
+      "transfermarkt_url": "https://www.transfermarkt.com/ural-yekaterinburg/startseite/verein/11127",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ural-yekaterinburg/besucherzahlenentwicklung/verein/11127",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Ural_Yekaterinburg",
+      "stadium": {
+        "name": "Central Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/ural-yekaterinburg/stadion/verein/11127/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Central_Stadium_(Yekaterinburg)",
+        "city": {
+          "name": "Yekaterinburg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Yekaterinburg"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Volga Ulyanovsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/volga-uljanovsk/startseite/verein/12439",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/volga-uljanovsk/besucherzahlenentwicklung/verein/12439",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Volga_Ulyanovsk",
+      "stadium": {
+        "name": "Trud Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/volga-uljanovsk/stadion/verein/12439/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Trud_Stadium_(Ulyanovsk)",
+        "city": {
+          "name": "Ulyanovsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ulyanovsk"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Yenisey Krasnoyarsk",
+      "transfermarkt_url": "https://www.transfermarkt.com/enisey-krasnoyarsk/startseite/verein/3714",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/enisey-krasnoyarsk/besucherzahlenentwicklung/verein/3714",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Yenisey_Krasnoyarsk",
+      "stadium": {
+        "name": "Central Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/enisey-krasnoyarsk/stadion/verein/3714/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Central_Stadium_(Krasnoyarsk)",
+        "city": {
+          "name": "Krasnoyarsk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Krasnoyarsk"
+        }
+      },
+      "girone": null
+    }
+  ]
+}

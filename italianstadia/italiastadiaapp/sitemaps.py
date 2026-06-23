@@ -126,7 +126,7 @@ class StaticViewSitemap(_DataLastmodMixin, Sitemap):
     def items(self):
         return ["home", "map_page", "stadium_list", "team_list", "city_list", "stadium_development_list",
                 "insights_index", "insight_national", "insight_surface", "insight_density",
-                "insight_biggest", "insight_league_capacity"]
+                "insight_biggest", "insight_league_capacity", "insight_city_clubs"]
 
     def location(self, item):
         return reverse(f"italiastadiaapp:{item}")

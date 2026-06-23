@@ -1,0 +1,204 @@
+{
+  "league": {
+    "name": "NIFL Premiership",
+    "country": "Northern Ireland",
+    "country_code": "GB-NIR",
+    "division_level": 1,
+    "season": "25/26"
+  },
+  "teams": [
+    {
+      "name": "Linfield FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/linfield-fc/startseite/verein/3471",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/linfield-fc/besucherzahlenentwicklung/verein/3471",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Linfield_F.C.",
+      "stadium": {
+        "name": "Windsor Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/linfield-fc/stadion/verein/3471/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Windsor_Park",
+        "city": {
+          "name": "Belfast",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Belfast"
+        },
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Windsor_Park_Stadium%2C_Belfast_04.jpg"
+      },
+      "girone": null
+    },
+    {
+      "name": "Glentoran FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/glentoran-fc/startseite/verein/9026",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/glentoran-fc/besucherzahlenentwicklung/verein/9026",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Glentoran_F.C.",
+      "stadium": {
+        "name": "The Oval",
+        "transfermarkt_url": "https://www.transfermarkt.com/glentoran-fc/stadion/verein/9026/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/The_Oval_(Belfast)",
+        "city": {
+          "name": "Belfast",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Belfast"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Cliftonville FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/cliftonville-fc/startseite/verein/1251",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cliftonville-fc/besucherzahlenentwicklung/verein/1251",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Cliftonville_F.C.",
+      "stadium": {
+        "name": "Solitude",
+        "transfermarkt_url": "https://www.transfermarkt.com/cliftonville-fc/stadion/verein/1251/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Solitude_(football_ground)",
+        "city": {
+          "name": "Belfast",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Belfast"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Crusaders FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/crusaders-fc/startseite/verein/21532",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/crusaders-fc/besucherzahlenentwicklung/verein/21532",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Crusaders_F.C.",
+      "stadium": {
+        "name": "Seaview",
+        "transfermarkt_url": "https://www.transfermarkt.com/crusaders-fc/stadion/verein/21532/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Seaview_(football_ground)",
+        "city": {
+          "name": "Belfast",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Belfast"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Larne FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/larne-fc/startseite/verein/3461",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/larne-fc/besucherzahlenentwicklung/verein/3461",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Larne_F.C.",
+      "stadium": {
+        "name": "Inver Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/larne-fc/stadion/verein/3461/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Inver_Park",
+        "city": {
+          "name": "Larne",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Larne"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Coleraine FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/coleraine-fc/startseite/verein/3831",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/coleraine-fc/besucherzahlenentwicklung/verein/3831",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Coleraine_F.C.",
+      "stadium": {
+        "name": "The Showgrounds",
+        "transfermarkt_url": "https://www.transfermarkt.com/coleraine-fc/stadion/verein/3831/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/The_Showgrounds_(Coleraine)",
+        "city": {
+          "name": "Coleraine",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Coleraine"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Glenavon FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/glenavon-fc/startseite/verein/3463",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/glenavon-fc/besucherzahlenentwicklung/verein/3463",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Glenavon_F.C.",
+      "stadium": {
+        "name": "Mourneview Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/glenavon-fc/stadion/verein/3463/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Mourneview_Park",
+        "city": {
+          "name": "Lurgan",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lurgan"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Ballymena United FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/ballymena-united/startseite/verein/15244",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ballymena-united/besucherzahlenentwicklung/verein/15244",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ballymena_United_F.C.",
+      "stadium": {
+        "name": "Ballymena Showgrounds",
+        "transfermarkt_url": "https://www.transfermarkt.com/ballymena-united/stadion/verein/15244/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ballymena_Showgrounds",
+        "city": {
+          "name": "Ballymena",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Ballymena"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Carrick Rangers FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/carrick-rangers/startseite/verein/8714",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/carrick-rangers/besucherzahlenentwicklung/verein/8714",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Carrick_Rangers_F.C.",
+      "stadium": {
+        "name": "Loughshore Hotel Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/carrick-rangers/stadion/verein/8714/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Taylors_Avenue",
+        "city": {
+          "name": "Carrickfergus",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Carrickfergus"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Portadown FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/portadown-fc/startseite/verein/5594",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/portadown-fc/besucherzahlenentwicklung/verein/5594",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Portadown_F.C.",
+      "stadium": {
+        "name": "Shamrock Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/portadown-fc/stadion/verein/5594/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Shamrock_Park",
+        "city": {
+          "name": "Portadown",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Portadown"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Bangor FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/bangor-fc/startseite/verein/21531",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/bangor-fc/besucherzahlenentwicklung/verein/21531",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Bangor_F.C.",
+      "stadium": {
+        "name": "Clandeboye Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/bangor-fc/stadion/verein/21531/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Clandeboye_Park",
+        "city": {
+          "name": "Bangor",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bangor,_County_Down"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Dungannon Swifts FC",
+      "transfermarkt_url": "https://www.transfermarkt.com/dungannon-swifts/startseite/verein/21515",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/dungannon-swifts/besucherzahlenentwicklung/verein/21515",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Dungannon_Swifts_F.C.",
+      "stadium": {
+        "name": "Stangmore Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/dungannon-swifts/stadion/verein/21515/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stangmore_Park",
+        "city": {
+          "name": "Dungannon",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Dungannon"
+        }
+      },
+      "girone": null
+    }
+  ]
+}
