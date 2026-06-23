@@ -21,6 +21,7 @@ urlpatterns = [
     path('', views.index, name='home'),
     path('embed/map/', views.embed_map, name='embed_map'),
     path('map', views.map_page, name='map_page'),
+    path('map/', RedirectView.as_view(pattern_name='italiastadiaapp:map_page', permanent=True)),
     path('cities/', city_list, name='city_list'),
     path('stadiums/', stadium_list, name='stadium_list'),
     path('under-development/', stadium_development_list, name='stadium_development_list'),
