@@ -504,7 +504,7 @@
   "pk": 52,
   "fields": {
     "name": "Wales",
-    "code": "GB-WLS",
+    "code": "WL",
     "uefa_rank": 46,
     "population": 3130000
   }
@@ -514,7 +514,7 @@
   "pk": 53,
   "fields": {
     "name": "Northern Ireland",
-    "code": "GB-NIR",
+    "code": "NI",
     "uefa_rank": null,
     "population": 1910000
   }

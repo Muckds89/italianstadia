@@ -352,7 +352,12 @@ Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 f
 ## Data quality rules
 
 - `average_attendance` must be NULL if not scraped — never 0 (`clean_int()` returns None for 0)
-- Stadium coordinates fall back to Nominatim (OSM) when Wikipedia has no geo data — logged at WARNING
+- Stadium coordinate fallback chain: Wikipedia page geo markup → **Wikidata P625**
+  (`fetch_wikidata_coordinates`, language-independent: resolves coords even when the
+  linked English article has none but the native-language edition does, since both share
+  one Wikidata item) → Nominatim (OSM) → JSON hardcoded `latitude`/`longitude`. Each step
+  logged. A non-English `wikipedia_url` (e.g. `tr.`/`ru.wikipedia.org`) is fine and is the
+  preferred fix when only the native page carries the data.
 - If Nominatim also fails, set `"latitude"` and `"longitude"` directly in the stadium JSON entry as a hardcoded last resort (verified from OSM way ID or Google Maps). Example: `"latitude": 45.8813164, "longitude": 25.8083825`. Missing coords block map display — they are mandatory.
 - `ownership` must never be UNKNOWN when `owner_raw` has a value — no public keyword match → PRIVATE
 - JSON `stadium.owner_raw` fires only when Wikipedia infobox has no owner/operator row; it does not override Wikipedia data
