@@ -161,7 +161,9 @@
 {"@context":"https://schema.org","@type":"Dataset",
  "name":"Number of football clubs per city in Europe ({{ season }})",
  "description":"{{ page_description|escapejs }}",
- "url":"{{ request.scheme }}://{{ request.get_host }}{{ request.path }}"}
+ "url":"{{ request.scheme }}://{{ request.get_host }}{{ request.path }}",
+ "license":"https://creativecommons.org/licenses/by-sa/4.0/",
+ "creator":{"@type":"Organization","name":"Stadiums of Europe","url":"{{ request.scheme }}://{{ request.get_host }}/"}}
 </script>
 {% endblock %}
 

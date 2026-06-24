@@ -1266,6 +1266,22 @@ def classify_ownership(owner_raw):
         "bashkia ",                # municipality (Bashkia Vlorë, Bashkia Tiranë …)
         "bashkie",                 # genitive / other forms
         "komuna ",                 # commune / municipality
+        # ── Russian / Ukrainian / Bulgarian / Serbian (Cyrillic) ─────────────
+        "муницип",                 # муниципальное образование / муниципалитет
+        "город ",                  # «Город Тула» (МО «Город Тула»), city of …
+        "городск",                 # городской / городская (municipal)
+        "област",                  # область / областной (oblast / region)
+        "администрац",             # администрация (city administration)
+        "правительств",            # government (правительство Москвы …)
+        "министерств",             # ministry
+        "департамент",             # department (sports department)
+        "край ", "краев",          # krai (region)
+        "общин",                   # община (Bulgarian/Serbian municipality)
+        "громад",                  # громада (Ukrainian municipality)
+        "міськ",                   # міська рада (Ukrainian city council)
+        "державн",                 # state (Ukrainian/Bulgarian)
+        "скупштина",               # assembly (Serbian Cyrillic)
+        "општина",                 # municipality (Serbian/Macedonian Cyrillic)
     ]
 
     private_keywords = [
@@ -1328,7 +1344,60 @@ def classify_surface(text):
     return None
 
 
-def scrape_stadium_data(wikipedia_url=None, transfermarkt_url=None):
+# League country -> Wikipedia language subdomain, for the English->native infobox
+# fallback. Only the languages we actually scrape need entries; unknown -> no fallback.
+COUNTRY_WIKI_LANG = {
+    "Russia": "ru", "Turkey": "tr", "Ukraine": "uk", "Belarus": "be", "Poland": "pl",
+    "Germany": "de", "Spain": "es", "Italy": "it", "France": "fr", "Portugal": "pt",
+    "Netherlands": "nl", "Greece": "el", "Romania": "ro", "Czechia": "cs", "Austria": "de",
+    "Switzerland": "de", "Belgium": "nl", "Denmark": "da", "Croatia": "hr", "Cyprus": "el",
+    "Serbia": "sr", "Hungary": "hu", "Bulgaria": "bg", "Slovakia": "sk", "Slovenia": "sl",
+    "Norway": "no", "Sweden": "sv", "Finland": "fi", "Iceland": "is", "Estonia": "et",
+    "Latvia": "lv", "Lithuania": "lt", "Moldova": "ro", "North Macedonia": "mk",
+    "Albania": "sq", "Montenegro": "sr", "Luxembourg": "fr", "Malta": "mt",
+    "Azerbaijan": "az", "Armenia": "hy", "Georgia": "ka", "Israel": "he", "Kosovo": "sq",
+    "Bosnia and Herzegovina": "bs",
+}
+
+
+def fetch_langlink(wikipedia_url, target_lang):
+    """Return the URL of the same article in `target_lang` via the Wikipedia
+    langlinks API, or None. Lets us cross from an English stadium page to the
+    native-language edition (which often carries owner/capacity the en page lacks)."""
+    if not wikipedia_url or not target_lang:
+        return None
+    try:
+        from urllib.parse import urlparse, unquote, quote
+        host = urlparse(wikipedia_url).netloc
+        title = unquote(urlparse(wikipedia_url).path.split("/wiki/")[-1])
+        r = requests.get(f"https://{host}/w/api.php", headers=HEADERS, params={
+            "action": "query", "prop": "langlinks", "lllang": target_lang,
+            "titles": title, "format": "json", "redirects": 1,
+        }, timeout=15)
+        r.raise_for_status()
+        for page in r.json().get("query", {}).get("pages", {}).values():
+            for ll in page.get("langlinks", []):
+                native_title = ll.get("*")
+                if native_title:
+                    return f"https://{target_lang}.wikipedia.org/wiki/{quote(native_title.replace(' ', '_'))}"
+    except Exception as e:
+        logging.error(f"[Langlink] failed for '{wikipedia_url}' -> {target_lang}: {e}")
+    return None
+
+
+def _extract_infobox_fields(soup, lang):
+    """Pull the infobox fields we care about from one soup, using `lang` labels."""
+    return {
+        "capacity": extract_first_int(get_infobox_value(soup, infobox_labels("capacity", lang))),
+        "year_of_construction": extract_year(get_infobox_value(soup, infobox_labels("opened", lang))),
+        "surface": classify_surface(get_infobox_value(soup, infobox_labels("surface", lang))),
+        "address": get_infobox_value(soup, infobox_labels("address", lang)),
+        "owner_raw": get_infobox_value(
+            soup, infobox_labels("owner", lang) + infobox_labels("operator", lang)),
+    }
+
+
+def scrape_stadium_data(wikipedia_url=None, transfermarkt_url=None, native_lang=None):
     wikipedia_soup = get_soup(wikipedia_url) if wikipedia_url else None
     transfermarkt_soup = get_soup(transfermarkt_url) if transfermarkt_url else None
 
@@ -1337,22 +1406,37 @@ def scrape_stadium_data(wikipedia_url=None, transfermarkt_url=None):
 
     latitude, longitude = extract_coordinates_from_wikipedia(wikipedia_soup)
 
-    # Use the page's own language for infobox labels so the native-language
-    # fallback (tr./ru./… pages) reads owner/capacity/etc. too — not just en.
+    # Use the page's own language for infobox labels so a native-language URL
+    # (tr./ru./…) reads owner/capacity/etc., not just en.
     lang = wiki_lang(wikipedia_url)
-    capacity_raw = get_infobox_value(wikipedia_soup, infobox_labels("capacity", lang))
-    opened_raw = get_infobox_value(wikipedia_soup, infobox_labels("opened", lang))
-    address = get_infobox_value(wikipedia_soup, infobox_labels("address", lang))
-    owner_raw = get_infobox_value(
-        wikipedia_soup, infobox_labels("owner", lang) + infobox_labels("operator", lang))
-    surface_raw = get_infobox_value(wikipedia_soup, infobox_labels("surface", lang))
+    fields = _extract_infobox_fields(wikipedia_soup, lang)
+
+    # English->native fallback: if the page is NOT already the country's language
+    # and key fields are still missing, follow the langlink to the native article
+    # and fill the gaps there (e.g. en 'Arsenal Stadium (Tula)' has no owner, but
+    # ru 'Арсенал (стадион, Тула)' does).
+    missing = [k for k in ("owner_raw", "capacity", "surface", "year_of_construction", "address")
+               if not fields.get(k)]
+    if native_lang and lang != native_lang and missing:
+        native_url = fetch_langlink(wikipedia_url, native_lang)
+        if native_url:
+            native_soup = get_soup(native_url)
+            if native_soup:
+                nf = _extract_infobox_fields(native_soup, native_lang)
+                filled = []
+                for k in missing:
+                    if nf.get(k):
+                        fields[k] = nf[k]
+                        filled.append(k)
+                if filled:
+                    logging.info(f"[Native fallback] {native_url}: filled {filled}")
 
     return {
         "wikipedia_url": wikipedia_url,
-        "capacity": extract_first_int(capacity_raw),
-        "year_of_construction": extract_year(opened_raw),
-        "surface": classify_surface(surface_raw),
-        "address": address,
+        "capacity": fields["capacity"],
+        "year_of_construction": fields["year_of_construction"],
+        "surface": fields["surface"],
+        "address": fields["address"],
         "latitude": latitude,
         "longitude": longitude,
         "image_url": extract_best_stadium_image(
@@ -1361,8 +1445,8 @@ def scrape_stadium_data(wikipedia_url=None, transfermarkt_url=None):
             wikipedia_soup=wikipedia_soup,
             wikipedia_url=wikipedia_url,
         ),
-        "owner_raw": owner_raw,
-        "ownership": classify_ownership(owner_raw),
+        "owner_raw": fields["owner_raw"],
+        "ownership": classify_ownership(fields["owner_raw"]),
     }
 
 def first_valid(*values):
@@ -1389,13 +1473,14 @@ def _nominatim_lookup(stadium_name, city_name):
     return None, None
 
 
-def scrape_stadium(stadium_data, city):
+def scrape_stadium(stadium_data, city, native_lang=None):
     transfermarkt_url = stadium_data.get("transfermarkt_url")
     wikipedia_url = stadium_data.get("wikipedia_url")
     fallback_name = stadium_data.get("name")
 
     # 1. Scrape Wikipedia first
-    wiki_data = scrape_stadium_data(wikipedia_url=wikipedia_url, transfermarkt_url=transfermarkt_url) if wikipedia_url and transfermarkt_url else {}
+    wiki_data = scrape_stadium_data(wikipedia_url=wikipedia_url, transfermarkt_url=transfermarkt_url,
+                                    native_lang=native_lang) if wikipedia_url and transfermarkt_url else {}
 
     # 2. Default values
     name = fallback_name
@@ -2017,8 +2102,10 @@ def run(league_slug, season_override=None):
 
     league = resolve_league(data["league"])
     country_name = data["league"]["country"]
+    native_lang = COUNTRY_WIKI_LANG.get(country_name)
     season = season_override or data["league"]["season"]
-    logging.info(f"Scraping {league.name} ({country_name}), season {season}")
+    logging.info(f"Scraping {league.name} ({country_name}), season {season}"
+                 + (f" [native fallback: {native_lang}.wikipedia]" if native_lang else ""))
 
     for team_data in data["teams"]:
         logging.info("-----------------------------------------")
@@ -2028,7 +2115,7 @@ def run(league_slug, season_override=None):
         city_data = stadium_data.get("city", {})
 
         city = scrape_city(city_data, country=country_name)
-        stadium = scrape_stadium(stadium_data, city)
+        stadium = scrape_stadium(stadium_data, city, native_lang=native_lang)
         team = scrape_team(team_data, stadium, city, league=league, season=season)
 
         logging.info(f"Finished processing {team.name}")
