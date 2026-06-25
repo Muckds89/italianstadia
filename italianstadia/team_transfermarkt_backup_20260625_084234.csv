@@ -1,0 +1,110 @@
+team_id,team_name,field_name,old_value,new_value
+177,FC Famalicão,transfermarkt_id,,3329
+177,FC Famalicão,transfermarkt_url,,https://www.transfermarkt.com/fc-famalicao/startseite/verein/3329
+177,FC Famalicão,image_url,,https://tmssl.akamaized.net//images/wappen/head/3329.png
+177,FC Famalicão,average_attendance,,3776
+181,Casa Pia AC,transfermarkt_id,,3268
+181,Casa Pia AC,transfermarkt_url,,https://www.transfermarkt.com/casa-pia-ac/startseite/verein/3268
+181,Casa Pia AC,image_url,,https://tmssl.akamaized.net//images/wappen/head/3268.png
+181,Casa Pia AC,average_attendance,,2075
+644,KTP Kotka,transfermarkt_id,,7315
+644,KTP Kotka,transfermarkt_url,,https://www.transfermarkt.com/fc-ktp/startseite/verein/7315
+644,KTP Kotka,image_url,,https://tmssl.akamaized.net//images/wappen/head/7315.png
+644,KTP Kotka,average_attendance,2741,
+647,FK Željezničar,transfermarkt_id,,2573
+647,FK Željezničar,transfermarkt_url,,https://www.transfermarkt.com/fk-zeljeznicar-sarajevo/startseite/verein/2573
+647,FK Željezničar,image_url,,https://tmssl.akamaized.net//images/wappen/head/2573.png
+647,FK Željezničar,average_attendance,106,
+655,FK Sloga Doboj,transfermarkt_id,,7569
+655,FK Sloga Doboj,transfermarkt_url,,https://www.transfermarkt.com/fk-sloga-doboj/startseite/verein/7569
+655,FK Sloga Doboj,image_url,,https://tmssl.akamaized.net//images/wappen/head/7569.png
+726,Hibernians FC,transfermarkt_id,,10604
+726,Hibernians FC,transfermarkt_url,,https://www.transfermarkt.com/hibernians-fc/startseite/verein/10604
+726,Hibernians FC,image_url,,https://tmssl.akamaized.net//images/wappen/head/10604.png
+727,Ħamrun Spartans,transfermarkt_id,,17149
+727,Ħamrun Spartans,transfermarkt_url,,https://www.transfermarkt.com/hamrun-spartans/startseite/verein/17149
+727,Ħamrun Spartans,image_url,,https://tmssl.akamaized.net//images/wappen/head/17149.png
+728,Valletta FC,transfermarkt_id,,6335
+728,Valletta FC,transfermarkt_url,,https://www.transfermarkt.com/valletta-fc/startseite/verein/6335
+728,Valletta FC,image_url,,https://tmssl.akamaized.net//images/wappen/head/6335.png
+729,Birkirkara FC,transfermarkt_id,,10262
+729,Birkirkara FC,transfermarkt_url,,https://www.transfermarkt.com/birkirkara-fc/startseite/verein/10262
+729,Birkirkara FC,image_url,,https://tmssl.akamaized.net//images/wappen/head/10262.png
+729,Birkirkara FC,average_attendance,1435,
+730,Floriana FC,transfermarkt_id,,10603
+730,Floriana FC,transfermarkt_url,,https://www.transfermarkt.com/floriana-fc/startseite/verein/10603
+730,Floriana FC,image_url,,https://tmssl.akamaized.net//images/wappen/head/10603.png
+731,Sliema Wanderers,transfermarkt_id,,329
+731,Sliema Wanderers,transfermarkt_url,,https://www.transfermarkt.com/sliema-wanderers/startseite/verein/329
+731,Sliema Wanderers,image_url,,https://tmssl.akamaized.net//images/wappen/head/329.png
+731,Sliema Wanderers,average_attendance,148,
+732,Mosta FC,transfermarkt_id,,32125
+732,Mosta FC,transfermarkt_url,,https://www.transfermarkt.com/mosta-fc/startseite/verein/32125
+732,Mosta FC,image_url,https://upload.wikimedia.org/wikipedia/commons/e/ed/FC_Mosta.png,https://tmssl.akamaized.net//images/wappen/head/32125.png
+733,Gżira United,transfermarkt_id,,32768
+733,Gżira United,transfermarkt_url,,https://www.transfermarkt.com/gzira-united-fc/startseite/verein/32768
+733,Gżira United,image_url,,https://tmssl.akamaized.net//images/wappen/head/32768.png
+734,Naxxar Lions,transfermarkt_id,,32130
+734,Naxxar Lions,transfermarkt_url,,https://www.transfermarkt.com/naxxar-lions-fc/startseite/verein/32130
+734,Naxxar Lions,image_url,,https://tmssl.akamaized.net//images/wappen/head/32130.png
+735,Tarxien Rainbows,transfermarkt_id,,21395
+735,Tarxien Rainbows,transfermarkt_url,,https://www.transfermarkt.com/tarxien-rainbows/startseite/verein/21395
+735,Tarxien Rainbows,image_url,,https://tmssl.akamaized.net//images/wappen/head/21395.png
+736,Marsaxlokk FC,transfermarkt_id,,10605
+736,Marsaxlokk FC,transfermarkt_url,,https://www.transfermarkt.com/marsaxlokkfc/startseite/verein/10605
+736,Marsaxlokk FC,image_url,,https://tmssl.akamaized.net//images/wappen/head/10605.png
+736,Marsaxlokk FC,average_attendance,103,
+737,Żabbar St. Patrick,transfermarkt_id,,34423
+737,Żabbar St. Patrick,transfermarkt_url,,https://www.transfermarkt.com/zabbar-st-patrick-fc/startseite/verein/34423
+737,Żabbar St. Patrick,image_url,,https://tmssl.akamaized.net//images/wappen/head/34423.png
+804,England,transfermarkt_id,,3299
+804,England,transfermarkt_url,,https://www.transfermarkt.com/england/startseite/verein/3299
+804,England,image_url,https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/England_national_football_team_crest.svg/330px-England_national_football_team_crest.svg.png,https://tmssl.akamaized.net//images/wappen/head/3299.png
+805,France,transfermarkt_id,,3377
+805,France,transfermarkt_url,,https://www.transfermarkt.com/france/startseite/verein/3377
+805,France,image_url,https://upload.wikimedia.org/wikipedia/en/thumb/1/12/France_national_football_team_seal.svg/330px-France_national_football_team_seal.svg.png,https://tmssl.akamaized.net//images/wappen/head/3377.png
+806,Wales,transfermarkt_id,,3864
+806,Wales,transfermarkt_url,,https://www.transfermarkt.com/wales/startseite/verein/3864
+806,Wales,image_url,https://upload.wikimedia.org/wikipedia/en/thumb/d/dc/Wales_national_football_team_logo.svg/330px-Wales_national_football_team_logo.svg.png,https://tmssl.akamaized.net//images/wappen/head/3864.png
+807,Scotland,transfermarkt_id,,3380
+807,Scotland,transfermarkt_url,,https://www.transfermarkt.com/schottland/startseite/verein/3380
+807,Scotland,image_url,https://upload.wikimedia.org/wikipedia/en/thumb/5/50/Scotland_national_football_team_logo_2014.svg/330px-Scotland_national_football_team_logo_2014.svg.png,https://tmssl.akamaized.net//images/wappen/head/3380.png
+808,Republic of Ireland,transfermarkt_id,,3509
+808,Republic of Ireland,transfermarkt_url,,https://www.transfermarkt.com/republic-of-ireland/startseite/verein/3509
+808,Republic of Ireland,image_url,https://upload.wikimedia.org/wikipedia/en/thumb/f/f8/Republic_of_Ireland_national_football_team_crest.svg/330px-Republic_of_Ireland_national_football_team_crest.svg.png,https://tmssl.akamaized.net//images/wappen/head/3509.png
+809,Netherlands,transfermarkt_id,,3379
+809,Netherlands,transfermarkt_url,,https://www.transfermarkt.com/netherlands/startseite/verein/3379
+809,Netherlands,image_url,https://upload.wikimedia.org/wikipedia/en/thumb/7/78/Netherlands_national_football_team_logo.svg/330px-Netherlands_national_football_team_logo.svg.png,https://tmssl.akamaized.net//images/wappen/head/3379.png
+810,Portugal,transfermarkt_id,,3300
+810,Portugal,transfermarkt_url,,https://www.transfermarkt.com/portugal/startseite/verein/3300
+810,Portugal,image_url,https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Flag_of_Portugal_%28official%29.svg/330px-Flag_of_Portugal_%28official%29.svg.png,https://tmssl.akamaized.net//images/wappen/head/3300.png
+811,Serbia,transfermarkt_id,,3438
+811,Serbia,transfermarkt_url,,https://www.transfermarkt.com/serbia/startseite/verein/3438
+811,Serbia,image_url,https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Football_Association_of_Serbia_logo.svg/250px-Football_Association_of_Serbia_logo.svg.png,https://tmssl.akamaized.net//images/wappen/head/3438.png
+812,Hungary,transfermarkt_id,,3468
+812,Hungary,transfermarkt_url,,https://www.transfermarkt.com/hungary/startseite/verein/3468
+812,Hungary,image_url,https://flagcdn.com/w160/hu.png,https://tmssl.akamaized.net//images/wappen/head/3468.png
+813,Northern Ireland,transfermarkt_id,,5674
+813,Northern Ireland,transfermarkt_url,,https://www.transfermarkt.com/northern-ireland/startseite/verein/5674
+813,Northern Ireland,image_url,https://flagcdn.com/w160/gb-nir.png,https://tmssl.akamaized.net//images/wappen/head/5674.png
+814,Belgium,transfermarkt_id,,3382
+814,Belgium,transfermarkt_url,,https://www.transfermarkt.com/belgium/startseite/verein/3382
+814,Belgium,image_url,https://flagcdn.com/w160/be.png,https://tmssl.akamaized.net//images/wappen/head/3382.png
+815,Poland,transfermarkt_id,,3442
+815,Poland,transfermarkt_url,,https://www.transfermarkt.com/polen/startseite/verein/3442
+815,Poland,image_url,https://flagcdn.com/w160/pl.png,https://tmssl.akamaized.net//images/wappen/head/3442.png
+816,Romania,transfermarkt_id,,3447
+816,Romania,transfermarkt_url,,https://www.transfermarkt.com/romania/startseite/verein/3447
+816,Romania,image_url,https://flagcdn.com/w160/ro.png,https://tmssl.akamaized.net//images/wappen/head/3447.png
+817,Albania,transfermarkt_id,,3561
+817,Albania,transfermarkt_url,,https://www.transfermarkt.com/albanien/startseite/verein/3561
+817,Albania,image_url,https://flagcdn.com/w160/al.png,https://tmssl.akamaized.net//images/wappen/head/3561.png
+818,Armenia,transfermarkt_id,,6219
+818,Armenia,transfermarkt_url,,https://www.transfermarkt.com/armenia/startseite/verein/6219
+818,Armenia,image_url,https://flagcdn.com/w160/am.png,https://tmssl.akamaized.net//images/wappen/head/6219.png
+819,Georgia,transfermarkt_id,,3669
+819,Georgia,transfermarkt_url,,https://www.transfermarkt.com/georgia/startseite/verein/3669
+819,Georgia,image_url,https://flagcdn.com/w160/ge.png,https://tmssl.akamaized.net//images/wappen/head/3669.png
+820,Azerbaijan,transfermarkt_id,,8605
+820,Azerbaijan,transfermarkt_url,,https://www.transfermarkt.com/azerbaijan/startseite/verein/8605
+820,Azerbaijan,image_url,https://flagcdn.com/w160/az.png,https://tmssl.akamaized.net//images/wappen/head/8605.png
