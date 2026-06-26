@@ -1,0 +1,396 @@
+stadium_id,stadium_name,field_name,old_value,new_value
+989,18 June Stadium,surface,,GRASS
+644,A. Le Coq Arena,surface,,GRASS
+312,AFAS Stadion,surface,,GRASS
+914,AFAS Trainingscomplex,surface,,ARTIFICIAL
+485,AIL Arena,surface,,GRASS
+982,Abovyan City Stadium,surface,,GRASS
+334,Achter de Kazerne,surface,,GRASS
+856,Adjarabet Arena,surface,,GRASS
+825,Ak Bars Arena,surface,,GRASS
+813,Akhmat Arena,surface,,GRASS
+93,Alberto De Cristofaro,surface,,ARTIFICIAL
+109,AlbinoLeffe Stadium,surface,,GRASS
+439,Alfonso Murube,surface,,GRASS
+385,Allianz-Stadion,surface,,GRASS
+369,Andrův stadion,surface,,GRASS
+1058,Ankara Aktepe Stadium,surface,,GRASS
+238,Anoeta,surface,,GRASS
+817,Anzhi Arena,surface,,GRASS
+219,Arena Zabrze,surface,,GRASS
+841,Atlant Stadium,surface,,GRASS
+873,Audi Sportpark,surface,,GRASS
+780,Aviva Stadium,surface,,GRASS
+885,BRITA-Arena,surface,,GRASS
+388,BWT X Oberösterreichische Arena,surface,,GRASS
+440,Bahrain Victorious Nuevo Arcángel,surface,,GRASS
+987,Bajram Aliu Stadium,surface,,GRASS
+792,Baku Olympic Stadium,surface,,GRASS
+1024,Ballymena Showgrounds,surface,,GRASS
+850,Bank Respublika Arena,surface,,GRASS
+305,Başakşehir Fatih Terim,surface,,GRASS
+924,Benfica Campus,surface,,GRASS
+904,Bingoal Stadion,surface,,GRASS
+1001,Bloomfield Stadium,surface,,GRASS
+570,Bonifika,surface,,GRASS
+791,Boris Paichadze Dinamo Arena,surface,,GRASS
+830,Borisov Arena,surface,,GRASS
+1010,Bryntirion Park,surface,,ARTIFICIAL
+936,CTFD PortoGaia,surface,,GRASS
+1014,Cae-y-Castell,surface,,ARTIFICIAL
+906,Cambuur Stadion,surface,,GRASS
+941,Campo Municipal de Gobela,surface,,ARTIFICIAL
+971,Can Misses,surface,,GRASS
+1016,Cardiff International Sports Campus,surface,,ARTIFICIAL
+111,Carlo Speroni,surface,,GRASS
+433,Carlos Belmonte,surface,,GRASS
+333,Cegeka Arena,surface,,GRASS
+835,Central Stadium,surface,,GRASS
+963,Centro Deportivo Alcalá de Henares,surface,,GRASS
+985,Charentsavan City Stadium,surface,,ARTIFICIAL
+586,Cherry Red Records Stadium,surface,,GRASS
+85,Ciro Vigorito,surface,,GRASS
+106,Città di Meda - Mino Favini,surface,,GRASS
+965,Ciudad Deportiva Luis del Sol,surface,,GRASS
+1027,Clandeboye Park,surface,,ARTIFICIAL
+345,Cluj Arena,surface,,GRASS
+242,Coliseum,surface,,GRASS
+181,Complexo Desportivo FC Alverca,surface,,GRASS
+112,Comunale Gino Corioni,surface,,GRASS
+84,Comunale di Caravaggio,surface,,GRASS
+921,Covebo Stadion - De Koel,surface,,GRASS
+110,Dal Molin,surface,,GRASS
+843,Dalga Arena,surface,,ARTIFICIAL
+722,Daugava Stadium,surface,,GRASS
+319,De Adelaarshorst,surface,,GRASS
+915,De Herdgang,surface,,ARTIFICIAL
+911,De Oude Meerdijk,surface,,ARTIFICIAL
+405,Deepdale,surface,,GRASS
+1007,Deeside Stadium,surface,,ARTIFICIAL
+872,Dietmar-Hopp-Stadion,surface,,GRASS
+511,"Dimotiko Stadio ""Tasos Markou""",surface,,GRASS
+831,Dinamo Stadium,surface,,GRASS
+996,Doha Stadium,surface,,GRASS
+95,Domenico Francioni,surface,,GRASS
+97,Domenico Monterisi,surface,,GRASS
+100,Donato Curcio,surface,,ARTIFICIAL
+883,Donaustadion,surface,,GRASS
+350,Dr. Constantin Rădulescu,surface,,GRASS
+65,Druso,surface,,GRASS
+1046,Eduard Streltsov Stadium,surface,,GRASS
+445,El Alcoraz,surface,,GRASS
+962,El Maulí,surface,,GRASS
+964,El Palmar,surface,,GRASS
+972,El Pozuelo,surface,,GRASS
+956,El Prado,surface,,GRASS
+450,El Sardinero,surface,,GRASS
+466,Energi Viborg Arena,surface,,GRASS
+67,Enrico Sannazzari,surface,,ARTIFICIAL
+303,Eryaman Stadyumu,surface,,GRASS
+867,Erzgebirgsstadion,surface,,GRASS
+942,Espiñedo,surface,,GRASS
+955,Estadio Alfredo Di Stéfano,surface,,GRASS
+948,Estadio Anxo Carro,surface,,GRASS
+966,Estadio Cartagonova,surface,,GRASS
+952,Estadio El Toralín,surface,,GRASS
+974,Estadio Enrique Roca,surface,,GRASS
+957,Estadio Heliodoro Rodríguez López,surface,,GRASS
+976,Estadio Jesús Navas,surface,,GRASS
+970,Estadio José Rico Pérez,surface,,GRASS
+951,Estadio O Couto,surface,,GRASS
+947,Estadio Pedro Escartín,surface,,GRASS
+967,Estadio Pepico Amat,surface,,GRASS
+946,Estadio Príncipe Felipe,surface,,GRASS
+958,Estadio Reina Sofía,surface,,GRASS
+949,Estadio Romano,surface,,GRASS
+943,Estadio Román Suárez Puerta,surface,,GRASS
+959,Estadio Ruta de la Plata,surface,,GRASS
+960,Estadio Santo Domingo,surface,,GRASS
+954,Estadio da Malata,surface,,GRASS
+446,Estadio de Gran Canaria,surface,,GRASS
+953,Estadio de Pasarón,surface,,GRASS
+937,Estádio Aurélio Pereira,surface,,GRASS
+933,Estádio Capital do Móvel,surface,,GRASS
+932,Estádio Carlos Osório,surface,,GRASS
+928,Estádio Dr. Machado de Matos,surface,,GRASS
+939,Estádio Dr. Magalhães Pessoa,surface,,GRASS
+938,Estádio Manuel Marques,surface,,GRASS
+927,Estádio Marcolino de Castro,surface,,GRASS
+934,Estádio Municipal 25 de Abril,surface,,GRASS
+925,Estádio Municipal de Chaves,surface,,GRASS
+935,Estádio Municipal de Portimão,surface,,GRASS
+926,Estádio de São Luís,surface,,GRASS
+940,Estádio do FC Vizela,surface,,GRASS
+923,Estádio do Fontelo,surface,,GRASS
+930,Estádio do Lusitânia de Lourosa,surface,,GRASS
+929,Estádio do Mar,surface,,GRASS
+931,Estádio do Marítimo,surface,,GRASS
+83,Ettore Mannucci,surface,,ARTIFICIAL
+314,Euroborg,surface,,GRASS
+392,Ewood Park,surface,,GRASS
+837,FC Minsk Stadium,surface,,GRASS
+993,Fadil Vokrri Stadium,surface,,GRASS
+860,Fazisi Stadium,surface,,GRASS
+261,Finnvedsvallen,surface,,GRASS
+291,Fir Park,surface,,GRASS
+826,Fisht Olympic Stadium,surface,,GRASS
+365,Fortuna Arena,surface,,GRASS
+318,Fortuna Sittard Stadion,surface,,GRASS
+919,Frans Heesen Stadion,surface,,ARTIFICIAL
+912,GS Staalwerken Stadion,surface,,GRASS
+844,Gabala City Stadium,surface,,GRASS
+256,Gamla Ullevi,surface,,GRASS
+981,Gandzasar Stadium,surface,,ARTIFICIAL
+846,Ganja City Stadium,surface,,ARTIFICIAL
+660,Gargždai Stadium,surface,,ARTIFICIAL
+107,Gavagnin-Nocini,surface,,GRASS
+822,Gazovik,surface,,ARTIFICIAL
+828,Gazprom Arena,surface,,GRASS
+920,GelreDome,surface,,GRASS
+480,Gipedo Neapolis,surface,,GRASS
+475,Gipedo Panetolikou,surface,,GRASS
+125,Giuseppe Sivori,surface,,GRASS
+862,Givi Chokheli Stadium,surface,,GRASS
+988,Gjilan City Stadium,surface,,ARTIFICIAL
+322,Goffertstadion,surface,,GRASS
+501,Gradski Stadion u Borovu naselju,surface,,GRASS
+641,Gradski stadion (Prijedor),surface,,GRASS
+538,Gradski stadion Surdulica,surface,,ARTIFICIAL
+1003,Green Stadium,surface,,GRASS
+810,Grzegorz Lato Stadium,surface,,GRASS
+876,Grünwalder Stadion,surface,,GRASS
+983,Gyumri City Stadium,surface,,GRASS
+800,Górnik Łęczna Stadium,surface,,GRASS
+741,HS Orku völlurinn,surface,,GRASS
+1000,HaMoshava Stadium,surface,,GRASS
+779,Hampden Park,surface,,GRASS
+335,Het Kuipje,surface,,GRASS
+865,Heydar Aliyev Stadium,surface,,GRASS
+628,Hietalahti Stadium,surface,,ARTIFICIAL
+208,Hill Dickinson Stadium,surface,,GRASS
+408,Hillsborough,surface,,GRASS
+427,Holstein-Stadion,surface,,GRASS
+454,Ibercaja Estadio,surface,,GRASS
+451,Instalaciones de Zubieta,surface,,GRASS
+1021,Inver Park,surface,,ARTIFICIAL
+443,Ipurua,surface,,GRASS
+878,Jahnstadion Regensburg,surface,,GRASS
+630,Jakobstads Centralplan,surface,,ARTIFICIAL
+910,Jan Louwers Stadion,surface,,ARTIFICIAL
+1009,Jenner Park,surface,,ARTIFICIAL
+670,KA-Völlur,surface,,GRASS
+284,Kilmac Stadium at Dens Park,surface,,GRASS
+788,King Baudouin Stadium,surface,,GRASS
+523,Kolorcity Aréna,surface,,GRASS
+922,Koning Willem II Stadion,surface,,GRASS
+807,Konwiktorska Street Stadium,surface,,GRASS
+237,La Cartuja,surface,,GRASS
+448,La Rosaleda,surface,,GRASS
+740,Lambhagavöllurinn,surface,,ARTIFICIAL
+944,Lasesarre,surface,,GRASS
+945,Lezama,surface,,GRASS
+992,Liman Gegaj Stadium,surface,,ARTIFICIAL
+368,Lokotrans Arena,surface,,GRASS
+1025,Loughshore Hotel Arena,surface,,GRASS
+880,Ludwigsparkstadion,surface,,GRASS
+827,Lukoil Arena,surface,,GRASS
+323,MAC³PARK stadion,surface,,GRASS
+421,MERKUR SPIEL-ARENA,surface,,GRASS
+1012,Maes Tegid,surface,,ARTIFICIAL
+1059,Manisa 19 Mayıs Stadium,surface,,GRASS
+250,Manuel Martínez Valero,surface,,GRASS
+343,Maurice Dufrasne Stadion,surface,,GRASS
+852,Mehdi Huseynzade Stadium,surface,,GRASS
+572,Mestni stadion Fazanerija,surface,,GRASS
+119,Mimmo Pavone e Alessandro Mariani,surface,,ARTIFICIAL
+1023,Mourneview Park,surface,,GRASS
+977,Municipal de Tarazona,surface,,ARTIFICIAL
+378,Městský fotbalový stadion Miroslava Valenty,surface,,GRASS
+376,Městský stadion,surface,,GRASS
+367,Městský stadion - Vitkovice Aréna,surface,,GRASS
+666,N1 Völlurinn,surface,,ARTIFICIAL
+848,Neftchi Arena,surface,,GRASS
+836,Neman Stadium,surface,,GRASS
+1002,Netanya Stadium,surface,,GRASS
+1004,Netanya Stadium,surface,,GRASS
+1061,New Sakarya Stadium,surface,,GRASS
+1064,New Sivas 4 Eylül Stadium,surface,,GRASS
+866,New Tivoli,surface,,GRASS
+969,Nou Estadi,surface,,GRASS
+968,Nou Sardenya,surface,,ARTIFICIAL
+898,Nouste Camp,surface,,GRASS
+975,Nova Creu Alta,surface,,GRASS
+961,Nuevo Mirador,surface,,GRASS
+227,ORLEN Stadion im. Kazimierza Górskiego,surface,,GRASS
+832,OSK Brestsky,surface,,GRASS
+627,OSiR,surface,,GRASS
+1017,Old Road Ground,surface,,GRASS
+879,Ostseestadion,surface,,GRASS
+819,Ozon Arena,surface,,GRASS
+789,PGE Narodowy,surface,,GRASS
+147,Parc des Princes,surface,,GRASS
+887,Parc des Sports,surface,,GRASS
+1006,Park Hall,surface,,ARTIFICIAL
+918,Parkstad Limburg Stadion,surface,,GRASS
+324,Philips Stadion,surface,,GRASS
+978,Pinilla,surface,,GRASS
+282,Pittodrie Stadium,surface,,GRASS
+493,Poljud,surface,,GRASS
+778,Principality Stadium,surface,,GRASS
+383,Profertil Arena Hartberg,surface,,GRASS
+786,Puskás Aréna,surface,,GRASS
+651,Pärnu Rannastaadion,surface,,GRASS
+821,RZD Arena,surface,,GRASS
+863,Ramaz Shengelia Stadium,surface,,GRASS
+751,Raudondvario stadionas,surface,,ARTIFICIAL
+386,Red Bull Arena Salzburg,surface,,GRASS
+441,Reino de León,surface,,GRASS
+790,Republican Stadium (Yerevan),surface,,ARTIFICIAL
+213,RheinEnergieSTADION,surface,,GRASS
+579,Richmond Park,surface,,GRASS
+128,Romeo Menti,surface,,ARTIFICIAL
+815,Rostec Arena,surface,,GRASS
+824,Rostov Arena,surface,,GRASS
+580,Ryan McBride Brandywell Stadium,surface,,ARTIFICIAL
+536,SC Mladost Pančevo,surface,,ARTIFICIAL
+532,SRC Mr Radoš Milovanović,surface,,ARTIFICIAL
+999,Sammy Ofer Stadium,surface,,GRASS
+309,Samsun Yeni 19 Mayıs,surface,,GRASS
+667,Samsung völlurinn,surface,,ARTIFICIAL
+235,San Mamés,surface,,GRASS
+123,Sandro Cabassi,surface,,GRASS
+869,Schauinsland-Reisen-Arena,surface,,GRASS
+387,Schnabelholz,surface,,GRASS
+416,SchücoArena,surface,,GRASS
+489,Schützenwiese,surface,,GRASS
+1020,Seaview,surface,,ARTIFICIAL
+354,Sepsi Duna Arena,surface,,GRASS
+1063,Serik İsmail Oğan Stadium,surface,,GRASS
+1026,Shamrock Park,surface,,GRASS
+721,Skonto Stadium,surface,,GRASS
+438,SkyFi Castalia,surface,,GRASS
+814,Solidarnost Samara Arena,surface,,GRASS
+820,Solidarnost Samara Arena,surface,,GRASS
+1019,Solitude,surface,,ARTIFICIAL
+823,Sovcombank Arena,surface,,GRASS
+328,Sparta-stadion - Het Kasteel,surface,,GRASS
+842,Spartak Stadium Bobruisk,surface,,GRASS
+838,Spartak Stadium Mogilev,surface,,GRASS
+884,Sportclub Arena,surface,,GRASS
+913,Sportpark De Toekomst,surface,,GRASS
+874,Sportpark Höhenberg,surface,,GRASS
+708,Stade An de Millewisen,surface,,GRASS
+888,Stade Armand Cesari,surface,,GRASS
+900,Stade Auguste-Delaune,surface,,GRASS
+899,Stade Bauer,surface,,GRASS
+153,Stade Bollaert-Delelis,surface,,GRASS
+894,Stade Francis Le Basser,surface,,GRASS
+890,Stade Gabriel Montpied,surface,,GRASS
+902,Stade Geoffroy Guichard,surface,,GRASS
+340,Stade Joseph Mariën,surface,,GRASS
+897,Stade Marcel Picot,surface,,GRASS
+891,Stade Marcel Tribut,surface,,GRASS
+895,Stade Marie-Marvingt,surface,,GRASS
+746,Stade Municipal de la Ville de Differdange,surface,,GRASS
+901,Stade Paul Lignon,surface,,GRASS
+161,Stade Raymond-Kopa,surface,,GRASS
+701,Stade Um Dribbel,surface,,GRASS
+785,Stade de France,surface,,GRASS
+893,Stade de Roudourou,surface,,GRASS
+903,Stade de l'Aube,surface,,GRASS
+889,Stade de la Libération,surface,,GRASS
+886,Stade de la Licorne,surface,,GRASS
+896,Stade de la Mosson,surface,,GRASS
+892,Stade des Alpes,surface,,GRASS
+339,Stade du Pays de Charleroi,surface,,GRASS
+75,Stadio Breda,surface,,GRASS
+117,Stadio Città dell’Aria,surface,,ARTIFICIAL
+510,Stadio Ethnikos Achnas (Dasaki),surface,,GRASS
+90,Stadio Giuseppe Capozza,surface,,GRASS
+61,Stadio dei Marmi,surface,,ARTIFICIAL
+231,Stadion Bruk-Bet,surface,,GRASS
+917,Stadion De Geusselt,surface,,ARTIFICIAL
+907,Stadion De Vijverberg,surface,,GRASS
+908,Stadion De Vliert,surface,,ARTIFICIAL
+317,"Stadion Feyenoord ""De Kuip""",surface,,GRASS
+230,Stadion GOSiR,surface,,GRASS
+374,Stadion Juliska,surface,,GRASS
+909,Stadion Krommedijk,surface,,GRASS
+379,Stadion Letná,surface,,GRASS
+483,Stadion Letzigrund,surface,,GRASS
+795,Stadion Miejski (Kraków),surface,,GRASS
+808,Stadion Miejski w Niepołomicach,surface,,GRASS
+809,Stadion Miejski w Rzeszowie,surface,,GRASS
+805,Stadion Miejski w Siedlcach,surface,,GRASS
+806,Stadion Polonii Bytom,surface,,ARTIFICIAL
+637,Stadion Rođeni,surface,,GRASS
+566,Stadion ViOn,surface,,GRASS
+877,Stadion an der Bremer Brücke,surface,,GRASS
+870,Stadion an der Hafenstraße,surface,,GRASS
+868,Stadion der Freundschaft,surface,,GRASS
+228,Stadion im. Braci Czachorów,surface,,GRASS
+802,Stadion im. Orła Białego,surface,,GRASS
+798,Stadion przy ulicy Rudnowskiej,surface,,GRASS
+793,Stadion Śląski,surface,,GRASS
+755,Stadions Esplanade,surface,,ARTIFICIAL
+735,Stadionul Selemet,surface,,GRASS
+743,Stadiumi Flamurtari,surface,,GRASS
+745,Stadiumi Vore,surface,,ARTIFICIAL
+1028,Stangmore Park,surface,,GRASS
+1015,Stebonheath Park,surface,,GRASS
+254,Stora Valla,surface,,GRASS
+264,Strandvallen,surface,,GRASS
+986,Suva Reka City Stadium,surface,,ARTIFICIAL
+712,Ta' Qali National Stadium,surface,,GRASS
+950,Tajonar,surface,,GRASS
+576,Tallaght Stadium,surface,,GRASS
+794,Tarczyński Arena,surface,,GRASS
+995,Teddy Stadium,surface,,GRASS
+855,Tengiz Burjanadze Stadium,surface,,GRASS
+700,Terrain ZAC Klengbousbierg,surface,,GRASS
+1008,The Oval,surface,,GRASS
+1018,The Oval,surface,,GRASS
+585,The RSC,surface,,GRASS
+1022,The Showgrounds,surface,,GRASS
+781,Timsah Arena,surface,,GRASS
+389,Tivoli Stadion Tirol,surface,,GRASS
+849,Tofiq Bahramov Stadium,surface,,GRASS
+577,Tolka Park,surface,,GRASS
+98,Tonino D'Angelo,surface,,ARTIFICIAL
+833,Torpedo Stadium,surface,,GRASS
+589,Toughsheet Community Stadium,surface,,GRASS
+853,Tovuz City Stadium,surface,,GRASS
+613,Tsentralnyi Polissya,surface,,GRASS
+861,Tskaltubo Central Stadium,surface,,GRASS
+105,Tullio Saleri,surface,,GRASS
+82,Tullo Morgagni,surface,,GRASS
+307,Turka Araç Muayene Kocaeli Stadyumu,surface,,GRASS
+998,Turner Stadium,surface,,GRASS
+799,Tychy City Stadium,surface,,GRASS
+68,U-Power Stadium,surface,,GRASS
+434,UD Almería Stadium,surface,,GRASS
+984,Urartu Stadium,surface,,GRASS
+816,VEB Arena,surface,,GRASS
+818,VTB Arena,surface,,GRASS
+465,Vejle Stadion,surface,,GRASS
+432,Veltins-Arena,surface,,GRASS
+829,Vitebsky CSK,surface,,GRASS
+212,Volksparkstadion,surface,,GRASS
+882,WIRmachenDRUCK Arena,surface,,GRASS
+601,Weston Homes Stadium,surface,,GRASS
+631,Wiklöf Holding Arena,surface,,GRASS
+881,Willy-Sachs-Stadion,surface,,GRASS
+787,Windsor Park,surface,,GRASS
+801,Władysław Król Stadium,surface,,GRASS
+905,Yanmar Stadion,surface,,GRASS
+784,Yeni Ankara Stadyumu,surface,,GRASS
+980,Yerevan Football Academy Stadium,surface,,GRASS
+847,Yevlakh City Stadium,surface,,ARTIFICIAL
+997,Yud-Alef Stadium,surface,,GRASS
+834,Yunost Stadium,surface,,GRASS
+1062,Yusuf Ziya Öniş Stadium,surface,,GRASS
+991,Zahir Pajaziti Stadium,surface,,GRASS
+756,Zemgales Olimpiskais centrs,surface,,GRASS
+854,Zira Olympic Sport Complex,surface,,GRASS
+487,kybunpark,surface,,GRASS
+297,Çaykur Didi,surface,,GRASS

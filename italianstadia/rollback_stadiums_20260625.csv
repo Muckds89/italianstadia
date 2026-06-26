@@ -1,0 +1,108 @@
+stadium_id,stadium_name,field_name,old_value,new_value
+171,Estádio Municipal de Famalicão,capacity,,5186
+171,Estádio Municipal de Famalicão,address,,"Vila Nova de Famalicão, Portugal"
+171,Estádio Municipal de Famalicão,year_of_construction,,1952
+171,Estádio Municipal de Famalicão,owner_raw,Município de Famalicão,Vila Nova de Famalicão Municipality
+171,Estádio Municipal de Famalicão,stadium_type,,OPEN
+171,Estádio Municipal de Famalicão,surface,,GRASS
+171,Estádio Municipal de Famalicão,wikipedia_url,https://en.wikipedia.org/wiki/Est%C3%A1dio_Municipal_de_Famalic%C3%A3o,https://en.wikipedia.org/wiki/Est%C3%A1dio_Municipal_22_de_Junho
+171,Estádio Municipal de Famalicão,transfermarkt_url,https://www.transfermarkt.com/fc-famalicao/stadion/verein/3664,https://www.transfermarkt.com/fc-famalicao/stadion/verein/3329
+171,Estádio Municipal de Famalicão,image_url,,https://en.wikipedia.org/wiki/File:Blick_von_der_Gegentrib%C3%BCne_-_Est%C3%A1dio_Municipal_22_de_Junho.jpg
+175,Estádio Pina Manique,capacity,,2574
+175,Estádio Pina Manique,address,,"Parque de Monsanto, 1500-462 Lisboa, Portugal"
+175,Estádio Pina Manique,year_of_construction,,1954
+175,Estádio Pina Manique,stadium_type,,OPEN
+175,Estádio Pina Manique,surface,,GRASS
+175,Estádio Pina Manique,transfermarkt_url,https://www.transfermarkt.com/casa-pia-ac/stadion/verein/9607,https://www.transfermarkt.com/casa-pia-ac/stadion/verein/3268/stadion_id/5613
+643,Luke Stadium,capacity,,5000
+643,Luke Stadium,address,,"Gračanica, Bosnia and Herzegovina"
+643,Luke Stadium,stadium_type,,OPEN
+643,Luke Stadium,transfermarkt_url,https://www.transfermarkt.com/fk-sloga-doboj/stadion/verein/7569/saison_id/2025,https://www.transfermarkt.com/nk-bratstvo-gracanica/stadion/verein/3492
+690,Stadion pod Vrmcem,capacity,,425
+690,Stadion pod Vrmcem,address,"Kotor , Montenegro","Njegoševa bb, 85330 Kotor, Montenegro"
+690,Stadion pod Vrmcem,transfermarkt_url,https://www.transfermarkt.com/fk-bokelj/stadion/verein/4949/saison_id/2025,https://www.transfermarkt.com/fk-bokelj/stadion/verein/4949
+725,Tukums Stadium,capacity,,350
+725,Tukums Stadium,address,,"Kuldīgas iela 74, LV-3104 Tukums, Latvia"
+725,Tukums Stadium,surface,,GRASS
+725,Tukums Stadium,transfermarkt_url,https://www.transfermarkt.com/fk-tukums-2000/stadion/verein/28937/saison_id/2025,https://www.transfermarkt.com/fk-tukums-2000/stadion/verein/28937
+726,Grobiņas Stadion,capacity,,200
+726,Grobiņas Stadion,address,,"Grobiņa, Latvia"
+726,Grobiņas Stadion,wikipedia_url,https://en.wikipedia.org/wiki/Grobi%C5%86a,https://en.wikipedia.org/wiki/FK_Grobi%C5%86a
+727,Ogres Sporta Komplekss,capacity,,1250
+727,Ogres Sporta Komplekss,address,,"Skolas iela 21, LV-5001 Ogre, Latvia"
+727,Ogres Sporta Komplekss,owner_raw,Ogre Municipality,Ogre Municipality / Ogre Sports Centre
+727,Ogres Sporta Komplekss,surface,,GRASS
+727,Ogres Sporta Komplekss,transfermarkt_url,https://www.transfermarkt.com/ogre-united/stadion/verein/107916/saison_id/2025,https://www.transfermarkt.com/ogre-united/stadion/verein/107916
+732,Cricova teren sintetic,capacity,,0
+732,Cricova teren sintetic,address,"Chișinău , Moldova","Cricova, Moldova"
+732,Cricova teren sintetic,transfermarkt_url,https://www.transfermarkt.com/cstc-saksan/stadion/verein/90107,https://www.transfermarkt.com/politehnica-utm-shisinau/startseite/verein/90107
+796,Ullevaal Stadion,capacity,,27182
+796,Ullevaal Stadion,address,,"Sognsveien 75, Oslo, Norway"
+796,Ullevaal Stadion,year_of_construction,,1926
+796,Ullevaal Stadion,owner_raw,,Football Association of Norway
+796,Ullevaal Stadion,ownership,PUBLIC,PRIVATE
+796,Ullevaal Stadion,stadium_type,,OPEN
+796,Ullevaal Stadion,surface,,GRASS
+796,Ullevaal Stadion,transfermarkt_url,,https://www.transfermarkt.com/norway/stadion/verein/3440
+797,Bilino Polje,capacity,,13812
+797,Bilino Polje,address,,"Bulevar Kulina Bana bb, Zenica, Bosnia and Herzegovina"
+797,Bilino Polje,year_of_construction,,1972
+797,Bilino Polje,owner_raw,,City of Zenica
+797,Bilino Polje,stadium_type,,OPEN
+797,Bilino Polje,surface,,HYBRID
+797,Bilino Polje,transfermarkt_url,,https://www.transfermarkt.com/nk-celik-zenica/stadion/verein/765
+857,David Petriashvili Stadium,capacity,,2130
+857,David Petriashvili Stadium,address,,"Tbilisi, Georgia"
+857,David Petriashvili Stadium,year_of_construction,,2015
+857,David Petriashvili Stadium,owner_raw,,Georgian Football Federation
+857,David Petriashvili Stadium,ownership,UNKNOWN,PRIVATE
+857,David Petriashvili Stadium,stadium_type,,OPEN
+857,David Petriashvili Stadium,surface,,GRASS
+857,David Petriashvili Stadium,transfermarkt_url,https://www.transfermarkt.com/fc-gagra/stadion/verein/22842,https://www.transfermarkt.com/fc-tskhinvali/stadion/verein/19090
+861,Tskaltubo Central Stadium,capacity,,12000
+861,Tskaltubo Central Stadium,address,,"Tskaltubo, Georgia"
+861,Tskaltubo Central Stadium,stadium_type,,OPEN
+864,Nisporeni Central Stadium,capacity,,5200
+864,Nisporeni Central Stadium,address,,"8 Great National Assembly Street, Nisporeni, Moldova"
+864,Nisporeni Central Stadium,year_of_construction,,2021
+864,Nisporeni Central Stadium,owner_raw,,Nisporeni
+864,Nisporeni Central Stadium,ownership,UNKNOWN,PUBLIC
+864,Nisporeni Central Stadium,stadium_type,,OPEN
+864,Nisporeni Central Stadium,surface,,GRASS
+864,Nisporeni Central Stadium,transfermarkt_url,https://www.transfermarkt.com/dacia-buiucani/stadion/verein/39003,https://www.transfermarkt.com/sporting-trestieni/stadion/verein/86958
+864,Nisporeni Central Stadium,image_url,https://upload.wikimedia.org/wikipedia/commons/c/c1/Nisporeni_stadium_3.jpg,https://commons.wikimedia.org/wiki/Category:Nisporeni_Central_Stadium
+979,Nairi Stadium,capacity,,6850
+979,Nairi Stadium,address,,"Yerevan, Armenia"
+979,Nairi Stadium,year_of_construction,,1960
+979,Nairi Stadium,owner_raw,,FC Urartu
+979,Nairi Stadium,ownership,UNKNOWN,PRIVATE
+979,Nairi Stadium,stadium_type,,OPEN
+979,Nairi Stadium,surface,,GRASS
+990,Ferizaj City Stadium,capacity,,3000
+990,Ferizaj City Stadium,address,,"Ferizaj, Kosovo"
+990,Ferizaj City Stadium,stadium_type,,OPEN
+990,Ferizaj City Stadium,surface,,ARTIFICIAL
+990,Ferizaj City Stadium,wikipedia_url,,https://en.wikipedia.org/wiki/FC_Ferizaj
+994,Sami Kelmendi Stadium,capacity,,2500
+994,Sami Kelmendi Stadium,address,,"Xhevdet Breznica, Lipjan, Kosovo"
+994,Sami Kelmendi Stadium,stadium_type,,OPEN
+994,Sami Kelmendi Stadium,surface,,ARTIFICIAL
+994,Sami Kelmendi Stadium,transfermarkt_url,https://www.transfermarkt.com/kf-shkendija-hajvali/stadion/verein/95597,https://www.transfermarkt.com/kf-arberia/stadion/verein/81007
+1005,Tiberias Municipal Stadium,capacity,,7554
+1005,Tiberias Municipal Stadium,address,,"Tiberias, Israel"
+1005,Tiberias Municipal Stadium,owner_raw,,Municipality of Tiberias
+1005,Tiberias Municipal Stadium,ownership,UNKNOWN,PUBLIC
+1005,Tiberias Municipal Stadium,stadium_type,,OPEN
+1005,Tiberias Municipal Stadium,surface,,GRASS
+1005,Tiberias Municipal Stadium,architect,,Moti Bodek
+1005,Tiberias Municipal Stadium,wikipedia_url,https://en.wikipedia.org/wiki/Tiberias_Municipal_Stadium,https://en.wikipedia.org/wiki/Tiberias_Football_Stadium
+1011,Bridge Meadow,capacity,,2467
+1011,Bridge Meadow,address,,"Bridge Meadow Lane, Sydney Rees Way, Haverfordwest, Pembrokeshire SA61 2EX, Wales"
+1011,Bridge Meadow,stadium_type,,OPEN
+1011,Bridge Meadow,surface,,GRASS
+1011,Bridge Meadow,transfermarkt_url,https://www.transfermarkt.com/haverfordwest-county/stadion/verein/25232/saison_id/2025,https://www.transfermarkt.com/haverfordwest-county/stadion/verein/25232
+1013,Llanelian Road,capacity,,3000
+1013,Llanelian Road,address,"Old Colwyn , Wales","Llanelian Road, LL29 8UN Old Colwyn, Wales"
+1013,Llanelian Road,stadium_type,,OPEN
+1013,Llanelian Road,surface,,GRASS
+1013,Llanelian Road,transfermarkt_url,https://www.transfermarkt.com/colwyn-bay-fc/stadion/verein/22546/saison_id/2025,https://www.transfermarkt.com/colwyn-bay-fc/stadion/verein/22546
