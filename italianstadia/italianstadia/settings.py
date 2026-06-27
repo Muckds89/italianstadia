@@ -127,6 +127,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'italiastadiaapp.context_processors.adsense',
+                'italiastadiaapp.views.asset_version',
             ],
         },
     },

@@ -152,8 +152,8 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{% static 'js/list-layout.js' %}"></script>
-<script src="{% static 'js/consent.js' %}"></script>
+<script src="{% static 'js/list-layout.js' %}?v={{ asset_v }}"></script>
+<script src="{% static 'js/consent.js' %}?v={{ asset_v }}"></script>
 
 <div id="cookie-banner" class="d-none position-fixed bottom-0 start-0 end-0 bg-dark text-white p-3 shadow-lg" style="z-index:9999">
   <div class="container d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2">

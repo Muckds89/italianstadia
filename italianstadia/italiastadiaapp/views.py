@@ -518,6 +518,24 @@ def _map_version():
         return 0
 
 
+_ASSET_V_CACHE = {}
+
+def asset_version(request):
+    """Context processor: `asset_v` = newest mtime across static/js, so templates
+    can cache-bust script tags with `?v={{ asset_v }}`. Without this the browser
+    keeps serving a stale map.js/insights-map.js and JS changes look 'not done'.
+    Recomputed live in DEBUG; cached once in prod."""
+    if not settings.DEBUG and "v" in _ASSET_V_CACHE:
+        return {"asset_v": _ASSET_V_CACHE["v"]}
+    js_dir = Path(__file__).parent / "static" / "js"
+    try:
+        v = int(max(f.stat().st_mtime for f in js_dir.glob("*.js")))
+    except (OSError, ValueError):
+        v = 0
+    _ASSET_V_CACHE["v"] = v
+    return {"asset_v": v}
+
+
 @xframe_options_exempt
 @cache_page(60 * 60)
 def embed_map(request):

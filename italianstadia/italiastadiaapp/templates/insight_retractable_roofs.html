@@ -132,5 +132,5 @@
 
 {% block extra_scripts %}
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="{% static 'js/insights-map.js' %}"></script>
+<script src="{% static 'js/insights-map.js' %}?v={{ asset_v }}"></script>
 {% endblock %}

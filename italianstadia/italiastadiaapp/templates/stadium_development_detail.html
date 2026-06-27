@@ -214,7 +214,7 @@
 {% endblock %}
 
 {% block extra_scripts %}
-<script src="{% static 'js/stadium-detail-gallery.js' %}"></script>
+<script src="{% static 'js/stadium-detail-gallery.js' %}?v={{ asset_v }}"></script>
 {% if development.instagram_url %}
 <script async src="//www.instagram.com/embed.js"></script>
 {% endif %}

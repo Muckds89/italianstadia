@@ -312,7 +312,7 @@
 {% block extra_scripts %}
     <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
     <script src="{% static 'js/stadium-detail-map.js' %}?v=3"></script>
-    <script src="{% static 'js/stadium-detail-gallery.js' %}"></script>
+    <script src="{% static 'js/stadium-detail-gallery.js' %}?v={{ asset_v }}"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
