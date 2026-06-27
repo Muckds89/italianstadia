@@ -490,6 +490,8 @@ def stadiums_geojson(request):
         qs = qs.exclude(surface__isnull=True).exclude(surface="")
     elif param_view == "capacity":
         qs = qs.exclude(capacity__isnull=True).exclude(capacity=0)
+    elif param_view == "retractable":
+        qs = qs.filter(stadium_type="RETRACTABLE")
 
     return JsonResponse({
         "type": "FeatureCollection",
@@ -1473,6 +1475,12 @@ _INSIGHTS = [
         "blurb": "The European cities with the most football clubs, lower tiers included.",
         "url_name": "insight_city_clubs",
     },
+    {
+        "slug": "retractable-roofs",
+        "title": "Retractable-roof stadiums: Europe vs USA",
+        "blurb": "How Europe's retractable-roof grounds compare with the NFL and MLB.",
+        "url_name": "insight_retractable_roofs",
+    },
 ]
 
 
@@ -1910,6 +1918,84 @@ def insight_city_clubs(request):
                                  "acceptedAnswer": {"@type": "Answer", "text": f["a"]}}
                                 for f in faq]),
         "others": _insight_others("clubs-per-city"),
+        "page_description": _trim(re.sub(r"<[^>]+>", "", intro)),
+    })
+
+
+# Curated list of US retractable-roof stadiums (NFL / MLB) for the Europe-vs-USA
+# comparison. The USA leans heavily on retractable roofs (climate extremes +
+# multi-purpose franchise economics); Europe's are rarer and football-led.
+_US_RETRACTABLE_ROOFS = [
+    {"name": "AT&T Stadium", "city": "Arlington, TX", "league": "NFL", "capacity": 80000, "year": 2009},
+    {"name": "Mercedes-Benz Stadium", "city": "Atlanta, GA", "league": "NFL", "capacity": 71000, "year": 2017},
+    {"name": "NRG Stadium", "city": "Houston, TX", "league": "NFL", "capacity": 72220, "year": 2002},
+    {"name": "Lucas Oil Stadium", "city": "Indianapolis, IN", "league": "NFL", "capacity": 67000, "year": 2008},
+    {"name": "State Farm Stadium", "city": "Glendale, AZ", "league": "NFL", "capacity": 63400, "year": 2006},
+    {"name": "T-Mobile Park", "city": "Seattle, WA", "league": "MLB", "capacity": 47000, "year": 1999},
+    {"name": "Chase Field", "city": "Phoenix, AZ", "league": "MLB", "capacity": 48686, "year": 1998},
+    {"name": "American Family Field", "city": "Milwaukee, WI", "league": "MLB", "capacity": 41900, "year": 2001},
+    {"name": "Daikin Park", "city": "Houston, TX", "league": "MLB", "capacity": 41000, "year": 2000},
+    {"name": "Globe Life Field", "city": "Arlington, TX", "league": "MLB", "capacity": 40300, "year": 2020},
+    {"name": "loanDepot Park", "city": "Miami, FL", "league": "MLB", "capacity": 36000, "year": 2012},
+]
+
+
+@cache_page(60 * 60)
+def insight_retractable_roofs(request):
+    """Europe vs USA comparison of retractable-roof stadiums."""
+    qs = (Stadium.objects.filter(stadium_type="RETRACTABLE")
+          .select_related("city").prefetch_related("teams__league__country")
+          .order_by("-capacity"))
+    europe = []
+    for s in qs:
+        teams = [t for t in s.teams.all() if not t.is_national]
+        country = next((t.league.country.name for t in s.teams.all()
+                        if t.league and t.league.country), s.city.country if s.city else "")
+        europe.append({
+            "name": s.name, "slug": s.slug, "city": s.city.name if s.city else "",
+            "country": country, "capacity": s.capacity,
+            "team": ", ".join(t.name for t in teams[:2]),
+        })
+    usa = sorted(_US_RETRACTABLE_ROOFS, key=lambda r: -r["capacity"])
+    n_eu, n_us = len(europe), len(usa)
+    intro = (
+        f"Retractable roofs let a stadium open to the sky in good weather and seal shut against "
+        f"rain, snow or heat. They are a <strong>signature of North American sport</strong>: our "
+        f"dataset counts <strong>{n_eu}</strong> across Europe, against a roster of "
+        f"<strong>{n_us}+</strong> headline venues in the USA's NFL and MLB alone. This page "
+        f"compares the two."
+    )
+    about = (
+        "European retractable roofs are almost all football grounds, often built or upgraded for "
+        "a World Cup, Euro or Champions League final, and concentrated in colder or wetter climates "
+        "(Germany, the Netherlands, Scandinavia) plus a few showpiece national stadiums. The USA "
+        "builds them for a different reason: gridiron and baseball franchises play through brutal "
+        "summer heat (Texas, Arizona, Florida) and northern winters (Milwaukee, Seattle), and a "
+        "closing roof turns a single venue into a year-round, multi-event business. Counts cover "
+        "the leagues in our European dataset versus a curated set of the best-known US venues, so "
+        "treat the gap as indicative rather than a full census."
+    )
+    faq = [
+        ("How many stadiums in Europe have a retractable roof?",
+         f"Our dataset records {n_eu} European football stadiums with a retractable roof, including "
+         f"{', '.join(e['name'] for e in europe[:3])}."),
+        ("Why does the USA have more retractable-roof stadiums than Europe?",
+         "American football and baseball franchises play in extreme heat (Texas, Arizona, Florida) "
+         "and harsh winters, and a retractable roof makes a single arena usable year-round for "
+         "sport, concerts and conventions, so the economics favour them far more than in Europe."),
+        ("What is the biggest retractable-roof stadium in Europe?",
+         (f"{europe[0]['name']} in {europe[0]['city']} ({europe[0]['capacity']:,}) is the largest "
+          f"in our dataset." if europe else "Not available.")),
+    ]
+    faq = [{"q": q, "a": a} for q, a in faq]
+    return render(request, "insight_retractable_roofs.html", {
+        "europe": europe, "usa": usa, "n_eu": n_eu, "n_us": n_us,
+        "intro": intro, "about": about, "faq": faq,
+        "faq_json": json.dumps([{"@type": "Question", "name": f["q"],
+                                 "acceptedAnswer": {"@type": "Answer", "text": f["a"]}}
+                                for f in faq]),
+        "geojson_url": reverse("italiastadiaapp:stadiums_geojson") + "?view=retractable",
+        "others": _insight_others("retractable-roofs"),
         "page_description": _trim(re.sub(r"<[^>]+>", "", intro)),
     })
 

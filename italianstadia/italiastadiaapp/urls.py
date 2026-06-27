@@ -10,7 +10,7 @@ from .views import (
     tournament_list, tournament_detail, map_export,
     export_page, export_checkout, export_webhook, export_success, export_download, export_options,
     insights_index, insight_national, insight_surface, insight_density, insight_biggest,
-    insight_league_capacity, insight_city_clubs,
+    insight_league_capacity, insight_city_clubs, insight_retractable_roofs,
 )
 
 app_name = "italiastadiaapp"
@@ -40,6 +40,7 @@ urlpatterns = [
     path("insights/biggest-stadiums/", insight_biggest, name="insight_biggest"),
     path("insights/league-capacity/", insight_league_capacity, name="insight_league_capacity"),
     path("insights/clubs-per-city/", insight_city_clubs, name="insight_city_clubs"),
+    path("insights/retractable-roofs/", insight_retractable_roofs, name="insight_retractable_roofs"),
     path("api/stadiums/", stadiums_geojson, name="stadiums_geojson"),
     path("api/stadium-developments/", stadium_developments_geojson, name="stadium_developments_geojson"),
     path("api/export/stadiums/", export_stadiums, name="export_stadiums"),

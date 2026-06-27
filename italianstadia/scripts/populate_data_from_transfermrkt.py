@@ -1958,14 +1958,25 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
     attendance_url = team_data.get("transfermarkt_attendance_url")
     wikipedia_url = team_data.get("wikipedia_url")
 
-    # LOCK GUARD: never overwrite a manually-corrected team. If a locked row
-    # matches this team (by name + city, or transfermarkt_url), leave it
-    # untouched so the weekly auto-scrape can't undo the fix.
+    # LOCK GUARD: never overwrite a manually-corrected team's wiki/TM links,
+    # crest, name, etc. — BUT attendance changes every season and was not part
+    # of the manual fix, so a locked team still gets ONLY its average_attendance
+    # refreshed. Everything else is left untouched.
     locked = Team.objects.filter(name=team_name, city=city, locked=True).first()
     if locked is None and team_url:
         locked = Team.objects.filter(transfermarkt_url=team_url, locked=True).first()
     if locked is not None:
-        logging.info(f"[Locked] Skipping team '{locked.name}' — manually corrected, scraper won't touch it.")
+        att_url = attendance_url or locked.transfermarkt_url
+        if att_url:
+            att = scrape_average_attendance(att_url, season=season)
+            if att and att != locked.average_attendance:
+                locked.average_attendance = att
+                locked.save(update_fields=["average_attendance"])
+                logging.info(f"[Locked] '{locked.name}': refreshed attendance -> {att} (only field touched)")
+            else:
+                logging.info(f"[Locked] '{locked.name}': locked; attendance unchanged.")
+        else:
+            logging.info(f"[Locked] Skipping team '{locked.name}' — manually corrected (no attendance url).")
         return locked
 
     # 1. Wikipedia fallback/enrichment

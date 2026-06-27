@@ -657,6 +657,11 @@ function applyFilters(updateStadiumDropdown = true) {
             !selectedSurface || marker.surface === selectedSurface;
         const typeMatches =
             !selectedType || marker.stadiumType === selectedType;
+        // When an attribute filter (ownership / surface / roof type) is active, the
+        // user is hunting a specific characteristic, so reveal ALL divisions — a
+        // retractable roof in tier 3 must show. Clearing reverts to top-tier-only.
+        const hasAttributeFilter =
+            !!(selectedOwnership || selectedSurface || selectedType);
         const gironeMatches =
             !selectedGirone || marker.gironi.includes(selectedGirone);
         const stadiumMatches =
@@ -668,7 +673,9 @@ function applyFilters(updateStadiumDropdown = true) {
         if (!selectedCountry && !selectedLeague) {
             // Default: show tier-1 clubs + national team stadiums.
             // Notable teamless stadiums (e.g. Euro 2032 grounds) also show by default.
-            role = (isTopTier || isNational || isNotableTeamless) ? "active" : "hidden";
+            // With an attribute filter active, reveal lower divisions too.
+            role = (isTopTier || isNational || isNotableTeamless || hasAttributeFilter)
+                ? "active" : "hidden";
         } else if (selectedLeague) {
             // League selected: show ONLY that league — no context markers from other tiers
             role = inSelectedLeague ? "active" : "hidden";

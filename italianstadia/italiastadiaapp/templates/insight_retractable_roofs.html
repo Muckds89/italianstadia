@@ -1,0 +1,127 @@
+{% extends "base_detail.html" %}
+{% load static humanize %}
+
+{% block title %}Retractable-roof stadiums: Europe vs USA | Stadiums of Europe{% endblock %}
+
+{% block meta %}
+<meta name="description" content="{{ page_description }}">
+<meta property="og:title" content="Retractable-roof stadiums: Europe vs USA">
+<meta property="og:description" content="{{ page_description }}">
+<meta property="og:type" content="article">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'exports/insight_overview.png' %}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'exports/insight_overview.png' %}">
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  #insight-map{height:460px;border-radius:8px}
+  .tally{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem}
+  .tally .box{flex:1;min-width:160px;border-radius:10px;padding:18px 20px;color:#fff}
+  .tally .eu{background:#0d6efd}.tally .us{background:#b02a37}
+  .tally .num{font-size:2.4rem;font-weight:700;line-height:1}
+</style>
+{% endblock %}
+
+{% block extra_nav %}
+<a href="{% url 'italiastadiaapp:insights_index' %}" class="btn btn-outline-light btn-sm">← Insights</a>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-2">Retractable-roof stadiums: Europe vs USA</h1>
+    <p class="lead text-secondary mb-4">{{ intro|safe }}</p>
+
+    <div class="tally">
+        <div class="box eu"><div class="num">{{ n_eu }}</div>retractable-roof grounds in our European dataset</div>
+        <div class="box us"><div class="num">{{ n_us }}+</div>headline NFL &amp; MLB venues in the USA</div>
+    </div>
+
+    <div id="insight-map" class="mb-4"
+         data-mode="markers" data-color-by="single"
+         data-geojson-url="{{ geojson_url }}"
+         data-stadium-url-prefix="/stadium/"></div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white"><strong>About this data</strong></div>
+        <div class="card-body"><p class="mb-0">{{ about|safe }}</p></div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white"><strong>Europe ({{ n_eu }})</strong></div>
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead><tr><th>Stadium</th><th>City</th><th>Country</th><th class="text-end">Capacity</th></tr></thead>
+                        <tbody>
+                        {% for e in europe %}
+                            <tr>
+                                <td><a href="{% url 'italiastadiaapp:stadium_detail' e.slug %}">{{ e.name }}</a></td>
+                                <td>{{ e.city }}</td>
+                                <td>{{ e.country }}</td>
+                                <td class="text-end">{{ e.capacity|intcomma }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-header text-white" style="background:#b02a37"><strong>USA — selected NFL &amp; MLB ({{ n_us }})</strong></div>
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead><tr><th>Stadium</th><th>City</th><th>League</th><th class="text-end">Capacity</th></tr></thead>
+                        <tbody>
+                        {% for u in usa %}
+                            <tr>
+                                <td>{{ u.name }}</td>
+                                <td>{{ u.city }}</td>
+                                <td>{{ u.league }}</td>
+                                <td class="text-end">{{ u.capacity|intcomma }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if faq %}
+    <div class="card shadow-sm mb-4 mt-5">
+        <div class="card-header bg-white"><strong>Frequently asked questions</strong></div>
+        <div class="card-body">
+            {% for item in faq %}
+            <h2 class="h6 mb-1">{{ item.q }}</h2>
+            <p class="text-secondary">{{ item.a }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% include "_insight_related.html" %}
+</div>
+
+{% if faq %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":{{ faq_json|safe }}}
+</script>
+{% endif %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset",
+ "name":"Retractable-roof stadiums in Europe compared with the USA",
+ "description":"{{ page_description|escapejs }}",
+ "url":"{{ request.scheme }}://{{ request.get_host }}{{ request.path }}",
+ "license":"https://creativecommons.org/licenses/by-sa/4.0/",
+ "creator":{"@type":"Organization","name":"Stadiums of Europe","url":"{{ request.scheme }}://{{ request.get_host }}/"}}
+</script>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{% static 'js/insights-map.js' %}"></script>
+{% endblock %}

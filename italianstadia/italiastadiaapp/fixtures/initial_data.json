@@ -19171,7 +19171,7 @@
     "owner_raw": "City of Stockholm via SGA Fastigheter",
     "ownership": "PUBLIC",
     "slug": "3arena",
-    "stadium_type": "OPEN",
+    "stadium_type": "RETRACTABLE",
     "surface": "ARTIFICIAL",
     "architect": null,
     "tournaments": [],
@@ -26007,7 +26007,7 @@
     "owner_raw": "Parken Sport & Entertainment",
     "ownership": "PRIVATE",
     "slug": "parken-connected-by-3",
-    "stadium_type": "OPEN",
+    "stadium_type": "RETRACTABLE",
     "surface": "HYBRID",
     "architect": "Gert Andersson",
     "tournaments": [
