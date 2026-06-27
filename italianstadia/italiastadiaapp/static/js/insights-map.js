@@ -36,14 +36,15 @@
 
   if (mode === "markers") {
     var colorBy = el.dataset.colorBy || "single";
-    var useBadges = el.dataset.badges === "flag";
-    function badgeIcon(url) {
+    var badgeMode = el.dataset.badges || "";   // "flag" (national) | "club" (club crest)
+    var useBadges = !!badgeMode;
+    function badgeIcon(url, fit) {
       return L.divIcon({
         className: "insight-badge",
-        html: '<img src="' + url + '" style="width:30px;height:30px;border-radius:50%;'
-            + 'object-fit:cover;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.5);'
-            + 'background:#fff">',
-        iconSize: [30, 30], iconAnchor: [15, 15],
+        html: '<img src="' + url + '" style="width:32px;height:32px;border-radius:50%;'
+            + 'object-fit:' + (fit || "cover") + ';border:2px solid #fff;'
+            + 'box-shadow:0 1px 4px rgba(0,0,0,.5);background:#fff">',
+        iconSize: [32, 32], iconAnchor: [16, 16],
       });
     }
     fetch(el.dataset.geojsonUrl)
@@ -71,11 +72,13 @@
           var flag = null;
           if (useBadges) {
             var teams = p.teams || [];
-            var nat = teams.filter(function (t) { return t.is_national; })[0] || teams[0];
-            flag = nat && nat.image_url ? nat.image_url : null;
+            var pick = badgeMode === "club"
+              ? (teams.filter(function (t) { return !t.is_national; })[0] || teams[0])
+              : (teams.filter(function (t) { return t.is_national; })[0] || teams[0]);
+            flag = pick && pick.image_url ? pick.image_url : null;
           }
           var marker = flag
-            ? L.marker(ll, { icon: badgeIcon(flag) })
+            ? L.marker(ll, { icon: badgeIcon(flag, badgeMode === "club" ? "contain" : "cover") })
             : L.circleMarker(ll, {
                 radius: radius, color: "#111", weight: 1, fillColor: color, fillOpacity: 0.85,
               });

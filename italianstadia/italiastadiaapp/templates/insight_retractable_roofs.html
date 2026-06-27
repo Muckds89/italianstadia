@@ -8,9 +8,9 @@
 <meta property="og:title" content="Retractable-roof stadiums: Europe vs USA">
 <meta property="og:description" content="{{ page_description }}">
 <meta property="og:type" content="article">
-<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'exports/insight_overview.png' %}">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/f/f8/National_Stadium_Warsaw_aerial_view_2.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'exports/insight_overview.png' %}">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/f/f8/National_Stadium_Warsaw_aerial_view_2.jpg">
 {% endblock %}
 
 {% block extra_head %}
@@ -21,6 +21,10 @@
   .tally .box{flex:1;min-width:160px;border-radius:10px;padding:18px 20px;color:#fff}
   .tally .eu{background:#0d6efd}.tally .us{background:#b02a37}
   .tally .num{font-size:2.4rem;font-weight:700;line-height:1}
+  .insight-hero{position:relative;height:300px;border-radius:10px;overflow:hidden;margin-bottom:1.5rem}
+  .insight-hero img{width:100%;height:100%;object-fit:cover}
+  .insight-hero .cap{position:absolute;left:0;right:0;bottom:0;padding:14px 18px;color:#fff;
+    font-size:.85rem;background:linear-gradient(transparent,rgba(0,0,0,.75))}
 </style>
 {% endblock %}
 
@@ -30,6 +34,11 @@
 
 {% block content %}
 <div class="container my-5">
+    <div class="insight-hero">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/National_Stadium_Warsaw_aerial_view_2.jpg"
+             alt="PGE Narodowy in Warsaw, a retractable-roof stadium" loading="lazy">
+        <div class="cap">PGE Narodowy, Warsaw, one of Europe's retractable-roof stadiums. Image &copy; Wikimedia Commons</div>
+    </div>
     <h1 class="mb-2">Retractable-roof stadiums: Europe vs USA</h1>
     <p class="lead text-secondary mb-4">{{ intro|safe }}</p>
 
@@ -39,7 +48,7 @@
     </div>
 
     <div id="insight-map" class="mb-4"
-         data-mode="markers" data-color-by="single"
+         data-mode="markers" data-color-by="single" data-badges="club"
          data-geojson-url="{{ geojson_url }}"
          data-stadium-url-prefix="/stadium/"></div>
 
