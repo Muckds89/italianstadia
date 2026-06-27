@@ -161,6 +161,11 @@ class Team(models.Model):
     image_credit = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
+    locked = models.BooleanField(
+        default=False,
+        help_text="Protect manual corrections — the scraper skips locked teams.",
+    )
+
     league = models.ForeignKey(
         "League",
         on_delete=models.SET_NULL,

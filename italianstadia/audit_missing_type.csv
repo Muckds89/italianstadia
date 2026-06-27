@@ -1,0 +1,258 @@
+id,name,country,proposed_type,confidence,evidence,source,wikipedia_url
+68,U-Power Stadium,Italy,OPEN,low(default),,default,https://it.wikipedia.org/wiki/Stadio_Brianteo
+82,Tullo Morgagni,Italy,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stadio_Tullo_Morgagni
+105,Tullio Saleri,Italy,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stadio_Tullio_Saleri
+106,Città di Meda - Mino Favini,Italy,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stadio_Citt%C3%A0_di_Meda
+107,Gavagnin-Nocini,Italy,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stadio_Gavagnin_Nocini
+109,AlbinoLeffe Stadium,Italy,OPEN,low(default),,default,https://it.wikipedia.org/wiki/AlbinoLeffe_Stadium
+110,Dal Molin,Italy,OPEN,low(default),,default,https://it.wikipedia.org/wiki/Stadio_Tommaso_Dal_Molin
+111,Carlo Speroni,Italy,OPEN,low(default),,default,https://it.wikipedia.org/wiki/Stadio_Carlo_Speroni
+112,Comunale Gino Corioni,Italy,OPEN,low(default),,default,https://it.wikipedia.org/wiki/Stadio_Gino_Corioni
+117,Stadio Città dell’Aria,Italy,OPEN,low(default),,default,https://it.wikipedia.org/wiki/Stadio_Citt%C3%A0_dell%27Aria
+119,Mimmo Pavone e Alessandro Mariani,Italy,OPEN,low(default),,default,https://it.wikipedia.org/wiki/Stadio_Mimmo_Pavone-Alessandro_Mariani
+125,Giuseppe Sivori,Italy,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stadio_Attilio_Bravi
+128,Romeo Menti,Italy,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stadio_Romeo_Menti_(Castellammare_di_Stabia)
+181,Complexo Desportivo FC Alverca,Portugal,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Est%C3%A1dio_Municipal_de_Alverca
+212,Volksparkstadion,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Volksparkstadion
+231,Stadion Bruk-Bet,Poland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stadion_Sportowy_Bruk-Bet_Termalica
+383,Profertil Arena Hartberg,Austria,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stadion_Hartberg
+387,Schnabelholz,Austria,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stadion_Schnabelholz
+439,Alfonso Murube,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Estadio_Alfonso_Murube
+448,La Rosaleda,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/La_Rosaleda_Stadium
+454,Ibercaja Estadio,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Ibercaja_Stadium
+465,Vejle Stadion,Denmark,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Vejle_Stadium
+613,Tsentralnyi Polissya,Ukraine,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Tsentralnyi_Stadium_(Zhytomyr)
+628,Hietalahti Stadium,Finland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Hietalahti_Stadium
+756,Zemgales Olimpiskais centrs,Latvia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Zemgale_Olympic_Center
+778,Principality Stadium,Wales,RETRACTABLE,high,retractable roof,primary,https://en.wikipedia.org/wiki/Principality_Stadium
+779,Hampden Park,Scotland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Hampden_Park
+780,Aviva Stadium,Ireland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Aviva_Stadium
+781,Timsah Arena,Turkey,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Centennial_Atat%C3%BCrk_Stadium
+784,Yeni Ankara Stadyumu,Turkey,OPEN,low(default),,default,https://en.wikipedia.org/wiki/New_Ankara_Stadium
+785,Stade de France,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_de_France
+786,Puskás Aréna,Hungary,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Pusk%C3%A1s_Ar%C3%A9na
+787,Windsor Park,Northern Ireland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Windsor_Park
+788,King Baudouin Stadium,Belgium,OPEN,low(default),,default,https://en.wikipedia.org/wiki/King_Baudouin_Stadium
+789,PGE Narodowy,Poland,RETRACTABLE,high,retractable roof,primary,https://en.wikipedia.org/wiki/PGE_Narodowy
+790,Republican Stadium (Yerevan),Armenia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Vazgen_Sargsyan_Republican_Stadium
+791,Boris Paichadze Dinamo Arena,Georgia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Boris_Paichadze_Dinamo_Arena
+792,Baku Olympic Stadium,Azerbaijan,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Baku_Olympic_Stadium
+793,Stadion Śląski,Poland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Silesian_Stadium
+794,Tarczyński Arena,Poland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Wroc%C5%82aw_Stadium
+795,Stadion Miejski (Kraków),Poland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Henryk_Reyman_Municipal_Stadium
+799,Tychy City Stadium,Poland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Tychy_Municipal_Stadium
+801,Władysław Król Stadium,Poland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/W%C5%82adys%C5%82aw_Kr%C3%B3l_Municipal_Stadium
+802,Stadion im. Orła Białego,Poland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/White_Eagle_Municipal_Stadium
+807,Konwiktorska Street Stadium,Poland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/General_Kazimierz_Sosnkowski_Municipal_Stadium
+809,Stadion Miejski w Rzeszowie,Poland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stal_Rzesz%C3%B3w_Municipal_Stadium
+810,Grzegorz Lato Stadium,Poland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stadion_Stali_Mielec
+813,Akhmat Arena,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Akhmat-Arena
+814,Solidarnost Samara Arena,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Solidarnost_Samara_Arena
+815,Rostec Arena,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Kaliningrad_Stadium
+816,VEB Arena,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/VEB_Arena
+817,Anzhi Arena,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Anzhi_Arena
+818,VTB Arena,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/VTB_Arena
+819,Ozon Arena,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Krasnodar_Stadium
+820,Solidarnost Samara Arena,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Solidarnost_Samara_Arena
+821,RZD Arena,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Lokomotiv_Stadium_(Moscow)
+822,Gazovik,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Gazovik_Stadium_(Orenburg)
+823,Sovcombank Arena,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Nizhny_Novgorod_Stadium
+824,Rostov Arena,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Rostov_Arena
+825,Ak Bars Arena,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Ak_Bars_Arena
+826,Fisht Olympic Stadium,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Fisht_Olympic_Stadium
+827,Lukoil Arena,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Lukoil_Arena
+828,Gazprom Arena,Russia,RETRACTABLE,high,retractable roof,primary,https://en.wikipedia.org/wiki/Krestovsky_Stadium
+829,Vitebsky CSK,Belarus,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Vitebsky_Central_Sport_Complex
+830,Borisov Arena,Belarus,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Borisov_Arena
+831,Dinamo Stadium,Belarus,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Dinamo_Stadium_(Minsk)
+832,OSK Brestsky,Belarus,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Regional_Sport_Complex_Brestsky
+833,Torpedo Stadium,Belarus,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Torpedo_Stadium_(Zhodino)
+834,Yunost Stadium,Belarus,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Yunost_Stadium_(Mazyr)
+835,Central Stadium,Belarus,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Central_Stadium_(Gomel)
+836,Neman Stadium,Belarus,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Neman_Stadium
+837,FC Minsk Stadium,Belarus,OPEN,low(default),,default,https://en.wikipedia.org/wiki/FC_Minsk_Stadium
+838,Spartak Stadium Mogilev,Belarus,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Spartak_Stadium_(Mogilev)
+841,Atlant Stadium,Belarus,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Atlant_Stadium
+842,Spartak Stadium Bobruisk,Belarus,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Spartak_Stadium_(Bobruisk)
+843,Dalga Arena,Azerbaijan,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Dalga_Arena
+844,Gabala City Stadium,Azerbaijan,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Gabala_City_Stadium
+846,Ganja City Stadium,Azerbaijan,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Ganja_City_Stadium
+847,Yevlakh City Stadium,Azerbaijan,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Yevlakh_City_Stadium
+848,Neftchi Arena,Azerbaijan,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Neft%C3%A7i_Arena
+849,Tofiq Bahramov Stadium,Azerbaijan,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Tofiq_Bahramov_Republican_Stadium
+850,Bank Respublika Arena,Azerbaijan,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Bank_Respublika_Arena
+852,Mehdi Huseynzade Stadium,Azerbaijan,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Sumgayit_City_Stadium
+853,Tovuz City Stadium,Azerbaijan,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Tovuz_City_Stadium
+854,Zira Olympic Sport Complex,Azerbaijan,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Zira_Olympic_Sport_Complex_Stadium
+855,Tengiz Burjanadze Stadium,Georgia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Tengiz_Burjanadze_Stadium
+856,Adjarabet Arena,Georgia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Adjarabet_Arena
+860,Fazisi Stadium,Georgia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Fazisi_Stadium
+862,Givi Chokheli Stadium,Georgia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Municipal_Stadium_(Telavi)
+863,Ramaz Shengelia Stadium,Georgia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Ramaz_Shengelia_Stadium
+865,Heydar Aliyev Stadium,Azerbaijan,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Heydar_Aliyev_Stadium
+866,New Tivoli,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/New_Tivoli
+867,Erzgebirgsstadion,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Eins_Erzgebirgsstadion
+868,Stadion der Freundschaft,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stadion_der_Freundschaft_(Cottbus)
+869,Schauinsland-Reisen-Arena,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/MSV-Arena
+870,Stadion an der Hafenstraße,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stadion_an_der_Hafenstra%C3%9Fe
+872,Dietmar-Hopp-Stadion,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Dietmar-Hopp-Stadion
+873,Audi Sportpark,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Audi_Sportpark
+874,Sportpark Höhenberg,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Sportpark_H%C3%B6henberg
+876,Grünwalder Stadion,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Gr%C3%BCnwalder_Stadion
+877,Stadion an der Bremer Brücke,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stadion_an_der_Bremer_Br%C3%BCcke
+878,Jahnstadion Regensburg,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Jahnstadion_Regensburg
+879,Ostseestadion,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Ostseestadion
+880,Ludwigsparkstadion,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Ludwigsparkstadion
+881,Willy-Sachs-Stadion,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Sachs-Stadion
+882,WIRmachenDRUCK Arena,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/WIRmachenDRUCK_Arena
+883,Donaustadion,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Donaustadion
+884,Sportclub Arena,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Sportclub_Arena
+885,BRITA-Arena,Germany,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Brita-Arena
+886,Stade de la Licorne,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_de_la_Licorne
+887,Parc des Sports,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Parc_des_Sports_(Annecy)
+888,Stade Armand Cesari,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_Armand-Cesari
+889,Stade de la Libération,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_de_la_Lib%C3%A9ration
+890,Stade Gabriel Montpied,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_Gabriel-Montpied
+891,Stade Marcel Tribut,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_Marcel-Tribut
+892,Stade des Alpes,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_des_Alpes
+893,Stade de Roudourou,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_de_Roudourou
+894,Stade Francis Le Basser,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_Francis_Le_Basser
+895,Stade Marie-Marvingt,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_Marie-Marvingt
+896,Stade de la Mosson,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_de_la_Mosson
+897,Stade Marcel Picot,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_Marcel_Picot
+898,Nouste Camp,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_du_Hameau
+899,Stade Bauer,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_Bauer
+900,Stade Auguste-Delaune,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_Auguste-Delaune
+901,Stade Paul Lignon,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_Paul-Lignon
+902,Stade Geoffroy Guichard,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_Geoffroy-Guichard
+903,Stade de l'Aube,France,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stade_de_l%27Aube
+904,Bingoal Stadion,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/ADO_Den_Haag_Stadium
+905,Yanmar Stadion,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Yanmar_Stadion
+906,Cambuur Stadion,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Cambuur_Stadion
+907,Stadion De Vijverberg,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/De_Vijverberg
+908,Stadion De Vliert,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/De_Vliert
+909,Stadion Krommedijk,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stadion_Krommedijk
+910,Jan Louwers Stadion,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Jan_Louwers_Stadion
+911,De Oude Meerdijk,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/De_Oude_Meerdijk
+912,GS Staalwerken Stadion,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/GS_Staalwerken_Stadion
+913,Sportpark De Toekomst,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Sportpark_De_Toekomst
+915,De Herdgang,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/De_Herdgang
+917,Stadion De Geusselt,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/De_Geusselt
+918,Parkstad Limburg Stadion,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Parkstad_Limburg_Stadion
+919,Frans Heesen Stadion,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Frans_Heesen_Stadion
+920,GelreDome,Netherlands,RETRACTABLE,high,retractable roof,primary,https://en.wikipedia.org/wiki/GelreDome
+921,Covebo Stadion - De Koel,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/De_Koel
+922,Koning Willem II Stadion,Netherlands,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Koning_Willem_II_Stadion
+923,Estádio do Fontelo,Portugal,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Est%C3%A1dio_do_Fontelo
+924,Benfica Campus,Portugal,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Benfica_Campus
+925,Estádio Municipal de Chaves,Portugal,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Est%C3%A1dio_Municipal_Eng._Manuel_Branco_Teixeira
+926,Estádio de São Luís,Portugal,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Est%C3%A1dio_de_S%C3%A3o_Lu%C3%ADs
+927,Estádio Marcolino de Castro,Portugal,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Est%C3%A1dio_Marcolino_de_Castro
+929,Estádio do Mar,Portugal,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Est%C3%A1dio_do_Mar
+931,Estádio do Marítimo,Portugal,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Est%C3%A1dio_do_Mar%C3%ADtimo
+932,Estádio Carlos Osório,Portugal,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Est%C3%A1dio_Carlos_Os%C3%B3rio
+933,Estádio Capital do Móvel,Portugal,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Est%C3%A1dio_Capital_do_M%C3%B3vel
+934,Estádio Municipal 25 de Abril,Portugal,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Est%C3%A1dio_Municipal_25_de_Abril
+935,Estádio Municipal de Portimão,Portugal,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Est%C3%A1dio_Municipal_de_Portim%C3%A3o
+936,CTFD PortoGaia,Portugal,OPEN,low(default),,default,https://en.wikipedia.org/wiki/CTFD_PortoGaia
+938,Estádio Manuel Marques,Portugal,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Est%C3%A1dio_Manuel_Marques
+939,Estádio Dr. Magalhães Pessoa,Portugal,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Est%C3%A1dio_Dr._Magalh%C3%A3es_Pessoa
+941,Campo Municipal de Gobela,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Campo_Municipal_de_Gobela
+943,Estadio Román Suárez Puerta,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Estadio_Rom%C3%A1n_Su%C3%A1rez_Puerta
+945,Lezama,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Lezama_Facilities
+946,Estadio Príncipe Felipe,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Estadio_Pr%C3%ADncipe_Felipe
+947,Estadio Pedro Escartín,Mexico,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Pedro_Escart%C3%ADn
+948,Estadio Anxo Carro,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Estadio_Anxo_Carro
+949,Estadio Romano,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Estadio_Romano
+950,Tajonar,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Tajonar_Facilities
+952,Estadio El Toralín,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Estadio_El_Toral%C3%ADn
+953,Estadio de Pasarón,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Estadio_Municipal_de_Pasar%C3%B3n
+954,Estadio da Malata,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Estadio_Municipal_de_A_Malata
+955,Estadio Alfredo Di Stéfano,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Alfredo_Di_St%C3%A9fano_Stadium
+957,Estadio Heliodoro Rodríguez López,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Estadio_Heliodoro_Rodr%C3%ADguez_L%C3%B3pez
+959,Estadio Ruta de la Plata,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Estadio_Ruta_de_la_Plata
+960,Estadio Santo Domingo,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Estadio_Municipal_de_Santo_Domingo
+961,Nuevo Mirador,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Estadio_Nuevo_Mirador
+967,Estadio Pepico Amat,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Nuevo_Pepico_Amat
+968,Nou Sardenya,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Nou_Sardenya
+969,Nou Estadi,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Nou_Estadi_Costa_Daurada
+970,Estadio José Rico Pérez,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Jos%C3%A9_Rico_P%C3%A9rez
+971,Can Misses,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Estadi_Municipal_de_Can_Misses
+974,Estadio Enrique Roca,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Estadio_Nueva_Condomina
+975,Nova Creu Alta,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Estadi_de_la_Nova_Creu_Alta
+976,Estadio Jesús Navas,Spain,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Ciudad_Deportiva_Jos%C3%A9_Ram%C3%B3n_Cisneros_Palacios
+980,Yerevan Football Academy Stadium,Armenia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Yerevan_Football_Academy_Stadium
+981,Gandzasar Stadium,Armenia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Kapan_Stadium
+982,Abovyan City Stadium,Armenia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Vahagn_Tumasyan_Stadium
+983,Gyumri City Stadium,Armenia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Gyumri_City_Stadium
+984,Urartu Stadium,Armenia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Urartu_Stadium
+985,Charentsavan City Stadium,Armenia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Charentsavan_City_Stadium
+986,Suva Reka City Stadium,Kosovo,OPEN,low(default),,default,https://en.wikipedia.org/wiki/FC_Ballkani
+987,Bajram Aliu Stadium,Kosovo,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Bajram_Aliu_Stadium
+988,Gjilan City Stadium,Kosovo,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Gjilan_City_Stadium
+991,Zahir Pajaziti Stadium,Kosovo,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Zahir_Pajaziti_Stadium
+993,Fadil Vokrri Stadium,Kosovo,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Fadil_Vokrri_Stadium
+995,Teddy Stadium,Israel,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Teddy_Stadium
+996,Doha Stadium,Israel,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Doha_Stadium
+997,Yud-Alef Stadium,Israel,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Yud-Alef_Stadium
+998,Turner Stadium,Israel,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Turner_Stadium
+999,Sammy Ofer Stadium,Israel,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Sammy_Ofer_Stadium
+1000,HaMoshava Stadium,Israel,OPEN,low(default),,default,https://en.wikipedia.org/wiki/HaMoshava_Stadium
+1001,Bloomfield Stadium,Israel,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Bloomfield_Stadium
+1002,Netanya Stadium,Israel,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Netanya_Stadium
+1003,Green Stadium,Israel,OPEN,low(default),,default,"https://en.wikipedia.org/wiki/Green_Stadium,_Nof_HaGalil"
+1004,Netanya Stadium,Israel,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Netanya_Stadium
+1006,Park Hall,England,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Park_Hall_(Oswestry)
+1007,Deeside Stadium,Wales,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Deeside_Stadium
+1008,The Oval,Wales,OPEN,low(default),,default,"https://en.wikipedia.org/wiki/The_Oval,_Caernarfon"
+1009,Jenner Park,Wales,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Jenner_Park_Stadium
+1012,Maes Tegid,Wales,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Maes_Tegid
+1014,Cae-y-Castell,Wales,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Cae-y-Castell
+1015,Stebonheath Park,Wales,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Stebonheath_Park
+1016,Cardiff International Sports Campus,Wales,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Cardiff_International_Sports_Campus
+1018,The Oval,Northern Ireland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/The_Oval_(Belfast)
+1019,Solitude,Northern Ireland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Solitude_(football_ground)
+1020,Seaview,Northern Ireland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Seaview_(football_ground)
+1021,Inver Park,Northern Ireland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Inver_Park
+1022,The Showgrounds,Northern Ireland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/The_Showgrounds_(Coleraine)
+1023,Mourneview Park,Northern Ireland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Mourneview_Park
+1024,Ballymena Showgrounds,Northern Ireland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Ballymena_Showgrounds
+1025,Loughshore Hotel Arena,Northern Ireland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Taylors_Avenue
+1026,Shamrock Park,Northern Ireland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Shamrock_Park
+1027,Clandeboye Park,Northern Ireland,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Clandeboye_Park
+1029,New Adana Stadium,Turkey,OPEN,low(default),,default,https://en.wikipedia.org/wiki/New_Adana_Stadium
+1030,Diyarbakır Stadium,Turkey,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Diyarbakır_Stadium
+1031,17 Eylül Stadium,Turkey,OPEN,low(default),,default,https://en.wikipedia.org/wiki/17_Eylül_Stadium
+1032,Bodrum District Stadium,Turkey,OPEN,low(default),,default,https://tr.wikipedia.org/wiki/Bodrum_İlçe_Stadyumu
+1033,Arsenal Stadium,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Arsenal_Stadium_(Tula)
+1034,Chayka Stadium,Russia,OPEN,low(default),,default,https://ru.wikipedia.org/wiki/Центральный_стадион_имени_И._П._Чайки
+1035,Central Stadium,Russia,OPEN,low(default),,default,"https://ru.wikipedia.org/wiki/Центральный_(стадион,_Челябинск)"
+1037,Tsentralny Stadium,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Fakel_Stadium
+1038,Central Stadium,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/KAMAZ_Stadium
+1039,Neftekhimik Stadium,Russia,OPEN,low(default),,default,https://ru.wikipedia.org/wiki/Нефтехимик_(стадион)
+1040,Sapsan Arena,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Sapsan_Arena
+1041,Volgograd Arena,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Volgograd_Arena
+1042,Shinnik Stadium,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Shinnik_Stadium
+1043,Lenin Stadium,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Lenin_Stadium_(Khabarovsk)
+1044,Lokomotiv Stadium,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Lokomotiv_Stadium_(Saratov)
+1045,Urozhay Stadium,Russia,OPEN,low(default),,default,"https://ru.wikipedia.org/wiki/Урожай_(стадион,_Караваево)"
+1046,Eduard Streltsov Stadium,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Eduard_Streltsov_Stadium
+1047,Neftyanik Stadium,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Neftyanik_Stadium_(Ufa)
+1048,Central Stadium,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Central_Stadium_(Yekaterinburg)
+1049,Trud Stadium,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Trud_Stadium_(Ulyanovsk)
+1050,Central Stadium,Russia,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Central_Stadium_(Krasnoyarsk)
+1051,Bolu Atatürk Stadium,Turkey,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Bolu_Atatürk_Stadium
+1052,Çorum City Stadium,Turkey,OPEN,low(default),,default,https://tr.wikipedia.org/wiki/Çorum_Şehir_Stadyumu
+1053,Kazım Karabekir Stadium,Turkey,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Kazım_Karabekir_Stadium
+1054,Esenler Stadium,Turkey,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Esenler_Stadium
+1055,Fuat Tosyalı Stadium,Turkey,OPEN,low(default),,default,https://tr.wikipedia.org/wiki/Fuat_Tosyalı_Stadyumu
+1056,Iğdır City Stadium,Turkey,OPEN,low(default),,default,https://tr.wikipedia.org/wiki/Iğdır_Şehir_Stadyumu
+1057,Esenyurt Necmi Kadıoğlu Stadium,Turkey,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Esenyurt_Necmi_Kadıoğlu_Stadium
+1058,Ankara Aktepe Stadium,Turkey,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Ankara_Aktepe_Stadium
+1059,Manisa 19 Mayıs Stadium,Turkey,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Manisa_19_Mayıs_Stadium
+1060,Pendik Stadium,Turkey,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Pendik_Stadium
+1061,New Sakarya Stadium,Turkey,OPEN,low(default),,default,https://en.wikipedia.org/wiki/New_Sakarya_Stadium
+1062,Yusuf Ziya Öniş Stadium,Turkey,OPEN,low(default),,default,https://en.wikipedia.org/wiki/Yusuf_Ziya_Öniş_Stadium
+1064,New Sivas 4 Eylül Stadium,Turkey,OPEN,low(default),,default,https://en.wikipedia.org/wiki/New_Sivas_4_Eylül_Stadium
+1065,Ümraniye Municipality City Stadium,Turkey,OPEN,low(default),,default,https://tr.wikipedia.org/wiki/Ümraniye_Belediyesi_Şehir_Stadyumu
+1066,Van Atatürk Stadium,Turkey,OPEN,low(default),,default,https://tr.wikipedia.org/wiki/Van_Atatürk_Stadyumu

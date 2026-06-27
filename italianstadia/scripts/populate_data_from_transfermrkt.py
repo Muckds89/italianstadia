@@ -1321,6 +1321,38 @@ def classify_ownership(owner_raw):
     # UNKNOWN is reserved for missing/empty owner_raw only.
     return "PRIVATE"
 
+_ROOF_RETRACTABLE = ("retractable roof", "convertible roof", "sliding roof", "movable roof",
+                     "açılır kapanır çatı", "açılır çatı", "ausfahrbares dach", "раздвижн",
+                     "tetto retrattile", "techo retráctil", "toit rétractable")
+_ROOF_CLOSED = ("domed stadium", "geodesic dome", "fully enclosed", "fully-enclosed",
+                "indoor arena", "indoor stadium", "fixed closed roof", "enclosed roof",
+                "kapalı stadyum", "estadio cubierto", "stadio coperto")
+
+
+def classify_roof(text):
+    """Classify a stadium's roof from page text -> RETRACTABLE / CLOSED / OPEN.
+    Football grounds are open-air by default; only positive roof evidence overrides.
+    Returns OPEN (not None) so the value persists across re-scrapes."""
+    if not text:
+        return "OPEN"
+    t = text.lower()
+    if any(w in t for w in _ROOF_RETRACTABLE):
+        return "RETRACTABLE"
+    if any(w in t for w in _ROOF_CLOSED):
+        return "CLOSED"
+    return "OPEN"
+
+
+def _page_roof_text(soup):
+    """Infobox text + first paragraphs, for roof-keyword detection."""
+    if not soup:
+        return ""
+    ib = get_infobox(soup)
+    intro = " ".join(p.get_text(" ", strip=True)
+                     for p in soup.select("div.mw-parser-output > p")[:4])
+    return ((ib.get_text(" ", strip=True) if ib else "") + " " + intro)
+
+
 def classify_surface(text):
     """Map a multilingual infobox surface value to GRASS / ARTIFICIAL / HYBRID,
     or None. Covers English + the native-fallback languages (tr 'doğal çim',
@@ -1436,6 +1468,7 @@ def scrape_stadium_data(wikipedia_url=None, transfermarkt_url=None, native_lang=
         "capacity": fields["capacity"],
         "year_of_construction": fields["year_of_construction"],
         "surface": fields["surface"],
+        "stadium_type": classify_roof(_page_roof_text(wikipedia_soup)),
         "address": fields["address"],
         "latitude": latitude,
         "longitude": longitude,
@@ -1722,6 +1755,12 @@ def scrape_stadium(stadium_data, city, native_lang=None):
                 if new_surface:
                     shared.surface = new_surface
                     update_fields.append("surface")
+            # Backfill roof type when missing
+            if not shared.stadium_type:
+                new_type = stadium_data.get("stadium_type") or wiki_data.get("stadium_type")
+                if new_type:
+                    shared.stadium_type = new_type
+                    update_fields.append("stadium_type")
             shared.save(update_fields=update_fields)
             logging.info(
                 f"Shared stadium — reused existing '{shared.name}' "
@@ -1737,6 +1776,7 @@ def scrape_stadium(stadium_data, city, native_lang=None):
             "address": final_address,
             "year_of_construction": final_year,
             "surface": stadium_data.get("surface") or wiki_data.get("surface"),
+            "stadium_type": stadium_data.get("stadium_type") or wiki_data.get("stadium_type"),
             "wikipedia_url": wikipedia_url,
             "transfermarkt_url": transfermarkt_url,
             "image_url": final_image_url,
@@ -1917,6 +1957,16 @@ def scrape_team(team_data, stadium, city, league, season="24/25"):
     team_url = team_data.get("transfermarkt_url")
     attendance_url = team_data.get("transfermarkt_attendance_url")
     wikipedia_url = team_data.get("wikipedia_url")
+
+    # LOCK GUARD: never overwrite a manually-corrected team. If a locked row
+    # matches this team (by name + city, or transfermarkt_url), leave it
+    # untouched so the weekly auto-scrape can't undo the fix.
+    locked = Team.objects.filter(name=team_name, city=city, locked=True).first()
+    if locked is None and team_url:
+        locked = Team.objects.filter(transfermarkt_url=team_url, locked=True).first()
+    if locked is not None:
+        logging.info(f"[Locked] Skipping team '{locked.name}' — manually corrected, scraper won't touch it.")
+        return locked
 
     # 1. Wikipedia fallback/enrichment
     wiki_data = scrape_team_from_wikipedia(wikipedia_url) if wikipedia_url else {}
