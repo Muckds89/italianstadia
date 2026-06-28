@@ -37,6 +37,18 @@
         <a href="{% url 'italiastadiaapp:tournament_detail' 'uefa-euro-2032' %}">Euro 2032 venues</a>,
         or <a href="{% url 'italiastadiaapp:export_page' %}">export a custom map</a>.
     </p>
+
+    <div class="card mt-4">
+        <div class="card-header bg-white"><strong>Embed this map on your site</strong></div>
+        <div class="card-body">
+            <p class="small text-muted mb-2">Free to embed. Copy and paste this into any web page
+                (a link back to Stadiums of Europe is appreciated).</p>
+            <textarea id="embedCode" class="form-control font-monospace small" rows="3" readonly
+                onclick="this.select()">&lt;iframe src="{{ request.scheme }}://{{ request.get_host }}{% url 'italiastadiaapp:embed_map' %}" width="100%" height="500" style="border:0;border-radius:8px" loading="lazy" title="Map of European football stadiums"&gt;&lt;/iframe&gt;
+&lt;p style="font:12px sans-serif"&gt;Map by &lt;a href="{{ request.scheme }}://{{ request.get_host }}{% url 'italiastadiaapp:map_page' %}"&gt;Stadiums of Europe&lt;/a&gt;&lt;/p&gt;</textarea>
+            <button id="copyEmbed" class="btn btn-sm btn-primary mt-2" type="button">Copy embed code</button>
+        </div>
+    </div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -63,6 +75,18 @@
       });
       if (bounds.length) map.fitBounds(bounds, { padding: [20, 20], maxZoom: 5 });
     });
+
+  var copyBtn = document.getElementById("copyEmbed");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", function () {
+      var ta = document.getElementById("embedCode");
+      ta.select();
+      navigator.clipboard.writeText(ta.value).then(function () {
+        copyBtn.textContent = "Copied!";
+        setTimeout(function () { copyBtn.textContent = "Copy embed code"; }, 2000);
+      }).catch(function () { document.execCommand("copy"); });
+    });
+  }
 })();
 </script>
 {% endblock %}
