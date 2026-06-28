@@ -236,6 +236,30 @@
             {% endfor %}
             {% endif %}
 
+            {% if same_city_clubs or same_league_clubs or related_country %}
+            <hr>
+            <h2 class="h5 mt-3">Explore more</h2>
+            {% if related_country %}
+            <p class="mb-2"><a href="{% url 'italiastadiaapp:country_stats' related_country %}">All {{ related_country }} football stadiums &amp; clubs →</a></p>
+            {% endif %}
+            {% if same_city_clubs %}
+            <p class="mb-1"><strong>Other clubs in {{ team.city.name }}:</strong></p>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+                {% for c in same_city_clubs %}
+                <a class="btn btn-sm btn-outline-secondary" href="{% url 'italiastadiaapp:team_detail' c.slug %}">{{ c.name }}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if same_league_clubs %}
+            <p class="mb-1"><strong>Other clubs in {{ team.league.name }}:</strong></p>
+            <div class="d-flex flex-wrap gap-2">
+                {% for c in same_league_clubs %}
+                <a class="btn btn-sm btn-outline-secondary" href="{% url 'italiastadiaapp:team_detail' c.slug %}">{{ c.name }}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endif %}
+
         </div>
     </div>
 </div>

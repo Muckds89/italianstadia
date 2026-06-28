@@ -700,10 +700,21 @@ def team_detail(request, slug):
     from_list    = request.GET.get("from_list", None)
     back_country = from_list if from_list else ""
     answer, faq = _team_answer_faq(team)
+    # Internal linking: other clubs in the same city + same league (boosts crawl
+    # depth / topical authority — see GROWTH_PLAN.md indexing pillar).
+    same_city = (Team.objects.filter(city=team.city).exclude(id=team.id)
+                 .select_related("stadium")[:8]) if team.city else []
+    same_league = (Team.objects.filter(league=team.league).exclude(id=team.id)
+                   .select_related("stadium")[:8]) if team.league else []
+    country_name = (team.league.country.name if team.league and team.league.country
+                    else (team.city.country if team.city else ""))
     return render(request, "team_detail.html", {
         "team": team,
         "from_list": from_list is not None,
         "back_country": back_country,
+        "same_city_clubs": same_city,
+        "same_league_clubs": same_league,
+        "related_country": country_name,
         "page_description": _team_description(team),
         "answer": answer,
         "faq": faq,

@@ -25,10 +25,14 @@ sitemaps = {
 }
 
 
+# Fallback publisher ID so ads.txt is NEVER served empty (an empty file makes
+# AdSense report "Not found", even though the file 200s). The env var still wins
+# when set; this guarantees the seller line survives an unset/cleared env var.
+_DEFAULT_ADSENSE_CLIENT = "ca-pub-9969866762001544"
+
+
 def ads_txt(request):
-    client = settings.GOOGLE_ADSENSE_CLIENT  # e.g. ca-pub-9969866762001544
-    if not client:
-        return HttpResponse("", content_type="text/plain")
+    client = settings.GOOGLE_ADSENSE_CLIENT or _DEFAULT_ADSENSE_CLIENT
     pub_id = client.replace("ca-", "", 1)   # ads.txt uses pub-XXX, not ca-pub-XXX
     return HttpResponse(
         f"google.com, {pub_id}, DIRECT, f08c47fec0942fa0\n",
