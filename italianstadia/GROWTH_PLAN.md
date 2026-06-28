@@ -108,3 +108,64 @@ search-demand matches — keep them for promotion, but the search money is capac
 least one insight post gets traction on Reddit/X. SEO ranking gains take 2–6 weeks to register;
 the social/backlink layer is what compresses it into a month. Without promotion, organic alone
 likely reaches ~333 closer to 6–10 weeks.
+
+---
+
+# UPDATE — 2026-06-27 (Search Console export review)
+
+## New numbers (last ~2 weeks)
+- **63 clicks / 21,418 impressions → 0.29% CTR**, avg position ~14. Impressions rising; the
+  blockers are (1) most rankings sit on **page 2**, (2) **CTR ≈ 0**, (3) **indexing**.
+- Breakout page: **`/tournaments/uefa-euro-2032/` = 24 clicks (38% of all clicks)**;
+  "euro 2032 stadiums" pos 5.6, 8% CTR. Tournaments/insights are the model.
+- Team pages = impressions, ~0 clicks: Strømsgodset 3,868 impr / 2 clicks; Watford, West Ham,
+  Plymouth, Sporting CP = hundreds of impressions / **0 clicks** (page-2 + weak snippets).
+- Devices ~50/50 mobile/desktop. Top countries: Poland, UK, Greece, Hungary, NL.
+
+## THE CEILING: indexing (new, #1 priority)
+**1,152 pages "Discovered – currently not indexed."** Google found the URLs but won't spend
+crawl budget. For a young site this = **low authority + many near-identical templated pages**,
+not a bug. Levers, in order:
+1. **Backlinks / authority** — the dominant factor (see Distribution below).
+2. **Internal linking depth** — hubs (insights, country, city) link heavily to detail pages.
+3. **Unique content per page** — thin templated pages read as duplicates; keep answer-blocks
+   + FAQ + genuinely unique sentences.
+4. **Focus crawl budget** — numeric `/team/<id>/` URLs are 301→slug + canonical + NOT in the
+   sitemap (verified). Sitemap now uses **priority tiering** (below) so quality pages crawl first.
+5. **Don't expect mass "Request indexing" to scale** to 1,152 — authority + links is the fix.
+
+## Shipped in this batch (2026-06-27)
+- **CTR titles/meta (Pillar 1):**
+  - Team `<title>` → `"<Team> stadium — <Stadium> (capacity), <City> | Stadiums of Europe"`.
+  - Stadium `<title>` → `"<Stadium>, <City> — <cap> capacity football stadium | …"`.
+  - Matching `og:title` on both. (Front-loads the exact search terms: "<club> stadium",
+    "<stadium> capacity".)
+- **Sitemap priority tiering (crawl-budget focus):** national/top-division grounds 0.8–0.9,
+  2nd tier 0.6, lower 0.4; teams 0.7 / 0.5 / 0.3. Google indexes the high-value pages first.
+- Verified numeric-ID URLs are 301 + canonical + excluded from sitemap.
+
+## Revised priority order
+1. **Indexing/authority** (NEW #1) — backlinks + internal links + content depth. Nothing else
+   matters if 1,152 pages stay unindexed.
+2. **CTR** — titles shipped; next: ensure answer-block + FAQ on every team/stadium page.
+3. **Double down on tournaments + insights** — the only consistent click sources; keep building
+   evergreen, link-worthy pieces (retractable roofs ✓, clubs-per-city ✓, Euro guides ✓).
+
+## Distribution & backlinks (unblocks indexing)
+- **Track the Wikipedia/Euro-2032 backlink:** GSC shows search clicks only — referral clicks
+  live in **GA4 → Traffic acquisition**. UTM-tag the placed link
+  (`?utm_source=wikipedia&utm_medium=referral&utm_campaign=euro2032`). GSC → Links → External
+  shows the backlink itself. (Wikipedia links are `nofollow` → traffic, not ranking juice.)
+- **Get more links:** Wikipedia (stadium articles → that stadium's page; "List of football
+  stadiums in X" → country page/map), **r/dataisbeautiful** (insight visuals = perfect OC),
+  groundhopping sites/forums (footballgroundmap, stadiumguide, r/groundhopping), the
+  **embeddable `/embed/map/` widget** (add a visible "Embed this map" button), data pitches to
+  football bloggers/journalists (e.g. "15 retractable roofs in Europe vs 11+ US NFL/MLB").
+- **Reddit:** lead with insight images on r/dataisbeautiful + r/soccer once the account is
+  established; comment genuinely in r/soccer / r/groundhopping meanwhile.
+
+## Still TODO (next batches)
+- "Embed this map" button + UTM on `/map` Wikipedia placement.
+- Answer-block + FAQ coverage audit across all team/stadium pages.
+- More internal "Related stadiums / clubs in this city / same tournament" links on detail pages.
+- Re-pitch the insights as r/dataisbeautiful posts (retractable roofs, clubs-per-city).

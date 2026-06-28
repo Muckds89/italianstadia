@@ -30,10 +30,24 @@ class _DataLastmodMixin:
 
 class StadiumSitemap(_DataLastmodMixin, Sitemap):
     changefreq = "monthly"
-    priority = 0.8
 
     def items(self):
-        return Stadium.objects.filter(latitude__isnull=False).exclude(slug="").order_by("id")
+        return (Stadium.objects.filter(latitude__isnull=False).exclude(slug="")
+                .prefetch_related("teams__league").order_by("id"))
+
+    def priority(self, obj):
+        # Focus crawl budget: grounds with a top-division or national tenant rank
+        # highest; lower-tier grounds get a lower priority so Google indexes the
+        # high-value pages first while the site's authority is still building.
+        levels = [t.league.division_level for t in obj.teams.all()
+                  if t.league and t.league.division_level]
+        if any(getattr(t, "is_national", False) for t in obj.teams.all()):
+            return 0.9
+        if levels and min(levels) == 1:
+            return 0.8
+        if levels and min(levels) == 2:
+            return 0.6
+        return 0.4
 
     def location(self, obj):
         return reverse("italiastadiaapp:stadium_detail", args=[obj.slug])
@@ -41,10 +55,16 @@ class StadiumSitemap(_DataLastmodMixin, Sitemap):
 
 class TeamSitemap(_DataLastmodMixin, Sitemap):
     changefreq = "monthly"
-    priority = 0.7
 
     def items(self):
         return Team.objects.select_related("league").exclude(slug="").order_by("id")
+
+    def priority(self, obj):
+        # Same tiering as stadiums — top-flight clubs first.
+        if getattr(obj, "is_national", False):
+            return 0.8
+        lvl = obj.league.division_level if obj.league else None
+        return {1: 0.7, 2: 0.5}.get(lvl, 0.3)
 
     def location(self, obj):
         return reverse("italiastadiaapp:team_detail", args=[obj.slug])

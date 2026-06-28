@@ -1,12 +1,12 @@
 {% extends "base_detail.html" %}
-{% load static %}
+{% load static humanize %}
 
-{% block title %}{{ team.name }}, Stadium, Founded & Country | Stadiums of Europe{% endblock %}
+{% block title %}{{ team.name }} stadium — {{ team.stadium.name }}{% if team.stadium.capacity %} ({{ team.stadium.capacity|intcomma }}){% endif %}{% if team.city %}, {{ team.city.name }}{% endif %} | Stadiums of Europe{% endblock %}
 
 {% block meta %}
 <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{% url 'italiastadiaapp:team_detail' team.slug %}">
 <meta name="description" content="{{ page_description }}">
-<meta property="og:title" content="{{ team.name }} | Stadiums of Europe">
+<meta property="og:title" content="{{ team.name }} — {{ team.stadium.name }}{% if team.stadium.capacity %} ({{ team.stadium.capacity|intcomma }}){% endif %}">
 <meta property="og:description" content="{{ page_description }}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Stadiums of Europe">
