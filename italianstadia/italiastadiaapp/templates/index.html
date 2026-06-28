@@ -430,7 +430,9 @@
 <script src="{% static 'js/map.js' %}?v={{ asset_v }}"></script>
 
 <footer style="text-align:center;padding:10px;font-size:12px;color:#888;">
-    <a href="{% url 'italiastadiaapp:privacy' %}" style="color:#888;">Privacy Policy</a>
+    <a href="{% url 'italiastadiaapp:about' %}" style="color:#888;">About</a>
+    &middot; <a href="{% url 'italiastadiaapp:contact' %}" style="color:#888;">Contact</a>
+    &middot; <a href="{% url 'italiastadiaapp:privacy' %}" style="color:#888;">Privacy Policy</a>
     &nbsp;·&nbsp; &copy; {% now "Y" %} Stadiums of Europe
 </footer>
 </body>

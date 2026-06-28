@@ -49,6 +49,8 @@ urlpatterns = [
     path("stadium-development/<int:pk>/", stadium_development_detail_redirect, name="stadium_development_detail_by_id"),
     path("stadium-development/<slug:slug>/", stadium_development_detail, name="stadium_development_detail"),
     path("privacy/", views.privacy, name="privacy"),
+    path("about/", views.about, name="about"),
+    path("contact/", views.contact, name="contact"),
     # Paid export
     path("export/", export_page, name="export_page"),
     path("export/checkout/", export_checkout, name="export_checkout"),

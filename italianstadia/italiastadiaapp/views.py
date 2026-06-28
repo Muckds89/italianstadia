@@ -917,6 +917,18 @@ def privacy(request):
     })
 
 
+def about(request):
+    return render(request, "about.html", {
+        "adsense_client": settings.GOOGLE_ADSENSE_CLIENT,
+    })
+
+
+def contact(request):
+    return render(request, "contact.html", {
+        "adsense_client": settings.GOOGLE_ADSENSE_CLIENT,
+    })
+
+
 def api_status(request):
     refresh = LastRefresh.objects.filter(pk=1).first()
     return JsonResponse({
