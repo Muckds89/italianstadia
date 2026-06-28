@@ -30315,7 +30315,7 @@
     "capacity": 9215,
     "address": "Plough Lane, Wimbledon",
     "year_of_construction": 2020,
-    "city": 501,
+    "city": 170,
     "latitude": "51.431390",
     "longitude": "-0.186670",
     "owner_raw": "AFC Wimbledon",
@@ -30328,7 +30328,7 @@
     "wikipedia_url": "https://en.wikipedia.org/wiki/Plough_Lane",
     "transfermarkt_url": "https://www.transfermarkt.com/afc-wimbledon/stadion/verein/3884",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadion-wimbledon-plough-lane-stadium-2022-1650465892-83989.jpg?lm=1650465911",
-    "image_credit": null,
+    "image_credit": "",
     "extra_images": [
       {
         "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Plough_Lane%2C_18_May_2021.jpg",
@@ -30339,7 +30339,7 @@
         "credit": "Fleets / Wikimedia Commons / CC BY-SA 4.0"
       }
     ],
-    "description": null,
+    "description": "",
     "locked": true
   }
 },
@@ -30706,7 +30706,7 @@
     "capacity": 9241,
     "address": "Leyton , London , England",
     "year_of_construction": 1937,
-    "city": 511,
+    "city": 170,
     "latitude": "51.560280",
     "longitude": "-0.012780",
     "owner_raw": "Waltham Forest Council (leased)",
@@ -30719,7 +30719,7 @@
     "wikipedia_url": "https://en.wikipedia.org/wiki/Brisbane_Road",
     "transfermarkt_url": "https://www.transfermarkt.com/leyton-orient/stadion/verein/1150",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/matchroom-stadium-leyton-orient-stadion-1585061841-34677.jpg?lm=1585061866",
-    "image_credit": null,
+    "image_credit": "",
     "extra_images": [
       {
         "url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Brisbane_Road.jpg",
@@ -30738,7 +30738,7 @@
         "credit": "Timgeordie2017 / Wikimedia Commons / CC BY-SA 4.0"
       }
     ],
-    "description": null,
+    "description": "",
     "locked": false
   }
 },
@@ -58445,7 +58445,7 @@
     "stadium": 586,
     "manager": "Johnnie Jackson",
     "num_of_titles": 0,
-    "city": 501,
+    "city": 170,
     "average_attendance": 8396,
     "wikipedia_url": "https://en.wikipedia.org/wiki/AFC_Wimbledon",
     "transfermarkt_url": "https://www.transfermarkt.com/afc-wimbledon/startseite/verein/3884",
@@ -58705,7 +58705,7 @@
     "stadium": 596,
     "manager": "Richie Wellens",
     "num_of_titles": 0,
-    "city": 511,
+    "city": 170,
     "average_attendance": 8262,
     "wikipedia_url": "https://en.wikipedia.org/wiki/Leyton_Orient_F.C.",
     "transfermarkt_url": "https://www.transfermarkt.com/leyton-orient/startseite/verein/1150",

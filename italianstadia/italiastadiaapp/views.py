@@ -1943,9 +1943,14 @@ def insight_city_clubs(request):
                         f"We list every club based in {city_name} across the divisions we cover; "
                         f"check the table above for the current {season} count."))
     if top:
-        faq.append(("Which European city has the most football clubs?",
-                    f"In our dataset {top['city']} has the most, with {top['count']} clubs "
-                    f"({season} season)."))
+        leaders = [c["city"] for c in rows if c["count"] == top["count"]]
+        if len(leaders) == 1:
+            most_a = (f"In our dataset {leaders[0]} has the most, with {top['count']} clubs "
+                      f"({season} season).")
+        else:
+            most_a = (f"In our dataset {' and '.join([', '.join(leaders[:-1]), leaders[-1]]) if len(leaders) > 2 else ' and '.join(leaders)} "
+                      f"are tied for the most, with {top['count']} clubs each ({season} season).")
+        faq.append(("Which European city has the most football clubs?", most_a))
     faq.append(("Which leagues and divisions are included?",
                 "The top five leagues are covered down to the third tier, the next ten countries "
                 "down to the second tier, and every other country's top division. All figures are "
