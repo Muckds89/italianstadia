@@ -1917,8 +1917,15 @@ def insight_city_clubs(request):
         "can see who was right about it."
     )
     if top:
-        intro += (f" Right now <strong>{top['city']}</strong> tops our dataset with "
-                  f"<strong>{top['count']}</strong> clubs.")
+        _leaders = [c["city"] for c in rows if c["count"] == top["count"]]
+        _names = (" and ".join(_leaders) if len(_leaders) <= 2
+                  else ", ".join(_leaders[:-1]) + " and " + _leaders[-1])
+        if len(_leaders) == 1:
+            intro += (f" Right now <strong>{_names}</strong> tops our dataset with "
+                      f"<strong>{top['count']}</strong> clubs.")
+        else:
+            intro += (f" Right now <strong>{_names}</strong> are tied at the top with "
+                      f"<strong>{top['count']}</strong> clubs each.")
     about = (
         "Every club is counted against the city it is based in, national teams excluded. "
         "Coverage depth varies by country: the <strong>top five leagues</strong> are covered "
