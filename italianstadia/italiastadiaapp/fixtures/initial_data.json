@@ -14435,8 +14435,8 @@
     "city": 95,
     "latitude": "37.074300",
     "longitude": "15.291300",
-    "owner_raw": "Syracuse",
-    "ownership": "PRIVATE",
+    "owner_raw": "Comune di Siracusa",
+    "ownership": "PUBLIC",
     "slug": "nicola-de-simone",
     "stadium_type": "OPEN",
     "surface": "GRASS",
@@ -14447,8 +14447,8 @@
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Stadio_Nicola_De_Simone_%28Siracusa%29.JPG",
     "image_credit": "Wikimedia Commons",
     "extra_images": [],
-    "description": null,
-    "locked": false
+    "description": "",
+    "locked": true
   }
 },
 {
