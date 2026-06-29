@@ -2087,6 +2087,13 @@ _SURFACE_COLOURS = {
     "GRASS":      (76, 175, 80),
     "HYBRID":     (33, 150, 243),
 }
+# Roof / stadium-type colours for the "color by stadium type" export mode.
+_TYPE_COLOURS = {
+    "OPEN":        (96, 165, 250),   # sky blue
+    "RETRACTABLE": (245, 158, 11),   # amber
+    "CLOSED":      (139, 92, 246),   # purple
+}
+_TYPE_LABELS = {"OPEN": "Open", "RETRACTABLE": "Retractable roof", "CLOSED": "Closed"}
 _DEFAULT_DOT_COLOUR = (136, 136, 136)
 
 _COUNTRY_PALETTE = [
@@ -2118,7 +2125,7 @@ def _parse_export_params(request):
         style_key = "dark"
 
     color_by = request.GET.get("color_by", "surface").lower()
-    if color_by not in ("surface", "country", "single"):
+    if color_by not in ("surface", "country", "single", "type"):
         color_by = "surface"
 
     raw_color = request.GET.get("dot_color", "#f5c542").lstrip("#")
@@ -2193,6 +2200,7 @@ def _parse_export_params(request):
         "subtitle": request.GET.get("subtitle", "").strip()[:100],
         # filter params
         "surface":   request.GET.get("surface", "").strip().upper(),
+        "stadium_type": request.GET.get("stadium_type", "").strip().upper(),
         "country":   request.GET.get("country", "").strip(),
         "league":    request.GET.get("league", "").strip(),
         "ownership": request.GET.get("ownership", "").strip().upper(),
@@ -2212,6 +2220,8 @@ def _get_export_stadiums(params):
     qs = Stadium.objects.select_related("city").prefetch_related("teams__league__country")
     if params["surface"]:
         qs = qs.filter(surface=params["surface"])
+    if params.get("stadium_type"):
+        qs = qs.filter(stadium_type=params["stadium_type"])
     if params.get("surface_known"):
         qs = qs.exclude(surface__isnull=True).exclude(surface="")
     if params["country"]:
@@ -2251,13 +2261,14 @@ def _get_export_stadiums(params):
         if params.get("no_badges"):
             image_url = ""   # render colour-coded dots instead of club crests
         results.append({
-            "name":       s.name,
-            "team_name":  team_name,
-            "lat":        float(s.latitude),
-            "lon":        float(s.longitude),
-            "surface":    s.surface or "",
-            "country":    country,
-            "image_url":  image_url,
+            "name":         s.name,
+            "team_name":    team_name,
+            "lat":          float(s.latitude),
+            "lon":          float(s.longitude),
+            "surface":      s.surface or "",
+            "stadium_type": s.stadium_type or "",
+            "country":      country,
+            "image_url":    image_url,
         })
     return results
 
@@ -2928,6 +2939,8 @@ def _dot_colour(stadium, params, country_index):
             stadium.get("dev_status", "PLANNING"), _DEFAULT_DOT_COLOUR)
     if params["color_by"] == "bid":
         return _BID_COLOR.get(stadium.get("bid", ""), _DEFAULT_DOT_COLOUR)
+    if params["color_by"] == "type":
+        return _TYPE_COLOURS.get(stadium.get("stadium_type", ""), _DEFAULT_DOT_COLOUR)
     if params["color_by"] == "single":
         return params["single_color"]
     if params["color_by"] == "country":
@@ -3225,6 +3238,13 @@ def _build_legend_entries(params, stadiums):
         return [(_BID_COLOR[b], f"{b} bid") for b in present]
     if params["color_by"] == "single":
         return [(params["single_color"], "Stadium")]
+    if params["color_by"] == "type":
+        present = {s.get("stadium_type", "") for s in stadiums}
+        entries = [(_TYPE_COLOURS[t], _TYPE_LABELS[t])
+                   for t in ("OPEN", "RETRACTABLE", "CLOSED") if t in present]
+        if "" in present:
+            entries.append((_DEFAULT_DOT_COLOUR, "Unknown"))
+        return entries
     if params["color_by"] == "surface":
         surfaces_present = {s["surface"] for s in stadiums}
         entries = []

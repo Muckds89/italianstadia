@@ -19,12 +19,40 @@
     <div class="icon">✅</div>
     <h2 class="fw-bold mb-2">Payment confirmed!</h2>
     <p class="text-secondary mb-4">Your map is ready. Click below to download, this link is single-use and valid for 24 hours.</p>
-    <a href="{% url 'italiastadiaapp:export_download' token=token %}" class="btn btn-download w-100 mb-3">
+    <a id="downloadBtn" href="{% url 'italiastadiaapp:export_download' token=token %}" class="btn btn-download w-100 mb-3">
         Download Map PNG
     </a>
+    <p id="downloadNote" class="small text-secondary mb-3 d-none">
+        Preparing your high-resolution map… this can take a few seconds. A copy has also been
+        emailed to you. Please don't click again, the link is single-use.
+    </p>
     <a href="{% url 'italiastadiaapp:export_page' %}" class="btn btn-sm btn-outline-secondary w-100">
         Export another map
     </a>
 </div>
+
+<script>
+(function () {
+    // The download link burns a single-use token. A second (accidental) click would
+    // hit the already-used token and show an error, so we lock the link on first click
+    // and show a "preparing…" note while the (few-second) render/download happens.
+    var btn = document.getElementById("downloadBtn");
+    var note = document.getElementById("downloadNote");
+    var used = false;
+    btn.addEventListener("click", function (e) {
+        if (used) { e.preventDefault(); return; }   // ignore double-clicks
+        used = true;
+        // Let THIS click proceed (starts the download), then lock the button.
+        setTimeout(function () {
+            btn.classList.add("disabled");
+            btn.setAttribute("aria-disabled", "true");
+            btn.style.pointerEvents = "none";
+            btn.style.opacity = "0.6";
+            btn.textContent = "Preparing download…";
+            note.classList.remove("d-none");
+        }, 0);
+    });
+})();
+</script>
 </body>
 </html>
