@@ -2132,7 +2132,7 @@ def _parse_export_params(request):
         style_key = "dark"
 
     color_by = request.GET.get("color_by", "surface").lower()
-    if color_by not in ("surface", "country", "single", "type"):
+    if color_by not in ("surface", "country", "single", "type", "ownership"):
         color_by = "surface"
 
     raw_color = request.GET.get("dot_color", "#f5c542").lstrip("#")
