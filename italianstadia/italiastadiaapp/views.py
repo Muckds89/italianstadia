@@ -2273,11 +2273,24 @@ def _get_export_stadiums(params):
         else:
             image_url = (primary_team.image_url or "") if primary_team else ""
         team_name  = (primary_team.name or "") if primary_team else ""
+        # Shared grounds (San Siro = Milan + Inter, Mapei = Sassuolo + Reggiana,
+        # U-Power = Monza + Inter U23) get a combined badge + a joined label.
+        # National mode keeps the single national flag.
+        if params.get("national") or params.get("national_only"):
+            tenants = [{"name": team_name, "image_url": image_url}] if team_name else []
+        else:
+            clubs = [t for t in teams if not t.is_national]
+            tenants = [{"name": t.name, "image_url": (t.image_url or "")} for t in clubs[:4]]
+            if not tenants and team_name:
+                tenants = [{"name": team_name, "image_url": image_url}]
+        label_name = " / ".join(t["name"] for t in tenants[:2]) or team_name
         if params.get("no_badges"):
             image_url = ""   # render colour-coded dots instead of club crests
+            tenants = []
         results.append({
             "name":         s.name,
-            "team_name":    team_name,
+            "team_name":    label_name,
+            "teams":        tenants,
             "lat":          float(s.latitude),
             "lon":          float(s.longitude),
             "surface":      s.surface or "",
@@ -2917,32 +2930,67 @@ def _fetch_badge_image(url, size=20):
         return None
 
 
+def _compose_multi_badge(imgs, size):
+    """Combine several tenant crests into one badge image (shared grounds).
+    2 clubs -> left/right split; 3-4 -> 2x2 quadrants. Circle-masked by the caller."""
+    imgs = [i for i in imgs if i is not None]
+    if not imgs:
+        return None
+    if len(imgs) == 1:
+        return imgs[0]
+    base = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    if len(imgs) == 2:
+        h = size // 2
+        base.paste(imgs[0].crop((0, 0, h, size)), (0, 0))
+        base.paste(imgs[1].crop((h, 0, size, size)), (h, 0))
+        ImageDraw.Draw(base).line([(h, 0), (h, size)], fill=(255, 255, 255), width=1)
+    else:
+        h = size // 2
+        for img, (qx, qy) in zip(imgs[:4], [(0, 0), (h, 0), (0, h), (h, h)]):
+            base.paste(img.resize((h, h), Image.LANCZOS), (qx, qy))
+    return base
+
+
 def _prefetch_badges(stadiums, size=20):
-    """Fetch badge images in parallel with a hard 22-second wall-clock budget.
-    Returns whatever loaded in time, uncached badges are skipped gracefully."""
-    items = [(s["name"], s.get("image_url", "")) for s in stadiums if s.get("image_url")]
-    if not items:
+    """Fetch tenant badge images in parallel (hard 22 s budget) and compose a
+    single badge per stadium, so shared grounds show a combined crest. Returns
+    {stadium_name: PIL image}; uncached badges are skipped gracefully."""
+    # Collect every unique crest URL (from the tenants list, else the single url).
+    url_set = set()
+    for s in stadiums:
+        tlist = s.get("teams") or ([{"image_url": s.get("image_url", "")}]
+                                   if s.get("image_url") else [])
+        for t in tlist:
+            if t.get("image_url"):
+                url_set.add(t["image_url"])
+    if not url_set:
         return {}
 
     deadline = _time.monotonic() + 22   # hard budget, stay under Render's 30s limit
-    result = {}
-
+    url_imgs = {}
     with ThreadPoolExecutor(max_workers=8) as pool:
-        futures = {pool.submit(_fetch_badge_image, url, size): name for name, url in items}
+        futures = {pool.submit(_fetch_badge_image, url, size): url for url in url_set}
         try:
             for future in as_completed(futures, timeout=22):
                 if _time.monotonic() > deadline:
                     break
-                name = futures[future]
+                url = futures[future]
                 try:
                     img = future.result(timeout=0)
                     if img:
-                        result[name] = img
+                        url_imgs[url] = img
                 except Exception:
                     pass
         except Exception:
-            pass   # TimeoutError from as_completed, return what we have
+            pass   # TimeoutError from as_completed, use what we have
 
+    result = {}
+    for s in stadiums:
+        tlist = s.get("teams") or ([{"image_url": s.get("image_url", "")}]
+                                   if s.get("image_url") else [])
+        imgs = [url_imgs[t["image_url"]] for t in tlist if t.get("image_url") in url_imgs]
+        if imgs:
+            result[s["name"]] = _compose_multi_badge(imgs, size)
     return result
 
 
