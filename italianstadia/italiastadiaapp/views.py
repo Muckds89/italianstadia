@@ -2094,6 +2094,13 @@ _TYPE_COLOURS = {
     "CLOSED":      (139, 92, 246),   # purple
 }
 _TYPE_LABELS = {"OPEN": "Open", "RETRACTABLE": "Retractable roof", "CLOSED": "Closed"}
+# Ownership colours for the "colour by / ring by ownership" export mode.
+_OWNERSHIP_COLOURS = {
+    "PUBLIC":  (76, 175, 80),    # green
+    "PRIVATE": (231, 76, 60),    # red
+    "MIXED":   (255, 159, 28),   # amber
+}
+_OWNERSHIP_LABELS = {"PUBLIC": "Public", "PRIVATE": "Private", "MIXED": "Mixed"}
 _DEFAULT_DOT_COLOUR = (136, 136, 136)
 
 _COUNTRY_PALETTE = [
@@ -2184,6 +2191,7 @@ def _parse_export_params(request):
         "size_key": size_key,
         "style_key": style_key,
         "color_by": color_by,
+        "ring_by": request.GET.get("ring_by", "").strip().lower(),
         "single_color": single_color,
         "bg_color": bg_color,
         "label_size": label_size,
@@ -2218,18 +2226,25 @@ def _parse_export_params(request):
 def _get_export_stadiums(params):
     """Return list of dicts for stadiums matching the filter params."""
     qs = Stadium.objects.select_related("city").prefetch_related("teams__league__country")
-    if params["surface"]:
-        qs = qs.filter(surface=params["surface"])
-    if params.get("stadium_type"):
-        qs = qs.filter(stadium_type=params["stadium_type"])
+    # Multi-select: surface / stadium_type / ownership accept a comma-separated list
+    # so users can export two or more categories at once (e.g. PRIVATE + MIXED).
+    def _multi(v):
+        return [x.strip().upper() for x in str(v or "").split(",") if x.strip()]
+    surfaces = _multi(params["surface"])
+    if surfaces:
+        qs = qs.filter(surface__in=surfaces)
+    types = _multi(params.get("stadium_type"))
+    if types:
+        qs = qs.filter(stadium_type__in=types)
+    owns = _multi(params["ownership"])
+    if owns:
+        qs = qs.filter(ownership__in=owns)
     if params.get("surface_known"):
         qs = qs.exclude(surface__isnull=True).exclude(surface="")
     if params["country"]:
         qs = qs.filter(city__country=params["country"])
     if params["league"]:
         qs = qs.filter(teams__league__name=params["league"])
-    if params["ownership"]:
-        qs = qs.filter(ownership=params["ownership"])
     if params.get("national"):
         qs = qs.filter(teams__is_national=True)
     if params.get("national_only"):
@@ -2267,6 +2282,7 @@ def _get_export_stadiums(params):
             "lon":          float(s.longitude),
             "surface":      s.surface or "",
             "stadium_type": s.stadium_type or "",
+            "ownership":    s.ownership or "",
             "country":      country,
             "image_url":    image_url,
         })
@@ -2930,29 +2946,42 @@ def _prefetch_badges(stadiums, size=20):
     return result
 
 
-def _dot_colour(stadium, params, country_index):
-    if params["color_by"] == "tournament_status":
+def _category_colour(stadium, mode, params, country_index):
+    """Colour for a stadium under a given category `mode` (surface/type/ownership/
+    country/single/tournament_status/dev_status/bid). Shared by dot fill and the
+    badge ring."""
+    if mode == "tournament_status":
         return _TOURNAMENT_STATUS_COLOR.get(
             stadium.get("tournament_status", "CANDIDATE"), _DEFAULT_DOT_COLOUR)
-    if params["color_by"] == "dev_status":
-        return _DEV_STATUS_COLOR.get(
-            stadium.get("dev_status", "PLANNING"), _DEFAULT_DOT_COLOUR)
-    if params["color_by"] == "bid":
+    if mode == "dev_status":
+        return _DEV_STATUS_COLOR.get(stadium.get("dev_status", "PLANNING"), _DEFAULT_DOT_COLOUR)
+    if mode == "bid":
         return _BID_COLOR.get(stadium.get("bid", ""), _DEFAULT_DOT_COLOUR)
-    if params["color_by"] == "type":
+    if mode == "type":
         return _TYPE_COLOURS.get(stadium.get("stadium_type", ""), _DEFAULT_DOT_COLOUR)
-    if params["color_by"] == "single":
+    if mode == "ownership":
+        return _OWNERSHIP_COLOURS.get(stadium.get("ownership", ""), _DEFAULT_DOT_COLOUR)
+    if mode == "single":
         return params["single_color"]
-    if params["color_by"] == "country":
+    if mode == "country":
         idx = country_index.get(stadium["country"], 0)
         return _COUNTRY_PALETTE[idx % len(_COUNTRY_PALETTE)]
-    # surface
+    # surface (default)
     return _SURFACE_COLOURS.get(stadium["surface"], _DEFAULT_DOT_COLOUR)
+
+
+def _dot_colour(stadium, params, country_index):
+    return _category_colour(stadium, params["color_by"], params, country_index)
 
 
 def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, reserve_boxes=None):
     BADGE_R   = params.get("badge_size", 13)
     RING_W    = 2
+    # Optional coloured ring around club badges (colour-codes a category while the
+    # crest stays visible). Validated to a known mode or "".
+    ring_by   = params.get("ring_by") if params.get("ring_by") in (
+        "ownership", "surface", "type", "country") else ""
+    RING_EXTRA = max(3, BADGE_R // 3)
     FONT_SZ   = params.get("label_size", 22)
     FONT_SZ2  = max(10, int(FONT_SZ * 0.78))
     PAD_X     = 10
@@ -2973,7 +3002,7 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
     font_team    = _load_font(bold=False, size=FONT_SZ2)
     font_stadium = _load_font(bold=True,  size=FONT_SZ)
 
-    rr = BADGE_R + RING_W
+    rr = BADGE_R + (RING_EXTRA if ring_by else RING_W)
 
     placed_boxes  = []
     badge_circles = []
@@ -3031,7 +3060,17 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
             draw.ellipse([px - BADGE_R, py - BADGE_R, px + BADGE_R, py + BADGE_R], fill=colour)
         else:
             badge_img = badges.get(s["name"])
-            draw.ellipse([px - rr, py - rr, px + rr, py + rr], fill=(255, 255, 255))
+            # Colour the ring/halo by a chosen category (ring_by) so the club crest
+            # stays visible but the rim colour-codes ownership/surface/type/etc.
+            if ring_by:
+                ring_colour = _category_colour(s, ring_by, params, country_index)
+                ring_r = BADGE_R + RING_EXTRA
+                draw.ellipse([px - ring_r, py - ring_r, px + ring_r, py + ring_r], fill=ring_colour)
+                # thin white separator between the colour ring and the crest
+                draw.ellipse([px - BADGE_R - 1, py - BADGE_R - 1,
+                              px + BADGE_R + 1, py + BADGE_R + 1], fill=(255, 255, 255))
+            else:
+                draw.ellipse([px - rr, py - rr, px + rr, py + rr], fill=(255, 255, 255))
             if badge_img:
                 mask = Image.new("L", (BADGE_R * 2, BADGE_R * 2), 0)
                 ImageDraw.Draw(mask).ellipse([0, 0, BADGE_R * 2 - 1, BADGE_R * 2 - 1], fill=255)
@@ -3220,32 +3259,42 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
 
 
 def _build_legend_entries(params, stadiums):
-    """Return list of (colour_tuple, label_str) for the legend."""
-    if params["color_by"] == "tournament_status":
+    """Return list of (colour_tuple, label_str) for the legend. A coloured badge
+    ring (ring_by) drives the legend when set; otherwise the dot colour (color_by)."""
+    mode = params.get("ring_by") if params.get("ring_by") in (
+        "ownership", "surface", "type", "country") else params["color_by"]
+    if mode == "tournament_status":
         present = {s.get("tournament_status", "CANDIDATE") for s in stadiums}
         return [
             (_TOURNAMENT_STATUS_COLOR[st], _TOURNAMENT_STATUS_LABEL[st])
             for st in ("CONFIRMED", "CANDIDATE", "DISCARDED") if st in present
         ]
-    if params["color_by"] == "dev_status":
+    if mode == "dev_status":
         present = {s.get("dev_status", "PLANNING") for s in stadiums}
         return [
             (_DEV_STATUS_COLOR[st], _DEV_STATUS_LABEL[st])
             for st in _DEV_STATUSES if st in present
         ]
-    if params["color_by"] == "bid":
+    if mode == "bid":
         present = [b for b in _BID_COLOR if any(s.get("bid") == b for s in stadiums)]
         return [(_BID_COLOR[b], f"{b} bid") for b in present]
-    if params["color_by"] == "single":
+    if mode == "single":
         return [(params["single_color"], "Stadium")]
-    if params["color_by"] == "type":
+    if mode == "ownership":
+        present = {s.get("ownership", "") for s in stadiums}
+        entries = [(_OWNERSHIP_COLOURS[o], _OWNERSHIP_LABELS[o])
+                   for o in ("PUBLIC", "PRIVATE", "MIXED") if o in present]
+        if "UNKNOWN" in present or "" in present:
+            entries.append((_DEFAULT_DOT_COLOUR, "Unknown"))
+        return entries
+    if mode == "type":
         present = {s.get("stadium_type", "") for s in stadiums}
         entries = [(_TYPE_COLOURS[t], _TYPE_LABELS[t])
                    for t in ("OPEN", "RETRACTABLE", "CLOSED") if t in present]
         if "" in present:
             entries.append((_DEFAULT_DOT_COLOUR, "Unknown"))
         return entries
-    if params["color_by"] == "surface":
+    if mode == "surface":
         surfaces_present = {s["surface"] for s in stadiums}
         entries = []
         for surf, colour in _SURFACE_COLOURS.items():

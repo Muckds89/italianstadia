@@ -162,44 +162,54 @@
                     <ul class="ac-list" id="leagueList"></ul>
                 </div>
                 <div class="mb-2">
-                    <label class="form-label small mb-1">Surface</label>
-                    <select id="expSurface" class="form-select form-select-sm">
-                        <option value="">All surfaces</option>
-                        <option value="GRASS">Grass</option>
-                        <option value="HYBRID">Hybrid</option>
-                        <option value="ARTIFICIAL">Artificial</option>
-                    </select>
+                    <label class="form-label small mb-1">Surface <span class="text-secondary">(tick one or more)</span></label>
+                    <div class="d-flex flex-wrap gap-3" id="expSurface">
+                        <div class="form-check"><input class="form-check-input surf-check" type="checkbox" value="GRASS" id="sfG"><label class="form-check-label small" for="sfG">Grass</label></div>
+                        <div class="form-check"><input class="form-check-input surf-check" type="checkbox" value="HYBRID" id="sfH"><label class="form-check-label small" for="sfH">Hybrid</label></div>
+                        <div class="form-check"><input class="form-check-input surf-check" type="checkbox" value="ARTIFICIAL" id="sfA"><label class="form-check-label small" for="sfA">Artificial</label></div>
+                    </div>
                 </div>
                 <div class="mb-2">
-                    <label class="form-label small mb-1">Stadium type (roof)</label>
-                    <select id="expType" class="form-select form-select-sm">
-                        <option value="">All types</option>
-                        <option value="OPEN">Open</option>
-                        <option value="RETRACTABLE">Retractable roof</option>
-                        <option value="CLOSED">Closed</option>
-                    </select>
+                    <label class="form-label small mb-1">Stadium type / roof <span class="text-secondary">(tick one or more)</span></label>
+                    <div class="d-flex flex-wrap gap-3" id="expType">
+                        <div class="form-check"><input class="form-check-input type-check" type="checkbox" value="OPEN" id="tyO"><label class="form-check-label small" for="tyO">Open</label></div>
+                        <div class="form-check"><input class="form-check-input type-check" type="checkbox" value="RETRACTABLE" id="tyR"><label class="form-check-label small" for="tyR">Retractable</label></div>
+                        <div class="form-check"><input class="form-check-input type-check" type="checkbox" value="CLOSED" id="tyC"><label class="form-check-label small" for="tyC">Closed</label></div>
+                    </div>
                 </div>
                 <div class="mb-2">
-                    <label class="form-label small mb-1">Colour markers by</label>
+                    <label class="form-label small mb-1">Ownership <span class="text-secondary">(tick one or more)</span></label>
+                    <div class="d-flex flex-wrap gap-3" id="expOwnership">
+                        <div class="form-check"><input class="form-check-input own-check" type="checkbox" value="PUBLIC" id="owPub"><label class="form-check-label small" for="owPub">Public</label></div>
+                        <div class="form-check"><input class="form-check-input own-check" type="checkbox" value="PRIVATE" id="owPriv"><label class="form-check-label small" for="owPriv">Private</label></div>
+                        <div class="form-check"><input class="form-check-input own-check" type="checkbox" value="MIXED" id="owMix"><label class="form-check-label small" for="owMix">Mixed</label></div>
+                    </div>
+                </div>
+                <hr class="my-2">
+                <div class="mb-2">
+                    <label class="form-label small mb-1">Badge ring colour <span class="text-secondary">(keeps club badges)</span></label>
+                    <select id="expRingBy" class="form-select form-select-sm">
+                        <option value="">No ring (plain badge)</option>
+                        <option value="ownership">Ownership</option>
+                        <option value="surface">Pitch surface</option>
+                        <option value="type">Stadium type (roof)</option>
+                        <option value="country">Country</option>
+                    </select>
+                    <div class="small text-secondary mt-1">Colour-codes each badge's outer ring; turn on “Legend” to label the colours.</div>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label small mb-1">Or: colour the whole marker by</label>
                     <select id="expColorBy" class="form-select form-select-sm">
                         <option value="surface">Pitch surface</option>
                         <option value="type">Stadium type (roof)</option>
+                        <option value="ownership">Ownership</option>
                         <option value="country">Country</option>
                     </select>
                 </div>
                 <div class="form-check mb-0">
                     <input class="form-check-input" type="checkbox" id="expColourDots">
                     <label class="form-check-label small" for="expColourDots">Coloured dots instead of club badges</label>
-                    <div class="small text-secondary">Turn on to see the “colour markers by” colours and legend.</div>
-                </div>
-                <div class="mb-0">
-                    <label class="form-label small mb-1">Ownership</label>
-                    <select id="expOwnership" class="form-select form-select-sm">
-                        <option value="">All ownership</option>
-                        <option value="PUBLIC">Public</option>
-                        <option value="PRIVATE">Private</option>
-                        <option value="MIXED">Mixed</option>
-                    </select>
+                    <div class="small text-secondary">Turn on to replace badges with the “colour the whole marker by” colours.</div>
                 </div>
             </div>
 
@@ -440,8 +450,14 @@ document.getElementById("expCountry").addEventListener("change", function () {
     const p = new URLSearchParams(window.location.search);
     if (p.get("country"))   document.getElementById("expCountry").value   = p.get("country");
     if (p.get("league"))    document.getElementById("expLeague").value    = p.get("league");
-    if (p.get("surface"))   document.getElementById("expSurface").value   = p.get("surface");
-    if (p.get("ownership")) document.getElementById("expOwnership").value = p.get("ownership");
+    const _tick = (sel, csv) => (csv || "").split(",").forEach(v => {
+        const el = document.querySelector(sel + "[value='" + v.trim().toUpperCase() + "']");
+        if (el) el.checked = true;
+    });
+    if (p.get("surface"))      _tick(".surf-check", p.get("surface"));
+    if (p.get("stadium_type")) _tick(".type-check", p.get("stadium_type"));
+    if (p.get("ownership"))    _tick(".own-check",  p.get("ownership"));
+    if (p.get("ring_by"))      document.getElementById("expRingBy").value = p.get("ring_by");
     if (p.get("title"))     document.getElementById("expTitle").value     = p.get("title");
 })();
 
@@ -498,12 +514,17 @@ document.getElementById("expStyle").addEventListener("change", _syncBgColorAvail
 _syncBgColorAvailability();
 
 // ── Build filters object ──────────────────────────────────────────────────────
+// Comma-join the ticked checkboxes for a multi-select filter (e.g. PRIVATE,MIXED).
+function _checked(sel) {
+    return [...document.querySelectorAll(sel + ":checked")].map(el => el.value).join(",");
+}
 function _getFilters() {
     const f = {
         country:     document.getElementById("expCountry").value.trim(),
-        surface:     document.getElementById("expSurface").value,
-        stadium_type: document.getElementById("expType").value,
-        ownership:   document.getElementById("expOwnership").value,
+        surface:     _checked(".surf-check"),
+        stadium_type: _checked(".type-check"),
+        ownership:   _checked(".own-check"),
+        ring_by:     document.getElementById("expRingBy").value,
         league:      document.getElementById("expLeague").value.trim(),
         style_key:   document.getElementById("expStyle").value,
         size_key:    document.getElementById("expSize").value,
