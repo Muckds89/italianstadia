@@ -12810,46 +12810,6 @@
 },
 {
   "model": "italiastadiaapp.stadium",
-  "pk": 46,
-  "fields": {
-    "name": "Brianteo",
-    "capacity": 17102,
-    "address": "Via Franco Tognini 4, 20900",
-    "year_of_construction": 1988,
-    "city": 41,
-    "latitude": "45.582780",
-    "longitude": "9.308060",
-    "owner_raw": "Municipality of Monza",
-    "ownership": "PUBLIC",
-    "slug": "brianteo",
-    "stadium_type": "OPEN",
-    "surface": "GRASS",
-    "architect": null,
-    "tournaments": [],
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Brianteo",
-    "transfermarkt_url": "https://www.transfermarkt.com/ac-monza/stadion/verein/2919/saison_id/2025",
-    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadio-brianteo-monza-1680608236-104875.jpg?lm=1680608253",
-    "image_credit": "Transfermarkt",
-    "extra_images": [
-      {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Stadio_Brianteo_2014.jpg",
-        "credit": "Simonemb / Wikimedia Commons / Public domain"
-      },
-      {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Stadio_Brianteo_2024.jpg",
-        "credit": "Simonemb / Wikimedia Commons / CC0"
-      },
-      {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/5/56/Stadio_brianteo_monza_2022.jpg",
-        "credit": "Simonemb / Wikimedia Commons / CC BY-SA 4.0"
-      }
-    ],
-    "description": null,
-    "locked": true
-  }
-},
-{
-  "model": "italiastadiaapp.stadium",
   "pk": 47,
   "fields": {
     "name": "Benito Stirpe",
@@ -44454,7 +44414,7 @@
     "founded": "1912-01-01",
     "tier": 2,
     "girone": null,
-    "stadium": 46,
+    "stadium": 68,
     "manager": "Paolo Bianco",
     "num_of_titles": 0,
     "city": 41,
