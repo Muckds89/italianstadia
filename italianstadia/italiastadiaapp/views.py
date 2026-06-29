@@ -3847,8 +3847,9 @@ def export_checkout(request):
 
     # Build filter param string that will be stored and used at download time
     allowed_keys = {
-        "country", "league", "ownership", "surface", "type",
-        "color_by", "style_key", "size_key", "title", "subtitle", "labels",
+        "country", "league", "ownership", "surface", "stadium_type",
+        "color_by", "ring_by", "no_badges",
+        "style_key", "size_key", "title", "subtitle", "labels",
         "north", "legend", "scale", "spotlight", "logo", "bg_color",
         "label_size", "label_color", "badge_size", "tournament", "tstatus",
         "layer", "dstatus", "national",
