@@ -187,29 +187,19 @@
                 </div>
                 <hr class="my-2">
                 <div class="mb-2">
-                    <label class="form-label small mb-1">Badge ring colour <span class="text-secondary">(keeps club badges)</span></label>
-                    <select id="expRingBy" class="form-select form-select-sm">
-                        <option value="">No ring (plain badge)</option>
+                    <label class="form-label small mb-1">Colour-code markers by</label>
+                    <select id="expColourBy" class="form-select form-select-sm">
+                        <option value="">None (plain club badges)</option>
                         <option value="ownership">Ownership</option>
                         <option value="surface">Pitch surface</option>
                         <option value="type">Stadium type (roof)</option>
                         <option value="country">Country</option>
                     </select>
-                    <div class="small text-secondary mt-1">Colour-codes each badge's outer ring; turn on “Legend” to label the colours.</div>
-                </div>
-                <div class="mb-2">
-                    <label class="form-label small mb-1">Or: colour the whole marker by</label>
-                    <select id="expColorBy" class="form-select form-select-sm">
-                        <option value="surface">Pitch surface</option>
-                        <option value="type">Stadium type (roof)</option>
-                        <option value="ownership">Ownership</option>
-                        <option value="country">Country</option>
-                    </select>
+                    <div class="small text-secondary mt-1">Colours each badge's outer ring. Turn on “Legend” to label the colours.</div>
                 </div>
                 <div class="form-check mb-0">
                     <input class="form-check-input" type="checkbox" id="expColourDots">
-                    <label class="form-check-label small" for="expColourDots">Coloured dots instead of club badges</label>
-                    <div class="small text-secondary">Turn on to replace badges with the “colour the whole marker by” colours.</div>
+                    <label class="form-check-label small" for="expColourDots">Show as coloured dots (hide club badges)</label>
                 </div>
             </div>
 
@@ -457,7 +447,9 @@ document.getElementById("expCountry").addEventListener("change", function () {
     if (p.get("surface"))      _tick(".surf-check", p.get("surface"));
     if (p.get("stadium_type")) _tick(".type-check", p.get("stadium_type"));
     if (p.get("ownership"))    _tick(".own-check",  p.get("ownership"));
-    if (p.get("ring_by"))      document.getElementById("expRingBy").value = p.get("ring_by");
+    const _cat = p.get("ring_by") || (p.get("no_badges") === "1" ? p.get("color_by") : "");
+    if (_cat) document.getElementById("expColourBy").value = _cat;
+    if (p.get("no_badges") === "1") document.getElementById("expColourDots").checked = true;
     if (p.get("title"))     document.getElementById("expTitle").value     = p.get("title");
 })();
 
@@ -524,7 +516,6 @@ function _getFilters() {
         surface:     _checked(".surf-check"),
         stadium_type: _checked(".type-check"),
         ownership:   _checked(".own-check"),
-        ring_by:     document.getElementById("expRingBy").value,
         league:      document.getElementById("expLeague").value.trim(),
         style_key:   document.getElementById("expStyle").value,
         size_key:    document.getElementById("expSize").value,
@@ -535,8 +526,16 @@ function _getFilters() {
         legend:      document.getElementById("expLegend").checked  ? "1" : "0",
         scale:       document.getElementById("expScale").checked   ? "1" : "0",
         spotlight:   document.getElementById("expSpotlight").checked ? "1" : "0",
-        color_by:    document.getElementById("expColorBy").value || "surface",
-        no_badges:   document.getElementById("expColourDots").checked ? "1" : "0",
+        // One "colour-code by" control: a category colours the badge RING (badges
+        // kept) or, with "coloured dots" ticked, the whole dot (badges hidden).
+        color_by:    ((document.getElementById("expColourBy").value &&
+                       document.getElementById("expColourDots").checked)
+                      ? document.getElementById("expColourBy").value : "surface"),
+        ring_by:     ((document.getElementById("expColourBy").value &&
+                       !document.getElementById("expColourDots").checked)
+                      ? document.getElementById("expColourBy").value : ""),
+        no_badges:   ((document.getElementById("expColourBy").value &&
+                       document.getElementById("expColourDots").checked) ? "1" : "0"),
         label_size:  document.getElementById("expLabelSize").value,
         label_color: document.getElementById("expLabelColor").value,
         badge_size:  document.getElementById("expBadgeSize").value,
