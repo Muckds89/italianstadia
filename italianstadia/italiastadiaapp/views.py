@@ -2541,10 +2541,12 @@ def _trimmed_bbox(stadiums, pad=0.06, qlon=0.02):
 def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None):
     """Pick the inset box geometry (size + emptiest corner) up front, so the main
     map's label engine can RESERVE it and never draw a label under the inset."""
-    IW = max(360, int(W * 0.26))
+    IW = max(300, int(W * 0.21))
     IH = int(IW * 0.74)
     margin = 16
-    cluster_bbox = _bbox_with_padding(inset_stadiums, pad=0.15)
+    # Tight padding so the source rectangle on the main map hugs the real grounds
+    # (an honest magnifier, not an oversized box).
+    cluster_bbox = _bbox_with_padding(inset_stadiums, pad=0.06)
     if main_bbox:
         cxs = [_lon_lat_to_px(s["lon"], s["lat"], main_bbox, W, H) for s in inset_stadiums]
         ccx = sum(p[0] for p in cxs) / len(cxs)
@@ -2581,7 +2583,12 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
     ix0, iy0, IW, IH = layout["ix0"], layout["iy0"], layout["IW"], layout["IH"]
     cluster_bbox = layout["cluster_bbox"]
 
-    inset_img = _solid_background(style_key, IW, IH, cluster_bbox).convert("RGBA")
+    # Same background as the main map (satellite/dark tiles), so the zoom reads as
+    # a real magnifier of the area rather than a flat green panel.
+    use_tiles = params.get("tiles", True) and not params.get("bg_color")
+    inset_img = _make_background(style_key, IW, IH, cluster_bbox,
+                                 use_tiles=use_tiles,
+                                 land_color=params.get("bg_color")).convert("RGBA")
     badges = _prefetch_badges(inset_stadiums, size=int(IW * 0.07))
 
     try:
@@ -3331,26 +3338,35 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
         col_x0 = EDGE if side == "left" else W - EDGE - maxw
         bands = _bands_for(col_x0, col_x0 + maxw)
         col.sort(key=lambda it: it["py"])       # order-preserving → leaders don't cross
-        # Spread labels EVENLY over the full column height (use all the space) by
-        # distributing the slack as equal gaps; tighten only if they don't all fit.
-        n = len(col)
+        # Build the FREE vertical segments (the column minus reserved bands), then
+        # pack labels across them with an even gap. Packing into the real free space
+        # means nothing cascades off the frame, so labels never silently drop.
+        free, y = [], EDGE
+        for b0, b1 in sorted((max(b0, EDGE), min(b1, H - EDGE)) for b0, b1 in bands):
+            if b0 > y:
+                free.append([y, b0])
+            y = max(y, b1)
+        if y < H - EDGE:
+            free.append([y, H - EDGE])
+        if not free:
+            return
+        free_total = sum(e - s for s, e in free)
         total_h = sum(it["pill_h"] for it in col)
-        avail = (H - 2 * EDGE)
-        gap = max(GAPY, (avail - total_h) / (n + 1)) if avail > total_h else GAPY
-        cursor = EDGE + (gap if avail > total_h else 0)
+        n = len(col)
+        gap = max(GAPY, (free_total - total_h) / (n + 1)) if free_total > total_h else GAPY
+        seg = 0
+        cursor = free[0][0] + (gap if free_total > total_h else 0)
         for it in col:
-            ly = cursor
-            moved = True
-            while moved:                        # slide below any reserved band hit
-                moved = False
-                for b0, b1 in bands:
-                    if ly < b1 and ly + it["pill_h"] > b0:
-                        ly, moved = b1 + GAPY, True
-            if ly + it["pill_h"] > H - EDGE:
-                it["lx"] = None                 # no vertical room left → drop
+            # jump to the next free segment if this label won't fit in the current one
+            while seg < len(free) and cursor + it["pill_h"] > free[seg][1]:
+                seg += 1
+                if seg < len(free):
+                    cursor = free[seg][0]
+            if seg >= len(free):
+                it["lx"] = None                 # genuinely no room left
                 continue
-            it["lx"], it["ly"], it["side"] = col_x0, int(ly), side
-            cursor = ly + it["pill_h"] + gap
+            it["lx"], it["ly"], it["side"] = col_x0, int(cursor), side
+            cursor += it["pill_h"] + gap
 
     _place_column(left_col, "left")
     _place_column(right_col, "right")
