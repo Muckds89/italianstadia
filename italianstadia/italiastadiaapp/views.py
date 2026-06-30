@@ -2538,44 +2538,48 @@ def _trimmed_bbox(stadiums, pad=0.06, qlon=0.02):
     return (lon_min - lon_pad, lat_min - lat_pad, lon_max + lon_pad, lat_max + lat_pad)
 
 
-def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
-                main_bbox=None, reserves=None):
-    """Magnifier inset: render the densest cluster zoomed into a corner box, draw
-    a source outline where it sits on the main map, and connect the two. Labels in
-    the box are clean because only a few grounds are shown, enlarged."""
-    if not inset_stadiums:
-        return img
-
+def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None):
+    """Pick the inset box geometry (size + emptiest corner) up front, so the main
+    map's label engine can RESERVE it and never draw a label under the inset."""
     IW = max(360, int(W * 0.26))
     IH = int(IW * 0.74)
     margin = 16
-
-    # --- choose the emptiest corner: farthest from the cluster, avoiding overlays ---
     cluster_bbox = _bbox_with_padding(inset_stadiums, pad=0.28)
     if main_bbox:
-        cxs = [(_lon_lat_to_px(s["lon"], s["lat"], main_bbox, W, H)) for s in inset_stadiums]
+        cxs = [_lon_lat_to_px(s["lon"], s["lat"], main_bbox, W, H) for s in inset_stadiums]
         ccx = sum(p[0] for p in cxs) / len(cxs)
         ccy = sum(p[1] for p in cxs) / len(cxs)
     else:
         ccx, ccy = W / 2, H / 2
     corners = {
-        "tl": (margin, margin),
-        "tr": (W - IW - margin, margin),
-        "bl": (margin, H - IH - margin),
-        "br": (W - IW - margin, H - IH - margin),
+        "tl": (margin, margin), "tr": (W - IW - margin, margin),
+        "bl": (margin, H - IH - margin), "br": (W - IW - margin, H - IH - margin),
     }
     def _corner_score(pos):
         x0, y0 = corners[pos]
         cx, cy = x0 + IW / 2, y0 + IH / 2
         dist = ((cx - ccx) ** 2 + (cy - ccy) ** 2) ** 0.5
         box = (x0, y0, x0 + IW, y0 + IH)
-        penalty = 0
-        for rb in (reserves or []):
-            if not (box[2] < rb[0] or box[0] > rb[2] or box[3] < rb[1] or box[1] > rb[3]):
-                penalty += 10000
+        penalty = sum(10000 for rb in (reserves or [])
+                      if not (box[2] < rb[0] or box[0] > rb[2] or box[3] < rb[1] or box[1] > rb[3]))
         return dist - penalty
     pos = max(corners, key=_corner_score)
     ix0, iy0 = corners[pos]
+    return {"ix0": ix0, "iy0": iy0, "IW": IW, "IH": IH, "cluster_bbox": cluster_bbox,
+            "box": (ix0, iy0, ix0 + IW, iy0 + IH)}
+
+
+def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
+                main_bbox=None, layout=None):
+    """Magnifier inset: render the densest cluster zoomed into a corner box, draw
+    a source outline where it sits on the main map, and connect the two. Labels in
+    the box are clean because only a few grounds are shown, enlarged."""
+    if not inset_stadiums:
+        return img
+    if layout is None:
+        layout = _inset_layout(inset_stadiums, W, H, main_bbox)
+    ix0, iy0, IW, IH = layout["ix0"], layout["iy0"], layout["IW"], layout["IH"]
+    cluster_bbox = layout["cluster_bbox"]
 
     inset_img = _solid_background(style_key, IW, IH, cluster_bbox).convert("RGBA")
     badges = _prefetch_badges(inset_stadiums, size=int(IW * 0.07))
@@ -2586,11 +2590,12 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
     except Exception:
         font_s = font_t = ImageFont.load_default()
 
-    placed = []
     BR = max(11, int(IW * 0.035))
     rr = BR + 2
     d = ImageDraw.Draw(inset_img)
 
+    # Pass 1: draw all badges first (so labels, drawn next, are never covered).
+    dots = []
     for s in inset_stadiums:
         px, py = _lon_lat_to_px(s["lon"], s["lat"], cluster_bbox, IW, IH)
         colour    = _dot_colour(s, params, country_index)
@@ -2601,28 +2606,56 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
             mask = Image.new("L", (BR*2, BR*2), 0)
             ImageDraw.Draw(mask).ellipse([0, 0, BR*2-1, BR*2-1], fill=255)
             inset_img.paste(b, (px-BR, py-BR), mask)
-            d = ImageDraw.Draw(inset_img)
         else:
             d.ellipse([px-BR, py-BR, px+BR, py+BR], fill=colour)
+        dots.append((px, py, s))
+    d = ImageDraw.Draw(inset_img)
 
+    # Pass 2: place each label with a small search (sides + vertical nudges),
+    # avoiding the badges and other labels, so all of them show.
+    placed = []
+    badge_circles = [(px, py, rr) for px, py, _ in dots]
+    def _hits_badge(box):
+        cx2, cy2 = (box[0]+box[2])/2, (box[1]+box[3])/2
+        hw, hh = (box[2]-box[0])/2, (box[3]-box[1])/2
+        for bx, by, br in badge_circles:
+            if max(abs(bx-cx2)-hw, 0)**2 + max(abs(by-cy2)-hh, 0)**2 < (br+2)**2:
+                return True
+        return False
+    for px, py, s in dots:
         label1 = s.get("team_name", "") or ""
         label2 = s["name"]
         tw = max(int(len(label1) * font_t.size * 0.55), int(len(label2) * font_s.size * 0.58)) + 8
         th = (font_t.size + 2 if label1 else 0) + font_s.size + 6
-        gap = 7
-        lx = px + rr + gap if px + rr + gap + tw < IW - 4 else px - rr - gap - tw
-        ly = max(2, min(py - th // 2, IH - th - 2))
-        box = (lx, ly, lx + tw, ly + th)
-        if not any(not (box[2] < pb[0] or box[0] > pb[2] or box[3] < pb[1] or box[1] > pb[3])
-                   for pb in placed):
-            d.rounded_rectangle([lx-3, ly-2, lx+tw+3, ly+th+2], radius=4, fill=(10, 13, 24, 235))
-            d.line([(px + (rr if lx > px else -rr), py),
-                    (lx if lx > px else lx+tw, ly + th // 2)], fill=(255, 255, 255, 170), width=1)
-            yy = ly + 3
-            if label1:
-                d.text((lx+3, yy), label1, font=font_t, fill=(170, 205, 255)); yy += font_t.size + 2
-            d.text((lx+3, yy), label2, font=font_s, fill=(255, 255, 255))
-            placed.append(box)
+        step = th + 4
+        chosen = None
+        for voff in [0, -step, step, -2*step, 2*step, -3*step, 3*step]:
+            for gap in (rr + 6, rr + 22):
+                for lx in (px + gap, px - gap - tw):
+                    ly = int(py + voff - th/2)
+                    box = (lx, ly, lx + tw, ly + th)
+                    if lx < 3 or ly < 2 or lx+tw > IW-3 or ly+th > IH-3:
+                        continue
+                    if _hits_badge(box):
+                        continue
+                    if any(not (box[2]<pb[0] or box[0]>pb[2] or box[3]<pb[1] or box[1]>pb[3])
+                           for pb in placed):
+                        continue
+                    chosen = (lx, ly, box)
+                    break
+                if chosen: break
+            if chosen: break
+        if not chosen:
+            continue
+        lx, ly, box = chosen
+        d.rounded_rectangle([lx-3, ly-2, lx+tw+3, ly+th+2], radius=4, fill=(10, 13, 24, 235))
+        d.line([(px + (rr if lx > px else -rr), py),
+                (lx if lx > px else lx+tw, ly + th // 2)], fill=(255, 255, 255, 170), width=1)
+        yy = ly + 3
+        if label1:
+            d.text((lx+3, yy), label1, font=font_t, fill=(170, 205, 255)); yy += font_t.size + 2
+        d.text((lx+3, yy), label2, font=font_s, fill=(255, 255, 255))
+        placed.append(box)
 
     d.rectangle([(0, 0), (IW-1, IH-1)], outline=(120, 200, 255), width=3)
     try:
@@ -3283,7 +3316,10 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
         # either side of a narrow country), using the whole frame. Rich search +
         # both sides always, since labels are never allowed to overlap.
         maxgap = int(W * 0.60)
-        base_gaps = [int(maxgap * f) for f in (1.0, 0.78, 0.60, 0.45, 0.33, 0.24, 0.17, 0.11)]
+        # Small absolute gaps FIRST so a label can sit right beside its badge
+        # (short leader = no spaghetti); large gaps remain as a fallback for clusters.
+        base_gaps = [rr + 8, rr + 28, int(W * 0.05), int(W * 0.09)] + \
+                    [int(maxgap * f) for f in (0.45, 0.33, 0.24, 0.17, 0.11)]
         base_voffs = [0]
         for k in range(1, 16):
             base_voffs += [-k * vstep, k * vstep]
@@ -3333,14 +3369,14 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
                         # the nearer side, with a light vertical fallback term.
                         cx2 = (box[0] + box[2]) / 2
                         cy2 = (box[1] + box[3]) / 2
-                        edge = min(cx2, W - cx2) + 0.25 * min(cy2, H - cy2)
-                        # Gentle balance across the two margins, but a leader-line
-                        # length penalty keeps each label NEAR its own badge so we
-                        # don't fling an east-side badge's label to the west edge
-                        # (which caused labels to collide).
-                        crowd = (left_n if cx2 < W / 2 else right_n) * 4
+                        # Proximity-first: minimise the leader length so each label
+                        # hugs its own badge (short, non-crossing leaders). A small
+                        # margin term breaks ties toward the side seas; a light crowd
+                        # term keeps the two halves balanced.
                         linelen = abs(px - cx2) + abs(py - cy2)
-                        score = edge + crowd + 0.18 * linelen
+                        edge = min(cx2, W - cx2) + 0.25 * min(cy2, H - cy2)
+                        crowd = (left_n if cx2 < W / 2 else right_n) * 1.5
+                        score = linelen + 0.06 * edge + crowd
                         if best_score is None or score < best_score:
                             best, best_score = (lx, ly, box, pts), score
             return best
@@ -3816,11 +3852,17 @@ def _compose_export_image(params):
     if params.get("logo"):
         reserves.append(_logo_box(W, H))                          # bottom-right
 
+    # Reserve the inset box BEFORE labels so no main-map label is hidden under it.
+    inset_layout = None
+    if inset_stadiums:
+        inset_layout = _inset_layout(inset_stadiums, W, H, main_bbox=bbox, reserves=reserves)
+        reserves.append(inset_layout["box"])
+
     img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index,
                                 reserve_boxes=reserves)
     if inset_stadiums:
         img = _draw_inset(img, inset_stadiums, params, W, H, country_index,
-                          params["style_key"], main_bbox=bbox, reserves=reserves)
+                          params["style_key"], main_bbox=bbox, layout=inset_layout)
     legend_n = 0
     if params["legend"]:
         img = _draw_legend(img, params, stadiums)
