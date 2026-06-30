@@ -3279,135 +3279,86 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
                 return pts
         return route_h if allow_cross else None
 
-    # Place labels left-to-right so left badges claim left space first
-    order = sorted(dot_positions, key=lambda t: t[0])
+    # ── Column-leader labelling (general — no per-map tuning) ─────────────────
+    # Push every label out to the LEFT or RIGHT margin and stack the labels in the
+    # SAME vertical order as their badges. An order-preserving point-to-column
+    # matching is planar, so leader lines never cross; pushing labels to the
+    # margins also keeps them clear of the badges (no congestion). Reserved overlay
+    # areas (title, legend, logo, inset, …) become forbidden vertical bands the
+    # column skips. Works for any selection without tuning.
+    EDGE = max(20, int(min(W, H) * 0.03))
+    GAPY = max(6, int(FONT_SZ * 0.35))
 
-    # Hard wall-clock budget: label placement is O(n²); for huge selections it
-    # could run ~30-50s, blow Render's request timeout, and stack memory across
-    # retries → OOM. Stop placing once the budget is spent (remaining labels are
-    # dropped, which R3 permits at ≥70 badges; small maps finish well within it).
-    label_deadline = _time.monotonic() + 10
-
-    for px, py, s in order:
-        if _time.monotonic() > label_deadline:
-            break
-        team_line    = s.get("team_name", "") or ""
-        stadium_line = s["name"]
-
+    items = []
+    for px, py, s in dot_positions:
+        team_line, stadium_line = (s.get("team_name", "") or ""), s["name"]
         try:
-            tb1 = draw.textbbox((0, 0), team_line,    font=font_team)
+            tb1 = draw.textbbox((0, 0), team_line, font=font_team)
             tw1, th1 = tb1[2] - tb1[0], tb1[3] - tb1[1]
             tb2 = draw.textbbox((0, 0), stadium_line, font=font_stadium)
             tw2, th2 = tb2[2] - tb2[0], tb2[3] - tb2[1]
         except AttributeError:
             tw1, th1 = len(team_line) * 7, FONT_SZ2
             tw2, th2 = len(stadium_line) * 9, FONT_SZ
-
         show_team = bool(team_line)
-        pill_w = max(tw1, tw2) + PAD_X * 2
-        pill_h = (th1 + LINE_GAP + th2 if show_team else th2) + PAD_Y * 2
+        items.append(dict(
+            px=px, py=py, team=team_line, stadium=stadium_line, show_team=show_team, th1=th1,
+            pill_w=max(tw1, tw2) + PAD_X * 2,
+            pill_h=(th1 + LINE_GAP + th2 if show_team else th2) + PAD_Y * 2,
+            side="left" if px < W / 2 else "right"))
 
-        # R2 side rule: left-half badges → label left, right-half → label right
-        primary_side = "left" if px < W / 2 else "right"
-        vstep = pill_h + 6
+    def _bands_for(col_x0, col_x1):
+        """Vertical [y0,y1] intervals the column must skip (reserved boxes that
+        overlap the column's x-range), sorted top-down."""
+        return sorted((rb[1], rb[3]) for rb in (reserve_boxes or [])
+                      if not (rb[2] < col_x0 or rb[0] > col_x1))
 
-        # Candidate generation: gaps reach most of the canvas WIDTH so labels can
-        # be pushed all the way into the far left/right margins (e.g. the empty sea
-        # either side of a narrow country), using the whole frame. Rich search +
-        # both sides always, since labels are never allowed to overlap.
-        maxgap = int(W * 0.60)
-        # Small absolute gaps FIRST so a label can sit right beside its badge
-        # (short leader = no spaghetti); large gaps remain as a fallback for clusters.
-        base_gaps = [rr + 8, rr + 28, int(W * 0.05), int(W * 0.09)] + \
-                    [int(maxgap * f) for f in (0.45, 0.33, 0.24, 0.17, 0.11)]
-        base_voffs = [0]
-        for k in range(1, 16):
-            base_voffs += [-k * vstep, k * vstep]
+    def _place_column(col, side):
+        if not col:
+            return
+        maxw = max(it["pill_w"] for it in col)
+        col_x0 = EDGE if side == "left" else W - EDGE - maxw
+        bands = _bands_for(col_x0, col_x0 + maxw)
+        col.sort(key=lambda it: it["py"])
+        cursor = EDGE
+        for it in col:
+            ly = max(cursor, it["py"] - it["pill_h"] / 2)
+            moved = True
+            while moved:                       # slide below any reserved band hit
+                moved = False
+                for b0, b1 in bands:
+                    if ly < b1 and ly + it["pill_h"] > b0:
+                        ly, moved = b1 + GAPY, True
+            if ly + it["pill_h"] > H - EDGE:
+                it["lx"] = None                # no vertical room left → drop
+                continue
+            it["lx"], it["ly"] = col_x0, int(ly)
+            cursor = ly + it["pill_h"] + GAPY
 
-        # Prefer the natural side (left badge → left) but allow the other side too.
-        sides = [primary_side, "right" if primary_side == "left" else "left"]
+    _place_column([it for it in items if it["side"] == "left"], "left")
+    _place_column([it for it in items if it["side"] == "right"], "right")
 
-        EDGE_MARGIN = max(24, int(min(W, H) * 0.035))   # breathing room from edges
+    # Leaders first (under the pills), then the pills + text.
+    for it in items:
+        if it.get("lx") is None:
+            continue
+        lx, ly, pw, ph = it["lx"], it["ly"], it["pill_w"], it["pill_h"]
+        if it["side"] == "left":
+            inner_x, bx = lx + pw, it["px"] - rr
+        else:
+            inner_x, bx = lx, it["px"] + rr
+        draw.line([(bx, it["py"]), (inner_x, int(ly + ph / 2))], fill=label_rgb, width=1)
 
-        def _search(allow_overlap, allow_cross, avoid_lines):
-            best = None
-            best_score = None
-            # Balance the two side margins: count labels already placed on each
-            # half so we can nudge the next one toward the emptier side.
-            left_n = sum(1 for b in placed_boxes if (b[0] + b[2]) / 2 < W / 2)
-            right_n = len(placed_boxes) - left_n
-            for side in sides:
-                for voff in base_voffs:
-                    for gap in base_gaps:
-                        if side == "right":
-                            lx = int(px + gap)
-                        else:
-                            lx = int(px - gap - pill_w)
-                        ly = int(py + voff - pill_h / 2)
-                        if (lx < EDGE_MARGIN or ly < EDGE_MARGIN
-                                or lx + pill_w > W - EDGE_MARGIN
-                                or ly + pill_h > H - EDGE_MARGIN):
-                            continue
-                        box = (lx, ly, lx + pill_w, ly + pill_h)
-                        # Never place a label over a reserved overlay area (title,
-                        # logo, legend, scale bar, north arrow), always enforced.
-                        if reserve_boxes and any(
-                            not (box[2] < rb[0] or box[0] > rb[2] or box[3] < rb[1] or box[1] > rb[3])
-                            for rb in reserve_boxes
-                        ):
-                            continue
-                        # A label pill may overlap OTHER pills in the relaxed pass,
-                        # but must NEVER cover a badge (badges are the anchors).
-                        if _box_overlaps(box, pills=not allow_overlap, badges=True):
-                            continue
-                        pts = _route(px, py, side, lx, ly, pill_w, pill_h,
-                                     allow_cross=allow_cross, avoid_boxes=avoid_lines)
-                        if pts is None:
-                            continue
-                        # Prefer the LEFT/RIGHT margins (the side seas) over the
-                        # top/bottom edges: score is mainly horizontal distance to
-                        # the nearer side, with a light vertical fallback term.
-                        cx2 = (box[0] + box[2]) / 2
-                        cy2 = (box[1] + box[3]) / 2
-                        # Proximity-first: minimise the leader length so each label
-                        # hugs its own badge (short, non-crossing leaders). A small
-                        # margin term breaks ties toward the side seas; a light crowd
-                        # term keeps the two halves balanced.
-                        linelen = abs(px - cx2) + abs(py - cy2)
-                        edge = min(cx2, W - cx2) + 0.25 * min(cy2, H - cy2)
-                        crowd = (left_n if cx2 < W / 2 else right_n) * 1.5
-                        score = linelen + 0.06 * edge + crowd
-                        if best_score is None or score < best_score:
-                            best, best_score = (lx, ly, box, pts), score
-            return best
-
-        # Labels NEVER overlap. Escalate while keeping pills non-overlapping:
-        #  1. clean: line avoids badges AND other label pills
-        #  2. line may cross another label pill (but not a badge)
-        #  3. line may cross a badge too (pill still doesn't overlap anything)
-        # Only if no NON-overlapping pill position exists at all do we drop it.
-        chosen = _search(allow_overlap=False, allow_cross=False, avoid_lines=True)
-        if chosen is None:
-            chosen = _search(allow_overlap=False, allow_cross=False, avoid_lines=False)
-        if chosen is None:
-            chosen = _search(allow_overlap=False, allow_cross=True, avoid_lines=False)
-
-        if not chosen:
-            continue  # no non-overlapping spot anywhere → drop (never stack)
-
-        lx, ly, box, pts = chosen
-
-        # ── Orthogonal leader polyline + pill, sharp 90° corners ──
-        draw.line([(int(x), int(y)) for x, y in pts], fill=label_rgb, width=1)
-        draw.rounded_rectangle([lx, ly, lx + pill_w, ly + pill_h], radius=5, fill=(8, 10, 20, 220))
-
+    for it in items:
+        if it.get("lx") is None:
+            continue
+        lx, ly, pw, ph = it["lx"], it["ly"], it["pill_w"], it["pill_h"]
+        draw.rounded_rectangle([lx, ly, lx + pw, ly + ph], radius=5, fill=(8, 10, 20, 220))
         ty = ly + PAD_Y
-        if show_team:
-            draw.text((lx + PAD_X, ty), team_line, font=font_team, fill=team_rgb)
-            ty += th1 + LINE_GAP
-        draw.text((lx + PAD_X, ty), stadium_line, font=font_stadium, fill=label_rgb)
-
-        placed_boxes.append(box)
+        if it["show_team"]:
+            draw.text((lx + PAD_X, ty), it["team"], font=font_team, fill=team_rgb)
+            ty += it["th1"] + LINE_GAP
+        draw.text((lx + PAD_X, ty), it["stadium"], font=font_stadium, fill=label_rgb)
 
     return img
 
