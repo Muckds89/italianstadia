@@ -297,7 +297,15 @@
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="expInset">
-                    <label class="form-check-label small" for="expInset">Zoom inset on the busiest cluster (de-clutters labels)</label>
+                    <label class="form-check-label small" for="expInset">Auto zoom inset on the busiest cluster</label>
+                </div>
+                <div class="mt-2">
+                    <label class="form-label small mb-1">Or draw your own detail inset</label>
+                    <div class="btn-group btn-group-sm w-100" role="group">
+                        <button type="button" id="insetDrawBtn" class="btn btn-outline-light">✏️ Draw box on preview</button>
+                        <button type="button" id="insetClearBtn" class="btn btn-outline-secondary" style="max-width:90px">Clear</button>
+                    </div>
+                    <div class="small text-secondary mt-1" id="insetHint">Generate a preview, click <em>Draw box</em>, then drag a rectangle on the map to zoom that area.</div>
                 </div>
             </div>
         </div>
@@ -531,6 +539,7 @@ function _getFilters() {
         scale:       document.getElementById("expScale").checked   ? "1" : "0",
         spotlight:   document.getElementById("expSpotlight").checked ? "1" : "0",
         inset:       document.getElementById("expInset").checked ? "1" : "0",
+        inset_box:   window._insetBox ? window._insetBox.join(",") : "",
         // One "colour-code by" control: a category colours the badge RING (badges
         // kept) or, with "coloured dots" ticked, the whole dot (badges hidden).
         color_by:    ((document.getElementById("expColourBy").value &&
@@ -607,6 +616,84 @@ document.getElementById("previewBtn").addEventListener("click", function () {
             spinner.classList.add("d-none");
         });
 });
+
+// ── Draw-your-own inset box on the preview ───────────────────────────────────
+(function () {
+    window._insetBox = null;
+    let drawing = false, active = false, sx = 0, sy = 0;
+    const wrap = document.getElementById("previewWrap");
+    const hint = document.getElementById("insetHint");
+    let rectEl = null;
+
+    function ensureRect() {
+        if (!rectEl) {
+            rectEl = document.createElement("div");
+            rectEl.style.cssText = "position:absolute;border:2px solid #ff4d4f;" +
+                "background:rgba(255,77,79,.12);pointer-events:none;z-index:5;display:none";
+            wrap.appendChild(rectEl);
+        }
+        return rectEl;
+    }
+    function imgEl() { return wrap.querySelector("img.preview-img"); }
+
+    document.getElementById("insetDrawBtn").addEventListener("click", function () {
+        if (!imgEl()) { hint.textContent = "Generate a preview first, then draw the box."; return; }
+        active = !active;
+        this.classList.toggle("btn-light", active);
+        this.classList.toggle("btn-outline-light", !active);
+        wrap.style.cursor = active ? "crosshair" : "";
+        hint.textContent = active ? "Drag a rectangle on the map…"
+                                  : "Click “Draw box”, then drag a rectangle on the map.";
+    });
+    document.getElementById("insetClearBtn").addEventListener("click", function () {
+        window._insetBox = null;
+        if (rectEl) rectEl.style.display = "none";
+        hint.textContent = "Inset box cleared. Generate the preview to update.";
+    });
+
+    function pos(e) {
+        const wr = wrap.getBoundingClientRect();
+        const t = e.touches ? e.touches[0] : e;
+        return { x: t.clientX - wr.left, y: t.clientY - wr.top };
+    }
+    wrap.addEventListener("mousedown", function (e) {
+        if (!active || !imgEl()) return;
+        drawing = true;
+        const p = pos(e); sx = p.x; sy = p.y;
+        const r = ensureRect();
+        r.style.display = "block";
+        r.style.left = sx + "px"; r.style.top = sy + "px";
+        r.style.width = "0px"; r.style.height = "0px";
+        e.preventDefault();
+    });
+    wrap.addEventListener("mousemove", function (e) {
+        if (!drawing) return;
+        const p = pos(e);
+        rectEl.style.left = Math.min(sx, p.x) + "px";
+        rectEl.style.top = Math.min(sy, p.y) + "px";
+        rectEl.style.width = Math.abs(p.x - sx) + "px";
+        rectEl.style.height = Math.abs(p.y - sy) + "px";
+    });
+    window.addEventListener("mouseup", function (e) {
+        if (!drawing) return;
+        drawing = false;
+        const img = imgEl();
+        if (!img) return;
+        const ir = img.getBoundingClientRect(), wr = wrap.getBoundingClientRect();
+        const p = pos(e);
+        // fractions relative to the IMAGE (which may be letter-boxed in the wrap)
+        const fx = v => Math.min(1, Math.max(0, (v + wr.left - ir.left) / ir.width));
+        const fy = v => Math.min(1, Math.max(0, (v + wr.top - ir.top) / ir.height));
+        const x0 = fx(Math.min(sx, p.x)), x1 = fx(Math.max(sx, p.x));
+        const y0 = fy(Math.min(sy, p.y)), y1 = fy(Math.max(sy, p.y));
+        if (x1 - x0 < 0.02 || y1 - y0 < 0.02) { window._insetBox = null; rectEl.style.display = "none"; return; }
+        window._insetBox = [x0.toFixed(4), y0.toFixed(4), x1.toFixed(4), y1.toFixed(4)].map(Number);
+        active = false; wrap.style.cursor = "";
+        const btn = document.getElementById("insetDrawBtn");
+        btn.classList.remove("btn-light"); btn.classList.add("btn-outline-light");
+        hint.textContent = "Box set ✓ — click “Generate Preview” to see the zoom inset.";
+    });
+})();
 
 // ── Free download (branded: logo + watermark, full selected size) ─────────────
 document.getElementById("freeBtn").addEventListener("click", function () {

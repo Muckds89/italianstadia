@@ -2118,6 +2118,23 @@ def _hex_to_rgba(hex_str, default):
         return default
 
 
+def _parse_frac4(s):
+    """Parse 'fx0,fy0,fx1,fy1' (image fractions 0..1) → (x0,y0,x1,y1) normalised
+    so x0<x1, y0<y1; returns None if invalid or degenerate."""
+    try:
+        v = [float(x) for x in str(s).split(",")]
+        if len(v) != 4:
+            return None
+        v = [min(1.0, max(0.0, x)) for x in v]
+        x0, x1 = sorted((v[0], v[2]))
+        y0, y1 = sorted((v[1], v[3]))
+        if (x1 - x0) < 0.02 or (y1 - y0) < 0.02:   # too tiny → ignore
+            return None
+        return (x0, y0, x1, y1)
+    except (ValueError, TypeError):
+        return None
+
+
 def _parse_export_params(request):
     """Validate and return all export configuration from query params.
     Accepts both 'size'/'style' (legacy) and 'size_key'/'style_key' (export page).
@@ -2202,6 +2219,9 @@ def _parse_export_params(request):
         "scale": request.GET.get("scale", "0") == "1",
         "spotlight": request.GET.get("spotlight", "0") == "1",
         "inset": "auto" if request.GET.get("inset", "0") == "1" else "",
+        # User-drawn inset rectangle as 4 image fractions "fx0,fy0,fx1,fy1" (0..1).
+        # When present it overrides the auto cluster and zooms exactly that area.
+        "inset_box": _parse_frac4(request.GET.get("inset_box", "")),
         "labels": request.GET.get("labels", "1") == "1",
         "logo": request.GET.get("logo", "0") == "1",
         "tiles": request.GET.get("tiles", "1") != "0",
@@ -2540,19 +2560,24 @@ def _trimmed_bbox(stadiums, pad=0.06, qlon=0.02):
     return (lon_min - lon_pad, lat_min - lat_pad, lon_max + lon_pad, lat_max + lat_pad)
 
 
-def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None):
+def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox=None):
     """Pick the inset box geometry (size + emptiest corner) up front, so the main
-    map's label engine can RESERVE it and never draw a label under the inset."""
-    IW = max(300, int(W * 0.21))
-    IH = int(IW * 0.74)
+    map's label engine can RESERVE it and never draw a label under the inset. When
+    `zoom_bbox` is given (a user-drawn rectangle), that exact area is zoomed; else
+    the area is derived tightly from the inset grounds."""
     margin = 16
-    # Tight padding so the source rectangle on the main map hugs the real grounds
-    # (an honest magnifier, not an oversized box).
-    cluster_bbox = _bbox_with_padding(inset_stadiums, pad=0.06)
+    # The source rectangle: an explicit drawn box wins; else hug the grounds.
+    cluster_bbox = zoom_bbox or _bbox_with_padding(inset_stadiums, pad=0.06)
+    # Match the inset box aspect to the drawn area so the zoom isn't distorted.
+    aspect = ((cluster_bbox[2] - cluster_bbox[0]) /
+              max(1e-6, _merc_y(cluster_bbox[1]) - _merc_y(cluster_bbox[3])) /
+              (W / float(H)))
+    IW = max(300, int(W * 0.24))
+    IH = int(max(160, min(IW * 1.1, IW / max(0.4, min(2.5, aspect)))))
     if main_bbox:
-        cxs = [_lon_lat_to_px(s["lon"], s["lat"], main_bbox, W, H) for s in inset_stadiums]
-        ccx = sum(p[0] for p in cxs) / len(cxs)
-        ccy = sum(p[1] for p in cxs) / len(cxs)
+        ax0, ay0 = _lon_lat_to_px(cluster_bbox[0], cluster_bbox[3], main_bbox, W, H)
+        ax1, ay1 = _lon_lat_to_px(cluster_bbox[2], cluster_bbox[1], main_bbox, W, H)
+        ccx, ccy = (ax0 + ax1) / 2, (ay0 + ay1) / 2
     else:
         ccx, ccy = W / 2, H / 2
     corners = {
@@ -3786,7 +3811,6 @@ def _compose_export_image(params):
             return None, "No stadiums match the selected filters."
 
     W, H = params["W"], params["H"]
-    main_stadiums, inset_stadiums = _split_main_inset(stadiums, params)
     # Broad, unfiltered Europe export: trim longitude outliers (Iceland / Ural Russia) so
     # the frame stays on Europe. Filtered exports (country/league/tournament/dev/national)
     # keep the full bbox so they're never cropped.
@@ -3801,8 +3825,24 @@ def _compose_export_image(params):
         tb = (max(tb[0], -11.0), tb[1], min(tb[2], 45.0), tb[3])
         bbox = _cover_bbox_to_aspect(tb, W, H)
     else:
-        raw_bbox = _bbox_with_padding(main_stadiums if main_stadiums else stadiums)
+        raw_bbox = _bbox_with_padding(stadiums)
         bbox = _expand_bbox_to_aspect(raw_bbox, W, H)
+
+    # Inset grounds + zoom area: a user-drawn box (image fractions over the map)
+    # wins and zooms exactly that area; otherwise the auto cluster is used.
+    inset_stadiums, inset_zoom_bbox = [], None
+    ibox = params.get("inset_box")
+    if ibox:
+        lon0 = bbox[0] + ibox[0] * (bbox[2] - bbox[0])
+        lon1 = bbox[0] + ibox[2] * (bbox[2] - bbox[0])
+        myt, myb = _merc_y(bbox[3]), _merc_y(bbox[1])
+        lat_hi = _merc_y_inv(myt + ibox[1] * (myb - myt))   # fy=0 is the top → high lat
+        lat_lo = _merc_y_inv(myt + ibox[3] * (myb - myt))
+        inset_zoom_bbox = (lon0, lat_lo, lon1, lat_hi)
+        inset_stadiums = [s for s in stadiums
+                          if lon0 <= s["lon"] <= lon1 and lat_lo <= s["lat"] <= lat_hi][:8]
+    elif params.get("inset") == "auto":
+        inset_stadiums = _auto_inset_cluster(stadiums)
 
     country_index = {}
     for s in stadiums:
@@ -3816,7 +3856,7 @@ def _compose_export_image(params):
     # Spotlight: dim everything outside the selected country and outline it,
     # so badges/labels (drawn next, on top) stay fully bright.
     if params.get("spotlight"):
-        img = _spotlight_country(img, main_stadiums, bbox, W, H)
+        img = _spotlight_country(img, stadiums, bbox, W, H)
 
     # Reserve every overlay area from label placement so labels never land on the
     # title, logo, legend, scale bar, or north arrow. Map tiles/badges still
@@ -3841,7 +3881,8 @@ def _compose_export_image(params):
     # Reserve the inset box BEFORE labels so no main-map label is hidden under it.
     inset_layout = None
     if inset_stadiums:
-        inset_layout = _inset_layout(inset_stadiums, W, H, main_bbox=bbox, reserves=reserves)
+        inset_layout = _inset_layout(inset_stadiums, W, H, main_bbox=bbox, reserves=reserves,
+                                     zoom_bbox=inset_zoom_bbox)
         reserves.append(inset_layout["box"])
 
     # Draw ALL badges on the main map (incl. the inset cluster, so those grounds
@@ -3952,7 +3993,7 @@ def export_checkout(request):
         "country", "league", "ownership", "surface", "stadium_type",
         "color_by", "ring_by", "no_badges",
         "style_key", "size_key", "title", "subtitle", "labels",
-        "north", "legend", "scale", "spotlight", "logo", "bg_color", "inset",
+        "north", "legend", "scale", "spotlight", "logo", "bg_color", "inset", "inset_box",
         "label_size", "label_color", "badge_size", "tournament", "tstatus",
         "layer", "dstatus", "national",
     }
