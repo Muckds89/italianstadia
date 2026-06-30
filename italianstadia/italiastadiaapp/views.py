@@ -2492,7 +2492,7 @@ def _auto_inset_cluster(stadiums, max_n=9):
     centre, near = None, []
     for c in stadiums:
         grp = [s for s in stadiums
-               if abs(s["lat"] - c["lat"]) < 0.40 and abs(s["lon"] - c["lon"]) < 0.55]
+               if abs(s["lat"] - c["lat"]) < 0.28 and abs(s["lon"] - c["lon"]) < 0.40]
         if len(grp) > len(near):
             centre, near = c, grp
     if len(near) < 4:
@@ -2544,7 +2544,7 @@ def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None):
     IW = max(360, int(W * 0.26))
     IH = int(IW * 0.74)
     margin = 16
-    cluster_bbox = _bbox_with_padding(inset_stadiums, pad=0.28)
+    cluster_bbox = _bbox_with_padding(inset_stadiums, pad=0.15)
     if main_bbox:
         cxs = [_lon_lat_to_px(s["lon"], s["lat"], main_bbox, W, H) for s in inset_stadiums]
         ccx = sum(p[0] for p in cxs) / len(cxs)
@@ -3125,7 +3125,8 @@ def _dot_colour(stadium, params, country_index):
     return _category_colour(stadium, params["color_by"], params, country_index)
 
 
-def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, reserve_boxes=None):
+def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
+                          reserve_boxes=None, no_label_names=None):
     BADGE_R   = params.get("badge_size", 13)
     RING_W    = 2
     # Optional coloured ring around club badges (colour-codes a category while the
@@ -3289,8 +3290,11 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
     EDGE = max(20, int(min(W, H) * 0.03))
     GAPY = max(6, int(FONT_SZ * 0.35))
 
+    skip = no_label_names or set()
     items = []
     for px, py, s in dot_positions:
+        if s["name"] in skip:
+            continue                            # badge already drawn; label lives in the inset
         team_line, stadium_line = (s.get("team_name", "") or ""), s["name"]
         try:
             tb1 = draw.textbbox((0, 0), team_line, font=font_team)
@@ -3304,8 +3308,15 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
         items.append(dict(
             px=px, py=py, team=team_line, stadium=stadium_line, show_team=show_team, th1=th1,
             pill_w=max(tw1, tw2) + PAD_X * 2,
-            pill_h=(th1 + LINE_GAP + th2 if show_team else th2) + PAD_Y * 2,
-            side="left" if px < W / 2 else "right"))
+            pill_h=(th1 + LINE_GAP + th2 if show_team else th2) + PAD_Y * 2))
+
+    # Balance the two columns: split by x at the MEDIAN so roughly half the labels
+    # go each side (a far-west badge still labels left, far-east right), instead of
+    # piling onto whichever half holds the cluster.
+    by_x = sorted(items, key=lambda it: it["px"])
+    mid = len(by_x) // 2
+    left_col = by_x[:mid]
+    right_col = by_x[mid:]
 
     def _bands_for(col_x0, col_x1):
         """Vertical [y0,y1] intervals the column must skip (reserved boxes that
@@ -3319,24 +3330,30 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index, rese
         maxw = max(it["pill_w"] for it in col)
         col_x0 = EDGE if side == "left" else W - EDGE - maxw
         bands = _bands_for(col_x0, col_x0 + maxw)
-        col.sort(key=lambda it: it["py"])
-        cursor = EDGE
+        col.sort(key=lambda it: it["py"])       # order-preserving → leaders don't cross
+        # Spread labels EVENLY over the full column height (use all the space) by
+        # distributing the slack as equal gaps; tighten only if they don't all fit.
+        n = len(col)
+        total_h = sum(it["pill_h"] for it in col)
+        avail = (H - 2 * EDGE)
+        gap = max(GAPY, (avail - total_h) / (n + 1)) if avail > total_h else GAPY
+        cursor = EDGE + (gap if avail > total_h else 0)
         for it in col:
-            ly = max(cursor, it["py"] - it["pill_h"] / 2)
+            ly = cursor
             moved = True
-            while moved:                       # slide below any reserved band hit
+            while moved:                        # slide below any reserved band hit
                 moved = False
                 for b0, b1 in bands:
                     if ly < b1 and ly + it["pill_h"] > b0:
                         ly, moved = b1 + GAPY, True
             if ly + it["pill_h"] > H - EDGE:
-                it["lx"] = None                # no vertical room left → drop
+                it["lx"] = None                 # no vertical room left → drop
                 continue
-            it["lx"], it["ly"] = col_x0, int(ly)
-            cursor = ly + it["pill_h"] + GAPY
+            it["lx"], it["ly"], it["side"] = col_x0, int(ly), side
+            cursor = ly + it["pill_h"] + gap
 
-    _place_column([it for it in items if it["side"] == "left"], "left")
-    _place_column([it for it in items if it["side"] == "right"], "right")
+    _place_column(left_col, "left")
+    _place_column(right_col, "right")
 
     # Leaders first (under the pills), then the pills + text.
     for it in items:
@@ -3809,8 +3826,11 @@ def _compose_export_image(params):
         inset_layout = _inset_layout(inset_stadiums, W, H, main_bbox=bbox, reserves=reserves)
         reserves.append(inset_layout["box"])
 
-    img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index,
-                                reserve_boxes=reserves)
+    # Draw ALL badges on the main map (incl. the inset cluster, so those grounds
+    # still show in place); only their LABELS move into the zoom box.
+    inset_names = {s["name"] for s in inset_stadiums}
+    img = _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
+                                reserve_boxes=reserves, no_label_names=inset_names)
     if inset_stadiums:
         img = _draw_inset(img, inset_stadiums, params, W, H, country_index,
                           params["style_key"], main_bbox=bbox, layout=inset_layout)
