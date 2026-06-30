@@ -295,6 +295,10 @@
                     <input class="form-check-input" type="checkbox" id="expSpotlight">
                     <label class="form-check-label small" for="expSpotlight">Spotlight country (dim &amp; outline surroundings)</label>
                 </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="expInset">
+                    <label class="form-check-label small" for="expInset">Zoom inset on the busiest cluster (de-clutters labels)</label>
+                </div>
             </div>
         </div>
 
@@ -526,6 +530,7 @@ function _getFilters() {
         legend:      document.getElementById("expLegend").checked  ? "1" : "0",
         scale:       document.getElementById("expScale").checked   ? "1" : "0",
         spotlight:   document.getElementById("expSpotlight").checked ? "1" : "0",
+        inset:       document.getElementById("expInset").checked ? "1" : "0",
         // One "colour-code by" control: a category colours the badge RING (badges
         // kept) or, with "coloured dots" ticked, the whole dot (badges hidden).
         color_by:    ((document.getElementById("expColourBy").value &&

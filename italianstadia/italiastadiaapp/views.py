@@ -2201,6 +2201,7 @@ def _parse_export_params(request):
         "north": request.GET.get("north", "0") == "1",
         "scale": request.GET.get("scale", "0") == "1",
         "spotlight": request.GET.get("spotlight", "0") == "1",
+        "inset": "auto" if request.GET.get("inset", "0") == "1" else "",
         "labels": request.GET.get("labels", "1") == "1",
         "logo": request.GET.get("logo", "0") == "1",
         "tiles": request.GET.get("tiles", "1") != "0",
@@ -2482,8 +2483,35 @@ def _load_font(bold=False, size=20):
     return ImageFont.load_default()
 
 
-def _split_main_inset(stadiums):
-    # The Iceland inset was removed, everything is drawn on the main map.
+def _auto_inset_cluster(stadiums, max_n=9):
+    """Find the densest knot of grounds (e.g. the Milan area) to pull into a zoomed
+    inset, de-cluttering the main map's labels. Caps the inset at `max_n` of the
+    tightest grounds so the zoom box stays readable. Returns the cluster or []."""
+    if len(stadiums) < 8:
+        return []
+    centre, near = None, []
+    for c in stadiums:
+        grp = [s for s in stadiums
+               if abs(s["lat"] - c["lat"]) < 0.40 and abs(s["lon"] - c["lon"]) < 0.55]
+        if len(grp) > len(near):
+            centre, near = c, grp
+    if len(near) < 4:
+        return []
+    if len(near) > max_n:
+        near = sorted(near, key=lambda s: (s["lat"] - centre["lat"]) ** 2
+                      + (s["lon"] - centre["lon"]) ** 2)[:max_n]
+    return near
+
+
+def _split_main_inset(stadiums, params=None):
+    """When the inset option is on, peel the densest cluster off the main map so
+    its labels move into the zoom box. Otherwise everything stays on the main map."""
+    if params and params.get("inset") == "auto":
+        cluster = _auto_inset_cluster(stadiums)
+        if cluster:
+            cset = {id(s) for s in cluster}
+            main = [s for s in stadiums if id(s) not in cset]
+            return main, cluster
     return stadiums, []
 
 
@@ -2510,74 +2538,116 @@ def _trimmed_bbox(stadiums, pad=0.06, qlon=0.02):
     return (lon_min - lon_pad, lat_min - lat_pad, lon_max + lon_pad, lat_max + lat_pad)
 
 
-def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key):
-    """Draw Iceland inset (top-left) with badges and labels."""
+def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
+                main_bbox=None, reserves=None):
+    """Magnifier inset: render the densest cluster zoomed into a corner box, draw
+    a source outline where it sits on the main map, and connect the two. Labels in
+    the box are clean because only a few grounds are shown, enlarged."""
     if not inset_stadiums:
         return img
 
-    IW, IH = 280, 200
-    margin = 12
-    ix0, iy0 = margin, margin
+    IW = max(360, int(W * 0.26))
+    IH = int(IW * 0.74)
+    margin = 16
 
-    inset_bbox = _bbox_with_padding(inset_stadiums, pad=0.25)
-    inset_img  = _solid_background(style_key, IW, IH, inset_bbox)
+    # --- choose the emptiest corner: farthest from the cluster, avoiding overlays ---
+    cluster_bbox = _bbox_with_padding(inset_stadiums, pad=0.28)
+    if main_bbox:
+        cxs = [(_lon_lat_to_px(s["lon"], s["lat"], main_bbox, W, H)) for s in inset_stadiums]
+        ccx = sum(p[0] for p in cxs) / len(cxs)
+        ccy = sum(p[1] for p in cxs) / len(cxs)
+    else:
+        ccx, ccy = W / 2, H / 2
+    corners = {
+        "tl": (margin, margin),
+        "tr": (W - IW - margin, margin),
+        "bl": (margin, H - IH - margin),
+        "br": (W - IW - margin, H - IH - margin),
+    }
+    def _corner_score(pos):
+        x0, y0 = corners[pos]
+        cx, cy = x0 + IW / 2, y0 + IH / 2
+        dist = ((cx - ccx) ** 2 + (cy - ccy) ** 2) ** 0.5
+        box = (x0, y0, x0 + IW, y0 + IH)
+        penalty = 0
+        for rb in (reserves or []):
+            if not (box[2] < rb[0] or box[0] > rb[2] or box[3] < rb[1] or box[1] > rb[3]):
+                penalty += 10000
+        return dist - penalty
+    pos = max(corners, key=_corner_score)
+    ix0, iy0 = corners[pos]
 
-    badges = _prefetch_badges(inset_stadiums, size=16)
+    inset_img = _solid_background(style_key, IW, IH, cluster_bbox).convert("RGBA")
+    badges = _prefetch_badges(inset_stadiums, size=int(IW * 0.07))
 
     try:
-        font_s = ImageFont.truetype("arialbd.ttf", 13)
-        font_t = ImageFont.truetype("arial.ttf",   11)
+        font_s = ImageFont.truetype("arialbd.ttf", max(14, int(IW * 0.034)))
+        font_t = ImageFont.truetype("arial.ttf",   max(11, int(IW * 0.027)))
     except Exception:
         font_s = font_t = ImageFont.load_default()
 
     placed = []
-    BR, RW = 8, 2
-    rr = BR + RW
+    BR = max(11, int(IW * 0.035))
+    rr = BR + 2
+    d = ImageDraw.Draw(inset_img)
 
     for s in inset_stadiums:
-        px, py = _lon_lat_to_px(s["lon"], s["lat"], inset_bbox, IW, IH)
+        px, py = _lon_lat_to_px(s["lon"], s["lat"], cluster_bbox, IW, IH)
         colour    = _dot_colour(s, params, country_index)
         badge_img = badges.get(s["name"])
-
-        d = ImageDraw.Draw(inset_img)
         d.ellipse([px-rr, py-rr, px+rr, py+rr], fill=(255, 255, 255))
         if badge_img:
             b = badge_img.resize((BR*2, BR*2), Image.LANCZOS)
             mask = Image.new("L", (BR*2, BR*2), 0)
             ImageDraw.Draw(mask).ellipse([0, 0, BR*2-1, BR*2-1], fill=255)
             inset_img.paste(b, (px-BR, py-BR), mask)
+            d = ImageDraw.Draw(inset_img)
         else:
             d.ellipse([px-BR, py-BR, px+BR, py+BR], fill=colour)
 
-        # Simple label: team / stadium, right or left
         label1 = s.get("team_name", "") or ""
         label2 = s["name"]
-        tw = max(len(label1)*6, len(label2)*7)
-        th = 26
-        gap = 8
-        lx = px + rr + gap if px + rr + gap + tw < IW - 2 else px - rr - gap - tw
-        ly = py - th // 2
+        tw = max(int(len(label1) * font_t.size * 0.55), int(len(label2) * font_s.size * 0.58)) + 8
+        th = (font_t.size + 2 if label1 else 0) + font_s.size + 6
+        gap = 7
+        lx = px + rr + gap if px + rr + gap + tw < IW - 4 else px - rr - gap - tw
+        ly = max(2, min(py - th // 2, IH - th - 2))
         box = (lx, ly, lx + tw, ly + th)
-        if not any(not (box[2]<pb[0] or box[0]>pb[2] or box[3]<pb[1] or box[1]>pb[3]) for pb in placed):
-            d = ImageDraw.Draw(inset_img)
-            d.rounded_rectangle([lx-2,ly-2,lx+tw+2,ly+th+2], radius=3, fill=(8,10,20,210))
-            # leader line
-            d.line([(px + (rr if lx > px else -rr), py), (lx if lx > px else lx+tw, py)],
-                   fill=(255,255,255,160), width=1)
+        if not any(not (box[2] < pb[0] or box[0] > pb[2] or box[3] < pb[1] or box[1] > pb[3])
+                   for pb in placed):
+            d.rounded_rectangle([lx-3, ly-2, lx+tw+3, ly+th+2], radius=4, fill=(10, 13, 24, 235))
+            d.line([(px + (rr if lx > px else -rr), py),
+                    (lx if lx > px else lx+tw, ly + th // 2)], fill=(255, 255, 255, 170), width=1)
+            yy = ly + 3
             if label1:
-                d.text((lx, ly+2), label1, font=font_t, fill=(180,210,255))
-            d.text((lx, ly+14 if label1 else ly+6), label2, font=font_s, fill=(255,255,255))
+                d.text((lx+3, yy), label1, font=font_t, fill=(170, 205, 255)); yy += font_t.size + 2
+            d.text((lx+3, yy), label2, font=font_s, fill=(255, 255, 255))
             placed.append(box)
 
-    d = ImageDraw.Draw(inset_img)
-    d.rectangle([(0,0),(IW-1,IH-1)], outline=(160,165,190), width=2)
+    d.rectangle([(0, 0), (IW-1, IH-1)], outline=(120, 200, 255), width=3)
     try:
-        fhdr = ImageFont.truetype("arial.ttf", 12)
+        fhdr = ImageFont.truetype("arialbd.ttf", max(12, int(IW * 0.03)))
     except Exception:
         fhdr = ImageFont.load_default()
-    d.text((6, IH-18), "Iceland / Faroe Is.", font=fhdr, fill=(210,215,230))
+    d.text((8, 6), "Detail view", font=fhdr, fill=(190, 225, 255))
 
-    img.paste(inset_img, (ix0, iy0))
+    # --- source outline on the main map + connector to the inset box ---
+    if main_bbox:
+        sx0, sy0 = _lon_lat_to_px(cluster_bbox[0], cluster_bbox[3], main_bbox, W, H)
+        sx1, sy1 = _lon_lat_to_px(cluster_bbox[2], cluster_bbox[1], main_bbox, W, H)
+        md = ImageDraw.Draw(img)
+        md.rectangle([sx0, sy0, sx1, sy1], outline=(120, 200, 255), width=2)
+        # two connector lines from the source box to the inset box (magnifier look)
+        src_cx, src_cy = (sx0 + sx1) / 2, (sy0 + sy1) / 2
+        ins_cx, ins_cy = ix0 + IW / 2, iy0 + IH / 2
+        if ins_cx < src_cx:   # inset on the left
+            md.line([(sx0, sy0), (ix0 + IW, iy0)], fill=(120, 200, 255, 130), width=1)
+            md.line([(sx0, sy1), (ix0 + IW, iy0 + IH)], fill=(120, 200, 255, 130), width=1)
+        else:                  # inset on the right
+            md.line([(sx1, sy0), (ix0, iy0)], fill=(120, 200, 255, 130), width=1)
+            md.line([(sx1, sy1), (ix0, iy0 + IH)], fill=(120, 200, 255, 130), width=1)
+
+    img.paste(inset_img, (ix0, iy0), inset_img)
     return img
 
 
@@ -3694,7 +3764,7 @@ def _compose_export_image(params):
             return None, "No stadiums match the selected filters."
 
     W, H = params["W"], params["H"]
-    main_stadiums, inset_stadiums = _split_main_inset(stadiums)
+    main_stadiums, inset_stadiums = _split_main_inset(stadiums, params)
     # Broad, unfiltered Europe export: trim longitude outliers (Iceland / Ural Russia) so
     # the frame stays on Europe. Filtered exports (country/league/tournament/dev/national)
     # keep the full bbox so they're never cropped.
@@ -3749,7 +3819,8 @@ def _compose_export_image(params):
     img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index,
                                 reserve_boxes=reserves)
     if inset_stadiums:
-        img = _draw_inset(img, inset_stadiums, params, W, H, country_index, params["style_key"])
+        img = _draw_inset(img, inset_stadiums, params, W, H, country_index,
+                          params["style_key"], main_bbox=bbox, reserves=reserves)
     legend_n = 0
     if params["legend"]:
         img = _draw_legend(img, params, stadiums)
@@ -3850,7 +3921,7 @@ def export_checkout(request):
         "country", "league", "ownership", "surface", "stadium_type",
         "color_by", "ring_by", "no_badges",
         "style_key", "size_key", "title", "subtitle", "labels",
-        "north", "legend", "scale", "spotlight", "logo", "bg_color",
+        "north", "legend", "scale", "spotlight", "logo", "bg_color", "inset",
         "label_size", "label_color", "badge_size", "tournament", "tstatus",
         "layer", "dstatus", "national",
     }
