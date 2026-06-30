@@ -2483,19 +2483,21 @@ def _load_font(bold=False, size=20):
     return ImageFont.load_default()
 
 
-def _auto_inset_cluster(stadiums, max_n=9):
+def _auto_inset_cluster(stadiums, max_n=6):
     """Find the densest knot of grounds (e.g. the Milan area) to pull into a zoomed
     inset, de-cluttering the main map's labels. Caps the inset at `max_n` of the
     tightest grounds so the zoom box stays readable. Returns the cluster or []."""
     if len(stadiums) < 8:
         return []
+    # Tight radius: only grounds whose badges genuinely overlap on the main map
+    # belong in the magnifier; anything separable stays on the main map (labelled).
     centre, near = None, []
     for c in stadiums:
         grp = [s for s in stadiums
-               if abs(s["lat"] - c["lat"]) < 0.28 and abs(s["lon"] - c["lon"]) < 0.40]
+               if abs(s["lat"] - c["lat"]) < 0.18 and abs(s["lon"] - c["lon"]) < 0.28]
         if len(grp) > len(near):
             centre, near = c, grp
-    if len(near) < 4:
+    if len(near) < 3:
         return []
     if len(near) > max_n:
         near = sorted(near, key=lambda s: (s["lat"] - centre["lat"]) ** 2
