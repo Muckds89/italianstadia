@@ -40,6 +40,11 @@ if DEBUG:
 GOOGLE_ADSENSE_CLIENT = os.environ.get("GOOGLE_ADSENSE_CLIENT", "")
 GOOGLE_ADSENSE_SLOT   = os.environ.get("GOOGLE_ADSENSE_SLOT", "")
 
+# Google Analytics 4. Set GOOGLE_ANALYTICS_ID in Render env to the Measurement ID
+# (looks like G-XXXXXXXXXX, from GA4 Admin → Data Streams → your web stream).
+# Left blank in local dev so the tag never loads there and doesn't pollute stats.
+GOOGLE_ANALYTICS_ID = os.environ.get("GOOGLE_ANALYTICS_ID", "")
+
 # MapTiler API key — set in Render env vars; never commit to git.
 MAPTILER_API_KEY = os.environ.get("MAPTILER_API_KEY", "")
 
@@ -109,6 +114,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Last, so it edits the raw HTML before GZipMiddleware compresses the response.
+    'italiastadiaapp.middleware.GoogleAnalyticsMiddleware',
 ]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
