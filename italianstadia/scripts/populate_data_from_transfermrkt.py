@@ -1205,8 +1205,11 @@ def classify_ownership(owner_raw):
         "skarb państwa",           # State Treasury
         # ── Dutch / Belgian (Flemish) ────────────────────────────────────────
         "gemeente ",               # Gemeente Amsterdam / Rotterdam
-        "stad ",                   # Stad Gent / Stad Brugge (trailing space)
-        " stad",                   # Göteborgs Stad / Antwerpse Stad (leading space)
+        "stad ",                   # Stad Gent / Stad Brugge / Stad Antwerpen (prefix form)
+        # NB: do NOT add " stad" (leading space) — it substring-matches the WORD
+        # "Stadium"/"Stadion"/"Stade" and wrongly tagged 9 privately/company-owned
+        # grounds PUBLIC (e.g. "…Stadionbetriebs AG", "Millennium Stadium plc").
+        # The rare Swedish suffix form ("Göteborgs Stad") uses a manual owner_raw override.
         "stadsbestuur", "stadsgewest", "stadseigendom",
         "provinciaal", "provincie ",
         "gewest ",                 # Brussels Hoofdstedelijk Gewest

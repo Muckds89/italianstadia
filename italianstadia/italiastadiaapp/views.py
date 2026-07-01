@@ -3086,11 +3086,41 @@ except Exception:
     _BADGE_DISK_CACHE = None
 
 
+def _svg_badge_png_url(svg_url):
+    """Resolve an upload.wikimedia.org SVG file to a rasterised PNG thumbnail URL via
+    the MediaWiki imageinfo API. Fair-use logos live on the local wiki (…/wikipedia/en/…)
+    and free ones on Commons (…/wikipedia/commons/…); query the right host accordingly.
+    Returns a PNG url or None."""
+    try:
+        fname = svg_url.rsplit("/", 1)[-1]
+        from urllib.parse import unquote
+        title = "File:" + unquote(fname)
+        # …/wikipedia/<proj>/… → API host: 'commons' → commons.wikimedia.org, else <proj>.wikipedia.org
+        proj = "commons"
+        if "/wikipedia/" in svg_url:
+            proj = svg_url.split("/wikipedia/", 1)[1].split("/", 1)[0]
+        host = "commons.wikimedia.org" if proj == "commons" else f"{proj}.wikipedia.org"
+        r = _requests.get(
+            f"https://{host}/w/api.php",
+            params={"action": "query", "titles": title, "prop": "imageinfo",
+                    "iiprop": "url", "iiurlwidth": 256, "format": "json"},
+            headers={"User-Agent": "stadiamap/1.0 (stadiumsofeurope.com)"}, timeout=5).json()
+        for p in r["query"]["pages"].values():
+            ii = p.get("imageinfo", [{}])[0]
+            return ii.get("thumburl") or None
+    except Exception:
+        return None
+    return None
+
+
 def _fetch_badge_image(url, size=20):
     """Download, resize, and cache a badge image to /tmp only (no in-process
     Django cache, see _fetch_one_tile for why)."""
     if not url:
         return None
+
+    # Cache key is the ORIGINAL url so an SVG that's already rasterised on disk never
+    # re-hits the MediaWiki API.
     key = hashlib.md5(f"{url}_{size}".encode()).hexdigest()
 
     # 1. Disk cache (/tmp survives between requests on the same dyno)
@@ -3100,6 +3130,15 @@ def _fetch_badge_image(url, size=20):
             return Image.open(disk_path).convert("RGBA")
         except Exception:
             pass
+
+    # PIL cannot rasterise SVG. Wikimedia renders any SVG to a PNG thumbnail, but the
+    # allowed widths are per-file buckets (not arbitrary), so ask the MediaWiki API for
+    # a valid thumburl. Only runs on a cache-miss (above), so it's rare. Fixes crests
+    # like SBV Vitesse whose Wikipedia logo is an SVG.
+    if url.lower().endswith(".svg") and "upload.wikimedia.org" in url:
+        url = _svg_badge_png_url(url)
+        if not url:
+            return None
 
     # 2. Fetch from web
     try:

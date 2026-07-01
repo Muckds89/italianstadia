@@ -15601,7 +15601,7 @@
     "latitude": "52.457220",
     "longitude": "13.568060",
     "owner_raw": "An der Alten Försterei Stadionbetriebs AG",
-    "ownership": "PUBLIC",
+    "ownership": "PRIVATE",
     "slug": "an-der-alten-forsterei",
     "stadium_type": "OPEN",
     "surface": "GRASS",
@@ -15630,7 +15630,7 @@
       }
     ],
     "description": null,
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -15842,7 +15842,7 @@
     "latitude": "50.611900",
     "longitude": "3.130400",
     "owner_raw": "Eiffage Lille Stadium Arena (until 2043) Métropole Européenne de Lille (from 2043)",
-    "ownership": "PUBLIC",
+    "ownership": "PRIVATE",
     "slug": "decathlon-arena-stade-pierre-mauroy",
     "stadium_type": "RETRACTABLE",
     "surface": "HYBRID",
@@ -15851,10 +15851,10 @@
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stade_Pierre-Mauroy",
     "transfermarkt_url": "https://www.transfermarkt.com/losc-lille/stadion/verein/1082",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/losc-lille-stade-pierre-mauroy-2021-1629202801-69128.jpg?lm=1629202818",
-    "image_credit": null,
+    "image_credit": "",
     "extra_images": [],
-    "description": null,
-    "locked": false
+    "description": "",
+    "locked": true
   }
 },
 {
@@ -19524,7 +19524,7 @@
     "latitude": "60.366940",
     "longitude": "5.357500",
     "owner_raw": "Brann Stadion AS",
-    "ownership": "PUBLIC",
+    "ownership": "PRIVATE",
     "slug": "brann-stadion",
     "stadium_type": "OPEN",
     "surface": "HYBRID",
@@ -19553,7 +19553,7 @@
       }
     ],
     "description": null,
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -23365,7 +23365,7 @@
     "latitude": "47.816390",
     "longitude": "12.998330",
     "owner_raw": "SWS Stadion Salzburg Planungs- und Errichtungsgesellschaft m.b.H",
-    "ownership": "PUBLIC",
+    "ownership": "PRIVATE",
     "slug": "red-bull-arena-salzburg",
     "stadium_type": "OPEN",
     "surface": "GRASS",
@@ -24812,7 +24812,7 @@
     "latitude": "49.318610",
     "longitude": "7.121670",
     "owner_raw": "Kaiserlinde Stadiongesellschaft mbH & Co. KG",
-    "ownership": "PUBLIC",
+    "ownership": "PRIVATE",
     "slug": "ursapharm-arena-an-der-kaiserlinde",
     "stadium_type": "OPEN",
     "surface": "GRASS",
@@ -24837,7 +24837,7 @@
       }
     ],
     "description": null,
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -26755,7 +26755,7 @@
     "latitude": "47.541670",
     "longitude": "7.620280",
     "owner_raw": "Genossenschaft Stadion St. Jakob-Park",
-    "ownership": "PUBLIC",
+    "ownership": "PRIVATE",
     "slug": "st-jakob-park",
     "stadium_type": "OPEN",
     "surface": "GRASS",
@@ -26767,7 +26767,7 @@
     "image_credit": null,
     "extra_images": [],
     "description": null,
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -35207,7 +35207,7 @@
     "latitude": "51.478200",
     "longitude": "-3.182600",
     "owner_raw": "Millennium Stadium plc ( Welsh Rugby Union )",
-    "ownership": "PUBLIC",
+    "ownership": "PRIVATE",
     "slug": "principality-stadium",
     "stadium_type": "RETRACTABLE",
     "surface": "GRASS",
@@ -36054,8 +36054,8 @@
     "city": 659,
     "latitude": "52.174054",
     "longitude": "22.290483",
-    "owner_raw": null,
-    "ownership": "UNKNOWN",
+    "owner_raw": "Municipal (per stadium name)",
+    "ownership": "PUBLIC",
     "slug": "stadion-miejski-w-siedlcach",
     "stadium_type": "OPEN",
     "surface": "GRASS",
@@ -36144,8 +36144,8 @@
     "city": 661,
     "latitude": "50.006416",
     "longitude": "20.187377",
-    "owner_raw": null,
-    "ownership": "UNKNOWN",
+    "owner_raw": "Municipal (per stadium name)",
+    "ownership": "PUBLIC",
     "slug": "stadion-miejski-w-niepoomicach",
     "stadium_type": "OPEN",
     "surface": "GRASS",
@@ -37151,8 +37151,8 @@
     "city": 688,
     "latitude": "53.686300",
     "longitude": "27.139000",
-    "owner_raw": "",
-    "ownership": "UNKNOWN",
+    "owner_raw": "Municipal (per stadium name)",
+    "ownership": "PUBLIC",
     "slug": "city-stadium-dzerzhinsk",
     "stadium_type": "OPEN",
     "surface": "GRASS",
@@ -37164,7 +37164,7 @@
     "image_credit": "",
     "extra_images": [],
     "description": "",
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -37313,8 +37313,8 @@
     "city": 693,
     "latitude": null,
     "longitude": null,
-    "owner_raw": "",
-    "ownership": "UNKNOWN",
+    "owner_raw": "Municipal (per stadium name)",
+    "ownership": "PUBLIC",
     "slug": "imishli-city-stadium",
     "stadium_type": "OPEN",
     "surface": "GRASS",
@@ -37326,7 +37326,7 @@
     "image_credit": "",
     "extra_images": [],
     "description": "",
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -37376,8 +37376,8 @@
     "city": 695,
     "latitude": "40.602900",
     "longitude": "47.161300",
-    "owner_raw": null,
-    "ownership": "UNKNOWN",
+    "owner_raw": "Municipal (per stadium name)",
+    "ownership": "PUBLIC",
     "slug": "yevlakh-city-stadium",
     "stadium_type": "OPEN",
     "surface": "ARTIFICIAL",
@@ -37501,8 +37501,8 @@
     "city": 696,
     "latitude": "40.640600",
     "longitude": "48.635500",
-    "owner_raw": "",
-    "ownership": "UNKNOWN",
+    "owner_raw": "Municipal (per stadium name)",
+    "ownership": "PUBLIC",
     "slug": "shamakhi-city-stadium",
     "stadium_type": "OPEN",
     "surface": "GRASS",
@@ -37514,7 +37514,7 @@
     "image_credit": "",
     "extra_images": [],
     "description": "",
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -39634,8 +39634,8 @@
     "city": 752,
     "latitude": "51.962780",
     "longitude": "5.892780",
-    "owner_raw": "local government",
-    "ownership": "PUBLIC",
+    "owner_raw": "Nedstede",
+    "ownership": "PRIVATE",
     "slug": "gelredome",
     "stadium_type": "RETRACTABLE",
     "surface": "GRASS",
@@ -39644,7 +39644,7 @@
     "wikipedia_url": "https://en.wikipedia.org/wiki/GelreDome",
     "transfermarkt_url": "https://www.transfermarkt.com/vitesse-arnheim/stadion/verein/499",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/vitesse-arnheim-stadion-gelredome-1604588241-50603.jpg?lm=1604588256",
-    "image_credit": null,
+    "image_credit": "",
     "extra_images": [
       {
         "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Airborne_match_Vitesse_Arnhem.jpg",
@@ -39663,7 +39663,7 @@
         "credit": "Arnhemcity12 / Wikimedia Commons / CC BY-SA 4.0"
       }
     ],
-    "description": null,
+    "description": "",
     "locked": true
   }
 },
@@ -41288,8 +41288,8 @@
     "city": 802,
     "latitude": "41.900841",
     "longitude": "-1.738629",
-    "owner_raw": null,
-    "ownership": "UNKNOWN",
+    "owner_raw": "Municipal (per stadium name)",
+    "ownership": "PUBLIC",
     "slug": "municipal-de-tarazona",
     "stadium_type": "OPEN",
     "surface": "ARTIFICIAL",
@@ -41572,8 +41572,8 @@
     "city": 808,
     "latitude": "42.360600",
     "longitude": "20.827000",
-    "owner_raw": null,
-    "ownership": "UNKNOWN",
+    "owner_raw": "Municipal (per stadium name)",
+    "ownership": "PUBLIC",
     "slug": "suva-reka-city-stadium",
     "stadium_type": "OPEN",
     "surface": "ARTIFICIAL",
@@ -41685,8 +41685,8 @@
     "city": 812,
     "latitude": null,
     "longitude": null,
-    "owner_raw": null,
-    "ownership": "UNKNOWN",
+    "owner_raw": "Municipal (per stadium name)",
+    "ownership": "PUBLIC",
     "slug": "ferizaj-city-stadium",
     "stadium_type": "OPEN",
     "surface": "ARTIFICIAL",
@@ -43683,8 +43683,8 @@
     "city": 869,
     "latitude": "39.910280",
     "longitude": "44.029440",
-    "owner_raw": null,
-    "ownership": "UNKNOWN",
+    "owner_raw": "Municipal (per stadium name)",
+    "ownership": "PUBLIC",
     "slug": "igdr-city-stadium",
     "stadium_type": "OPEN",
     "surface": "GRASS",
@@ -43701,7 +43701,7 @@
       }
     ],
     "description": null,
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -43946,8 +43946,8 @@
     "city": 258,
     "latitude": "41.058890",
     "longitude": "29.109440",
-    "owner_raw": null,
-    "ownership": "UNKNOWN",
+    "owner_raw": "Municipal (per stadium name)",
+    "ownership": "PUBLIC",
     "slug": "umraniye-municipality-city-stadium",
     "stadium_type": "OPEN",
     "surface": "GRASS",
@@ -43959,7 +43959,7 @@
     "image_credit": null,
     "extra_images": [],
     "description": null,
-    "locked": false
+    "locked": true
   }
 },
 {
