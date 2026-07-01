@@ -21,10 +21,15 @@ class GoogleAnalyticsMiddleware:
 
     @staticmethod
     def _build(gid):
+        # Consent Mode v2: default everything to DENIED so GA runs cookieless until the
+        # visitor clicks "Accept all" (consent.js then calls gtag('consent','update',…)).
+        # This keeps the tag site-wide while honouring the cookie banner's opt-in promise.
         return (
             f'<script async src="https://www.googletagmanager.com/gtag/js?id={gid}"></script>'
             f'<script>window.dataLayer=window.dataLayer||[];'
             f'function gtag(){{dataLayer.push(arguments);}}'
+            f"gtag('consent','default',{{'ad_storage':'denied','analytics_storage':'denied',"
+            f"'ad_user_data':'denied','ad_personalization':'denied'}});"
             f"gtag('js',new Date());gtag('config','{gid}');</script>"
         ).encode("utf-8")
 

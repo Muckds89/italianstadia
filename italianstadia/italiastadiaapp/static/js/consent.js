@@ -11,6 +11,19 @@
     document.head.appendChild(s);
   }
 
+  // Google Analytics (Consent Mode v2): the GA tag is injected site-wide and defaults
+  // to 'denied' (cookieless). Granting here upgrades it to full, cookie-based analytics.
+  function updateAnalyticsConsent(granted) {
+    if (typeof window.gtag !== 'function') return;
+    var state = granted ? 'granted' : 'denied';
+    window.gtag('consent', 'update', {
+      analytics_storage: state,
+      ad_storage: state,
+      ad_user_data: state,
+      ad_personalization: state
+    });
+  }
+
   function applyChoice(choice) {
     try { localStorage.setItem(CONSENT_KEY, choice); } catch (e) {}
     var banner = document.getElementById('cookie-banner');
@@ -19,6 +32,7 @@
       banner.style.opacity = '0';
       setTimeout(function () { if (banner.parentNode) banner.parentNode.removeChild(banner); }, 320);
     }
+    updateAnalyticsConsent(choice === 'accepted');
     if (choice === 'accepted') loadAdsense();
   }
 
@@ -27,6 +41,7 @@
     try { existing = localStorage.getItem(CONSENT_KEY); } catch (e) {}
 
     if (existing === 'accepted') {
+      updateAnalyticsConsent(true);
       loadAdsense();
       return;
     }

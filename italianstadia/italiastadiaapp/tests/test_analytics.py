@@ -12,6 +12,9 @@ class GoogleAnalyticsMiddlewareTests(TestCase):
         body = resp.content.decode()
         self.assertIn(f"gtag/js?id={GID}", body)
         self.assertIn(f"gtag('config','{GID}')", body)
+        # Consent Mode v2: defaults to denied (cookieless) until the banner grants it
+        self.assertIn("gtag('consent','default'", body)
+        self.assertIn("'analytics_storage':'denied'", body)
         # injected inside <head>, and exactly once
         self.assertEqual(body.count("googletagmanager.com/gtag/js"), 1)
         self.assertLess(body.index("gtag/js"), body.index("</head>"))
