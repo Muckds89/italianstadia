@@ -2645,51 +2645,61 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
         dots.append((px, py, s))
     d = ImageDraw.Draw(inset_img)
 
-    # Pass 2: place each label with a small search (sides + vertical nudges),
-    # avoiding the badges and other labels, so all of them show.
-    placed = []
-    badge_circles = [(px, py, rr) for px, py, _ in dots]
-    def _hits_badge(box):
-        cx2, cy2 = (box[0]+box[2])/2, (box[1]+box[3])/2
-        hw, hh = (box[2]-box[0])/2, (box[3]-box[1])/2
-        for bx, by, br in badge_circles:
-            if max(abs(bx-cx2)-hw, 0)**2 + max(abs(by-cy2)-hh, 0)**2 < (br+2)**2:
-                return True
-        return False
+    # Pass 2: deterministic two-column edge layout. Labels are pushed to the inset's
+    # left/right margins and stacked in latitude order, exactly like the main map's
+    # column-leader engine. This GUARANTEES every ground in the inset is labelled
+    # (mandatory) — no search-and-drop that could silently omit a name.
+    items = []
     for px, py, s in dots:
         label1 = s.get("team_name", "") or ""
         label2 = s["name"]
-        tw = max(int(len(label1) * font_t.size * 0.55), int(len(label2) * font_s.size * 0.58)) + 8
+        tw = max(int(len(label1) * font_t.size * 0.55),
+                 int(len(label2) * font_s.size * 0.58)) + 8
         th = (font_t.size + 2 if label1 else 0) + font_s.size + 6
-        step = th + 4
-        chosen = None
-        for voff in [0, -step, step, -2*step, 2*step, -3*step, 3*step]:
-            for gap in (rr + 6, rr + 22):
-                for lx in (px + gap, px - gap - tw):
-                    ly = int(py + voff - th/2)
-                    box = (lx, ly, lx + tw, ly + th)
-                    if lx < 3 or ly < 2 or lx+tw > IW-3 or ly+th > IH-3:
-                        continue
-                    if _hits_badge(box):
-                        continue
-                    if any(not (box[2]<pb[0] or box[0]>pb[2] or box[3]<pb[1] or box[1]>pb[3])
-                           for pb in placed):
-                        continue
-                    chosen = (lx, ly, box)
-                    break
-                if chosen: break
-            if chosen: break
-        if not chosen:
-            continue
-        lx, ly, box = chosen
-        d.rounded_rectangle([lx-3, ly-2, lx+tw+3, ly+th+2], radius=4, fill=(10, 13, 24, 235))
-        d.line([(px + (rr if lx > px else -rr), py),
-                (lx if lx > px else lx+tw, ly + th // 2)], fill=(255, 255, 255, 170), width=1)
+        items.append({"px": px, "py": py, "l1": label1, "l2": label2, "tw": tw, "th": th})
+
+    hdr_h = int(IW * 0.03) + 16          # keep clear of the "Detail view" header
+    # Split into two BALANCED columns (near-equal counts) by longitude rank, so a
+    # lopsided cluster can't pile every label into one column and crowd it — the
+    # westernmost half goes left, the easternmost half right.
+    by_x = sorted(items, key=lambda it: it["px"])
+    half = (len(by_x) + 1) // 2
+    left_ids = {id(it) for it in by_x[:half]}
+    left = [it for it in items if id(it) in left_ids]
+    right = [it for it in items if id(it) not in left_ids]
+
+    def _stack(col, side):
+        if not col:
+            return
+        col.sort(key=lambda it: it["py"])
+        top, bot = hdr_h, IH - 6
+        total = sum(it["th"] for it in col)
+        spread = bot - top - total
+        gap = max(3, spread / (len(col) + 1)) if spread > 0 else 3
+        y = top + (gap if spread > 0 else 0)
+        for it in col:
+            it["ly"] = int(min(y, IH - 6 - it["th"]))
+            it["lx"] = 4 if side == "left" else IW - 4 - it["tw"]
+            it["side"] = side
+            y = it["ly"] + it["th"] + gap
+
+    _stack(left, "left")
+    _stack(right, "right")
+
+    for it in left + right:
+        lx, ly, tw, th = it["lx"], it["ly"], it["tw"], it["th"]
+        # leader from the badge to the pill's inner edge (right edge for a left-column
+        # label, left edge for a right-column one) — drawn under the pill.
+        inner_x = lx + tw if it["side"] == "left" else lx
+        d.line([(it["px"], it["py"]), (inner_x, ly + th // 2)],
+               fill=(255, 255, 255, 170), width=1)
+        d.rounded_rectangle([lx - 3, ly - 2, lx + tw + 3, ly + th + 2],
+                            radius=4, fill=(10, 13, 24, 235))
         yy = ly + 3
-        if label1:
-            d.text((lx+3, yy), label1, font=font_t, fill=(170, 205, 255)); yy += font_t.size + 2
-        d.text((lx+3, yy), label2, font=font_s, fill=(255, 255, 255))
-        placed.append(box)
+        if it["l1"]:
+            d.text((lx + 3, yy), it["l1"], font=font_t, fill=(170, 205, 255))
+            yy += font_t.size + 2
+        d.text((lx + 3, yy), it["l2"], font=font_s, fill=(255, 255, 255))
 
     d.rectangle([(0, 0), (IW-1, IH-1)], outline=(120, 200, 255), width=3)
     try:
@@ -2763,9 +2773,6 @@ def _spotlight_country(img, stadiums, bbox, W, H, dim=165):
     if not pts:
         return img
 
-    mask = Image.new("L", (W, H), 0)
-    md = ImageDraw.Draw(mask)
-    border_rings = []
     try:
         # Use the hi-res Natural Earth 10m set: one named MultiPolygon per country
         # (Italy incl. Sicily/Sardinia, Serbia incl. Vojvodina, Bosnia whole, Denmark
@@ -2774,6 +2781,8 @@ def _spotlight_country(img, stadiums, bbox, W, H, dim=165):
     except Exception:
         return img
 
+    # Precompute each country's outer rings + overall lon/lat bbox once.
+    feat_rings = []   # index-aligned with feats: (rings, (lo0, la0, lo1, la1)) or None
     for feat in feats:
         geom = feat["geometry"]
         if geom["type"] == "Polygon":
@@ -2781,29 +2790,73 @@ def _spotlight_country(img, stadiums, bbox, W, H, dim=165):
         elif geom["type"] == "MultiPolygon":
             rings = [poly[0] for poly in geom["coordinates"]]
         else:
+            feat_rings.append(None)
             continue
-        # Does ANY ring of this country contain a displayed stadium?
-        matched = False
-        for ring in rings:
+        lo0 = min(c[0] for r in rings for c in r); lo1 = max(c[0] for r in rings for c in r)
+        la0 = min(c[1] for r in rings for c in r); la1 = max(c[1] for r in rings for c in r)
+        feat_rings.append((rings, (lo0, la0, lo1, la1)))
+
+    def _contains(fi, lo, la):
+        entry = feat_rings[fi]
+        if not entry:
+            return False
+        for ring in entry[0]:
             rlons = [c[0] for c in ring]; rlats = [c[1] for c in ring]
-            rl0, rl1, ra0, ra1 = min(rlons), max(rlons), min(rlats), max(rlats)
-            cand = [(lo, la) for lo, la in pts if rl0 <= lo <= rl1 and ra0 <= la <= ra1]
-            if cand and any(_point_in_ring(lo, la, ring) for lo, la in cand):
-                matched = True
+            if (min(rlons) <= lo <= max(rlons) and min(rlats) <= la <= max(rlats)
+                    and _point_in_ring(lo, la, ring)):
+                return True
+        return False
+
+    # First pass: which country polygon strictly contains each displayed ground?
+    matched = set()
+    unmatched = []
+    for lo, la in pts:
+        hit = None
+        for fi in range(len(feat_rings)):
+            if _contains(fi, lo, la):
+                hit = fi
                 break
-        if not matched:
-            continue
-        # Draw the WHOLE country (every island / region), not just the part that
-        # happens to hold a stadium, so Denmark keeps Jutland, Serbia keeps
-        # Vojvodina, Bosnia stays whole, etc.
-        for ring in rings:
+        if hit is not None:
+            matched.add(hit)
+        else:
+            unmatched.append((lo, la))
+
+    # Coastal / island / delta grounds (e.g. Gazprom Arena on a reclaimed island in
+    # the Neva delta) fall just OUTSIDE the simplified 10m coastline, so strict
+    # containment misses them. Snap each such ground to the NEAREST country within a
+    # small tolerance — a stadium is always close to its own land — so its country
+    # still lights up. Name-independent, works for any coastal ground.
+    TOL2 = 0.6 ** 2   # squared degrees (~up to a few tens of km); guards against open sea
+    for lo, la in unmatched:
+        best, bestd = None, TOL2
+        for fi, entry in enumerate(feat_rings):
+            if not entry:
+                continue
+            lo0, la0, lo1, la1 = entry[1]
+            if lo < lo0 - 0.6 or lo > lo1 + 0.6 or la < la0 - 0.6 or la > la1 + 0.6:
+                continue
+            for ring in entry[0]:
+                for x, y in ring:
+                    dd = (x - lo) ** 2 + (y - la) ** 2
+                    if dd < bestd:
+                        bestd, best = dd, fi
+        if best is not None:
+            matched.add(best)
+
+    if not matched:
+        return img  # no polygon matched, leave the map untouched
+
+    # Draw the WHOLE of each matched country (every island / region), not just the
+    # part that holds a stadium, so Denmark keeps Jutland, Serbia keeps Vojvodina, etc.
+    mask = Image.new("L", (W, H), 0)
+    md = ImageDraw.Draw(mask)
+    border_rings = []
+    for fi in matched:
+        for ring in feat_rings[fi][0]:
             pix = [_lon_lat_to_px(lo, la, bbox, W, H) for lo, la in ring]
             if len(pix) >= 3:
                 md.polygon(pix, fill=255)
                 border_rings.append(pix)
-
-    if not border_rings:
-        return img  # no polygon matched, leave the map untouched
 
     # Dim the outside: paste a dark colour with per-pixel alpha = dim where mask==0
     from PIL import ImageChops
