@@ -46,6 +46,16 @@ def robots_txt(request):
     lines = [
         "User-agent: *",
         "Allow: /",
+        # Machine-readable data, not pages — GSC showed Google crawling these and
+        # filing them under "Crawled - currently not indexed" (wasted crawl budget).
+        "Disallow: /api/",
+        "Disallow: /static/data/",
+        # Internal back-navigation params on detail links; the pages self-canonicalise
+        # to the clean URL, but blocking the variants stops Google recrawling them.
+        "Disallow: /*?from_list",
+        "Disallow: /*?from_team_list",
+        "Disallow: /*?*&from_list",
+        "Disallow: /*?*&from_team_list",
         "",
         f"Sitemap: {request.build_absolute_uri('/sitemap.xml')}",
     ]
