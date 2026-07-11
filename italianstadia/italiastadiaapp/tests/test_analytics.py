@@ -70,3 +70,18 @@ class SeoTagTests(TestCase):
         resp = self.client.get("/sitemap.xml")
         self.assertEqual(resp.status_code, 200)
         self.assertNotIn(b"?country=", resp.content)
+
+
+class LegacySlugRedirectTests(TestCase):
+    def test_legacy_stadium_slug_redirects_permanently(self):
+        from italiastadiaapp.models import City, Stadium
+        city = City.objects.create(name="Reykjavik", country="Iceland")
+        Stadium.objects.create(name="Lambhagavollurinn", slug="lambhagavollurinn",
+                               city=city, latitude=64.1, longitude=-21.9)
+        resp = self.client.get("/stadium/lambhagavollur/")
+        self.assertEqual(resp.status_code, 301)
+        self.assertTrue(resp["Location"].endswith("/stadium/lambhagavollurinn/"))
+
+    def test_unknown_slug_still_404s(self):
+        resp = self.client.get("/stadium/definitely-not-a-stadium/")
+        self.assertEqual(resp.status_code, 404)

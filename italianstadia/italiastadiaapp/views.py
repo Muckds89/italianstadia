@@ -171,7 +171,21 @@ def _team_description(team):
     return _trim(sentence)
 
 
+# Old slugs Google still requests (GSC 404 report) whose record was renamed, merged,
+# or replaced by the club's current ground. 301 preserves any link value; slugs with
+# NO successor stay honest 404s and drop out of the report on their own.
+_LEGACY_STADIUM_SLUGS = {
+    "lambhagavollur": "lambhagavollurinn",          # renamed (Icelandic definite article)
+    "bashkimi-stadium-2": "bashkimi-stadium",       # duplicate record merged
+    "milsami-stadium": "csr-orhei",                 # FC Milsami Orhei's current ground record
+    "sportpark-skoatterwald": "abe-lenstra-stadion",  # SC Heerenveen's actual stadium
+}
+
+
 def stadium_detail(request, slug):
+    if slug in _LEGACY_STADIUM_SLUGS:
+        return redirect("italiastadiaapp:stadium_detail",
+                        slug=_LEGACY_STADIUM_SLUGS[slug], permanent=True)
     stadium = get_object_or_404(
         Stadium.objects.select_related("city").prefetch_related(
             "teams__league__country"
