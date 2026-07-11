@@ -45,6 +45,12 @@ GOOGLE_ADSENSE_SLOT   = os.environ.get("GOOGLE_ADSENSE_SLOT", "")
 # Left blank in local dev so the tag never loads there and doesn't pollute stats.
 GOOGLE_ANALYTICS_ID = os.environ.get("GOOGLE_ANALYTICS_ID", "")
 
+# SEO: the single host the site should be served on. Any other host (notably the
+# Render fallback domain italianstadia-2.onrender.com, which otherwise serves a full
+# duplicate of the site) is 301-redirected here by CanonicalHostMiddleware.
+# Blank in local dev disables the redirect.
+CANONICAL_HOST = os.environ.get("CANONICAL_HOST", "")
+
 # MapTiler API key — set in Render env vars; never commit to git.
 MAPTILER_API_KEY = os.environ.get("MAPTILER_API_KEY", "")
 
@@ -105,6 +111,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # First: send any non-canonical host (e.g. the Render *.onrender.com fallback
+    # domain, which serves a full duplicate of the site) to the canonical domain
+    # before anything else runs.
+    "italiastadiaapp.middleware.CanonicalHostMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.middleware.gzip.GZipMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",

@@ -5,7 +5,7 @@ from django.contrib.sitemaps import Sitemap
 from django.utils.text import slugify
 from django.urls import reverse
 
-from .models import City, Country, Stadium, StadiumDevelopment, Team
+from .models import Country, Stadium, StadiumDevelopment, Team
 
 
 def _data_lastmod():
@@ -80,17 +80,6 @@ class DevelopmentSitemap(_DataLastmodMixin, Sitemap):
 
     def location(self, obj):
         return reverse("italiastadiaapp:stadium_development_detail", args=[obj.slug])
-
-
-class CitySitemap(_DataLastmodMixin, Sitemap):
-    changefreq = "yearly"
-    priority = 0.4
-
-    def items(self):
-        return City.objects.order_by("id")
-
-    def location(self, obj):
-        return reverse("italiastadiaapp:city_list") + f"?country={obj.country}"
 
 
 class TournamentSitemap(_DataLastmodMixin, Sitemap):

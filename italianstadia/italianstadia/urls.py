@@ -5,7 +5,6 @@ from django.http import HttpResponse
 from django.urls import path, include
 
 from italiastadiaapp.sitemaps import (
-    CitySitemap,
     CountryHubSitemap,
     DevelopmentSitemap,
     StadiumSitemap,
@@ -14,11 +13,14 @@ from italiastadiaapp.sitemaps import (
     TournamentSitemap,
 )
 
+# NB: no CitySitemap — it emitted /cities/?country=X once per CITY (hundreds of
+# query-string URLs, duplicated within each country, with no canonical), which GSC
+# filed under "Duplicate without user-selected canonical". Country coverage is the
+# CountryHubSitemap's job; /cities/ itself is in the static sitemap.
 sitemaps = {
     "stadiums":     StadiumSitemap,
     "developments": DevelopmentSitemap,
     "teams":        TeamSitemap,
-    "cities":       CitySitemap,
     "countries":    CountryHubSitemap,
     "tournaments":  TournamentSitemap,
     "static":       StaticViewSitemap,

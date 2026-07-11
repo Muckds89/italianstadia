@@ -2,9 +2,33 @@
 import re
 
 from django.conf import settings
+from django.http import HttpResponsePermanentRedirect
 
 # Match the first opening <head ...> tag.
 _HEAD_RE = re.compile(rb"(<head[^>]*>)", re.IGNORECASE)
+
+
+class CanonicalHostMiddleware:
+    """301-redirect every request on a non-canonical host to CANONICAL_HOST.
+
+    The Render fallback domain (italianstadia-2.onrender.com) serves the site as a
+    full 200 duplicate — Google crawled it and filed hundreds of pages as
+    duplicates/alternates of stadiumsofeurope.com. A permanent redirect consolidates
+    all hosts onto the canonical one. No-ops when CANONICAL_HOST is unset (local dev)
+    or the request is already on it.
+    """
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        canonical = getattr(settings, "CANONICAL_HOST", "")
+        if canonical:
+            host = request.get_host().partition(":")[0]
+            if host not in (canonical, "localhost", "127.0.0.1", "testserver"):
+                return HttpResponsePermanentRedirect(
+                    f"https://{canonical}{request.get_full_path()}")
+        return self.get_response(request)
 
 
 class GoogleAnalyticsMiddleware:
