@@ -118,7 +118,13 @@
             {% for league in leagues %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 {{ league.name }}
-                <span class="badge bg-secondary">Div {{ league.division_level }}</span>
+                <span>
+                    {% if league.season %}
+                    <span class="badge bg-light text-dark border me-1"
+                          title="The season this league's data reflects">{{ league.season }}</span>
+                    {% endif %}
+                    <span class="badge bg-secondary">Div {{ league.division_level }}</span>
+                </span>
             </li>
             {% endfor %}
         </ul>

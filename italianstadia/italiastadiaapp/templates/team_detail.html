@@ -81,6 +81,12 @@
                             {% if team.league.country %}
                             <span class="text-muted">({{ team.league.country.name }})</span>
                             {% endif %}
+                            {% if team.league.season %}
+                            <span class="badge bg-light text-dark border ms-1"
+                                  title="The season this club's squad and attendance data reflects">
+                                {{ team.league.season }} season
+                            </span>
+                            {% endif %}
                         </li>
                         <li class="list-group-item">
                             <strong>Division level:</strong> {{ team.league.division_level }}

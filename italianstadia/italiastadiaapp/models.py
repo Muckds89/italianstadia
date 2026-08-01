@@ -22,6 +22,10 @@ class League(models.Model):
     country = models.ForeignKey(Country, on_delete=models.CASCADE,
                                 related_name="leagues", db_index=True)
     division_level = models.IntegerField()  # 1=top flight, 2=second, ...
+    # Which season this league's team/attendance data reflects ("2025/26").
+    # Leagues are re-scraped one by one as their new season kicks off; the old
+    # season's data stays live (and correctly labelled) until then.
+    season = models.CharField(max_length=9, blank=True, default="2025/26")
 
     def __str__(self):
         return f"{self.name} ({self.country})"

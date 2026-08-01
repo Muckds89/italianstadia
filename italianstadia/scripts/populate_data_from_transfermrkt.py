@@ -205,6 +205,21 @@ logging.basicConfig(
 # League resolution
 # --------------------------------------------------
 
+def normalize_season(season):
+    """Canonical display form for a season string: '25/26' -> '2025/26'.
+    Accepts '25/26', '2025/26' and '2025/2026'; returns '' for empty input."""
+    s = (season or "").strip()
+    if not s or "/" not in s:
+        return s
+    start, _, end = s.partition("/")
+    start, end = start.strip(), end.strip()
+    if len(start) == 2:
+        start = f"20{start}"
+    if len(end) == 4:
+        end = end[2:]
+    return f"{start}/{end}"
+
+
 def resolve_league(config):
     """Resolve Country and League from the JSON league config block.
 
@@ -2168,6 +2183,12 @@ def run(league_slug, season_override=None):
     country_name = data["league"]["country"]
     native_lang = COUNTRY_WIKI_LANG.get(country_name)
     season = season_override or data["league"]["season"]
+    # Stamp the league with the season this scrape reflects, so the site can show
+    # per-league freshness while other leagues still carry last season's data.
+    display_season = normalize_season(season)
+    if display_season and league.season != display_season:
+        league.season = display_season
+        league.save(update_fields=["season"])
     logging.info(f"Scraping {league.name} ({country_name}), season {season}"
                  + (f" [native fallback: {native_lang}.wikipedia]" if native_lang else ""))
 

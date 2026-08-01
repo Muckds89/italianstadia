@@ -191,3 +191,31 @@ def test_league_ordering():
 
     names = list(League.objects.filter(country=country).values_list("name", flat=True))
     assert names == ["Serie A", "Serie B", "Serie C"]
+
+@pytest.mark.django_db
+def test_league_season_defaults_and_is_editable():
+    """League.season labels which season each league's data reflects, so leagues
+    can be refreshed one at a time while the rest stay live and correctly dated."""
+    country = Country.objects.create(name="Testland", code="TL")
+    lg = League.objects.create(name="Test Liga", country=country, division_level=1)
+    assert lg.season == "2025/26"
+    lg.season = "2026/27"
+    lg.save(update_fields=["season"])
+    lg.refresh_from_db()
+    assert lg.season == "2026/27"
+
+
+def test_normalize_season_forms():
+    import importlib.util
+    import os
+    from django.conf import settings
+    spec = importlib.util.spec_from_file_location(
+        "_tm_scraper_season",
+        os.path.join(settings.BASE_DIR, "scripts", "populate_data_from_transfermrkt.py"),
+    )
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    assert mod.normalize_season("25/26") == "2025/26"
+    assert mod.normalize_season("2025/26") == "2025/26"
+    assert mod.normalize_season("2026/2027") == "2026/27"
+    assert mod.normalize_season("") == ""
