@@ -1340,6 +1340,16 @@
   }
 },
 {
+  "model": "italiastadiaapp.league",
+  "pk": 85,
+  "fields": {
+    "name": "II liga",
+    "country": 39,
+    "division_level": 3,
+    "season": "2026/27"
+  }
+},
+{
   "model": "italiastadiaapp.city",
   "pk": 6,
   "fields": {
@@ -12361,6 +12371,32 @@
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Van_Fortress_From_Northwest.JPG",
     "image_credit": "",
     "description": "Van [ a ] is a city in eastern Turkey's Van Province , on the eastern shore of Lake Van . It is the capital and largest city of Van Province."
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 875,
+  "fields": {
+    "name": "Skierniewice",
+    "population": 45184,
+    "country": "Poland",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Skierniewice",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/34/1.Urz%C4%85d_Miasta_w_Skierniewicach%2C_Ratusz_%28cropped%29.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 876,
+  "fields": {
+    "name": "Bielsko-Biała",
+    "population": 165127,
+    "country": "Poland",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bielsko-Bia%C5%82a",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Rynek_w_Bielsku.jpg",
+    "image_credit": null,
+    "description": null
   }
 },
 {
@@ -44062,6 +44098,87 @@
   }
 },
 {
+  "model": "italiastadiaapp.stadium",
+  "pk": 1067,
+  "fields": {
+    "name": "Stadion Miejski w Skierniewicach",
+    "capacity": 3000,
+    "address": null,
+    "year_of_construction": 2024,
+    "city": 875,
+    "latitude": "51.976199",
+    "longitude": "20.142349",
+    "owner_raw": "Municipal (Stadion Miejski, OSiR Skierniewice complex)",
+    "ownership": "PUBLIC",
+    "slug": "stadion-miejski-w-skierniewicach",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/unia-skierniewice/stadion/verein/30753",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": true
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1068,
+  "fields": {
+    "name": "Warta Poznań Stadium",
+    "capacity": 2813,
+    "address": "Wilda , Poznań , Poland",
+    "year_of_construction": 1998,
+    "city": 187,
+    "latitude": "52.393610",
+    "longitude": "16.931110",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "warta-poznan-stadium",
+    "stadium_type": "OPEN",
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Warta_Pozna%C5%84_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/warta-poznan/stadion/verein/7146",
+    "image_url": "https://maps.wikimedia.org/img/osm-intl,13,a,a,250x200.png?lang=en&domain=en.wikipedia.org&title=Warta_Pozna%C5%84_Stadium&revid=1333711973&groups=_2364d8dc7a0ae2147e33660dcbe7cb8f940acffa&parser=parsoid",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1069,
+  "fields": {
+    "name": "Bielsko-Biała Stadium",
+    "capacity": 14963,
+    "address": "Ulica Rychlińskiego 21, [ 1 ] Bielsko-Biała , Poland",
+    "year_of_construction": 2015,
+    "city": 876,
+    "latitude": "49.817500",
+    "longitude": "19.054170",
+    "owner_raw": "Bielsko-Bialski Ośrodek Sportu i Rekreacji (BBOSiR) [ 1 ]",
+    "ownership": "PRIVATE",
+    "slug": "bielsko-biaa-stadium",
+    "stadium_type": "OPEN",
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bielsko-Bia%C5%82a_Stadium",
+    "transfermarkt_url": "https://www.transfermarkt.com/podbeskidzie-bielsko-biala/stadion/verein/6361",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/50/Stadion_Miejski_Bielsko-Bia%C5%82a_trybuna_wschodnia_February_2015.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
   "model": "italiastadiaapp.team",
   "pk": 7,
   "fields": {
@@ -63516,7 +63633,7 @@
     "is_national": false,
     "name": "GKS Tychy",
     "founded": "1971-01-01",
-    "tier": 2,
+    "tier": 3,
     "girone": null,
     "stadium": 799,
     "manager": "René Poms",
@@ -63529,7 +63646,7 @@
     "image_credit": null,
     "description": "GKS Tychy is a Polish professional football club, based in Tychy , that competes in the Polish II liga . The club was founded in 1971. It played in the Ekstraklasa between 1974–1977 and 1995–1997. Their biggest success was a second-place finish in the 1975–76 Ekstraklasa season .",
     "locked": false,
-    "league": 68,
+    "league": 85,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "gks-tychy"
@@ -63542,7 +63659,7 @@
     "is_national": false,
     "name": "Górnik Łęczna",
     "founded": "1979-01-01",
-    "tier": 2,
+    "tier": 3,
     "girone": null,
     "stadium": 800,
     "manager": "Yuriy Shatalov",
@@ -63555,7 +63672,7 @@
     "image_credit": null,
     "description": null,
     "locked": false,
-    "league": 68,
+    "league": 85,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "gornik-eczna"
@@ -63932,7 +64049,7 @@
     "is_national": false,
     "name": "Znicz Pruszków",
     "founded": "1923-01-01",
-    "tier": 2,
+    "tier": 3,
     "girone": null,
     "stadium": 812,
     "manager": "Łukasz Smolarow",
@@ -63945,7 +64062,7 @@
     "image_credit": null,
     "description": "Miejski Klub Sportowy Znicz Pruszków ( Polish pronunciation: [ˈzɲit͡ʂ ˈpruʂkuf] ) is a football club based in Pruszków , Poland. They currently compete in the II liga , the third level of the Polish football league system , after suffering relegation in the 2025–26 season .",
     "locked": false,
-    "league": 68,
+    "league": 85,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "znicz-pruszkow"
@@ -70839,6 +70956,84 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "vanspor"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1104,
+  "fields": {
+    "is_national": false,
+    "name": "Unia Skierniewice",
+    "founded": "1945-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1067,
+    "manager": "Kamil Socha",
+    "num_of_titles": 0,
+    "city": 875,
+    "average_attendance": 2616,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Unia_Skierniewice",
+    "transfermarkt_url": "https://www.transfermarkt.com/unia-skierniewice/startseite/verein/30753",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/30753.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 68,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "unia-skierniewice"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1105,
+  "fields": {
+    "is_national": false,
+    "name": "Warta Poznań",
+    "founded": "1912-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1068,
+    "manager": "Maciej Tokarczyk",
+    "num_of_titles": 2,
+    "city": 187,
+    "average_attendance": 842,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Warta_Pozna%C5%84",
+    "transfermarkt_url": "https://www.transfermarkt.com/warta-poznan/startseite/verein/7146",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/7146.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 68,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "warta-poznan"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1106,
+  "fields": {
+    "is_national": false,
+    "name": "Podbeskidzie Bielsko-Biała",
+    "founded": "1997-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1069,
+    "manager": "Marcin Włodarski",
+    "num_of_titles": 0,
+    "city": 876,
+    "average_attendance": 2121,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Podbeskidzie_Bielsko-Bia%C5%82a",
+    "transfermarkt_url": "https://www.transfermarkt.com/podbeskidzie-bielsko-biala/startseite/verein/6361",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/6361.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 68,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "podbeskidzie-bielsko-biaa"
   }
 },
 {

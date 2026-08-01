@@ -23,36 +23,6 @@
       }
     },
     {
-      "name": "GKS Tychy",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/GKS_Tychy",
-      "transfermarkt_url": "https://www.transfermarkt.com/gks-tychy/startseite/verein/1750",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gks-tychy/besucherzahlenentwicklung/verein/1750",
-      "stadium": {
-        "name": "Tychy City Stadium",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Tychy_Municipal_Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/gks-tychy/stadion/verein/1750",
-        "city": {
-          "name": "Tychy",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Tychy"
-        }
-      }
-    },
-    {
-      "name": "Górnik Łęczna",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/GKS_G%C3%B3rnik_%C5%81%C4%99czna",
-      "transfermarkt_url": "https://www.transfermarkt.com/gornik-leczna/startseite/verein/3291",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/gornik-leczna/besucherzahlenentwicklung/verein/3291",
-      "stadium": {
-        "name": "Górnik Łęczna Stadium",
-        "wikipedia_url": "",
-        "transfermarkt_url": "https://www.transfermarkt.com/gornik-leczna/stadion/verein/3291",
-        "city": {
-          "name": "Łęczna",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%81%C4%99czna"
-        }
-      }
-    },
-    {
       "name": "ŁKS Łódź",
       "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%81KS_%C5%81%C3%B3d%C5%BA",
       "transfermarkt_url": "https://www.transfermarkt.com/lks-lodz/startseite/verein/256",
@@ -218,21 +188,6 @@
       }
     },
     {
-      "name": "Znicz Pruszków",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Znicz_Pruszk%C3%B3w",
-      "transfermarkt_url": "https://www.transfermarkt.com/znicz-pruszkow/startseite/verein/9109",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/znicz-pruszkow/besucherzahlenentwicklung/verein/9109",
-      "stadium": {
-        "name": "Znicz Stadium",
-        "wikipedia_url": "",
-        "transfermarkt_url": "https://www.transfermarkt.com/znicz-pruszkow/stadion/verein/9109",
-        "city": {
-          "name": "Pruszków",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Pruszk%C3%B3w"
-        }
-      }
-    },
-    {
       "name": "Lechia Gdańsk",
       "transfermarkt_url": "https://www.transfermarkt.com/lechia-gdansk/startseite/verein/4000",
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/lechia-gdansk/besucherzahlenentwicklung/verein/4000",
@@ -277,6 +232,54 @@
         "city": {
           "name": "Nieciecza",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Nieciecza"
+        }
+      }
+    },
+    {
+      "name": "Unia Skierniewice",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Unia_Skierniewice",
+      "transfermarkt_url": "https://www.transfermarkt.com/unia-skierniewice/startseite/verein/30753",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/unia-skierniewice/besucherzahlenentwicklung/verein/30753",
+      "stadium": {
+        "name": "Stadion Miejski w Skierniewicach",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/unia-skierniewice/stadion/verein/30753",
+        "city": {
+          "name": "Skierniewice",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Skierniewice"
+        },
+        "latitude": 51.976199,
+        "longitude": 20.142349,
+        "owner_raw": "Municipal (Stadion Miejski, OSiR Skierniewice complex)"
+      }
+    },
+    {
+      "name": "Warta Poznań",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Warta_Pozna%C5%84",
+      "transfermarkt_url": "https://www.transfermarkt.com/warta-poznan/startseite/verein/7146",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/warta-poznan/besucherzahlenentwicklung/verein/7146",
+      "stadium": {
+        "name": "Warta Poznań Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Warta_Pozna%C5%84_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/warta-poznan/stadion/verein/7146",
+        "city": {
+          "name": "Poznań",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Pozna%C5%84"
+        }
+      }
+    },
+    {
+      "name": "Podbeskidzie Bielsko-Biała",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Podbeskidzie_Bielsko-Bia%C5%82a",
+      "transfermarkt_url": "https://www.transfermarkt.com/podbeskidzie-bielsko-biala/startseite/verein/6361",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/podbeskidzie-bielsko-biala/besucherzahlenentwicklung/verein/6361",
+      "stadium": {
+        "name": "Bielsko-Biała Stadium",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bielsko-Bia%C5%82a_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/podbeskidzie-bielsko-biala/stadion/verein/6361",
+        "city": {
+          "name": "Bielsko-Biała",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bielsko-Bia%C5%82a"
         }
       }
     }
