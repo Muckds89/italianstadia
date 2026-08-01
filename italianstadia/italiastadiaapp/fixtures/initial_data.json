@@ -971,16 +971,6 @@
 },
 {
   "model": "italiastadiaapp.league",
-  "pk": 47,
-  "fields": {
-    "name": "Divizia Națională",
-    "country": 33,
-    "division_level": 1,
-    "season": "2025/26"
-  }
-},
-{
-  "model": "italiastadiaapp.league",
   "pk": 48,
   "fields": {
     "name": "Moldovan Super Liga",

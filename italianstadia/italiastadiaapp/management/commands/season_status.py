@@ -65,3 +65,18 @@ class Command(BaseCommand):
                 self.stdout.write(
                     f"  {lg.country.name:<20} {lg.name:<38} {counts.get(lg.id, 0):>3} teams")
         self.stdout.write(f"\nTotal: {qs.count()} leagues.")
+
+        # A league with no teams is almost always a duplicate left behind by a
+        # rename (e.g. Divizia Nationala -> Moldovan Super Liga) or a placeholder
+        # that was never filled. Surface them so they don't sit unnoticed.
+        empty = [lg for lg in qs if counts.get(lg.id, 0) == 0]
+        if empty:
+            self.stdout.write(self.style.WARNING(
+                f"\n{len(empty)} league(s) with NO teams — check for a rename duplicate:"))
+            for lg in empty:
+                siblings = [o for o in qs
+                            if o.country_id == lg.country_id
+                            and o.division_level == lg.division_level and o.id != lg.id]
+                hint = (" | same-tier: " + ", ".join(
+                    f"{o.name} ({counts.get(o.id, 0)} teams)" for o in siblings)) if siblings else ""
+                self.stdout.write(f"  {lg.country.name:<20} {lg.name}{hint}")
