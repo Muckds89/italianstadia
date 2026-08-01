@@ -3447,25 +3447,49 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
     EDGE = max(20, int(min(W, H) * 0.03))
     GAPY = max(6, int(FONT_SZ * 0.35))
 
+    # Cap how wide a label may get. Names like "Stadion Miejski im. Marszałka Józefa
+    # Piłsudskiego" run half the frame on one line, so they reach across the map and
+    # sit on top of the badges however they're stacked vertically. Wrapping them
+    # keeps every pill inside its margin column, where it can't cover anything.
+    MAX_PILL_W = max(160, int(W * 0.23))
+
+    def _measure(text, font, fallback_cw):
+        try:
+            bb = draw.textbbox((0, 0), text, font=font)
+            return bb[2] - bb[0], bb[3] - bb[1]
+        except AttributeError:
+            return len(text) * fallback_cw, getattr(font, "size", FONT_SZ)
+
+    def _wrap(text, font, max_w, fallback_cw):
+        """Greedy word wrap to max_w. Returns [(line, w, h), ...]."""
+        words, lines, cur = text.split(), [], ""
+        for word in words:
+            trial = f"{cur} {word}".strip()
+            if cur and _measure(trial, font, fallback_cw)[0] > max_w:
+                lines.append(cur)
+                cur = word
+            else:
+                cur = trial
+        if cur:
+            lines.append(cur)
+        return [(ln,) + _measure(ln, font, fallback_cw) for ln in (lines or [text])]
+
     skip = no_label_names or set()
     items = []
+    inner_w = MAX_PILL_W - PAD_X * 2
     for px, py, s in dot_positions:
         if s["name"] in skip:
             continue                            # badge already drawn; label lives in the inset
         team_line, stadium_line = (s.get("team_name", "") or ""), s["name"]
-        try:
-            tb1 = draw.textbbox((0, 0), team_line, font=font_team)
-            tw1, th1 = tb1[2] - tb1[0], tb1[3] - tb1[1]
-            tb2 = draw.textbbox((0, 0), stadium_line, font=font_stadium)
-            tw2, th2 = tb2[2] - tb2[0], tb2[3] - tb2[1]
-        except AttributeError:
-            tw1, th1 = len(team_line) * 7, FONT_SZ2
-            tw2, th2 = len(stadium_line) * 9, FONT_SZ
-        show_team = bool(team_line)
-        items.append(dict(
-            px=px, py=py, team=team_line, stadium=stadium_line, show_team=show_team, th1=th1,
-            pill_w=max(tw1, tw2) + PAD_X * 2,
-            pill_h=(th1 + LINE_GAP + th2 if show_team else th2) + PAD_Y * 2))
+        rows = []                                # [(text, font, fill_key, w, h)]
+        if team_line:
+            for ln, w, h in _wrap(team_line, font_team, inner_w, 7):
+                rows.append((ln, font_team, "team", w, h))
+        for ln, w, h in _wrap(stadium_line, font_stadium, inner_w, 9):
+            rows.append((ln, font_stadium, "stadium", w, h))
+        pill_w = max(r[3] for r in rows) + PAD_X * 2
+        pill_h = sum(r[4] for r in rows) + LINE_GAP * (len(rows) - 1) + PAD_Y * 2
+        items.append(dict(px=px, py=py, rows=rows, pill_w=pill_w, pill_h=pill_h))
 
     # Split the labels into the two columns. Default: MEDIAN x, so roughly half go
     # each side. But when the badges form two clearly separated horizontal groups
@@ -3494,6 +3518,7 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
         overlap the column's x-range), sorted top-down."""
         return sorted((rb[1], rb[3]) for rb in (reserve_boxes or [])
                       if not (rb[2] < col_x0 or rb[0] > col_x1))
+
 
     def _place_column(col, side):
         if not col:
@@ -3527,16 +3552,21 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
         seg = 0
         cursor = free[0][0] + (gap if free_total > total_h else 0)
         for it in col:
+            x0, h = _x_for(it), it["pill_h"]
             # jump to the next free segment if this label won't fit in the current one
-            while seg < len(free) and cursor + it["pill_h"] > free[seg][1]:
+            while seg < len(free) and cursor + h > free[seg][1]:
                 seg += 1
                 if seg < len(free):
                     cursor = free[seg][0]
             if seg >= len(free):
-                it["lx"] = None                 # genuinely no room left
-                continue
-            it["lx"], it["ly"], it["side"] = _x_for(it), int(cursor), side
-            cursor += it["pill_h"] + gap
+                # Out of free space: keep the label (a missing label is worse than a
+                # tight fit) pinned inside the frame rather than dropping it.
+                cursor = min(cursor, H - EDGE - h)
+                seg = len(free) - 1
+            # Never let a pill run off the bottom edge.
+            it["ly"] = int(max(EDGE, min(cursor, H - EDGE - h)))
+            it["lx"], it["side"] = x0, side
+            cursor = it["ly"] + h + gap
 
     _place_column(left_col, "left")
     _place_column(right_col, "right")
@@ -3558,10 +3588,10 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
         lx, ly, pw, ph = it["lx"], it["ly"], it["pill_w"], it["pill_h"]
         draw.rounded_rectangle([lx, ly, lx + pw, ly + ph], radius=5, fill=(8, 10, 20, 220))
         ty = ly + PAD_Y
-        if it["show_team"]:
-            draw.text((lx + PAD_X, ty), it["team"], font=font_team, fill=team_rgb)
-            ty += it["th1"] + LINE_GAP
-        draw.text((lx + PAD_X, ty), it["stadium"], font=font_stadium, fill=label_rgb)
+        for text, font, kind, _w, h in it["rows"]:
+            draw.text((lx + PAD_X, ty), text, font=font,
+                      fill=team_rgb if kind == "team" else label_rgb)
+            ty += h + LINE_GAP
 
     return img
 
