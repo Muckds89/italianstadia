@@ -606,7 +606,7 @@
     "name": "Ekstraklasa",
     "country": 39,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2026/27"
   }
 },
 {
@@ -1186,7 +1186,7 @@
     "name": "I liga",
     "country": 39,
     "division_level": 2,
-    "season": "2025/26"
+    "season": "2026/27"
   }
 },
 {
@@ -48776,7 +48776,7 @@
     "is_national": false,
     "name": "Lechia Gdańsk",
     "founded": "1945-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 220,
     "manager": "vacant",
@@ -48789,7 +48789,7 @@
     "image_credit": null,
     "description": "Lechia Gdańsk ( Polish pronunciation: [ˈlɛxja ˈɡdaj̃sk] ) is a Polish football club based in Gdańsk . As of the 2026–27 season , they compete in the I liga .",
     "locked": false,
-    "league": 9,
+    "league": 68,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "lechia-gdansk"
@@ -49036,7 +49036,7 @@
     "is_national": false,
     "name": "Arka Gdynia",
     "founded": "1929-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 230,
     "manager": "vacant",
@@ -49049,7 +49049,7 @@
     "image_credit": null,
     "description": "Morski Związkowy Klub Sportowy Arka Gdynia ( lit. ' Maritime Union Sports Club Arka Gdynia ' , Polish pronunciation: [ˈmɔrskʲi zvjɔ̃sˈkɔvɨ ˈklup spɔrˈtɔvɨ ˈarka ˈɡdɨɲa] ) is a professional football club based in Gdynia , Poland The club was founded as Klub Sportowy Gdynia in 1929. [ 2 ] They will play in the I liga in the 2026–27 season following relegation in the previous season.",
     "locked": false,
-    "league": 9,
+    "league": 68,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "arka-gdynia"
@@ -49062,7 +49062,7 @@
     "is_national": false,
     "name": "Bruk-Bet Termalica Nieciecza",
     "founded": "1922-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 231,
     "manager": "Marcin Brosz",
@@ -49075,7 +49075,7 @@
     "image_credit": null,
     "description": "Bruk-Bet Termalica Nieciecza Klub Sportowy Spółka Akcyjna , commonly referred to as Bruk-Bet Termalica Nieciecza ( Polish pronunciation: [ˈbruɡbɛt tɛrmaˈlika ɲɛˈt͡ɕɛt͡ʂa] ), is a Polish professional football club based in Nieciecza . The team competes in the I liga , the second tier of the Polish football league system , following their 2025–26 Ekstraklasa relegation. [ 2 ]",
     "locked": false,
-    "league": 9,
+    "league": 68,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "bruk-bet-termalica-nieciecza"
@@ -63882,7 +63882,7 @@
     "is_national": false,
     "name": "Śląsk Wrocław",
     "founded": "1947-01-01",
-    "tier": 2,
+    "tier": 1,
     "girone": null,
     "stadium": 794,
     "manager": "Ante Šimundža [ 2 ]",
@@ -63895,7 +63895,7 @@
     "image_credit": null,
     "description": "Wrocławski Klub Sportowy Śląsk Wrocław Spółka Akcyjna , commonly known as WKS Śląsk Wrocław ( Polish pronunciation: [ɕlɔ̃zɡ ˈvrɔt͡swaf] ), is a Polish professional football club based in Wrocław that plays in the Ekstraklasa , the top level of the Polish football league system .",
     "locked": false,
-    "league": 68,
+    "league": 9,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "slask-wrocaw"
@@ -63908,9 +63908,9 @@
     "is_national": false,
     "name": "Wieczysta Kraków",
     "founded": "1942-01-01",
-    "tier": 2,
+    "tier": 1,
     "girone": null,
-    "stadium": 811,
+    "stadium": 795,
     "manager": "Kazimierz Moskal",
     "num_of_titles": 0,
     "city": 664,
@@ -63921,7 +63921,7 @@
     "image_credit": null,
     "description": "Wieczysta Kraków is a Polish football club, based in Kraków . As of the 2026–27 season , they compete in the Ekstraklasa , after winning the 2025–26 I liga promotion play-offs.",
     "locked": false,
-    "league": 68,
+    "league": 9,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "wieczysta-krakow"
@@ -63934,7 +63934,7 @@
     "is_national": false,
     "name": "Wisła Kraków",
     "founded": "1906-01-01",
-    "tier": 2,
+    "tier": 1,
     "girone": null,
     "stadium": 795,
     "manager": "Mariusz Jop",
@@ -63947,7 +63947,7 @@
     "image_credit": null,
     "description": "Towarzystwo Sportowe Wisła Kraków Spółka Akcyjna , commonly referred to as Wisła Kraków ( Polish pronunciation: [ˈviswa ˈkrakuf] ), is a Polish professional football club based in Kraków . They compete in the Ekstraklasa following promotion from the 2025–26 I liga . [ 3 ] It ranks fourth in the number of national titles won (13), behind Górnik Zabrze , Ruch Chorzów (both on 14), and Legia Warsaw (15), and second in all-time victories. Wisła was founded in 1906 under the name TS Wisła ( Polish : Towarzystwo Sportowe Wisła). The team plays its home matches at the Synerise Arena Kraków .",
     "locked": false,
-    "league": 68,
+    "league": 9,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "wisa-krakow"

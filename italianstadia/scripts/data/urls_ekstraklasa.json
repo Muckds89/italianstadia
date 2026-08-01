@@ -4,7 +4,7 @@
     "country": "Poland",
     "country_code": "PL",
     "division_level": 1,
-    "season": "25/26"
+    "season": "26/27"
   },
   "teams": [
     {
@@ -100,22 +100,6 @@
         "city": {
           "name": "Zabrze",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Zabrze"
-        }
-      }
-    },
-    {
-      "name": "Lechia Gdańsk",
-      "transfermarkt_url": "https://www.transfermarkt.com/lechia-gdansk/startseite/verein/4000",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/lechia-gdansk/besucherzahlenentwicklung/verein/4000",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Lechia_Gda%C5%84sk",
-      "stadium": {
-        "name": "Polsat Plus Arena Gdańsk",
-        "owner_raw": "Miasto Gdańsk",
-        "transfermarkt_url": "https://www.transfermarkt.com/lechia-gdansk/stadion/verein/4000",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Polsat_Plus_Arena_Gda%C5%84sk",
-        "city": {
-          "name": "Gdańsk",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Gda%C5%84sk"
         }
       }
     },
@@ -264,34 +248,47 @@
       }
     },
     {
-      "name": "Arka Gdynia",
-      "transfermarkt_url": "https://www.transfermarkt.com/arka-gdynia/startseite/verein/6107",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/arka-gdynia/besucherzahlenentwicklung/verein/6107",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Arka_Gdynia",
+      "name": "Wisła Kraków",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Wis%C5%82a_Krak%C3%B3w",
+      "transfermarkt_url": "https://www.transfermarkt.com/wisla-krakau/startseite/verein/422",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/wisla-krakau/besucherzahlenentwicklung/verein/422",
       "stadium": {
-        "name": "GOSiR Stadium",
-        "owner_raw": "Miasto Gdynia",
-        "transfermarkt_url": "https://www.transfermarkt.com/arka-gdynia/stadion/verein/6107",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Miejski_(Gdynia)",
+        "name": "Stadion Miejski (Kraków)",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Henryk_Reyman_Municipal_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/wisla-krakau/stadion/verein/422",
         "city": {
-          "name": "Gdynia",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Gdynia"
+          "name": "Kraków",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Krak%C3%B3w"
         }
       }
     },
     {
-      "name": "Bruk-Bet Termalica Nieciecza",
-      "transfermarkt_url": "https://www.transfermarkt.com/bruk-bet-termalica-nieciecza/startseite/verein/15906",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/bruk-bet-termalica-nieciecza/besucherzahlenentwicklung/verein/15906",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Bruk-Bet_Termalica_Nieciecza",
+      "name": "Śląsk Wrocław",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%9Al%C4%85sk_Wroc%C5%82aw",
+      "transfermarkt_url": "https://www.transfermarkt.com/slask-wroclaw/startseite/verein/759",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/slask-wroclaw/besucherzahlenentwicklung/verein/759",
       "stadium": {
-        "name": "Bruk-Bet Stadium",
-        "owner_raw": "Bruk-Bet Termalica Nieciecza",
-        "transfermarkt_url": "https://www.transfermarkt.com/bruk-bet-termalica-nieciecza/stadion/verein/15906",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Sportowy_Bruk-Bet_Termalica",
+        "name": "Tarczyński Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Wroc%C5%82aw_Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/slask-wroclaw/stadion/verein/759",
         "city": {
-          "name": "Nieciecza",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Nieciecza"
+          "name": "Wrocław",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Wroc%C5%82aw"
+        }
+      }
+    },
+    {
+      "name": "Wieczysta Kraków",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Wieczysta_Krak%C3%B3w",
+      "transfermarkt_url": "https://www.transfermarkt.com/wieczysta-krakow/startseite/verein/30974",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/wieczysta-krakow/besucherzahlenentwicklung/verein/30974",
+      "stadium": {
+        "name": "ArcelorMittal Park",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/wieczysta-krakow/stadion/verein/30974",
+        "city": {
+          "name": "Sosnowiec",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Sosnowiec"
         }
       }
     }
