@@ -3501,6 +3501,12 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
         maxw = max(it["pill_w"] for it in col)
         col_x0 = EDGE if side == "left" else W - EDGE - maxw
         bands = _bands_for(col_x0, col_x0 + maxw)
+        # Each pill hugs its own margin: left column left-aligned at EDGE, right
+        # column RIGHT-aligned so its right edge sits at W-EDGE. Aligning every
+        # right-hand pill to the widest one instead would push short labels far
+        # into the map, covering badges.
+        def _x_for(it):
+            return EDGE if side == "left" else W - EDGE - it["pill_w"]
         col.sort(key=lambda it: it["py"])       # order-preserving → leaders don't cross
         # Build the FREE vertical segments (the column minus reserved bands), then
         # pack labels across them with an even gap. Packing into the real free space
@@ -3529,7 +3535,7 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
             if seg >= len(free):
                 it["lx"] = None                 # genuinely no room left
                 continue
-            it["lx"], it["ly"], it["side"] = col_x0, int(cursor), side
+            it["lx"], it["ly"], it["side"] = _x_for(it), int(cursor), side
             cursor += it["pill_h"] + gap
 
     _place_column(left_col, "left")
