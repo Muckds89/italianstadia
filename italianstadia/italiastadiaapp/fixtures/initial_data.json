@@ -12542,13 +12542,7 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": "Carlo Cocchia, Luigi Corradi",
-    "tournaments": [
-      {
-        "tournament": "UEFA Euro 2032",
-        "year": 2032,
-        "status": "CANDIDATE"
-      }
-    ],
+    "tournaments": [],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Diego_Armando_Maradona",
     "transfermarkt_url": "https://www.transfermarkt.com/ssc-neapel/stadion/verein/6195/saison_id/2025",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadium-san-paolo-naples-for-bruno-pesaola-2015-1710801934-132030.jpg?lm=1710801971",
@@ -12611,13 +12605,7 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": null,
-    "tournaments": [
-      {
-        "tournament": "UEFA Euro 2032",
-        "year": 2032,
-        "status": "CANDIDATE"
-      }
-    ],
+    "tournaments": [],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Renato_Dall%27Ara",
     "transfermarkt_url": "https://www.transfermarkt.com/fc-bologna/stadion/verein/1025/saison_id/2025",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadio-renato-dallara-bologna-1627641591-68074.jpg?lm=1627641622",
@@ -70962,7 +70950,13 @@
     "source_url": "https://www.gauarena.com/progetti/restyling-stadio-renato-dallara/",
     "instagram_url": null,
     "notes": "La volontà di avviare un processo di ammodernamento dello stadio Renato Dall'Ara comporterà oltre che una valorizzazione di un così importante bene architettonico della città, anche un miglioramento sostanziale dell'impatto che lo stadio stesso ha sul contesto circostante.\r\n\r\nLo Stadio Dall’Ara, una volta ristrutturato, sarà in grado di accogliere circa 30.000 spettatori e ospiterà, oltre alle funzioni strettamente connesse all’evento sportivo (spogliatoi, area media, ospitalità...) anche destinazioni terziarie e ludiche.",
-    "tournaments": []
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ]
   }
 },
 {
@@ -71299,7 +71293,13 @@
     "source_url": "https://www.gauarena.com/progetti/napoli-stadium/",
     "instagram_url": null,
     "notes": "The Stadio Diego Armando Maradona in Naples is set for a major renovation as one of Italy's candidate venues for UEFA Euro 2032, with plans to modernise the bowl named after the late Argentine and bring it toward a 55,000 capacity. The upgrade would refresh SSC Napoli's home, originally opened in 1959, for top-tier European tournament standards.",
-    "tournaments": []
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ]
   }
 },
 {
