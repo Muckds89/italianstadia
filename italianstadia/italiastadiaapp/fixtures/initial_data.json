@@ -14038,13 +14038,7 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": null,
-    "tournaments": [
-      {
-        "tournament": "UEFA Euro 2032",
-        "year": 2032,
-        "status": "CANDIDATE"
-      }
-    ],
+    "tournaments": [],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Arechi",
     "transfermarkt_url": "https://www.transfermarkt.com/us-salernitana-1919/stadion/verein/380/saison_id/2025",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadio-arechi-salernitana-1627640891-68070.jpg?lm=1627641023",
@@ -70937,7 +70931,13 @@
     "source_url": "https://www.gauarena.com/progetti/restyling-stadio-arechi-salerno/",
     "instagram_url": null,
     "notes": "Benvenuti nel futuro dello sport e dell'innovazione: il progetto rivoluzionario dello Stadio \"Arechi\". Un'ambiziosa visione della Regione per dare vita a uno stadio all'avanguardia, dove sicurezza, sostenibilità e qualità si fondono con l'eccellenza del calcio di massima serie. Questa incredibile struttura è stata concepita con un unico obiettivo: rispettare e valorizzare la città e la tifoseria che tanto ama la sua squadra. L'attenzione per l'ambiente è al centro del progetto, grazie all'utilizzo di tecnologie all'avanguardia che minimizzano l'impatto ambientale e massimizzano l'efficienza energetica. Ma non è tutto: il nuovo stadio \"Arechi\" abbraccia l'inclusività, con un design senza barriere architettoniche e sociali, garantendo l'accessibilità a tutte le persone, comprese quelle con disabilità.",
-    "tournaments": []
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ]
   }
 },
 {

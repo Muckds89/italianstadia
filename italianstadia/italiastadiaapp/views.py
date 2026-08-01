@@ -2462,6 +2462,20 @@ def _merc_y_inv(y):
     return math.degrees(math.atan(math.sinh(math.pi * (1 - 2 * y))))
 
 
+def _label_gutter_bbox(bbox, frac=0.19):
+    """Widen the frame so the outer `frac` of each side stays empty of markers.
+
+    Labels are laid out in columns hugging the left/right margins, so if the data
+    reaches the edge of the frame (e.g. Italy sitting hard against the left side on
+    the Euro 2032 map) the pills land on top of the badges. Reserving a gutter is
+    the only fix that always works: no vertical placement can save a pill whose
+    column overlaps the badge field. Zooms out slightly; aspect is restored by
+    _expand_bbox_to_aspect afterwards."""
+    lon_min, lat_min, lon_max, lat_max = bbox
+    grow = (lon_max - lon_min) * (frac / max(0.1, 1 - 2 * frac))
+    return (lon_min - grow, lat_min, lon_max + grow, lat_max)
+
+
 def _expand_bbox_to_aspect(bbox, W, H):
     """Expand bbox symmetrically so its Mercator aspect ratio matches W:H.
     This ensures the exported image isn't geographically stretched."""
@@ -3999,6 +4013,9 @@ def _compose_export_image(params):
         bbox = _cover_bbox_to_aspect(tb, W, H)
     else:
         raw_bbox = _bbox_with_padding(stadiums)
+        if params.get("labels"):
+            # Keep the left/right label columns clear of the markers.
+            raw_bbox = _label_gutter_bbox(raw_bbox)
         bbox = _expand_bbox_to_aspect(raw_bbox, W, H)
 
     # Inset grounds + zoom area: a user-drawn box (image fractions over the map)
