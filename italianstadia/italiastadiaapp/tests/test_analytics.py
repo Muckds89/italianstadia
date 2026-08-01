@@ -85,3 +85,36 @@ class LegacySlugRedirectTests(TestCase):
     def test_unknown_slug_still_404s(self):
         resp = self.client.get("/stadium/definitely-not-a-stadium/")
         self.assertEqual(resp.status_code, 404)
+
+
+class BasemapAttributionTests(TestCase):
+    """Tile providers require visible attribution on every rendered map."""
+
+    def _text(self, **params):
+        from italiastadiaapp.views import _source_text
+        base = {"tiles": True, "style_key": "satellite"}
+        base.update(params)
+        return _source_text(base)
+
+    def test_satellite_credits_esri(self):
+        self.assertIn("Esri", self._text(style_key="satellite"))
+
+    def test_dark_and_light_credit_osm_and_carto(self):
+        for style in ("dark", "light"):
+            txt = self._text(style_key=style)
+            self.assertIn("OpenStreetMap", txt, style)
+            self.assertIn("CARTO", txt, style)
+
+    def test_topo_credits_osm(self):
+        self.assertIn("OpenStreetMap", self._text(style_key="topo"))
+
+    def test_always_credits_our_data_sources(self):
+        self.assertIn("Wikipedia & Transfermarkt", self._text())
+
+    def test_no_tile_attribution_when_tiles_off(self):
+        # solid background => no provider imagery shown => no provider credit
+        txt = self._text(tiles=False)
+        self.assertNotIn("Esri", txt)
+        self.assertIn("Wikipedia & Transfermarkt", txt)
+        txt2 = self._text(bg_color=(10, 10, 40, 255))
+        self.assertNotIn("Esri", txt2)

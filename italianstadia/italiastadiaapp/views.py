@@ -3907,11 +3907,35 @@ def _draw_logo(img, W, H):
     return img
 
 
-def _draw_source(img, W, H, legend_entries=0):
-    """Small data-source credit in the BOTTOM-LEFT corner. When a legend is
-    present (also bottom-left) the credit stacks just above it so they don't
-    overlap."""
+# Basemap attribution required by each tile provider's terms of use. Every
+# published or exported map must carry the credit for the imagery it actually
+# uses — Esri, OpenStreetMap and CARTO all require visible attribution.
+_TILE_ATTRIBUTION = {
+    "satellite": "Imagery © Esri, Maxar, Earthstar Geographics",
+    "dark":      "© OpenStreetMap contributors, © CARTO",
+    "light":     "© OpenStreetMap contributors, © CARTO",
+    "topo":      "© OpenStreetMap contributors",
+}
+
+
+def _source_text(params):
+    """Credit line: our data sources plus the basemap attribution for the style
+    actually rendered. Tile attribution is dropped when tiles are switched off
+    (solid background), because then no provider imagery is shown."""
     text = "Data: Wikipedia & Transfermarkt"
+    uses_tiles = params.get("tiles", True) and not params.get("bg_color")
+    if uses_tiles:
+        attr = _TILE_ATTRIBUTION.get(params.get("style_key"))
+        if attr:
+            text += f"  ·  {attr}"
+    return text
+
+
+def _draw_source(img, W, H, legend_entries=0, text=None):
+    """Small data-source + basemap-attribution credit in the BOTTOM-LEFT corner.
+    When a legend is present (also bottom-left) the credit stacks just above it
+    so they don't overlap."""
+    text = text or "Data: Wikipedia & Transfermarkt"
     font = _load_font(bold=False, size=13)
     d = ImageDraw.Draw(img)
     try:
@@ -4093,7 +4117,8 @@ def _compose_export_image(params):
         img = _draw_scale_bar(img, bbox, W, H)
     if params.get("logo"):
         img = _draw_logo(img, W, H)
-    img = _draw_source(img, W, H, legend_entries=legend_n)   # data-source credit
+    # data-source + basemap attribution credit
+    img = _draw_source(img, W, H, legend_entries=legend_n, text=_source_text(params))
 
     if tlayout:
         img = _draw_title_translucent(img, tlayout)
