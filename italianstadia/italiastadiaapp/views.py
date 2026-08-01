@@ -1114,15 +1114,25 @@ _TOURNAMENT_EDITORIAL = {
             "leaving Turkey to be awarded the tournament as sole host. Those concerns are not "
             "merely hypothetical, UEFA president Aleksander Čeferin has publicly warned that "
             "Italy risks being removed as co-host if its infrastructure plans do not progress.",
-            "The Italian host list is also shifting. Bari's Stadio San Nicola has effectively "
-            "dropped out of the running, while Lecce's Stadio Ettore Giardiniero (Via del Mare) "
-            "has stepped forward: its candidacy was accepted, with a renovation planned to bring "
-            "the ground up to UEFA standard. On the map below Bari is marked as withdrawn and "
-            "Lecce appears as an under-renovation candidate.",
+            "The Italian race entered its decisive phase on 31 July 2026, the FIGC's deadline "
+            "for candidate cities to deliver their dossiers (approved projects, financial "
+            "guarantees and proof of UEFA compliance). Twelve cities answered the call: Turin "
+            "(Allianz Stadium), Milan (the planned new San Siro), Rome, with two dossiers, "
+            "the Stadio Olimpico and the new Stadio della Roma, Florence (the rebuilt Artemio "
+            "Franchi), Naples (Stadio Diego Armando Maradona), Genoa (Luigi Ferraris), Verona "
+            "(Marcantonio Bentegodi), Bologna (Renato Dall'Ara), Bari (San Nicola), Palermo "
+            "(Renzo Barbera), Salerno (Arechi) and Cagliari (a planned new stadium). Lecce's "
+            "Via del Mare, an earlier candidate, did not submit a dossier. The FIGC will "
+            "shortlist five stadiums, plus reserves, by mid-September, and UEFA is expected to "
+            "ratify the final Italian five in the first week of October 2026. Of the twelve, "
+            "only Turin's Allianz Stadium is tournament-ready today; every other candidacy "
+            "depends on a renovation or a new build being delivered on time.",
         ],
         "sources": [
-            {"label": "LeccePrima, Via del Mare's Euro 2032 candidacy accepted",
-             "url": "https://www.lecceprima.it/sport/calcio/euro-2032-via-del-mare-candidatura-accettata.html"},
+            {"label": "La Gazzetta dello Sport, Euro 2032: which stadiums will host the tournament",
+             "url": "https://www.gazzetta.it/Calcio/Europei/31-07-2026/euro-2032-quali-stadi-ospiteranno-il-torneo.shtml"},
+            {"label": "Calcio e Finanza, Florence files its official Euro 2032 candidacy (31 July 2026)",
+             "url": "https://www.calcioefinanza.it/2026/07/31/candidatura-ufficiale-stadio-franchi-euro-2032/"},
             {"label": "Calcio e Finanza, Italy–Turkey joint candidacy for Euro 2032",
              "url": "https://www.calcioefinanza.it/2023/07/28/gravina-candidatura-italia-turchia-per-euro-2032-svolta-storica/"},
             {"label": "Football Italia, Gravina on Italy, Euro 2032 and Turkey",
@@ -1138,9 +1148,16 @@ _TOURNAMENT_EDITORIAL = {
              "Italy and Turkey merged their separate bids into a single joint candidacy during "
              "the bidding process; UEFA awarded them the 2032 finals unopposed in October 2023."),
             ("How many stadiums will Euro 2032 use?",
-             "UEFA requires each host to provide around 10 stadiums meeting its capacity tiers, "
-             "so the Italy–Turkey edition is expected to use roughly 20 venues split between the "
-             "two countries, narrowed from a longer candidate list."),
+             "Each host country will provide five stadiums, ten in total. Both federations "
+             "are narrowing longer candidate lists; the final venues are expected to be "
+             "ratified by UEFA in early October 2026."),
+            ("Which Italian cities are candidates for Euro 2032?",
+             "Twelve cities delivered dossiers to the FIGC by the 31 July 2026 deadline: "
+             "Turin, Milan, Rome (two projects), Florence, Naples, Genoa, Verona, Bologna, "
+             "Bari, Palermo, Salerno and Cagliari. Five will be chosen, with reserves."),
+            ("Which Italian stadium is ready for Euro 2032 today?",
+             "Only Turin's Allianz Stadium currently meets UEFA requirements without further "
+             "work; all other Italian candidacies rely on renovations or new builds."),
         ],
     },
     "champions-league-final": {
@@ -3450,11 +3467,25 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
             pill_w=max(tw1, tw2) + PAD_X * 2,
             pill_h=(th1 + LINE_GAP + th2 if show_team else th2) + PAD_Y * 2))
 
-    # Balance the two columns: split by x at the MEDIAN so roughly half the labels
-    # go each side (a far-west badge still labels left, far-east right), instead of
-    # piling onto whichever half holds the cluster.
+    # Split the labels into the two columns. Default: MEDIAN x, so roughly half go
+    # each side. But when the badges form two clearly separated horizontal groups
+    # (e.g. a two-country tournament map: Italy west, Turkey east), split at the
+    # LARGEST x-gap instead — every west-group label goes left and every east-group
+    # label right, which reads far better than mixing the groups. General rule, no
+    # per-map tuning: the gap split only kicks in when the widest gap between
+    # neighbouring badges is big in absolute terms AND dominates typical spacing.
     by_x = sorted(items, key=lambda it: it["px"])
     mid = len(by_x) // 2
+    if len(by_x) >= 6:
+        gaps = [(by_x[i + 1]["px"] - by_x[i]["px"], i + 1) for i in range(len(by_x) - 1)]
+        # consider only splits that leave at least 2 labels on each side
+        cand = [(g, i) for g, i in gaps if 2 <= i <= len(by_x) - 2]
+        if cand:
+            gsize, gidx = max(cand)
+            others = sorted(g for g, _ in gaps)
+            typical = others[len(others) // 2] or 1
+            if gsize > W * 0.15 and gsize > 4 * typical:
+                mid = gidx
     left_col = by_x[:mid]
     right_col = by_x[mid:]
 

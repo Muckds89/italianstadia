@@ -12350,7 +12350,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CONFIRMED"
+        "status": "CANDIDATE"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Juventus_Stadium",
@@ -12424,7 +12424,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CONFIRMED"
+        "status": "CANDIDATE"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Olimpico",
@@ -12539,7 +12539,13 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": null,
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Renato_Dall%27Ara",
     "transfermarkt_url": "https://www.transfermarkt.com/fc-bologna/stadion/verein/1025/saison_id/2025",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadio-renato-dallara-bologna-1627641591-68074.jpg?lm=1627641622",
@@ -13018,7 +13024,13 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": null,
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Renzo_Barbera",
     "transfermarkt_url": "https://www.transfermarkt.com/us-palermo/stadion/verein/458/saison_id/2025",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/palermo-fc-comunale-renzo-barbera-la-favorita-2022-23-1680777146-105015.jpg?lm=1680777156",
@@ -13086,7 +13098,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "DISCARDED"
+        "status": "CANDIDATE"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_San_Nicola",
@@ -13954,7 +13966,13 @@
     "stadium_type": "OPEN",
     "surface": "GRASS",
     "architect": null,
-    "tournaments": [],
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Stadio_Arechi",
     "transfermarkt_url": "https://www.transfermarkt.com/us-salernitana-1919/stadion/verein/380/saison_id/2025",
     "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/stadio-arechi-salernitana-1627640891-68070.jpg?lm=1627641023",
@@ -20616,7 +20634,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CONFIRMED"
+        "status": "CANDIDATE"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Atat%C3%BCrk_Olympic_Stadium",
@@ -20666,7 +20684,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CONFIRMED"
+        "status": "CANDIDATE"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/%C5%9E%C3%BCkr%C3%BC_Saraco%C4%9Flu_Stadium",
@@ -20716,7 +20734,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CONFIRMED"
+        "status": "CANDIDATE"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Rams_Park",
@@ -71053,7 +71071,13 @@
     "source_url": "https://populous.com/article/a-s-roma-unveils-populous-designs-for-new-stadium-and-community-district",
     "instagram_url": null,
     "notes": "Stadio della Roma is AS Roma's planned new 55,000-seat club-owned stadium in the Pietralata district of Rome, ending decades of ground-sharing at the publicly owned Stadio Olimpico. Approved for construction with a target opening around 2028, it would become the first stadium fully owned by Roma and one of Italy's first purpose-built football-only grounds of its size.",
-    "tournaments": []
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ]
   }
 },
 {
@@ -71323,7 +71347,7 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "CANDIDATE"
+        "status": "DISCARDED"
       }
     ]
   }
