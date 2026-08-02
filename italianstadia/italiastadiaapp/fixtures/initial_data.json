@@ -71998,7 +71998,69 @@
       {
         "tournament": "UEFA Euro 2032",
         "year": 2032,
-        "status": "DISCARDED"
+        "status": "CANDIDATE"
+      }
+    ]
+  }
+},
+{
+  "model": "italiastadiaapp.stadiumdevelopment",
+  "pk": 22,
+  "fields": {
+    "stadium": null,
+    "name": "Stadio Flaminio redevelopment",
+    "slug": "stadio-flaminio-redevelopment",
+    "project_type": "REDEVELOPMENT",
+    "status": "PLANNING",
+    "future_capacity": 50750,
+    "estimated_opening": 2031,
+    "latitude": "41.926956",
+    "longitude": "12.472300",
+    "country": "Italy",
+    "architect": "Pier Luigi Nervi (original 1959 structure)",
+    "developer": "S.S. Lazio",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "source_url": "https://en.wikipedia.org/wiki/Stadio_Flaminio",
+    "instagram_url": null,
+    "notes": "Pier Luigi Nervi's 1959 stadium, owned by the Comune di Roma and disused since 2011. Lazio's February 2026 proposal (about EUR 480m) would restore the listed structure and add a suspended tier, raising capacity from 24,973 to 50,750 by 2031. One of Rome's three Euro 2032 dossiers alongside the Stadio Olimpico and the new Roma ground at Pietralata.",
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
+      }
+    ]
+  }
+},
+{
+  "model": "italiastadiaapp.stadiumdevelopment",
+  "pk": 23,
+  "fields": {
+    "stadium": null,
+    "name": "New Napoli Stadium (ex Q8, San Giovanni a Teduccio)",
+    "slug": "new-napoli-stadium-ex-q8-san-giovanni-a-teduccio",
+    "project_type": "NEW",
+    "status": "PLANNING",
+    "future_capacity": 70000,
+    "estimated_opening": null,
+    "latitude": "40.845356",
+    "longitude": "14.297495",
+    "country": "Italy",
+    "architect": null,
+    "developer": "SSC Napoli (Aurelio De Laurentiis)",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "source_url": "https://www.ilnapolista.it/2026/07/nuovo-stadio-napoli-area-ex-q8-teduccio-38-ettari-60mila-posti/",
+    "instagram_url": null,
+    "notes": "Privately funded new build proposed by SSC Napoli president Aurelio De Laurentiis on the 38-hectare former Q8 (Kuwait Petroleum) refinery site at San Giovanni a Teduccio in east Naples. Reported at 60,000-70,000 seats and over EUR 1bn; the site's remediation is due to finish between late 2027 and early 2028. Submitted alongside the municipal Stadio Maradona renovation as Naples' second Euro 2032 dossier. Site coordinates are the former refinery footprint (OSM way 29496715); the exact stadium position within it is not yet public.",
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2032",
+        "year": 2032,
+        "status": "CANDIDATE"
       }
     ]
   }

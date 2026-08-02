@@ -1116,17 +1116,23 @@ _TOURNAMENT_EDITORIAL = {
             "Italy risks being removed as co-host if its infrastructure plans do not progress.",
             "The Italian race entered its decisive phase on 31 July 2026, the FIGC's deadline "
             "for candidate cities to deliver their dossiers (approved projects, financial "
-            "guarantees and proof of UEFA compliance). Twelve cities answered the call: Turin "
-            "(Allianz Stadium), Milan (the planned new San Siro), Rome, with two dossiers, "
-            "the Stadio Olimpico and the new Stadio della Roma, Florence (the rebuilt Artemio "
-            "Franchi), Naples (Stadio Diego Armando Maradona), Genoa (Luigi Ferraris), Verona "
-            "(Marcantonio Bentegodi), Bologna (Renato Dall'Ara), Bari (San Nicola), Palermo "
-            "(Renzo Barbera), Salerno (Arechi) and Cagliari (a planned new stadium). Lecce's "
-            "Via del Mare, an earlier candidate, did not submit a dossier. The FIGC will "
-            "shortlist five stadiums, plus reserves, by mid-September, and UEFA is expected to "
-            "ratify the final Italian five in the first week of October 2026. Of the twelve, "
-            "only Turin's Allianz Stadium is tournament-ready today; every other candidacy "
-            "depends on a renovation or a new build being delivered on time.",
+            "guarantees and proof of UEFA compliance). On 1 August the federation confirmed "
+            "what it had received: <strong>13 cities putting forward 16 stadiums</strong>. The "
+            "cities are Bari, Bologna, Cagliari, Florence, Genoa, Lecce, Milan, Naples, "
+            "Palermo, Rome, Salerno, Turin and Verona; Udine and Reggio Emilia, both mentioned "
+            "earlier in the process, did not file.",
+            "The count reaches 16 because two cities entered more than one project. Rome "
+            "submitted three: the existing Stadio Olimpico, the new Roma ground planned for "
+            "Pietralata, and the Stadio Flaminio, Pier Luigi Nervi's derelict 1959 arena, "
+            "which Lazio propose to restore and expand to 50,750 seats. Naples submitted two "
+            "competing visions: the city council's publicly funded renovation of the Stadio "
+            "Diego Armando Maradona, and a privately financed new build pushed by club "
+            "president Aurelio De Laurentiis on the former Q8 refinery site at San Giovanni a "
+            "Teduccio in the east of the city.",
+            "The FIGC will shortlist five stadiums, plus reserves, by mid-September, and UEFA "
+            "is expected to ratify the final Italian five in the first week of October 2026. "
+            "Of the sixteen, only Turin's Allianz Stadium is tournament-ready today; every "
+            "other candidacy depends on a renovation or a new build being delivered on time.",
         ],
         "sources": [
             {"label": "La Gazzetta dello Sport, Euro 2032: which stadiums will host the tournament",
@@ -1152,9 +1158,15 @@ _TOURNAMENT_EDITORIAL = {
              "are narrowing longer candidate lists; the final venues are expected to be "
              "ratified by UEFA in early October 2026."),
             ("Which Italian cities are candidates for Euro 2032?",
-             "Twelve cities delivered dossiers to the FIGC by the 31 July 2026 deadline: "
-             "Turin, Milan, Rome (two projects), Florence, Naples, Genoa, Verona, Bologna, "
-             "Bari, Palermo, Salerno and Cagliari. Five will be chosen, with reserves."),
+             "Thirteen cities delivered dossiers to the FIGC by the 31 July 2026 deadline, "
+             "covering 16 stadiums: Bari, Bologna, Cagliari, Florence, Genoa, Lecce, Milan, "
+             "Naples, Palermo, Rome, Salerno, Turin and Verona. Rome entered three projects "
+             "and Naples two. Five will be chosen, with reserves."),
+            ("Why are there 16 stadiums but only 13 candidate cities?",
+             "Rome submitted three dossiers, the Stadio Olimpico, the new Roma stadium at "
+             "Pietralata and a restored Stadio Flaminio, and Naples two, the municipal "
+             "renovation of the Stadio Maradona and a privately funded new stadium on the "
+             "former Q8 refinery site at San Giovanni a Teduccio."),
             ("Which Italian stadium is ready for Euro 2032 today?",
              "Only Turin's Allianz Stadium currently meets UEFA requirements without further "
              "work; all other Italian candidacies rely on renovations or new builds."),
