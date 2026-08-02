@@ -2306,7 +2306,13 @@ def _get_export_stadiums(params):
     if params.get("surface_known"):
         qs = qs.exclude(surface__isnull=True).exclude(surface="")
     if params["country"]:
-        qs = qs.filter(city__country=params["country"])
+        # Match the interactive map (map.js applyFilters), which treats a country as
+        # its LEAGUE SYSTEM, not just its borders. Filtering on the stadium's
+        # geographic country alone silently dropped FC Vaduz from a "Switzerland"
+        # export: Vaduz plays in the Swiss Super League but sits in Liechtenstein,
+        # so the map showed 11 of the league's 12 clubs.
+        qs = qs.filter(Q(city__country=params["country"])
+                       | Q(teams__league__country__name=params["country"])).distinct()
     if params["league"]:
         qs = qs.filter(teams__league__name=params["league"])
     if params.get("national"):

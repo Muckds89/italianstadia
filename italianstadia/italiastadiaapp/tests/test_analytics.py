@@ -159,3 +159,49 @@ class HiddenLeagueTests(TestCase):
     def test_hidden_league_absent_from_export_options(self):
         resp = self.client.get(reverse("italiastadiaapp:export_options"))
         self.assertNotIn(b"Test Second", resp.content)
+
+
+class ExportCountryFilterTests(TestCase):
+    """A country filter means that country's LEAGUE SYSTEM, not just its borders.
+
+    FC Vaduz play in the Swiss Super League but their ground is in Liechtenstein,
+    so filtering an export on the stadium's geographic country silently produced a
+    'Switzerland' map missing one of the league's twelve clubs.
+    """
+
+    def setUp(self):
+        from italiastadiaapp.models import City, Country, League, Stadium, Team
+        swiss = Country.objects.create(name="Helvetia", code="HV")
+        lg = League.objects.create(name="Helvetia Super League", country=swiss,
+                                   division_level=1)
+        home = City.objects.create(name="Berncity", country="Helvetia")
+        abroad = City.objects.create(name="Smallstate", country="Microlandia")
+        s1 = Stadium.objects.create(name="Home Park", city=home, capacity=30000,
+                                    latitude=46.9, longitude=7.4)
+        s2 = Stadium.objects.create(name="Abroad Park", city=abroad, capacity=6000,
+                                    latitude=47.1, longitude=9.5)
+        Team.objects.create(name="Home FC", league=lg, stadium=s1, city=home)
+        Team.objects.create(name="Abroad FC", league=lg, stadium=s2, city=abroad)
+
+    def _export(self, country):
+        from italiastadiaapp.views import _get_export_stadiums
+        return _get_export_stadiums({
+            "country": country, "league": "", "ownership": "", "surface": "",
+            "stadium_type": "", "tournament": "", "layer": "", "national": False,
+            "national_only": False, "dev_status": "", "bid": "", "min_capacity": 0,
+            "max_capacity": 0, "era": "", "color_by": "single", "tstatus": set(),
+        })
+
+    def test_country_export_includes_foreign_ground_in_that_league(self):
+        names = {s["name"] for s in self._export("Helvetia")}
+        self.assertIn("Home Park", names)
+        self.assertIn("Abroad Park", names)      # the Vaduz case
+
+    def test_country_export_excludes_unrelated_countries(self):
+        self.assertEqual(self._export("Microlandia") and
+                         {s["name"] for s in self._export("Microlandia")},
+                         {"Abroad Park"})        # geographic match still works
+
+    def test_no_duplicate_rows_from_the_join(self):
+        rows = self._export("Helvetia")
+        self.assertEqual(len(rows), len({s["name"] for s in rows}))
