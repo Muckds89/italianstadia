@@ -2488,6 +2488,26 @@ def _label_gutter_bbox(bbox, frac=0.19):
     return (lon_min - grow, lat_min, lon_max + grow, lat_max)
 
 
+def _inset_cluster_bbox(stadiums, pad=0.35, floor=0.008):
+    """Tight bounding box for the magnifier's source area.
+
+    _bbox_with_padding enforces a 0.8-degree minimum pad, which is right for a
+    country map and catastrophic for a magnifier: two grounds 315 m apart (the
+    Dundee pair) came out as a 1.6-degree box roughly 180 km across, so the
+    "Detail view" showed coastline instead of the two stadiums it existed to
+    separate. Here the pad is proportional to the cluster with a small floor
+    (~900 m), so the box actually frames the grounds.
+    """
+    lats = [s["lat"] for s in stadiums]
+    lons = [s["lon"] for s in stadiums]
+    lat_min, lat_max = min(lats), max(lats)
+    lon_min, lon_max = min(lons), max(lons)
+    lat_pad = max((lat_max - lat_min) * pad, floor)
+    lon_pad = max((lon_max - lon_min) * pad, floor)
+    return (lon_min - lon_pad, lat_min - lat_pad,
+            lon_max + lon_pad, lat_max + lat_pad)
+
+
 def _expand_bbox_to_aspect(bbox, W, H):
     """Expand bbox symmetrically so its Mercator aspect ratio matches W:H.
     This ensures the exported image isn't geographically stretched."""
@@ -2560,14 +2580,92 @@ def _load_font(bold=False, size=20):
     return ImageFont.load_default()
 
 
-def _auto_inset_cluster(stadiums, max_n=6):
-    """Find the densest knot of grounds (e.g. the Milan area) to pull into a zoomed
-    inset, de-cluttering the main map's labels. Caps the inset at `max_n` of the
-    tightest grounds so the zoom box stays readable. Returns the cluster or []."""
+def _auto_inset_cluster(stadiums, max_n=6, bbox=None, W=None, H=None, badge_r=13):
+    """Pick the knot of grounds to magnify in the inset.
+
+    The inset exists to rescue grounds you CANNOT READ on the main map, so the
+    choice is made on actual badge overlap in pixels, not on how many grounds sit
+    inside some lat/lon box. Selecting by member count picked the wrong cluster:
+    on a Scotland map it magnified four Glasgow grounds that were already legible
+    while leaving Dundee's two (315 m apart, badges completely on top of each
+    other) and Edinburgh's pair unreadable.
+
+    Grounds are grouped transitively by whether their badges intersect, and the
+    group with the most severe overlap wins. A pair is enough — two badges drawn
+    on top of one another is exactly the problem the inset solves.
+    """
+    if len(stadiums) < 4 or not bbox or not W or not H:
+        return _auto_inset_cluster_legacy(stadiums, max_n)
+
+    pts = [(s, *_lon_lat_to_px(s["lon"], s["lat"], bbox, W, H)) for s in stadiums]
+    touch = (badge_r + 2) * 2                      # centres closer than this => overlap
+
+    # Union-find over the "badges intersect" relation.
+    parent = list(range(len(pts)))
+
+    def find(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+
+    overlaps = 0
+    for i in range(len(pts)):
+        for j in range(i + 1, len(pts)):
+            dx, dy = pts[i][1] - pts[j][1], pts[i][2] - pts[j][2]
+            if dx * dx + dy * dy < touch * touch:
+                overlaps += 1
+                a, b = find(i), find(j)
+                if a != b:
+                    parent[a] = b
+    if not overlaps:
+        return []                                   # nothing is unreadable — no inset
+
+    groups = {}
+    for idx in range(len(pts)):
+        groups.setdefault(find(idx), []).append(idx)
+
+    def severity(idxs):
+        """How badly this group needs magnifying: TIGHTNESS first (the closest
+        pair), then how many pairs overlap.
+
+        Tightness has to lead. Ranking by pair count picked a loose four-ground
+        knot whose badges were still individually readable (Glasgow, closest pair
+        13 px) over a pair sitting exactly on top of each other (Dundee's two
+        grounds, 315 m apart => 0 px). The unreadable pair is the one that needs
+        the magnifier.
+        """
+        if len(idxs) < 2:
+            return (0, 0)
+        pairs, closest = 0, float("inf")
+        for a in range(len(idxs)):
+            for b in range(a + 1, len(idxs)):
+                dx = pts[idxs[a]][1] - pts[idxs[b]][1]
+                dy = pts[idxs[a]][2] - pts[idxs[b]][2]
+                d2 = dx * dx + dy * dy
+                if d2 < touch * touch:
+                    pairs += 1
+                closest = min(closest, d2)
+        return (-closest, pairs)
+
+    best = max(groups.values(), key=severity)
+    if len(best) < 2:
+        return []
+    chosen = [pts[i][0] for i in best]
+    if len(chosen) > max_n:
+        cx = sum(p[1] for p in pts if p[0] in chosen) / len(chosen)
+        cy = sum(p[2] for p in pts if p[0] in chosen) / len(chosen)
+        pos = {id(p[0]): (p[1], p[2]) for p in pts}
+        chosen = sorted(chosen, key=lambda s: (pos[id(s)][0] - cx) ** 2
+                        + (pos[id(s)][1] - cy) ** 2)[:max_n]
+    return chosen
+
+
+def _auto_inset_cluster_legacy(stadiums, max_n=6):
+    """Lat/lon fallback used when no frame geometry is available (callers that
+    have not yet computed the bbox)."""
     if len(stadiums) < 8:
         return []
-    # Tight radius: only grounds whose badges genuinely overlap on the main map
-    # belong in the magnifier; anything separable stays on the main map (labelled).
     centre, near = None, []
     for c in stadiums:
         grp = [s for s in stadiums
@@ -2624,7 +2722,7 @@ def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox
     the area is derived tightly from the inset grounds."""
     margin = 16
     # The source rectangle: an explicit drawn box wins; else hug the grounds.
-    cluster_bbox = zoom_bbox or _bbox_with_padding(inset_stadiums, pad=0.06)
+    cluster_bbox = zoom_bbox or _inset_cluster_bbox(inset_stadiums)
     # Match the inset box aspect to the drawn area so the zoom isn't distorted.
     aspect = ((cluster_bbox[2] - cluster_bbox[0]) /
               max(1e-6, _merc_y(cluster_bbox[1]) - _merc_y(cluster_bbox[3])) /
@@ -3060,10 +3158,16 @@ def _make_background(style_key, W, H, bbox, use_tiles=True, land_color=None):
     # HIGHEST affordable zoom (most detail). Picking the lowest zoom here was a
     # bug: a tiny bbox at z=3 makes the per-tile upscale enormous (256→16000px)
     # → ~1 GB allocation → instant OOM 502 (Malta/Cyprus/N. Macedonia).
+    # Ceiling is 14, not 8: a small bbox (the magnifier inset, or a small country)
+    # needs a HIGH zoom to show any real detail. Capping at 8 meant the "Detail
+    # view" was just the main map's coarse tiles blown up — visibly blurry, with
+    # no more detail than the map it was magnifying. Large bboxes simply blow
+    # MAX_TILES at high zoom and fall through to a lower one, so this costs
+    # nothing for continent-scale maps.
     MAX_TILES = 160
     z = None
     best_affordable = None
-    for z_try in range(8, 2, -1):
+    for z_try in range(14, 2, -1):
         n = 2 ** z_try
         tx_min_f = (lon_min + 180) / 360 * n
         tx_max_f = (lon_max + 180) / 360 * n
@@ -4068,7 +4172,9 @@ def _compose_export_image(params):
         inset_stadiums = [s for s in stadiums
                           if lon0 <= s["lon"] <= lon1 and lat_lo <= s["lat"] <= lat_hi][:8]
     elif params.get("inset") == "auto":
-        inset_stadiums = _auto_inset_cluster(stadiums)
+        # Pass the frame so the cluster is chosen on real badge overlap in pixels.
+        inset_stadiums = _auto_inset_cluster(
+            stadiums, bbox=bbox, W=W, H=H, badge_r=params.get("badge_size", 13))
 
     country_index = {}
     for s in stadiums:
