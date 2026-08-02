@@ -4,7 +4,7 @@
     "country": "Switzerland",
     "country_code": "CH",
     "division_level": 1,
-    "season": "25/26"
+    "season": "26/27"
   },
   "teams": [
     {
@@ -151,22 +151,6 @@
       }
     },
     {
-      "name": "FC Winterthur",
-      "transfermarkt_url": "https://www.transfermarkt.com/fc-winterthur/startseite/verein/242",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-winterthur/besucherzahlenentwicklung/verein/242",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Winterthur",
-      "stadium": {
-        "name": "Stadion Schützenwiese",
-        "owner_raw": "City of Winterthur",
-        "transfermarkt_url": "https://www.transfermarkt.com/fc-winterthur/stadion/verein/242",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Sch%C3%BCtzenwiese",
-        "city": {
-          "name": "Winterthur",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Winterthur"
-        }
-      }
-    },
-    {
       "name": "FC Lausanne-Sport",
       "transfermarkt_url": "https://www.transfermarkt.com/fc-lausanne-sport/startseite/verein/527",
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-lausanne-sport/besucherzahlenentwicklung/verein/527",
@@ -194,6 +178,21 @@
         "city": {
           "name": "Thun",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Thun"
+        }
+      }
+    },
+    {
+      "name": "FC Vaduz",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Vaduz",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-vaduz/startseite/verein/163",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-vaduz/besucherzahlenentwicklung/verein/163",
+      "stadium": {
+        "name": "Rheinpark Stadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Rheinpark_Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-vaduz/stadion/verein/163",
+        "city": {
+          "name": "Vaduz",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Vaduz"
         }
       }
     }

@@ -4,7 +4,7 @@
     "country": "Scotland",
     "country_code": "GB-SCT",
     "division_level": 1,
-    "season": "25/26"
+    "season": "26/27"
   },
   "teams": [
     {
@@ -129,21 +129,6 @@
       }
     },
     {
-      "name": "Livingston FC",
-      "transfermarkt_url": "https://www.transfermarkt.com/livingston-fc/startseite/verein/1241",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/livingston-fc/besucherzahlenentwicklung/verein/1241",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Livingston_F.C.",
-      "stadium": {
-        "name": "Almondvale Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/livingston-fc/stadion/verein/1241",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Almondvale_Stadium",
-        "city": {
-          "name": "Livingston",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Livingston,_West_Lothian"
-        }
-      }
-    },
-    {
       "name": "Motherwell FC",
       "transfermarkt_url": "https://www.transfermarkt.com/motherwell-fc/startseite/verein/987",
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/motherwell-fc/besucherzahlenentwicklung/verein/987",
@@ -185,6 +170,21 @@
         "city": {
           "name": "Paisley",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Paisley,_Renfrewshire"
+        }
+      }
+    },
+    {
+      "name": "St Johnstone FC",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/St_Johnstone_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/st-johnstone-fc/startseite/verein/2578",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/st-johnstone-fc/besucherzahlenentwicklung/verein/2578",
+      "stadium": {
+        "name": "McDiarmid Park",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/McDiarmid_Park",
+        "transfermarkt_url": "https://www.transfermarkt.com/st-johnstone-fc/stadion/verein/2578",
+        "city": {
+          "name": "Perth",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Perth,_Scotland"
         }
       }
     }

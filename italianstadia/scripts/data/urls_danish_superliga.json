@@ -4,7 +4,7 @@
     "country": "Denmark",
     "country_code": "DK",
     "division_level": 1,
-    "season": "25/26"
+    "season": "26/27"
   },
   "teams": [
     {
@@ -50,22 +50,6 @@
         "city": {
           "name": "Copenhagen",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Copenhagen"
-        }
-      }
-    },
-    {
-      "name": "FC Fredericia",
-      "transfermarkt_url": "https://www.transfermarkt.com/fc-fredericia/startseite/verein/5776",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-fredericia/besucherzahlenentwicklung/verein/5776",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Fredericia",
-      "stadium": {
-        "name": "Monjasa Park",
-        "owner_raw": "Fredericia Kommune",
-        "transfermarkt_url": "https://www.transfermarkt.com/fc-fredericia/stadion/verein/5776",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Fredericia_Stadium",
-        "city": {
-          "name": "Fredericia",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Fredericia"
         }
       }
     },
@@ -166,22 +150,6 @@
       }
     },
     {
-      "name": "Vejle Boldklub",
-      "transfermarkt_url": "https://www.transfermarkt.com/vejle-boldklub/startseite/verein/443",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/vejle-boldklub/besucherzahlenentwicklung/verein/443",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Vejle_Boldklub",
-      "stadium": {
-        "name": "Vejle Stadium",
-        "owner_raw": "Vejle Kommune",
-        "transfermarkt_url": "https://www.transfermarkt.com/vejle-boldklub/stadion/verein/443",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Vejle_Stadium",
-        "city": {
-          "name": "Vejle",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Vejle"
-        }
-      }
-    },
-    {
       "name": "Viborg FF",
       "transfermarkt_url": "https://www.transfermarkt.com/viborg-ff/startseite/verein/1063",
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/viborg-ff/besucherzahlenentwicklung/verein/1063",
@@ -194,6 +162,36 @@
         "city": {
           "name": "Viborg",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Viborg,_Denmark"
+        }
+      }
+    },
+    {
+      "name": "Lyngby Boldklub",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Lyngby_Boldklub",
+      "transfermarkt_url": "https://www.transfermarkt.com/lyngby-bk/startseite/verein/369",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/lyngby-bk/besucherzahlenentwicklung/verein/369",
+      "stadium": {
+        "name": "Lyngby Stadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Lyngby_Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/lyngby-bk/stadion/verein/369",
+        "city": {
+          "name": "Kongens Lyngby",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kongens_Lyngby"
+        }
+      }
+    },
+    {
+      "name": "AC Horsens",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/AC_Horsens",
+      "transfermarkt_url": "https://www.transfermarkt.com/ac-horsens/startseite/verein/2414",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ac-horsens/besucherzahlenentwicklung/verein/2414",
+      "stadium": {
+        "name": "CASA Arena Horsens",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Casa_Arena_Horsens",
+        "transfermarkt_url": "https://www.transfermarkt.com/ac-horsens/stadion/verein/2414",
+        "city": {
+          "name": "Horsens",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Horsens"
         }
       }
     }

@@ -414,7 +414,7 @@
   "pk": 43,
   "fields": {
     "name": "Scotland",
-    "code": "SC",
+    "code": "GB-SCT",
     "uefa_rank": 12,
     "population": 5450000
   }
@@ -646,7 +646,7 @@
     "name": "Scottish Premiership",
     "country": 43,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2026/27"
   }
 },
 {
@@ -746,7 +746,7 @@
     "name": "Danish Superliga",
     "country": 19,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2026/27"
   }
 },
 {
@@ -766,7 +766,7 @@
     "name": "Swiss Super League",
     "country": 49,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2026/27"
   }
 },
 {
@@ -1346,6 +1346,36 @@
     "name": "II liga",
     "country": 39,
     "division_level": 3,
+    "season": "2026/27"
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 86,
+  "fields": {
+    "name": "Challenge League",
+    "country": 49,
+    "division_level": 2,
+    "season": "2026/27"
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 87,
+  "fields": {
+    "name": "Danish 1st Division",
+    "country": 19,
+    "division_level": 2,
+    "season": "2026/27"
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 88,
+  "fields": {
+    "name": "Scottish Championship",
+    "country": 43,
+    "division_level": 2,
     "season": "2026/27"
   }
 },
@@ -9349,10 +9379,10 @@
   "pk": 642,
   "fields": {
     "name": "Horsens",
-    "population": 64418,
+    "population": null,
     "country": "Denmark",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Horsens",
-    "image_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Horsens_old_center.JPG",
     "image_credit": null,
     "description": null
   }
@@ -12395,6 +12425,45 @@
     "country": "Poland",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Bielsko-Bia%C5%82a",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Rynek_w_Bielsku.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 877,
+  "fields": {
+    "name": "Vaduz",
+    "population": 5696,
+    "country": "Liechtenstein",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Vaduz",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/View_of_Vaduz.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 878,
+  "fields": {
+    "name": "Kongens Lyngby",
+    "population": null,
+    "country": "Denmark",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Kongens_Lyngby",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/58/Lyngby_Kirke_%28Kongens_Lyngby%29_21-03-06.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 879,
+  "fields": {
+    "name": "Perth, Scotland",
+    "population": 47893,
+    "country": "Scotland",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Perth,_Scotland",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Perth%2C_Scotland_-_Bank_of_Tay.jpg",
     "image_credit": null,
     "description": null
   }
@@ -44179,6 +44248,132 @@
   }
 },
 {
+  "model": "italiastadiaapp.stadium",
+  "pk": 1070,
+  "fields": {
+    "name": "Rheinpark Stadion",
+    "capacity": 6441,
+    "address": "Vaduz , Liechtenstein",
+    "year_of_construction": 1998,
+    "city": 877,
+    "latitude": "47.140280",
+    "longitude": "9.510280",
+    "owner_raw": "FC Vaduz",
+    "ownership": "PRIVATE",
+    "slug": "rheinpark-stadion",
+    "stadium_type": "OPEN",
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Rheinpark_Stadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-vaduz/stadion/verein/163",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4b/The_Rheinpark_Stadium_before_a_UEFA_Nations_League_match_%282022%29.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Rheinpark-Stadion-Main_stand_and_castle.JPG",
+        "credit": "Christopher Voitus / Wikimedia Commons / CC BY-SA 3.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1071,
+  "fields": {
+    "name": "Lyngby Stadion",
+    "capacity": 10000,
+    "address": "Lundtoftevej 53, 2800 Kongens Lyngby",
+    "year_of_construction": 1949,
+    "city": 878,
+    "latitude": "55.781340",
+    "longitude": "12.505628",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "lyngby-stadion",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Lyngby_Stadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/lyngby-bk/stadion/verein/369",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Lyngby_bk_-_fc_fyn.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1072,
+  "fields": {
+    "name": "CASA Arena Horsens",
+    "capacity": 10400,
+    "address": "Langmarksvej 59, 8700 Horsens",
+    "year_of_construction": 1929,
+    "city": 642,
+    "latitude": "55.871555",
+    "longitude": "9.857161",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "casa-arena-horsens",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Casa_Arena_Horsens",
+    "transfermarkt_url": "https://www.transfermarkt.com/ac-horsens/stadion/verein/2414",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/AC_Horsens_-_FC_K%C3%B8benhavn%2C_12._March_2023.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1073,
+  "fields": {
+    "name": "McDiarmid Park",
+    "capacity": 10696,
+    "address": "Tulloch , Perth , Scotland",
+    "year_of_construction": 1989,
+    "city": 879,
+    "latitude": "56.409720",
+    "longitude": "-3.476940",
+    "owner_raw": "St Johnstone F.C.",
+    "ownership": "PRIVATE",
+    "slug": "mcdiarmid-park",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/McDiarmid_Park",
+    "transfermarkt_url": "https://www.transfermarkt.com/st-johnstone-fc/stadion/verein/2578",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/McDiarmid_Park.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Inside_McDiarmid_Park.jpg",
+        "credit": "Colin Smith / Wikimedia Commons / CC BY-SA 2.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/1e/McDiarmid_Park%2C_Perth_-_geograph.org.uk_-_3933810.jpg",
+        "credit": "Mike Pennington / Wikimedia Commons / CC BY-SA 2.0"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/61/The_Main_Stand_at_McDiarmid_Park.jpg",
+        "credit": "Grievous Angel / Wikimedia Commons / CC BY-SA 3.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
   "model": "italiastadiaapp.team",
   "pk": 7,
   "fields": {
@@ -50737,7 +50932,7 @@
     "is_national": false,
     "name": "Livingston FC",
     "founded": "1943-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 290,
     "manager": "Glenn Whelan",
@@ -50750,7 +50945,7 @@
     "image_credit": null,
     "description": "Livingston Football Club is a Scottish professional football club based in Livingston, West Lothian and currently plays in the Scottish Championship .",
     "locked": false,
-    "league": 13,
+    "league": 88,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "livingston-fc"
@@ -55079,7 +55274,7 @@
     "is_national": false,
     "name": "FC Fredericia",
     "founded": "1991-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 458,
     "manager": "Michael Hansen",
@@ -55092,7 +55287,7 @@
     "image_credit": null,
     "description": "Fodbold Club Fredericia af 1991 ( Danish pronunciation: [fʁeðɐˈʁetɕæ, fʁæðɐˈʁætɕæ] ), [ 4 ] simply known as FC Fredericia , is a professional association football club based in the town of Fredericia , Denmark, that competes in the Danish Superliga , the top tier of the Danish football league system . Founded in 1991 as a merger between Fredericia fF and Fredericia KFUM , it is affiliated to DBU Jutland . The team plays its home matches at Fredericia Stadium , named Monjasa Park for sponsorship reasons, where it has been based since 2006.",
     "locked": false,
-    "league": 23,
+    "league": 87,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "fc-fredericia"
@@ -55261,7 +55456,7 @@
     "is_national": false,
     "name": "Vejle Boldklub",
     "founded": "1891-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 465,
     "manager": "Claus Nørgaard",
@@ -55274,7 +55469,7 @@
     "image_credit": null,
     "description": "Vejle Boldklub is a Danish professional football club based in Vejle in Jutland . Formed in 1891, the club is one of the most successful clubs in Danish football history, having won the Danish championship five times and the Danish cup title six times.",
     "locked": false,
-    "league": 23,
+    "league": 87,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "vejle-boldklub"
@@ -55911,7 +56106,7 @@
     "is_national": false,
     "name": "FC Winterthur",
     "founded": "1896-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 489,
     "manager": "Patrick Rahmen",
@@ -55924,7 +56119,7 @@
     "image_credit": null,
     "description": "FC Winterthur is a Swiss football club based in Winterthur , Canton of Zürich . They play in the Swiss Super League , the first tier of Swiss football, and appeared regularly in the Nationalliga A during the 20th century. Their home is the Stadion Schützenwiese .",
     "locked": false,
-    "league": 25,
+    "league": 86,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "fc-winterthur"
@@ -71034,6 +71229,110 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "podbeskidzie-bielsko-biaa"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1107,
+  "fields": {
+    "is_national": false,
+    "name": "FC Vaduz",
+    "founded": "1932-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1070,
+    "manager": "Marc Schneider",
+    "num_of_titles": 0,
+    "city": 877,
+    "average_attendance": 1844,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Vaduz",
+    "transfermarkt_url": "https://www.transfermarkt.com/fc-vaduz/startseite/verein/163",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/163.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 25,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "fc-vaduz"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1108,
+  "fields": {
+    "is_national": false,
+    "name": "Lyngby Boldklub",
+    "founded": "1921-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1071,
+    "manager": "Andreas Bjelland & Mikkel Jespersen",
+    "num_of_titles": 2,
+    "city": 878,
+    "average_attendance": 7436,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Lyngby_Boldklub",
+    "transfermarkt_url": "https://www.transfermarkt.com/lyngby-bk/startseite/verein/369",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/369.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 23,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "lyngby-boldklub"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1109,
+  "fields": {
+    "is_national": false,
+    "name": "AC Horsens",
+    "founded": "1994-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1072,
+    "manager": "Niki Zimling",
+    "num_of_titles": 0,
+    "city": 642,
+    "average_attendance": 3379,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/AC_Horsens",
+    "transfermarkt_url": "https://www.transfermarkt.com/ac-horsens/startseite/verein/2414",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/2414.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 23,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "ac-horsens"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1110,
+  "fields": {
+    "is_national": false,
+    "name": "St Johnstone FC",
+    "founded": "1884-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1073,
+    "manager": "Simo Valakari",
+    "num_of_titles": 0,
+    "city": 879,
+    "average_attendance": 4668,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/St_Johnstone_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/st-johnstone-fc/startseite/verein/2578",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/2578.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 13,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "st-johnstone-fc"
   }
 },
 {
