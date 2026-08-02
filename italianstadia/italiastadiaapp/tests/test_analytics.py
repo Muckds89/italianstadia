@@ -118,3 +118,44 @@ class BasemapAttributionTests(TestCase):
         self.assertIn("Wikipedia & Transfermarkt", txt)
         txt2 = self._text(bg_color=(10, 10, 40, 255))
         self.assertNotIn("Esri", txt2)
+
+
+class HiddenLeagueTests(TestCase):
+    """A league whose coverage is partial is suppressed from site-facing lists,
+    but its clubs and stadiums stay visible."""
+
+    def setUp(self):
+        from italiastadiaapp.models import City, Country, League, Stadium, Team
+        self.country = Country.objects.create(name="Testland", code="TL")
+        self.city = City.objects.create(name="Testville", country="Testland")
+        self.top = League.objects.create(name="Test Prem", country=self.country,
+                                         division_level=1)
+        self.low = League.objects.create(name="Test Second", country=self.country,
+                                         division_level=2, hidden=True)
+        self.stadium = Stadium.objects.create(
+            name="Relegated Park", city=self.city, capacity=9000,
+            latitude=52.0, longitude=1.0)
+        self.team = Team.objects.create(name="Dropped FC", league=self.low,
+                                        stadium=self.stadium, city=self.city)
+
+    def test_hidden_league_absent_from_country_hub(self):
+        resp = self.client.get(
+            reverse("italiastadiaapp:country_stats", args=["Testland"]))
+        self.assertNotContains(resp, "Test Second")
+
+    def test_visible_league_still_listed(self):
+        from italiastadiaapp.models import Stadium, Team
+        s = Stadium.objects.create(name="Top Park", city=self.city, capacity=20000,
+                                   latitude=52.1, longitude=1.1)
+        Team.objects.create(name="Top FC", league=self.top, stadium=s, city=self.city)
+        resp = self.client.get(
+            reverse("italiastadiaapp:country_stats", args=["Testland"]))
+        self.assertContains(resp, "Test Prem")
+
+    def test_clubs_of_hidden_league_are_not_deleted(self):
+        from italiastadiaapp.models import Team
+        self.assertTrue(Team.objects.filter(name="Dropped FC").exists())
+
+    def test_hidden_league_absent_from_export_options(self):
+        resp = self.client.get(reverse("italiastadiaapp:export_options"))
+        self.assertNotIn(b"Test Second", resp.content)

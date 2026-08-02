@@ -264,7 +264,7 @@ def country_stats(request, country_name):
     biggest = top10[0] if top10 else None
     leagues = (
         League.objects.select_related("country")
-        .filter(country__name__iexact=name).order_by("division_level")
+        .filter(country__name__iexact=name, hidden=False).order_by("division_level")
     )
 
     map_features = []
@@ -631,7 +631,7 @@ def stadium_list(request):
 
     # Build ordered list of leagues to use as sections, ranked countries first,
     # unranked countries last (nulls_last), then alphabetically within each group.
-    leagues_qs = League.objects.select_related("country").order_by(
+    leagues_qs = League.objects.select_related("country").filter(hidden=False).order_by(
         F("country__uefa_rank").asc(nulls_last=True),
         "country__name",
         "division_level",
@@ -754,7 +754,7 @@ def team_list(request):
     if selected_country:
         teams_qs = teams_qs.filter(league__country__name=selected_country)
 
-    leagues_qs = League.objects.select_related("country").order_by(
+    leagues_qs = League.objects.select_related("country").filter(hidden=False).order_by(
         F("country__uefa_rank").asc(nulls_last=True),
         "country__name",
         "division_level",
@@ -4480,6 +4480,7 @@ def export_options(request):
         Team.objects
         .exclude(league__isnull=True)
         .exclude(is_national=True)            # national sides aren't a selectable league
+        .exclude(league__hidden=True)         # incomplete divisions aren't offered
         .exclude(stadium__city__country="")
         .values_list("stadium__city__country", "league__name")
         .distinct()

@@ -536,7 +536,8 @@
     "name": "Serie A",
     "country": 1,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -546,7 +547,8 @@
     "name": "Serie B",
     "country": 1,
     "division_level": 2,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -556,7 +558,8 @@
     "name": "Serie C",
     "country": 1,
     "division_level": 3,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -566,7 +569,8 @@
     "name": "Bundesliga",
     "country": 2,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -576,7 +580,8 @@
     "name": "Ligue 1",
     "country": 3,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -586,7 +591,8 @@
     "name": "Primeira Liga",
     "country": 5,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -596,7 +602,8 @@
     "name": "Premier League",
     "country": 6,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -606,7 +613,8 @@
     "name": "Ekstraklasa",
     "country": 39,
     "division_level": 1,
-    "season": "2026/27"
+    "season": "2026/27",
+    "hidden": false
   }
 },
 {
@@ -616,7 +624,8 @@
     "name": "La Liga",
     "country": 47,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -626,7 +635,8 @@
     "name": "Allsvenskan",
     "country": 48,
     "division_level": 1,
-    "season": "2025"
+    "season": "2025",
+    "hidden": false
   }
 },
 {
@@ -636,7 +646,8 @@
     "name": "Eliteserien",
     "country": 38,
     "division_level": 1,
-    "season": "2025"
+    "season": "2025",
+    "hidden": false
   }
 },
 {
@@ -646,7 +657,8 @@
     "name": "Scottish Premiership",
     "country": 43,
     "division_level": 1,
-    "season": "2026/27"
+    "season": "2026/27",
+    "hidden": false
   }
 },
 {
@@ -656,7 +668,8 @@
     "name": "Süper Lig",
     "country": 50,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -666,7 +679,8 @@
     "name": "Eredivisie",
     "country": 36,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -676,7 +690,8 @@
     "name": "Belgian Pro League",
     "country": 13,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -686,7 +701,8 @@
     "name": "SuperLiga",
     "country": 40,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -696,7 +712,8 @@
     "name": "Czech First League",
     "country": 18,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -706,7 +723,8 @@
     "name": "Austrian Football Bundesliga",
     "country": 10,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -716,7 +734,8 @@
     "name": "EFL Championship",
     "country": 6,
     "division_level": 2,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -726,7 +745,8 @@
     "name": "2. Bundesliga",
     "country": 2,
     "division_level": 2,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -736,7 +756,8 @@
     "name": "Segunda División",
     "country": 47,
     "division_level": 2,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -746,7 +767,8 @@
     "name": "Danish Superliga",
     "country": 19,
     "division_level": 1,
-    "season": "2026/27"
+    "season": "2026/27",
+    "hidden": false
   }
 },
 {
@@ -756,7 +778,8 @@
     "name": "Super League Greece 1",
     "country": 23,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -766,7 +789,8 @@
     "name": "Swiss Super League",
     "country": 49,
     "division_level": 1,
-    "season": "2026/27"
+    "season": "2026/27",
+    "hidden": false
   }
 },
 {
@@ -776,7 +800,8 @@
     "name": "HNL",
     "country": 16,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -786,7 +811,8 @@
     "name": "Cypriot First Division",
     "country": 17,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -796,7 +822,8 @@
     "name": "Nemzeti Bajnokság I",
     "country": 24,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -806,7 +833,8 @@
     "name": "Serbian SuperLiga",
     "country": 44,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -816,7 +844,8 @@
     "name": "First Professional Football League",
     "country": 15,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -826,7 +855,8 @@
     "name": "Slovak Super Liga",
     "country": 45,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -836,7 +866,8 @@
     "name": "Prva liga",
     "country": 46,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -846,7 +877,8 @@
     "name": "League of Ireland Premier Division",
     "country": 26,
     "division_level": 1,
-    "season": "2025"
+    "season": "2025",
+    "hidden": false
   }
 },
 {
@@ -856,7 +888,8 @@
     "name": "EFL League One",
     "country": 6,
     "division_level": 3,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -866,7 +899,8 @@
     "name": "Ukrainian Premier League",
     "country": 51,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -876,7 +910,8 @@
     "name": "Veikkausliiga",
     "country": 21,
     "division_level": 1,
-    "season": "2025"
+    "season": "2025",
+    "hidden": false
   }
 },
 {
@@ -886,7 +921,8 @@
     "name": "Premier League of Bosnia and Herzegovina",
     "country": 14,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -896,7 +932,8 @@
     "name": "Meistriliiga",
     "country": 20,
     "division_level": 1,
-    "season": "2025"
+    "season": "2025",
+    "hidden": false
   }
 },
 {
@@ -906,7 +943,8 @@
     "name": "Besta deild karla",
     "country": 25,
     "division_level": 1,
-    "season": "2025"
+    "season": "2025",
+    "hidden": false
   }
 },
 {
@@ -916,7 +954,8 @@
     "name": "Macedonian First Football League",
     "country": 37,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -926,7 +965,8 @@
     "name": "Montenegrin First Football League",
     "country": 35,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -936,7 +976,8 @@
     "name": "Luxembourg National Division",
     "country": 31,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -946,7 +987,8 @@
     "name": "Maltese Premier League",
     "country": 32,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -956,7 +998,8 @@
     "name": "Kategoria Superiore",
     "country": 7,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -966,7 +1009,8 @@
     "name": "Virsliga",
     "country": 28,
     "division_level": 1,
-    "season": "2025"
+    "season": "2025",
+    "hidden": false
   }
 },
 {
@@ -976,7 +1020,8 @@
     "name": "Moldovan Super Liga",
     "country": 33,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -986,7 +1031,8 @@
     "name": "A Lyga",
     "country": 30,
     "division_level": 1,
-    "season": "2025"
+    "season": "2025",
+    "hidden": false
   }
 },
 {
@@ -996,7 +1042,8 @@
     "name": "National Football Team",
     "country": 6,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1006,7 +1053,8 @@
     "name": "National Football Team",
     "country": 3,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1016,7 +1064,8 @@
     "name": "National Football Team",
     "country": 52,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1026,7 +1075,8 @@
     "name": "National Football Team",
     "country": 43,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1036,7 +1086,8 @@
     "name": "National Football Team",
     "country": 26,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1046,7 +1097,8 @@
     "name": "National Football Team",
     "country": 36,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1056,7 +1108,8 @@
     "name": "National Football Team",
     "country": 5,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1066,7 +1119,8 @@
     "name": "National Football Team",
     "country": 13,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1076,7 +1130,8 @@
     "name": "National Football Team",
     "country": 50,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1086,7 +1141,8 @@
     "name": "National Football Team",
     "country": 44,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1096,7 +1152,8 @@
     "name": "National Football Team",
     "country": 24,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1106,7 +1163,8 @@
     "name": "National Football Team",
     "country": 53,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1116,7 +1174,8 @@
     "name": "National Football Team",
     "country": 39,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1126,7 +1185,8 @@
     "name": "National Football Team",
     "country": 40,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1136,7 +1196,8 @@
     "name": "National Football Team",
     "country": 7,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1146,7 +1207,8 @@
     "name": "National Football Team",
     "country": 9,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1156,7 +1218,8 @@
     "name": "National Football Team",
     "country": 22,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1166,7 +1229,8 @@
     "name": "National Football Team",
     "country": 11,
     "division_level": 0,
-    "season": ""
+    "season": "",
+    "hidden": false
   }
 },
 {
@@ -1176,7 +1240,8 @@
     "name": "I liga",
     "country": 39,
     "division_level": 2,
-    "season": "2026/27"
+    "season": "2026/27",
+    "hidden": false
   }
 },
 {
@@ -1186,7 +1251,8 @@
     "name": "Russian Premier League",
     "country": 41,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -1196,7 +1262,8 @@
     "name": "Belarusian Premier League",
     "country": 12,
     "division_level": 1,
-    "season": "2025"
+    "season": "2025",
+    "hidden": false
   }
 },
 {
@@ -1206,7 +1273,8 @@
     "name": "Azerbaijan Premier League",
     "country": 11,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -1216,7 +1284,8 @@
     "name": "Erovnuli Liga",
     "country": 22,
     "division_level": 1,
-    "season": "2025"
+    "season": "2025",
+    "hidden": false
   }
 },
 {
@@ -1226,7 +1295,8 @@
     "name": "3. Liga",
     "country": 2,
     "division_level": 3,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -1236,7 +1306,8 @@
     "name": "Ligue 2",
     "country": 3,
     "division_level": 2,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -1246,7 +1317,8 @@
     "name": "Eerste Divisie",
     "country": 36,
     "division_level": 2,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -1256,7 +1328,8 @@
     "name": "Liga Portugal 2",
     "country": 5,
     "division_level": 2,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -1266,7 +1339,8 @@
     "name": "Primera Federación",
     "country": 47,
     "division_level": 3,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -1276,7 +1350,8 @@
     "name": "Armenian Premier League",
     "country": 9,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -1286,7 +1361,8 @@
     "name": "Football Superleague of Kosovo",
     "country": 27,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -1296,7 +1372,8 @@
     "name": "Israeli Premier League",
     "country": 54,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -1306,7 +1383,8 @@
     "name": "Cymru Premier",
     "country": 52,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -1316,7 +1394,8 @@
     "name": "NIFL Premiership",
     "country": 53,
     "division_level": 1,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -1326,7 +1405,8 @@
     "name": "TFF First League",
     "country": 50,
     "division_level": 2,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -1336,7 +1416,8 @@
     "name": "Russian First League",
     "country": 41,
     "division_level": 2,
-    "season": "2025/26"
+    "season": "2025/26",
+    "hidden": false
   }
 },
 {
@@ -1346,7 +1427,8 @@
     "name": "II liga",
     "country": 39,
     "division_level": 3,
-    "season": "2026/27"
+    "season": "2026/27",
+    "hidden": true
   }
 },
 {
@@ -1356,7 +1438,8 @@
     "name": "Challenge League",
     "country": 49,
     "division_level": 2,
-    "season": "2026/27"
+    "season": "2026/27",
+    "hidden": true
   }
 },
 {
@@ -1366,7 +1449,8 @@
     "name": "Danish 1st Division",
     "country": 19,
     "division_level": 2,
-    "season": "2026/27"
+    "season": "2026/27",
+    "hidden": true
   }
 },
 {
@@ -1376,7 +1460,8 @@
     "name": "Scottish Championship",
     "country": 43,
     "division_level": 2,
-    "season": "2026/27"
+    "season": "2026/27",
+    "hidden": true
   }
 },
 {

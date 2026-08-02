@@ -26,6 +26,12 @@ class League(models.Model):
     # Leagues are re-scraped one by one as their new season kicks off; the old
     # season's data stays live (and correctly labelled) until then.
     season = models.CharField(max_length=9, blank=True, default="2025/26")
+    # Hide a league from site-facing lists and filters while our coverage of it is
+    # incomplete. Set on second tiers that exist only to hold relegated clubs — a
+    # visitor seeing "Scottish Championship: 1 club" would read it as the whole
+    # division. The clubs and their stadiums stay visible; only the league listing
+    # is suppressed. Clear this once the division is fully scraped.
+    hidden = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name} ({self.country})"

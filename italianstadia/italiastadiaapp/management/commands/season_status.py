@@ -62,9 +62,22 @@ class Command(BaseCommand):
             self.stdout.write(self.style.HTTP_INFO(
                 f"\n{season}  —  {len(leagues)} league(s)"))
             for lg in leagues:
+                flag = "  [HIDDEN]" if lg.hidden else ""
                 self.stdout.write(
-                    f"  {lg.country.name:<20} {lg.name:<38} {counts.get(lg.id, 0):>3} teams")
+                    f"  {lg.country.name:<20} {lg.name:<38} "
+                    f"{counts.get(lg.id, 0):>3} teams{flag}")
         self.stdout.write(f"\nTotal: {qs.count()} leagues.")
+
+        # Hidden leagues are temporarily suppressed from the site because our
+        # coverage of them is partial. Keep them visible HERE so they get filled in.
+        hidden = [lg for lg in qs if lg.hidden]
+        if hidden:
+            self.stdout.write(self.style.WARNING(
+                f"\n{len(hidden)} league(s) HIDDEN from the site (incomplete coverage) — "
+                f"scrape the full division, then clear League.hidden:"))
+            for lg in hidden:
+                self.stdout.write(
+                    f"  {lg.country.name:<20} {lg.name:<30} {counts.get(lg.id, 0):>3} teams")
 
         # A league with no teams is almost always a duplicate left behind by a
         # rename (e.g. Divizia Nationala -> Moldovan Super Liga) or a placeholder
