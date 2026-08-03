@@ -2792,14 +2792,15 @@ def _trimmed_bbox(stadiums, pad=0.06, qlon=0.02):
 
 
 def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox=None,
-                  width_frac=0.24):
+                  width_frac=0.24, bbox_pad=0.35, bbox_floor=0.008):
     """Pick the inset box geometry (size + emptiest corner) up front, so the main
     map's label engine can RESERVE it and never draw a label under the inset. When
     `zoom_bbox` is given (a user-drawn rectangle), that exact area is zoomed; else
     the area is derived tightly from the inset grounds."""
     margin = 16
     # The source rectangle: an explicit drawn box wins; else hug the grounds.
-    cluster_bbox = zoom_bbox or _inset_cluster_bbox(inset_stadiums)
+    cluster_bbox = zoom_bbox or _inset_cluster_bbox(inset_stadiums, pad=bbox_pad,
+                                                   floor=bbox_floor)
     # Match the inset box aspect to the drawn area so the zoom isn't distorted.
     aspect = ((cluster_bbox[2] - cluster_bbox[0]) /
               max(1e-6, _merc_y(cluster_bbox[1]) - _merc_y(cluster_bbox[3])) /
@@ -2932,6 +2933,21 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
             d.text((lx + 3, yy), it["l1"], font=font_t, fill=(170, 205, 255))
             yy += font_t.size + 2
         d.text((lx + 3, yy), it["l2"], font=font_s, fill=(255, 255, 255))
+
+    # Re-draw the badges ON TOP of the pills. In a box this small the label columns
+    # unavoidably run over the markers, and a hidden badge defeats the point of the
+    # box — better to clip a few characters of text than lose the ground itself.
+    for px, py, s_ in dots:
+        badge_img = badges.get(s_["name"])
+        d.ellipse([px-rr, py-rr, px+rr, py+rr], fill=(255, 255, 255))
+        if badge_img:
+            b = badge_img.resize((BR*2, BR*2), Image.LANCZOS)
+            mask = Image.new("L", (BR*2, BR*2), 0)
+            ImageDraw.Draw(mask).ellipse([0, 0, BR*2-1, BR*2-1], fill=255)
+            inset_img.paste(b, (px-BR, py-BR), mask)
+        else:
+            d.ellipse([px-BR, py-BR, px+BR, py+BR],
+                      fill=_dot_colour(s_, params, country_index))
 
     d.rectangle([(0, 0), (IW-1, IH-1)], outline=(120, 200, 255), width=3)
     try:
@@ -4311,9 +4327,13 @@ def _compose_export_image(params):
         _, island_groups = _outlier_island_groups(stadiums)
         for grp in island_groups:
             # Narrower than a magnifier inset: two of these plus the label columns
-            # have to share the frame.
+            # have to share the frame. Framed MUCH wider than a magnifier though —
+            # a magnifier wants to separate two grounds 300 m apart, whereas an
+            # island box is only useful if you can see the island's shape and place
+            # it geographically. The ~0.45 degree floor (~50 km each side) fits
+            # Madeira and Sao Miguel, both roughly 60 km long.
             lay = _inset_layout(grp, W, H, main_bbox=bbox, reserves=reserves,
-                                width_frac=0.17)
+                                width_frac=0.17, bbox_pad=1.2, bbox_floor=0.45)
             reserves.append(lay["box"])
             island_layouts.append((grp, lay))
     island_names = {s["name"] for grp, _ in island_layouts for s in grp}
