@@ -4,7 +4,7 @@
     "country": "Portugal",
     "country_code": "PT",
     "division_level": 1,
-    "season": "25/26"
+    "season": "26/27"
   },
   "teams": [
     {
@@ -243,22 +243,6 @@
       }
     },
     {
-      "name": "CD Tondela",
-      "transfermarkt_url": "https://www.transfermarkt.com/cd-tondela/startseite/verein/7179",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cd-tondela/besucherzahlenentwicklung/verein/7179",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/C.D._Tondela",
-      "stadium": {
-        "name": "Estádio João Cardoso",
-        "owner_raw": "Município de Tondela",
-        "transfermarkt_url": "https://www.transfermarkt.com/cd-tondela/stadion/verein/7179",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Jo%C3%A3o_Cardoso",
-        "city": {
-          "name": "Tondela",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Tondela"
-        }
-      }
-    },
-    {
       "name": "FC Alverca",
       "transfermarkt_url": "https://www.transfermarkt.com/fc-alverca/startseite/verein/2521",
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-alverca/besucherzahlenentwicklung/verein/2521",
@@ -277,18 +261,32 @@
       }
     },
     {
-      "name": "AVS Futebol SAD",
-      "transfermarkt_url": "https://www.transfermarkt.com/avs-futebol-sad/startseite/verein/110302",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/avs-futebol-sad/besucherzahlenentwicklung/verein/110302",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/AVS_Futebol_SAD",
+      "name": "Marítimo",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/C.S._Mar%C3%ADtimo",
+      "transfermarkt_url": "https://www.transfermarkt.com/cs-maritimo/startseite/verein/1301",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/cs-maritimo/besucherzahlenentwicklung/verein/1301",
       "stadium": {
-        "name": "Estádio do CD Aves",
-        "owner_raw": "Município de Vila do Conde",
-        "transfermarkt_url": "https://www.transfermarkt.com/avs-futebol-sad/stadion/verein/110302",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_do_CD_Aves",
+        "name": "Estádio do Marítimo",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_do_Mar%C3%ADtimo",
+        "transfermarkt_url": "https://www.transfermarkt.com/cs-maritimo/stadion/verein/1301",
         "city": {
-          "name": "Vila do Conde",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Vila_do_Conde"
+          "name": "Funchal",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Funchal"
+        }
+      }
+    },
+    {
+      "name": "Académico de Viseu",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Acad%C3%A9mico_de_Viseu_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/academico-viseu-fc/startseite/verein/7788",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/academico-viseu-fc/besucherzahlenentwicklung/verein/7788",
+      "stadium": {
+        "name": "Estádio do Fontelo",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_do_Fontelo",
+        "transfermarkt_url": "https://www.transfermarkt.com/academico-viseu-fc/stadion/verein/7788",
+        "city": {
+          "name": "Viseu",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Viseu"
         }
       }
     }

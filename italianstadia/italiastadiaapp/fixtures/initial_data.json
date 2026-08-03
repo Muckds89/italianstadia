@@ -591,7 +591,7 @@
     "name": "Primeira Liga",
     "country": 5,
     "division_level": 1,
-    "season": "2025/26",
+    "season": "2026/27",
     "hidden": false
   }
 },
@@ -690,7 +690,7 @@
     "name": "Belgian Pro League",
     "country": 13,
     "division_level": 1,
-    "season": "2025/26",
+    "season": "2026/27",
     "hidden": false
   }
 },
@@ -1328,7 +1328,7 @@
     "name": "Liga Portugal 2",
     "country": 5,
     "division_level": 2,
-    "season": "2025/26",
+    "season": "2026/27",
     "hidden": false
   }
 },
@@ -1459,6 +1459,17 @@
   "fields": {
     "name": "Scottish Championship",
     "country": 43,
+    "division_level": 2,
+    "season": "2026/27",
+    "hidden": true
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 89,
+  "fields": {
+    "name": "Challenger Pro League",
+    "country": 13,
     "division_level": 2,
     "season": "2026/27",
     "hidden": true
@@ -12554,6 +12565,45 @@
   }
 },
 {
+  "model": "italiastadiaapp.city",
+  "pk": 880,
+  "fields": {
+    "name": "Beveren",
+    "population": 50281,
+    "country": "Belgium",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Beveren",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Flag_of_Beveren.svg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 881,
+  "fields": {
+    "name": "Kortrijk",
+    "population": 77741,
+    "country": "Belgium",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Kortrijk",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Schouwburgplein_Kortrijk.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 882,
+  "fields": {
+    "name": "Lommel",
+    "population": 34044,
+    "country": "Belgium",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Lommel",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Lommel_-_Sint-Pietersbandenkerk.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
   "model": "italiastadiaapp.stadium",
   "pk": 8,
   "fields": {
@@ -16076,8 +16126,8 @@
     "city": 141,
     "latitude": "43.727500",
     "longitude": "7.415560",
-    "owner_raw": "Monaco",
-    "ownership": "PRIVATE",
+    "owner_raw": "Monaco — Wikidata P127: Monaco (sovereign state)",
+    "ownership": "PUBLIC",
     "slug": "stade-louis-ii",
     "stadium_type": "OPEN",
     "surface": "HYBRID",
@@ -16089,7 +16139,7 @@
     "image_credit": null,
     "extra_images": [],
     "description": null,
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -21970,8 +22020,8 @@
     "city": 284,
     "latitude": "51.193330",
     "longitude": "3.180560",
-    "owner_raw": "Bruges",
-    "ownership": "PRIVATE",
+    "owner_raw": "Bruges — Wikidata P127: Bruges (municipality)",
+    "ownership": "PUBLIC",
     "slug": "jan-breydel-stadium",
     "stadium_type": "OPEN",
     "surface": "HYBRID",
@@ -21988,7 +22038,7 @@
       }
     ],
     "description": null,
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -32424,8 +32474,8 @@
     "city": 548,
     "latitude": "44.776100",
     "longitude": "17.199600",
-    "owner_raw": "Banja Luka",
-    "ownership": "PRIVATE",
+    "owner_raw": "Banja Luka — Wikidata P127: Banja Luka (municipality)",
+    "ownership": "PUBLIC",
     "slug": "banja-luka-city-stadium",
     "stadium_type": "OPEN",
     "surface": "HYBRID",
@@ -32442,7 +32492,7 @@
       }
     ],
     "description": null,
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -38492,8 +38542,8 @@
     "city": 713,
     "latitude": "49.479440",
     "longitude": "8.502500",
-    "owner_raw": "Mannheim",
-    "ownership": "PRIVATE",
+    "owner_raw": "Mannheim — Wikidata P127: Mannheim (city)",
+    "ownership": "PUBLIC",
     "slug": "carl-benz-stadion",
     "stadium_type": "OPEN",
     "surface": "ARTIFICIAL",
@@ -38510,7 +38560,7 @@
       }
     ],
     "description": "",
-    "locked": false
+    "locked": true
   }
 },
 {
@@ -44459,6 +44509,92 @@
   }
 },
 {
+  "model": "italiastadiaapp.stadium",
+  "pk": 1074,
+  "fields": {
+    "name": "Freethiel Stadion",
+    "capacity": 8156,
+    "address": "Beveren , Beveren-Kruibeke-Zwijndrecht , Belgium",
+    "year_of_construction": 2009,
+    "city": 880,
+    "latitude": "51.214139",
+    "longitude": "4.243931",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "freethiel-stadion",
+    "stadium_type": "OPEN",
+    "surface": "HYBRID",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Freethiel_Stadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/sk-beveren/stadion/verein/28643",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/64/Beveren.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1075,
+  "fields": {
+    "name": "Guldensporen Stadion",
+    "capacity": 9399,
+    "address": "Kortrijk , Belgium",
+    "year_of_construction": 1947,
+    "city": 881,
+    "latitude": "50.830432",
+    "longitude": "3.248906",
+    "owner_raw": "Kortrijk — Wikidata P127: Kortrijk (municipality)",
+    "ownership": "PUBLIC",
+    "slug": "guldensporen-stadion",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Guldensporen_Stadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/kv-kortrijk/stadion/verein/601",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Guldensporenstadion.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": true
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1076,
+  "fields": {
+    "name": "Soevereinstadion",
+    "capacity": 8231,
+    "address": "Lommel , Belgium",
+    "year_of_construction": 1992,
+    "city": 882,
+    "latitude": "51.239440",
+    "longitude": "5.307220",
+    "owner_raw": "Lommel — Wikidata P127: Lommel (municipality)",
+    "ownership": "PUBLIC",
+    "slug": "soevereinstadion",
+    "stadium_type": "OPEN",
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Soevereinstadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/lommel-sk/stadion/verein/5026",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/lommel-sk-stadion-1625222853-66565.jpg?lm=1625222875",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/40/Soevereinstadion.jpg",
+        "credit": "Bram Vaesen / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": true
+  }
+},
+{
   "model": "italiastadiaapp.team",
   "pk": 7,
   "fields": {
@@ -48339,7 +48475,7 @@
     "is_national": false,
     "name": "CD Tondela",
     "founded": "1933-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 180,
     "manager": "Gonçalo Feio",
@@ -48352,7 +48488,7 @@
     "image_credit": null,
     "description": "Clube Desportivo de Tondela ( Portuguese pronunciation: [tõˈdɛlɐ] ⓘ ) is a Portuguese professional football club that plays in Primeira Liga , the top tier of Portuguese football, following their promotion after winning the 2024–25 Liga Portugal 2 . They are based in the town of Tondela and play in the Estádio João Cardoso . Founded in 1933, the club predominantly played within Portugal's regional leagues until their gradual climb up the league pyramid since 2004.",
     "locked": false,
-    "league": 7,
+    "league": 76,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "cd-tondela"
@@ -48391,7 +48527,7 @@
     "is_national": false,
     "name": "AVS Futebol SAD",
     "founded": "2023-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 182,
     "manager": "João Henriques",
@@ -48404,7 +48540,7 @@
     "image_credit": null,
     "description": "AVS Futebol SAD is a Portuguese professional football club currently playing in the Primeira Liga (the first tier of the Portuguese football league system ). They are based in the town of Vila das Aves , and play in Estádio do CD Aves . Founded in 2023, the club comes from the renaming of former UD Vilafranquense SAD after moving to Vila das Aves. [ 1 ]",
     "locked": false,
-    "league": 7,
+    "league": 76,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "avs-futebol-sad"
@@ -52109,7 +52245,7 @@
     "is_national": false,
     "name": "FCV Dender EH",
     "founded": "2005-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 331,
     "manager": "Yannick Ferrera",
@@ -52122,7 +52258,7 @@
     "image_credit": null,
     "description": "Football Club Verbroedering Dender Eendracht Hekelgem , also simply known as Dender or FCV Dender EH , is a Belgian professional football club based in Denderleeuw . The club will play in the Challenger Pro League following their loss against Lommel SK in the relegation play-offs.",
     "locked": false,
-    "league": 16,
+    "league": 89,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "fcv-dender-eh"
@@ -67241,7 +67377,7 @@
     "is_national": false,
     "name": "Académico de Viseu",
     "founded": "1914-01-01",
-    "tier": 2,
+    "tier": 1,
     "girone": null,
     "stadium": 923,
     "manager": "Sérgio Fonseca",
@@ -67254,7 +67390,7 @@
     "image_credit": null,
     "description": "Académico de Viseu Futebol Clube , commonly known as Académico de Viseu , is a Portuguese professional football club based in Viseu . Founded in 1914 as Clube Académico de Futebol , the club went through several changes over the course of the years, folding in 2005 due to financial troubles and re-founding under its current name. The club currently play in the Liga Portugal 2 , but will be heading to Primeira Liga in the 2026–27 season, following promotion. They hold their home games at Estádio do Fontelo . [ 4 ]",
     "locked": false,
-    "league": 76,
+    "league": 7,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "academico-de-viseu"
@@ -67449,7 +67585,7 @@
     "is_national": false,
     "name": "Marítimo",
     "founded": "1910-01-01",
-    "tier": 2,
+    "tier": 1,
     "girone": null,
     "stadium": 931,
     "manager": "Mitchell van der Gaag",
@@ -67462,7 +67598,7 @@
     "image_credit": null,
     "description": "Club Sport Marítimo MH M ( Portuguese pronunciation: [mɐˈɾitimu] ), commonly known as Marítimo or Marítimo da Madeira , is a Portuguese professional sports club based in the city of Funchal , on the island of Madeira . Established in 1910, Marítimo is best known for its football team currently playing in Liga Portugal 2 , but will be heading to the first tier Primeira Liga in the 2026–27 season, following promotion.",
     "locked": false,
-    "league": 76,
+    "league": 7,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "maritimo"
@@ -71418,6 +71554,84 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "st-johnstone-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1111,
+  "fields": {
+    "is_national": false,
+    "name": "SK Beveren",
+    "founded": "1936-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1074,
+    "manager": "Marink Reedijk",
+    "num_of_titles": 0,
+    "city": 880,
+    "average_attendance": 4407,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/S.K._Beveren",
+    "transfermarkt_url": "https://www.transfermarkt.com/sk-beveren/startseite/verein/28643",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/28643.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 16,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "sk-beveren"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1112,
+  "fields": {
+    "is_national": false,
+    "name": "KV Kortrijk",
+    "founded": "1901-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1075,
+    "manager": "Michiel Jonckheere",
+    "num_of_titles": 0,
+    "city": 881,
+    "average_attendance": 6798,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/K.V._Kortrijk",
+    "transfermarkt_url": "https://www.transfermarkt.com/kv-kortrijk/startseite/verein/601",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/601.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 16,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "kv-kortrijk"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1113,
+  "fields": {
+    "is_national": false,
+    "name": "Lommel SK",
+    "founded": "1937-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1076,
+    "manager": "Lee Johnson",
+    "num_of_titles": 0,
+    "city": 882,
+    "average_attendance": 1526,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Lommel_S.K.",
+    "transfermarkt_url": "https://www.transfermarkt.com/lommel-sk/startseite/verein/5026",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/5026.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 16,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "lommel-sk"
   }
 },
 {

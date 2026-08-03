@@ -4,7 +4,7 @@
     "country": "Belgium",
     "country_code": "BE",
     "division_level": 1,
-    "season": "25/26"
+    "season": "26/27"
   },
   "teams": [
     {
@@ -34,22 +34,6 @@
         "city": {
           "name": "Bruges",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Bruges"
-        }
-      }
-    },
-    {
-      "name": "FCV Dender EH",
-      "transfermarkt_url": "https://www.transfermarkt.com/fcv-dender-eh/startseite/verein/9010",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fcv-dender-eh/besucherzahlenentwicklung/verein/9010",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/FCV_Dender_EH",
-      "stadium": {
-        "name": "Van Roystadion",
-        "owner_raw": "FCV Dender EH",
-        "transfermarkt_url": "https://www.transfermarkt.com/fcv-dender-eh/stadion/verein/9010",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Van_Roystadion",
-        "city": {
-          "name": "Denderleeuw",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Denderleeuw"
         }
       }
     },
@@ -257,6 +241,51 @@
         "city": {
           "name": "Waregem",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Waregem"
+        }
+      }
+    },
+    {
+      "name": "SK Beveren",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/S.K._Beveren",
+      "transfermarkt_url": "https://www.transfermarkt.com/sk-beveren/startseite/verein/28643",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sk-beveren/besucherzahlenentwicklung/verein/28643",
+      "stadium": {
+        "name": "Freethiel Stadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Freethiel_Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/sk-beveren/stadion/verein/28643",
+        "city": {
+          "name": "Beveren",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Beveren"
+        }
+      }
+    },
+    {
+      "name": "KV Kortrijk",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/K.V._Kortrijk",
+      "transfermarkt_url": "https://www.transfermarkt.com/kv-kortrijk/startseite/verein/601",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kv-kortrijk/besucherzahlenentwicklung/verein/601",
+      "stadium": {
+        "name": "Guldensporen Stadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Guldensporen_Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/kv-kortrijk/stadion/verein/601",
+        "city": {
+          "name": "Kortrijk",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kortrijk"
+        }
+      }
+    },
+    {
+      "name": "Lommel SK",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Lommel_S.K.",
+      "transfermarkt_url": "https://www.transfermarkt.com/lommel-sk/startseite/verein/5026",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/lommel-sk/besucherzahlenentwicklung/verein/5026",
+      "stadium": {
+        "name": "Soevereinstadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Soevereinstadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/lommel-sk/stadion/verein/5026",
+        "city": {
+          "name": "Lommel",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Lommel"
         }
       }
     }
