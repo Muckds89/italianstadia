@@ -205,3 +205,43 @@ class ExportCountryFilterTests(TestCase):
     def test_no_duplicate_rows_from_the_join(self):
         rows = self._export("Helvetia")
         self.assertEqual(len(rows), len({s["name"] for s in rows}))
+
+
+class IslandInsetTests(TestCase):
+    """Far-flung island groups get their own inset instead of stretching the frame."""
+
+    def _groups(self, pts, **kw):
+        from italiastadiaapp.views import _outlier_island_groups
+        stadiums = [{"lat": la, "lon": lo, "name": n} for n, la, lo in pts]
+        return _outlier_island_groups(stadiums, **kw)
+
+    def test_portugal_islands_are_split_out(self):
+        pts = [("Luz", 38.75, -9.18), ("Alvalade", 38.76, -9.16),
+               ("Dragao", 41.16, -8.58), ("Braga", 41.56, -8.43),
+               ("Madeira", 32.65, -16.91), ("Maritimo", 32.65, -16.93),
+               ("Sao Miguel", 37.74, -25.66)]
+        main, groups = self._groups(pts)
+        self.assertEqual(len(main), 4)                      # mainland only
+        self.assertEqual(len(groups), 2)                    # Madeira + Azores
+        sizes = sorted(len(g) for g in groups)
+        self.assertEqual(sizes, [1, 2])
+
+    def test_spread_out_mainland_is_not_split(self):
+        """A merely wide country must NOT be broken up - Barcelona is not an island."""
+        pts = [("Madrid", 40.45, -3.68), ("Valencia", 39.47, -0.35),
+               ("Barcelona", 41.38, 2.12), ("Sevilla", 37.38, -5.98),
+               ("Bilbao", 43.26, -2.94)]
+        main, groups = self._groups(pts)
+        self.assertEqual(groups, [])
+        self.assertEqual(len(main), 5)
+
+    def test_too_few_stadiums_is_left_alone(self):
+        main, groups = self._groups([("A", 40.0, -3.0), ("B", 32.0, -16.0)])
+        self.assertEqual(groups, [])
+
+    def test_group_cap_keeps_extras_on_the_main_map(self):
+        pts = [("m1", 40.0, -3.0), ("m2", 40.1, -3.1), ("m3", 40.2, -3.2),
+               ("i1", 32.0, -16.0), ("i2", 37.7, -25.6), ("i3", 28.1, -15.4)]
+        main, groups = self._groups(pts, max_groups=2)
+        self.assertEqual(len(groups), 2)
+        self.assertEqual(len(main) + sum(len(g) for g in groups), len(pts))

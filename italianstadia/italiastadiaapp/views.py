@@ -2361,6 +2361,7 @@ def _get_export_stadiums(params):
             "name":         s.name,
             "team_name":    label_name,
             "teams":        tenants,
+            "city":         s.city.name if s.city else "",
             "lat":          float(s.latitude),
             "lon":          float(s.longitude),
             "surface":      s.surface or "",
@@ -2686,6 +2687,72 @@ def _auto_inset_cluster_legacy(stadiums, max_n=6):
     return near
 
 
+def _outlier_island_groups(stadiums, max_groups=2, link_deg=4.0, sep_deg=7.0):
+    """Split stadiums into (main_body, [outlier_group, ...]).
+
+    A few far-flung grounds otherwise dictate the whole frame: Portugal's league
+    includes the Azores and Madeira, which stretch the bbox ~17 degrees west and
+    squeeze mainland Portugal into a sliver against the edge. Those groups are
+    better shown in their own inset boxes, the way an atlas handles them.
+
+    Single-linkage clustering: grounds within `link_deg` of each other join the
+    same cluster. The largest cluster is the main body; clusters lying more than
+    `sep_deg` away from it are returned as outlier groups (largest first, capped
+    at `max_groups`). Anything closer than that stays on the main map, so this
+    never fires for a merely spread-out country.
+
+    Defaults were tuned against the real dataset: at 4.0/7.0 only Portugal
+    triggers (Madeira + the Azores). Looser values wrongly split mainland
+    countries - Barcelona and Lecce came out as "islands" at 2.5/4.0.
+    """
+    if len(stadiums) < 3:
+        return stadiums, []
+
+    parent = list(range(len(stadiums)))
+
+    def find(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+
+    for i in range(len(stadiums)):
+        for j in range(i + 1, len(stadiums)):
+            dlon = stadiums[i]["lon"] - stadiums[j]["lon"]
+            dlat = stadiums[i]["lat"] - stadiums[j]["lat"]
+            if (dlon * dlon + dlat * dlat) ** 0.5 <= link_deg:
+                a, b = find(i), find(j)
+                if a != b:
+                    parent[a] = b
+
+    clusters = {}
+    for idx in range(len(stadiums)):
+        clusters.setdefault(find(idx), []).append(stadiums[idx])
+    if len(clusters) < 2:
+        return stadiums, []
+
+    ordered = sorted(clusters.values(), key=len, reverse=True)
+    main = ordered[0]
+
+    def gap_to_main(group):
+        return min(((g["lon"] - m["lon"]) ** 2 + (g["lat"] - m["lat"]) ** 2) ** 0.5
+                   for g in group for m in main)
+
+    outliers, kept = [], list(main)
+    for grp in ordered[1:]:
+        if gap_to_main(grp) > sep_deg:
+            outliers.append(grp)
+        else:
+            kept.extend(grp)
+    if not outliers:
+        return stadiums, []
+
+    outliers.sort(key=len, reverse=True)
+    for extra in outliers[max_groups:]:          # more groups than boxes: keep on map
+        kept.extend(extra)
+    return kept, outliers[:max_groups]
+
+
 def _split_main_inset(stadiums, params=None):
     """When the inset option is on, peel the densest cluster off the main map so
     its labels move into the zoom box. Otherwise everything stays on the main map."""
@@ -2721,7 +2788,8 @@ def _trimmed_bbox(stadiums, pad=0.06, qlon=0.02):
     return (lon_min - lon_pad, lat_min - lat_pad, lon_max + lon_pad, lat_max + lat_pad)
 
 
-def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox=None):
+def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox=None,
+                  width_frac=0.24):
     """Pick the inset box geometry (size + emptiest corner) up front, so the main
     map's label engine can RESERVE it and never draw a label under the inset. When
     `zoom_bbox` is given (a user-drawn rectangle), that exact area is zoomed; else
@@ -2733,7 +2801,7 @@ def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox
     aspect = ((cluster_bbox[2] - cluster_bbox[0]) /
               max(1e-6, _merc_y(cluster_bbox[1]) - _merc_y(cluster_bbox[3])) /
               (W / float(H)))
-    IW = max(300, int(W * 0.24))
+    IW = max(220, int(W * width_frac))
     IH = int(max(160, min(IW * 1.1, IW / max(0.4, min(2.5, aspect)))))
     if main_bbox:
         ax0, ay0 = _lon_lat_to_px(cluster_bbox[0], cluster_bbox[3], main_bbox, W, H)
@@ -2760,7 +2828,7 @@ def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox
 
 
 def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
-                main_bbox=None, layout=None):
+                main_bbox=None, layout=None, show_source=True, header="Detail view"):
     """Magnifier inset: render the densest cluster zoomed into a corner box, draw
     a source outline where it sits on the main map, and connect the two. Labels in
     the box are clean because only a few grounds are shown, enlarged."""
@@ -2867,10 +2935,12 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
         fhdr = ImageFont.truetype("arialbd.ttf", max(12, int(IW * 0.03)))
     except Exception:
         fhdr = ImageFont.load_default()
-    d.text((8, 6), "Detail view", font=fhdr, fill=(190, 225, 255))
+    d.text((8, 6), header, font=fhdr, fill=(190, 225, 255))
 
     # --- source outline on the main map + connector to the inset box ---
-    if main_bbox:
+    # Skipped for island groups: they sit OUTSIDE the main frame, so there is no
+    # on-map area to outline and a connector would point off the edge.
+    if main_bbox and show_source:
         sx0, sy0 = _lon_lat_to_px(cluster_bbox[0], cluster_bbox[3], main_bbox, W, H)
         sx1, sy1 = _lon_lat_to_px(cluster_bbox[2], cluster_bbox[1], main_bbox, W, H)
         md = ImageDraw.Draw(img)
@@ -4158,7 +4228,16 @@ def _compose_export_image(params):
         tb = (max(tb[0], -11.0), tb[1], min(tb[2], 45.0), tb[3])
         bbox = _cover_bbox_to_aspect(tb, W, H)
     else:
-        raw_bbox = _bbox_with_padding(stadiums)
+        # Far-flung island groups (Madeira, the Azores) otherwise dictate the frame
+        # and squash the mainland into a sliver. Frame the main body and give each
+        # island group its own inset instead — but only when insets are enabled,
+        # so the plain map still shows every ground in one frame.
+        frame_stadiums = stadiums
+        if params.get("inset"):
+            main_body, island_groups = _outlier_island_groups(stadiums)
+            if island_groups:
+                frame_stadiums = main_body
+        raw_bbox = _bbox_with_padding(frame_stadiums)
         if params.get("labels"):
             # Keep the left/right label columns clear of the markers.
             raw_bbox = _label_gutter_bbox(raw_bbox)
@@ -4178,9 +4257,12 @@ def _compose_export_image(params):
         inset_stadiums = [s for s in stadiums
                           if lon0 <= s["lon"] <= lon1 and lat_lo <= s["lat"] <= lat_hi][:8]
     elif params.get("inset") == "auto":
-        # Pass the frame so the cluster is chosen on real badge overlap in pixels.
-        inset_stadiums = _auto_inset_cluster(
-            stadiums, bbox=bbox, W=W, H=H, badge_r=params.get("badge_size", 13))
+        # Island groups take priority: without an inset they are simply off-frame.
+        # Otherwise fall back to magnifying the densest knot of overlapping badges.
+        _, island_groups = _outlier_island_groups(stadiums)
+        if not island_groups:
+            inset_stadiums = _auto_inset_cluster(
+                stadiums, bbox=bbox, W=W, H=H, badge_r=params.get("badge_size", 13))
 
     country_index = {}
     for s in stadiums:
@@ -4216,6 +4298,22 @@ def _compose_export_image(params):
     if params.get("logo"):
         reserves.append(_logo_box(W, H))                          # bottom-right
 
+    # Island groups: each gets its own box, and those grounds are drawn ONLY there
+    # (they lie outside the main frame, so a badge on the main map would be clipped
+    # or land in the wrong place).
+    island_layouts = []
+    if params.get("inset"):
+        _, island_groups = _outlier_island_groups(stadiums)
+        for grp in island_groups:
+            # Narrower than a magnifier inset: two of these plus the label columns
+            # have to share the frame.
+            lay = _inset_layout(grp, W, H, main_bbox=bbox, reserves=reserves,
+                                width_frac=0.17)
+            reserves.append(lay["box"])
+            island_layouts.append((grp, lay))
+    island_names = {s["name"] for grp, _ in island_layouts for s in grp}
+    main_stadiums = [s for s in stadiums if s["name"] not in island_names]
+
     # Reserve the inset box BEFORE labels so no main-map label is hidden under it.
     inset_layout = None
     if inset_stadiums:
@@ -4226,8 +4324,13 @@ def _compose_export_image(params):
     # Draw ALL badges on the main map (incl. the inset cluster, so those grounds
     # still show in place); only their LABELS move into the zoom box.
     inset_names = {s["name"] for s in inset_stadiums}
-    img = _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
+    img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index,
                                 reserve_boxes=reserves, no_label_names=inset_names)
+    for grp, lay in island_layouts:
+        label = grp[0].get("city") or grp[0].get("country") or "Detail view"
+        img = _draw_inset(img, grp, params, W, H, country_index, params["style_key"],
+                          main_bbox=bbox, layout=lay, show_source=False,
+                          header=str(label))
     if inset_stadiums:
         img = _draw_inset(img, inset_stadiums, params, W, H, country_index,
                           params["style_key"], main_bbox=bbox, layout=inset_layout)
