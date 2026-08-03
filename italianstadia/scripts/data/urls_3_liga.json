@@ -4,7 +4,7 @@
     "country": "Germany",
     "country_code": "DE",
     "division_level": 3,
-    "season": "25/26"
+    "season": "26/27"
   },
   "teams": [
     {
@@ -34,21 +34,6 @@
         "city": {
           "name": "Aue",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Aue"
-        }
-      }
-    },
-    {
-      "name": "Energie Cottbus",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Energie_Cottbus",
-      "transfermarkt_url": "https://www.transfermarkt.com/fc-energie-cottbus/startseite/verein/25",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-energie-cottbus/besucherzahlenentwicklung/verein/25",
-      "stadium": {
-        "name": "Stadion der Freundschaft",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_der_Freundschaft_(Cottbus)",
-        "transfermarkt_url": "https://www.transfermarkt.com/fc-energie-cottbus/stadion/verein/25",
-        "city": {
-          "name": "Cottbus",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Cottbus"
         }
       }
     },
@@ -173,21 +158,6 @@
       }
     },
     {
-      "name": "VfL Osnabrück",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/VfL_Osnabr%C3%BCck",
-      "transfermarkt_url": "https://www.transfermarkt.com/vfl-osnabruck/startseite/verein/81",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/vfl-osnabruck/besucherzahlenentwicklung/verein/81",
-      "stadium": {
-        "name": "Stadion an der Bremer Brücke",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_an_der_Bremer_Br%C3%BCcke",
-        "transfermarkt_url": "https://www.transfermarkt.com/vfl-osnabruck/stadion/verein/81",
-        "city": {
-          "name": "Osnabrück",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Osnabr%C3%BCck"
-        }
-      }
-    },
-    {
       "name": "Jahn Regensburg",
       "wikipedia_url": "https://en.wikipedia.org/wiki/SSV_Jahn_Regensburg",
       "transfermarkt_url": "https://www.transfermarkt.com/ssv-jahn-regensburg/startseite/verein/109",
@@ -304,6 +274,36 @@
         "city": {
           "name": "Wiesbaden",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Wiesbaden"
+        }
+      }
+    },
+    {
+      "name": "Fortuna Düsseldorf",
+      "transfermarkt_url": "https://www.transfermarkt.com/fortuna-dusseldorf/startseite/verein/38",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fortuna-dusseldorf/besucherzahlenentwicklung/verein/38",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Fortuna_D%C3%BCsseldorf",
+      "stadium": {
+        "name": "Merkur Spiel-Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/fortuna-dusseldorf/stadion/verein/38",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Merkur_Spiel-Arena",
+        "city": {
+          "name": "Düsseldorf",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/D%C3%BCsseldorf"
+        }
+      }
+    },
+    {
+      "name": "SC Preußen Münster",
+      "transfermarkt_url": "https://www.transfermarkt.com/preussen-munster/startseite/verein/91",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/preussen-munster/besucherzahlenentwicklung/verein/91",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Preu%C3%9Fen_M%C3%BCnster",
+      "stadium": {
+        "name": "LVM-Preußenstadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/preussen-munster/stadion/verein/91",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Preu%C3%9Fenstadion",
+        "city": {
+          "name": "Münster",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/M%C3%BCnster"
         }
       }
     }

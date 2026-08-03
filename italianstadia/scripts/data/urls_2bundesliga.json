@@ -4,7 +4,7 @@
     "country": "Germany",
     "country_code": "DE",
     "division_level": 2,
-    "season": "25/26"
+    "season": "26/27"
   },
   "teams": [
     {
@@ -95,36 +95,6 @@
         "city": {
           "name": "Dresden",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Dresden"
-        }
-      }
-    },
-    {
-      "name": "Fortuna Düsseldorf",
-      "transfermarkt_url": "https://www.transfermarkt.com/fortuna-dusseldorf/startseite/verein/38",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fortuna-dusseldorf/besucherzahlenentwicklung/verein/38",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Fortuna_D%C3%BCsseldorf",
-      "stadium": {
-        "name": "Merkur Spiel-Arena",
-        "transfermarkt_url": "https://www.transfermarkt.com/fortuna-dusseldorf/stadion/verein/38",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Merkur_Spiel-Arena",
-        "city": {
-          "name": "Düsseldorf",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/D%C3%BCsseldorf"
-        }
-      }
-    },
-    {
-      "name": "SV 07 Elversberg",
-      "transfermarkt_url": "https://www.transfermarkt.com/sv-07-elversberg/startseite/verein/64",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sv-07-elversberg/besucherzahlenentwicklung/verein/64",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/SV_Elversberg",
-      "stadium": {
-        "name": "Ursapharm-Arena an der Kaiserlinde",
-        "transfermarkt_url": "https://www.transfermarkt.com/sv-07-elversberg/stadion/verein/64",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Waldstadion_an_der_Kaiserlinde",
-        "city": {
-          "name": "Spiesen-Elversberg",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Spiesen-Elversberg"
         }
       }
     },
@@ -221,21 +191,6 @@
       }
     },
     {
-      "name": "SC Preußen Münster",
-      "transfermarkt_url": "https://www.transfermarkt.com/preussen-munster/startseite/verein/91",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/preussen-munster/besucherzahlenentwicklung/verein/91",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Preu%C3%9Fen_M%C3%BCnster",
-      "stadium": {
-        "name": "LVM-Preußenstadion",
-        "transfermarkt_url": "https://www.transfermarkt.com/preussen-munster/stadion/verein/91",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Preu%C3%9Fenstadion",
-        "city": {
-          "name": "Münster",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/M%C3%BCnster"
-        }
-      }
-    },
-    {
       "name": "1. FC Nürnberg",
       "transfermarkt_url": "https://www.transfermarkt.com/1-fc-nurnberg/startseite/verein/4",
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/1-fc-nurnberg/besucherzahlenentwicklung/verein/4",
@@ -251,32 +206,77 @@
       }
     },
     {
-      "name": "SC Paderborn 07",
-      "transfermarkt_url": "https://www.transfermarkt.com/sc-paderborn-07/startseite/verein/127",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sc-paderborn-07/besucherzahlenentwicklung/verein/127",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Paderborn_07",
+      "name": "VfL Wolfsburg",
+      "transfermarkt_url": "https://www.transfermarkt.com/vfl-wolfsburg/startseite/verein/82",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/vfl-wolfsburg/besucherzahlenentwicklung/verein/82",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/VfL_Wolfsburg",
       "stadium": {
-        "name": "Home Deluxe Arena",
-        "transfermarkt_url": "https://www.transfermarkt.com/sc-paderborn-07/stadion/verein/127",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Home_Deluxe_Arena",
+        "name": "Volkswagen Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/volkswagen-arena/stadion/stadion/6",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Volkswagen_Arena",
         "city": {
-          "name": "Paderborn",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Paderborn"
+          "name": "Wolfsburg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Wolfsburg"
         }
       }
     },
     {
-      "name": "FC Schalke 04",
-      "transfermarkt_url": "https://www.transfermarkt.com/fc-schalke-04/startseite/verein/33",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-schalke-04/besucherzahlenentwicklung/verein/33",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Schalke_04",
+      "name": "1. FC Heidenheim",
+      "transfermarkt_url": "https://www.transfermarkt.com/1-fc-heidenheim-1846/startseite/verein/2036",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/1-fc-heidenheim-1846/besucherzahlenentwicklung/verein/2036",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/1._FC_Heidenheim_1846",
       "stadium": {
-        "name": "Veltins-Arena",
-        "transfermarkt_url": "https://www.transfermarkt.com/fc-schalke-04/stadion/verein/33",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Arena_AufSchalke",
+        "name": "Voith-Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/voith-arena/stadion/stadion/5059",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Voith-Arena",
         "city": {
-          "name": "Gelsenkirchen",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Gelsenkirchen"
+          "name": "Heidenheim an der Brenz",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Heidenheim_an_der_Brenz"
+        }
+      }
+    },
+    {
+      "name": "FC St. Pauli",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-st-pauli/startseite/verein/35",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-st-pauli/besucherzahlenentwicklung/verein/35",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_St._Pauli",
+      "stadium": {
+        "name": "Millerntor-Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/millerntor-stadion/stadion/stadion/65",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Millerntor-Stadion",
+        "city": {
+          "name": "Hamburg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Hamburg"
+        }
+      }
+    },
+    {
+      "name": "VfL Osnabrück",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/VfL_Osnabr%C3%BCck",
+      "transfermarkt_url": "https://www.transfermarkt.com/vfl-osnabruck/startseite/verein/81",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/vfl-osnabruck/besucherzahlenentwicklung/verein/81",
+      "stadium": {
+        "name": "Stadion an der Bremer Brücke",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_an_der_Bremer_Br%C3%BCcke",
+        "transfermarkt_url": "https://www.transfermarkt.com/vfl-osnabruck/stadion/verein/81",
+        "city": {
+          "name": "Osnabrück",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Osnabr%C3%BCck"
+        }
+      }
+    },
+    {
+      "name": "Energie Cottbus",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Energie_Cottbus",
+      "transfermarkt_url": "https://www.transfermarkt.com/fc-energie-cottbus/startseite/verein/25",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-energie-cottbus/besucherzahlenentwicklung/verein/25",
+      "stadium": {
+        "name": "Stadion der Freundschaft",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_der_Freundschaft_(Cottbus)",
+        "transfermarkt_url": "https://www.transfermarkt.com/fc-energie-cottbus/stadion/verein/25",
+        "city": {
+          "name": "Cottbus",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Cottbus"
         }
       }
     }
