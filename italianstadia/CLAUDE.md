@@ -462,6 +462,18 @@ Ownership is factual, legal information. Publishing incorrect ownership damages 
 - Only one source → use it, log INFO that second source was absent
 - No source at all → `UNKNOWN`, log WARNING — this is the ONLY valid use of UNKNOWN
 
+**Wikidata owners are classified by ENTITY TYPE, not by keyword.** P127 returns a
+bare label — `Kortrijk`, `Lommel`, `Barcelona` — with no wording for the public
+keyword list to match, so `classify_ownership` used to default every one to PRIVATE
+and published municipally owned grounds as privately owned. `fetch_wikidata_ownership`
+therefore also resolves each owner's **P31 (instance of)** and returns
+`(label, kind)`; `_wd_kind_from_types` maps municipality/city/state/government →
+PUBLIC and club/company → PRIVATE. The name alone cannot tell these apart —
+"Barcelona" is the CLUB (Camp Nou is private), "Kortrijk" is the MUNICIPALITY
+(Guldensporen is public). The type override applies **only** when Wikidata is the
+sole source; Wikipedia's free text stays keyword-classified because it is more
+specific. An unrecognised type returns `None` and changes nothing — never guess.
+
 **Strictly forbidden:**
 - Guessing ownership from team name (e.g. "FC Bayern" does not mean Bayern owns the stadium)
 - Inferring ownership from city name without an infobox/Wikidata entry

@@ -604,16 +604,46 @@ def _is_valid_badge_url(url):
 # Wikidata ownership cross-check (second source)
 # --------------------------------------------------
 
+# What KIND of thing owns the ground, from the owner entity's P31 (instance of).
+# Wikidata returns owners as bare entity labels — "Kortrijk", "Lommel", "Barcelona" —
+# with no wording for classify_ownership's keywords to match, so every one of them
+# used to fall through to PRIVATE. That published municipally owned grounds as
+# privately owned. The entity's TYPE disambiguates what its name cannot:
+# "Barcelona" the football club vs "Kortrijk" the municipality.
+_WD_PUBLIC_KINDS = (
+    "municipalit", "city", "town", "commune", "province", "state", "government",
+    "public", "district", "county", "capital", "borough", "region",
+    "local authority", "principality", "prefecture", "canton", "federal",
+)
+_WD_PRIVATE_KINDS = (
+    "football club", "association football club", "sports club", "sports team",
+    "business", "enterprise", "company", "corporation", "organization",
+    "organisation", "société", "holding",
+)
+
+
+def _wd_kind_from_types(type_labels):
+    """PUBLIC / PRIVATE / None from an owner entity's 'instance of' labels."""
+    joined = " ; ".join(type_labels).lower()
+    if any(k in joined for k in _WD_PUBLIC_KINDS):
+        return "PUBLIC"
+    if any(k in joined for k in _WD_PRIVATE_KINDS):
+        return "PRIVATE"
+    return None
+
+
 def fetch_wikidata_ownership(wikipedia_url):
     """
     Query Wikidata for the 'owned by' (P127) property of a stadium.
-    Uses the Wikipedia page to locate the Wikidata entity, then resolves P127 labels.
+    Uses the Wikipedia page to locate the Wikidata entity, then resolves P127 labels
+    AND each owner's P31 (instance of) so the owner's type is known, not just its name.
 
-    Returns the owner name string (English label) or None if not found.
-    This is used as a second-source cross-check against Wikipedia's infobox owner field.
+    Returns (owner_label_or_None, kind_or_None) where kind is "PUBLIC"/"PRIVATE"
+    derived from the owner entity type. Used as a second source and cross-check
+    against Wikipedia's infobox owner field.
     """
     if not wikipedia_url:
-        return None
+        return None, None
 
     try:
         from urllib.parse import urlparse, unquote
@@ -639,7 +669,7 @@ def fetch_wikidata_ownership(wikipedia_url):
 
         if not entity_id:
             logging.info(f"[Wikidata] No entity ID for '{title}'")
-            return None
+            return None, None
 
         # Step 2: fetch P127 (owned by) claims for the entity
         time.sleep(0.3)
@@ -655,7 +685,7 @@ def fetch_wikidata_ownership(wikipedia_url):
 
         if not p127_claims:
             logging.info(f"[Wikidata] No P127 (owned by) for entity {entity_id} ('{title}')")
-            return None
+            return None, None
 
         # Step 3: resolve each owner entity to its English label
         owner_ids = []
@@ -667,32 +697,56 @@ def fetch_wikidata_ownership(wikipedia_url):
                     owner_ids.append(oid)
 
         if not owner_ids:
-            return None
+            return None, None
 
         time.sleep(0.3)
         resp3 = requests.get("https://www.wikidata.org/w/api.php", params={
             "action": "wbgetentities",
             "ids": "|".join(owner_ids[:5]),
-            "props": "labels",
+            "props": "labels|claims",
             "languages": "en",
             "format": "json",
         }, headers=HEADERS, timeout=15)
         resp3.raise_for_status()
-        owner_labels = []
+        owner_entities = resp3.json().get("entities", {})
+        owner_labels, type_ids = [], []
         for oid in owner_ids:
-            oe = resp3.json().get("entities", {}).get(oid, {})
+            oe = owner_entities.get(oid, {})
             label = oe.get("labels", {}).get("en", {}).get("value", "")
             if label:
                 owner_labels.append(label)
+            for c in oe.get("claims", {}).get("P31", []):
+                tid = c.get("mainsnak", {}).get("datavalue", {}).get("value", {}).get("id")
+                if tid and tid not in type_ids:
+                    type_ids.append(tid)
+
+        # Resolve the owner's "instance of" targets to labels so the owner's TYPE
+        # decides public vs private — a bare name like "Kortrijk" cannot.
+        kind = None
+        if type_ids:
+            time.sleep(0.3)
+            resp4 = requests.get("https://www.wikidata.org/w/api.php", params={
+                "action": "wbgetentities",
+                "ids": "|".join(type_ids[:10]),
+                "props": "labels",
+                "languages": "en",
+                "format": "json",
+            }, headers=HEADERS, timeout=15)
+            resp4.raise_for_status()
+            tents = resp4.json().get("entities", {})
+            type_labels = [tents.get(t, {}).get("labels", {}).get("en", {}).get("value", "")
+                           for t in type_ids[:10]]
+            kind = _wd_kind_from_types([t for t in type_labels if t])
 
         result = " / ".join(owner_labels) if owner_labels else None
         if result:
-            logging.info(f"[Wikidata] Owner for '{title}': {result}")
-        return result
+            logging.info(f"[Wikidata] Owner for '{title}': {result}"
+                         + (f" [type => {kind}]" if kind else " [type unresolved]"))
+        return result, kind
 
     except Exception as e:
         logging.error(f"[Wikidata] fetch_wikidata_ownership failed for '{wikipedia_url}': {e}")
-        return None
+        return None, None
 
 
 def fetch_wikidata_coordinates(wikipedia_url):
@@ -1636,12 +1690,14 @@ def scrape_stadium(stadium_data, city, native_lang=None):
     #  undermines the credibility of the entire project.
 
     wiki_owner_raw = first_valid(wiki_data.get("owner_raw"), stadium_data.get("owner_raw"))
-    wikidata_owner = fetch_wikidata_ownership(wikipedia_url)
+    wikidata_owner, wikidata_kind = fetch_wikidata_ownership(wikipedia_url)
 
     if wiki_owner_raw and wikidata_owner:
         # Both sources have data — cross-check classifications
         wiki_cls = classify_ownership(wiki_owner_raw)
-        wd_cls   = classify_ownership(wikidata_owner)
+        # Wikidata labels are bare entity names with no keywords to match, so trust
+        # the owner's entity TYPE (P31) over a keyword scan of its name.
+        wd_cls   = wikidata_kind or classify_ownership(wikidata_owner)
         if wiki_cls != wd_cls:
             logging.warning(
                 f"[Ownership CONFLICT] '{final_name}': "
@@ -1656,13 +1712,26 @@ def scrape_stadium(stadium_data, city, native_lang=None):
         logging.info(f"[Ownership] '{final_name}': Wikipedia only → '{wiki_owner_raw}'")
         final_owner_raw = wiki_owner_raw
     elif wikidata_owner:
-        logging.info(f"[Ownership] '{final_name}': Wikidata fallback → '{wikidata_owner}'")
+        logging.info(f"[Ownership] '{final_name}': Wikidata fallback → '{wikidata_owner}'"
+                     + (f" (entity type → {wikidata_kind})" if wikidata_kind else ""))
         final_owner_raw = wikidata_owner
     else:
         logging.warning(f"[Ownership UNKNOWN] '{final_name}': no owner data from any source")
         final_owner_raw = None
 
     final_ownership = classify_ownership(final_owner_raw)
+    # When the owner came from Wikidata, its label is a bare entity name ("Kortrijk",
+    # "Lommel") with nothing for the keyword list to match, so classify_ownership
+    # defaults it to PRIVATE — publishing municipally owned grounds as private. The
+    # entity's own type (P31) is authoritative here, so it overrides the keyword guess.
+    # Wikipedia-sourced text keeps keyword classification: it is the more specific source.
+    if final_owner_raw == wikidata_owner and wikidata_kind and not wiki_owner_raw:
+        if final_ownership != wikidata_kind:
+            logging.info(
+                f"[Ownership] '{final_name}': '{wikidata_owner}' has no public keyword "
+                f"but its Wikidata type says {wikidata_kind} → using {wikidata_kind}"
+            )
+        final_ownership = wikidata_kind
 
     # 6. Fetch gallery images from Wikimedia Commons
     # A JSON stadium.image_url wins over the scraped one — manual override for
