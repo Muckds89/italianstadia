@@ -27216,7 +27216,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 486,
   "fields": {
-    "name": "swissporarena",
+    "name": "thermoplan arena",
     "capacity": 15680,
     "address": "Lucerne , Switzerland",
     "year_of_construction": 2011,
@@ -27249,7 +27249,7 @@
       }
     ],
     "description": null,
-    "locked": false
+    "locked": true
   }
 },
 {
