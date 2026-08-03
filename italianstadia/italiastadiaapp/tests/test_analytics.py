@@ -210,9 +210,12 @@ class ExportCountryFilterTests(TestCase):
 class IslandInsetTests(TestCase):
     """Far-flung island groups get their own inset instead of stretching the frame."""
 
-    def _groups(self, pts, **kw):
+    def _groups(self, pts, country="Portugal", **kw):
+        """Helper points share one country: an outlier only counts as an island if
+        it belongs to the SAME country as the main body (see the Turkey case below)."""
         from italiastadiaapp.views import _outlier_island_groups
-        stadiums = [{"lat": la, "lon": lo, "name": n} for n, la, lo in pts]
+        stadiums = [{"lat": la, "lon": lo, "name": n, "country": country}
+                    for n, la, lo in pts]
         return _outlier_island_groups(stadiums, **kw)
 
     def test_portugal_islands_are_split_out(self):
