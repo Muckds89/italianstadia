@@ -245,3 +245,17 @@ class IslandInsetTests(TestCase):
         main, groups = self._groups(pts, max_groups=2)
         self.assertEqual(len(groups), 2)
         self.assertEqual(len(main) + sum(len(g) for g in groups), len(pts))
+
+    def test_a_different_country_is_not_an_island(self):
+        """Distance alone must not trigger an island box. On the Euro 2032 map
+        Turkey sits ~10 degrees from Italy and was wrongly boxed as an island."""
+        from italiastadiaapp.views import _outlier_island_groups
+        pts = [{"lat": 45.5, "lon": 9.1, "name": "Meazza", "country": "Italy"},
+               {"lat": 45.1, "lon": 7.6, "name": "Allianz", "country": "Italy"},
+               {"lat": 41.9, "lon": 12.5, "name": "Olimpico", "country": "Italy"},
+               {"lat": 41.0, "lon": 28.8, "name": "Ataturk", "country": "Turkey"},
+               {"lat": 41.0, "lon": 29.0, "name": "RAMS", "country": "Turkey"},
+               {"lat": 39.9, "lon": 32.8, "name": "Ankara", "country": "Turkey"}]
+        main, groups = _outlier_island_groups(pts)
+        self.assertEqual(groups, [])
+        self.assertEqual(len(main), 6)

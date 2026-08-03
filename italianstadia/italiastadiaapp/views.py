@@ -2741,9 +2741,17 @@ def _outlier_island_groups(stadiums, max_groups=2, link_deg=4.0, sep_deg=7.0):
         return min(((g["lon"] - m["lon"]) ** 2 + (g["lat"] - m["lat"]) ** 2) ** 0.5
                    for g in group for m in main)
 
+    # An outlier only counts as an ISLAND if it belongs to the same country as the
+    # main body. Distance alone is not enough: on the Euro 2032 map Turkey sits
+    # ~10 degrees from Italy and was pulled into an "island" box, wrecking a
+    # two-country map. Madeira and the Azores are Portugal; Turkey is not Italy.
+    main_countries = {s.get("country") for s in main if s.get("country")}
+
     outliers, kept = [], list(main)
     for grp in ordered[1:]:
-        if gap_to_main(grp) > sep_deg:
+        grp_countries = {s.get("country") for s in grp if s.get("country")}
+        same_country = bool(grp_countries) and grp_countries <= main_countries
+        if same_country and gap_to_main(grp) > sep_deg:
             outliers.append(grp)
         else:
             kept.extend(grp)
@@ -2832,7 +2840,8 @@ def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox
 
 
 def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
-                main_bbox=None, layout=None, show_source=True, header="Detail view"):
+                main_bbox=None, layout=None, show_source=True, header="Detail view",
+                draw_labels=True):
     """Magnifier inset: render the densest cluster zoomed into a corner box, draw
     a source outline where it sits on the main map, and connect the two. Labels in
     the box are clean because only a few grounds are shown, enlarged."""
@@ -2883,7 +2892,7 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
     # column-leader engine. This GUARANTEES every ground in the inset is labelled
     # (mandatory) — no search-and-drop that could silently omit a name.
     items = []
-    for px, py, s in dots:
+    for px, py, s in (dots if draw_labels else []):
         label1 = s.get("team_name", "") or ""
         label2 = s["name"]
         tw = max(int(len(label1) * font_t.size * 0.55),
@@ -3508,7 +3517,12 @@ def _dot_colour(stadium, params, country_index):
 
 
 def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
-                          reserve_boxes=None, no_label_names=None):
+                          reserve_boxes=None, no_label_names=None,
+                          extra_label_points=None):
+    """`extra_label_points` are (px, py, stadium) anchors already in pixel space,
+    for grounds whose badge is drawn elsewhere (inside an island inset). They get
+    a full-size label in the margin columns with a leader back to the box, instead
+    of a cramped label squeezed inside it."""
     BADGE_R   = params.get("badge_size", 13)
     RING_W    = 2
     # Optional coloured ring around club badges (colour-codes a category while the
@@ -3614,6 +3628,10 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
                 draw.ellipse([px - BADGE_R, py - BADGE_R, px + BADGE_R, py + BADGE_R], fill=colour)
 
         badge_circles.append((px, py, rr))
+        dot_positions.append((px, py, s))
+    # Badges for these were already drawn (inside their inset); label them here so
+    # they use the same font and margin columns as every other ground.
+    for px, py, s in (extra_label_points or []):
         dot_positions.append((px, py, s))
 
     if not params["labels"]:
@@ -3727,8 +3745,12 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
     mid = len(by_x) // 2
     if len(by_x) >= 6:
         gaps = [(by_x[i + 1]["px"] - by_x[i]["px"], i + 1) for i in range(len(by_x) - 1)]
-        # consider only splits that leave at least 2 labels on each side
-        cand = [(g, i) for g, i in gaps if 2 <= i <= len(by_x) - 2]
+        # Only splits that stay reasonably BALANCED. Requiring just 2-per-side let
+        # the gap split fire on island anchors sitting far right, throwing all 15
+        # mainland labels into one column until it overflowed the frame. A genuine
+        # two-group map (Italy/Turkey) splits near the middle anyway.
+        lo, hi = max(2, int(len(by_x) * 0.35)), min(len(by_x) - 2, int(len(by_x) * 0.65))
+        cand = [(g, i) for g, i in gaps if lo <= i <= hi]
         if cand:
             gsize, gidx = max(cand)
             others = sorted(g for g, _ in gaps)
@@ -4346,16 +4368,27 @@ def _compose_export_image(params):
                                      zoom_bbox=inset_zoom_bbox)
         reserves.append(inset_layout["box"])
 
+    # Islands FIRST, badges only: their labels are handled by the main engine below
+    # so they get the same font size and margin columns as every other ground —
+    # inside a box this small a label is unreadably cramped. The leader points back
+    # into the box, so the tie to the island stays clear.
+    island_anchors = []
+    for grp, lay in island_layouts:
+        header = grp[0].get("city") or grp[0].get("country") or "Detail view"
+        img = _draw_inset(img, grp, params, W, H, country_index, params["style_key"],
+                          main_bbox=bbox, layout=lay, show_source=False,
+                          header=str(header), draw_labels=False)
+        for s in grp:
+            bx, by = _lon_lat_to_px(s["lon"], s["lat"], lay["cluster_bbox"],
+                                    lay["IW"], lay["IH"])
+            island_anchors.append((lay["ix0"] + bx, lay["iy0"] + by, s))
+
     # Draw ALL badges on the main map (incl. the inset cluster, so those grounds
     # still show in place); only their LABELS move into the zoom box.
     inset_names = {s["name"] for s in inset_stadiums}
     img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index,
-                                reserve_boxes=reserves, no_label_names=inset_names)
-    for grp, lay in island_layouts:
-        label = grp[0].get("city") or grp[0].get("country") or "Detail view"
-        img = _draw_inset(img, grp, params, W, H, country_index, params["style_key"],
-                          main_bbox=bbox, layout=lay, show_source=False,
-                          header=str(label))
+                                reserve_boxes=reserves, no_label_names=inset_names,
+                                extra_label_points=island_anchors)
     if inset_stadiums:
         img = _draw_inset(img, inset_stadiums, params, W, H, country_index,
                           params["style_key"], main_bbox=bbox, layout=inset_layout)
