@@ -2262,6 +2262,9 @@ def _parse_export_params(request):
         "scale": request.GET.get("scale", "0") == "1",
         "spotlight": request.GET.get("spotlight", "0") == "1",
         "inset": "auto" if request.GET.get("inset", "0") == "1" else "",
+        # Pull far-flung island groups into their own boxes rather than letting
+        # them stretch the frame. On by default; islands=0 forces true extent.
+        "islands": request.GET.get("islands", "1") != "0",
         # User-drawn inset rectangle as 4 image fractions "fx0,fy0,fx1,fy1" (0..1).
         # When present it overrides the auto cluster and zooms exactly that area.
         "inset_box": _parse_frac4(request.GET.get("inset_box", "")),
@@ -4230,10 +4233,11 @@ def _compose_export_image(params):
     else:
         # Far-flung island groups (Madeira, the Azores) otherwise dictate the frame
         # and squash the mainland into a sliver. Frame the main body and give each
-        # island group its own inset instead — but only when insets are enabled,
-        # so the plain map still shows every ground in one frame.
+        # island group its own box. This is ALWAYS on: an over-extended frame is a
+        # legibility defect, not a preference, and those grounds would otherwise be
+        # unreadable dots in an ocean. Set islands=0 to force one true-extent frame.
         frame_stadiums = stadiums
-        if params.get("inset"):
+        if params.get("islands", True):
             main_body, island_groups = _outlier_island_groups(stadiums)
             if island_groups:
                 frame_stadiums = main_body
@@ -4257,9 +4261,10 @@ def _compose_export_image(params):
         inset_stadiums = [s for s in stadiums
                           if lon0 <= s["lon"] <= lon1 and lat_lo <= s["lat"] <= lat_hi][:8]
     elif params.get("inset") == "auto":
-        # Island groups take priority: without an inset they are simply off-frame.
-        # Otherwise fall back to magnifying the densest knot of overlapping badges.
-        _, island_groups = _outlier_island_groups(stadiums)
+        # Island groups already have their own boxes; the magnifier only competes
+        # for space, so fall back to it only when there are no islands.
+        _, island_groups = (_outlier_island_groups(stadiums)
+                            if params.get("islands", True) else (stadiums, []))
         if not island_groups:
             inset_stadiums = _auto_inset_cluster(
                 stadiums, bbox=bbox, W=W, H=H, badge_r=params.get("badge_size", 13))
@@ -4302,7 +4307,7 @@ def _compose_export_image(params):
     # (they lie outside the main frame, so a badge on the main map would be clipped
     # or land in the wrong place).
     island_layouts = []
-    if params.get("inset"):
+    if params.get("islands", True):
         _, island_groups = _outlier_island_groups(stadiums)
         for grp in island_groups:
             # Narrower than a magnifier inset: two of these plus the label columns
@@ -4436,6 +4441,7 @@ def export_checkout(request):
         "color_by", "ring_by", "no_badges",
         "style_key", "size_key", "title", "subtitle", "labels",
         "north", "legend", "scale", "spotlight", "logo", "bg_color", "inset", "inset_box",
+        "islands",
         "label_size", "label_color", "badge_size", "tournament", "tstatus",
         "layer", "dstatus", "national",
     }
