@@ -23,21 +23,6 @@
       }
     },
     {
-      "name": "Erzgebirge Aue",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Erzgebirge_Aue",
-      "transfermarkt_url": "https://www.transfermarkt.com/fc-erzgebirge-aue/startseite/verein/94",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-erzgebirge-aue/besucherzahlenentwicklung/verein/94",
-      "stadium": {
-        "name": "Erzgebirgsstadion",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Eins_Erzgebirgsstadion",
-        "transfermarkt_url": "https://www.transfermarkt.com/fc-erzgebirge-aue/stadion/verein/94",
-        "city": {
-          "name": "Aue",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Aue"
-        }
-      }
-    },
-    {
       "name": "MSV Duisburg",
       "wikipedia_url": "https://en.wikipedia.org/wiki/MSV_Duisburg",
       "transfermarkt_url": "https://www.transfermarkt.com/msv-duisburg/startseite/verein/52",
@@ -143,21 +128,6 @@
       }
     },
     {
-      "name": "1860 Munich",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/TSV_1860_Munich",
-      "transfermarkt_url": "https://www.transfermarkt.com/tsv-1860-munchen/startseite/verein/72",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/tsv-1860-munchen/besucherzahlenentwicklung/verein/72",
-      "stadium": {
-        "name": "Grünwalder Stadion",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Gr%C3%BCnwalder_Stadion",
-        "transfermarkt_url": "https://www.transfermarkt.com/tsv-1860-munchen/stadion/verein/72",
-        "city": {
-          "name": "Munich",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Munich"
-        }
-      }
-    },
-    {
       "name": "Jahn Regensburg",
       "wikipedia_url": "https://en.wikipedia.org/wiki/SSV_Jahn_Regensburg",
       "transfermarkt_url": "https://www.transfermarkt.com/ssv-jahn-regensburg/startseite/verein/109",
@@ -203,21 +173,6 @@
       }
     },
     {
-      "name": "1. FC Schweinfurt 05",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/1._FC_Schweinfurt_05",
-      "transfermarkt_url": "https://www.transfermarkt.com/1-fc-schweinfurt-05/startseite/verein/103",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/1-fc-schweinfurt-05/besucherzahlenentwicklung/verein/103",
-      "stadium": {
-        "name": "Willy-Sachs-Stadion",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Sachs-Stadion",
-        "transfermarkt_url": "https://www.transfermarkt.com/1-fc-schweinfurt-05/stadion/verein/103",
-        "city": {
-          "name": "Schweinfurt",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Schweinfurt"
-        }
-      }
-    },
-    {
       "name": "VfB Stuttgart II",
       "wikipedia_url": "https://en.wikipedia.org/wiki/VfB_Stuttgart_II",
       "transfermarkt_url": "https://www.transfermarkt.com/vfb-stuttgart-ii/startseite/verein/102",
@@ -229,21 +184,6 @@
         "city": {
           "name": "Aspach",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Aspach"
-        }
-      }
-    },
-    {
-      "name": "SSV Ulm",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/SSV_Ulm_1846",
-      "transfermarkt_url": "https://www.transfermarkt.com/ssv-ulm-1846/startseite/verein/69",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ssv-ulm-1846/besucherzahlenentwicklung/verein/69",
-      "stadium": {
-        "name": "Donaustadion",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Donaustadion",
-        "transfermarkt_url": "https://www.transfermarkt.com/ssv-ulm-1846/stadion/verein/69",
-        "city": {
-          "name": "Ulm",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Ulm"
         }
       }
     },
@@ -304,6 +244,66 @@
         "city": {
           "name": "Münster",
           "wikipedia_url": "https://en.wikipedia.org/wiki/M%C3%BCnster"
+        }
+      }
+    },
+    {
+      "name": "SC Fortuna Köln",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Fortuna_K%C3%B6ln",
+      "transfermarkt_url": "https://www.transfermarkt.com/x/startseite/verein/92",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/x/besucherzahlenentwicklung/verein/92",
+      "stadium": {
+        "name": "Südstadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/S%C3%BCdstadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/x/stadion/verein/92",
+        "city": {
+          "name": "Cologne",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Cologne"
+        }
+      }
+    },
+    {
+      "name": "SV Meppen",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SV_Meppen",
+      "transfermarkt_url": "https://www.transfermarkt.com/x/startseite/verein/247",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/x/besucherzahlenentwicklung/verein/247",
+      "stadium": {
+        "name": "Hänsch-Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/H%C3%A4nsch-Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/x/stadion/verein/247",
+        "city": {
+          "name": "Meppen",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Meppen"
+        }
+      }
+    },
+    {
+      "name": "SG Sonnenhof Großaspach",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SG_Sonnenhof_Gro%C3%9Faspach",
+      "transfermarkt_url": "https://www.transfermarkt.com/x/startseite/verein/2589",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/x/besucherzahlenentwicklung/verein/2589",
+      "stadium": {
+        "name": "Mechatronik Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Mechatronik_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/x/stadion/verein/2589",
+        "city": {
+          "name": "Aspach",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Aspach,_Baden-W%C3%BCrttemberg"
+        }
+      }
+    },
+    {
+      "name": "Würzburger Kickers",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/W%C3%BCrzburger_Kickers",
+      "transfermarkt_url": "https://www.transfermarkt.com/x/startseite/verein/1557",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/x/besucherzahlenentwicklung/verein/1557",
+      "stadium": {
+        "name": "Akon Arena",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Akon_Arena",
+        "transfermarkt_url": "https://www.transfermarkt.com/x/stadion/verein/1557",
+        "city": {
+          "name": "Würzburg",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/W%C3%BCrzburg"
         }
       }
     }

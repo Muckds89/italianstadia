@@ -1476,6 +1476,28 @@
   }
 },
 {
+  "model": "italiastadiaapp.league",
+  "pk": 90,
+  "fields": {
+    "name": "Regionalliga",
+    "country": 2,
+    "division_level": 4,
+    "season": "2026/27",
+    "hidden": true
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 91,
+  "fields": {
+    "name": "Liga 3",
+    "country": 5,
+    "division_level": 3,
+    "season": "2026/27",
+    "hidden": true
+  }
+},
+{
   "model": "italiastadiaapp.city",
   "pk": 6,
   "fields": {
@@ -3539,7 +3561,7 @@
     "wikipedia_url": "https://en.wikipedia.org/wiki/Cologne",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Kranh%C3%A4user_Cologne%2C_April_2018_-01.jpg",
     "image_credit": null,
-    "description": "Cologne ( / k ə ˈ l oʊ n / ⓘ kə- LOHN ; German: Köln [kœln] ⓘ ; Kölsch : Kölle [ˈkœ̂lə] ⓘ ) is the fourth-most populous city of Germany and the largest city of the German state of North Rhine-Westphalia with nearly 1.1 million inhabitants in the city proper and over 3.1 million people in the Cologne Bonn urban region . Cologne is also part of the Rhine-Ruhr metropolitan region , the second biggest metropolitan region by GDP in the European Union . Centered on the left bank of the Rhine , Cologne is located on the River Rhine ( Lower Rhine ), about 35 kilometres (22 mi) southeast of the North Rhine-Westphalia state capital Düsseldorf and 22 kilometres (14 mi) northwest of Bonn , the former capital of West Germany ."
+    "description": null
   }
 },
 {
@@ -12599,6 +12621,71 @@
     "country": "Belgium",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Lommel",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Lommel_-_Sint-Pietersbandenkerk.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 883,
+  "fields": {
+    "name": "Meppen",
+    "population": 36930,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Meppen",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Historia_urbodomo_Meppen_4.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 884,
+  "fields": {
+    "name": "Aspach, Baden-Württemberg",
+    "population": 8178,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Aspach,_Baden-W%C3%BCrttemberg",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/09/Gro%C3%9Faspach_aus_Westen.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 885,
+  "fields": {
+    "name": "Würzburg",
+    "population": 133258,
+    "country": "Germany",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/W%C3%BCrzburg",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Marienberg_wuerzburg.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 886,
+  "fields": {
+    "name": "Coimbra",
+    "population": 140796,
+    "country": "Portugal",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Coimbra",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Coimbra_e_o_rio_Mondego_%286167200429%29_%28cropped%29.jpg",
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 887,
+  "fields": {
+    "name": "Amarante, Portugal",
+    "population": 52116,
+    "country": "Portugal",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Amarante,_Portugal",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Amarante_bank.jpg",
     "image_credit": null,
     "description": null
   }
@@ -44595,6 +44682,178 @@
   }
 },
 {
+  "model": "italiastadiaapp.stadium",
+  "pk": 1077,
+  "fields": {
+    "name": "Südstadion",
+    "capacity": 11748,
+    "address": "Cologne , Germany",
+    "year_of_construction": 1979,
+    "city": 185,
+    "latitude": "50.917500",
+    "longitude": "6.943600",
+    "owner_raw": "Kölner Sportstätten GmbH",
+    "ownership": "PRIVATE",
+    "slug": "sudstadion",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/S%C3%BCdstadion",
+    "transfermarkt_url": "https://www.transfermarkt.com/x/stadion/verein/92",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/sudstadion-1481626866-9406.jpg?lm=1491209211",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1078,
+  "fields": {
+    "name": "Hänsch-Arena",
+    "capacity": 13241,
+    "address": "Meppen , Germany",
+    "year_of_construction": 1924,
+    "city": 883,
+    "latitude": "52.708019",
+    "longitude": "7.298025",
+    "owner_raw": "City of Meppen",
+    "ownership": "PUBLIC",
+    "slug": "hansch-arena",
+    "stadium_type": "OPEN",
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/H%C3%A4nsch-Arena",
+    "transfermarkt_url": "https://www.transfermarkt.com/x/stadion/verein/247",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/hansch-arena-meppen-stadion-1605013147-50932.jpg?lm=1605013182",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Emslandstadion_nach_dem_Aufstiegsspiel_Meppen_gegen_Waldhof_Mannheim.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+        "credit": "Cryptorebel / Wikimedia Commons / CC BY-SA 4.0"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1079,
+  "fields": {
+    "name": "Mechatronik Arena",
+    "capacity": 10001,
+    "address": "Aspach , Germany",
+    "year_of_construction": 2011,
+    "city": 884,
+    "latitude": "48.980485",
+    "longitude": "9.393005",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "mechatronik-arena",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Mechatronik_Arena",
+    "transfermarkt_url": "https://www.transfermarkt.com/x/stadion/verein/2589",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/comtech-arena-1481626429-9421.jpg?lm=1491209214",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1080,
+  "fields": {
+    "name": "Akon Arena",
+    "capacity": 13090,
+    "address": "Würzburg , Germany",
+    "year_of_construction": 1967,
+    "city": 885,
+    "latitude": "49.767036",
+    "longitude": "9.932892",
+    "owner_raw": "FC Würzburger Kickers e. V.",
+    "ownership": "PRIVATE",
+    "slug": "akon-arena",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Akon_Arena",
+    "transfermarkt_url": "https://www.transfermarkt.com/x/stadion/verein/1557",
+    "image_url": "https://tmssl.akamaized.net//images/foto/stadionnormal/flyeralarm-arena-2017-1531921887-16696.jpg?lm=1531921905",
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1081,
+  "fields": {
+    "name": "Estádio Cidade de Coimbra",
+    "capacity": 29622,
+    "address": "Coimbra , Portugal",
+    "year_of_construction": 1949,
+    "city": 886,
+    "latitude": "40.203330",
+    "longitude": "-8.407780",
+    "owner_raw": "Municipality of Coimbra",
+    "ownership": "PUBLIC",
+    "slug": "estadio-cidade-de-coimbra",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Cidade_de_Coimbra",
+    "transfermarkt_url": "https://www.transfermarkt.com/x/stadion/verein/50566",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Coimbra_City_Stadium.jpg",
+    "image_credit": null,
+    "extra_images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Coimbra_City_Stadium.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+        "credit": "Elapsed at English Wikipedia / Wikimedia Commons / Public domain"
+      }
+    ],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1082,
+  "fields": {
+    "name": "Estádio Municipal de Amarante",
+    "capacity": 5000,
+    "address": null,
+    "year_of_construction": 1981,
+    "city": 887,
+    "latitude": "41.282055",
+    "longitude": "-8.075774",
+    "owner_raw": null,
+    "ownership": "UNKNOWN",
+    "slug": "estadio-municipal-de-amarante",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "",
+    "transfermarkt_url": "https://www.transfermarkt.com/x/stadion/verein/7789",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
   "model": "italiastadiaapp.team",
   "pk": 7,
   "fields": {
@@ -65921,7 +66180,7 @@
     "is_national": false,
     "name": "Erzgebirge Aue",
     "founded": "1946-01-01",
-    "tier": 3,
+    "tier": 4,
     "girone": null,
     "stadium": 867,
     "manager": "Khvicha Shubitidze / Enrico Kern",
@@ -65934,7 +66193,7 @@
     "image_credit": null,
     "description": "Fußball Club Erzgebirge Aue e.V. , commonly known as simply FC Erzgebirge Aue or Erzgebirge Aue ( German pronunciation: [ˌeːɐ̯t͡sɡəbɪʁɡə ˈaʊ̯ə] ⓘ ), is a German football club based in Aue-Bad Schlema , Saxony . The former East German side was a founding member of the 3. Liga in 2008–09, after being relegated from the 2. Bundesliga in 2007–08. The Club will compete in the Regionalliga Nordost in 2026–27, following relegation. The city of Aue-Bad Schlema has a population of about 20,800, making it one of the smallest cities to ever host a club playing at the second highest level of German football. However, the team attracts supporters from a larger urban area that includes Chemnitz and Zwickau , whose own football sides ( CFC and FSV ) are among Aue's traditional rivals.",
     "locked": false,
-    "league": 73,
+    "league": 90,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "erzgebirge-aue"
@@ -66155,7 +66414,7 @@
     "is_national": false,
     "name": "1860 Munich",
     "founded": "1860-01-01",
-    "tier": 3,
+    "tier": 4,
     "girone": null,
     "stadium": 876,
     "manager": "Markus Kauczinski",
@@ -66168,7 +66427,7 @@
     "image_credit": null,
     "description": "Turn- und Sportverein München von 1860 , commonly known as TSV 1860 Munich ( German pronunciation: [ˌteːʔɛsˈfaʊ ˌʔaxtseːnˈhʊndɐt ˈzɛçtsɪç ˈmʏnçn̩] ; sechzig locally [ˈzɛçtsɪk] ; lettered as Achtzehnhundertsechzig München ) or 1860 Munich , is a sports club based in Munich . The club's football team plays in the 3. Liga , the third tier of the German football pyramid . Their current home ground is the Grünwalder Stadion , having first moved there in 1911 and spent much of their history there.",
     "locked": false,
-    "league": 73,
+    "league": 90,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "1860-munich"
@@ -66285,7 +66544,7 @@
     "is_national": false,
     "name": "1. FC Schweinfurt 05",
     "founded": "1905-01-01",
-    "tier": 3,
+    "tier": 4,
     "girone": null,
     "stadium": 881,
     "manager": "Jermaine Jones",
@@ -66298,7 +66557,7 @@
     "image_credit": null,
     "description": "1. Fussball-Club Schweinfurt 1905, Verein für Leibesübungen e.V. , called 1. FC Schweinfurt 05 , Schweinfurt 05 , or simply FC 05 , is a German association football club established in Schweinfurt ( Bavaria ) in 1905. Besides men’s and women‘s football , it also has a section for athletics .",
     "locked": false,
-    "league": 73,
+    "league": 90,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "1-fc-schweinfurt-05"
@@ -66337,7 +66596,7 @@
     "is_national": false,
     "name": "SSV Ulm",
     "founded": "1970-01-01",
-    "tier": 3,
+    "tier": 4,
     "girone": null,
     "stadium": 883,
     "manager": "Pavel Dochev",
@@ -66350,7 +66609,7 @@
     "image_credit": null,
     "description": "SSV Ulm 1846 FUSSBALL e.V. , commonly known as SSV Ulm 1846 or SSV Ulm , is a German football club based in Ulm , Baden-Württemberg. SSV Ulm 1846 FUSSBALL was formed on 7 March 2009 as new independent club  through the separation of the football department from the present-day multi-sports club SSV Ulm 1846 e.V. After finishing in first place and earning promotion from 3. Liga in 2023–24, the club played in 2. Bundesliga in the 2024–25 season ; a 17th-place finish in 2. Bundesliga meant relegation back to 3. Liga for the 2025–26 season. [ 1 ]",
     "locked": false,
-    "league": 73,
+    "league": 90,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "ssv-ulm"
@@ -67611,7 +67870,7 @@
     "is_national": false,
     "name": "UD Oliveirense",
     "founded": "1922-01-01",
-    "tier": 2,
+    "tier": 3,
     "girone": null,
     "stadium": 932,
     "manager": "Ricardo Chéu",
@@ -67624,7 +67883,7 @@
     "image_credit": null,
     "description": "União Desportiva Oliveirense (UDO), commonly known as Oliveirense , is a Portuguese sports club from the city of Oliveira de Azeméis , in Aveiro District . [ 1 ] The club was founded on 25 October 1922. [ 2 ] The main football team currently plays at the Estádio Carlos Osório which holds a seating capacity of 1,750 and plays in Liga Portugal 2 . As a multisports club it fields very successful teams in rink hockey and basketball as well. [ 3 ] [ 4 ] Its rink hockey team has won the Taça de Portugal on three occasions whilst its basketball team has won the Portuguese Basketball SuperCup and the Portuguese Basketball Cup . [ 5 ] The Kelly–Simoldes–UDO cycling team, which holds a UCI Continental team licence, is affiliated with União Desportiva Oliveirense.",
     "locked": false,
-    "league": 76,
+    "league": 91,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "ud-oliveirense"
@@ -67637,7 +67896,7 @@
     "is_national": false,
     "name": "Paços de Ferreira",
     "founded": "1950-01-01",
-    "tier": 2,
+    "tier": 3,
     "girone": null,
     "stadium": 933,
     "manager": null,
@@ -67650,7 +67909,7 @@
     "image_credit": null,
     "description": "Paços de Ferreira ( European Portuguese pronunciation: [ˈpasuʒ ðɨ fɨˈʁɐjɾɐ] ⓘ ) is a city in the Porto District , in the north of Portugal . The population of the city in 2011 was 7491, while its municipality had 56,340 inhabitants, [ 1 ] in an area of 70.99 km². [ 2 ]",
     "locked": false,
-    "league": 76,
+    "league": 91,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "pacos-de-ferreira"
@@ -71632,6 +71891,162 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "lommel-sk"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1114,
+  "fields": {
+    "is_national": false,
+    "name": "SC Fortuna Köln",
+    "founded": "1948-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 1077,
+    "manager": "Matthias Mink",
+    "num_of_titles": 0,
+    "city": 185,
+    "average_attendance": 2890,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Fortuna_K%C3%B6ln",
+    "transfermarkt_url": "https://www.transfermarkt.com/x/startseite/verein/92",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/92.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "sc-fortuna-koln"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1115,
+  "fields": {
+    "is_national": false,
+    "name": "SV Meppen",
+    "founded": "1912-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 1078,
+    "manager": "Lucas Beniermann",
+    "num_of_titles": 0,
+    "city": 883,
+    "average_attendance": 7868,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/SV_Meppen",
+    "transfermarkt_url": "https://www.transfermarkt.com/x/startseite/verein/247",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/247.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "sv-meppen"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1116,
+  "fields": {
+    "is_national": false,
+    "name": "SG Sonnenhof Großaspach",
+    "founded": "1994-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 1079,
+    "manager": "Pascal Reinhardt",
+    "num_of_titles": 0,
+    "city": 884,
+    "average_attendance": 1329,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/SG_Sonnenhof_Gro%C3%9Faspach",
+    "transfermarkt_url": "https://www.transfermarkt.com/x/startseite/verein/2589",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/2589.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "sg-sonnenhof-groaspach"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1117,
+  "fields": {
+    "is_national": false,
+    "name": "Würzburger Kickers",
+    "founded": "1907-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 1080,
+    "manager": "Michael Schiele",
+    "num_of_titles": 0,
+    "city": 885,
+    "average_attendance": 2357,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/W%C3%BCrzburger_Kickers",
+    "transfermarkt_url": "https://www.transfermarkt.com/x/startseite/verein/1557",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/1557.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 73,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "wurzburger-kickers"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1118,
+  "fields": {
+    "is_national": false,
+    "name": "Académica de Coimbra",
+    "founded": "1987-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1081,
+    "manager": "António Barbosa",
+    "num_of_titles": 0,
+    "city": 886,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Associa%C3%A7%C3%A3o_Acad%C3%A9mica_de_Coimbra_%E2%80%93_O.A.F.",
+    "transfermarkt_url": "https://www.transfermarkt.com/x/startseite/verein/50566",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/50566.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 76,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "academica-de-coimbra"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1119,
+  "fields": {
+    "is_national": false,
+    "name": "Amarante FC",
+    "founded": "1923-01-01",
+    "tier": 2,
+    "girone": null,
+    "stadium": 1082,
+    "manager": "Jorge Pinto",
+    "num_of_titles": 0,
+    "city": 887,
+    "average_attendance": 350,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Amarante_F.C.",
+    "transfermarkt_url": "https://www.transfermarkt.com/x/startseite/verein/7789",
+    "image_url": "https://tmssl.akamaized.net/images/wappen/head/7789.png",
+    "image_credit": null,
+    "description": null,
+    "locked": false,
+    "league": 76,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "amarante-fc"
   }
 },
 {

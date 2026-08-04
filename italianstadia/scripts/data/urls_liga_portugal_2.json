@@ -113,36 +113,6 @@
       }
     },
     {
-      "name": "UD Oliveirense",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/U.D._Oliveirense",
-      "transfermarkt_url": "https://www.transfermarkt.com/ud-oliveirense/startseite/verein/8827",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ud-oliveirense/besucherzahlenentwicklung/verein/8827",
-      "stadium": {
-        "name": "Estádio Carlos Osório",
-        "wikipedia_url": "",
-        "transfermarkt_url": "https://www.transfermarkt.com/ud-oliveirense/stadion/verein/8827",
-        "city": {
-          "name": "Oliveira de Azeméis",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Oliveira_de_Azem%C3%A9is"
-        }
-      }
-    },
-    {
-      "name": "Paços de Ferreira",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Pa%C3%A7os_de_Ferreira",
-      "transfermarkt_url": "https://www.transfermarkt.com/fc-pacos-de-ferreira/startseite/verein/2995",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fc-pacos-de-ferreira/besucherzahlenentwicklung/verein/2995",
-      "stadium": {
-        "name": "Estádio Capital do Móvel",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Capital_do_M%C3%B3vel",
-        "transfermarkt_url": "https://www.transfermarkt.com/fc-pacos-de-ferreira/stadion/verein/2995",
-        "city": {
-          "name": "Paços de Ferreira",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Pa%C3%A7os_de_Ferreira"
-        }
-      }
-    },
-    {
       "name": "Penafiel",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Penafiel",
       "transfermarkt_url": "https://www.transfermarkt.com/fc-penafiel/startseite/verein/3327",
@@ -276,6 +246,36 @@
         "city": {
           "name": "Tondela",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Tondela"
+        }
+      }
+    },
+    {
+      "name": "Académica de Coimbra",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Associa%C3%A7%C3%A3o_Acad%C3%A9mica_de_Coimbra_%E2%80%93_O.A.F.",
+      "transfermarkt_url": "https://www.transfermarkt.com/x/startseite/verein/50566",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/x/besucherzahlenentwicklung/verein/50566",
+      "stadium": {
+        "name": "Estádio Cidade de Coimbra",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Cidade_de_Coimbra",
+        "transfermarkt_url": "https://www.transfermarkt.com/x/stadion/verein/50566",
+        "city": {
+          "name": "Coimbra",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Coimbra"
+        }
+      }
+    },
+    {
+      "name": "Amarante FC",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Amarante_F.C.",
+      "transfermarkt_url": "https://www.transfermarkt.com/x/startseite/verein/7789",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/x/besucherzahlenentwicklung/verein/7789",
+      "stadium": {
+        "name": "Estádio Municipal de Amarante",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/x/stadion/verein/7789",
+        "city": {
+          "name": "Amarante",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Amarante,_Portugal"
         }
       }
     }
