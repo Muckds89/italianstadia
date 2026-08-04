@@ -167,15 +167,15 @@
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/casa-pia-ac/besucherzahlenentwicklung/verein/9607",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Casa_Pia_A.C.",
       "stadium": {
-        "name": "Estádio Pina Manique",
-        "owner_raw": "Casa Pia de Lisboa",
+        "name": "Estádio Municipal de Rio Maior",
+        "owner_raw": "Municipal (Estádio Municipal de Rio Maior)",
         "transfermarkt_url": "https://www.transfermarkt.com/casa-pia-ac/stadion/verein/9607",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Casa_Pia_A.C.",
-        "latitude": 38.7375,
-        "longitude": -9.2039,
+        "wikipedia_url": "",
+        "latitude": 39.344577,
+        "longitude": -8.934484,
         "city": {
-          "name": "Lisbon",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Lisbon"
+          "name": "Rio Maior",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rio_Maior"
         }
       }
     },

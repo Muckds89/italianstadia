@@ -12691,6 +12691,19 @@
   }
 },
 {
+  "model": "italiastadiaapp.city",
+  "pk": 888,
+  "fields": {
+    "name": "Rio Maior",
+    "population": null,
+    "country": "Portugal",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Rio_Maior",
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
   "model": "italiastadiaapp.stadium",
   "pk": 8,
   "fields": {
@@ -44854,6 +44867,33 @@
   }
 },
 {
+  "model": "italiastadiaapp.stadium",
+  "pk": 1083,
+  "fields": {
+    "name": "Estádio Municipal de Rio Maior",
+    "capacity": 7000,
+    "address": null,
+    "year_of_construction": null,
+    "city": 888,
+    "latitude": "39.344577",
+    "longitude": "-8.934484",
+    "owner_raw": "Municipal (Estádio Municipal de Rio Maior)",
+    "ownership": "PUBLIC",
+    "slug": "estadio-municipal-de-rio-maior",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": null,
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": true
+  }
+},
+{
   "model": "italiastadiaapp.team",
   "pk": 7,
   "fields": {
@@ -48606,10 +48646,10 @@
     "founded": "1879-01-01",
     "tier": 1,
     "girone": null,
-    "stadium": 175,
+    "stadium": 1083,
     "manager": "Álvaro Pacheco",
     "num_of_titles": 0,
-    "city": 155,
+    "city": 888,
     "average_attendance": 2075,
     "wikipedia_url": "https://en.wikipedia.org/wiki/Casa_Pia_A.C.",
     "transfermarkt_url": "https://www.transfermarkt.com/casa-pia-ac/startseite/verein/3268",
