@@ -158,7 +158,12 @@ class Team(models.Model):
     blank=True,
     null=True
     )
-    stadium = models.ForeignKey(Stadium, on_delete=models.CASCADE, related_name='teams', db_index=True)
+    # Nullable: several national teams have NO home ground. Portugal rotate between
+    # the Luz, Alvalade and the Dragao; asserting any one of them as "their stadium"
+    # publishes a fact that isn't true. A club always has a ground, so in practice
+    # this is null only for rotating national sides.
+    stadium = models.ForeignKey(Stadium, on_delete=models.CASCADE, related_name='teams',
+                                db_index=True, null=True, blank=True)
     manager = models.CharField(max_length=255, blank=True, null=True)
     num_of_titles = models.IntegerField(null=True, blank=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='teams', db_index=True)
