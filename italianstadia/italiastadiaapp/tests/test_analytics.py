@@ -13,12 +13,38 @@ class GoogleAnalyticsMiddlewareTests(TestCase):
         body = resp.content.decode()
         self.assertIn(f"gtag/js?id={GID}", body)
         self.assertIn(f"gtag('config','{GID}')", body)
-        # Consent Mode v2: defaults to denied (cookieless) until the banner grants it
+        # Consent Mode v2: defaults to denied (cookieless) until the banner grants it,
+        # or until the head snippet restores a previously stored "accepted" choice.
         self.assertIn("gtag('consent','default'", body)
-        self.assertIn("'analytics_storage':'denied'", body)
+        self.assertIn("'analytics_storage':_cs", body)
+        self.assertIn("'granted':'denied'", body)
         # injected inside <head>, and exactly once
         self.assertEqual(body.count("googletagmanager.com/gtag/js"), 1)
         self.assertLess(body.index("gtag/js"), body.index("</head>"))
+
+    @override_settings(GOOGLE_ANALYTICS_ID=GID)
+    def test_stored_consent_is_restored_before_config_fires(self):
+        """A returning visitor who already accepted must have consent restored in the
+        head snippet, BEFORE gtag('config') sends page_view. consent.js updates from a
+        DOMContentLoaded handler at the end of the body, by which point page_view and
+        the export funnel's view_item have already gone out tagged gcs=G100 (denied) --
+        GA4 keeps those out of Realtime and out of the cookie-based reports."""
+        body = self.client.get(reverse("italiastadiaapp:home")).content.decode()
+        self.assertIn("localStorage.getItem('cookie_consent')", body)
+        self.assertIn("_cc==='accepted'?'granted':'denied'", body)
+        # the restore must precede BOTH the consent default and the config call
+        self.assertLess(body.index("getItem('cookie_consent')"),
+                        body.index("gtag('consent','default'"))
+        self.assertLess(body.index("gtag('consent','default'"),
+                        body.index(f"gtag('config','{GID}')"))
+
+    @override_settings(GOOGLE_ANALYTICS_ID=GID)
+    def test_default_is_still_denied_for_a_first_time_visitor(self):
+        """No stored choice must stay denied -- the restore is an upgrade path for
+        people who already opted in, never a way to assume consent."""
+        body = self.client.get(reverse("italiastadiaapp:home")).content.decode()
+        self.assertIn("?'granted':'denied'", body)
+        self.assertNotIn("'analytics_storage':'granted'", body)
 
     @override_settings(GOOGLE_ANALYTICS_ID="")
     def test_no_tag_when_id_unset(self):

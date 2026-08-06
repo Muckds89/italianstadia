@@ -50,12 +50,24 @@ class GoogleAnalyticsMiddleware:
         # Consent Mode v2: default everything to DENIED so GA runs cookieless until the
         # visitor clicks "Accept all" (consent.js then calls gtag('consent','update',…)).
         # This keeps the tag site-wide while honouring the cookie banner's opt-in promise.
+        #
+        # A RETURNING visitor's stored choice must be restored HERE, synchronously,
+        # before gtag('config') fires page_view. consent.js runs its update from a
+        # DOMContentLoaded handler at the end of the body, which is far too late: the
+        # page_view (and the export funnel's view_item) had already gone out tagged
+        # gcs=G100 (denied), and GA4 keeps denied hits out of Realtime and out of the
+        # cookie-based reports. The effect was that someone who accepted cookies months
+        # ago still had every page load counted as consent-denied. Nothing loaded at the
+        # bottom of the page can beat a config call in the head, so the restore lives in
+        # the snippet itself. consent.js still owns first-time choices and the banner.
         return (
             f'<script async src="https://www.googletagmanager.com/gtag/js?id={gid}"></script>'
             f'<script>window.dataLayer=window.dataLayer||[];'
             f'function gtag(){{dataLayer.push(arguments);}}'
-            f"gtag('consent','default',{{'ad_storage':'denied','analytics_storage':'denied',"
-            f"'ad_user_data':'denied','ad_personalization':'denied'}});"
+            f"var _cc=null;try{{_cc=localStorage.getItem('cookie_consent');}}catch(e){{}}"
+            f"var _cs=_cc==='accepted'?'granted':'denied';"
+            f"gtag('consent','default',{{'ad_storage':_cs,'analytics_storage':_cs,"
+            f"'ad_user_data':_cs,'ad_personalization':_cs}});"
             f"gtag('js',new Date());gtag('config','{gid}');</script>"
         ).encode("utf-8")
 
