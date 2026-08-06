@@ -114,18 +114,61 @@ class ConsentBannerMiddleware:
     def _build():
         from django.templatetags.static import static
         from django.urls import reverse
+        # A thin bar at the foot of the page was being ignored, and an ignored banner
+        # means consent stays DENIED: those visitors are invisible in GA4 and AdSense
+        # never loads for them. The dimmed backdrop makes it a deliberate choice
+        # instead of page furniture.
+        #
+        # Both buttons are the SAME size, weight and visual prominence on purpose.
+        # Nudging people toward "Accept" would raise the consent rate, but the EDPB
+        # requires refusing to be as easy as accepting and this audience is almost
+        # entirely EU. Make the choice unmissable, not lopsided.
+        # The CSS ships WITH the banner rather than living in styles.css, because the
+        # export funnel templates never load styles.css — the banner would have been
+        # injected there unstyled, which is the same coverage gap that hid it in the
+        # first place. Linking styles.css into those pages instead would restyle them
+        # (they are dark, standalone documents). Everything here is scoped to
+        # #cookie-banner and uses no Bootstrap classes, so it is safe on every page.
         return (
+            '<style>'
+            '#cookie-banner.d-none{display:none!important}'
+            '#cookie-banner{position:fixed;inset:0;z-index:100000;display:flex;'
+            'align-items:center;justify-content:center;padding:16px}'
+            '#cookie-banner .cookie-backdrop{position:absolute;inset:0;'
+            'background:rgba(8,10,16,.62)}'
+            '#cookie-banner .cookie-card{position:relative;max-width:520px;width:100%%;'
+            'background:#fff;color:#1c2029;border-radius:14px;padding:24px 26px;'
+            'box-shadow:0 18px 48px rgba(0,0,0,.45);'
+            'font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}'
+            '#cookie-banner .cookie-title{font-size:1.15rem;font-weight:700;margin:0 0 8px}'
+            '#cookie-banner .cookie-text{font-size:.92rem;line-height:1.5;margin:0 0 18px;'
+            'color:#414958}'
+            '#cookie-banner .cookie-text a{color:#0b5ed7}'
+            '#cookie-banner .cookie-actions{display:flex;gap:10px}'
+            # Equal weight by design: refusing must be as easy as accepting (EDPB).
+            '#cookie-banner .cookie-btn{flex:1 1 0;padding:11px 14px;font-size:.92rem;'
+            'font-weight:600;border-radius:9px;cursor:pointer;border:1px solid #c8cdd8}'
+            '#cookie-banner .cookie-btn:focus-visible{outline:3px solid #0b5ed7;'
+            'outline-offset:2px}'
+            '#cookie-banner .cookie-btn-reject{background:#f1f3f7;color:#1c2029}'
+            '#cookie-banner .cookie-btn-accept{background:#1c2029;color:#fff;'
+            'border-color:#1c2029}'
+            '@media(max-width:420px){#cookie-banner .cookie-actions'
+            '{flex-direction:column-reverse}}'
+            '</style>'
             '<script src="%s"></script>'
-            '<div id="cookie-banner" class="d-none position-fixed bottom-0 start-0 '
-            'end-0 bg-dark text-white p-3 shadow-lg" style="z-index:9999">'
-            '<div class="container d-flex flex-column flex-md-row align-items-md-center '
-            'justify-content-between gap-2">'
-            '<p class="mb-0 small">We use cookies to serve ads and analyse traffic. '
-            'See our <a href="%s" class="text-warning">Privacy Policy</a>.</p>'
-            '<div class="d-flex gap-2 flex-shrink-0">'
-            '<button id="cookie-reject" class="btn btn-outline-light btn-sm">'
+            '<div id="cookie-banner" class="d-none" role="dialog" aria-modal="true"'
+            ' aria-labelledby="cookie-banner-title">'
+            '<div class="cookie-backdrop"></div>'
+            '<div class="cookie-card" role="document">'
+            '<h2 id="cookie-banner-title" class="cookie-title">Before you continue</h2>'
+            '<p class="cookie-text">We use cookies to measure traffic and to show ads, '
+            'which is what keeps this site free. You can refuse and carry on using '
+            'everything as normal. See our <a href="%s">Privacy Policy</a>.</p>'
+            '<div class="cookie-actions">'
+            '<button id="cookie-reject" type="button" class="cookie-btn cookie-btn-reject">'
             'Reject non-essential</button>'
-            '<button id="cookie-accept" class="btn btn-warning btn-sm fw-semibold">'
+            '<button id="cookie-accept" type="button" class="cookie-btn cookie-btn-accept">'
             'Accept all</button>'
             '</div></div></div>'
         ) % (static("js/consent.js"), reverse("italiastadiaapp:privacy"))

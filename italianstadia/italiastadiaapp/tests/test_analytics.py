@@ -378,3 +378,30 @@ class ConsentBannerCoverageTests(TestCase):
     def test_not_injected_into_json(self):
         resp = self.client.get(reverse("italiastadiaapp:stadiums_geojson"))
         self.assertNotIn(b"cookie-banner", resp.content)
+
+
+class ConsentBannerProminenceTests(TestCase):
+    def test_banner_styles_ship_with_the_banner(self):
+        """The export funnel templates never load styles.css, so banner CSS kept in
+        that file would arrive unstyled exactly where it matters most."""
+        for name in ("export_page", "home", "insights_index"):
+            body = self.client.get(reverse(f"italiastadiaapp:{name}")).content.decode()
+            self.assertIn("#cookie-banner .cookie-card", body, name)
+            self.assertIn("cookie-backdrop", body, name)
+
+    def test_reject_is_as_prominent_as_accept(self):
+        """EDPB: refusing must be as easy as accepting. Both buttons share the same
+        class and flex basis, so neither can be quietly demoted to a faint link."""
+        body = self.client.get(reverse("italiastadiaapp:home")).content.decode()
+        self.assertIn('class="cookie-btn cookie-btn-reject"', body)
+        self.assertIn('class="cookie-btn cookie-btn-accept"', body)
+        self.assertIn(".cookie-btn{flex:1 1 0", body)
+
+    def test_base_detail_no_longer_ships_its_own_copy(self):
+        """One source of truth: the template copy was removed when the middleware
+        took over, so the two can never drift apart."""
+        from pathlib import Path
+        from django.conf import settings
+        tpl = (Path(settings.BASE_DIR) / "italiastadiaapp" / "templates"
+               / "base_detail.html").read_text(encoding="utf-8")
+        self.assertNotIn("cookie-banner", tpl)
