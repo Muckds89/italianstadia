@@ -4,41 +4,9 @@
     "country": "Turkey",
     "country_code": "TR",
     "division_level": 2,
-    "season": "25/26"
+    "season": "26/27"
   },
   "teams": [
-    {
-      "name": "Adana Demirspor",
-      "transfermarkt_url": "https://www.transfermarkt.com/adana-demirspor/startseite/verein/3840",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/adana-demirspor/besucherzahlenentwicklung/verein/3840",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Adana_Demirspor",
-      "stadium": {
-        "name": "New Adana Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/adana-demirspor/stadion/verein/3840/saison_id/2025",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/New_Adana_Stadium",
-        "city": {
-          "name": "Adana",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Adana"
-        }
-      },
-      "girone": null
-    },
-    {
-      "name": "Amedspor",
-      "transfermarkt_url": "https://www.transfermarkt.com/amed-sk/startseite/verein/12382",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/amed-sk/besucherzahlenentwicklung/verein/12382",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Amedspor",
-      "stadium": {
-        "name": "Diyarbakır Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/amed-sk/stadion/verein/12382/saison_id/2025",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Diyarbakır_Stadium",
-        "city": {
-          "name": "Diyarbakır",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Diyarbakır"
-        }
-      },
-      "girone": null
-    },
     {
       "name": "Bandırmaspor",
       "transfermarkt_url": "https://www.transfermarkt.com/bandirmaspor/startseite/verein/20760",
@@ -88,38 +56,6 @@
       "girone": null
     },
     {
-      "name": "Çorum",
-      "transfermarkt_url": "https://www.transfermarkt.com/corum-fk/startseite/verein/37951",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/corum-fk/besucherzahlenentwicklung/verein/37951",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Çorum_F.K.",
-      "stadium": {
-        "name": "Çorum City Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/corum-fk/stadion/verein/37951/saison_id/2025",
-        "wikipedia_url": "https://tr.wikipedia.org/wiki/Çorum_Şehir_Stadyumu",
-        "city": {
-          "name": "Çorum",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Çorum"
-        }
-      },
-      "girone": null
-    },
-    {
-      "name": "Erzurumspor",
-      "transfermarkt_url": "https://www.transfermarkt.com/erzurumspor-fk/startseite/verein/39722",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/erzurumspor-fk/besucherzahlenentwicklung/verein/39722",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Erzurumspor",
-      "stadium": {
-        "name": "Kazım Karabekir Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/erzurumspor-fk/stadion/verein/39722/saison_id/2025",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Kazım_Karabekir_Stadium",
-        "city": {
-          "name": "Erzurum",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Erzurum"
-        }
-      },
-      "girone": null
-    },
-    {
       "name": "Esenler Erokspor",
       "transfermarkt_url": "https://www.transfermarkt.com/esenler-erokspor/startseite/verein/45269",
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/esenler-erokspor/besucherzahlenentwicklung/verein/45269",
@@ -136,22 +72,6 @@
       "girone": null
     },
     {
-      "name": "Hatayspor",
-      "transfermarkt_url": "https://www.transfermarkt.com/hatayspor/startseite/verein/7775",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/hatayspor/besucherzahlenentwicklung/verein/7775",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Hatayspor",
-      "stadium": {
-        "name": "Fuat Tosyalı Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/hatayspor/stadion/verein/7775/saison_id/2025",
-        "wikipedia_url": "https://tr.wikipedia.org/wiki/Fuat_Tosyalı_Stadyumu",
-        "city": {
-          "name": "Antakya",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Antakya"
-        }
-      },
-      "girone": null
-    },
-    {
       "name": "Iğdır",
       "transfermarkt_url": "https://www.transfermarkt.com/igdir-fk/startseite/verein/74664",
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/igdir-fk/besucherzahlenentwicklung/verein/74664",
@@ -163,22 +83,6 @@
         "city": {
           "name": "Iğdır",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Iğdır"
-        }
-      },
-      "girone": null
-    },
-    {
-      "name": "İstanbulspor",
-      "transfermarkt_url": "https://www.transfermarkt.com/istanbulspor/startseite/verein/924",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/istanbulspor/besucherzahlenentwicklung/verein/924",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/İstanbulspor",
-      "stadium": {
-        "name": "Esenyurt Necmi Kadıoğlu Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/istanbulspor/stadion/verein/924/saison_id/2025",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Esenyurt_Necmi_Kadıoğlu_Stadium",
-        "city": {
-          "name": "Istanbul",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Istanbul"
         }
       },
       "girone": null
@@ -232,22 +136,6 @@
       "girone": null
     },
     {
-      "name": "Sakaryaspor",
-      "transfermarkt_url": "https://www.transfermarkt.com/sakaryaspor/startseite/verein/2463",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sakaryaspor/besucherzahlenentwicklung/verein/2463",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Sakaryaspor",
-      "stadium": {
-        "name": "New Sakarya Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/sakaryaspor/stadion/verein/2463/saison_id/2025",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/New_Sakarya_Stadium",
-        "city": {
-          "name": "Adapazarı",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Adapazarı"
-        }
-      },
-      "girone": null
-    },
-    {
       "name": "Sarıyer",
       "transfermarkt_url": "https://www.transfermarkt.com/sariyer/startseite/verein/518",
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/sariyer/besucherzahlenentwicklung/verein/518",
@@ -259,22 +147,6 @@
         "city": {
           "name": "Istanbul",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Istanbul"
-        }
-      },
-      "girone": null
-    },
-    {
-      "name": "Serikspor",
-      "transfermarkt_url": "https://www.transfermarkt.com/serik-belediyespor/startseite/verein/50845",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/serik-belediyespor/besucherzahlenentwicklung/verein/50845",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Serikspor",
-      "stadium": {
-        "name": "Serik İsmail Oğan Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/serik-belediyespor/stadion/verein/50845/saison_id/2025",
-        "wikipedia_url": "",
-        "city": {
-          "name": "Serik",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Serik"
         }
       },
       "girone": null
@@ -296,6 +168,22 @@
       "girone": null
     },
     {
+      "name": "Vanspor",
+      "transfermarkt_url": "https://www.transfermarkt.com/van-spor-fk/startseite/verein/3173",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/van-spor-fk/besucherzahlenentwicklung/verein/3173",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Vanspor",
+      "stadium": {
+        "name": "Van Atatürk Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/van-spor-fk/stadion/verein/3173/saison_id/2025",
+        "wikipedia_url": "https://tr.wikipedia.org/wiki/Van_Atatürk_Stadyumu",
+        "city": {
+          "name": "Van",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Van,_Turkey"
+        }
+      },
+      "girone": null
+    },
+    {
       "name": "Ümraniyespor",
       "transfermarkt_url": "https://www.transfermarkt.com/umraniyespor/startseite/verein/24245",
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/umraniyespor/besucherzahlenentwicklung/verein/24245",
@@ -312,17 +200,126 @@
       "girone": null
     },
     {
-      "name": "Vanspor",
-      "transfermarkt_url": "https://www.transfermarkt.com/van-spor-fk/startseite/verein/3173",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/van-spor-fk/besucherzahlenentwicklung/verein/3173",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Vanspor",
+      "name": "İstanbulspor",
+      "transfermarkt_url": "https://www.transfermarkt.com/istanbulspor/startseite/verein/924",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/istanbulspor/besucherzahlenentwicklung/verein/924",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/İstanbulspor",
       "stadium": {
-        "name": "Van Atatürk Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/van-spor-fk/stadion/verein/3173/saison_id/2025",
-        "wikipedia_url": "https://tr.wikipedia.org/wiki/Van_Atatürk_Stadyumu",
+        "name": "Esenyurt Necmi Kadıoğlu Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/istanbulspor/stadion/verein/924/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Esenyurt_Necmi_Kadıoğlu_Stadium",
         "city": {
-          "name": "Van",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Van,_Turkey"
+          "name": "Istanbul",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Istanbul"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Antalyaspor",
+      "transfermarkt_url": "https://www.transfermarkt.com/antalyaspor/startseite/verein/589",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/antalyaspor/besucherzahlenentwicklung/verein/589",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Antalyaspor",
+      "stadium": {
+        "name": "Antalya Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/antalyaspor/stadion/verein/589",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Antalya_Stadium",
+        "city": {
+          "name": "Antalya",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Antalya"
+        }
+      }
+    },
+    {
+      "name": "Kayserispor",
+      "transfermarkt_url": "https://www.transfermarkt.com/kayserispor/startseite/verein/3205",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kayserispor/besucherzahlenentwicklung/verein/3205",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Kayserispor",
+      "stadium": {
+        "name": "Kadir Has Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/kayserispor/stadion/verein/3205",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kadir_Has_Stadium",
+        "city": {
+          "name": "Kayseri",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Kayseri"
+        }
+      }
+    },
+    {
+      "name": "Fatih Karagümrük",
+      "transfermarkt_url": "https://www.transfermarkt.com/fatih-karagumruk/startseite/verein/6646",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fatih-karagumruk/besucherzahlenentwicklung/verein/6646",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Fatih_Karag%C3%BCmr%C3%BCk_S.K.",
+      "stadium": {
+        "name": "Atatürk Olympic Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/fatih-karagumruk/stadion/verein/6646",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Atat%C3%BCrk_Olympic_Stadium",
+        "city": {
+          "name": "Istanbul",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Istanbul"
+        }
+      }
+    },
+    {
+      "name": "Bursaspor",
+      "transfermarkt_url": "",
+      "transfermarkt_attendance_url": "",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Bursaspor",
+      "stadium": {
+        "name": "Bursa Büyükşehir Belediye Stadyumu",
+        "transfermarkt_url": "",
+        "wikipedia_url": "https://tr.wikipedia.org/wiki/Bursa_Büyükşehir_Belediye_Stadyumu",
+        "city": {
+          "name": "Bursa",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Bursa"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Batman Petrolspor",
+      "transfermarkt_url": "",
+      "transfermarkt_attendance_url": "",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Batman_Petrolspor",
+      "stadium": {
+        "name": "Batman Yeni Şehir Stadyumu",
+        "transfermarkt_url": "",
+        "wikipedia_url": "https://tr.wikipedia.org/wiki/Batman_Yeni_Şehir_Stadyumu",
+        "city": {
+          "name": "Batman",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Batman,_Turkey"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Mardin 1969 Spor",
+      "transfermarkt_url": "",
+      "transfermarkt_attendance_url": "",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Mardin_1969_S.K.",
+      "stadium": {
+        "name": "21 Kasım Stadyumu",
+        "transfermarkt_url": "",
+        "wikipedia_url": "https://tr.wikipedia.org/wiki/21_Kasım_Stadyumu",
+        "city": {
+          "name": "Mardin",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Mardin"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Muğlaspor",
+      "transfermarkt_url": "",
+      "transfermarkt_attendance_url": "",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Muğlaspor",
+      "stadium": {
+        "name": "Muğla Atatürk Stadyumu",
+        "transfermarkt_url": "",
+        "wikipedia_url": "https://tr.wikipedia.org/wiki/Muğla_Atatürk_Stadyumu",
+        "city": {
+          "name": "Muğla",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Muğla"
         }
       },
       "girone": null

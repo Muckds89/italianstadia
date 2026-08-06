@@ -4,24 +4,9 @@
     "country": "Netherlands",
     "country_code": "NL",
     "division_level": 2,
-    "season": "25/26"
+    "season": "26/27"
   },
   "teams": [
-    {
-      "name": "ADO Den Haag",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/ADO_Den_Haag",
-      "transfermarkt_url": "https://www.transfermarkt.com/ado-den-haag/startseite/verein/1268",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ado-den-haag/besucherzahlenentwicklung/verein/1268",
-      "stadium": {
-        "name": "Bingoal Stadion",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/ADO_Den_Haag_Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/ado-den-haag/stadion/verein/1268",
-        "city": {
-          "name": "The Hague",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/The_Hague"
-        }
-      }
-    },
     {
       "name": "Almere City",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Almere_City_FC",
@@ -34,21 +19,6 @@
         "city": {
           "name": "Almere",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Almere"
-        }
-      }
-    },
-    {
-      "name": "SC Cambuur",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/SC_Cambuur",
-      "transfermarkt_url": "https://www.transfermarkt.com/sc-cambuur-leeuwarden/startseite/verein/133",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/sc-cambuur-leeuwarden/besucherzahlenentwicklung/verein/133",
-      "stadium": {
-        "name": "Cambuur Stadion",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Cambuur_Stadion",
-        "transfermarkt_url": "https://www.transfermarkt.com/sc-cambuur-leeuwarden/stadion/verein/133",
-        "city": {
-          "name": "Leeuwarden",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Leeuwarden"
         }
       }
     },
@@ -143,21 +113,6 @@
       }
     },
     {
-      "name": "Jong Ajax",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Jong_Ajax",
-      "transfermarkt_url": "https://www.transfermarkt.com/ajax-amsterdam-ii/startseite/verein/8817",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ajax-amsterdam-ii/besucherzahlenentwicklung/verein/8817",
-      "stadium": {
-        "name": "Sportpark De Toekomst",
-        "wikipedia_url": "",
-        "transfermarkt_url": "https://www.transfermarkt.com/ajax-amsterdam-ii/stadion/verein/8817",
-        "city": {
-          "name": "Amsterdam",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Amsterdam"
-        }
-      }
-    },
-    {
       "name": "Jong AZ",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jong_AZ",
       "transfermarkt_url": "https://www.transfermarkt.com/az-alkmaar-ii/startseite/verein/11368",
@@ -173,17 +128,17 @@
       }
     },
     {
-      "name": "Jong PSV",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Jong_PSV",
-      "transfermarkt_url": "https://www.transfermarkt.com/psv-eindhoven-ii/startseite/verein/9715",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/psv-eindhoven-ii/besucherzahlenentwicklung/verein/9715",
+      "name": "Jong Ajax",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Jong_Ajax",
+      "transfermarkt_url": "https://www.transfermarkt.com/ajax-amsterdam-ii/startseite/verein/8817",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/ajax-amsterdam-ii/besucherzahlenentwicklung/verein/8817",
       "stadium": {
-        "name": "De Herdgang",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/De_Herdgang",
-        "transfermarkt_url": "https://www.transfermarkt.com/psv-eindhoven-ii/stadion/verein/9715",
+        "name": "Sportpark De Toekomst",
+        "wikipedia_url": "",
+        "transfermarkt_url": "https://www.transfermarkt.com/ajax-amsterdam-ii/stadion/verein/8817",
         "city": {
-          "name": "Eindhoven",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Eindhoven"
+          "name": "Amsterdam",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Amsterdam"
         }
       }
     },
@@ -199,6 +154,21 @@
         "city": {
           "name": "Utrecht",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Utrecht"
+        }
+      }
+    },
+    {
+      "name": "Jong PSV",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Jong_PSV",
+      "transfermarkt_url": "https://www.transfermarkt.com/psv-eindhoven-ii/startseite/verein/9715",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/psv-eindhoven-ii/besucherzahlenentwicklung/verein/9715",
+      "stadium": {
+        "name": "De Herdgang",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/De_Herdgang",
+        "transfermarkt_url": "https://www.transfermarkt.com/psv-eindhoven-ii/stadion/verein/9715",
+        "city": {
+          "name": "Eindhoven",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Eindhoven"
         }
       }
     },
@@ -248,21 +218,6 @@
       }
     },
     {
-      "name": "TOP Oss",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/TOP_Oss",
-      "transfermarkt_url": "https://www.transfermarkt.com/top-oss/startseite/verein/1228",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/top-oss/besucherzahlenentwicklung/verein/1228",
-      "stadium": {
-        "name": "Frans Heesen Stadion",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Frans_Heesen_Stadion",
-        "transfermarkt_url": "https://www.transfermarkt.com/top-oss/stadion/verein/1228",
-        "city": {
-          "name": "Oss",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Oss"
-        }
-      }
-    },
-    {
       "name": "SBV Vitesse",
       "wikipedia_url": "https://en.wikipedia.org/wiki/SBV_Vitesse",
       "transfermarkt_url": "https://www.transfermarkt.com/vitesse-arnheim/startseite/verein/499",
@@ -274,6 +229,21 @@
         "city": {
           "name": "Arnhem",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Arnhem"
+        }
+      }
+    },
+    {
+      "name": "TOP Oss",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/TOP_Oss",
+      "transfermarkt_url": "https://www.transfermarkt.com/top-oss/startseite/verein/1228",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/top-oss/besucherzahlenentwicklung/verein/1228",
+      "stadium": {
+        "name": "Frans Heesen Stadion",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Frans_Heesen_Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/top-oss/stadion/verein/1228",
+        "city": {
+          "name": "Oss",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Oss"
         }
       }
     },
@@ -293,17 +263,48 @@
       }
     },
     {
-      "name": "Willem II",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Willem_II",
-      "transfermarkt_url": "https://www.transfermarkt.com/willem-ii-tilburg/startseite/verein/403",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/willem-ii-tilburg/besucherzahlenentwicklung/verein/403",
+      "name": "Heracles Almelo",
+      "transfermarkt_url": "https://www.transfermarkt.com/heracles-almelo/startseite/verein/1304",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/heracles-almelo/besucherzahlenentwicklung/verein/1304",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Heracles_Almelo",
       "stadium": {
-        "name": "Koning Willem II Stadion",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Koning_Willem_II_Stadion",
-        "transfermarkt_url": "https://www.transfermarkt.com/willem-ii-tilburg/stadion/verein/403",
+        "name": "Asito Stadion",
+        "owner_raw": "Heracles Almelo",
+        "transfermarkt_url": "https://www.transfermarkt.com/heracles-almelo/stadion/verein/1304",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Asito_Stadion",
         "city": {
-          "name": "Tilburg",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Tilburg"
+          "name": "Almelo",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Almelo"
+        }
+      }
+    },
+    {
+      "name": "NAC Breda",
+      "transfermarkt_url": "https://www.transfermarkt.com/nac-breda/startseite/verein/132",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/nac-breda/besucherzahlenentwicklung/verein/132",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/NAC_Breda",
+      "stadium": {
+        "name": "Rat Verlegh Stadion",
+        "transfermarkt_url": "https://www.transfermarkt.com/nac-breda/stadion/verein/132",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Rat_Verlegh_Stadion",
+        "city": {
+          "name": "Breda",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Breda"
+        }
+      }
+    },
+    {
+      "name": "FC Volendam",
+      "transfermarkt_url": "",
+      "transfermarkt_attendance_url": "",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Volendam",
+      "stadium": {
+        "name": "Kras Stadion",
+        "transfermarkt_url": "",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kras_Stadion",
+        "city": {
+          "name": "Volendam",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Volendam"
         }
       }
     }

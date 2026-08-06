@@ -4,7 +4,7 @@
     "country": "Turkey",
     "country_code": "TR",
     "division_level": 1,
-    "season": "25/26"
+    "season": "26/27"
   },
   "teams": [
     {
@@ -24,21 +24,6 @@
       }
     },
     {
-      "name": "Antalyaspor",
-      "transfermarkt_url": "https://www.transfermarkt.com/antalyaspor/startseite/verein/589",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/antalyaspor/besucherzahlenentwicklung/verein/589",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Antalyaspor",
-      "stadium": {
-        "name": "Antalya Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/antalyaspor/stadion/verein/589",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Antalya_Stadium",
-        "city": {
-          "name": "Antalya",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Antalya"
-        }
-      }
-    },
-    {
       "name": "Beşiktaş JK",
       "transfermarkt_url": "https://www.transfermarkt.com/besiktas-istanbul/startseite/verein/114",
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/besiktas-istanbul/besucherzahlenentwicklung/verein/114",
@@ -54,22 +39,6 @@
       }
     },
     {
-      "name": "Çaykur Rizespor",
-      "transfermarkt_url": "https://www.transfermarkt.com/caykur-rizespor/startseite/verein/126",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/caykur-rizespor/besucherzahlenentwicklung/verein/126",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/%C3%87aykur_Rizespor",
-      "stadium": {
-        "name": "Çaykur Didi Stadium",
-        "owner_raw": "Rize Belediyesi",
-        "transfermarkt_url": "https://www.transfermarkt.com/caykur-rizespor/stadion/verein/126",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Rize_City_Stadium",
-        "city": {
-          "name": "Rize",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Rize"
-        }
-      }
-    },
-    {
       "name": "Eyüpspor",
       "transfermarkt_url": "https://www.transfermarkt.com/eyupspor/startseite/verein/7160",
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/eyupspor/besucherzahlenentwicklung/verein/7160",
@@ -79,21 +48,6 @@
         "owner_raw": "Kasımpaşa S.K.",
         "transfermarkt_url": "https://www.transfermarkt.com/eyupspor/stadion/verein/7160",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Recep_Tayyip_Erdo%C4%9Fan_Stadium",
-        "city": {
-          "name": "Istanbul",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Istanbul"
-        }
-      }
-    },
-    {
-      "name": "Fatih Karagümrük",
-      "transfermarkt_url": "https://www.transfermarkt.com/fatih-karagumruk/startseite/verein/6646",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/fatih-karagumruk/besucherzahlenentwicklung/verein/6646",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Fatih_Karag%C3%BCmr%C3%BCk_S.K.",
-      "stadium": {
-        "name": "Atatürk Olympic Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/fatih-karagumruk/stadion/verein/6646",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Atat%C3%BCrk_Olympic_Stadium",
         "city": {
           "name": "Istanbul",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Istanbul"
@@ -179,22 +133,6 @@
       }
     },
     {
-      "name": "İstanbul Başakşehir FK",
-      "transfermarkt_url": "https://www.transfermarkt.com/istanbul-basaksehir-fk/startseite/verein/6890",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/istanbul-basaksehir-fk/besucherzahlenentwicklung/verein/6890",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/%C4%B0stanbul_Ba%C5%9Fak%C5%9Fehir_F.K.",
-      "stadium": {
-        "name": "Başakşehir Fatih Terim Stadium",
-        "owner_raw": "Gençlik ve Spor Bakanlığı",
-        "transfermarkt_url": "https://www.transfermarkt.com/istanbul-basaksehir-fk/stadion/verein/6890",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Ba%C5%9Fak%C5%9Fehir_Fatih_Terim_Stadium",
-        "city": {
-          "name": "Istanbul",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Istanbul"
-        }
-      }
-    },
-    {
       "name": "Kasımpaşa SK",
       "transfermarkt_url": "https://www.transfermarkt.com/kasimpasa/startseite/verein/10484",
       "transfermarkt_attendance_url": "https://www.transfermarkt.com/kasimpasa/besucherzahlenentwicklung/verein/10484",
@@ -207,21 +145,6 @@
         "city": {
           "name": "Istanbul",
           "wikipedia_url": "https://en.wikipedia.org/wiki/Istanbul"
-        }
-      }
-    },
-    {
-      "name": "Kayserispor",
-      "transfermarkt_url": "https://www.transfermarkt.com/kayserispor/startseite/verein/3205",
-      "transfermarkt_attendance_url": "https://www.transfermarkt.com/kayserispor/besucherzahlenentwicklung/verein/3205",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Kayserispor",
-      "stadium": {
-        "name": "Kadir Has Stadium",
-        "transfermarkt_url": "https://www.transfermarkt.com/kayserispor/stadion/verein/3205",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Kadir_Has_Stadium",
-        "city": {
-          "name": "Kayseri",
-          "wikipedia_url": "https://en.wikipedia.org/wiki/Kayseri"
         }
       }
     },
@@ -287,6 +210,86 @@
           "wikipedia_url": "https://en.wikipedia.org/wiki/Trabzon"
         }
       }
+    },
+    {
+      "name": "Çaykur Rizespor",
+      "transfermarkt_url": "https://www.transfermarkt.com/caykur-rizespor/startseite/verein/126",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/caykur-rizespor/besucherzahlenentwicklung/verein/126",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/%C3%87aykur_Rizespor",
+      "stadium": {
+        "name": "Çaykur Didi Stadium",
+        "owner_raw": "Rize Belediyesi",
+        "transfermarkt_url": "https://www.transfermarkt.com/caykur-rizespor/stadion/verein/126",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Rize_City_Stadium",
+        "city": {
+          "name": "Rize",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Rize"
+        }
+      }
+    },
+    {
+      "name": "İstanbul Başakşehir FK",
+      "transfermarkt_url": "https://www.transfermarkt.com/istanbul-basaksehir-fk/startseite/verein/6890",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/istanbul-basaksehir-fk/besucherzahlenentwicklung/verein/6890",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/%C4%B0stanbul_Ba%C5%9Fak%C5%9Fehir_F.K.",
+      "stadium": {
+        "name": "Başakşehir Fatih Terim Stadium",
+        "owner_raw": "Gençlik ve Spor Bakanlığı",
+        "transfermarkt_url": "https://www.transfermarkt.com/istanbul-basaksehir-fk/stadion/verein/6890",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Ba%C5%9Fak%C5%9Fehir_Fatih_Terim_Stadium",
+        "city": {
+          "name": "Istanbul",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Istanbul"
+        }
+      }
+    },
+    {
+      "name": "Erzurumspor",
+      "transfermarkt_url": "https://www.transfermarkt.com/erzurumspor-fk/startseite/verein/39722",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/erzurumspor-fk/besucherzahlenentwicklung/verein/39722",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Erzurumspor",
+      "stadium": {
+        "name": "Kazım Karabekir Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/erzurumspor-fk/stadion/verein/39722/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Kazım_Karabekir_Stadium",
+        "city": {
+          "name": "Erzurum",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Erzurum"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Amedspor",
+      "transfermarkt_url": "https://www.transfermarkt.com/amed-sk/startseite/verein/12382",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/amed-sk/besucherzahlenentwicklung/verein/12382",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Amedspor",
+      "stadium": {
+        "name": "Diyarbakır Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/amed-sk/stadion/verein/12382/saison_id/2025",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Diyarbakır_Stadium",
+        "city": {
+          "name": "Diyarbakır",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Diyarbakır"
+        }
+      },
+      "girone": null
+    },
+    {
+      "name": "Çorum",
+      "transfermarkt_url": "https://www.transfermarkt.com/corum-fk/startseite/verein/37951",
+      "transfermarkt_attendance_url": "https://www.transfermarkt.com/corum-fk/besucherzahlenentwicklung/verein/37951",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Çorum_F.K.",
+      "stadium": {
+        "name": "Çorum City Stadium",
+        "transfermarkt_url": "https://www.transfermarkt.com/corum-fk/stadion/verein/37951/saison_id/2025",
+        "wikipedia_url": "https://tr.wikipedia.org/wiki/Çorum_Şehir_Stadyumu",
+        "city": {
+          "name": "Çorum",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Çorum"
+        }
+      },
+      "girone": null
     }
   ]
 }

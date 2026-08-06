@@ -23,7 +23,7 @@ import json
 import sys
 import time
 from pathlib import Path
-from urllib.parse import unquote
+from urllib.parse import quote, unquote, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
@@ -72,13 +72,30 @@ def collect_urls(data: dict) -> list[tuple[str, str]]:
     return results
 
 
+def to_ascii_url(url: str) -> str:
+    """Percent-encode the path so non-ASCII titles survive http.client.
+
+    Wikipedia URLs are stored readable ("/wiki/Bandırmaspor", "/wiki/Van_Atatürk
+    _Stadyumu") because that is what a human pastes from the address bar. urlopen
+    puts the request line through an ASCII encode, so any such URL raised
+    UnicodeEncodeError, which the broad except below reported as a BROKEN link.
+    Every Turkish, Polish and accented article in the project therefore failed this
+    gate while being perfectly valid — and the gate is what decides whether the
+    scraper may run. unquote first so an already-encoded URL is not double-encoded.
+    """
+    parts = urlsplit(url)
+    return urlunsplit((parts.scheme, parts.netloc,
+                       quote(unquote(parts.path), safe="/:@!$&'()*+,;=~"),
+                       parts.query, parts.fragment))
+
+
 def check_url(url: str, timeout: int) -> tuple[bool, str]:
     """
     Returns (ok: bool, message: str).
     ok=True means the article exists and is reachable.
     """
     try:
-        req = Request(url, method="HEAD", headers=HEADERS)
+        req = Request(to_ascii_url(url), method="HEAD", headers=HEADERS)
         with urlopen(req, timeout=timeout) as resp:
             final_url = resp.geturl()
             status = resp.status
