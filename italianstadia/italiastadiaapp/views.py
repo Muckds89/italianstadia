@@ -1523,44 +1523,58 @@ CURRENT_SEASON = "2025/2026"
 _INSIGHTS = [
     {
         "slug": "national-stadiums",
+        "icon": "🏟️",
+        "accent": "#1d3557,#2a6f97",
         "title": "National stadiums of Europe",
         "blurb": "Each country's main national-team venue, and which are club-free.",
         "url_name": "insight_national",
-        "image": "exports/insight_national.png",
+        "image": "exports/insight_national_card.jpg",
     },
     {
         "slug": "stadium-surfaces",
+        "icon": "🌿",
+        "accent": "#1b4332,#40916c",
         "title": "Artificial vs natural grass in European stadiums",
         "blurb": "How many grounds use real grass, hybrid pitches or full artificial turf.",
         "url_name": "insight_surface",
-        "image": "exports/insight_surface.png",
+        "image": "exports/insight_surface_card.jpg",
     },
     {
         "slug": "stadium-density",
+        "icon": "📍",
+        "accent": "#3d1e6d,#7b2cbf",
         "title": "Stadium density per population",
         "blurb": "Which countries pack in the most football stadiums per million people.",
         "url_name": "insight_density",
     },
     {
         "slug": "biggest-stadiums",
+        "icon": "📏",
+        "accent": "#6a2c0f,#c1611f",
         "title": "Biggest & smallest stadiums in Europe",
         "blurb": "The largest football stadiums in Europe by capacity, and the smallest.",
         "url_name": "insight_biggest",
     },
     {
         "slug": "league-capacity",
+        "icon": "📊",
+        "accent": "#0b3954,#087e8b",
         "title": "Big five leagues: attendance & capacity",
         "blurb": "Average attendance and how full grounds get, plus capacity by league.",
         "url_name": "insight_league_capacity",
     },
     {
         "slug": "clubs-per-city",
+        "icon": "🏙️",
+        "accent": "#4a1c2e,#a4133c",
         "title": "How many football clubs are in each city?",
         "blurb": "The European cities with the most football clubs, lower tiers included.",
         "url_name": "insight_city_clubs",
     },
     {
         "slug": "retractable-roofs",
+        "icon": "🔁",
+        "accent": "#2b2d42,#5c677d",
         "title": "Retractable-roof stadiums: Europe vs USA",
         "blurb": "How Europe's retractable-roof grounds compare with the NFL and MLB.",
         "url_name": "insight_retractable_roofs",
@@ -4474,6 +4488,8 @@ def export_page(request):
     """The /export/ landing page, shows filter UI and watermarked preview."""
     return render(request, "export.html", {
         "stripe_publishable_key": settings.STRIPE_SECRET_KEY.replace("sk_", "pk_") if settings.STRIPE_SECRET_KEY else "",
+        # GA4 ecommerce events report value in major units, Stripe charges in cents.
+        "export_price_eur": f"{EXPORT_PRICE_EUR / 100:.2f}",
     })
 
 
@@ -4641,7 +4657,11 @@ def export_success(request):
             "msg": "Payment not confirmed yet, please wait a few seconds and refresh this page."
         })
 
-    return render(request, "export_success.html", {"token": str(token_obj.token)})
+    return render(request, "export_success.html", {
+        "token": str(token_obj.token),
+        "export_price_eur": f"{EXPORT_PRICE_EUR / 100:.2f}",
+        "stripe_session": session_id,
+    })
 
 
 def _render_export_png(token_obj):

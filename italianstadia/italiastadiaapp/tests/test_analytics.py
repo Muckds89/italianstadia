@@ -1,5 +1,6 @@
 """GoogleAnalyticsMiddleware: GA4 tag injected on every HTML page when the id is set."""
 from django.test import TestCase, override_settings
+from django.utils.html import escape
 from django.urls import reverse
 
 GID = "G-TEST123456"
@@ -262,3 +263,56 @@ class IslandInsetTests(TestCase):
         main, groups = _outlier_island_groups(pts)
         self.assertEqual(groups, [])
         self.assertEqual(len(main), 6)
+
+
+class ExportFunnelTrackingTests(TestCase):
+    """The export funnel is the only thing on the site that takes money, so the
+    GA4 wiring that measures it is guarded: a silent regression here means we go
+    back to flying blind on whether anyone ever starts checkout."""
+
+    def test_export_page_carries_the_analytics_config(self):
+        resp = self.client.get(reverse("italiastadiaapp:export_page"))
+        body = resp.content.decode()
+        self.assertIn('id="exportAnalytics"', body)
+        self.assertIn('data-step="view"', body)
+        self.assertIn("js/export-analytics.js", body)
+
+    def test_price_is_sent_in_euros_not_cents(self):
+        """GA4 ecommerce `value` is in major units. Passing the Stripe cents
+        amount would report every 50-cent sale as a 50-euro one."""
+        from italiastadiaapp.views import EXPORT_PRICE_EUR
+        body = self.client.get(reverse("italiastadiaapp:export_page")).content.decode()
+        self.assertIn(f'data-price="{EXPORT_PRICE_EUR / 100:.2f}"', body)
+        self.assertNotIn(f'data-price="{EXPORT_PRICE_EUR}"', body)
+
+    def test_each_funnel_step_is_dispatched(self):
+        """The template owns no analytics logic, it only dispatches these events.
+        Renaming one without updating export-analytics.js breaks the funnel
+        silently — nothing errors, the events just stop arriving."""
+        body = self.client.get(reverse("italiastadiaapp:export_page")).content.decode()
+        for event in ("export:preview", "export:checkout", "export:free"):
+            self.assertIn(event, body)
+
+
+class InsightsIndexTests(TestCase):
+    def test_every_card_has_a_hero(self):
+        """Cards without a rendered map used to collapse to a bare title block
+        next to full-bleed image cards, which made the grid look broken."""
+        from italiastadiaapp.views import _INSIGHTS
+        body = self.client.get(reverse("italiastadiaapp:insights_index")).content.decode()
+        with_image = [i for i in _INSIGHTS if i.get("image")]
+        without = [i for i in _INSIGHTS if not i.get("image")]
+        self.assertTrue(without, "test is meaningless if every insight has a map")
+        # one gradient tile per image-less insight (+1 for the CSS rule itself)
+        self.assertEqual(body.count("insight-hero-fallback"), len(without) + 1)
+        self.assertEqual(body.count('class="insight-hero" loading'), len(with_image))
+        for i in _INSIGHTS:
+            self.assertIn(escape(i["title"]), body)  # titles carry & and '
+
+    def test_card_heroes_are_thumbnails_not_the_full_maps(self):
+        """The full hero PNGs are 1920x1080 / ~3 MB each and were being shipped
+        into a ~300px card, which is what made /insights/ heavy enough to bounce."""
+        from italiastadiaapp.views import _INSIGHTS
+        for i in _INSIGHTS:
+            if i.get("image"):
+                self.assertTrue(i["image"].endswith("_card.jpg"), i["image"])

@@ -364,6 +364,10 @@
     </div>
 </div>
 
+{# GA4 export-funnel tracking. Config only — the logic lives in export-analytics.js. #}
+<div id="exportAnalytics" data-step="view" data-price="{{ export_price_eur }}" hidden></div>
+<script src="{% static 'js/export-analytics.js' %}" defer></script>
+
 <script>
 // ── Autocomplete ──────────────────────────────────────────────────────────────
 let _acData = {countries: [], leagues: [], leagues_by_country: {}};
@@ -588,6 +592,7 @@ function _getFilters() {
 // ── Preview (shows the FREE branded version, logo + watermark) ───────────────
 document.getElementById("previewBtn").addEventListener("click", function () {
     const f = _getFilters();
+    document.dispatchEvent(new CustomEvent("export:preview", {detail: {filters: f}}));
     const p = new URLSearchParams({...f, size_key: "hd"});  // HD for preview speed
     const url = "/api/export/map/?" + p.toString();
 
@@ -698,6 +703,7 @@ document.getElementById("previewBtn").addEventListener("click", function () {
 // ── Free download (branded: logo + watermark, full selected size) ─────────────
 document.getElementById("freeBtn").addEventListener("click", function () {
     const f = _getFilters();
+    document.dispatchEvent(new CustomEvent("export:free", {detail: {filters: f}}));
     const url = "/api/export/map/?" + new URLSearchParams(f).toString();
     const spinner = document.getElementById("freeSpinner");
     const errEl   = document.getElementById("freeError");
@@ -737,6 +743,8 @@ document.getElementById("payBtn").addEventListener("click", function () {
     if (!ok) return;
 
     const filters = _getFilters();
+    // GA4 begin_checkout — fired after the confirm, so it counts intent to pay.
+    document.dispatchEvent(new CustomEvent("export:checkout", {detail: {filters: filters}}));
     const spinner = document.getElementById("paySpinner");
     const errEl   = document.getElementById("payError");
     spinner.classList.remove("d-none");

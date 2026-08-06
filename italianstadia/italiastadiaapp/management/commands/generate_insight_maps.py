@@ -14,6 +14,7 @@ Usage:
 """
 from pathlib import Path
 
+from PIL import Image
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.test import RequestFactory
@@ -62,9 +63,23 @@ class Command(BaseCommand):
                     self.stderr.write(f"  {key}: {err}")
                     continue
                 img = _draw_watermark(img, params["W"], params["H"])
+                rgb = img.convert("RGB")
                 path = out_dir / f"insight_{key}.png"
-                img.convert("RGB").save(path, format="PNG", optimize=True)
-                self.stdout.write(self.style.SUCCESS(f"  Wrote {path.name}"))
+                rgb.save(path, format="PNG", optimize=True)
+
+                # Card thumbnail. The full PNG is 1920x1080 and ~3 MB; the
+                # /insights/ grid draws it into a ~300x170 box, so shipping the
+                # original meant several MB of hero images per page load. JPEG at
+                # card width is ~2% of the bytes and visually identical at that size.
+                card = rgb.copy()
+                card.thumbnail((640, 640), Image.LANCZOS)
+                card_path = out_dir / f"insight_{key}_card.jpg"
+                card.save(card_path, format="JPEG", quality=82, optimize=True,
+                          progressive=True)
+
+                self.stdout.write(self.style.SUCCESS(
+                    f"  Wrote {path.name} + {card_path.name} "
+                    f"({card_path.stat().st_size // 1024} KB)"))
             except Exception as e:
                 self.stderr.write(f"  {key}: render failed: {e}")
 

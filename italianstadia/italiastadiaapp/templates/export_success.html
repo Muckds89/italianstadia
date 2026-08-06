@@ -32,6 +32,11 @@
     </a>
 </div>
 
+{# GA4 purchase event. transaction_id = Stripe session, so refreshes de-duplicate. #}
+<div id="exportAnalytics" data-step="purchase" data-price="{{ export_price_eur }}"
+     data-transaction-id="{{ stripe_session }}" hidden></div>
+<script src="{% static 'js/export-analytics.js' %}" defer></script>
+
 <script>
 (function () {
     // The download link burns a single-use token. A second (accidental) click would
