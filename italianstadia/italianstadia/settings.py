@@ -126,6 +126,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # Last, so it edits the raw HTML before GZipMiddleware compresses the response.
     'italiastadiaapp.middleware.GoogleAnalyticsMiddleware',
+    # Guarantees the consent banner on templates that don't extend base_detail
+    # (home, export, success) — Consent Mode defaults to denied, so a page with
+    # no banner can never be upgraded to full analytics.
+    'italiastadiaapp.middleware.ConsentBannerMiddleware',
 ]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

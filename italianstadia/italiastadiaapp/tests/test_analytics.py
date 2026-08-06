@@ -316,3 +316,39 @@ class InsightsIndexTests(TestCase):
         for i in _INSIGHTS:
             if i.get("image"):
                 self.assertTrue(i["image"].endswith("_card.jpg"), i["image"])
+
+
+class ConsentBannerCoverageTests(TestCase):
+    """Consent Mode defaults to denied, so a page without the banner can never be
+    upgraded to cookie-based analytics. The banner used to live only in
+    base_detail.html, which silently excluded the home page and the whole export
+    funnel — i.e. every page that matters for revenue."""
+
+    def test_banner_on_pages_that_do_not_extend_base_detail(self):
+        for name in ("home", "export_page"):
+            body = self.client.get(reverse(f"italiastadiaapp:{name}")).content.decode()
+            self.assertIn('id="cookie-banner"', body, name)
+            self.assertIn("js/consent.js", body, name)
+            self.assertIn("cookie-accept", body, name)
+
+    def test_banner_on_pages_that_do_extend_base_detail(self):
+        body = self.client.get(reverse("italiastadiaapp:insights_index")).content.decode()
+        self.assertIn('id="cookie-banner"', body)
+
+    def test_never_injected_twice(self):
+        """base_detail.html already renders one; a second would stack two fixed
+        bars over each other and only the top one's buttons would work."""
+        for name in ("home", "insights_index", "export_page", "privacy"):
+            body = self.client.get(reverse(f"italiastadiaapp:{name}")).content.decode()
+            self.assertEqual(body.count('id="cookie-banner"'), 1, name)
+            self.assertEqual(body.count("js/consent.js"), 1, name)
+
+    def test_not_injected_into_the_embeddable_map(self):
+        """/embed/ is iframed into other people's pages, where consent is the host
+        page's responsibility — our widget must not paint a banner over their site."""
+        body = self.client.get(reverse("italiastadiaapp:embed_map")).content.decode()
+        self.assertNotIn('id="cookie-banner"', body)
+
+    def test_not_injected_into_json(self):
+        resp = self.client.get(reverse("italiastadiaapp:stadiums_geojson"))
+        self.assertNotIn(b"cookie-banner", resp.content)

@@ -6,6 +6,8 @@ from django.http import HttpResponsePermanentRedirect
 
 # Match the first opening <head ...> tag.
 _HEAD_RE = re.compile(rb"(<head[^>]*>)", re.IGNORECASE)
+# Match the LAST closing </body> tag.
+_BODY_RE = re.compile(rb"(</body>)(?!.*</body>)", re.IGNORECASE | re.DOTALL)
 
 
 class CanonicalHostMiddleware:
@@ -69,6 +71,65 @@ class GoogleAnalyticsMiddleware:
         if b"googletagmanager.com/gtag/js" in content:
             return response
         new, n = _HEAD_RE.subn(rb"\1" + self._build(gid), content, count=1)
+        if n:
+            response.content = new
+            if response.has_header("Content-Length"):
+                response["Content-Length"] = str(len(new))
+        return response
+
+
+class ConsentBannerMiddleware:
+    """Inject the cookie-consent banner + consent.js into every HTML page.
+
+    Same problem, same fix as GoogleAnalyticsMiddleware: the banner lived only in
+    base_detail.html, so every template with its own <body> silently had none —
+    including the HOME PAGE and /export/, the two pages that matter most. With
+    Consent Mode defaulting to 'denied', a page with no banner gives the visitor no
+    way to grant consent, so those sessions stayed permanently cookieless and AdSense
+    never loaded there.
+
+    Skipped for /embed/ — that view is designed to be iframed into other people's
+    sites, where a consent banner belongs to the host page, not to our widget.
+
+    Idempotent: pages that already render the banner (base_detail.html children) are
+    left untouched, so there is never a second one.
+    """
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    @staticmethod
+    def _build():
+        from django.templatetags.static import static
+        from django.urls import reverse
+        return (
+            '<script src="%s"></script>'
+            '<div id="cookie-banner" class="d-none position-fixed bottom-0 start-0 '
+            'end-0 bg-dark text-white p-3 shadow-lg" style="z-index:9999">'
+            '<div class="container d-flex flex-column flex-md-row align-items-md-center '
+            'justify-content-between gap-2">'
+            '<p class="mb-0 small">We use cookies to serve ads and analyse traffic. '
+            'See our <a href="%s" class="text-warning">Privacy Policy</a>.</p>'
+            '<div class="d-flex gap-2 flex-shrink-0">'
+            '<button id="cookie-reject" class="btn btn-outline-light btn-sm">'
+            'Reject non-essential</button>'
+            '<button id="cookie-accept" class="btn btn-warning btn-sm fw-semibold">'
+            'Accept all</button>'
+            '</div></div></div>'
+        ) % (static("js/consent.js"), reverse("italiastadiaapp:privacy"))
+
+    def __call__(self, request):
+        response = self.get_response(request)
+        if getattr(response, "streaming", False):
+            return response
+        if "text/html" not in response.get("Content-Type", ""):
+            return response
+        if request.path.startswith("/embed/"):
+            return response
+        content = response.content
+        if b'id="cookie-banner"' in content:   # template already renders it
+            return response
+        new, n = _BODY_RE.subn(self._build().encode("utf-8") + rb"\1", content, count=1)
         if n:
             response.content = new
             if response.has_header("Content-Length"):
