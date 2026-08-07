@@ -547,3 +547,36 @@ class BadgeFittingTests(TestCase):
         import inspect
         from italiastadiaapp import views
         self.assertIn("_v2", inspect.getsource(views._fetch_badge_image))
+
+
+class InsetSizeTests(TestCase):
+    """The detail inset was a fixed 24% of map width. Everything inside it -- badge
+    radius, both fonts -- is derived from that width, so the Istanbul cluster's
+    labels were unreadably cramped. Size is now user-selectable."""
+
+    def _frac(self, **q):
+        from django.test import RequestFactory
+        from italiastadiaapp.views import _parse_export_params
+        return _parse_export_params(RequestFactory().get("/", q))["inset_frac"]
+
+    def test_default_is_medium_not_the_old_fixed_value(self):
+        self.assertEqual(self._frac(), 0.30)
+
+    def test_sizes_map_to_increasing_fractions(self):
+        s, m, l = self._frac(inset_size="s"), self._frac(inset_size="m"), self._frac(inset_size="l")
+        self.assertLess(s, m)
+        self.assertLess(m, l)
+
+    def test_unknown_value_falls_back_to_medium(self):
+        self.assertEqual(self._frac(inset_size="enormous"), 0.30)
+        self.assertEqual(self._frac(inset_size=""), 0.30)
+
+    def test_case_and_whitespace_tolerant(self):
+        self.assertEqual(self._frac(inset_size=" L "), self._frac(inset_size="l"))
+
+    def test_survives_the_paid_checkout_allowlist(self):
+        """Filters are re-read from the stored JSON at download time; a key missing
+        from the allowlist would silently reset to default on the paid export."""
+        import inspect
+        from italiastadiaapp import views
+        self.assertIn('"inset_size"', inspect.getsource(views.export_checkout))

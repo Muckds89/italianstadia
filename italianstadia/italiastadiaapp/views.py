@@ -2299,6 +2299,12 @@ def _parse_export_params(request):
         "dstatus":    dstatus,
         "national":   national,
         "national_only": national_only,
+        # Inset box width as a fraction of the map. The old fixed 0.24 left the
+        # Istanbul cluster (5 grounds) with labels too cramped to read — the box's
+        # fonts and badges are all sized from its width, so widening the box
+        # enlarges everything inside it. Default is now M.
+        "inset_frac": {"s": 0.24, "m": 0.30, "l": 0.38}.get(
+            request.GET.get("inset_size", "m").strip().lower(), 0.30),
         "no_badges":  request.GET.get("no_badges", "0") == "1",
         "surface_known": request.GET.get("surface_known", "0") == "1",
     }
@@ -4452,7 +4458,8 @@ def _compose_export_image(params):
     inset_layout = None
     if inset_stadiums:
         inset_layout = _inset_layout(inset_stadiums, W, H, main_bbox=bbox, reserves=reserves,
-                                     zoom_bbox=inset_zoom_bbox)
+                                     zoom_bbox=inset_zoom_bbox,
+                                     width_frac=params.get("inset_frac", 0.30))
         reserves.append(inset_layout["box"])
 
     # Islands FIRST, badges only: their labels are handled by the main engine below
@@ -4583,6 +4590,7 @@ def export_checkout(request):
         "color_by", "ring_by", "no_badges",
         "style_key", "size_key", "title", "subtitle", "labels",
         "north", "legend", "scale", "spotlight", "logo", "bg_color", "inset", "inset_box",
+        "inset_size",
         "islands",
         "label_size", "label_color", "badge_size", "tournament", "tstatus",
         "layer", "dstatus", "national",

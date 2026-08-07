@@ -300,6 +300,12 @@
                     <label class="form-check-label small" for="expInset">Auto zoom inset on the busiest cluster</label>
                 </div>
                 <div class="mt-2">
+                    <label class="form-label small mb-1">Inset size</label>
+                    <select id="expInsetSize" class="form-select form-select-sm mb-2">
+                        <option value="s">Small</option>
+                        <option value="m" selected>Medium</option>
+                        <option value="l">Large</option>
+                    </select>
                     <label class="form-label small mb-1">Or draw your own detail inset</label>
                     <div class="btn-group btn-group-sm w-100" role="group">
                         <button type="button" id="insetDrawBtn" class="btn btn-outline-light">✏️ Draw box on preview</button>
@@ -544,6 +550,7 @@ function _getFilters() {
         spotlight:   document.getElementById("expSpotlight").checked ? "1" : "0",
         inset:       document.getElementById("expInset").checked ? "1" : "0",
         inset_box:   window._insetBox ? window._insetBox.join(",") : "",
+        inset_size:  document.getElementById("expInsetSize").value,
         // One "colour-code by" control: a category colours the badge RING (badges
         // kept) or, with "coloured dots" ticked, the whole dot (badges hidden).
         color_by:    ((document.getElementById("expColourBy").value &&
