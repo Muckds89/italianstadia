@@ -88,3 +88,42 @@ def test_unrecognised_type_returns_none_rather_than_guessing():
     """No verdict is better than a wrong one — the caller keeps the keyword result."""
     assert _kind(["something we have never seen"]) is None
     assert _kind([]) is None
+
+
+
+# ── Wikidata owner TYPES (P31) ────────────────────────────────────────────────
+# Same class of bug one level up: type labels are matched as substrings and the
+# PUBLIC test runs before the PRIVATE one, so a label that merely CONTAINS a
+# public-sounding word classified a private owner as publicly owned.
+
+from populate_data_from_transfermrkt import _wd_kind_from_types  # noqa: E402
+
+
+@pytest.mark.parametrize("labels", [
+    ["business", "enterprise", "public company"],      # ArcelorMittal, Otelul Galati
+    ["public limited company", "enterprise"],
+    ["public joint-stock company"],
+    ["real estate company"],                           # "real eSTATE"
+])
+def test_public_sounding_company_types_are_private(labels):
+    """'public company' means publicly TRADED. ArcelorMittal owns the Otelul
+    Stadium in Galati; before this, its ground was classified as publicly owned."""
+    assert _wd_kind_from_types(labels) == "PRIVATE"
+
+
+@pytest.mark.parametrize("label", [
+    "municipality of Romania", "city of Germany", "public institution",
+    "state-owned enterprise", "commune of France",
+])
+def test_genuine_public_owner_types_still_public(label):
+    assert _wd_kind_from_types([label]) == "PUBLIC"
+
+
+def test_football_club_type_is_private():
+    assert _wd_kind_from_types(["association football club"]) == "PRIVATE"
+
+
+def test_unrecognised_type_returns_none():
+    """An unknown type must change nothing rather than guess — the override only
+    applies when Wikidata is the sole ownership source."""
+    assert _wd_kind_from_types(["archaeological site"]) is None

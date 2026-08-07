@@ -615,6 +615,13 @@ _WD_PUBLIC_KINDS = (
     "public", "district", "county", "capital", "borough", "region",
     "local authority", "principality", "prefecture", "canton", "federal",
 )
+# Wikidata type labels that contain a public-sounding word but describe a PRIVATE
+# entity. Removed before the public test, which matches on substrings.
+_WD_FALSE_PUBLIC = (
+    "public company", "public limited company", "publicly traded company",
+    "public joint-stock company", "public joint stock company",
+    "real estate",
+)
 _WD_PRIVATE_KINDS = (
     "football club", "association football club", "sports club", "sports team",
     "business", "enterprise", "company", "corporation", "organization",
@@ -625,6 +632,17 @@ _WD_PRIVATE_KINDS = (
 def _wd_kind_from_types(type_labels):
     """PUBLIC / PRIVATE / None from an owner entity's 'instance of' labels."""
     joined = " ; ".join(type_labels).lower()
+    # Strip phrases that only LOOK public before testing, because the public test
+    # runs first and matches on substrings. ArcelorMittal, which owns the Otelul
+    # Stadium in Galati, is typed "business ; enterprise ; public company" —
+    # "public company" means publicly TRADED, yet it matched "public" and the
+    # stadium of a private steel company was classified as publicly owned. Same
+    # trap in "real estate", which contains "state".
+    # Rewritten to "company", not deleted: these phrases ARE evidence of a private
+    # commercial owner, and a type like "public joint-stock company" has nothing
+    # else in it — deleting outright would return None and lose that signal.
+    for phrase in _WD_FALSE_PUBLIC:
+        joined = joined.replace(phrase, " company ")
     if any(k in joined for k in _WD_PUBLIC_KINDS):
         return "PUBLIC"
     if any(k in joined for k in _WD_PRIVATE_KINDS):
