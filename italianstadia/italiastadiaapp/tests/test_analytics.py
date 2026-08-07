@@ -638,3 +638,52 @@ class InsetLabelLayoutTests(TestCase):
         self.assertIn("_wrap_text(", inspect.getsource(views._draw_dots_and_labels))
         # ... and the inset no longer estimates width from character count
         self.assertNotIn("len(label2) * font_s.size", inspect.getsource(views._draw_inset))
+
+
+class AutoInsetClusterTests(TestCase):
+    """The magnifier picks the knot of grounds whose badges overlap. Severity is
+    scored as (-closest_squared_px, overlapping_pairs), so a real cluster always
+    scores NEGATIVE -- an isolated ground returning (0, 0) beat every cluster in
+    max(), the function bailed, and no inset was ever drawn."""
+
+    W = H = 1000
+    BBOX = (0.0, 50.0, 10.0, 55.0)      # lon0, lat0, lon1, lat1
+
+    def _s(self, name, lon, lat):
+        return {"name": name, "team_name": name, "lon": lon, "lat": lat}
+
+    def _cluster(self, stadiums, badge_r=13):
+        from italiastadiaapp.views import _auto_inset_cluster
+        return _auto_inset_cluster(stadiums, bbox=self.BBOX, W=self.W, H=self.H,
+                                   badge_r=badge_r)
+
+    def _spread(self):
+        """Four grounds far enough apart that none of their badges touch."""
+        return [self._s("A", 0.5, 50.3), self._s("B", 4.0, 51.5),
+                self._s("C", 8.0, 53.0), self._s("D", 9.5, 54.5)]
+
+    def test_a_tight_pair_is_found_among_isolated_grounds(self):
+        got = self._cluster(self._spread() + [self._s("X", 2.0, 52.0),
+                                              self._s("Y", 2.01, 52.005)])
+        self.assertEqual({s["name"] for s in got}, {"X", "Y"})
+
+    def test_no_overlap_means_no_inset(self):
+        self.assertEqual(self._cluster(self._spread()), [])
+
+    def test_the_tighter_knot_wins_over_the_looser_one(self):
+        """Tightness leads: a pair drawn exactly on top of each other needs the
+        magnifier more than a looser group whose badges are still readable."""
+        loose = [self._s("L1", 6.00, 52.0), self._s("L2", 6.13, 52.0),
+                 self._s("L3", 6.26, 52.0)]
+        tight = [self._s("T1", 2.00, 53.0), self._s("T2", 2.002, 53.0)]
+        got = self._cluster(self._spread() + loose + tight)
+        self.assertEqual({s["name"] for s in got}, {"T1", "T2"})
+
+    def test_a_distant_city_is_not_dragged_in(self):
+        """Kocaelispor sits ~80 km from Istanbul: far enough that its badge never
+        touches, so the inset must stay at metropolitan scale."""
+        metro = [self._s("M1", 2.00, 52.00), self._s("M2", 2.02, 52.01),
+                 self._s("M3", 2.03, 51.99)]
+        far = self._s("Far", 3.2, 52.0)
+        got = self._cluster(self._spread() + metro + [far])
+        self.assertEqual({s["name"] for s in got}, {"M1", "M2", "M3"})

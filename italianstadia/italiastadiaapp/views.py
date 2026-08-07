@@ -2694,8 +2694,12 @@ def _auto_inset_cluster(stadiums, max_n=6, bbox=None, W=None, H=None, badge_r=13
         grounds, 315 m apart => 0 px). The unreadable pair is the one that needs
         the magnifier.
         """
+        # -inf, NOT 0. Tightness is scored as -closest (a squared pixel distance),
+        # so every genuine cluster is NEGATIVE while a lone ground scoring 0 would
+        # win max() outright — the function then returned [] and no inset was ever
+        # drawn. Any real cluster must outrank an isolated ground.
         if len(idxs) < 2:
-            return (0, 0)
+            return (float("-inf"), 0)
         pairs, closest = 0, float("inf")
         for a in range(len(idxs)):
             for b in range(a + 1, len(idxs)):
