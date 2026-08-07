@@ -473,3 +473,77 @@ class ExportDrawOrderTests(TestCase):
         s = Stadium.objects.get(name="Tiny Park")
         s.save()
         self.assertEqual(self._order(), before)
+
+
+class BadgeFittingTests(TestCase):
+    """Crests are pasted through a CIRCULAR mask. The old code took the top square
+    of any taller-than-wide image, so the bottom of every shield crest was thrown
+    away before the mask even ran -- a Reddit reader spotted it on the Eredivisie
+    map. Nothing may be clipped now, whatever the source aspect ratio."""
+
+    SIZE = 40
+
+    @staticmethod
+    def _furthest_opaque(im):
+        """Distance from centre to the outermost opaque pixel."""
+        import math
+        a = im.getchannel("A")
+        w, h = im.size
+        px = a.load()
+        cx, cy = (w - 1) / 2.0, (h - 1) / 2.0
+        return max((math.hypot(x - cx, y - cy)
+                    for y in range(h) for x in range(w) if px[x, y] > 24),
+                   default=0.0)
+
+    def _fit(self, im):
+        from italiastadiaapp.views import _fit_badge_in_circle
+        return _fit_badge_in_circle(im, self.SIZE)
+
+    def _assert_inside_circle(self, im, label):
+        self.assertLessEqual(self._furthest_opaque(im), self.SIZE / 2.0, label)
+
+    def test_tall_shield_is_not_beheaded(self):
+        from PIL import Image, ImageDraw
+        im = Image.new("RGBA", (100, 160), (0, 0, 0, 0))
+        ImageDraw.Draw(im).polygon([(50, 0), (100, 30), (50, 159), (0, 30)],
+                                   fill=(200, 30, 30, 255))
+        out = self._fit(im)
+        self._assert_inside_circle(out, "tall shield")
+        # the tip must survive: bottom half of the badge cannot be empty
+        bottom = out.crop((0, self.SIZE // 2, self.SIZE, self.SIZE)).getchannel("A")
+        self.assertGreater(max(bottom.getdata()), 24, "shield tip was cropped away")
+
+    def test_round_crest_fills_the_circle_without_being_trimmed(self):
+        """The reader's specific complaint: even already-circular logos lost an edge."""
+        from PIL import Image, ImageDraw
+        im = Image.new("RGBA", (120, 120), (0, 0, 0, 0))
+        ImageDraw.Draw(im).ellipse([0, 0, 119, 119], fill=(30, 80, 200, 255))
+        out = self._fit(im)
+        self._assert_inside_circle(out, "round crest")
+        # and it should still nearly fill the badge, not be shrunk to a dot
+        self.assertGreater(self._furthest_opaque(out), self.SIZE / 2.0 - 2.0)
+
+    def test_wide_wordmark_keeps_its_aspect_ratio(self):
+        from PIL import Image, ImageDraw
+        im = Image.new("RGBA", (200, 60), (0, 0, 0, 0))
+        ImageDraw.Draw(im).rectangle([0, 0, 199, 59], fill=(20, 160, 90, 255))
+        out = self._fit(im)
+        self._assert_inside_circle(out, "wide wordmark")
+        bbox = out.getchannel("A").getbbox()
+        ratio = (bbox[2] - bbox[0]) / (bbox[3] - bbox[1])
+        self.assertGreater(ratio, 2.0, "wide crest was squashed to square")
+
+    def test_transparent_padding_does_not_shrink_the_crest(self):
+        """A crest centred in a large transparent canvas must not be scaled down to
+        fit that empty margin."""
+        from PIL import Image, ImageDraw
+        small = Image.new("RGBA", (200, 200), (0, 0, 0, 0))
+        ImageDraw.Draw(small).ellipse([80, 80, 119, 119], fill=(200, 30, 30, 255))
+        out = self._fit(small)
+        self.assertGreater(self._furthest_opaque(out), self.SIZE / 2.0 - 2.0)
+
+    def test_cache_key_changed_with_the_fitting_algorithm(self):
+        """Stale disk-cached badges cropped under the old rules must not be reused."""
+        import inspect
+        from italiastadiaapp import views
+        self.assertIn("_v2", inspect.getsource(views._fetch_badge_image))

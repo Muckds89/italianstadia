@@ -3421,6 +3421,52 @@ def _svg_badge_png_url(svg_url):
     return None
 
 
+def _fit_badge_in_circle(img, size):
+    """Scale a crest so ALL of it survives the circular badge mask.
+
+    The old code did `if h > w: crop((0, 0, w, w))` — it took the TOP square of a
+    taller-than-wide image, so the bottom of every shield crest was thrown away
+    before the mask even ran, and wide crests were squashed to square instead. A
+    Reddit reader spotted the result on the Eredivisie map.
+
+    Fitting by bounding box alone is not enough either: the mask is a CIRCLE, so a
+    crest scaled to touch the square's edges still loses its corners. This measures
+    the farthest opaque pixel from the centre and scales that distance to the circle
+    radius, which is exactly right for both shapes — an already-round crest fills
+    the circle edge to edge with nothing trimmed (the case the reader called out),
+    while a shield or a wordmark shrinks only as much as its corners demand.
+    """
+    alpha = img.getchannel("A")
+    bbox = alpha.getbbox()          # drop fully transparent padding, never artwork
+    if bbox:
+        img = img.crop(bbox)
+        alpha = img.getchannel("A")
+    w, h = img.size
+    if not w or not h:
+        return Image.new("RGBA", (size, size), (0, 0, 0, 0))
+
+    cx, cy = (w - 1) / 2.0, (h - 1) / 2.0
+    px = alpha.load()
+    step = max(1, int(max(w, h) / 64))   # sampling grid; exact enough at badge sizes
+    far = 0.0
+    for y in range(0, h, step):
+        for x in range(0, w, step):
+            if px[x, y] > 24:           # ignore near-transparent antialiasing fringe
+                d = math.hypot(x - cx, y - cy)
+                if d > far:
+                    far = d
+    # A full pixel of clearance, not half: LANCZOS ringing spreads the edge slightly
+    # and centring an odd-sized result inside an even canvas costs another half pixel,
+    # which together were enough to push a round crest back over the mask edge.
+    radius = (size / 2.0) - 1.0
+    scale = (radius / far) if far > 0 else 1.0
+    nw, nh = max(1, round(w * scale)), max(1, round(h * scale))
+
+    out = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    out.paste(img.resize((nw, nh), Image.LANCZOS), ((size - nw) // 2, (size - nh) // 2))
+    return out
+
+
 def _fetch_badge_image(url, size=20):
     """Download, resize, and cache a badge image to /tmp only (no in-process
     Django cache, see _fetch_one_tile for why)."""
@@ -3428,8 +3474,10 @@ def _fetch_badge_image(url, size=20):
         return None
 
     # Cache key is the ORIGINAL url so an SVG that's already rasterised on disk never
-    # re-hits the MediaWiki API.
-    key = hashlib.md5(f"{url}_{size}".encode()).hexdigest()
+    # re-hits the MediaWiki API. The `v2` is the fitting-algorithm version: bump it
+    # whenever _fit_badge_in_circle changes, otherwise every dyno keeps serving the
+    # badges it cropped under the old rules and the fix appears not to work.
+    key = hashlib.md5(f"{url}_{size}_v2".encode()).hexdigest()
 
     # 1. Disk cache (/tmp survives between requests on the same dyno)
     disk_path = _os.path.join(_BADGE_DISK_CACHE, f"{key}.png") if _BADGE_DISK_CACHE else None
@@ -3452,11 +3500,7 @@ def _fetch_badge_image(url, size=20):
     try:
         r = _requests.get(url, timeout=3, headers={"User-Agent": "StadiumsOfEurope/1.0"})
         r.raise_for_status()
-        img = Image.open(io.BytesIO(r.content)).convert("RGBA")
-        w, h = img.size
-        if h > w:
-            img = img.crop((0, 0, w, w))
-        img = img.resize((size, size), Image.LANCZOS)
+        img = _fit_badge_in_circle(Image.open(io.BytesIO(r.content)).convert("RGBA"), size)
         if disk_path:
             try:
                 img.save(disk_path, format="PNG")
