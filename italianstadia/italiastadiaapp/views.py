@@ -2304,6 +2304,33 @@ def _parse_export_params(request):
     }
 
 
+def _draw_rank(s):
+    """Sort key deciding which crest sits on top where grounds overlap.
+
+    Badges are painted in list order, so the LAST one drawn wins the overlap. This
+    key sorts ASCENDING, meaning the most important ground ends up last, on top.
+
+    Order is: domestic league titles, then capacity, then name.
+
+    Before this existed the order was raw database insertion order, which in
+    Rotterdam put Sparta's badge over Feyenoord's purely because Sparta's row was
+    created later — no rule at all, and liable to shift on any re-scrape.
+
+    Capacity is the tie-break rather than a second-order nicety: `num_of_titles` is
+    0 for most clubs (about two thirds of the table) both legitimately and, in some
+    cases, because the Transfermarkt honours scrape missed them — Ajax carried 0
+    despite a record 36 Dutch titles. Capacity is populated everywhere and needs no
+    external source, so it does the real work whenever honours are absent or equal.
+
+    Titles are read from the CLUB tenants only. A national side shares the ground
+    (Wembley, the Puskás) and carries no domestic league count, so including it
+    would drag a major club's ground down to 0.
+    """
+    clubs = [t for t in s.teams.all() if not t.is_national]
+    titles = max((t.num_of_titles or 0) for t in clubs) if clubs else 0
+    return (titles, s.capacity or 0, s.name or "")
+
+
 def _get_export_stadiums(params):
     """Return list of dicts for stadiums matching the filter params."""
     qs = Stadium.objects.select_related("city").prefetch_related("teams__league__country")
@@ -2341,18 +2368,7 @@ def _get_export_stadiums(params):
         ).filter(_nat__gte=1, _club=0)
     qs = qs.exclude(latitude=None).exclude(longitude=None).distinct()
 
-    # Draw order decides which crest sits on top where grounds overlap, and it used
-    # to be raw insertion order — in Rotterdam that put Sparta's badge over
-    # Feyenoord's purely because Sparta was inserted later. Sorting ASCENDING by
-    # capacity means the biggest ground is drawn LAST, i.e. on top.
-    #
-    # Capacity, not num_of_titles, even though honours are the more natural notion
-    # of "which club matters more here": that field is unreliable. Ajax carry 0 in
-    # the database despite a record 36 Dutch titles (the Transfermarkt honours
-    # scrape misses some clubs), so ranking by it would bury Ajax under Excelsior —
-    # a far worse error than the one this fixes. Capacity is populated for every
-    # ground and needs no external source to stay correct.
-    ordered = sorted(qs, key=lambda s: (s.capacity or 0, s.name))
+    ordered = sorted(qs, key=_draw_rank)
 
     results = []
     for s in ordered:

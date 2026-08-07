@@ -431,11 +431,40 @@ class ExportDrawOrderTests(TestCase):
         params = _parse_export_params(RequestFactory().get("/", {"league": "Order League"}))
         return [s["name"] for s in _get_export_stadiums(params)]
 
-    def test_biggest_ground_is_drawn_last(self):
+    def test_biggest_ground_is_drawn_last_when_no_club_has_titles(self):
         self.assertEqual(self._order()[-1], "Huge Arena")
 
-    def test_order_is_ascending_by_capacity(self):
+    def test_capacity_breaks_the_tie_at_zero_titles(self):
         self.assertEqual(self._order(), ["Tiny Park", "Mid Stadium", "Huge Arena"])
+
+    def test_titles_outrank_capacity(self):
+        """A decorated club at a small ground beats a bigger, title-less one."""
+        from italiastadiaapp.models import Team
+        t = Team.objects.get(name="Tiny Park FC")
+        t.num_of_titles = 12
+        t.save(update_fields=["num_of_titles"])
+        self.assertEqual(self._order()[-1], "Tiny Park")
+
+    def test_capacity_breaks_the_tie_between_equal_title_counts(self):
+        from italiastadiaapp.models import Team
+        for n in ("Tiny Park FC", "Huge Arena FC"):
+            t = Team.objects.get(name=n)
+            t.num_of_titles = 5
+            t.save(update_fields=["num_of_titles"])
+        order = self._order()
+        self.assertEqual(order[-1], "Huge Arena")
+        self.assertLess(order.index("Tiny Park"), order.index("Huge Arena"))
+
+    def test_national_side_does_not_drag_a_clubs_ground_down(self):
+        """National teams share grounds and carry no domestic league count, so
+        counting them would rank a major club's stadium as title-less."""
+        from italiastadiaapp.models import Stadium, Team
+        s = Stadium.objects.get(name="Tiny Park")
+        Team.objects.get(name="Tiny Park FC").__class__.objects.filter(
+            name="Tiny Park FC").update(num_of_titles=12)
+        Team.objects.create(name="Orderland NT", stadium=s, city=self.city,
+                            league=self.lg, is_national=True, num_of_titles=0)
+        self.assertEqual(self._order()[-1], "Tiny Park")
 
     def test_order_does_not_depend_on_insertion_order(self):
         """Re-saving a row must not change which crest wins the overlap."""
