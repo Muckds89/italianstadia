@@ -2888,6 +2888,33 @@ def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox
             "box": (ix0, iy0, ix0 + IW, iy0 + IH)}
 
 
+def _measure_text(draw, text, font, fallback_cw=7):
+    """True pixel size of `text`. Shared by the main label engine and the inset —
+    the inset used to estimate width as len(text) * font.size * 0.58, which is
+    badly wrong for long names and let its pills overrun into each other."""
+    try:
+        bb = draw.textbbox((0, 0), text, font=font)
+        return bb[2] - bb[0], bb[3] - bb[1]
+    except AttributeError:
+        return len(text) * fallback_cw, getattr(font, "size", 12)
+
+
+def _wrap_text(draw, text, font, max_w, fallback_cw=7):
+    """Greedy word wrap to max_w. Returns [(line, w, h), ...]."""
+    words, lines, cur = text.split(), [], ""
+    for word in words:
+        trial = f"{cur} {word}".strip()
+        if cur and _measure_text(draw, trial, font, fallback_cw)[0] > max_w:
+            lines.append(cur)
+            cur = word
+        else:
+            cur = trial
+    if cur:
+        lines.append(cur)
+    return [(ln,) + _measure_text(draw, ln, font, fallback_cw)
+            for ln in (lines or [text])]
+
+
 def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
                 main_bbox=None, layout=None, show_source=True, header="Detail view",
                 draw_labels=True):
@@ -2936,48 +2963,83 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
         dots.append((px, py, s))
     d = ImageDraw.Draw(inset_img)
 
-    # Pass 2: deterministic two-column edge layout. Labels are pushed to the inset's
-    # left/right margins and stacked in latitude order, exactly like the main map's
-    # column-leader engine. This GUARANTEES every ground in the inset is labelled
-    # (mandatory) — no search-and-drop that could silently omit a name.
-    items = []
-    for px, py, s in (dots if draw_labels else []):
-        label1 = s.get("team_name", "") or ""
-        label2 = s["name"]
-        tw = max(int(len(label1) * font_t.size * 0.55),
-                 int(len(label2) * font_s.size * 0.58)) + 8
-        th = (font_t.size + 2 if label1 else 0) + font_s.size + 6
-        items.append({"px": px, "py": py, "l1": label1, "l2": label2, "tw": tw, "th": th})
-
+    # Pass 2: two-column edge layout. Labels are pushed to the inset's left/right
+    # margins and stacked in latitude order, like the main map's column-leader
+    # engine. Every ground in the inset IS labelled (mandatory) — no search-and-drop
+    # that could silently omit a name.
+    #
+    # Three things used to make these collide, all fixed here:
+    #   * width was estimated as len(text) * font.size * 0.58, which underestimates
+    #     long names badly — "Turka Araç Muayene Kocaeli Stadyumu" ran straight into
+    #     the opposite column;
+    #   * nothing wrapped, so one long name produced one very wide pill;
+    #   * when a column ran out of vertical room the stack clamped every remaining
+    #     pill to the same bottom position, drawing them on top of each other.
+    # Now text is measured with real metrics, wrapped to a width that makes a
+    # left/right overlap geometrically impossible, and the font steps down until the
+    # tallest column genuinely fits.
+    PAD = 4
+    GAP_MIN = 3
     hdr_h = int(IW * 0.03) + 16          # keep clear of the "Detail view" header
-    # Split into two BALANCED columns (near-equal counts) by longitude rank, so a
-    # lopsided cluster can't pile every label into one column and crowd it — the
-    # westernmost half goes left, the easternmost half right.
-    by_x = sorted(items, key=lambda it: it["px"])
-    half = (len(by_x) + 1) // 2
-    left_ids = {id(it) for it in by_x[:half]}
-    left = [it for it in items if id(it) in left_ids]
-    right = [it for it in items if id(it) not in left_ids]
+    avail_h = (IH - 6) - hdr_h
+    # Two pills plus a centre gutter must fit across the box, so neither column can
+    # ever reach the other however long the club name is.
+    pill_max_w = int(IW * 0.44)
 
-    def _stack(col, side):
+    def _build(f_stad, f_team):
+        """Lay out every label at the given fonts; returns (items, tallest column)."""
+        built = []
+        for px, py, s in (dots if draw_labels else []):
+            rows = []
+            team_line = s.get("team_name", "") or ""
+            if team_line:
+                rows += [(t, f_team, "team", w, h) for t, w, h in
+                         _wrap_text(d, team_line, f_team, pill_max_w - 2 * PAD)]
+            rows += [(t, f_stad, "stad", w, h) for t, w, h in
+                     _wrap_text(d, s["name"], f_stad, pill_max_w - 2 * PAD)]
+            tw = max(r[3] for r in rows) + 2 * PAD
+            th = sum(r[4] for r in rows) + 2 * PAD + 2 * (len(rows) - 1)
+            built.append({"px": px, "py": py, "rows": rows, "tw": tw, "th": th})
+        by_x = sorted(built, key=lambda it: it["px"])
+        half = (len(by_x) + 1) // 2
+        left_ids = {id(it) for it in by_x[:half]}
+        cols = ([it for it in built if id(it) in left_ids],
+                [it for it in built if id(it) not in left_ids])
+        tallest = max((sum(it["th"] for it in c) + GAP_MIN * max(0, len(c) - 1)
+                       for c in cols), default=0)
+        return built, cols, tallest
+
+    # Step the fonts down until the busiest column fits without stacking pills on
+    # top of one another. Shrinking text is the lesser evil: the box exists to name
+    # these grounds, so an unreadable overlap defeats it entirely.
+    f_stad, f_team = font_s, font_t
+    items, cols, tallest = _build(f_stad, f_team)
+    while tallest > avail_h and getattr(f_stad, "size", 0) > 9:
+        try:
+            f_stad = ImageFont.truetype("arialbd.ttf", f_stad.size - 1)
+            f_team = ImageFont.truetype("arial.ttf", max(8, f_team.size - 1))
+        except Exception:
+            break
+        items, cols, tallest = _build(f_stad, f_team)
+
+    for side, col in zip(("left", "right"), cols):
         if not col:
-            return
+            continue
         col.sort(key=lambda it: it["py"])
-        top, bot = hdr_h, IH - 6
         total = sum(it["th"] for it in col)
-        spread = bot - top - total
-        gap = max(3, spread / (len(col) + 1)) if spread > 0 else 3
-        y = top + (gap if spread > 0 else 0)
+        spread = avail_h - total
+        gap = max(GAP_MIN, spread / (len(col) + 1)) if spread > 0 else GAP_MIN
+        y = hdr_h + (gap if spread > 0 else 0)
         for it in col:
-            it["ly"] = int(min(y, IH - 6 - it["th"]))
+            # Never clamp two pills to the same spot: keep the running cursor even if
+            # that means the last one sits slightly low, which the font-shrink above
+            # has already made very unlikely.
+            it["ly"] = int(y)
             it["lx"] = 4 if side == "left" else IW - 4 - it["tw"]
             it["side"] = side
             y = it["ly"] + it["th"] + gap
 
-    _stack(left, "left")
-    _stack(right, "right")
-
-    for it in left + right:
+    for it in items:
         lx, ly, tw, th = it["lx"], it["ly"], it["tw"], it["th"]
         # leader from the badge to the pill's inner edge (right edge for a left-column
         # label, left edge for a right-column one) — drawn under the pill.
@@ -2986,11 +3048,11 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
                fill=(255, 255, 255, 170), width=1)
         d.rounded_rectangle([lx - 3, ly - 2, lx + tw + 3, ly + th + 2],
                             radius=4, fill=(10, 13, 24, 235))
-        yy = ly + 3
-        if it["l1"]:
-            d.text((lx + 3, yy), it["l1"], font=font_t, fill=(170, 205, 255))
-            yy += font_t.size + 2
-        d.text((lx + 3, yy), it["l2"], font=font_s, fill=(255, 255, 255))
+        yy = ly + PAD
+        for text, fnt, kind, _w, hh in it["rows"]:
+            d.text((lx + PAD, yy), text, font=fnt,
+                   fill=(170, 205, 255) if kind == "team" else (255, 255, 255))
+            yy += hh + 2
 
     # Re-draw the badges ON TOP of the pills. In a box this small the label columns
     # unavoidably run over the markers, and a hidden badge defeats the point of the
@@ -3789,26 +3851,13 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
     # keeps every pill inside its margin column, where it can't cover anything.
     MAX_PILL_W = max(160, int(W * 0.23))
 
+    # Module-level helpers, shared with the inset so both label layouts measure and
+    # wrap text identically.
     def _measure(text, font, fallback_cw):
-        try:
-            bb = draw.textbbox((0, 0), text, font=font)
-            return bb[2] - bb[0], bb[3] - bb[1]
-        except AttributeError:
-            return len(text) * fallback_cw, getattr(font, "size", FONT_SZ)
+        return _measure_text(draw, text, font, fallback_cw)
 
     def _wrap(text, font, max_w, fallback_cw):
-        """Greedy word wrap to max_w. Returns [(line, w, h), ...]."""
-        words, lines, cur = text.split(), [], ""
-        for word in words:
-            trial = f"{cur} {word}".strip()
-            if cur and _measure(trial, font, fallback_cw)[0] > max_w:
-                lines.append(cur)
-                cur = word
-            else:
-                cur = trial
-        if cur:
-            lines.append(cur)
-        return [(ln,) + _measure(ln, font, fallback_cw) for ln in (lines or [text])]
+        return _wrap_text(draw, text, font, max_w, fallback_cw)
 
     skip = no_label_names or set()
     items = []

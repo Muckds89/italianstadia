@@ -580,3 +580,61 @@ class InsetSizeTests(TestCase):
         import inspect
         from italiastadiaapp import views
         self.assertIn('"inset_size"', inspect.getsource(views.export_checkout))
+
+
+class InsetLabelLayoutTests(TestCase):
+    """Inset labels used to run into each other: width was guessed from character
+    count, nothing wrapped, and a full column clamped every remaining pill to the
+    same y. The Istanbul box (6 grounds, names like 'Turka Araç Muayene Kocaeli
+    Stadyumu') collided every time."""
+
+    def _draw(self):
+        from PIL import Image, ImageDraw
+        return ImageDraw.Draw(Image.new("RGBA", (400, 400)))
+
+    def _font(self, size=14):
+        from PIL import ImageFont
+        try:
+            return ImageFont.truetype("arialbd.ttf", size)
+        except Exception:
+            self.skipTest("Arial not available on this platform")
+
+    def test_wrap_never_exceeds_the_limit(self):
+        from italiastadiaapp.views import _wrap_text
+        d, f = self._draw(), self._font()
+        rows = _wrap_text(d, "Chobani Stadyumu FB Şükrü Saracoğlu Spor Kompleksi", f, 120)
+        self.assertGreater(len(rows), 1, "long name was not wrapped at all")
+        for _line, w, _h in rows:
+            self.assertLessEqual(w, 120)
+
+    def test_wrap_keeps_every_word(self):
+        from italiastadiaapp.views import _wrap_text
+        text = "Turka Araç Muayene Kocaeli Stadyumu"
+        rows = _wrap_text(self._draw(), text, self._font(), 100)
+        self.assertEqual(" ".join(r[0] for r in rows).split(), text.split())
+
+    def test_single_unbreakable_word_still_returned(self):
+        """A word wider than the limit must not vanish."""
+        from italiastadiaapp.views import _wrap_text
+        rows = _wrap_text(self._draw(), "Başakşehiristanbulspor", self._font(), 10)
+        self.assertEqual(len(rows), 1)
+        self.assertTrue(rows[0][0])
+
+    def test_measure_uses_real_metrics_not_character_count(self):
+        from italiastadiaapp.views import _measure_text
+        d, f = self._draw(), self._font()
+        narrow, _ = _measure_text(d, "lllll", f)
+        wide, _ = _measure_text(d, "WWWWW", f)
+        self.assertLess(narrow, wide,
+                        "same length, different width — char-count estimates cannot see this")
+
+    def test_main_engine_and_inset_share_one_implementation(self):
+        """The helpers were closures inside the main label engine, which is why the
+        inset had its own (worse) copy."""
+        import inspect
+        from italiastadiaapp import views
+        # both label layouts call the module-level helpers ...
+        self.assertIn("_wrap_text(", inspect.getsource(views._draw_inset))
+        self.assertIn("_wrap_text(", inspect.getsource(views._draw_dots_and_labels))
+        # ... and the inset no longer estimates width from character count
+        self.assertNotIn("len(label2) * font_s.size", inspect.getsource(views._draw_inset))
