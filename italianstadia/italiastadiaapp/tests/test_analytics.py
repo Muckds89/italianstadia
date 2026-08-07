@@ -687,3 +687,51 @@ class AutoInsetClusterTests(TestCase):
         far = self._s("Far", 3.2, 52.0)
         got = self._cluster(self._spread() + metro + [far])
         self.assertEqual({s["name"] for s in got}, {"M1", "M2", "M3"})
+
+
+class FontFallbackTests(TestCase):
+    """Turkish/Romanian diacritics rendered as mojibake in the inset on production
+    while the main map was fine. The inset called ImageFont.truetype("arialbd.ttf")
+    directly -- a Windows-only filename. On Render that raises and drops to PIL's
+    default bitmap font, which has no glyphs for s-cedilla or dotted-I. The bug is
+    INVISIBLE on Windows, where Arial exists, so it needs a static guard."""
+
+    def test_no_render_code_names_a_windows_only_font(self):
+        import re
+        from pathlib import Path
+        from django.conf import settings
+        src = (Path(settings.BASE_DIR) / "italiastadiaapp" / "views.py").read_text(
+            encoding="utf-8")
+        # strip comments so the explanatory note about the old bug doesn't match
+        code = "\n".join(l.split("#")[0] for l in src.splitlines())
+        bad = re.findall(r'ImageFont\.truetype\(\s*["\']([Aa]rial[^"\']*)["\']', code)
+        self.assertEqual(bad, [], f"use _load_font() instead of bare Arial: {bad}")
+
+    def test_load_font_offers_linux_fallbacks(self):
+        """_load_font is the only path with DejaVu/Liberation fallbacks, which is
+        why the main map's labels survived and the inset's did not."""
+        import inspect
+        from italiastadiaapp import views
+        src = inspect.getsource(views._load_font)
+        self.assertIn("DejaVuSans", src)
+        self.assertIn("Liberation", src)
+
+    def test_turkish_and_romanian_glyphs_are_present(self):
+        """Guards the actual symptom. Comparing rendered WIDTHS proves nothing --
+        s-cedilla and plain s share an advance width in Arial -- so this compares
+        each glyph against a codepoint no font defines (private-use U+E000). A
+        character the font lacks falls back to .notdef and renders identically to
+        it; a character it has does not."""
+        from PIL import Image, ImageDraw
+        from italiastadiaapp.views import _load_font
+        font = _load_font(bold=True, size=28)
+
+        def pixels(ch):
+            img = Image.new("L", (60, 50), 0)
+            ImageDraw.Draw(img).text((4, 4), ch, font=font, fill=255)
+            return img.tobytes()
+
+        notdef = pixels("")
+        for ch in "şğİıŞĞ" + "țțăîâȚĂÎÂ":
+            self.assertNotEqual(pixels(ch), notdef,
+                                f"font has no glyph for {ch!r} - it will render as a box")

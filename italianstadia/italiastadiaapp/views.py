@@ -2940,11 +2940,13 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
                                  land_color=params.get("bg_color")).convert("RGBA")
     badges = _prefetch_badges(inset_stadiums, size=int(IW * 0.07))
 
-    try:
-        font_s = ImageFont.truetype("arialbd.ttf", max(14, int(IW * 0.034)))
-        font_t = ImageFont.truetype("arial.ttf",   max(11, int(IW * 0.027)))
-    except Exception:
-        font_s = font_t = ImageFont.load_default()
+    # _load_font, NOT ImageFont.truetype("arialbd.ttf"): the bare call only names
+    # Windows fonts, so on Render it raised and dropped to PIL's default bitmap
+    # font, which has no Turkish glyphs. The main map's labels came out fine while
+    # the inset rendered "Besiktas"/"Basaksehir" as mojibake, because only the main
+    # path had the Linux fallbacks.
+    font_s = _load_font(bold=True,  size=max(14, int(IW * 0.034)))
+    font_t = _load_font(bold=False, size=max(11, int(IW * 0.027)))
 
     BR = max(11, int(IW * 0.035))
     rr = BR + 2
@@ -3020,8 +3022,8 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
     items, cols, tallest = _build(f_stad, f_team)
     while tallest > avail_h and getattr(f_stad, "size", 0) > 9:
         try:
-            f_stad = ImageFont.truetype("arialbd.ttf", f_stad.size - 1)
-            f_team = ImageFont.truetype("arial.ttf", max(8, f_team.size - 1))
+            f_stad = _load_font(bold=True,  size=f_stad.size - 1)
+            f_team = _load_font(bold=False, size=max(8, f_team.size - 1))
         except Exception:
             break
         items, cols, tallest = _build(f_stad, f_team)
@@ -3075,7 +3077,7 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
 
     d.rectangle([(0, 0), (IW-1, IH-1)], outline=(120, 200, 255), width=3)
     try:
-        fhdr = ImageFont.truetype("arialbd.ttf", max(12, int(IW * 0.03)))
+        fhdr = _load_font(bold=True, size=max(12, int(IW * 0.03)))
     except Exception:
         fhdr = ImageFont.load_default()
     d.text((8, 6), header, font=fhdr, fill=(190, 225, 255))
@@ -4051,7 +4053,7 @@ def _draw_legend(img, params, stadiums):
         return img
 
     try:
-        font = ImageFont.truetype("arial.ttf", 14)
+        font = _load_font(bold=False, size=14)
     except Exception:
         font = ImageFont.load_default()
 
