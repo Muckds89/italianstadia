@@ -405,3 +405,42 @@ class ConsentBannerProminenceTests(TestCase):
         tpl = (Path(settings.BASE_DIR) / "italiastadiaapp" / "templates"
                / "base_detail.html").read_text(encoding="utf-8")
         self.assertNotIn("cookie-banner", tpl)
+
+
+class ExportDrawOrderTests(TestCase):
+    """Where two grounds overlap on a map, the crest drawn LAST sits on top. That
+    used to be raw insertion order: in Rotterdam it put Sparta over Feyenoord purely
+    because Sparta's row was created later."""
+
+    def setUp(self):
+        from italiastadiaapp.models import City, Country, League, Stadium, Team
+        c = Country.objects.create(name="Orderland", code="OL")
+        self.lg = League.objects.create(name="Order League", country=c, division_level=1)
+        self.city = City.objects.create(name="Ordertown", country="Orderland")
+        # created small-first so insertion order is the OPPOSITE of the wanted order
+        for name, cap, lat in [("Tiny Park", 4000, 50.0),
+                               ("Huge Arena", 60000, 50.1),
+                               ("Mid Stadium", 20000, 50.2)]:
+            s = Stadium.objects.create(name=name, capacity=cap, city=self.city,
+                                       latitude=lat, longitude=5.0)
+            Team.objects.create(name=f"{name} FC", stadium=s, city=self.city, league=self.lg)
+
+    def _order(self):
+        from italiastadiaapp.views import _get_export_stadiums, _parse_export_params
+        from django.test import RequestFactory
+        params = _parse_export_params(RequestFactory().get("/", {"league": "Order League"}))
+        return [s["name"] for s in _get_export_stadiums(params)]
+
+    def test_biggest_ground_is_drawn_last(self):
+        self.assertEqual(self._order()[-1], "Huge Arena")
+
+    def test_order_is_ascending_by_capacity(self):
+        self.assertEqual(self._order(), ["Tiny Park", "Mid Stadium", "Huge Arena"])
+
+    def test_order_does_not_depend_on_insertion_order(self):
+        """Re-saving a row must not change which crest wins the overlap."""
+        from italiastadiaapp.models import Stadium
+        before = self._order()
+        s = Stadium.objects.get(name="Tiny Park")
+        s.save()
+        self.assertEqual(self._order(), before)
