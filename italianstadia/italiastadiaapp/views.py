@@ -3495,6 +3495,12 @@ def _svg_badge_png_url(svg_url):
     return None
 
 
+# Wikimedia's user-agent policy: a descriptive agent with contact details.
+# A generic string gets rate-limited (HTTP 429) as soon as several crests are
+# fetched in one render, which shows up as randomly missing badges.
+_BADGE_UA_WIKIMEDIA = "stadiamap/1.0 (destavola.marco@gmail.com)"
+
+
 def _fit_badge_in_circle(img, size):
     """Scale a crest so ALL of it survives the circular badge mask.
 
@@ -3572,7 +3578,19 @@ def _fetch_badge_image(url, size=20):
 
     # 2. Fetch from web
     try:
-        r = _requests.get(url, timeout=3, headers={"User-Agent": "StadiumsOfEurope/1.0"})
+        # Wikimedia throttles generic user agents and asks for contact details in
+        # the string (the same rule the wiki audits already follow). Crests are
+        # increasingly served from Wikipedia rather than Transfermarkt, whose CDN
+        # 503s on individual files, so a throttled fetch here means a blank badge.
+        # The timeout is also longer for Wikimedia: an SVG is rasterised on their
+        # side and 3s was not always enough, which silently produced a bare dot.
+        wikimedia = "wikimedia.org" in url or "wikipedia.org" in url
+        r = _requests.get(
+            url,
+            timeout=10 if wikimedia else 3,
+            headers={"User-Agent": _BADGE_UA_WIKIMEDIA if wikimedia
+                     else "StadiumsOfEurope/1.0"},
+        )
         r.raise_for_status()
         img = _fit_badge_in_circle(Image.open(io.BytesIO(r.content)).convert("RGBA"), size)
         if disk_path:
