@@ -3512,7 +3512,14 @@ _BADGE_UA_WIKIMEDIA = "stadiamap/1.0 (destavola.marco@gmail.com)"
 #
 # The retry added earlier does not save this case: all three attempts land inside
 # the same throttled window. The cap is the fix; the retry covers the isolated 503.
-_BADGE_HOST_LIMITS = {"tmssl.akamaized.net": 1}
+_BADGE_HOST_LIMITS = {
+    "tmssl.akamaized.net": 1,
+    # Wikimedia now hosts most crests and throttles bursts from one client.
+    # 8 workers against it dropped 17 of 18 badges on a cold cache. Its own
+    # guidance is serial-ish access with a contact UA; 3 is a compromise that
+    # keeps a full league render under a couple of seconds.
+    "upload.wikimedia.org": 3,
+}
 _BADGE_HOST_DEFAULT = 8
 _badge_host_sems = {}
 _badge_host_lock = _threading.Lock()

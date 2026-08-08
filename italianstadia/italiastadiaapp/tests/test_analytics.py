@@ -852,3 +852,45 @@ class BadgeFetchRetryTests(TestCase):
         wm = views._badge_host_semaphore("https://upload.wikimedia.org/b.svg")
         self.assertEqual(tm._value, 1)
         self.assertGreater(wm._value, 1)
+
+
+class CrestFileTypeTests(TestCase):
+    """A club article is full of files named after the club that are not crests.
+    An earlier crest migration wrote a golf-tournament photo as Eintracht
+    Frankfurt's badge, graffiti as Gornik Zabrze's, a 1960 team photo as
+    Newcastle's, and a pronunciation recording as Augsburg's -- 109 clubs got
+    photographs. Only svg/png may be stored as a crest."""
+
+    ALLOWED = (".svg", ".png")
+
+    def test_no_stored_crest_is_a_photo_or_audio_file(self):
+        from italiastadiaapp.models import Team
+        bad = []
+        for t in Team.objects.exclude(image_url="").exclude(image_url__isnull=True):
+            u = t.image_url.split("?")[0].lower()
+            if not u.endswith(self.ALLOWED):
+                bad.append((t.name, u.rsplit("/", 1)[-1]))
+        self.assertEqual(bad, [], f"non-crest files stored as crests: {bad[:8]}")
+
+    def test_picker_rejects_a_photo_named_after_the_club(self):
+        from italiastadiaapp.management.commands.refresh_dead_crests import Command
+        pick = Command._pick_article_image
+        club = "Eintracht Frankfurt"
+        self.assertIsNone(pick(["File:Eintracht Frankfurt Golf Open 8875.jpg"], club))
+        self.assertIsNone(pick(["File:De-Eintracht Frankfurt.ogg"], club))
+        self.assertIsNone(pick(["File:Eintracht Frankfurt 1960.jpg"], club))
+
+    def test_picker_accepts_a_real_logo(self):
+        from italiastadiaapp.management.commands.refresh_dead_crests import Command
+        pick = Command._pick_article_image
+        self.assertEqual(pick(["File:Eintracht Frankfurt Logo.svg"], "Eintracht Frankfurt"),
+                         "File:Eintracht Frankfurt Logo.svg")
+        # club-named SVG with no keyword: the Corvinul case
+        self.assertEqual(pick(["File:FC Corvinul Hunedoara.svg"], "FC Corvinul Hunedoara"),
+                         "File:FC Corvinul Hunedoara.svg")
+
+    def test_keyword_logo_beats_a_club_named_svg(self):
+        from italiastadiaapp.management.commands.refresh_dead_crests import Command
+        got = Command._pick_article_image(
+            ["File:FC Example.svg", "File:FC Example logo.svg"], "FC Example")
+        self.assertEqual(got, "File:FC Example logo.svg")
