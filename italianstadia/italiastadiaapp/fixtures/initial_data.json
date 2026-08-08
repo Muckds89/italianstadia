@@ -12789,6 +12789,19 @@
   }
 },
 {
+  "model": "italiastadiaapp.city",
+  "pk": 893,
+  "fields": {
+    "name": "Hunedoara",
+    "population": null,
+    "country": "Romania",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Hunedoara",
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
   "model": "italiastadiaapp.stadium",
   "pk": 8,
   "fields": {
@@ -45110,6 +45123,33 @@
   }
 },
 {
+  "model": "italiastadiaapp.stadium",
+  "pk": 1089,
+  "fields": {
+    "name": "Michael Klein Stadium",
+    "capacity": 16500,
+    "address": null,
+    "year_of_construction": 1960,
+    "city": 893,
+    "latitude": "45.761730",
+    "longitude": "22.912927",
+    "owner_raw": "Municipality of Hunedoara",
+    "ownership": "PUBLIC",
+    "slug": "michael-klein-stadium",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Michael_Klein_Stadium",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": "Corvinul's home ground, but not licensed for Liga I: for 2026/27 the club plays its home matches away from Hunedoara, at the Francisc von Neuman Stadium in Arad for the time being. A replacement ground in Hunedoara is planned.",
+    "locked": false
+  }
+},
+{
   "model": "italiastadiaapp.team",
   "pk": 7,
   "fields": {
@@ -72407,6 +72447,32 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "sc-austria-lustenau"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1124,
+  "fields": {
+    "is_national": false,
+    "name": "FC Corvinul Hunedoara",
+    "founded": null,
+    "tier": 1,
+    "girone": null,
+    "stadium": 1089,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 893,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Corvinul_Hunedoara",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/3/3e/FC_Corvinul_Hunedoara.svg",
+    "image_credit": "Crest via English Wikipedia (fair use).",
+    "description": null,
+    "locked": false,
+    "league": 17,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "fc-corvinul-hunedoara"
   }
 },
 {
