@@ -752,10 +752,13 @@ class BadgeFetchRetryTests(TestCase):
 
     @staticmethod
     def _png_bytes():
+        """Must exceed the 100-byte floor that marks a soft-blocked empty 200.
+        An 8x8 PNG is only 79 bytes and would itself be read as blocked."""
         import io
         from PIL import Image
         buf = io.BytesIO()
-        Image.new("RGBA", (8, 8), (255, 0, 0, 255)).save(buf, format="PNG")
+        Image.new("RGBA", (48, 48), (255, 0, 0, 255)).save(buf, format="PNG")
+        assert len(buf.getvalue()) >= 100
         return buf.getvalue()
 
     def _run(self, statuses):
@@ -802,3 +805,50 @@ class BadgeFetchRetryTests(TestCase):
         img, attempts = self._run([404])
         self.assertIsNone(img)
         self.assertEqual(attempts, 1)
+
+    def test_empty_200_is_treated_as_failure_and_retried(self):
+        """Transfermarkt soft-blocks with 200 + zero bytes rather than an error
+        status, so status alone says healthy while the badge silently vanishes."""
+        from unittest import mock
+        from italiastadiaapp import views
+        calls = {"n": 0}
+
+        class Resp:
+            def __init__(self, body):
+                self.status_code, self.content = 200, body
+
+            def raise_for_status(self):
+                pass
+
+        bodies = [b"", self._png_bytes()]
+
+        def fake_get(url, **kw):
+            b = bodies[min(calls["n"], len(bodies) - 1)]
+            calls["n"] += 1
+            return Resp(b)
+
+        with mock.patch.object(views._requests, "get", side_effect=fake_get),                 mock.patch.object(views._time, "sleep", lambda *_: None):
+            img = views._fetch_badge_image("https://tmssl.example/x.png", 26)
+        self.assertIsNotNone(img, "empty 200 must be retried, not accepted")
+        self.assertEqual(calls["n"], 2)
+
+    def test_persistent_empty_200_returns_none_not_a_broken_image(self):
+        from unittest import mock
+        from italiastadiaapp import views
+
+        class Resp:
+            status_code, content = 200, b""
+
+            def raise_for_status(self):
+                pass
+
+        with mock.patch.object(views._requests, "get", side_effect=lambda *a, **k: Resp()),                 mock.patch.object(views._time, "sleep", lambda *_: None):
+            self.assertIsNone(views._fetch_badge_image("https://tmssl.example/x.png", 26))
+
+    def test_transfermarkt_host_is_capped_to_one_concurrent_fetch(self):
+        """8 parallel workers against TM's CDN returned one badge out of twelve."""
+        from italiastadiaapp import views
+        tm = views._badge_host_semaphore("https://tmssl.akamaized.net/a.png")
+        wm = views._badge_host_semaphore("https://upload.wikimedia.org/b.svg")
+        self.assertEqual(tm._value, 1)
+        self.assertGreater(wm._value, 1)
