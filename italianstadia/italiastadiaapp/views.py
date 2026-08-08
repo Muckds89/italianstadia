@@ -7,6 +7,7 @@ import math
 import os as _os
 import re
 import threading as _threading
+from urllib.parse import urlparse as _urlparse
 import time as _time
 import traceback
 import uuid
@@ -3500,6 +3501,33 @@ def _svg_badge_png_url(svg_url):
 # fetched in one render, which shows up as randomly missing badges.
 _BADGE_UA_WIKIMEDIA = "stadiamap/1.0 (destavola.marco@gmail.com)"
 
+# Per-host concurrency caps for badge fetches.
+#
+# _prefetch_badges runs 8 workers. Against Transfermarkt's CDN that is a burst it
+# refuses: fetching the 12 Austrian Bundesliga crests one at a time returns 200 for
+# every one, while the same 12 through the concurrent prefetch returned ONE badge
+# and eleven bare green dots. CLAUDE.md already records the rule for the scraper --
+# "run TM fetches SEQUENTIALLY, concurrency triggers 429/502/504" -- but the
+# renderer never followed it.
+#
+# The retry added earlier does not save this case: all three attempts land inside
+# the same throttled window. The cap is the fix; the retry covers the isolated 503.
+_BADGE_HOST_LIMITS = {"tmssl.akamaized.net": 1}
+_BADGE_HOST_DEFAULT = 8
+_badge_host_sems = {}
+_badge_host_lock = _threading.Lock()
+
+
+def _badge_host_semaphore(url):
+    host = _urlparse(url).netloc.lower()
+    with _badge_host_lock:
+        sem = _badge_host_sems.get(host)
+        if sem is None:
+            sem = _threading.Semaphore(
+                _BADGE_HOST_LIMITS.get(host, _BADGE_HOST_DEFAULT))
+            _badge_host_sems[host] = sem
+    return sem
+
 
 def _fit_badge_in_circle(img, size):
     """Scale a crest so ALL of it survives the circular badge mask.
@@ -3596,13 +3624,25 @@ def _fetch_badge_image(url, size=20):
         # this way, while the same URL served fine seconds later. Kept short: this
         # runs inside the render's 22 s badge budget.
         r = None
-        for attempt in range(3):
-            r = _requests.get(url, timeout=timeout, headers=headers)
-            if r.status_code < 500 and r.status_code != 429:
-                break
-            if attempt < 2:
-                _time.sleep(0.4 * (attempt + 1))
+        with _badge_host_semaphore(url):
+            for attempt in range(3):
+                r = _requests.get(url, timeout=timeout, headers=headers)
+                # An EMPTY 200 counts as a failure. Transfermarkt's CDN soft-blocks
+                # by answering 200 with a zero-byte body rather than a 4xx/5xx:
+                # raise_for_status() passes, PIL then fails to open the empty buffer,
+                # and the outer except swallows it. Eleven of twelve Austrian crests
+                # vanished this way while every URL "worked" when checked by status
+                # code alone. 200-with-no-image is the signal that matters.
+                too_small = len(r.content or b"") < 100
+                retryable = r.status_code >= 500 or r.status_code == 429 or (
+                    r.status_code == 200 and too_small)
+                if not retryable:
+                    break
+                if attempt < 2:
+                    _time.sleep(0.4 * (attempt + 1))
         r.raise_for_status()
+        if len(r.content or b"") < 100:
+            return None
         img = _fit_badge_in_circle(Image.open(io.BytesIO(r.content)).convert("RGBA"), size)
         if disk_path:
             try:

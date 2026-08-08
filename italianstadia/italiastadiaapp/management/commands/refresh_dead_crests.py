@@ -46,10 +46,17 @@ class Command(BaseCommand):
 
     # ── helpers ──────────────────────────────────────────────────────────────
     def _alive(self, url):
+        """A crest counts as alive only if the response is actually an image.
+
+        Transfermarkt's CDN soft-blocks by returning HTTP 200 with a zero-byte
+        body, so a status-code check calls a blocked crest healthy and the map
+        still renders a bare dot. Size is the honest test.
+        """
         if not url:
             return False
         try:
-            return requests.get(url, timeout=12, headers=UA).status_code == 200
+            r = requests.get(url, timeout=12, headers=UA)
+            return r.status_code == 200 and len(r.content or b"") >= 100
         except Exception:
             return False
 
