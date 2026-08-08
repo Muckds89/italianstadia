@@ -22773,8 +22773,8 @@
     "address": "2 Aleea Stadionului",
     "year_of_construction": 1973,
     "city": 299,
-    "latitude": "46.768330",
-    "longitude": "23.572220",
+    "latitude": "46.779678",
+    "longitude": "23.577247",
     "owner_raw": "Cluj County Council",
     "ownership": "PUBLIC",
     "slug": "dr-constantin-radulescu",
@@ -45083,6 +45083,33 @@
   }
 },
 {
+  "model": "italiastadiaapp.stadium",
+  "pk": 1088,
+  "fields": {
+    "name": "Arcul de Triumf",
+    "capacity": 8207,
+    "address": null,
+    "year_of_construction": 2021,
+    "city": 300,
+    "latitude": "44.468893",
+    "longitude": "26.074991",
+    "owner_raw": "National Agency for Sport",
+    "ownership": "PUBLIC",
+    "slug": "arcul-de-triumf",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Arcul_de_Triumf_Stadium",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": "Dinamo's home ground while their own stadium is rebuilt; big matches are moved to the Arena Nationala.",
+    "locked": false
+  }
+},
+{
   "model": "italiastadiaapp.team",
   "pk": 7,
   "fields": {
@@ -53203,7 +53230,7 @@
     "founded": "1948-01-01",
     "tier": 1,
     "girone": null,
-    "stadium": 346,
+    "stadium": 1088,
     "manager": "Nuno Campos",
     "num_of_titles": 18,
     "city": 300,
