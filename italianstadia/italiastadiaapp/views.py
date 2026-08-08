@@ -3682,10 +3682,19 @@ def _compose_multi_badge(imgs, size):
     return base
 
 
+# Crests are downloaded and cached at ONE canonical size, then scaled to whatever
+# the caller wants. The disk-cache key includes the size, so when the main map
+# asked for 26 px and the inset for ~40 px every crest was downloaded TWICE — and
+# the inset's second round is what the host throttled, which is why the auto-zoom
+# box rendered green dots while the map around it showed badges. One size means
+# one download, and the inset now reuses what the map already fetched.
+_BADGE_FETCH_SIZE = 160
+
+
 def _prefetch_badges(stadiums, size=20):
     """Fetch tenant badge images in parallel (hard 22 s budget) and compose a
     single badge per stadium, so shared grounds show a combined crest. Returns
-    {stadium_name: PIL image}; uncached badges are skipped gracefully."""
+    {stadium_name: PIL image} at `size`; uncached badges are skipped gracefully."""
     # Collect every unique crest URL (from the tenants list, else the single url).
     url_set = set()
     for s in stadiums:
@@ -3700,7 +3709,8 @@ def _prefetch_badges(stadiums, size=20):
     deadline = _time.monotonic() + 22   # hard budget, stay under Render's 30s limit
     url_imgs = {}
     with ThreadPoolExecutor(max_workers=8) as pool:
-        futures = {pool.submit(_fetch_badge_image, url, size): url for url in url_set}
+        futures = {pool.submit(_fetch_badge_image, url, _BADGE_FETCH_SIZE): url
+                   for url in url_set}
         try:
             for future in as_completed(futures, timeout=22):
                 if _time.monotonic() > deadline:
@@ -3721,7 +3731,10 @@ def _prefetch_badges(stadiums, size=20):
                                    if s.get("image_url") else [])
         imgs = [url_imgs[t["image_url"]] for t in tlist if t.get("image_url") in url_imgs]
         if imgs:
-            result[s["name"]] = _compose_multi_badge(imgs, size)
+            composed = _compose_multi_badge(imgs, _BADGE_FETCH_SIZE)
+            if composed is not None and size and size != _BADGE_FETCH_SIZE:
+                composed = composed.resize((size, size), Image.LANCZOS)
+            result[s["name"]] = composed
     return result
 
 
