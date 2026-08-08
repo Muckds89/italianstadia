@@ -3585,12 +3585,23 @@ def _fetch_badge_image(url, size=20):
         # The timeout is also longer for Wikimedia: an SVG is rasterised on their
         # side and 3s was not always enough, which silently produced a bare dot.
         wikimedia = "wikimedia.org" in url or "wikipedia.org" in url
-        r = _requests.get(
-            url,
-            timeout=10 if wikimedia else 3,
-            headers={"User-Agent": _BADGE_UA_WIKIMEDIA if wikimedia
-                     else "StadiumsOfEurope/1.0"},
-        )
+        headers = {"User-Agent": _BADGE_UA_WIKIMEDIA if wikimedia
+                   else "StadiumsOfEurope/1.0"}
+        timeout = 10 if wikimedia else 3
+
+        # Retry 5xx and 429. Transfermarkt's CDN 503s individual assets at random
+        # and Wikimedia rate-limits bursts; a single attempt meant one unlucky
+        # request silently dropped that club's badge and the map drew a bare dot
+        # instead. Petrolul Ploiesti vanished from a published Romania map exactly
+        # this way, while the same URL served fine seconds later. Kept short: this
+        # runs inside the render's 22 s badge budget.
+        r = None
+        for attempt in range(3):
+            r = _requests.get(url, timeout=timeout, headers=headers)
+            if r.status_code < 500 and r.status_code != 429:
+                break
+            if attempt < 2:
+                _time.sleep(0.4 * (attempt + 1))
         r.raise_for_status()
         img = _fit_badge_in_circle(Image.open(io.BytesIO(r.content)).convert("RGBA"), size)
         if disk_path:

@@ -735,3 +735,70 @@ class FontFallbackTests(TestCase):
         for ch in "şğİıŞĞ" + "țțăîâȚĂÎÂ":
             self.assertNotEqual(pixels(ch), notdef,
                                 f"font has no glyph for {ch!r} - it will render as a box")
+
+
+class BadgeFetchRetryTests(TestCase):
+    """Transfermarkt's CDN 503s individual crests at random. Without a retry, one
+    unlucky request drops that club's badge and the map draws a bare dot — which
+    is only ever spotted by eye, after publishing. Petrolul Ploiesti disappeared
+    from a Romania map exactly this way while the URL served fine seconds later."""
+
+    def setUp(self):
+        import shutil, os
+        from italiastadiaapp import views
+        # a warm disk cache would satisfy the fetch before any HTTP happens
+        shutil.rmtree(views._BADGE_DISK_CACHE, ignore_errors=True)
+        os.makedirs(views._BADGE_DISK_CACHE, exist_ok=True)
+
+    @staticmethod
+    def _png_bytes():
+        import io
+        from PIL import Image
+        buf = io.BytesIO()
+        Image.new("RGBA", (8, 8), (255, 0, 0, 255)).save(buf, format="PNG")
+        return buf.getvalue()
+
+    def _run(self, statuses):
+        """Serve `statuses` in order; returns (image_or_None, attempts_made)."""
+        from unittest import mock
+        from italiastadiaapp import views
+        calls = {"n": 0}
+
+        class Resp:
+            def __init__(self, code, body):
+                self.status_code, self.content = code, body
+
+            def raise_for_status(self):
+                if self.status_code >= 400:
+                    raise Exception(f"HTTP {self.status_code}")
+
+        def fake_get(url, **kw):
+            code = statuses[min(calls["n"], len(statuses) - 1)]
+            calls["n"] += 1
+            return Resp(code, self._png_bytes() if code == 200 else b"")
+
+        with mock.patch.object(views._requests, "get", side_effect=fake_get), \
+                mock.patch.object(views._time, "sleep", lambda *_: None):
+            img = views._fetch_badge_image("https://tmssl.example/x.png", 26)
+        return img, calls["n"]
+
+    def test_transient_503_then_success_still_yields_a_badge(self):
+        img, attempts = self._run([503, 200])
+        self.assertIsNotNone(img, "a retryable 503 must not lose the badge")
+        self.assertEqual(attempts, 2)
+
+    def test_rate_limit_is_retried_too(self):
+        img, attempts = self._run([429, 200])
+        self.assertIsNotNone(img)
+        self.assertEqual(attempts, 2)
+
+    def test_persistent_503_gives_up_without_hanging_the_render(self):
+        img, attempts = self._run([503])
+        self.assertIsNone(img)
+        self.assertEqual(attempts, 3, "must stop at 3 attempts, not loop")
+
+    def test_404_is_not_retried(self):
+        """A missing file will never appear; retrying only burns the badge budget."""
+        img, attempts = self._run([404])
+        self.assertIsNone(img)
+        self.assertEqual(attempts, 1)
