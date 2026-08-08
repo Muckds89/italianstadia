@@ -894,3 +894,91 @@ class CrestFileTypeTests(TestCase):
         got = Command._pick_article_image(
             ["File:FC Example.svg", "File:FC Example logo.svg"], "FC Example")
         self.assertEqual(got, "File:FC Example logo.svg")
+
+
+class LocalCrestTests(TestCase):
+    """Crests are committed to static/crests/ so a render makes no network call
+    for badges. Transfermarkt soft-blocked us and Wikimedia throttled the
+    replacement; both turned badges into bare dots on already-published maps."""
+
+    def setUp(self):
+        from italiastadiaapp.models import City, Country, League, Stadium, Team
+        c = Country.objects.create(name="Crestland", code="CL")
+        self.lg = League.objects.create(name="Crest League", country=c,
+                                        division_level=1)
+        self.city = City.objects.create(name="Cresttown", country="Crestland")
+        self.stadium = Stadium.objects.create(name="Crest Park", city=self.city,
+                                              capacity=1000, latitude=50.0,
+                                              longitude=5.0)
+        self.team = Team.objects.create(name="Crest FC", stadium=self.stadium,
+                                        city=self.city, league=self.lg,
+                                        image_url="https://example.invalid/x.png")
+
+    def _write_crest(self, fname):
+        import os
+        from PIL import Image
+        from italiastadiaapp.views import _CREST_DIR, _BADGE_FETCH_SIZE
+        os.makedirs(_CREST_DIR, exist_ok=True)
+        path = os.path.join(_CREST_DIR, fname)
+        Image.new("RGBA", (_BADGE_FETCH_SIZE, _BADGE_FETCH_SIZE),
+                  (10, 200, 90, 255)).save(path)
+        self.addCleanup(lambda: os.path.exists(path) and os.remove(path))
+        return path
+
+    def _prefetch(self, size=26):
+        from italiastadiaapp.views import _prefetch_badges
+        return _prefetch_badges([{
+            "name": self.stadium.name,
+            "teams": [{"name": self.team.name, "image_url": self.team.image_url,
+                       "crest_file": self.team.crest_file}],
+        }], size=size)
+
+    def test_render_needs_no_network_when_the_crest_is_local(self):
+        from unittest import mock
+        from italiastadiaapp import views
+        self._write_crest("crest-fc-test.png")
+        self.team.crest_file = "crest-fc-test.png"
+        self.team.save(update_fields=["crest_file"])
+        with mock.patch.object(views._requests, "get",
+                               side_effect=AssertionError("network was used")):
+            got = self._prefetch()
+        self.assertIn(self.stadium.name, got)
+        self.assertEqual(got[self.stadium.name].size, (26, 26))
+
+    def test_falls_back_to_the_url_when_no_local_file(self):
+        """Mid-migration a club may have image_url but no crest_file yet."""
+        from unittest import mock
+        from italiastadiaapp import views
+        calls = {"n": 0}
+
+        def fake(*a, **k):
+            calls["n"] += 1
+            raise RuntimeError("offline")
+
+        with mock.patch.object(views._requests, "get", side_effect=fake):
+            self._prefetch()
+        self.assertGreater(calls["n"], 0, "must still try the remote URL")
+
+    def test_a_missing_local_file_does_not_break_the_render(self):
+        """crest_file pointing at a deleted file must fall back, not crash."""
+        from unittest import mock
+        from italiastadiaapp import views
+        self.team.crest_file = "definitely-not-there.png"
+        self.team.save(update_fields=["crest_file"])
+        with mock.patch.object(views._requests, "get",
+                               side_effect=RuntimeError("offline")):
+            self.assertEqual(self._prefetch(), {})
+
+    def test_local_crest_is_scaled_to_the_caller_size(self):
+        """The map and the inset ask for different sizes off ONE stored file."""
+        self._write_crest("crest-fc-test2.png")
+        self.team.crest_file = "crest-fc-test2.png"
+        self.team.save(update_fields=["crest_file"])
+        self.assertEqual(self._prefetch(26)[self.stadium.name].size, (26, 26))
+        self.assertEqual(self._prefetch(40)[self.stadium.name].size, (40, 40))
+
+    def test_basename_only_no_path_traversal(self):
+        """crest_file is a filename, not a path; a traversal attempt resolves
+        inside the crest directory and simply misses."""
+        from italiastadiaapp.views import _local_crest
+        self.assertIsNone(_local_crest("../../settings.py"))

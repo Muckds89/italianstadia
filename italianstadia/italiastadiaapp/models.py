@@ -176,6 +176,14 @@ class Team(models.Model):
     image_credit = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
+    # Filename (not a path) under static/crests/ of the locally stored crest.
+    # Map exports used to fetch every crest from a third party at render time;
+    # Transfermarkt then soft-blocked us and Wikimedia throttled the replacement,
+    # both of which silently turned badges into bare dots on published maps. The
+    # renderer prefers this file and falls back to image_url, which is kept so the
+    # provenance survives and download_crests can re-run.
+    crest_file = models.CharField(max_length=255, blank=True, default="")
+
     locked = models.BooleanField(
         default=False,
         help_text="Protect manual corrections — the scraper skips locked teams.",

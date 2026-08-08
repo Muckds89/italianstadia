@@ -2403,7 +2403,8 @@ def _get_export_stadiums(params):
             tenants = [{"name": team_name, "image_url": image_url}] if team_name else []
         else:
             clubs = [t for t in teams if not t.is_national]
-            tenants = [{"name": t.name, "image_url": (t.image_url or "")} for t in clubs[:4]]
+            tenants = [{"name": t.name, "image_url": (t.image_url or ""),
+                        "crest_file": (t.crest_file or "")} for t in clubs[:4]]
             if not tenants and team_name:
                 tenants = [{"name": team_name, "image_url": image_url}]
         label_name = " / ".join(t["name"] for t in tenants[:2]) or team_name
@@ -3462,11 +3463,19 @@ def _make_background(style_key, W, H, bbox, use_tiles=True, land_color=None):
     return out
 
 
+_CREST_DIR = _os.path.join(str(settings.BASE_DIR), "italiastadiaapp",
+                          "static", "crests")
 _BADGE_DISK_CACHE = _os.path.join(_os.path.sep, "tmp", "soe_badges")
 try:
     _os.makedirs(_BADGE_DISK_CACHE, exist_ok=True)
 except Exception:
     _BADGE_DISK_CACHE = None
+
+
+# Wikimedia's user-agent policy: a descriptive agent with contact details.
+# A generic string gets rate-limited (HTTP 429) as soon as several crests are
+# fetched in one render, which shows up as randomly missing badges.
+_BADGE_UA_WIKIMEDIA = "stadiamap/1.0 (destavola.marco@gmail.com)"
 
 
 def _svg_badge_png_url(svg_url):
@@ -3487,7 +3496,7 @@ def _svg_badge_png_url(svg_url):
             f"https://{host}/w/api.php",
             params={"action": "query", "titles": title, "prop": "imageinfo",
                     "iiprop": "url", "iiurlwidth": 256, "format": "json"},
-            headers={"User-Agent": "stadiamap/1.0 (stadiumsofeurope.com)"}, timeout=5).json()
+            headers={"User-Agent": _BADGE_UA_WIKIMEDIA}, timeout=15).json()
         for p in r["query"]["pages"].values():
             ii = p.get("imageinfo", [{}])[0]
             return ii.get("thumburl") or None
@@ -3496,10 +3505,6 @@ def _svg_badge_png_url(svg_url):
     return None
 
 
-# Wikimedia's user-agent policy: a descriptive agent with contact details.
-# A generic string gets rate-limited (HTTP 429) as soon as several crests are
-# fetched in one render, which shows up as randomly missing badges.
-_BADGE_UA_WIKIMEDIA = "stadiamap/1.0 (destavola.marco@gmail.com)"
 
 # Per-host concurrency caps for badge fetches.
 #
@@ -3691,23 +3696,49 @@ def _compose_multi_badge(imgs, size):
 _BADGE_FETCH_SIZE = 160
 
 
+def _local_crest(fname):
+    """Load a committed crest from static/crests/, or None.
+
+    This is the whole point of download_crests: in the steady state every club has
+    a local file and a render makes NO network call for badges, so no third party
+    can blank them again. Files are already PNG at _BADGE_FETCH_SIZE and already
+    fitted to the circular mask, so nothing else has to happen here.
+    """
+    if not fname or not _CREST_DIR:
+        return None
+    path = _os.path.join(_CREST_DIR, _os.path.basename(fname))
+    if not _os.path.exists(path):
+        return None
+    try:
+        return Image.open(path).convert("RGBA")
+    except Exception:
+        return None
+
+
 def _prefetch_badges(stadiums, size=20):
     """Fetch tenant badge images in parallel (hard 22 s budget) and compose a
     single badge per stadium, so shared grounds show a combined crest. Returns
     {stadium_name: PIL image} at `size`; uncached badges are skipped gracefully."""
-    # Collect every unique crest URL (from the tenants list, else the single url).
-    url_set = set()
+    # Local committed crests first; only what is still missing goes over the wire.
+    local, url_set = {}, set()
     for s in stadiums:
-        tlist = s.get("teams") or ([{"image_url": s.get("image_url", "")}]
+        tlist = s.get("teams") or ([{"image_url": s.get("image_url", ""),
+                                     "crest_file": s.get("crest_file", "")}]
                                    if s.get("image_url") else [])
         for t in tlist:
-            if t.get("image_url"):
+            key = t.get("image_url") or t.get("crest_file")
+            if not key:
+                continue
+            img = _local_crest(t.get("crest_file"))
+            if img is not None:
+                local[key] = img
+            elif t.get("image_url"):
                 url_set.add(t["image_url"])
-    if not url_set:
+    if not url_set and not local:
         return {}
 
     deadline = _time.monotonic() + 22   # hard budget, stay under Render's 30s limit
-    url_imgs = {}
+    url_imgs = dict(local)
     with ThreadPoolExecutor(max_workers=8) as pool:
         futures = {pool.submit(_fetch_badge_image, url, _BADGE_FETCH_SIZE): url
                    for url in url_set}
@@ -3727,9 +3758,12 @@ def _prefetch_badges(stadiums, size=20):
 
     result = {}
     for s in stadiums:
-        tlist = s.get("teams") or ([{"image_url": s.get("image_url", "")}]
+        tlist = s.get("teams") or ([{"image_url": s.get("image_url", ""),
+                                     "crest_file": s.get("crest_file", "")}]
                                    if s.get("image_url") else [])
-        imgs = [url_imgs[t["image_url"]] for t in tlist if t.get("image_url") in url_imgs]
+        imgs = [url_imgs[k] for k in
+                ((t.get("image_url") or t.get("crest_file")) for t in tlist)
+                if k in url_imgs]
         if imgs:
             composed = _compose_multi_badge(imgs, _BADGE_FETCH_SIZE)
             if composed is not None and size and size != _BADGE_FETCH_SIZE:
