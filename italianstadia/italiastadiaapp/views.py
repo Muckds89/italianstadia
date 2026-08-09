@@ -4426,7 +4426,10 @@ def _source_text(params):
     """Credit line: our data sources plus the basemap attribution for the style
     actually rendered. Tile attribution is dropped when tiles are switched off
     (solid background), because then no provider imagery is shown."""
-    text = "Data: Wikipedia & Transfermarkt"
+    # Crests now come from Wikipedia and Wikimedia Commons, not Transfermarkt, so
+    # the credit says so. Stadium, club and attendance data still comes from
+    # Wikipedia and Transfermarkt, which is why Transfermarkt stays on the line.
+    text = "Data: Wikipedia & Transfermarkt  ·  Crests: Wikipedia & Wikimedia Commons"
     uses_tiles = params.get("tiles", True) and not params.get("bg_color")
     if uses_tiles:
         attr = _TILE_ATTRIBUTION.get(params.get("style_key"))
@@ -4439,7 +4442,7 @@ def _draw_source(img, W, H, legend_entries=0, text=None):
     """Small data-source + basemap-attribution credit in the BOTTOM-LEFT corner.
     When a legend is present (also bottom-left) the credit stacks just above it
     so they don't overlap."""
-    text = text or "Data: Wikipedia & Transfermarkt"
+    text = text or "Data: Wikipedia & Transfermarkt  ·  Crests: Wikipedia & Wikimedia Commons"
     font = _load_font(bold=False, size=13)
     d = ImageDraw.Draw(img)
     try:

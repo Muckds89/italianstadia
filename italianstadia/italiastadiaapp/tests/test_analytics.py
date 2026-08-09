@@ -138,6 +138,11 @@ class BasemapAttributionTests(TestCase):
     def test_always_credits_our_data_sources(self):
         self.assertIn("Wikipedia & Transfermarkt", self._text())
 
+    def test_credits_wikimedia_for_crests(self):
+        """Crests are sourced from Wikipedia/Commons and served from our own
+        domain; Transfermarkt stays credited for the stadium and club data."""
+        self.assertIn("Crests: Wikipedia & Wikimedia Commons", self._text())
+
     def test_no_tile_attribution_when_tiles_off(self):
         # solid background => no provider imagery shown => no provider credit
         txt = self._text(tiles=False)
