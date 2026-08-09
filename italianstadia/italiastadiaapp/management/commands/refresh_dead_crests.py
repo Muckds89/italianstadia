@@ -230,6 +230,17 @@ class Command(BaseCommand):
                     return True
                 return not u.endswith((".svg", ".png"))
             targets = [t for t in qs if suspect(t)]
+
+        # A crest deliberately cleared as WRONG must not be re-picked from the same
+        # article on the next run. Acerbis (a kit manufacturer) and Doosan (a
+        # sponsor) were cleared once and silently came back, because the article
+        # scan has no memory of a human decision. image_credit carries that memory.
+        held = [t for t in targets if (t.image_credit or "").startswith("No verified crest")]
+        if held:
+            targets = [t for t in targets if t not in held]
+            self.stdout.write(self.style.WARNING(
+                f"holding {len(held)} club(s) previously cleared as wrong: "
+                + ", ".join(sorted(t.name for t in held)[:8])))
         self.stdout.write(f"{len(targets)} crests to re-source "
                           f"(of {len(qs)} clubs)\n")
 

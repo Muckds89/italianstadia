@@ -128,10 +128,10 @@ class Command(BaseCommand):
         for t in qs:
             fname = f"{t.slug}.png"
             path = out_dir / fname
-            if path.exists() and not o["force"]:
-                if t.crest_file != fname:
-                    t.crest_file = fname
-                    t.save(update_fields=["crest_file"])
+            # An EMPTY crest_file means the URL was corrected and the file on disk
+            # is stale, so it must be re-downloaded. Re-linking it instead kept AS
+            # Roma showing a text wordmark after its crest had been fixed.
+            if path.exists() and not o["force"] and t.crest_file == fname:
                 skipped += 1
                 continue
 
