@@ -2880,15 +2880,37 @@ def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox
         "tl": (margin, margin), "tr": (W - IW - margin, margin),
         "bl": (margin, H - IH - margin), "br": (W - IW - margin, H - IH - margin),
     }
+    # The source rectangle on the main map: the inset must never sit on top of the
+    # very grounds it is magnifying.
+    src_rect = None
+    if main_bbox:
+        src_rect = (min(ax0, ax1), min(ay0, ay1), max(ax0, ax1), max(ay0, ay1))
+
+    def _overlaps(box, other, pad=0):
+        return not (box[2] + pad < other[0] or box[0] - pad > other[2]
+                    or box[3] + pad < other[1] or box[1] - pad > other[3])
+
     def _corner_score(pos):
+        """Lower is better: the NEAREST corner that covers nothing.
+
+        This used to return `dist - penalty` and take the max, i.e. the corner
+        FURTHEST from the cluster. On the Austria map that put the Vienna inset in
+        the top-left and drew its leader diagonally across the entire country --
+        "who the hell draws lines across if it's not necessary", as a reader put
+        it. Distance was never the goal; not covering anything was. So: minimise
+        the leader length, and let a large penalty rule out any corner that would
+        overlap the grounds being magnified or a reserved label column.
+        """
         x0, y0 = corners[pos]
         cx, cy = x0 + IW / 2, y0 + IH / 2
         dist = ((cx - ccx) ** 2 + (cy - ccy) ** 2) ** 0.5
         box = (x0, y0, x0 + IW, y0 + IH)
-        penalty = sum(10000 for rb in (reserves or [])
-                      if not (box[2] < rb[0] or box[0] > rb[2] or box[3] < rb[1] or box[1] > rb[3]))
-        return dist - penalty
-    pos = max(corners, key=_corner_score)
+        penalty = sum(10000 for rb in (reserves or []) if _overlaps(box, rb))
+        if src_rect and _overlaps(box, src_rect, pad=8):
+            penalty += 10000
+        return dist + penalty
+
+    pos = min(corners, key=_corner_score)
     ix0, iy0 = corners[pos]
     return {"ix0": ix0, "iy0": iy0, "IW": IW, "IH": IH, "cluster_bbox": cluster_bbox,
             "box": (ix0, iy0, ix0 + IW, iy0 + IH)}

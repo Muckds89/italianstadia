@@ -23740,7 +23740,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 382,
   "fields": {
-    "name": "Merkur Arena",
+    "name": "Stadion Graz-Liebenau",
     "capacity": 16364,
     "address": "Ivica-Osim-Platz 1 8041 Graz - Liebenau Austria",
     "year_of_construction": 1997,
@@ -23768,7 +23768,7 @@
         "credit": "Jacktd / Wikimedia Commons / CC BY-SA 3.0"
       }
     ],
-    "description": null,
+    "description": "Known as the Merkur Arena until the naming-rights contract with Merkur Versicherung expired on 28 February 2026.",
     "locked": false
   }
 },
@@ -54615,8 +54615,8 @@
     "average_attendance": 2031,
     "wikipedia_url": "https://en.wikipedia.org/wiki/WSG_Tirol",
     "transfermarkt_url": "https://www.transfermarkt.com/wsg-tirol/startseite/verein/2446",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/59/Swarovski_Wattens-_Logo_Gesamtverein.svg",
-    "image_credit": "Crest via Commons (P154); Transfermarkt copy unavailable.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/8/85/WSG_Tirol_logo.svg",
+    "image_credit": "Crest via Wikimedia Commons.",
     "description": "Wattener Sportgemeinschaft Tirol ( lit. ' Wattens' Sports Community Tyrol ' ), commonly known as WSG Tirol , is a professional association football club based in the town of Wattens , Tyrol , Austria, that competes in the Austrian Football Bundesliga , the top tier of the Austrian football league system . Founded in 1930, it is affiliated to the Tirol Football Association . The team plays its home matches at Tivoli Stadion Tirol , where it has been based since 2019. In the 1969–70 season they played in the Nationalliga, the highest division in Austrian football at this time.",
     "crest_file": "wsg-tirol.png",
     "locked": false,
