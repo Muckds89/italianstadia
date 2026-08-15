@@ -62,7 +62,12 @@ _YEAR = r"(?:1[89]\d\d|20[0-2]\d)"
 _DASH = "[-‐‑‒–—―]"
 _CLOSED = _YEAR + r"\s*" + _DASH + r"\s*(?:" + _YEAR + r"|\d\d)(?!\d)"
 _OPEN = _YEAR + r"\s*" + _DASH + r"\s*(?!\d)"
-_RETIRED_WORD = r"former[_ ]logo|logo[_ ]avant|avant[_ ]1|jahre"
+# "old logo"/"old crest" carry no date at all, so the range test never saw
+# them: Newcastle United was on "NUFC - Old Crest - Magpie.png" and West
+# Bromwich on "West-Bromwich-Albion-F.C.-old-logo.png".
+_RETIRED_WORD = (r"former[_ ]logo|logo[_ ]avant|avant[_ ]1|jahre"
+                 r"|old[_ -](?:logo|crest|badge|emblem)"
+                 r"|(?:logo|crest|badge)[_ -]old")
 _CENTENARY = r"[_ ]100[_ ](?:years|jaar|lat|anni)|[_ ]100[_ ]\d"
 HISTORIC = re.compile("|".join((_CLOSED, _RETIRED_WORD, _CENTENARY)), re.I)
 _HAS_OPEN = re.compile(_OPEN)

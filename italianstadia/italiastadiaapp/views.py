@@ -3286,11 +3286,23 @@ def _point_in_ring(lon, lat, ring):
     return inside
 
 
-def _spotlight_country(img, stadiums, bbox, W, H, dim=165):
+def _spotlight_country(img, stadiums, bbox, W, H, dim=165, focus=None):
     """Dim everything OUTSIDE the country/countries that contain the displayed
     stadiums, and outline those borders, so the selected country stands out.
-    Name-independent: identifies the country by which polygon contains the
-    stadiums (works even for England → the UK polygon)."""
+
+    Containment alone cannot express "the English league", because an English
+    league is not confined to England: Cardiff, Swansea and Wrexham are Welsh
+    clubs in the EFL, and Berwick-style edge cases aside, letting their grounds
+    choose the highlight lights up Wales too. `focus` names the country to
+    highlight so those clubs still appear as markers OUTSIDE the lit area, which
+    is the honest picture -- they play in England's pyramid, they are not in
+    England. Containment stays the fallback when no country filter is set.
+
+    This only became expressible once the border data was split: the bundled set
+    had ONE "United Kingdom" polygon, so England, Scotland, Wales and Northern
+    Ireland could not be told apart at all. It now carries the four home nations
+    as separate Natural Earth map units.
+    """
     pts = [(s["lon"], s["lat"]) for s in stadiums]
     if not pts:
         return img
@@ -3328,6 +3340,16 @@ def _spotlight_country(img, stadiums, bbox, W, H, dim=165):
                     and _point_in_ring(lo, la, ring)):
                 return True
         return False
+
+    # A named focus wins outright: highlight that country and nothing else, however
+    # the grounds fall. Matched on the polygon's own name, so it works for any
+    # country and needs no table.
+    if focus:
+        want = (focus or "").strip().lower()
+        named = {i for i, f in enumerate(feats)
+                 if (f.get("properties", {}).get("name") or "").strip().lower() == want}
+        if named:
+            return _spotlight_draw(img, feat_rings, named, bbox, W, H, dim)
 
     # First pass: which country polygon strictly contains each displayed ground?
     matched = set()
@@ -3367,13 +3389,22 @@ def _spotlight_country(img, stadiums, bbox, W, H, dim=165):
 
     if not matched:
         return img  # no polygon matched, leave the map untouched
+    return _spotlight_draw(img, feat_rings, matched, bbox, W, H, dim)
 
+
+def _spotlight_draw(img, feat_rings, selected, bbox, W, H, dim):
+    """Dim everything outside `selected` and trace its border.
+
+    Split out of _spotlight_country so the name-focus path and the containment
+    path light the map identically -- the only thing that differs between them is
+    WHICH polygons get chosen.
+    """
     # Draw the WHOLE of each matched country (every island / region), not just the
     # part that holds a stadium, so Denmark keeps Jutland, Serbia keeps Vojvodina, etc.
     mask = Image.new("L", (W, H), 0)
     md = ImageDraw.Draw(mask)
     border_rings = []
-    for fi in matched:
+    for fi in selected:
         for ring in feat_rings[fi][0]:
             pix = [_lon_lat_to_px(lo, la, bbox, W, H) for lo, la in ring]
             if len(pix) >= 3:
@@ -4754,7 +4785,8 @@ def _compose_export_image(params):
     # Spotlight: dim everything outside the selected country and outline it,
     # so badges/labels (drawn next, on top) stay fully bright.
     if params.get("spotlight"):
-        img = _spotlight_country(img, stadiums, bbox, W, H)
+        img = _spotlight_country(img, stadiums, bbox, W, H,
+                                 focus=params.get("country") or None)
 
     # Reserve every overlay area from label placement so labels never land on the
     # title, logo, legend, scale bar, or north arrow. Map tiles/badges still
