@@ -43395,7 +43395,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 1030,
   "fields": {
-    "name": "Diyarbakır Stadium",
+    "name": "Diyarbakır Stadyumu",
     "capacity": 33000,
     "address": "Diyarbakır , Turkey",
     "year_of_construction": 2018,
@@ -44074,7 +44074,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 1052,
   "fields": {
-    "name": "Çorum City Stadium",
+    "name": "Çorum Şehir Stadyumu",
     "capacity": 15000,
     "address": null,
     "year_of_construction": 2020,
@@ -44101,7 +44101,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 1053,
   "fields": {
-    "name": "Kazım Karabekir Stadium",
+    "name": "Kâzım Karabekir Stadyumu",
     "capacity": 21374,
     "address": "Erzurum , Turkey",
     "year_of_construction": 1968,
@@ -72559,7 +72559,7 @@
   "pk": 1089,
   "fields": {
     "is_national": false,
-    "name": "Çorum",
+    "name": "Çorum FK",
     "founded": "2015-01-01",
     "tier": 2,
     "girone": null,
@@ -72586,7 +72586,7 @@
   "pk": 1090,
   "fields": {
     "is_national": false,
-    "name": "Erzurumspor",
+    "name": "Erzurumspor FK",
     "founded": "2015-01-01",
     "tier": 2,
     "girone": null,
