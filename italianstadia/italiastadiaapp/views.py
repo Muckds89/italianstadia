@@ -1,6 +1,7 @@
 import csv
 import hashlib
 import io
+import base64
 import json
 import logging
 import math
@@ -2311,6 +2312,8 @@ def _parse_export_params(request):
                          in ("auto", "tl", "tr", "bl", "br") else "auto"),
         "inset_frac": {"s": 0.24, "m": 0.30, "l": 0.38}.get(
             request.GET.get("inset_size", "m").strip().lower(), 0.30),
+        # Hand-placed inset labels from the drag editor, keyed by stadium slug.
+        "label_pos": _parse_label_overrides(request.GET.get("label_pos", "")),
         "no_badges":  request.GET.get("no_badges", "0") == "1",
         "surface_known": request.GET.get("surface_known", "0") == "1",
     }
@@ -2418,6 +2421,7 @@ def _get_export_stadiums(params):
             tenants = []
         results.append({
             "name":         s.name,
+            "slug":         s.slug or "",
             "team_name":    label_name,
             "teams":        tenants,
             "city":         s.city.name if s.city else "",
@@ -2940,6 +2944,42 @@ def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox
             "box": (ix0, iy0, ix0 + IW, iy0 + IH)}
 
 
+def _label_key(s):
+    """Stable identifier for one inset label, used by the drag editor.
+
+    Must survive a re-render: the browser sends back positions keyed by this, and
+    a list index would silently reassign every saved position the moment a filter
+    changes the stadium set. The stadium slug is unique and stable; tournament and
+    development venues have no slug, so their name is slugified as a fallback.
+    """
+    return (s.get("slug") or "").strip() or slugify(s.get("name", ""))[:60]
+
+
+def _parse_label_overrides(raw):
+    """Parse `label_pos=<key>:<nx>,<ny>;...` into {key: (nx, ny)}.
+
+    Coordinates are the pill's top-left as a FRACTION of the inset box, so a saved
+    layout keeps working when the user switches export size -- the whole point of
+    the resolution-independent sizing work. Anything unparseable is dropped rather
+    than raising: this arrives from a query string and a single bad pair must not
+    cost the user their whole map.
+    """
+    out = {}
+    for part in (raw or "").split(";"):
+        part = part.strip()
+        if not part or ":" not in part:
+            continue
+        key, _, coords = part.partition(":")
+        try:
+            nx, ny = (float(v) for v in coords.split(",", 1))
+        except (TypeError, ValueError):
+            continue
+        if not (-0.5 <= nx <= 1.5 and -0.5 <= ny <= 1.5):
+            continue          # far outside the box: treat as corrupt, not as intent
+        out[key.strip()[:60]] = (nx, ny)
+    return out
+
+
 def _measure_text(draw, text, font, fallback_cw=7):
     """True pixel size of `text`. Shared by the main label engine and the inset —
     the inset used to estimate width as len(text) * font.size * 0.58, which is
@@ -2969,7 +3009,7 @@ def _wrap_text(draw, text, font, max_w, fallback_cw=7):
 
 def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
                 main_bbox=None, layout=None, show_source=True, header="Detail view",
-                draw_labels=True):
+                draw_labels=True, label_overrides=None, geometry_sink=None):
     """Magnifier inset: render the densest cluster zoomed into a corner box, draw
     a source outline where it sits on the main map, and connect the two. Labels in
     the box are clean because only a few grounds are shown, enlarged."""
@@ -3030,10 +3070,23 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
     # Now text is measured with real metrics, wrapped to a width that makes a
     # left/right overlap geometrically impossible, and the font steps down until the
     # tallest column genuinely fits.
-    PAD = 4
-    GAP_MIN = 3
-    hdr_h = int(IW * 0.03) + 16          # keep clear of the "Detail view" header
-    avail_h = (IH - 6) - hdr_h
+    # Pill padding and gaps scale with the export, like label_size and badge_size
+    # already do. As fixed pixel counts they made a pill a different FRACTION of
+    # the box at each size, so an inset never looked the same on the HD preview as
+    # on the FHD file people paid for -- and a hand-placed label clamped to a
+    # different spot on each.
+    _k = max(0.5, W / float(_REFERENCE_W))
+    PAD = max(2, int(round(4 * _k)))
+    GAP_MIN = max(2, int(round(3 * _k)))
+    ROW_GAP = max(1, int(round(2 * _k)))
+    # Keep clear of the "Detail view" header. Every term scales with IW, so the
+    # header occupies the same FRACTION of the box at any export size. It used to
+    # be `int(IW * 0.03) + 16`, and that absolute 16 made the reserved strip 16.9%
+    # of the box at HD but 13.8% at FHD -- which silently moved a hand-placed label
+    # between the preview and the paid download, the same defect as the free/paid
+    # marker-size mismatch. The multiplier reproduces the old value at HD.
+    hdr_h = int(IW * 0.03) + int(IW * 0.0417)
+    avail_h = int(IH * 0.992) - hdr_h
     # Two pills plus a centre gutter must fit across the box, so neither column can
     # ever reach the other however long the club name is.
     pill_max_w = int(IW * 0.44)
@@ -3050,8 +3103,10 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
             rows += [(t, f_stad, "stad", w, h) for t, w, h in
                      _wrap_text(d, s["name"], f_stad, pill_max_w - 2 * PAD)]
             tw = max(r[3] for r in rows) + 2 * PAD
-            th = sum(r[4] for r in rows) + 2 * PAD + 2 * (len(rows) - 1)
-            built.append({"px": px, "py": py, "rows": rows, "tw": tw, "th": th})
+            th = sum(r[4] for r in rows) + 2 * PAD + ROW_GAP * (len(rows) - 1)
+            built.append({"px": px, "py": py, "rows": rows, "tw": tw, "th": th,
+                          "key": _label_key(s), "team": team_line,
+                          "stadium": s.get("name", "")})
         by_x = sorted(built, key=lambda it: it["px"])
         half = (len(by_x) + 1) // 2
         left_ids = {id(it) for it in by_x[:half]}
@@ -3066,10 +3121,14 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
     # these grounds, so an unreadable overlap defeats it entirely.
     f_stad, f_team = font_s, font_t
     items, cols, tallest = _build(f_stad, f_team)
-    while tallest > avail_h and getattr(f_stad, "size", 0) > 9:
+    _step  = max(1, int(round(1 * _k)))
+    _floor = max(9, int(round(9 * _k)))
+    while tallest > avail_h and getattr(f_stad, "size", 0) > _floor:
         try:
-            f_stad = _load_font(bold=True,  size=f_stad.size - 1)
-            f_team = _load_font(bold=False, size=max(8, f_team.size - 1))
+            f_stad = _load_font(bold=True,  size=f_stad.size - _step)
+            f_team = _load_font(bold=False,
+                                size=max(max(8, int(round(8 * _k))),
+                                         f_team.size - _step))
         except Exception:
             break
         items, cols, tallest = _build(f_stad, f_team)
@@ -3091,6 +3150,47 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
             it["side"] = side
             y = it["ly"] + it["th"] + gap
 
+    # A position the user dragged replaces the computed one. It is applied AFTER
+    # the automatic pass so an override only moves its own pill: the column stack
+    # above stays intact for every label the user did not touch, and clearing one
+    # override returns just that label to its automatic slot.
+    overrides = label_overrides or {}
+    for it in items:
+        pos = overrides.get(it["key"])
+        if not pos:
+            continue
+        # Clamp on FRACTIONS of the box, never on the pill's own width or height.
+        #
+        # Font sizes are integers and the shrink loop steps discretely, so a pill
+        # is not exactly the same fraction of the box at every export size. Bounding
+        # by `IW - tw` therefore made the limit itself resolution-dependent, and a
+        # label dropped near an edge landed somewhere else on the paid file than on
+        # the HD preview it was placed on. Bounding by fractions makes the drop
+        # point a pure function of what the user dragged.
+        #
+        # The pill can then overhang; it is clipped by the inset image, which is the
+        # right failure -- the browser clamps against the real measured pill before
+        # sending, so overhang only happens for a hand-edited URL.
+        it["lx"] = int(max(IW * 0.005, min(IW * 0.92, pos[0] * IW)))
+        it["ly"] = int(max(hdr_h, min(IH * 0.90, pos[1] * IH)))
+        # The leader must leave from whichever edge faces the badge, or a moved
+        # pill draws its line out of the far side and back across itself.
+        it["side"] = "left" if (it["lx"] + it["tw"] / 2) < it["px"] else "right"
+
+    if geometry_sink is not None:
+        for it in items:
+            geometry_sink.append({
+                "key": it["key"], "team": it["team"], "stadium": it["stadium"],
+                # fractions of the INSET box, matching what label_pos expects back
+                "x": round(it["lx"] / float(IW), 5),
+                "y": round(it["ly"] / float(IH), 5),
+                "w": round(it["tw"] / float(IW), 5),
+                "h": round(it["th"] / float(IH), 5),
+                "anchor_x": round(it["px"] / float(IW), 5),
+                "anchor_y": round(it["py"] / float(IH), 5),
+                "moved": it["key"] in overrides,
+            })
+
     for it in items:
         lx, ly, tw, th = it["lx"], it["ly"], it["tw"], it["th"]
         # leader from the badge to the pill's inner edge (right edge for a left-column
@@ -3104,7 +3204,7 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
         for text, fnt, kind, _w, hh in it["rows"]:
             d.text((lx + PAD, yy), text, font=fnt,
                    fill=(170, 205, 255) if kind == "team" else (255, 255, 255))
-            yy += hh + 2
+            yy += hh + ROW_GAP
 
     # Re-draw the badges ON TOP of the pills. In a box this small the label columns
     # unavoidably run over the markers, and a hidden badge defeats the point of the
@@ -4732,7 +4832,13 @@ def _compose_export_image(params):
                                 extra_label_points=island_anchors)
     if inset_stadiums:
         img = _draw_inset(img, inset_stadiums, params, W, H, country_index,
-                          params["style_key"], main_bbox=bbox, layout=inset_layout)
+                          params["style_key"], main_bbox=bbox, layout=inset_layout,
+                          label_overrides=params.get("label_pos"),
+                          geometry_sink=params.get("_geometry_sink"))
+        if params.get("_geometry_sink") is not None and inset_layout:
+            params["_inset_box"] = {
+                "x": inset_layout["ix0"] / float(W), "y": inset_layout["iy0"] / float(H),
+                "w": inset_layout["IW"] / float(W), "h": inset_layout["IH"] / float(H)}
     legend_n = 0
     if params["legend"]:
         img = _draw_legend(img, params, stadiums)
@@ -4783,6 +4889,11 @@ def map_export(request):
     # by the paid path (_render_export_png) after a successful payment, so a clean
     # map can never leak from here.
     params["logo"] = True
+    # Collect inset label boxes during THIS render and ship them back on the same
+    # response. A separate geometry endpoint would mean a second full compose per
+    # preview, and this box is memory-capped enough already -- FHD and 4K are
+    # downgraded to HD above precisely because the free tier OOMs otherwise.
+    params["_geometry_sink"] = []
     try:
         img, err = _compose_export_image(params)
         if err:
@@ -4801,6 +4912,17 @@ def map_export(request):
     response = HttpResponse(buf.read(), content_type="image/png")
     response["Content-Disposition"] = f'attachment; filename="{filename}"'
     response["Content-Encoding"] = "identity"  # prevent GzipMiddleware from re-encoding PNG
+    # Inset label geometry for the drag editor. Base64 because header values are
+    # latin-1 and these carry club names like "Beşiktaş" and "Fenerbahçe"; raw
+    # UTF-8 in a header raises UnicodeEncodeError and would 500 the preview.
+    try:
+        geo = json.dumps({"inset": params.get("_inset_box"),
+                          "labels": params.get("_geometry_sink") or []},
+                         ensure_ascii=False, separators=(",", ":"))
+        response["X-Inset-Labels"] = base64.b64encode(
+            geo.encode("utf-8")).decode("ascii")
+    except Exception:
+        pass          # the map is the product; never fail a render over metadata
     return response
 
 
@@ -4837,7 +4959,7 @@ def export_checkout(request):
         "color_by", "ring_by", "no_badges",
         "style_key", "size_key", "title", "subtitle", "labels",
         "north", "legend", "scale", "spotlight", "logo", "bg_color", "inset", "inset_box",
-        "inset_size", "inset_corner",
+        "inset_size", "inset_corner", "label_pos",
         "islands",
         "label_size", "label_color", "badge_size", "tournament", "tstatus",
         "layer", "dstatus", "national",

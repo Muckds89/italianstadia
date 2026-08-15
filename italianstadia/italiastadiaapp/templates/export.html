@@ -339,6 +339,13 @@
                     <span class="text-secondary small">Click "Generate Preview" to see your map.</span>
                     <div class="wm" id="wm" style="display:none"><span>PREVIEW, stadiumsofeurope.com</span></div>
                 </div>
+                <div class="d-flex align-items-center gap-2 mt-2 flex-wrap">
+                    <button id="insetLabelBtn" type="button"
+                            class="btn btn-sm btn-outline-info d-none">Move inset labels</button>
+                    <button id="insetLabelReset" type="button"
+                            class="btn btn-sm btn-outline-secondary d-none">Reset positions</button>
+                    <span id="insetLabelStatus" class="text-info small"></span>
+                </div>
                 <p id="previewError" class="text-danger small mt-2 d-none"></p>
             </div>
 
@@ -381,6 +388,7 @@
 {# GA4 export-funnel tracking. Config only — the logic lives in export-analytics.js. #}
 <div id="exportAnalytics" data-step="view" data-price="{{ export_price_eur }}" hidden></div>
 <script src="{% static 'js/export-analytics.js' %}" defer></script>
+<script src="{% static 'js/inset-label-editor.js' %}" defer></script>
 
 <script>
 // ── Autocomplete ──────────────────────────────────────────────────────────────
@@ -560,6 +568,11 @@ function _getFilters() {
         inset_box:   window._insetBox ? window._insetBox.join(",") : "",
         inset_size:  document.getElementById("expInsetSize").value,
         inset_corner: document.getElementById("expInsetCorner").value,
+        // Hand-placed inset labels, "<slug>:<x>,<y>;..." as fractions of the box.
+        // Fractions, not pixels, so a layout dragged on the HD preview lands in
+        // the same place on a 4K paid download.
+        label_pos:   (window.insetLabelEditor
+                      ? window.insetLabelEditor.serialize() : ""),
         // One "colour-code by" control: a category colours the badge RING (badges
         // kept) or, with "coloured dots" ticked, the whole dot (badges hidden).
         color_by:    ((document.getElementById("expColourBy").value &&
@@ -619,15 +632,28 @@ document.getElementById("previewBtn").addEventListener("click", function () {
     errEl.classList.add("d-none");
     wrap.querySelectorAll("img,.text-secondary").forEach(el => el.remove());
 
+    let _geo = null;
     fetch(url)
         .then(r => {
             if (!r.ok) return r.json().then(d => { throw new Error(d.error || "Preview failed"); });
+            // Inset label boxes ride along on the render that just happened; the
+            // editor needs them to know where the pills are.
+            const raw = r.headers.get("X-Inset-Labels");
+            if (raw) {
+                try {
+                    _geo = JSON.parse(decodeURIComponent(escape(atob(raw))));
+                } catch (e) { _geo = null; }
+            }
             return r.blob();
         })
         .then(blob => {
             const img = document.createElement("img");
             img.src = URL.createObjectURL(blob);
             img.className = "preview-img";
+            img.addEventListener("load", function () {
+                document.dispatchEvent(new CustomEvent("export:previewReady",
+                    {detail: {geometry: _geo}}));
+            });
             wrap.appendChild(img);
             spinner.classList.add("d-none");
         })
