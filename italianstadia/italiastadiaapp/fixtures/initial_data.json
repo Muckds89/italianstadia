@@ -624,7 +624,7 @@
     "name": "La Liga",
     "country": 47,
     "division_level": 1,
-    "season": "2025/26",
+    "season": "2026/27",
     "hidden": false
   }
 },
@@ -756,7 +756,7 @@
     "name": "Segunda División",
     "country": 47,
     "division_level": 2,
-    "season": "2025/26",
+    "season": "2026/27",
     "hidden": false
   }
 },
@@ -18887,7 +18887,7 @@
   "pk": 233,
   "fields": {
     "name": "Spotify Camp Nou",
-    "capacity": 62657,
+    "capacity": 62652,
     "address": "Barcelona , Catalonia, Spain",
     "year_of_construction": 1957,
     "city": 205,
@@ -50705,7 +50705,7 @@
     "description": "Real Club Deportivo Mallorca, S.A.D. ( Spanish: [reˈal ˈkluβ ðepoɾˈtiβo maˈʎoɾka] , Catalan : Reial Club Deportiu Mallorca [rəˈjal ˈklub dəpuɾˈtiw məˈʎɔɾkə] , Royal Sporting Club Mallorca ), commonly known as Real Mallorca or RCD Mallorca , is a Spanish professional football club based in Palma on the island of Mallorca in the Balearic Islands . Founded on 5 March 1916, they currently compete in La Liga , holding home games at the Estadi Mallorca Son Moix with a 23,142-seat capacity.",
     "crest_file": "rcd-mallorca.png",
     "locked": false,
-    "league": 10,
+    "league": 22,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "rcd-mallorca"
@@ -50732,7 +50732,7 @@
     "description": "Girona Futbol Club, S.A.D. ( Catalan: [ʒiˈɾonə] ⓘ zhi- RO -nuh ) is a Spanish professional football club based in Girona , Catalonia , Spain . Founded on 23 July 1930, the team will play in the Segunda División , following relegation from the 2025–26 La Liga season. [ 3 ]",
     "crest_file": "girona-fc.png",
     "locked": false,
-    "league": 10,
+    "league": 22,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "girona-fc"
@@ -50867,7 +50867,7 @@
     "description": "Real Oviedo ( Spanish: [reˈal oˈβjeðo] ; Asturian : Real Uviéu [reˈal uˈβjew] ) is a Spanish professional football club based in Oviedo , Asturias. Founded on 26 March 1926, the club plays in the Segunda División , the second level of the Spanish football league system . The club plays at the Estadio Carlos Tartiere , [ 4 ] opened on 30 September 2000, and is the largest sports stadium in Asturias. In the La Liga all-time league table , Real Oviedo ranks 19th, having played 39 seasons in the top flight.",
     "crest_file": "real-oviedo.png",
     "locked": false,
-    "league": 10,
+    "league": 22,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "real-oviedo"
@@ -56051,7 +56051,7 @@
     "description": "Real Club Deportivo de La Coruña ( lit. ' Royal Sporting Club of La Coruña ' ), commonly known as Deportivo La Coruña ( pronounced [depoɾˈtiβo la koˈɾuɲa] ) or simply Depor , is a Spanish professional football club based in the city of A Coruña , Galicia, that competes in La Liga , the top tier of Spanish football league system .",
     "crest_file": "deportivo-de-la-coruna.png",
     "locked": false,
-    "league": 22,
+    "league": 10,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "deportivo-de-la-coruna"
@@ -56213,7 +56213,7 @@
     "description": "Málaga Club de Fútbol ( Spanish pronunciation: [ˈmalaɣa ˈkluβ ðe ˈfuðβol] , Málaga Football Club ), or simply Málaga , is a club based in Málaga , Andalusia , Spain, who compete in Segunda División , the second tier of the Spanish league system , following their promotion from the Primera Federación in the 2023–24 season .",
     "crest_file": "malaga-cf.png",
     "locked": false,
-    "league": 22,
+    "league": 10,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "malaga-cf"
@@ -56267,7 +56267,7 @@
     "description": "Real Racing Club de Santander, S.A.D. ( Spanish pronunciation: [reˈal ˈraθiŋ kluβ ðe santanˈdeɾ] ), also known as Racing de Santander ( pronounced [ˈraθin de santanˈdeɾ] ) or simply Racing , is a football club based in Santander , Cantabria, Spain, that currently competes in Primera División , the first tier of the Spanish league system . It was founded in 1913 and it holds home games at El Sardinero , with a capacity for 22,222 spectators. [ 2 ] It is one of the ten founding clubs of La Liga .",
     "crest_file": "racing-de-santander.png",
     "locked": false,
-    "league": 22,
+    "league": 10,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "racing-de-santander"
