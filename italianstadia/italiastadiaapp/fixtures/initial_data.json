@@ -6812,7 +6812,7 @@
   "fields": {
     "name": "Nicosia",
     "population": 61378,
-    "country": "Republic of Cyprus",
+    "country": "Cyprus",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Nicosia",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Nicosia%27s_skyline_2024.jpg",
     "image_credit": null,
@@ -9347,7 +9347,7 @@
   "fields": {
     "name": "Tiraspol",
     "population": 126306,
-    "country": "Moldova ( de jure) Transnistria ( de facto ) [ a ]",
+    "country": "Moldova",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Tiraspol",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/89/House_of_Soviets_%2842912066861%29.jpg",
     "image_credit": null,
@@ -11297,7 +11297,7 @@
   "fields": {
     "name": "Guadalajara",
     "population": 1385629,
-    "country": "Mexico",
+    "country": "Spain",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Guadalajara",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Panor%C3%A1mica_Guadalajara_desde_edificio_Bansi_hacia_norte_%28cropped%29.jpg",
     "image_credit": null,

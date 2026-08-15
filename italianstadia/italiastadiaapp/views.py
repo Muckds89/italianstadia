@@ -5271,17 +5271,42 @@ def export_options(request):
         .exclude(league__hidden=True)         # incomplete divisions aren't offered
         .exclude(stadium__city__country="")
         .values_list("stadium__city__country", "league__name")
-        .distinct()
+        # NOT distinct: the rows are counted per club below to decide which country
+        # runs each league. Collapsing them makes every cross-border league a 1-1
+        # tie, which is exactly how one club in Oswestry put the Cymru Premier in
+        # England's dropdown.
     )
-    leagues_by_country = {}
+    # Offer a league only under the country that RUNS it, decided by where most of
+    # its clubs' grounds are.
+    #
+    # Grouping on the stadium's country alone put the Cymru Premier in England's
+    # dropdown, because The New Saints play at Park Hall in Oswestry -- one Welsh
+    # club, one English ground, and the whole Welsh league appeared under England.
+    # It is not an isolated case: Cardiff, Swansea and Wrexham put the EFL
+    # Championship under Wales, Vaduz put the Swiss Super League under
+    # Liechtenstein, Derry City put the League of Ireland under Northern Ireland,
+    # and FC Andorra put the Segunda División under Andorra. Every one of those
+    # selections produces a map of two or three clubs that nobody wants.
+    #
+    # Deciding by majority rather than by League.country keeps the keys as
+    # `city.country` free text, which the export filter matches on -- switching to
+    # the Country model's name would break countries whose two spellings differ
+    # ("Czechia" vs "Czech Republic"), the exact trap the docstring warns about.
+    from collections import Counter, defaultdict
+    homes = defaultdict(Counter)
     leagues_set = set()
     for country, league_name in rows:
         if not country or not league_name:
             continue
         leagues_set.add(league_name)
-        leagues_by_country.setdefault(country, [])
-        if league_name not in leagues_by_country[country]:
-            leagues_by_country[country].append(league_name)
+        homes[league_name][country] += 1
+
+    leagues_by_country = {}
+    for league_name, counts in homes.items():
+        top = max(counts.values())
+        # a tie means the league genuinely straddles a border; list it under each
+        for country in (c for c, n in counts.items() if n == top):
+            leagues_by_country.setdefault(country, []).append(league_name)
     for c in leagues_by_country:
         leagues_by_country[c].sort()
 
