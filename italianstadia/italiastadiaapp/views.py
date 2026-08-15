@@ -2860,7 +2860,13 @@ def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox
     map's label engine can RESERVE it and never draw a label under the inset. When
     `zoom_bbox` is given (a user-drawn rectangle), that exact area is zoomed; else
     the area is derived tightly from the inset grounds."""
-    margin = 16
+    # Every length here scales with the canvas. Absolute pixels made the inset a
+    # DIFFERENT FRACTION of an HD canvas than of an FHD one, which shifted the
+    # corner-score geometry enough to flip which corner won -- so the free (capped
+    # to HD) and paid (full size) exports of the same configuration put the detail
+    # box in different corners. The two must differ only by logo and watermark.
+    _k = W / float(_REFERENCE_W)
+    margin = max(8, int(round(16 * _k)))
     # The source rectangle: an explicit drawn box wins; else hug the grounds.
     cluster_bbox = zoom_bbox or _inset_cluster_bbox(inset_stadiums, pad=bbox_pad,
                                                    floor=bbox_floor)
@@ -2868,8 +2874,8 @@ def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox
     aspect = ((cluster_bbox[2] - cluster_bbox[0]) /
               max(1e-6, _merc_y(cluster_bbox[1]) - _merc_y(cluster_bbox[3])) /
               (W / float(H)))
-    IW = max(220, int(W * width_frac))
-    IH = int(max(160, min(IW * 1.1, IW / max(0.4, min(2.5, aspect)))))
+    IW = max(int(round(220 * _k)), int(W * width_frac))
+    IH = int(max(int(round(160 * _k)), min(IW * 1.1, IW / max(0.4, min(2.5, aspect)))))
     if main_bbox:
         ax0, ay0 = _lon_lat_to_px(cluster_bbox[0], cluster_bbox[3], main_bbox, W, H)
         ax1, ay1 = _lon_lat_to_px(cluster_bbox[2], cluster_bbox[1], main_bbox, W, H)
@@ -2962,17 +2968,15 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
     inset_img = _make_background(style_key, IW, IH, cluster_bbox,
                                  use_tiles=use_tiles,
                                  land_color=params.get("bg_color")).convert("RGBA")
-    badges = _prefetch_badges(inset_stadiums, size=int(IW * 0.07))
+    # Badge radius and label sizes come from the MAIN MAP's settings, not from the
+    # inset's own width. Deriving them from IW made the detail view render its
+    # badges and text at a different scale from the map around it, which reads as
+    # two charts stitched together rather than one map with a magnifier.
+    BR = max(9, int(params.get("badge_size", 13)))
+    font_s = _load_font(bold=True,  size=max(11, int(params.get("label_size", 22) * 0.82)))
+    font_t = _load_font(bold=False, size=max(9, int(params.get("label_size", 22) * 0.64)))
+    badges = _prefetch_badges(inset_stadiums, size=BR * 2)
 
-    # _load_font, NOT ImageFont.truetype("arialbd.ttf"): the bare call only names
-    # Windows fonts, so on Render it raised and dropped to PIL's default bitmap
-    # font, which has no Turkish glyphs. The main map's labels came out fine while
-    # the inset rendered "Besiktas"/"Basaksehir" as mojibake, because only the main
-    # path had the Linux fallbacks.
-    font_s = _load_font(bold=True,  size=max(14, int(IW * 0.034)))
-    font_t = _load_font(bold=False, size=max(11, int(IW * 0.027)))
-
-    BR = max(11, int(IW * 0.035))
     rr = BR + 2
     d = ImageDraw.Draw(inset_img)
 
@@ -4526,6 +4530,11 @@ def _draw_watermark(img, W, H, text="stadiumsofeurope.com", text_alpha=95, gap=7
 _RENDER_LOCK = _threading.BoundedSemaphore(1)
 
 
+# Label and badge pixel sizes are authored against this canvas width and scaled
+# from it, so a map looks identical at HD, FHD and 4K.
+_REFERENCE_W = 1280
+
+
 def _compose_export_image(params):
     """Shared render core for both the free preview and the paid download.
     Returns (PIL RGBA Image, None) or (None, error_message).
@@ -4534,6 +4543,18 @@ def _compose_export_image(params):
     no LABEL is placed under it, then the title/subtitle are drawn in a
     TRANSLUCENT box on top, the map shows through, nothing is lost.
     """
+    # Label and badge sizes are stored as pixels at the HD reference width, and
+    # scaled to whatever canvas is actually being drawn. Without this the SAME
+    # configuration produced two different-looking maps: the free endpoint caps
+    # fhd to 1280x720 while the paid download renders the full 1920x1080, so a
+    # 16 px label was proportionally a third smaller on the file people had paid
+    # for. The paid map must differ from the free one only by the logo and the
+    # watermark, never in layout.
+    _scale = params["W"] / float(_REFERENCE_W)
+    if abs(_scale - 1.0) > 0.01:
+        params["label_size"] = max(8, int(round(params.get("label_size", 22) * _scale)))
+        params["badge_size"] = max(6, int(round(params.get("badge_size", 13) * _scale)))
+
     if params.get("layer") == "development":
         stadiums = _get_development_export_stadiums(params)
         params["color_by"] = "dev_status"          # colour points by project status

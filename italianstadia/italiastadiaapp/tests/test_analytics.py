@@ -987,3 +987,90 @@ class LocalCrestTests(TestCase):
         inside the crest directory and simply misses."""
         from italiastadiaapp.views import _local_crest
         self.assertIsNone(_local_crest("../../settings.py"))
+
+
+class ExportSizeConsistencyTests(TestCase):
+    """The paid download must differ from the free one ONLY by the logo and the
+    watermark. It did not: map_export caps fhd to 1280x720 while the paid path
+    renders the full 1920x1080, and label/badge sizes were absolute pixels, so a
+    16 px label was a third smaller on the file people had paid for."""
+
+    def _params(self, size_key, **over):
+        from django.test import RequestFactory
+        from italiastadiaapp.views import _parse_export_params
+        q = {"league": "X", "label_size": "16", "badge_size": "13",
+             "size_key": size_key}
+        q.update(over)
+        return _parse_export_params(RequestFactory().get("/", q))
+
+    def _scaled(self, p):
+        """What _compose_export_image derives for this canvas."""
+        from italiastadiaapp.views import _REFERENCE_W
+        k = p["W"] / float(_REFERENCE_W)
+        return (max(8, round(p["label_size"] * k)), max(6, round(p["badge_size"] * k)))
+
+    def _assert_consistent(self, values, what):
+        """Within 5%. Sizes are rounded to whole pixels -- 13 * 1.5 = 19.5 becomes
+        20 -- so exact equality is not achievable and not the point; the point is
+        that nothing is a THIRD smaller, which is what the bug produced."""
+        lo, hi = min(values), max(values)
+        self.assertLessEqual((hi - lo) / hi, 0.05,
+                             f"{what} varies too much across sizes: {values}")
+
+    def test_label_is_the_same_fraction_of_the_canvas_at_every_size(self):
+        rel = [self._scaled(self._params(k))[0] / self._params(k)["H"]
+               for k in ("hd", "fhd", "4k")]
+        self._assert_consistent(rel, "label/height")
+
+    def test_badge_is_the_same_fraction_of_the_canvas_at_every_size(self):
+        rel = [self._scaled(self._params(k))[1] / self._params(k)["H"]
+               for k in ("hd", "fhd", "4k")]
+        self._assert_consistent(rel, "badge/height")
+
+    def test_the_old_bug_would_fail_these_assertions(self):
+        """Guard the guard: without scaling, a 16 px label on 720 vs 1080 is a 33%
+        difference, so the tolerance above is not so loose it accepts the bug."""
+        unscaled = [16 / 720, 16 / 1080]
+        with self.assertRaises(AssertionError):
+            self._assert_consistent(unscaled, "unscaled label/height")
+
+    def test_free_cap_and_paid_full_size_match_proportionally(self):
+        """map_export caps fhd to HD; the paid path keeps fhd. Same map either way."""
+        free = self._params("fhd")
+        free["W"], free["H"] = 1280, 720          # the cap map_export applies
+        paid = self._params("fhd")
+        self.assertNotEqual(free["W"], paid["W"], "test assumes the sizes differ")
+        self.assertAlmostEqual(self._scaled(free)[0] / free["H"],
+                               self._scaled(paid)[0] / paid["H"], places=3)
+        self.assertAlmostEqual(self._scaled(free)[1] / free["H"],
+                               self._scaled(paid)[1] / paid["H"], places=3)
+
+    def test_reference_width_is_the_authoring_size(self):
+        from italiastadiaapp.views import _REFERENCE_W, _EXPORT_SIZES
+        self.assertEqual(_REFERENCE_W, _EXPORT_SIZES["hd"][0])
+
+
+class InsetGeometryScalesTests(TestCase):
+    """The inset must occupy the same fraction of the canvas at any resolution.
+    Absolute margins and floors made it proportionally bigger on a small canvas,
+    which shifted the corner scoring and put the detail box in a DIFFERENT CORNER
+    on the free and paid exports of one configuration."""
+
+    def _layout(self, W, H):
+        from italiastadiaapp.views import _inset_layout
+        pts = [{"name": "a", "lat": 41.40, "lon": 2.15},
+               {"name": "b", "lat": 41.44, "lon": 2.19},
+               {"name": "c", "lat": 41.36, "lon": 2.11}]
+        return _inset_layout(pts, W, H, main_bbox=(-9.0, 36.0, 4.0, 44.0))
+
+    def test_inset_occupies_the_same_fraction_at_hd_and_fhd(self):
+        hd, fhd = self._layout(1280, 720), self._layout(1920, 1080)
+        for key, div_w in (("IW", True), ("IH", False)):
+            a = hd[key] / (1280 if div_w else 720)
+            b = fhd[key] / (1920 if div_w else 1080)
+            self.assertAlmostEqual(a, b, places=2, msg=key)
+
+    def test_inset_lands_in_the_same_corner_at_hd_and_fhd(self):
+        hd, fhd = self._layout(1280, 720), self._layout(1920, 1080)
+        self.assertAlmostEqual(hd["ix0"] / 1280, fhd["ix0"] / 1920, places=2)
+        self.assertAlmostEqual(hd["iy0"] / 720, fhd["iy0"] / 1080, places=2)
