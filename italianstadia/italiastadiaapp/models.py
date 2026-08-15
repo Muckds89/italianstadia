@@ -137,6 +137,12 @@ class Team(models.Model):
         (1, 'First Division'),
         (2, 'Second Division'),
         (3, 'Third Division'),
+        # Fourth tier: reached whenever a covered third tier relegates a club we
+        # already hold (England's League Two, Germany's Regionalliga). Those rows
+        # existed with tier=4 before it was a declared choice -- `choices` is not a
+        # database constraint, so they saved fine and only full_clean() would have
+        # objected. Declared here so the value is legitimate rather than incidental.
+        (4, 'Fourth Division'),
     ]
 
     is_national = models.BooleanField(default=False, db_index=True)

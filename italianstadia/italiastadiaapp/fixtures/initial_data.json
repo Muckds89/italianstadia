@@ -1531,6 +1531,17 @@
   }
 },
 {
+  "model": "italiastadiaapp.league",
+  "pk": 95,
+  "fields": {
+    "name": "EFL League Two",
+    "country": 6,
+    "division_level": 4,
+    "season": "2025/26",
+    "hidden": true
+  }
+},
+{
   "model": "italiastadiaapp.city",
   "pk": 6,
   "fields": {
@@ -12796,6 +12807,45 @@
     "population": null,
     "country": "Romania",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Hunedoara",
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 894,
+  "fields": {
+    "name": "Bromley",
+    "population": null,
+    "country": "England",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bromley",
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 895,
+  "fields": {
+    "name": "Cambridge",
+    "population": null,
+    "country": "England",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Cambridge",
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 896,
+  "fields": {
+    "name": "Milton Keynes",
+    "population": null,
+    "country": "England",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Milton_Keynes",
     "image_url": null,
     "image_credit": null,
     "description": null
@@ -45150,6 +45200,114 @@
   }
 },
 {
+  "model": "italiastadiaapp.stadium",
+  "pk": 1090,
+  "fields": {
+    "name": "Hayes Lane",
+    "capacity": 5000,
+    "address": null,
+    "year_of_construction": 1938,
+    "city": 894,
+    "latitude": "51.390103",
+    "longitude": "0.021083",
+    "owner_raw": "Bromley F.C.",
+    "ownership": "PRIVATE",
+    "slug": "hayes-lane",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Hayes_Lane",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1091,
+  "fields": {
+    "name": "Abbey Stadium",
+    "capacity": 7937,
+    "address": null,
+    "year_of_construction": 1932,
+    "city": 895,
+    "latitude": "52.211400",
+    "longitude": "0.153000",
+    "owner_raw": "Cambridge United F.C.",
+    "ownership": "PRIVATE",
+    "slug": "abbey-stadium",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Abbey_Stadium",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1092,
+  "fields": {
+    "name": "Stadium MK",
+    "capacity": 30500,
+    "address": null,
+    "year_of_construction": 2007,
+    "city": 896,
+    "latitude": "52.009444",
+    "longitude": "-0.733333",
+    "owner_raw": "Inter MK",
+    "ownership": "PRIVATE",
+    "slug": "stadium-mk",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Stadium_MK",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1093,
+  "fields": {
+    "name": "Meadow Lane",
+    "capacity": 19841,
+    "address": null,
+    "year_of_construction": 1910,
+    "city": 177,
+    "latitude": "52.942500",
+    "longitude": "-1.137222",
+    "owner_raw": "",
+    "ownership": "UNKNOWN",
+    "slug": "meadow-lane",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Meadow_Lane",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
   "model": "italiastadiaapp.team",
   "pk": 7,
   "fields": {
@@ -49476,7 +49634,7 @@
     "is_national": false,
     "name": "West Ham United",
     "founded": "1895-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 196,
     "manager": "Nuno Espírito Santo",
@@ -49490,7 +49648,7 @@
     "description": "West Ham United Football Club is a professional football club based in Stratford , East London , England. The club will compete in the EFL Championship in the 2026–27 season following relegation from the Premier League . The club plays at the London Stadium , having moved from their former home, the Boleyn Ground , in 2016.",
     "crest_file": "west-ham-united.png",
     "locked": false,
-    "league": 8,
+    "league": 20,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "west-ham-united"
@@ -49557,7 +49715,7 @@
     "is_national": false,
     "name": "Wolverhampton Wanderers",
     "founded": "1877-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 199,
     "manager": "Rob Edwards",
@@ -49571,7 +49729,7 @@
     "description": "Wolverhampton Wanderers Football Club ( / ˌ w ʊ l v ər ˈ h æ m p t ən / ⓘ WUUL -vər- HAMP -tən ), commonly referred to as Wolves , [ 1 ] is a professional football club based in Wolverhampton , England. The club competes in the EFL Championship , the second tier of English football , following relegation from the Premier League in the 2025-26 season . The club has played at Molineux Stadium since moving from Dudley Road in 1889. The club's traditional kit consists of old gold shirts and socks with black shorts. Since 1979, the kit has also featured the club's \"wolf's head\" logo. Long-standing rivalries exist with other clubs from the West Midlands , including Aston Villa , Stoke City , and Birmingham City but the main one being the Black Country derby contested with West Bromwich Albion . Since 2016, the club has been owned by the Chinese conglomerate Fosun International .",
     "crest_file": "wolverhampton-wanderers.png",
     "locked": false,
-    "league": 8,
+    "league": 20,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "wolverhampton-wanderers"
@@ -49746,7 +49904,7 @@
     "is_national": false,
     "name": "Burnley",
     "founded": "1882-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 210,
     "manager": "Mike Jackson (interim)",
@@ -49760,7 +49918,7 @@
     "description": "Burnley Football Club ( / ˈ b ɜːr n l i / ) is a professional football club based in Burnley , Lancashire, England. The team compete in the EFL Championship , the second tier of English football, following relegation from the Premier League in the 2025–26 season . Founded in 1882, Burnley were one of the first to become professional (in 1883) and subsequently put pressure on the Football Association to permit payments to players. They entered the FA Cup for the first time in 1885–86 and were one of the 12 founder members of the Football League in 1888–89 , the world's first league football competition.",
     "crest_file": "burnley.png",
     "locked": false,
-    "league": 8,
+    "league": 20,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "burnley"
@@ -54658,7 +54816,7 @@
   "pk": 392,
   "fields": {
     "is_national": false,
-    "name": "Birmingham City F.C.",
+    "name": "Birmingham City",
     "founded": "1875-01-01",
     "tier": 2,
     "girone": null,
@@ -54685,7 +54843,7 @@
   "pk": 393,
   "fields": {
     "is_national": false,
-    "name": "Blackburn Rovers F.C.",
+    "name": "Blackburn Rovers",
     "founded": "1875-01-01",
     "tier": 2,
     "girone": null,
@@ -54712,7 +54870,7 @@
   "pk": 394,
   "fields": {
     "is_national": false,
-    "name": "Bristol City F.C.",
+    "name": "Bristol City",
     "founded": "1894-01-01",
     "tier": 2,
     "girone": null,
@@ -54739,7 +54897,7 @@
   "pk": 395,
   "fields": {
     "is_national": false,
-    "name": "Charlton Athletic F.C.",
+    "name": "Charlton Athletic",
     "founded": "1905-01-01",
     "tier": 2,
     "girone": null,
@@ -54766,9 +54924,9 @@
   "pk": 396,
   "fields": {
     "is_national": false,
-    "name": "Coventry City F.C.",
+    "name": "Coventry City",
     "founded": "1883-01-01",
-    "tier": 2,
+    "tier": 1,
     "girone": null,
     "stadium": 395,
     "manager": "Frank Lampard",
@@ -54782,7 +54940,7 @@
     "description": "Coventry City Football Club is an English professional football club based in Coventry , West Midlands , England. The club competes in the Premier League , the top tier of English football , following promotion from the EFL Championship . The club is nicknamed the Sky Blues after the sky blue colours that have featured prominently throughout their history, which they have worn continuously since 1962. [ 2 ]",
     "crest_file": "coventry-city-fc.png",
     "locked": false,
-    "league": 20,
+    "league": 8,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "coventry-city-fc"
@@ -54793,7 +54951,7 @@
   "pk": 397,
   "fields": {
     "is_national": false,
-    "name": "Derby County F.C.",
+    "name": "Derby County",
     "founded": "1884-01-01",
     "tier": 2,
     "girone": null,
@@ -54820,9 +54978,9 @@
   "pk": 398,
   "fields": {
     "is_national": false,
-    "name": "Hull City A.F.C.",
+    "name": "Hull City",
     "founded": "1904-01-01",
-    "tier": 2,
+    "tier": 1,
     "girone": null,
     "stadium": 397,
     "manager": "Sergej Jakirović",
@@ -54836,7 +54994,7 @@
     "description": "Hull City Association Football Club is a professional association football club based in Kingston upon Hull , East Riding of Yorkshire, England. The club competes in the Premier League in the 2026–27 season following promotion via the playoffs . They play their home games at the MKM Stadium , after moving from Boothferry Park in 2002. [ 2 ] The club's traditional home colours are black and amber, often featuring in a striped design on the shirt, hence their nickname, the Tigers . [ 3 ] Hull also contest the Humber derby with both Grimsby Town and Scunthorpe United . [ 4 ] [ 5 ]",
     "crest_file": "hull-city-afc.png",
     "locked": false,
-    "league": 20,
+    "league": 8,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "hull-city-afc"
@@ -54847,9 +55005,9 @@
   "pk": 399,
   "fields": {
     "is_national": false,
-    "name": "Ipswich Town F.C.",
+    "name": "Ipswich Town",
     "founded": "1878-01-01",
-    "tier": 2,
+    "tier": 1,
     "girone": null,
     "stadium": 398,
     "manager": "Kieran McKenna",
@@ -54863,7 +55021,7 @@
     "description": null,
     "crest_file": "ipswich-town-fc.png",
     "locked": false,
-    "league": 20,
+    "league": 8,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "ipswich-town-fc"
@@ -54874,9 +55032,9 @@
   "pk": 400,
   "fields": {
     "is_national": false,
-    "name": "Leicester City F.C.",
+    "name": "Leicester City",
     "founded": "1884-01-01",
-    "tier": 2,
+    "tier": 3,
     "girone": null,
     "stadium": 399,
     "manager": "Gary Rowett",
@@ -54890,7 +55048,7 @@
     "description": null,
     "crest_file": "leicester-city-fc.png",
     "locked": false,
-    "league": 20,
+    "league": 34,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "leicester-city-fc"
@@ -54901,7 +55059,7 @@
   "pk": 401,
   "fields": {
     "is_national": false,
-    "name": "Middlesbrough F.C.",
+    "name": "Middlesbrough",
     "founded": "1876-01-01",
     "tier": 2,
     "girone": null,
@@ -54928,7 +55086,7 @@
   "pk": 402,
   "fields": {
     "is_national": false,
-    "name": "Millwall F.C.",
+    "name": "Millwall",
     "founded": "1885-01-01",
     "tier": 2,
     "girone": null,
@@ -54955,7 +55113,7 @@
   "pk": 403,
   "fields": {
     "is_national": false,
-    "name": "Norwich City F.C.",
+    "name": "Norwich City",
     "founded": "1902-01-01",
     "tier": 2,
     "girone": null,
@@ -54982,9 +55140,9 @@
   "pk": 404,
   "fields": {
     "is_national": false,
-    "name": "Oxford United F.C.",
+    "name": "Oxford United",
     "founded": "1893-01-01",
-    "tier": 2,
+    "tier": 3,
     "girone": null,
     "stadium": 403,
     "manager": "Matt Bloomfield",
@@ -54998,7 +55156,7 @@
     "description": "Oxford United Football Club ( / ˈ ɒ k s f ər d / ) is a professional football club based in Oxford , England. The club competes in EFL League One , the third tier of English football , following relegation from the EFL Championship in 2025—26 . Founded as Headington Football Club in 1893, the club adopted its current name in 1960. Nicknamed The U's, it has played its home games at the Kassam Stadium , replacing its former home of Manor Ground in 2001.",
     "crest_file": "oxford-united-fc.png",
     "locked": false,
-    "league": 20,
+    "league": 34,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "oxford-united-fc"
@@ -55009,7 +55167,7 @@
   "pk": 405,
   "fields": {
     "is_national": false,
-    "name": "Portsmouth F.C.",
+    "name": "Portsmouth",
     "founded": "1898-01-01",
     "tier": 2,
     "girone": null,
@@ -55036,7 +55194,7 @@
   "pk": 406,
   "fields": {
     "is_national": false,
-    "name": "Preston North End F.C.",
+    "name": "Preston North End",
     "founded": "1863-01-01",
     "tier": 2,
     "girone": null,
@@ -55063,7 +55221,7 @@
   "pk": 407,
   "fields": {
     "is_national": false,
-    "name": "Queens Park Rangers F.C.",
+    "name": "Queens Park Rangers",
     "founded": "1882-01-01",
     "tier": 2,
     "girone": null,
@@ -55090,7 +55248,7 @@
   "pk": 408,
   "fields": {
     "is_national": false,
-    "name": "Sheffield United F.C.",
+    "name": "Sheffield United",
     "founded": "1889-01-01",
     "tier": 2,
     "girone": null,
@@ -55117,9 +55275,9 @@
   "pk": 409,
   "fields": {
     "is_national": false,
-    "name": "Sheffield Wednesday F.C.",
+    "name": "Sheffield Wednesday",
     "founded": "1867-01-01",
-    "tier": 2,
+    "tier": 3,
     "girone": null,
     "stadium": 408,
     "manager": "Henrik Pedersen",
@@ -55133,7 +55291,7 @@
     "description": "Sheffield Wednesday Football Club is a professional football club based in Sheffield , South Yorkshire , England. The club competes in EFL League One , the third tier of English football , following relegation from the EFL Championship in 2025—26 . The club is owned by Arise Capital Partners LLC. [ 1 ]",
     "crest_file": "sheffield-wednesday-fc.png",
     "locked": false,
-    "league": 20,
+    "league": 34,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "sheffield-wednesday-fc"
@@ -55144,7 +55302,7 @@
   "pk": 410,
   "fields": {
     "is_national": false,
-    "name": "Southampton F.C.",
+    "name": "Southampton",
     "founded": "1885-01-01",
     "tier": 2,
     "girone": null,
@@ -55171,7 +55329,7 @@
   "pk": 411,
   "fields": {
     "is_national": false,
-    "name": "Stoke City F.C.",
+    "name": "Stoke City",
     "founded": "1863-01-01",
     "tier": 2,
     "girone": null,
@@ -55198,7 +55356,7 @@
   "pk": 412,
   "fields": {
     "is_national": false,
-    "name": "Swansea City A.F.C.",
+    "name": "Swansea City",
     "founded": "1912-01-01",
     "tier": 2,
     "girone": null,
@@ -55225,7 +55383,7 @@
   "pk": 413,
   "fields": {
     "is_national": false,
-    "name": "Watford F.C.",
+    "name": "Watford",
     "founded": "1881-01-01",
     "tier": 2,
     "girone": null,
@@ -55252,7 +55410,7 @@
   "pk": 414,
   "fields": {
     "is_national": false,
-    "name": "West Bromwich Albion F.C.",
+    "name": "West Bromwich Albion",
     "founded": "1878-01-01",
     "tier": 2,
     "girone": null,
@@ -55279,7 +55437,7 @@
   "pk": 415,
   "fields": {
     "is_national": false,
-    "name": "Wrexham A.F.C.",
+    "name": "Wrexham",
     "founded": "1864-01-01",
     "tier": 2,
     "girone": null,
@@ -60139,7 +60297,7 @@
   "pk": 595,
   "fields": {
     "is_national": false,
-    "name": "Barnsley FC",
+    "name": "Barnsley",
     "founded": "1887-01-01",
     "tier": 3,
     "girone": null,
@@ -60166,7 +60324,7 @@
   "pk": 596,
   "fields": {
     "is_national": false,
-    "name": "Blackpool FC",
+    "name": "Blackpool",
     "founded": "1887-01-01",
     "tier": 3,
     "girone": null,
@@ -60195,7 +60353,7 @@
     "is_national": false,
     "name": "Bolton Wanderers",
     "founded": "1874-01-01",
-    "tier": 3,
+    "tier": 2,
     "girone": null,
     "stadium": 589,
     "manager": "Steven Schumacher",
@@ -60209,7 +60367,7 @@
     "description": "Bolton Wanderers Football Club ( / ˈ b oʊ l t ən / ⓘ BOHL -tən , abbreviated as BWFC ) is a professional association football club based in the Horwich area of the Metropolitan Borough of Bolton , Greater Manchester , England. The club will compete in the EFL Championship , the second tier of the English Football League , in the 2026–27 season following promotion from EFL League One via the play-offs in May 2026.",
     "crest_file": "bolton-wanderers.png",
     "locked": false,
-    "league": 34,
+    "league": 20,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "bolton-wanderers"
@@ -60276,7 +60434,7 @@
     "is_national": false,
     "name": "Cardiff City",
     "founded": "1899-01-01",
-    "tier": 3,
+    "tier": 2,
     "girone": null,
     "stadium": 592,
     "manager": "Brian Barry-Murphy",
@@ -60290,7 +60448,7 @@
     "description": null,
     "crest_file": "cardiff-city.png",
     "locked": false,
-    "league": 34,
+    "league": 20,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "cardiff-city"
@@ -60330,7 +60488,7 @@
     "is_national": false,
     "name": "Exeter City",
     "founded": "1904-01-01",
-    "tier": 3,
+    "tier": 4,
     "girone": null,
     "stadium": 594,
     "manager": "Matt Taylor",
@@ -60344,7 +60502,7 @@
     "description": "Exeter City Football Club is a professional association football club based in Exeter , Devon , England. The club competes in EFL League Two, the fourth tier of English football , following relegation in the 2025-26 season. Known as \"the Grecians\", the origin of their nickname is subject to speculation and debate. The club is owned by the club's supporters through the Exeter City Supporters' Trust .",
     "crest_file": "exeter-city.png",
     "locked": false,
-    "league": 34,
+    "league": 95,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "exeter-city"
@@ -60411,7 +60569,7 @@
     "is_national": false,
     "name": "Lincoln City",
     "founded": "1884-01-01",
-    "tier": 3,
+    "tier": 2,
     "girone": null,
     "stadium": 597,
     "manager": "Chris Cohen & Tom Shaw",
@@ -60425,7 +60583,7 @@
     "description": "Lincoln City Football Club is a professional association football club based in the city of Lincoln , Lincolnshire , England. The club competes in the EFL Championship , the second tier of English football , following promotion from EFL League One .",
     "crest_file": "lincoln-city.png",
     "locked": false,
-    "league": 34,
+    "league": 20,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "lincoln-city"
@@ -60492,7 +60650,7 @@
     "is_national": false,
     "name": "Northampton Town",
     "founded": "1897-01-01",
-    "tier": 3,
+    "tier": 4,
     "girone": null,
     "stadium": 600,
     "manager": "Chris Hogg",
@@ -60506,7 +60664,7 @@
     "description": "Northampton Town Football Club is a professional association football club based in the town of Northampton , England. The club competes in EFL League Two , the fourth tier of English football , following relegation from EFL League One .",
     "crest_file": "northampton-town.png",
     "locked": false,
-    "league": 34,
+    "league": 95,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "northampton-town"
@@ -60573,7 +60731,7 @@
     "is_national": false,
     "name": "Port Vale",
     "founded": "1876-01-01",
-    "tier": 3,
+    "tier": 4,
     "girone": null,
     "stadium": 603,
     "manager": "Jon Brady",
@@ -60587,7 +60745,7 @@
     "description": "Port Vale Football Club is a professional football club based in Burslem , Stoke-on-Trent , England, which compete in EFL League Two , the fourth tier of the English football league system . Vale are named after the valley of ports on the Trent and Mersey Canal . They have never played top-flight football, and hold the record for the most seasons in the English Football League (114) without reaching the first tier. [ 8 ] After playing at the Athletic Ground in Cobridge and the Old Recreation Ground in Hanley , the club returned to Burslem when Vale Park was opened in 1950. Outside the ground is a statue of Roy Sproson , who played 842 competitive games for the club. The club's traditional rivals are Stoke City , and games between the two are known as the Potteries derby .",
     "crest_file": "port-vale.png",
     "locked": false,
-    "league": 34,
+    "league": 95,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "port-vale"
@@ -60598,7 +60756,7 @@
   "pk": 612,
   "fields": {
     "is_national": false,
-    "name": "Reading FC",
+    "name": "Reading",
     "founded": "1871-01-01",
     "tier": 3,
     "girone": null,
@@ -60627,7 +60785,7 @@
     "is_national": false,
     "name": "Rotherham United",
     "founded": "1870-01-01",
-    "tier": 3,
+    "tier": 4,
     "girone": null,
     "stadium": 605,
     "manager": "Vacant",
@@ -60641,7 +60799,7 @@
     "description": "Rotherham United Football Club , nicknamed The Millers , [ 1 ] is a professional association football club based in Rotherham , South Yorkshire, England. The club competes in EFL League Two , the fourth tier of English football , following relegation from EFL League One . The club's colours were initially yellow and black, but changed to red and white around 1930. [ 2 ] They have played home matches at the New York Stadium since 2012, having briefly moved to the Don Valley Stadium from their original home at Millmoor in 2008.",
     "crest_file": "rotherham-united.png",
     "locked": false,
-    "league": 34,
+    "league": 95,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "rotherham-united"
@@ -60652,7 +60810,7 @@
   "pk": 614,
   "fields": {
     "is_national": false,
-    "name": "Stevenage FC",
+    "name": "Stevenage",
     "founded": "1975-01-01",
     "tier": 3,
     "girone": null,
@@ -73524,6 +73682,114 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "fc-corvinul-hunedoara"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1125,
+  "fields": {
+    "is_national": false,
+    "name": "Bromley",
+    "founded": "1892-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 1090,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 894,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bromley_F.C.",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/2/29/Bromley_FC_crest.svg",
+    "image_credit": "Wikipedia (club infobox crest)",
+    "description": null,
+    "crest_file": "bromley.png",
+    "locked": false,
+    "league": 34,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "bromley"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1126,
+  "fields": {
+    "is_national": false,
+    "name": "Cambridge United",
+    "founded": "1912-01-01",
+    "tier": 3,
+    "girone": null,
+    "stadium": 1091,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 895,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Cambridge_United_F.C.",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/8/8f/Cambridge_United_FC_crest.svg",
+    "image_credit": "Wikipedia (club infobox crest)",
+    "description": null,
+    "crest_file": "cambridge-united.png",
+    "locked": false,
+    "league": 34,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "cambridge-united"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1127,
+  "fields": {
+    "is_national": false,
+    "name": "Milton Keynes Dons",
+    "founded": "2004-06-21",
+    "tier": 3,
+    "girone": null,
+    "stadium": 1092,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 896,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Milton_Keynes_Dons_F.C.",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/7/74/Milton_Keynes_Dons_FC_2025_crest.svg",
+    "image_credit": "Wikipedia (club infobox crest)",
+    "description": null,
+    "crest_file": "milton-keynes-dons.png",
+    "locked": false,
+    "league": 34,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "milton-keynes-dons"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1128,
+  "fields": {
+    "is_national": false,
+    "name": "Notts County",
+    "founded": "1862-11-25",
+    "tier": 3,
+    "girone": null,
+    "stadium": 1093,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 177,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Notts_County_F.C.",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/0/00/Notts_County_Logo.svg",
+    "image_credit": "Wikipedia (club infobox crest)",
+    "description": null,
+    "crest_file": "notts-county.png",
+    "locked": false,
+    "league": 34,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "notts-county"
   }
 },
 {
