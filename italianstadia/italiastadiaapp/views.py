@@ -2304,6 +2304,11 @@ def _parse_export_params(request):
         # Istanbul cluster (5 grounds) with labels too cramped to read — the box's
         # fonts and badges are all sized from its width, so widening the box
         # enlarges everything inside it. Default is now M.
+        # Which corner the detail box sits in. "auto" scores the four; tl/tr/bl/br
+        # let the user override when they can see something the scorer cannot.
+        "inset_corner": (request.GET.get("inset_corner", "auto").strip().lower()
+                         if request.GET.get("inset_corner", "auto").strip().lower()
+                         in ("auto", "tl", "tr", "bl", "br") else "auto"),
         "inset_frac": {"s": 0.24, "m": 0.30, "l": 0.38}.get(
             request.GET.get("inset_size", "m").strip().lower(), 0.30),
         "no_badges":  request.GET.get("no_badges", "0") == "1",
@@ -2855,7 +2860,8 @@ def _trimmed_bbox(stadiums, pad=0.06, qlon=0.02):
 
 
 def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox=None,
-                  width_frac=0.24, bbox_pad=0.35, bbox_floor=0.008):
+                  width_frac=0.24, bbox_pad=0.35, bbox_floor=0.008,
+                  corner="auto", markers=None):
     """Pick the inset box geometry (size + emptiest corner) up front, so the main
     map's label engine can RESERVE it and never draw a label under the inset. When
     `zoom_bbox` is given (a user-drawn rectangle), that exact area is zoomed; else
@@ -2899,6 +2905,11 @@ def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox
     def _corner_score(pos):
         """Lower is better: the NEAREST corner that covers nothing.
 
+        `markers` are the other grounds drawn on the main map. Avoiding only the
+        magnified cluster was not enough: on the Spain map the box landed in the
+        top-left and buried Racing Santander and Deportivo, while the bottom-left
+        was empty. A badge hidden under the inset is worse than a longer leader.
+
         This used to return `dist - penalty` and take the max, i.e. the corner
         FURTHEST from the cluster. On the Austria map that put the Vienna inset in
         the top-left and drew its leader diagonally across the entire country --
@@ -2914,9 +2925,16 @@ def _inset_layout(inset_stadiums, W, H, main_bbox=None, reserves=None, zoom_bbox
         penalty = sum(10000 for rb in (reserves or []) if _overlaps(box, rb))
         if src_rect and _overlaps(box, src_rect, pad=8):
             penalty += 10000
+        # Each ground the box would cover costs more than any leader length can.
+        pad = max(10, int(round(12 * _k)))
+        penalty += 20000 * sum(
+            1 for (mx, my) in (markers or [])
+            if box[0] - pad <= mx <= box[2] + pad and box[1] - pad <= my <= box[3] + pad)
         return dist + penalty
 
-    pos = min(corners, key=_corner_score)
+    # An explicit choice wins outright; "auto" scores the four corners.
+    choice = (corner or "auto").strip().lower()
+    pos = choice if choice in corners else min(corners, key=_corner_score)
     ix0, iy0 = corners[pos]
     return {"ix0": ix0, "iy0": iy0, "IW": IW, "IH": IH, "cluster_bbox": cluster_bbox,
             "box": (ix0, iy0, ix0 + IW, iy0 + IH)}
@@ -4681,9 +4699,14 @@ def _compose_export_image(params):
     # Reserve the inset box BEFORE labels so no main-map label is hidden under it.
     inset_layout = None
     if inset_stadiums:
+        # Every ground on the main map is an obstacle: the box must not be placed
+        # on top of a badge just because that corner is closer.
+        _markers = [_lon_lat_to_px(s["lon"], s["lat"], bbox, W, H) for s in stadiums]
         inset_layout = _inset_layout(inset_stadiums, W, H, main_bbox=bbox, reserves=reserves,
                                      zoom_bbox=inset_zoom_bbox,
-                                     width_frac=params.get("inset_frac", 0.30))
+                                     width_frac=params.get("inset_frac", 0.30),
+                                     corner=params.get("inset_corner", "auto"),
+                                     markers=_markers)
         reserves.append(inset_layout["box"])
 
     # Islands FIRST, badges only: their labels are handled by the main engine below
@@ -4814,7 +4837,7 @@ def export_checkout(request):
         "color_by", "ring_by", "no_badges",
         "style_key", "size_key", "title", "subtitle", "labels",
         "north", "legend", "scale", "spotlight", "logo", "bg_color", "inset", "inset_box",
-        "inset_size",
+        "inset_size", "inset_corner",
         "islands",
         "label_size", "label_color", "badge_size", "tournament", "tstatus",
         "layer", "dstatus", "national",

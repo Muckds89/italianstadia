@@ -1074,3 +1074,56 @@ class InsetGeometryScalesTests(TestCase):
         hd, fhd = self._layout(1280, 720), self._layout(1920, 1080)
         self.assertAlmostEqual(hd["ix0"] / 1280, fhd["ix0"] / 1920, places=2)
         self.assertAlmostEqual(hd["iy0"] / 720, fhd["iy0"] / 1080, places=2)
+
+
+class InsetCornerTests(TestCase):
+    """The detail box can be placed by hand. Auto also avoids covering grounds:
+    on the Spain map it sat top-left over Racing Santander and Deportivo while the
+    bottom-left was empty -- a hidden badge is worse than a longer leader."""
+
+    CLUSTER = [{"name": "a", "lat": 39.47, "lon": -0.35},
+               {"name": "b", "lat": 39.48, "lon": -0.36}]
+    BBOX = (-9.5, 35.5, 4.5, 44.0)
+    W, H = 1280, 720
+
+    def _layout(self, corner="auto", markers=None):
+        from italiastadiaapp.views import _inset_layout
+        return _inset_layout(self.CLUSTER, self.W, self.H, main_bbox=self.BBOX,
+                             corner=corner, markers=markers)
+
+    def _corner_of(self, lay):
+        return ("t" if lay["iy0"] < self.H / 2 else "b") + \
+               ("l" if lay["ix0"] < self.W / 2 else "r")
+
+    def test_each_explicit_corner_is_honoured(self):
+        for want in ("tl", "tr", "bl", "br"):
+            self.assertEqual(self._corner_of(self._layout(want)), want)
+
+    def test_an_unknown_corner_falls_back_to_auto(self):
+        from django.test import RequestFactory
+        from italiastadiaapp.views import _parse_export_params
+        for bad in ("middle", "", "TOP-LEFT", "9"):
+            p = _parse_export_params(RequestFactory().get("/", {"inset_corner": bad}))
+            self.assertEqual(p["inset_corner"], "auto", bad)
+
+    def test_case_and_whitespace_tolerant(self):
+        from django.test import RequestFactory
+        from italiastadiaapp.views import _parse_export_params
+        p = _parse_export_params(RequestFactory().get("/", {"inset_corner": " BL "}))
+        self.assertEqual(p["inset_corner"], "bl")
+
+    def test_auto_avoids_a_corner_occupied_by_a_ground(self):
+        """Put a marker in every corner but the bottom-left; auto must choose it."""
+        m = self.W, self.H
+        crowded = [(60, 60), (m[0] - 60, 60), (m[0] - 60, m[1] - 60)]
+        self.assertEqual(self._corner_of(self._layout("auto", markers=crowded)), "bl")
+
+    def test_an_explicit_corner_wins_even_over_a_ground(self):
+        """The manual pick is the user's call, not a suggestion."""
+        crowded = [(60, self.H - 60)]           # a ground sitting in bottom-left
+        self.assertEqual(self._corner_of(self._layout("bl", markers=crowded)), "bl")
+
+    def test_survives_the_paid_checkout_allowlist(self):
+        import inspect
+        from italiastadiaapp import views
+        self.assertIn('"inset_corner"', inspect.getsource(views.export_checkout))

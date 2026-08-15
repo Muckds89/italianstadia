@@ -300,6 +300,14 @@
                     <label class="form-check-label small" for="expInset">Auto zoom inset on the busiest cluster</label>
                 </div>
                 <div class="mt-2">
+                    <label class="form-label small mb-1">Inset corner</label>
+                    <select id="expInsetCorner" class="form-select form-select-sm mb-2">
+                        <option value="auto" selected>Auto (avoid covering clubs)</option>
+                        <option value="tl">Top left</option>
+                        <option value="tr">Top right</option>
+                        <option value="bl">Bottom left</option>
+                        <option value="br">Bottom right</option>
+                    </select>
                     <label class="form-label small mb-1">Inset size</label>
                     <select id="expInsetSize" class="form-select form-select-sm mb-2">
                         <option value="s">Small</option>
@@ -551,6 +559,7 @@ function _getFilters() {
         inset:       document.getElementById("expInset").checked ? "1" : "0",
         inset_box:   window._insetBox ? window._insetBox.join(",") : "",
         inset_size:  document.getElementById("expInsetSize").value,
+        inset_corner: document.getElementById("expInsetCorner").value,
         // One "colour-code by" control: a category colours the badge RING (badges
         // kept) or, with "coloured dots" ticked, the whole dot (badges hidden).
         color_by:    ((document.getElementById("expColourBy").value &&
