@@ -45,6 +45,45 @@ CREST_HINTS = ("logo", "crest", "badge", "emblem", "sigla", "wappen", "stemma", 
 NOT_CREST = ("commons-logo", "wikidata", "kit ", "kit_", "flag of", "icon",
              "edit-ltr", "symbol", "soccerball", "medal", "performance")
 
+# A crest filename that encodes a date RANGE ("Anderlecht 1933-1959"), calls
+# itself former, or is a centenary mark ("Feyenoord logo 100 years") describes a
+# badge the club NO LONGER USES.
+#
+# This matters because MediaWiki returns an article's images in ALPHABETICAL
+# order and the picker used to take the first keyword match. Big clubs document
+# their crest history, and those files sort early: "Athletic Club crest 1901.png"
+# beat "Club Athletic Bilbao logo.svg", which was sitting in the same list at
+# position 6. That is a systematic bias toward the OLDEST badge, not bad luck --
+# it put a 1902 logo on MSV Duisburg and a 1933 one on Anderlecht.
+#
+# A CLOSED range is historic; an OPEN one ("2015-heden", "2021-", "2025-") is
+# the badge in use today, so the closing year is what disqualifies a range.
+_YEAR = r"(?:1[89]\d\d|20[0-2]\d)"
+_DASH = "[-‐‑‒–—―]"
+_CLOSED = _YEAR + r"\s*" + _DASH + r"\s*(?:" + _YEAR + r"|\d\d)(?!\d)"
+_OPEN = _YEAR + r"\s*" + _DASH + r"\s*(?!\d)"
+_RETIRED_WORD = r"former[_ ]logo|logo[_ ]avant|avant[_ ]1|jahre"
+_CENTENARY = r"[_ ]100[_ ](?:years|jaar|lat|anni)|[_ ]100[_ ]\d"
+HISTORIC = re.compile("|".join((_CLOSED, _RETIRED_WORD, _CENTENARY)), re.I)
+_HAS_OPEN = re.compile(_OPEN)
+_HAS_WORD = re.compile("|".join((_RETIRED_WORD, _CENTENARY)), re.I)
+
+
+def is_historic(fname):
+    """True when the filename says this badge is RETIRED.
+
+    Ajax readopted a 1928 badge in 2025 and the file records both spans
+    ("1928-1991, 2025-"). A closed range next to an open one is a RETURN to the
+    old badge, not a retirement of it, so the open span wins -- unless the name
+    also says "former"/"avant", which is unambiguous.
+    """
+    fname = fname or ""
+    if _HAS_WORD.search(fname):
+        return True
+    if not HISTORIC.search(fname):
+        return False
+    return not _HAS_OPEN.search(fname)
+
 
 def norm(s):
     s = unicodedata.normalize("NFKD", (s or "").lower())
@@ -170,6 +209,62 @@ class Command(BaseCommand):
                         pass
         return out
 
+    # ── infobox: the club's own answer ───────────────────────────────────────
+    # The value must START with a non-space: "| image = " with nothing after it is
+    # a blank parameter, and a lazy group would otherwise capture the pad space and
+    # report an empty filename as a successful read.
+    _INFOBOX_IMG = re.compile(
+        r"^\s*\|\s*(?:image|logo|crest)\s*=\s*(?:\[\[)?(?:File:|Image:)?"
+        r"([^|\]\n{}\s][^|\]\n{}]*?)\s*$", re.I | re.M)
+
+    def _infobox_files(self, host, titles, sleep):
+        """Map article title -> the file its infobox displays as the club crest.
+
+        This is the AUTHORITATIVE source and is tried before Wikidata and before
+        any keyword scan. Wikidata P154 is simply absent for a lot of big clubs --
+        Real Madrid and Athletic Club both lack it -- which is what pushed them
+        onto the article scan and its alphabetical-first bug in the first place.
+        The infobox is never absent, is what the article itself renders, and is
+        kept current by editors, so it answered all 15 clubs correctly on the
+        first attempt where P154 answered none.
+
+        Only section 0 is requested: the infobox is in the lead, and full article
+        wikitext for 50 clubs is megabytes of payload for one parameter.
+        """
+        out = {}
+        for batch in chunks(titles, BATCH):
+            data, err = self._api(host, {
+                "action": "query", "redirects": 1, "formatversion": "2",
+                "titles": "|".join(batch), "prop": "revisions",
+                "rvprop": "content", "rvslots": "main", "rvsection": "0"}, sleep)
+            if err:
+                continue
+            q = data.get("query", {})
+            alias = {}
+            for k in ("normalized", "redirects"):
+                for m in q.get(k, []):
+                    alias[m["from"]] = m["to"]
+            for page in q.get("pages", []):
+                try:
+                    txt = page["revisions"][0]["slots"]["main"]["content"]
+                except Exception:
+                    continue
+                m = self._INFOBOX_IMG.search(txt)
+                if not m:
+                    continue
+                fname = m.group(1).strip()
+                # "image = " with an empty value, or a template call, is not a file
+                if not fname or "." not in fname or is_historic(fname):
+                    continue
+                out[page.get("title")] = fname
+            for src in batch:
+                dst = alias.get(src)
+                while dst and dst in alias:
+                    dst = alias[dst]
+                if dst and dst in out:
+                    out[src] = out[dst]
+        return out
+
     @staticmethod
     def _pick_article_image(images, title):
         """Choose the likeliest crest from an article's image list.
@@ -187,9 +282,17 @@ class Command(BaseCommand):
           * and either the filename says logo/crest/..., or the stem matches the
             club name AND the file is an SVG (a photo is essentially never SVG)
         Anything weaker is left unresolved for a human, which is the safe failure.
+
+        Passing those two tests is still not enough to pick a WINNER. This used to
+        return keyworded[0], and MediaWiki returns images in ALPHABETICAL order, so
+        the first hint match on a club that documents its crest history is its
+        oldest badge: Anderlecht got its 1933 crest, MSV Duisburg its 1902 one, and
+        Athletic Club its 1901 one while "Club Athletic Bilbao logo.svg" sat in the
+        same list unpicked. Candidates are therefore SCORED, retired badges are
+        dropped outright, and alphabetical position decides nothing.
         """
         want = norm(title)
-        named_svg, keyworded = [], []
+        scored = []
         for t in images:
             low = t.lower()
             if any(bad in low for bad in NOT_CREST):
@@ -197,15 +300,30 @@ class Command(BaseCommand):
             ext = low.rsplit(".", 1)[-1] if "." in low else ""
             if ext not in ("svg", "png"):
                 continue
-            stem = norm(t.split(":", 1)[-1].rsplit(".", 1)[0])
+            base = t.split(":", 1)[-1]
+            if is_historic(base):
+                continue
+            stem = norm(base.rsplit(".", 1)[0])
             name_match = stem and (
                 stem == want or (len(stem) > 8 and stem in want)
                 or (len(want) > 8 and want in stem))
-            if any(k in low for k in CREST_HINTS):
-                keyworded.append(t)
-            elif name_match and ext == "svg":
-                named_svg.append(t)
-        return (keyworded or named_svg or [None])[0]
+            keyworded = any(k in low for k in CREST_HINTS)
+            if not keyworded and not (name_match and ext == "svg"):
+                continue
+            score = 0
+            score += 4 if keyworded else 0
+            score += 3 if name_match else 0
+            score += 2 if ext == "svg" else 0        # vector = the club's own mark
+            # A bare year with no range ("Escudo Real Madrid 1908") is a dated
+            # badge even though it names no end date.
+            score -= 5 if re.search(r"(?:1[89]\d\d|20[01]\d)(?!\d)", base) else 0
+            scored.append((score, t))
+        if not scored:
+            return None
+        # sort by score only; ties keep MediaWiki order, which is arbitrary but
+        # stable, so a re-run cannot silently swap one club's crest for another.
+        scored.sort(key=lambda s: -s[0])
+        return scored[0][1]
 
     # ── main ─────────────────────────────────────────────────────────────────
     def handle(self, *a, **o):
@@ -274,14 +392,21 @@ class Command(BaseCommand):
                     qid_of[team.pk] = qid
                 images_of[team.pk] = [i["title"] for i in (page.get("images") or [])]
 
-            # 2. Wikidata P154 in batches, then Commons file -> URL in batches
+            # 2. the club article's own infobox -- the authoritative answer
+            infobox = self._infobox_files(host, titles, sleep)
+
+            # 3. Wikidata P154 in batches, then Commons file -> URL in batches
             fname_of_qid = self._p154(sorted(set(qid_of.values())), sleep)
             commons_urls = self._file_urls(
                 COMMONS, sorted({"File:" + f for f in fname_of_qid.values()}), sleep)
 
-            # 3. whatever P154 could not answer falls back to the article images
+            # 4. whatever the first two could not answer falls back to the images
             local_pick = {}
             for team, title in pairs:
+                ib = infobox.get(title)
+                if ib:
+                    local_pick[team.pk] = "File:" + ib
+                    continue
                 qid = qid_of.get(team.pk)
                 fname = fname_of_qid.get(qid) if qid else None
                 if fname and ("File:" + fname) in commons_urls:
