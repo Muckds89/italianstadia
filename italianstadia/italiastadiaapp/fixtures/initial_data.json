@@ -602,7 +602,7 @@
     "name": "Premier League",
     "country": 6,
     "division_level": 1,
-    "season": "2025/26",
+    "season": "2026/27",
     "hidden": false
   }
 },
@@ -712,7 +712,7 @@
     "name": "Czech First League",
     "country": 18,
     "division_level": 1,
-    "season": "2025/26",
+    "season": "2026/27",
     "hidden": false
   }
 },
@@ -734,7 +734,7 @@
     "name": "EFL Championship",
     "country": 6,
     "division_level": 2,
-    "season": "2025/26",
+    "season": "2026/27",
     "hidden": false
   }
 },
@@ -800,7 +800,7 @@
     "name": "HNL",
     "country": 16,
     "division_level": 1,
-    "season": "2025/26",
+    "season": "2026/27",
     "hidden": false
   }
 },
@@ -822,7 +822,7 @@
     "name": "Nemzeti Bajnokság I",
     "country": 24,
     "division_level": 1,
-    "season": "2025/26",
+    "season": "2026/27",
     "hidden": false
   }
 },
@@ -844,7 +844,7 @@
     "name": "First Professional Football League",
     "country": 15,
     "division_level": 1,
-    "season": "2025/26",
+    "season": "2026/27",
     "hidden": false
   }
 },
@@ -855,7 +855,7 @@
     "name": "Slovak Super Liga",
     "country": 45,
     "division_level": 1,
-    "season": "2025/26",
+    "season": "2026/27",
     "hidden": false
   }
 },
@@ -888,7 +888,7 @@
     "name": "EFL League One",
     "country": 6,
     "division_level": 3,
-    "season": "2025/26",
+    "season": "2026/27",
     "hidden": false
   }
 },
@@ -899,7 +899,7 @@
     "name": "Ukrainian Premier League",
     "country": 51,
     "division_level": 1,
-    "season": "2025/26",
+    "season": "2026/27",
     "hidden": false
   }
 },
@@ -1273,7 +1273,7 @@
     "name": "Azerbaijan Premier League",
     "country": 11,
     "division_level": 1,
-    "season": "2025/26",
+    "season": "2026/27",
     "hidden": false
   }
 },
@@ -1537,7 +1537,84 @@
     "name": "EFL League Two",
     "country": 6,
     "division_level": 4,
-    "season": "2025/26",
+    "season": "2026/27",
+    "hidden": true
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 96,
+  "fields": {
+    "name": "Prva NL",
+    "country": 16,
+    "division_level": 2,
+    "season": "2026/27",
+    "hidden": true
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 97,
+  "fields": {
+    "name": "Second Professional Football League",
+    "country": 15,
+    "division_level": 2,
+    "season": "2026/27",
+    "hidden": true
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 98,
+  "fields": {
+    "name": "2. Liga",
+    "country": 45,
+    "division_level": 2,
+    "season": "2026/27",
+    "hidden": true
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 99,
+  "fields": {
+    "name": "Czech National Football League",
+    "country": 18,
+    "division_level": 2,
+    "season": "2026/27",
+    "hidden": true
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 100,
+  "fields": {
+    "name": "Ukrainian First League",
+    "country": 51,
+    "division_level": 2,
+    "season": "2026/27",
+    "hidden": true
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 101,
+  "fields": {
+    "name": "Nemzeti Bajnokság II",
+    "country": 24,
+    "division_level": 2,
+    "season": "2026/27",
+    "hidden": true
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 102,
+  "fields": {
+    "name": "Azerbaijan First Division",
+    "country": 11,
+    "division_level": 2,
+    "season": "2026/27",
     "hidden": true
   }
 },
@@ -12846,6 +12923,71 @@
     "population": null,
     "country": "England",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Milton_Keynes",
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 897,
+  "fields": {
+    "name": "Ruse",
+    "population": null,
+    "country": "Bulgaria",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 898,
+  "fields": {
+    "name": "Brno",
+    "population": null,
+    "country": "Czechia",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 899,
+  "fields": {
+    "name": "Banská Bystrica",
+    "population": null,
+    "country": "Slovakia",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 900,
+  "fields": {
+    "name": "Chernivtsi",
+    "population": null,
+    "country": "Ukraine",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 901,
+  "fields": {
+    "name": "Odesa",
+    "population": null,
+    "country": "Ukraine",
+    "wikipedia_url": null,
     "image_url": null,
     "image_credit": null,
     "description": null
@@ -45308,6 +45450,222 @@
   }
 },
 {
+  "model": "italiastadiaapp.stadium",
+  "pk": 1094,
+  "fields": {
+    "name": "Gradski stadion (Ruse)",
+    "capacity": 13000,
+    "address": null,
+    "year_of_construction": 1950,
+    "city": 897,
+    "latitude": "43.848056",
+    "longitude": "25.963056",
+    "owner_raw": "Ruse (municipality)",
+    "ownership": "PUBLIC",
+    "slug": "gradski-stadion-ruse",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Gradski_stadion_(Ruse)",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1095,
+  "fields": {
+    "name": "Městský fotbalový stadion Srbská",
+    "capacity": 10785,
+    "address": null,
+    "year_of_construction": 1953,
+    "city": 898,
+    "latitude": "49.227162",
+    "longitude": "16.586276",
+    "owner_raw": "Brno (municipality)",
+    "ownership": "PUBLIC",
+    "slug": "mestsky-fotbalovy-stadion-srbska",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Městský_fotbalový_stadion_Srbská",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1096,
+  "fields": {
+    "name": "Národný Atletický Štadión",
+    "capacity": 7381,
+    "address": null,
+    "year_of_construction": 1959,
+    "city": 899,
+    "latitude": "48.731947",
+    "longitude": "19.131503",
+    "owner_raw": "Ministry of Defence SR",
+    "ownership": "PUBLIC",
+    "slug": "narodny-atleticky-stadion",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Národný_Atletický_Štadión",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1097,
+  "fields": {
+    "name": "Bukovyna Stadium",
+    "capacity": 12076,
+    "address": null,
+    "year_of_construction": 1974,
+    "city": 900,
+    "latitude": "48.275000",
+    "longitude": "25.942000",
+    "owner_raw": "Chernivtsi City Council",
+    "ownership": "PUBLIC",
+    "slug": "bukovyna-stadium",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bukovyna_Stadium",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1098,
+  "fields": {
+    "name": "Chornomorets Stadium",
+    "capacity": 34164,
+    "address": null,
+    "year_of_construction": 2011,
+    "city": 901,
+    "latitude": "46.480556",
+    "longitude": "30.755556",
+    "owner_raw": "FC Chornomorets Odesa",
+    "ownership": "PRIVATE",
+    "slug": "chornomorets-stadium",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Chornomorets_Stadium",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1099,
+  "fields": {
+    "name": "Illovszky Rudolf Stadion",
+    "capacity": 5054,
+    "address": null,
+    "year_of_construction": 2019,
+    "city": 440,
+    "latitude": "47.536944",
+    "longitude": "19.080556",
+    "owner_raw": "Vasas SC",
+    "ownership": "PRIVATE",
+    "slug": "illovszky-rudolf-stadion",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Illovszky_Rudolf_Stadion",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1100,
+  "fields": {
+    "name": "Bozsik Aréna",
+    "capacity": 8370,
+    "address": null,
+    "year_of_construction": 2021,
+    "city": 440,
+    "latitude": "47.442500",
+    "longitude": "19.155111",
+    "owner_raw": "Government of Hungary",
+    "ownership": "PUBLIC",
+    "slug": "bozsik-arena",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bozsik_Aréna",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1101,
+  "fields": {
+    "name": "Shafa Stadium",
+    "capacity": 8300,
+    "address": null,
+    "year_of_construction": 1996,
+    "city": 649,
+    "latitude": "40.410986",
+    "longitude": "49.897711",
+    "owner_raw": "ASK",
+    "ownership": "PRIVATE",
+    "slug": "shafa-stadium",
+    "stadium_type": "OPEN",
+    "surface": "GRASS",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Shafa_Stadium",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
   "model": "italiastadiaapp.team",
   "pk": 7,
   "fields": {
@@ -54332,7 +54690,7 @@
     "is_national": false,
     "name": "FK Dukla Prague",
     "founded": "1947-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 374,
     "manager": "Pavel Šustr [ cs ]",
@@ -54346,7 +54704,7 @@
     "description": "FK Dukla Prague ( Czech : FK Dukla Praha ) is a Czech association football club based in the Dejvice area of Prague . It currently plays in the Czech First League , the top flight of Czech club football.",
     "crest_file": "fk-dukla-prague.png",
     "locked": false,
-    "league": 18,
+    "league": 99,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "fk-dukla-prague"
@@ -54386,7 +54744,7 @@
     "is_national": false,
     "name": "MFK Karviná",
     "founded": "2003-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 376,
     "manager": "Marek Jarolím",
@@ -54400,7 +54758,7 @@
     "description": "MFK Karviná is a professional football club located in Karviná , Czech Republic . It plays in the Czech First League . The team's colours are green and white.",
     "crest_file": "mfk-karvina.png",
     "locked": false,
-    "league": 18,
+    "league": 99,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "mfk-karvina"
@@ -57815,7 +58173,7 @@
     "is_national": false,
     "name": "HNK Vukovar 1991",
     "founded": "1990-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 501,
     "manager": "Tomislav Stipić",
@@ -57829,7 +58187,7 @@
     "description": "HNK Vukovar 1991 is a professional Croatian football club based in Vukovar . The club currently plays in the First Football League , the second tier of Croatian football , following relegation from the 2025–26 Croatian Football League .",
     "crest_file": "hnk-vukovar-1991.png",
     "locked": false,
-    "league": 26,
+    "league": 96,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "hnk-vukovar-1991"
@@ -58490,7 +58848,7 @@
     "is_national": false,
     "name": "Diósgyőri VTK",
     "founded": "1910-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 522,
     "manager": "Péter Takács",
@@ -58504,7 +58862,7 @@
     "description": "Diósgyőri Vasgyárak Testgyakorló Köre , more commonly Diósgyőri VTK ( Hungarian: [ˈdioːʒɟøːri ˈveːteːkaː] ) is a professional football club from Hungary . Located in the Diósgyőr district of Miskolc . Founded in 1910 by the local working class youth, the club plays in the Nemzeti Bajnokság I , the top flight of Hungarian football , and has spent most of its history in the top tier. Diósgyőr is best known for its passionate supporters – in the past years, Diósgyőr had one of the highest average attendances in the Hungarian top division . [ 1 ] The football club enjoyed its first golden age in the late 1970s and early 1980s, including a third-place finish in the 1978–79 season of the Hungarian League and two Hungarian Cup triumphs in 1977 and 1980 .",
     "crest_file": "diosgyori-vtk.png",
     "locked": false,
-    "league": 28,
+    "league": 101,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "diosgyori-vtk"
@@ -58517,7 +58875,7 @@
     "is_national": false,
     "name": "Kazincbarcikai SC",
     "founded": "1957-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 523,
     "manager": "Attila Kuttor",
@@ -58531,7 +58889,7 @@
     "description": "Kazincbarcikai SC is a Hungarian professional football club based in Kazincbarcika . The team plays in the Nemzeti Bajnokság I , the top tier of Hungarian football, after promotion from the Nemzeti Bajnokság II in 2025. Playing in yellow and blue, the team's home is the Kolorcity Aréna .",
     "crest_file": "kazincbarcikai-sc.png",
     "locked": false,
-    "league": 28,
+    "league": 101,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "kazincbarcikai-sc"
@@ -59003,7 +59361,7 @@
     "is_national": false,
     "name": "PFC Beroe Stara Zagora",
     "founded": "1916-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 541,
     "manager": "Josu Uribe",
@@ -59017,7 +59375,7 @@
     "description": "Professional Football Club Beroe Stara Zagora , better known as just Beroe ( Bulgarian : Берое ), is a Bulgarian professional association football club based in Stara Zagora , that competes in the First League , the top division of the Bulgarian football league system . The club was founded in 1916 under the name Vereya . The club's colours are green and white.",
     "crest_file": "pfc-beroe-stara-zagora.png",
     "locked": false,
-    "league": 30,
+    "league": 97,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "pfc-beroe-stara-zagora"
@@ -59165,7 +59523,7 @@
     "is_national": false,
     "name": "FC Dobrudzha Dobrich",
     "founded": "1919-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 547,
     "manager": "Yasen Petrov",
@@ -59179,7 +59537,7 @@
     "description": "FC Dobrudzha ( Bulgarian : ФК Добруджа ) is a Bulgarian professional football club based in Dobrich , that competes in the First League , the first tier of Bulgarian football.",
     "crest_file": "fc-dobrudzha-dobrich.png",
     "locked": false,
-    "league": 30,
+    "league": 97,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "fc-dobrudzha-dobrich"
@@ -59300,7 +59658,7 @@
     "is_national": false,
     "name": "PFC Montana",
     "founded": "1947-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 552,
     "manager": "Atanas Atanasov",
@@ -59314,7 +59672,7 @@
     "description": "Professional Football Club Montana ( Bulgarian : ПФК Монтана ) is a Bulgarian professional football club based in Montana , which currently plays in the First League , the highest level of the Bulgarian football league system .",
     "crest_file": "pfc-montana.png",
     "locked": false,
-    "league": 30,
+    "league": 97,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "pfc-montana"
@@ -59597,7 +59955,7 @@
     "is_national": false,
     "name": "1. FC Tatran Prešov",
     "founded": "1898-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 562,
     "manager": "Erik Havrila",
@@ -59611,7 +59969,7 @@
     "description": "FC Tatran Prešov ( Slovak pronunciation: [ˈtatran ˈpreʂɔw] ) is a Slovak football club based in the city of Prešov , currently playing in the 2. Liga , 2nd tier of Slovak football. Tatran Prešov is the oldest football club in Slovakia, founded on 25 May 1898. The club participated in the Slovak First Football League from 2025–26, the top tier of Slovak football after promotion from 2. Liga in 2024–25. The \"Green and Whites\" played 32 seasons in the Czechoslovak top division. Tatran became the dark horse of the Czechoslovak league in the 1960s and 1970s, but never won a title. The greatest league success was the second place in the 1965 and 1973 seasons. The club also came close in the Czechoslovak Cup, losing twice in 1966 and 1992 finals.",
     "crest_file": "1-fc-tatran-presov.png",
     "locked": false,
-    "league": 31,
+    "league": 98,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "1-fc-tatran-presov"
@@ -61028,7 +61386,7 @@
     "is_national": false,
     "name": "Rukh Lviv",
     "founded": "2003-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 610,
     "manager": "Ivan Fedyk",
@@ -61042,7 +61400,7 @@
     "description": "FC Rukh Lviv ( Ukrainian : ФК «Рух» Львів ) is a Ukrainian professional football club based in Lviv . The club competes in the Ukrainian Premier League following the promotion as runners-up of 2019–20 Ukrainian First League .",
     "crest_file": "rukh-lviv.png",
     "locked": false,
-    "league": 35,
+    "league": 100,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "rukh-lviv"
@@ -61080,7 +61438,7 @@
   "pk": 624,
   "fields": {
     "is_national": false,
-    "name": "Metalist 1925 Kharkiv",
+    "name": "FC Kharkiv",
     "founded": "2016-01-01",
     "tier": 1,
     "girone": null,
@@ -61089,10 +61447,10 @@
     "num_of_titles": 0,
     "city": 527,
     "average_attendance": 1123,
-    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Metalist_1925_Kharkiv",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Kharkiv",
     "transfermarkt_url": "https://www.transfermarkt.com/metalist-1925-charkiw/startseite/verein/55686",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/20/Futbolni_Klub_Metalist_1925_Kharkiv_%28logo%29.svg",
-    "image_credit": "Crest via Commons (P154); Transfermarkt copy unavailable.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/7/7b/FC_Kharkiv_new_logo.png",
+    "image_credit": "Wikipedia (club infobox crest)",
     "description": "Football Club Metalist 1925 Kharkiv ( Ukrainian : Футбольний клуб Металіст 1925 Харків ) is a professional football club from Kharkiv , Ukraine. Founded in 2016, the club plays in the Ukrainian Premier League , the top tier of Ukrainian football after promotion from the Ukrainian First League in 2024–25. Their home stadium is the Metalist Oblast Sports Complex , with 40,003 capacity.",
     "crest_file": "metalist-1925-kharkiv.png",
     "locked": false,
@@ -61217,7 +61575,7 @@
     "is_national": false,
     "name": "Oleksandriya",
     "founded": "1947-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 618,
     "manager": "Volodymyr Sharan",
@@ -61231,7 +61589,7 @@
     "description": "Football Club Oleksandriya ( Ukrainian : Футбольний клуб Олександрія ), commonly known as Oleksandriya , is a Ukrainian professional football club based in the city of Oleksandriya , Kirovohrad Oblast . Founded in 1990, the club plays in the Ukrainian Premier League but will play in the Ukrainian First League in 2026-27 following relegation. The year 1948 on the club's crest appeared after its merger with UkrAhroKom in 2014 and depicts football heritage of the club rather than the club's foundation.",
     "crest_file": "oleksandriya.png",
     "locked": false,
-    "league": 35,
+    "league": 100,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "oleksandriya"
@@ -61298,7 +61656,7 @@
     "is_national": false,
     "name": "SC Poltava",
     "founded": "2020-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 620,
     "manager": "Pavlo Matviychenko (caretaker)",
@@ -61312,7 +61670,7 @@
     "description": "Sport Club Poltava ( Ukrainian : Спортивний клуб «Полтава» ) is a professional Ukrainian football club from the city of Poltava . The club will play in the Ukrainian First League in 2026-27, following relegation from the Ukrainian Premier League .",
     "crest_file": "sc-poltava.png",
     "locked": false,
-    "league": 35,
+    "league": 100,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "sc-poltava"
@@ -66941,7 +67299,7 @@
     "is_national": false,
     "name": "Karvan",
     "founded": "1990-01-01",
-    "tier": 1,
+    "tier": 2,
     "girone": null,
     "stadium": 847,
     "manager": "Vacant",
@@ -66955,7 +67313,7 @@
     "description": "Karvan İdman Klubu ( pronounced [carvan] ) is an Azerbaijani professional football club based in Yevlakh that participates in the Azerbaijan Premier League , after promotion from the Azerbaijan First Division in 2025. It was the first Azerbaijani club to pass the  first qualification stage in the UEFA Cup . [ 1 ]",
     "crest_file": "karvan.png",
     "locked": false,
-    "league": 71,
+    "league": 102,
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "karvan"
@@ -73790,6 +74148,303 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "slug": "notts-county"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1129,
+  "fields": {
+    "is_national": false,
+    "name": "NK Rudeš",
+    "founded": "1957-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 496,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 423,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/NK_Rudeš",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/5/59/NK_Rude%C5%A1.svg",
+    "image_credit": "Wikipedia (club infobox crest)",
+    "description": null,
+    "crest_file": "nk-rudes.png",
+    "locked": false,
+    "league": 26,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "nk-rudes"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1130,
+  "fields": {
+    "is_national": false,
+    "name": "FC Dunav Ruse",
+    "founded": "1949-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1094,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 897,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Dunav_Ruse",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Dunav_Ruse_Logo.png",
+    "image_credit": "Wikipedia (club infobox crest)",
+    "description": null,
+    "crest_file": "fc-dunav-ruse.png",
+    "locked": false,
+    "league": 30,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "fc-dunav-ruse"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1131,
+  "fields": {
+    "is_national": false,
+    "name": "MFK Dukla Banská Bystrica",
+    "founded": "1965-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1096,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 899,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/MFK_Dukla_Banská_Bystrica",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/1/14/FK_Dukla_Bansk%C3%A1_Bystrica_Logo.svg",
+    "image_credit": "Wikipedia (club infobox crest)",
+    "description": null,
+    "crest_file": "mfk-dukla-banska-bystrica.png",
+    "locked": false,
+    "league": 31,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "mfk-dukla-banska-bystrica"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1132,
+  "fields": {
+    "is_national": false,
+    "name": "FC Zbrojovka Brno",
+    "founded": "1913-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1095,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 898,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Zbrojovka_Brno",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/b/b3/Logo_of_FC_Zbrojovka_Brno.svg",
+    "image_credit": "Wikipedia (club infobox crest)",
+    "description": null,
+    "crest_file": "fc-zbrojovka-brno.png",
+    "locked": false,
+    "league": 18,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "fc-zbrojovka-brno"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1133,
+  "fields": {
+    "is_national": false,
+    "name": "SK Artis Brno",
+    "founded": "1932-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1095,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 898,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/SK_Artis_Brno",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/d/de/SK_Artis_Brno_logo.svg",
+    "image_credit": "Wikipedia (club infobox crest)",
+    "description": null,
+    "crest_file": "sk-artis-brno.png",
+    "locked": false,
+    "league": 18,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "sk-artis-brno"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1134,
+  "fields": {
+    "is_national": false,
+    "name": "FSC Bukovyna Chernivtsi",
+    "founded": "1958-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1097,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 900,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FSC_Bukovyna_Chernivtsi",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/6/61/Bukovyna_Chernivtsi.png",
+    "image_credit": "Wikipedia (club infobox crest)",
+    "description": null,
+    "crest_file": "fsc-bukovyna-chernivtsi.png",
+    "locked": false,
+    "league": 35,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "fsc-bukovyna-chernivtsi"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1135,
+  "fields": {
+    "is_national": false,
+    "name": "FC Chornomorets Odesa",
+    "founded": "1936-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1098,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 901,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Chornomorets_Odesa",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/3/32/Chornomorets_Odessa_Logo_2021.svg",
+    "image_credit": "Wikipedia (club infobox crest)",
+    "description": null,
+    "crest_file": "fc-chornomorets-odesa.png",
+    "locked": false,
+    "league": 35,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "fc-chornomorets-odesa"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1136,
+  "fields": {
+    "is_national": false,
+    "name": "FC Livyi Bereh Kyiv",
+    "founded": "2017-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 621,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 526,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Livyi_Bereh_Kyiv",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/e/e1/FC_Livyi_Bereh_Kyiv_logo.png",
+    "image_credit": "Wikipedia (club infobox crest)",
+    "description": null,
+    "crest_file": "fc-livyi-bereh-kyiv.png",
+    "locked": false,
+    "league": 35,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "fc-livyi-bereh-kyiv"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1137,
+  "fields": {
+    "is_national": false,
+    "name": "Vasas SC",
+    "founded": "1911-03-16",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1099,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 440,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Vasas_SC",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/f/f5/Vasas_SC.svg",
+    "image_credit": "Wikipedia (club infobox crest)",
+    "description": null,
+    "crest_file": "vasas-sc.png",
+    "locked": false,
+    "league": 28,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "vasas-sc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1138,
+  "fields": {
+    "is_national": false,
+    "name": "Kispest Honvéd FC",
+    "founded": "1909-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1100,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 440,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Kispest_Honvéd_FC",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/d/d7/Kispest_honved_fc_logo.png",
+    "image_credit": "Wikipedia (club infobox crest)",
+    "description": null,
+    "crest_file": "kispest-honved-fc.png",
+    "locked": false,
+    "league": 28,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "kispest-honved-fc"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1139,
+  "fields": {
+    "is_national": false,
+    "name": "Shafa Baku FK",
+    "founded": "1998-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1101,
+    "manager": null,
+    "num_of_titles": 0,
+    "city": 649,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Shafa_Baku_FK",
+    "transfermarkt_url": null,
+    "image_url": "",
+    "image_credit": "No verified crest: neither en nor az Wikipedia carries one (both image params empty, 2026-08)",
+    "description": null,
+    "crest_file": "",
+    "locked": false,
+    "league": 71,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "slug": "shafa-baku-fk"
   }
 },
 {
