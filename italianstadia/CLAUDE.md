@@ -4,7 +4,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this project is
 
-Interactive web map dashboard of Italian football stadiums (Serie A/B/C), planned to expand to European leagues. Built with Django 5.1 + SQLite (dev) / PostgreSQL (prod) + Leaflet.js + Bootstrap 5. Deployed on Render at https://italianstadia-2.onrender.com
+Interactive web map of European football stadiums, live at **stadiumsofeurope.com**.
+Django 5.1 + SQLite (dev) / PostgreSQL (prod) + Leaflet.js + Bootstrap 5, deployed on
+Render's free tier (512 MB — see "Memory budget" below, it shapes several designs).
+
+Scale as of August 2026: **53 countries, 100 leagues, ~1,070 clubs, ~1,030 stadiums.**
+The repo name and the `italianstadia` package are historical — this stopped being an
+Italy-only project long ago; do not take either as a statement of scope.
+
+Beyond the map it sells PNG map exports (€0.50 via Stripe), publishes insight pages, and
+serves a public read-only data API.
+
+**Do not write "currently" facts into this file.** Counts, coverage and roadmap status go
+stale silently and are then read with the same authority as the rules that are still true.
+This file is for rules and reasons; the code and the database are for state.
 
 ## Commands
 
@@ -164,13 +177,63 @@ All filter state and map logic lives in `map.js` as a single file. Filter DOM el
 
 When adding filter logic, keep all filter state local to `applyFilters()` / `applyDevelopmentFilters()` — do not scatter state across individual event handlers. Each event handler calls one of those two functions, nothing else.
 
-API URLs are currently hardcoded in `map.js` (`fetch("/api/stadiums/")`). When this is fixed, they should come from `data-url` attributes on DOM elements, not hardcoded strings.
+URLs come from `data-url` attributes on the `#map` element, never hardcoded in JS. Keep it
+that way — the template is the only place that knows a URL.
+
+**The two map layers load from DIFFERENT places, deliberately:**
+
+```
+data-stadiums-url     → {% static 'data/stadiums_map.json' %}   PRE-BUILT FILE (WhiteNoise)
+data-developments-url → {% url '...stadium_developments_geojson' %}   LIVE ENDPOINT
+```
+
+The ~1,000 operational stadiums are a pre-generated file; querying them per request was
+OOM-killing the dyno. The few dozen development projects are cheap, so they stay live.
+`/api/stadiums/` still exists and is still correct, but the site itself does not use it —
+it is there for external consumers. Do not "tidy" the map onto it.
 
 ## Database setup
 
 - **Local dev:** SQLite (auto, no config needed). `db.sqlite3` is in repo root.
 - **Production:** `DATABASE_URL` env var activates PostgreSQL via `dj_database_url`. SSL is required when `DATABASE_URL` is set.
 - No docker-compose. Just set `DATABASE_URL` in `.env` to use a local Postgres instead of SQLite.
+
+## Memory budget (Render free tier, 512 MB)
+
+This single constraint explains several designs that otherwise look like over-engineering.
+Before adding anything that runs per request, ask what it costs at 1,000 stadiums.
+
+- **Pre-generate, commit, serve statically.** `stadiums_map.json`, `city_clubs.json`, the
+  tournament and insight PNGs, and all ~1,060 crests are built by management commands and
+  served by WhiteNoise. None of them touch the DB or PIL at request time.
+- **`_RENDER_LOCK`** serialises map exports — one render at a time per worker. A second
+  concurrent request gets a friendly 429 rather than stacking memory into an OOM 502.
+- **FHD and 4K previews are downgraded to HD** in `map_export`. The paid path caps 4K too.
+- **Tiles cache to /tmp, never to Django's LocMemCache** — holding tile bytes in RAM grows
+  the worker render after render.
+- Anything that would need a second full compose per request (e.g. a separate endpoint for
+  export label geometry) must instead ride along on the render that already happened.
+
+## Export renderer must be resolution-independent
+
+The paid download differs from the free preview by the logo and the watermark, and by
+NOTHING else. The preview is always HD; the file someone paid for may be FHD or 4K, so any
+metric written in absolute pixels silently changes the layout between what they saw and
+what they bought.
+
+`_compose_export_image` scales `label_size` and `badge_size` by `W / _REFERENCE_W` (1280).
+Everything else inside the renderer must scale the same way. Bugs already found and fixed:
+
+- the inset's "Detail view" header reserved `int(IW*0.03) + 16` — that absolute 16 made the
+  strip 16.9% of the box at HD but 13.8% at FHD;
+- pill padding, row gap and the font-shrink STEP were fixed pixel counts, so HD and FHD
+  settled on different font ratios;
+- hand-placed inset labels are stored as FRACTIONS of the inset box, and clamped against
+  fractions — never against the pill's own width or height, which is itself
+  resolution-dependent because font sizes are integers.
+
+When touching the renderer, place the same element at HD, FHD and 4K and compare the
+resulting fractions. It is the only reliable check.
 
 ## Critical constraints
 
@@ -249,55 +312,72 @@ The only required steps when adding a league:
 - Do not add inline `<script>` blocks to templates — put JS in `static/js/`
 - Do not skip migrations — always run `makemigrations` after model changes
 - Do not hardcode API URLs in JS — use `data-url` attributes rendered by the template
+- Do not fetch a crest at render time — they are local files (see Crest sourcing)
+- Do not write an absolute pixel size into the export renderer — scale it by `_REFERENCE_W`
+- Do not delete a club that gets relegated out of a covered tier — move it to a hidden league
+- Do not guess ownership, a coordinate, or a crest. Every one of them has a documented
+  fallback chain, and every one ends in an explicit "unknown" rather than a plausible
+  invention. A wrong fact that looks right is the worst outcome this project can produce
+- Do not trust a filename, a club name or a league table to tell you what a badge shows.
+  Look at the rendered image
 
-## Roadmap context
+## League coverage and the season update
 
-The project is currently Italy-only (Serie A/B/C). Full roadmap in `italianstadia_ROADMAP.md`.
+Coverage is a fact about the DATABASE, not about this file — query it, never trust a table
+here:
 
-**Planned expansions:**
+```bash
+python -X utf8 manage.py season_status          # what is on which season
+```
 
-| Phase | Work |
-|-------|------|
-| Phase 2 | `Country` ✓, `League` ✓ models live; scrape European data; `TeamSeasonRecord` |
-| Phase 3 | Historical season filtering via `TeamSeasonRecord(team, league, season_year)` |
-| Phase 4 | Mobile-first UI, PWA |
-| Phase 5 | Stadium depth (timelines, search, rankings) |
+`League.season` is the source of truth ("2026/27", or "2026" for summer-season leagues:
+the Nordics, Baltics, Ireland, Iceland, Georgia, Belarus). A league whose clubs you have
+updated but whose `season` you forgot to bump is the easiest mistake to make here — the
+map is right and every report about it is wrong.
 
-**Phase 2 leagues (priority order):**
+**Updating a country for a new season** (the August job):
+1. Get the new roster from that league's own `20xx–xx_<League>` Wikipedia article. Never
+   infer promotions from last season's table — clubs get administratively relegated
+   (Karviná, match-fixing), withdraw (Rukh Lviv), rename (Metalist 1925 → FC Kharkiv), or
+   the whole division gets renamed (Championnat National → **Ligue 3**, 2026/27).
+2. Diff against the DB, then move clubs between tiers rather than deleting and recreating.
+3. Clubs relegated OUT of the covered tiers go to a hidden league — see below.
+4. Create genuinely new clubs with Team + Stadium (+ City), sourcing crests via the
+   infobox rule below and coordinates via the documented fallback chain.
+5. Bump `League.season` on every tier you touched.
+6. Assert the final roster against the article: count, no club missing or extra, and every
+   club with a crest, a stadium and coordinates.
+7. Regenerate derived artifacts, re-dump the fixture, run the tests.
 
-| League | Country | Division | Status |
-|--------|---------|----------|--------|
-| Serie A/B/C | Italy | 1–3 | ✓ live |
-| Premier League | England | 1 | JSON ready (25/26) |
-| EFL Championship | England | 2 | JSON ready (25/26) |
-| EFL League One | England | 3 | JSON ready (25/26) |
-| Bundesliga | Germany | 1 | JSON ready (25/26) |
-| 2. Bundesliga | Germany | 2 | JSON ready (25/26) |
-| Primeira Liga | Portugal | 1 | JSON ready (25/26) |
-| Ekstraklasa | Poland | 1 | JSON ready (25/26) |
-| La Liga | Spain | 1 | JSON ready (25/26) |
-| Segunda División | Spain | 2 | JSON ready (25/26) |
-| Ligue 1 / Ligue 2 | France | 1–2 | planned |
-| Eredivisie | Netherlands | 1 | JSON ready (25/26) |
-| Süper Lig | Turkey | 1 | JSON ready (25/26) |
-| SuperLiga | Romania | 1 | JSON ready (25/26) |
-| Czech First League | Czechia | 1 | JSON ready (25/26) |
-| Austrian Football Bundesliga | Austria | 1 | JSON ready (25/26) |
-| Swiss Super League | Switzerland | 1 | JSON ready (25/26) |
-| Scottish Premiership | Scotland | 1 | planned |
-| Belgian Pro League | Belgium | 1 | JSON ready (25/26) |
-| Danish Superliga | Denmark | 1 | JSON ready (25/26) |
-| Super League Greece 1 | Greece | 1 | JSON ready (25/26) |
-| HNL | Croatia | 1 | JSON ready (25/26) |
-| Cypriot First Division | Cyprus | 1 | JSON ready (25/26) |
-| Serbian SuperLiga | Serbia | 1 | JSON ready (25/26) |
-| Nemzeti Bajnokság I | Hungary | 1 | JSON ready (25/26) |
-| First Professional Football League | Bulgaria | 1 | JSON ready (25/26) |
-| Slovak Super Liga | Slovakia | 1 | JSON ready (25/26) |
-| Prva liga | Slovenia | 1 | JSON ready (25/26) |
-| League of Ireland Premier Division | Ireland | 1 | JSON ready (2025) |
+### Hidden leagues hold relegated clubs
 
-Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 fixes) before expanding to multi-league.
+When a club drops out of the tiers we cover, do NOT delete it — that discards verified
+stadium data you would have to re-scrape if it comes back up. Move it to a league one
+level down with `hidden=True` (EFL League Two, Prva NL, Liga II, Regionalliga …).
+
+Hidden means it is not offered in the export/league pickers, because a league containing
+nothing but the three clubs that just went down renders a nonsense map. A lower tier that
+is genuinely fully populated (Ligue 3, Serie C, EFL League One) is NOT hidden.
+
+`Team.tier` must be kept in step with `League.division_level` — they are separate fields
+and nothing enforces agreement.
+
+### A league belongs to the country that RUNS it
+
+`export_options` groups leagues by the country holding MOST of that league's grounds, not
+by `League.country` and not by every country a ground sits in.
+
+This is not pedantry. The New Saints are a Cymru Premier club who play at Park Hall in
+**England**, and grouping by ground country put the entire Welsh league in England's
+dropdown. Symmetrically, Cardiff/Swansea/Wrexham put the EFL Championship under Wales,
+Vaduz put the Swiss Super League under Liechtenstein, Derry City put the League of Ireland
+under Northern Ireland, and FC Andorra put the Segunda under Andorra.
+
+Keys stay `city.country` free text because that is what the export filter matches on;
+switching to the Country model's name breaks countries whose two spellings differ
+("Czechia" vs "Czech Republic"). The counting query must NOT be `.distinct()` — collapsing
+the rows makes every cross-border league a 1-1 tie and the fix silently does nothing.
+
 
 ## Known Transfermarkt XPath patterns (verified)
 - German clubs: @title = "German Champion"
@@ -349,6 +429,71 @@ Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 f
 - Israeli clubs: @title = "Israeli Champion"  ← unverified
 - Georgian clubs: @title = "Georgian Champion"  ← unverified
 
+## Crest sourcing (SELF-HOSTED — never fetch a badge at render time)
+
+Every club crest is a local PNG in `static/crests/<team-slug>.png`, recorded on
+`Team.crest_file`, committed, and served by WhiteNoise. A map render makes **zero** network
+calls for badges.
+
+This is not an optimisation. Crests used to be pulled from Transfermarkt at render time;
+TM soft-blocked us (HTTP 200 with a ZERO-BYTE body, so a status-code check called every
+crest healthy) and 999 of 1,034 badges vanished. Wikimedia, the replacement, throttles
+bursts. **Both failures are silent** — a missing crest draws a plain coloured dot, which
+reads as a design choice rather than an error, and maps were published with bare dots
+before anyone noticed.
+
+```bash
+python -X utf8 manage.py download_crests                 # fetch what is missing
+python -X utf8 manage.py download_crests --league "X"
+python -X utf8 manage.py refresh_dead_crests --fix       # re-source dead/wrong URLs
+```
+
+### Source order: the club article's INFOBOX first
+
+1. **The `| image =` / `| logo =` parameter of the club's own Wikipedia article.** This is
+   what the article itself renders, editors keep it current, and it is never absent the way
+   Wikidata is.
+2. Wikidata P154.
+3. A scored scan of the article's images — last resort.
+
+Wikidata P154 was the primary source and is simply MISSING for a lot of major clubs (Real
+Madrid and Athletic Club both lack it), which pushed them onto the fallback scan and its
+bug. Auditing 1,033 clubs against the infobox found 75 wrong crests.
+
+### Two traps the scan must guard against
+
+**MediaWiki returns an article's images in ALPHABETICAL order.** Taking the first keyword
+match therefore selects a club's OLDEST badge, because clubs that document their crest
+history have files named by year. "Athletic Club crest 1901.png" beat "Club Athletic Bilbao
+logo.svg" sitting six entries later in the same list. Candidates are SCORED; position
+decides nothing.
+
+**A filename that dates itself is a retired badge** — `is_historic()`. A CLOSED range is
+historic ("Anderlecht 1933–1959"); an OPEN one is the badge in use ("2015-heden", "2021-").
+Ajax needs both: they readopted a 1928 badge in 2025 and the file records "1928-1991,
+2025-". Also caught: "former logo", "old logo"/"old crest" (Newcastle and West Brom were
+both on files that said so), centenary marks (Feyenoord's "100 years").
+
+**A rebrand usually brings a new badge.** Sheffield Wednesday, Marseille, FC Kharkiv and
+Aston Villa all had stale crests behind a name or identity change. Re-check the infobox
+after any rename.
+
+### Failure is recorded, not left blank
+
+If neither the English nor the native-language Wikipedia has a crest, set `image_credit`
+to a string starting **"No verified crest"**. `refresh_dead_crests` holds those clubs
+rather than installing whatever it finds — without the guard it picked a golf-tournament
+photo for Eintracht, graffiti for Górnik, a street photo for Middlesbrough and a
+pronunciation recording (`De-FC_Augsburg.ogg`) for Augsburg.
+
+### Verify crests by LOOKING at them
+
+Filenames lie. After any crest change, render a contact sheet and inspect it — that is how
+Marseille's stale badge and FC Kharkiv's pre-rebrand "M" were caught, and neither had a
+suspicious filename. A quick sanity check that catches photographs: every real crest is
+≥10% transparent pixels; the Di Stéfano photograph that shipped as Real Madrid's badge was
+0.0%.
+
 ## Data quality rules
 
 - `average_attendance` must be NULL if not scraped — never 0 (`clean_int()` returns None for 0)
@@ -364,8 +509,27 @@ Do not skip Phase 1 stabilization (DB field limits ✓, JS modularization, N+1 f
 - Stadium images must be non-null — `og:image` is the fallback if infobox image not found; images stored at full resolution (no `/thumb/` in URL)
 
 ## Regenerate derived artifacts after data changes
-Two pre-rendered artifacts must be regenerated whenever the data they show changes, then
-committed (they are served as static files, NOT rendered per request — Render 512 MB limit):
+
+These are pre-built and committed, NOT rendered per request (see Memory budget). If you
+change data and skip this, the site keeps serving the old version and nothing errors —
+which is exactly why it needs a checklist rather than judgement.
+
+**The full sequence after any data change:**
+
+```bash
+python -X utf8 manage.py download_crests          # only if clubs were added/renamed
+python -X utf8 manage.py generate_stadiums_json
+python -X utf8 manage.py generate_city_clubs --season "2026/2027"
+python -X utf8 manage.py dumpdata italiastadiaapp \
+    --exclude italiastadiaapp.exporttoken --exclude italiastadiaapp.lastrefresh \
+    --indent 2 -o italiastadiaapp/fixtures/initial_data.json
+python -X utf8 -m pytest -q
+```
+
+Regenerate the tournament and insight PNGs as well after any change to the RENDERER
+itself, not just to the data — they bake the current renderer's metrics in.
+
+Detail on each:
 - `python manage.py generate_stadiums_json` → `static/data/stadiums_map.json` (operational map)
 - `python manage.py generate_tournament_maps` → `static/exports/tournament_<slug>.png`
   (the back-end tournament maps embedded on each `/tournaments/<slug>/` page, with logo +
