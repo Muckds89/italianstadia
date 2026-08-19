@@ -120,5 +120,21 @@ class InfoboxRegexTests(SimpleTestCase):
             self._pick("| logo = [[File:Club Athletic Bilbao logo.svg\n"),
             "Club Athletic Bilbao logo.svg")
 
+    def test_reads_an_image_written_as_a_full_link_with_a_size(self):
+        # "| image = [[Image:X.png|175px]]" -- requiring the filename to run to
+        # end-of-line reported these clubs as having NO infobox crest, which then
+        # handed them to the fallback scan. Scafatese was one.
+        self.assertEqual(
+            self._pick("| image = [[Image:ScafateseCalcio.png|175px]]\n"),
+            "ScafateseCalcio.png")
+
+    def test_reads_a_link_with_several_pipe_params(self):
+        self.assertEqual(
+            self._pick("| image = [[File:Foo bar.svg|150px|alt=Crest]]\n"),
+            "Foo bar.svg")
+
+    def test_a_template_value_is_not_a_filename(self):
+        self.assertIsNone(self._pick("| image = {{tmpl|x}}\n"))
+
     def test_ignores_an_empty_parameter(self):
         self.assertIsNone(self._pick("| image = \n| fullname = X\n"))

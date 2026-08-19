@@ -218,9 +218,13 @@ class Command(BaseCommand):
     # The value must START with a non-space: "| image = " with nothing after it is
     # a blank parameter, and a lazy group would otherwise capture the pad space and
     # report an empty filename as a successful read.
+    # A trailing "|175px]]" must be tolerated. Some articles write the parameter as a
+    # full image LINK, "| image = [[Image:ScafateseCalcio.png|175px]]", and requiring
+    # the filename to run to end-of-line silently reported those clubs as having no
+    # infobox crest at all -- which then hands them to the fallback scan.
     _INFOBOX_IMG = re.compile(
         r"^\s*\|\s*(?:image|logo|crest)\s*=\s*(?:\[\[)?(?:File:|Image:)?"
-        r"([^|\]\n{}\s][^|\]\n{}]*?)\s*$", re.I | re.M)
+        r"([^|\]\n{}\s][^|\]\n{}]*?)\s*(?:\|[^\]\n]*)?(?:\]\])?\s*$", re.I | re.M)
 
     def _infobox_files(self, host, titles, sleep):
         """Map article title -> the file its infobox displays as the club crest.
