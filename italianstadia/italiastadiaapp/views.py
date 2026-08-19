@@ -2424,6 +2424,16 @@ def _get_export_stadiums(params):
             tenants = [{"name": team_name, "image_url": image_url}] if team_name else []
         else:
             clubs = [t for t in teams if not t.is_national]
+            # A LEAGUE filter narrows the tenants too. Genoa and Sampdoria share the
+            # Luigi Ferraris, so a Serie B map labelled it "Genoa / UC Sampdoria" and
+            # drew a combined crest -- naming a Serie A club on a Serie B map. The
+            # groundshare is real; its relevance is not, once you have asked for one
+            # division. Fall back to all tenants if the filter would empty the ground,
+            # which cannot happen here but would leave a bare dot if it ever did.
+            if params.get("league"):
+                _in_league = [t for t in clubs
+                              if t.league and t.league.name == params["league"]]
+                clubs = _in_league or clubs
             tenants = [{"name": t.name, "image_url": (t.image_url or ""),
                         "crest_file": (t.crest_file or "")} for t in clubs[:4]]
             if not tenants and team_name:
@@ -3066,7 +3076,7 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
     for s in inset_stadiums:
         px, py = _lon_lat_to_px(s["lon"], s["lat"], cluster_bbox, IW, IH)
         colour    = _dot_colour(s, params, country_index)
-        badge_img = badges.get(s["name"])
+        badge_img = badges.get(_badge_key(s))
         d.ellipse([px-rr, py-rr, px+rr, py+rr], fill=(255, 255, 255))
         if badge_img:
             b = badge_img.resize((BR*2, BR*2), Image.LANCZOS)
@@ -3233,7 +3243,7 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
     # unavoidably run over the markers, and a hidden badge defeats the point of the
     # box — better to clip a few characters of text than lose the ground itself.
     for px, py, s_ in dots:
-        badge_img = badges.get(s_["name"])
+        badge_img = badges.get(_badge_key(s_))
         d.ellipse([px-rr, py-rr, px+rr, py+rr], fill=(255, 255, 255))
         if badge_img:
             b = badge_img.resize((BR*2, BR*2), Image.LANCZOS)
@@ -3913,6 +3923,18 @@ def _local_crest(fname):
         return None
 
 
+def _badge_key(s):
+    """Key for the prefetched-badge dict.
+
+    NOT the stadium name. Italy has two grounds called "Romeo Menti" -- Vicenza's
+    and Juve Stabia's, genuinely distinct venues that share a name -- and keying on
+    the name silently collapsed them, so one club wore the other's crest. The slug
+    is unique by database constraint; the name falls back only for synthetic rows
+    (tournament and development venues) that have no slug.
+    """
+    return s.get("slug") or s.get("name") or ""
+
+
 def _prefetch_badges(stadiums, size=20):
     """Fetch tenant badge images in parallel (hard 22 s budget) and compose a
     single badge per stadium, so shared grounds show a combined crest. Returns
@@ -3966,7 +3988,7 @@ def _prefetch_badges(stadiums, size=20):
             composed = _compose_multi_badge(imgs, _BADGE_FETCH_SIZE)
             if composed is not None and size and size != _BADGE_FETCH_SIZE:
                 composed = composed.resize((size, size), Image.LANCZOS)
-            result[s["name"]] = composed
+            result[_badge_key(s)] = composed
     return result
 
 
@@ -4100,7 +4122,7 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
             draw.ellipse([px - rr, py - rr, px + rr, py + rr], fill=(255, 255, 255))
             draw.ellipse([px - BADGE_R, py - BADGE_R, px + BADGE_R, py + BADGE_R], fill=colour)
         else:
-            badge_img = badges.get(s["name"])
+            badge_img = badges.get(_badge_key(s))
             # Colour the ring/halo by a chosen category (ring_by) so the club crest
             # stays visible but the rim colour-codes ownership/surface/type/etc.
             if ring_by:
@@ -4197,11 +4219,15 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
     def _wrap(text, font, max_w, fallback_cw):
         return _wrap_text(draw, text, font, max_w, fallback_cw)
 
+    # Keyed on the unique slug, NOT the stadium name. Vicenza and Juve Stabia both
+    # play at a "Romeo Menti"; with Juve Stabia's in the inset, a name-keyed skip set
+    # suppressed VICENZA's label on the main map too, leaving an unnamed badge and a
+    # Serie B map that silently showed 19 of its 20 clubs.
     skip = no_label_names or set()
     items = []
     inner_w = MAX_PILL_W - PAD_X * 2
     for px, py, s in dot_positions:
-        if s["name"] in skip:
+        if _badge_key(s) in skip:
             continue                            # badge already drawn; label lives in the inset
         team_line, stadium_line = (s.get("team_name", "") or ""), s["name"]
         rows = []                                # [(text, font, fill_key, w, h)]
@@ -4899,7 +4925,7 @@ def _compose_export_image(params):
 
     # Draw ALL badges on the main map (incl. the inset cluster, so those grounds
     # still show in place); only their LABELS move into the zoom box.
-    inset_names = {s["name"] for s in inset_stadiums}
+    inset_names = {_badge_key(s) for s in inset_stadiums}
     img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index,
                                 reserve_boxes=reserves, no_label_names=inset_names,
                                 extra_label_points=island_anchors)

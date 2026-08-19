@@ -1,58 +1,47 @@
 """
-Data invariants that fail SILENTLY in production.
+Pure-logic guards for the map renderer.
 
-Each of these has actually happened, and none of them raised anything: a stadium
-with no coordinates is simply dropped from every map, so Kosovo rendered 8 of its
-10 clubs and Wales 11 of its 12 with no error, no warning and no visual cue that
-anything was missing.
+NOTE ON SCOPE. The DATA checks that belong with these live in
+`manage.py check_map_integrity`, not here. pytest runs against an EMPTY test
+database — this project has no fixture loading in conftest — so an assertion like
+"no stadium is missing coordinates" passes trivially by iterating nothing. Three
+such tests were written here first and passed while the live database had five
+grounds with no coordinates and fourteen pairs of grounds sharing a name.
 
-These run against the FIXTURE, which is the data that reaches production, so a
-regression is caught before deploy rather than by a Reddit commenter.
+What CAN be tested here is behaviour that does not depend on stored rows.
 """
-from django.test import TestCase
+from django.test import SimpleTestCase
 
-from italiastadiaapp.models import League, Stadium, Team
-
-
-class CoordinatesAreMandatoryTests(TestCase):
-    """A ground with no coordinates cannot be drawn, so it is silently omitted."""
-
-    def test_no_stadium_hosting_a_club_lacks_coordinates(self):
-        bad = [
-            f"{s.name} ({', '.join(t.name for t in s.teams.all())})"
-            for s in Stadium.objects.prefetch_related("teams")
-            if (s.latitude is None or s.longitude is None) and s.teams.exists()
-        ]
-        self.assertEqual(bad, [], f"{len(bad)} ground(s) would vanish from the map: {bad}")
-
-    def test_every_club_in_a_visible_league_has_a_ground(self):
-        bad = [
-            f"{t.name} ({t.league.name})"
-            for t in Team.objects.select_related("stadium", "league")
-            .filter(is_national=False, league__hidden=False)
-            .exclude(league__isnull=True)
-            if t.stadium is None
-        ]
-        self.assertEqual(bad, [], f"{len(bad)} club(s) have no ground: {bad}")
+from italiastadiaapp.views import _badge_key
 
 
-class LeagueShapeTests(TestCase):
+class BadgeKeyTests(SimpleTestCase):
+    """Two DIFFERENT grounds can share a name, and keying on the name loses one.
 
-    def test_club_tier_matches_its_league_division_level(self):
-        """`tier` and `division_level` are separate fields and nothing enforces
-        agreement, so a club moved between tiers can keep a stale tier and drop
-        out of tier-filtered views."""
-        bad = [
-            f"{t.name}: tier={t.tier} but {t.league.name} is level {t.league.division_level}"
-            for t in Team.objects.select_related("league")
-            .filter(is_national=False).exclude(league__isnull=True)
-            if t.tier != t.league.division_level
-        ]
-        self.assertEqual(bad, [], f"{len(bad)} club(s) with a stale tier: {bad[:10]}")
+    Vicenza and Juve Stabia both play at a "Romeo Menti". Keying the prefetched
+    badge dict on the stadium name collapsed them, so one club wore the other's
+    crest; keying the inset's label-skip set on the name suppressed Vicenza's
+    label on the main map as well, and the Serie B export silently rendered 19 of
+    its 20 clubs. Fourteen name pairs in the live data are affected, so this was
+    never specific to Italy.
+    """
 
-    def test_a_league_holding_clubs_declares_a_season(self):
-        bad = [
-            lg.name for lg in League.objects.filter(division_level__gte=1)
-            if lg.teams.exists() and not (lg.season or "").strip()
-        ]
-        self.assertEqual(bad, [], f"league(s) with clubs but no season tag: {bad}")
+    def test_separates_grounds_that_share_a_name(self):
+        rows = [{"slug": "romeo-menti", "name": "Romeo Menti"},
+                {"slug": "romeo-menti-2", "name": "Romeo Menti"}]
+        self.assertEqual(len({_badge_key(r) for r in rows}), 2)
+
+    def test_prefers_the_slug_over_the_name(self):
+        self.assertEqual(
+            _badge_key({"slug": "romeo-menti-2", "name": "Romeo Menti"}),
+            "romeo-menti-2")
+
+    def test_falls_back_to_the_name_when_there_is_no_slug(self):
+        # tournament and development venues are synthetic rows carrying no slug
+        self.assertEqual(_badge_key({"name": "Wembley Stadium"}), "Wembley Stadium")
+        self.assertEqual(_badge_key({"slug": "", "name": "Wembley Stadium"}),
+                         "Wembley Stadium")
+
+    def test_never_returns_none(self):
+        # a key of None would collapse every unkeyable row onto one badge
+        self.assertEqual(_badge_key({}), "")
