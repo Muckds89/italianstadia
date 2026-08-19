@@ -86,7 +86,7 @@ class Command(BaseCommand):
                         params={"action": "query", "format": "json",
                                 "formatversion": "2", "titles": "|".join(batch),
                                 "prop": "imageinfo", "iiprop": "url",
-                                "iiurlwidth": 256})
+                                "iiurlwidth": 1024})
                     time.sleep(sleep)
                     data = r.json()
                 except Exception:

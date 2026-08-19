@@ -622,6 +622,31 @@ function closeMobileSheet() {
     sheet.classList.remove("open");
 }
 
+/**
+ * The tenants a marker should DISPLAY under the current filters.
+ *
+ * A ground keeps every club that plays there, but the badge must only show the
+ * ones the user asked to see. Genoa and Sampdoria share the Luigi Ferraris and
+ * Sassuolo and Reggiana the Mapei, so filtering to Serie A still drew a combined
+ * crest with a Serie B club in it — the marker answered "who plays here", when the
+ * question on screen was "who plays here IN SERIE A".
+ *
+ * Falls back to every tenant when nothing would survive, so a ground can never
+ * lose its badge entirely and turn into a bare dot.
+ */
+function teamsForDisplay(marker) {
+    const all = marker.teams || [];
+    // Read the live filter values rather than taking them as arguments: the icon is
+    // also re-set from the search box and from "zoom to city", and either of those
+    // forgetting to pass them would quietly restore the combined badge.
+    const league  = (typeof leagueFilter  !== "undefined" && leagueFilter)  ? leagueFilter.value  : "";
+    const country = (typeof countryFilter !== "undefined" && countryFilter) ? countryFilter.value : "";
+    if (!league && !country) { return all; }
+    const keep = all.filter(t =>
+        league ? String(t.league_id ?? "") === league : t.country === country);
+    return keep.length ? keep : all;
+}
+
 function applyFilters(updateStadiumDropdown = true) {
     if (searchTempMarker) { map.removeLayer(searchTempMarker); searchTempMarker = null; }
 
@@ -707,7 +732,14 @@ function applyFilters(updateStadiumDropdown = true) {
 
         marker.setOpacity(cfg.opacity);
         marker.setZIndexOffset(cfg.zOffset);
-        marker.setIcon(createMultiBadgeIcon(marker.teams, cfg.size));
+        const shown = teamsForDisplay(marker);
+        marker.setIcon(createMultiBadgeIcon(shown, cfg.size));
+        // keep the hover tooltip consistent with the badge
+        if (marker.getTooltip()) {
+            marker.setTooltipContent(
+                shown.length > 1 ? shown.map(t => t.name).join(" · ")
+                                 : (shown[0]?.name || marker.stadiumName || ""));
+        }
         clusterGroup.addLayer(marker);
         visibleMarkers.push(marker);
     });
@@ -1172,7 +1204,7 @@ fetch(document.getElementById("map").dataset.stadiumsUrl)
             }, null);
 
             const marker = L.marker([coords[1], coords[0]], {
-                icon: createMultiBadgeIcon(props.teams || [], BADGE_SIZE.active),
+                icon: createMultiBadgeIcon(props.teams || [], BADGE_SIZE.active),  // applyFilters re-sets this
                 zIndexOffset: 1000,
             });
             marker.primaryTeam = primaryTeam;
@@ -1477,7 +1509,7 @@ function wireSearch() {
                         }
                         m.setOpacity(1.0);
                         m.setZIndexOffset(2000);
-                        m.setIcon(createMultiBadgeIcon(m.teams, BADGE_SIZE.active));
+                        m.setIcon(createMultiBadgeIcon(teamsForDisplay(m), BADGE_SIZE.active));
                         m.addTo(map);
                         searchTempMarker = m;
                     }
@@ -1531,7 +1563,7 @@ function _applyCityZoom(cityName) {
         if (!clusterGroup.hasLayer(m) && !map.hasLayer(m)) {
             m.setOpacity(1.0);
             m.setZIndexOffset(2000);
-            m.setIcon(createMultiBadgeIcon(m.teams, BADGE_SIZE.active));
+            m.setIcon(createMultiBadgeIcon(teamsForDisplay(m), BADGE_SIZE.active));
             m.addTo(map);
         }
     });

@@ -3080,9 +3080,7 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
         d.ellipse([px-rr, py-rr, px+rr, py+rr], fill=(255, 255, 255))
         if badge_img:
             b = badge_img.resize((BR*2, BR*2), Image.LANCZOS)
-            mask = Image.new("L", (BR*2, BR*2), 0)
-            ImageDraw.Draw(mask).ellipse([0, 0, BR*2-1, BR*2-1], fill=255)
-            inset_img.paste(b, (px-BR, py-BR), mask)
+            inset_img.paste(b, (px-BR, py-BR), _circle_mask(BR*2))
         else:
             d.ellipse([px-BR, py-BR, px+BR, py+BR], fill=colour)
         dots.append((px, py, s))
@@ -3247,9 +3245,7 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
         d.ellipse([px-rr, py-rr, px+rr, py+rr], fill=(255, 255, 255))
         if badge_img:
             b = badge_img.resize((BR*2, BR*2), Image.LANCZOS)
-            mask = Image.new("L", (BR*2, BR*2), 0)
-            ImageDraw.Draw(mask).ellipse([0, 0, BR*2-1, BR*2-1], fill=255)
-            inset_img.paste(b, (px-BR, py-BR), mask)
+            inset_img.paste(b, (px-BR, py-BR), _circle_mask(BR*2))
         else:
             d.ellipse([px-BR, py-BR, px+BR, py+BR],
                       fill=_dot_colour(s_, params, country_index))
@@ -3686,6 +3682,14 @@ except Exception:
 _BADGE_UA_WIKIMEDIA = "stadiamap/1.0 (destavola.marco@gmail.com)"
 
 
+# SVGs are rasterised by MediaWiki at this width before being fitted into the badge
+# circle. It was 256, which is barely above the 160 we store: a detailed crest lost
+# its fine strokes on the way down and looked speckled on the map -- Palermo's gold
+# outline broke up and its wordmark turned to mush. Rasterising at 1024 and reducing
+# from there keeps those strokes continuous, and costs NOTHING on disk, because what
+# we store is still 160.
+_SVG_RASTER_W = 1024
+
 def _svg_badge_png_url(svg_url):
     """Resolve an upload.wikimedia.org SVG file to a rasterised PNG thumbnail URL via
     the MediaWiki imageinfo API. Fair-use logos live on the local wiki (…/wikipedia/en/…)
@@ -3703,7 +3707,7 @@ def _svg_badge_png_url(svg_url):
         r = _requests.get(
             f"https://{host}/w/api.php",
             params={"action": "query", "titles": title, "prop": "imageinfo",
-                    "iiprop": "url", "iiurlwidth": 256, "format": "json"},
+                    "iiprop": "url", "iiurlwidth": _SVG_RASTER_W, "format": "json"},
             headers={"User-Agent": _BADGE_UA_WIKIMEDIA}, timeout=15).json()
         for p in r["query"]["pages"].values():
             ii = p.get("imageinfo", [{}])[0]
@@ -3872,6 +3876,20 @@ def _fetch_badge_image(url, size=20):
         return img
     except Exception:
         return None
+
+
+def _circle_mask(d):
+    """Anti-aliased circular mask of diameter `d`.
+
+    ImageDraw.ellipse writes a hard 0/255 edge, so every badge on the map had a
+    visibly stair-stepped rim. Drawing at 4x and reducing gives the edge real
+    intermediate alpha, which is what makes a small badge read as a circle rather
+    than as a polygon.
+    """
+    SS = 4
+    big = Image.new("L", (d * SS, d * SS), 0)
+    ImageDraw.Draw(big).ellipse([0, 0, d * SS - 1, d * SS - 1], fill=255)
+    return big.resize((d, d), Image.LANCZOS)
 
 
 def _compose_multi_badge(imgs, size):
@@ -4135,9 +4153,8 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
             else:
                 draw.ellipse([px - rr, py - rr, px + rr, py + rr], fill=(255, 255, 255))
             if badge_img:
-                mask = Image.new("L", (BADGE_R * 2, BADGE_R * 2), 0)
-                ImageDraw.Draw(mask).ellipse([0, 0, BADGE_R * 2 - 1, BADGE_R * 2 - 1], fill=255)
-                img.paste(badge_img, (px - BADGE_R, py - BADGE_R), mask)
+                img.paste(badge_img, (px - BADGE_R, py - BADGE_R),
+                          _circle_mask(BADGE_R * 2))
                 draw = ImageDraw.Draw(img)
             else:
                 draw.ellipse([px - BADGE_R, py - BADGE_R, px + BADGE_R, py + BADGE_R], fill=colour)
