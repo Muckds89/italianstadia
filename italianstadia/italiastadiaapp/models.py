@@ -215,6 +215,23 @@ class Team(models.Model):
 
     uefa_coefficient = models.FloatField(null=True, blank=True)
 
+    # Which UEFA club competition this club is in THIS season, for continental maps.
+    # Blank (not null) means "not in Europe", matching how every other optional
+    # CharField on this model reads, so a filter never has to test for both.
+    #
+    # This records the LEAGUE PHASE only — the 36 clubs each competition draws after
+    # qualifying — not the qualifying rounds, where a club can be knocked out of one
+    # competition into another and the answer changes week to week. Set it once the
+    # league phase draw is known.
+    EUROPEAN_COMPETITION_CHOICES = [
+        ("UCL",  "UEFA Champions League"),
+        ("UEL",  "UEFA Europa League"),
+        ("UECL", "UEFA Conference League"),
+    ]
+    european_competition = models.CharField(
+        max_length=8, choices=EUROPEAN_COMPETITION_CHOICES,
+        blank=True, default="", db_index=True)
+
     slug = models.SlugField(max_length=255, unique=True, blank=True)
 
     def save(self, *args, **kwargs):

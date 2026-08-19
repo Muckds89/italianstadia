@@ -2208,7 +2208,7 @@ def _parse_export_params(request):
         style_key = "dark"
 
     color_by = request.GET.get("color_by", "surface").lower()
-    if color_by not in ("surface", "country", "single", "type", "ownership"):
+    if color_by not in ("surface", "country", "single", "type", "ownership", "uefa"):
         color_by = "surface"
 
     raw_color = request.GET.get("dot_color", "#f5c542").lstrip("#")
@@ -2314,6 +2314,10 @@ def _parse_export_params(request):
             request.GET.get("inset_size", "m").strip().lower(), 0.30),
         # Hand-placed inset labels from the drag editor, keyed by stadium slug.
         "label_pos": _parse_label_overrides(request.GET.get("label_pos", "")),
+        # UEFA club competition: UCL / UEL / UECL, or ANY for all three.
+        "uefa": (request.GET.get("uefa", "").strip().upper()
+                 if request.GET.get("uefa", "").strip().upper()
+                 in ("UCL", "UEL", "UECL", "ANY") else ""),
         "no_badges":  request.GET.get("no_badges", "0") == "1",
         "surface_known": request.GET.get("surface_known", "0") == "1",
     }
@@ -2374,6 +2378,15 @@ def _get_export_stadiums(params):
                        | Q(teams__league__country__name=params["country"])).distinct()
     if params["league"]:
         qs = qs.filter(teams__league__name=params["league"])
+    # Continental maps. This is a property of the CLUB, not of where the ground is, so
+    # it COMPOSES with any country/league filter instead of replacing it: "Italy +
+    # UEFA=ANY" is every Italian club in Europe, "UEFA=UCL" alone is the whole
+    # Champions League league phase across the continent.
+    if params.get("uefa"):
+        want = params["uefa"]
+        qs = (qs.filter(teams__european_competition__in=("UCL", "UEL", "UECL"))
+              if want == "ANY" else
+              qs.filter(teams__european_competition=want)).distinct()
     if params.get("national"):
         qs = qs.filter(teams__is_national=True)
     if params.get("national_only"):
@@ -2419,9 +2432,19 @@ def _get_export_stadiums(params):
         if params.get("no_badges"):
             image_url = ""   # render colour-coded dots instead of club crests
             tenants = []
+        # A ground can host two clubs in different competitions; take the highest
+        # (UCL > UEL > UECL) so the marker shows the biggest one played there.
+        # Derived from `teams`, NOT from `clubs` -- `clubs` only exists on the
+        # non-national branch above, and reading it in national mode raised
+        # UnboundLocalError and 500'd the whole export.
+        _rank = {"UCL": 0, "UEL": 1, "UECL": 2}
+        _euro = sorted((t.european_competition for t in teams
+                        if not t.is_national and getattr(t, "european_competition", "")),
+                       key=lambda c: _rank.get(c, 9))
         results.append({
             "name":         s.name,
             "slug":         s.slug or "",
+            "european_competition": _euro[0] if _euro else "",
             "team_name":    label_name,
             "teams":        tenants,
             "city":         s.city.name if s.city else "",
@@ -3947,6 +3970,14 @@ def _prefetch_badges(stadiums, size=20):
     return result
 
 
+# UEFA club competitions. Deliberately NOT the competitions' own brand colours -- all
+# three are blue-dominant and would be indistinguishable at dot size; these are chosen
+# to separate as badge rings.
+_UEFA_COLOURS = {"UCL": (56, 132, 255), "UEL": (255, 138, 32), "UECL": (56, 200, 120)}
+_UEFA_LABELS = {"UCL": "Champions League", "UEL": "Europa League",
+                "UECL": "Conference League"}
+
+
 def _category_colour(stadium, mode, params, country_index):
     """Colour for a stadium under a given category `mode` (surface/type/ownership/
     country/single/tournament_status/dev_status/bid). Shared by dot fill and the
@@ -3960,6 +3991,9 @@ def _category_colour(stadium, mode, params, country_index):
         return _BID_COLOR.get(stadium.get("bid", ""), _DEFAULT_DOT_COLOUR)
     if mode == "type":
         return _TYPE_COLOURS.get(stadium.get("stadium_type", ""), _DEFAULT_DOT_COLOUR)
+    if mode == "uefa":
+        return _UEFA_COLOURS.get(stadium.get("european_competition", ""),
+                                 _DEFAULT_DOT_COLOUR)
     if mode == "ownership":
         return _OWNERSHIP_COLOURS.get(stadium.get("ownership", ""), _DEFAULT_DOT_COLOUR)
     if mode == "single":
@@ -4311,6 +4345,13 @@ def _build_legend_entries(params, stadiums):
         return [(_BID_COLOR[b], f"{b} bid") for b in present]
     if mode == "single":
         return [(params["single_color"], "Stadium")]
+    if mode == "uefa":
+        present = {s.get("european_competition", "") for s in stadiums}
+        entries = [(_UEFA_COLOURS[c], _UEFA_LABELS[c])
+                   for c in ("UCL", "UEL", "UECL") if c in present]
+        if "" in present:
+            entries.append((_DEFAULT_DOT_COLOUR, "Not in Europe"))
+        return entries
     if mode == "ownership":
         present = {s.get("ownership", "") for s in stadiums}
         entries = [(_OWNERSHIP_COLOURS[o], _OWNERSHIP_LABELS[o])
