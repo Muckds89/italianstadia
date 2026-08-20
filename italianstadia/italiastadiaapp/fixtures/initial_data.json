@@ -3228,7 +3228,7 @@
   "model": "italiastadiaapp.city",
   "pk": 148,
   "fields": {
-    "name": "Brest, France",
+    "name": "Brest",
     "population": 142346,
     "country": "France",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Brest,_France",
@@ -17121,7 +17121,7 @@
   "pk": 155,
   "fields": {
     "name": "Stade de la Meinau",
-    "capacity": 32000,
+    "capacity": 32300,
     "address": "12, rue de l'Extenwoerth Strasbourg , France",
     "year_of_construction": 1914,
     "city": 146,
@@ -17360,7 +17360,7 @@
   "pk": 162,
   "fields": {
     "name": "Stade du Moustoir",
-    "capacity": 16787,
+    "capacity": 18110,
     "address": "Rue du Tour des Portes, Lorient , France",
     "year_of_construction": 1959,
     "city": 153,
