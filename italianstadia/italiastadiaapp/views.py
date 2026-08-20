@@ -3080,7 +3080,7 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
         d.ellipse([px-rr, py-rr, px+rr, py+rr], fill=(255, 255, 255))
         if badge_img:
             b = badge_img.resize((BR*2, BR*2), Image.LANCZOS)
-            inset_img.paste(b, (px-BR, py-BR), _circle_mask(BR*2))
+            _paste_badge(inset_img, b, (px-BR, py-BR), BR*2)
         else:
             d.ellipse([px-BR, py-BR, px+BR, py+BR], fill=colour)
         dots.append((px, py, s))
@@ -3245,7 +3245,7 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
         d.ellipse([px-rr, py-rr, px+rr, py+rr], fill=(255, 255, 255))
         if badge_img:
             b = badge_img.resize((BR*2, BR*2), Image.LANCZOS)
-            inset_img.paste(b, (px-BR, py-BR), _circle_mask(BR*2))
+            _paste_badge(inset_img, b, (px-BR, py-BR), BR*2)
         else:
             d.ellipse([px-BR, py-BR, px+BR, py+BR],
                       fill=_dot_colour(s_, params, country_index))
@@ -3892,6 +3892,24 @@ def _circle_mask(d):
     return big.resize((d, d), Image.LANCZOS)
 
 
+def _paste_badge(dst, badge, xy, diameter):
+    """Paste a crest into the circular badge slot, keeping ITS OWN transparency.
+
+    Image.paste(im, box, mask) uses `mask` for alpha and DISCARDS the image's own
+    alpha channel. Passing the circle mask alone therefore painted every
+    transparent pixel inside the circle as its raw RGB, which in a PNG is almost
+    always black -- so the more transparent a crest was, the blacker its badge.
+    Juventus (19% opaque) rendered as a solid black disc and Napoli (12%) as a
+    navy one; both are legible the moment their alpha is respected.
+
+    Multiplying the two masks keeps the crest's transparency AND crops it to the
+    circle, which is what was intended all along.
+    """
+    from PIL import ImageChops
+    mask = ImageChops.multiply(badge.getchannel("A"), _circle_mask(diameter))
+    dst.paste(badge, xy, mask)
+
+
 def _compose_multi_badge(imgs, size):
     """Combine several tenant crests into one badge image (shared grounds).
     2 clubs -> left/right split; 3-4 -> 2x2 quadrants. Circle-masked by the caller."""
@@ -4153,8 +4171,8 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
             else:
                 draw.ellipse([px - rr, py - rr, px + rr, py + rr], fill=(255, 255, 255))
             if badge_img:
-                img.paste(badge_img, (px - BADGE_R, py - BADGE_R),
-                          _circle_mask(BADGE_R * 2))
+                _paste_badge(img, badge_img, (px - BADGE_R, py - BADGE_R),
+                             BADGE_R * 2)
                 draw = ImageDraw.Draw(img)
             else:
                 draw.ellipse([px - BADGE_R, py - BADGE_R, px + BADGE_R, py + BADGE_R], fill=colour)
