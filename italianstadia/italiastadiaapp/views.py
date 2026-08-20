@@ -2314,6 +2314,10 @@ def _parse_export_params(request):
             request.GET.get("inset_size", "m").strip().lower(), 0.30),
         # Hand-placed inset labels from the drag editor, keyed by stadium slug.
         "label_pos": _parse_label_overrides(request.GET.get("label_pos", "")),
+        # Disc drawn behind each crest: white (default), black, or none.
+        "badge_bg": (request.GET.get("badge_bg", "white").strip().lower()
+                     if request.GET.get("badge_bg", "white").strip().lower()
+                     in ("white", "black", "none") else "white"),
         # UEFA club competition: UCL / UEL / UECL, or ANY for all three.
         "uefa": (request.GET.get("uefa", "").strip().upper()
                  if request.GET.get("uefa", "").strip().upper()
@@ -3069,6 +3073,7 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
     badges = _prefetch_badges(inset_stadiums, size=BR * 2)
 
     rr = BR + 2
+    badge_bg = _badge_bg_fill(params)
     d = ImageDraw.Draw(inset_img)
 
     # Pass 1: draw all badges first (so labels, drawn next, are never covered).
@@ -3077,7 +3082,8 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
         px, py = _lon_lat_to_px(s["lon"], s["lat"], cluster_bbox, IW, IH)
         colour    = _dot_colour(s, params, country_index)
         badge_img = badges.get(_badge_key(s))
-        d.ellipse([px-rr, py-rr, px+rr, py+rr], fill=(255, 255, 255))
+        if badge_bg is not None:
+            d.ellipse([px-rr, py-rr, px+rr, py+rr], fill=badge_bg)
         if badge_img:
             b = badge_img.resize((BR*2, BR*2), Image.LANCZOS)
             _paste_badge(inset_img, b, (px-BR, py-BR), BR*2)
@@ -3242,7 +3248,8 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
     # box — better to clip a few characters of text than lose the ground itself.
     for px, py, s_ in dots:
         badge_img = badges.get(_badge_key(s_))
-        d.ellipse([px-rr, py-rr, px+rr, py+rr], fill=(255, 255, 255))
+        if badge_bg is not None:
+            d.ellipse([px-rr, py-rr, px+rr, py+rr], fill=badge_bg)
         if badge_img:
             b = badge_img.resize((BR*2, BR*2), Image.LANCZOS)
             _paste_badge(inset_img, b, (px-BR, py-BR), BR*2)
@@ -3878,6 +3885,22 @@ def _fetch_badge_image(url, size=20):
         return None
 
 
+# The disc drawn behind a crest. White is the default because most crests are drawn
+# to sit on white, and a dark one (Juventus, Napoli, Torino away kits) needs it to
+# read at all. Black suits pale/outline crests on a dark map; "none" drops the disc
+# entirely for people who want the crest to float on the imagery.
+_BADGE_BG = {
+    "white": (255, 255, 255),
+    "black": (18, 20, 26),
+    "none":  None,
+}
+
+
+def _badge_bg_fill(params):
+    """Resolve the badge backing colour, or None for no disc at all."""
+    return _BADGE_BG.get((params or {}).get("badge_bg", "white"), (255, 255, 255))
+
+
 def _circle_mask(d):
     """Anti-aliased circular mask of diameter `d`.
 
@@ -4075,6 +4098,7 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
     a full-size label in the margin columns with a leader back to the box, instead
     of a cramped label squeezed inside it."""
     BADGE_R   = params.get("badge_size", 13)
+    badge_bg  = _badge_bg_fill(params)
     RING_W    = 2
     # Optional coloured ring around club badges (colour-codes a category while the
     # crest stays visible). Validated to a known mode or "".
@@ -4165,11 +4189,13 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
                 ring_colour = _category_colour(s, ring_by, params, country_index)
                 ring_r = BADGE_R + RING_EXTRA
                 draw.ellipse([px - ring_r, py - ring_r, px + ring_r, py + ring_r], fill=ring_colour)
-                # thin white separator between the colour ring and the crest
+                # thin separator between the colour ring and the crest, in the
+                # chosen backing so a black-backed badge does not get a white halo
                 draw.ellipse([px - BADGE_R - 1, py - BADGE_R - 1,
-                              px + BADGE_R + 1, py + BADGE_R + 1], fill=(255, 255, 255))
-            else:
-                draw.ellipse([px - rr, py - rr, px + rr, py + rr], fill=(255, 255, 255))
+                              px + BADGE_R + 1, py + BADGE_R + 1],
+                             fill=badge_bg or (255, 255, 255))
+            elif badge_bg is not None:
+                draw.ellipse([px - rr, py - rr, px + rr, py + rr], fill=badge_bg)
             if badge_img:
                 _paste_badge(img, badge_img, (px - BADGE_R, py - BADGE_R),
                              BADGE_R * 2)
@@ -5093,7 +5119,7 @@ def export_checkout(request):
         "color_by", "ring_by", "no_badges",
         "style_key", "size_key", "title", "subtitle", "labels",
         "north", "legend", "scale", "spotlight", "logo", "bg_color", "inset", "inset_box",
-        "inset_size", "inset_corner", "label_pos",
+        "inset_size", "inset_corner", "label_pos", "badge_bg",
         "islands",
         "label_size", "label_color", "badge_size", "tournament", "tstatus",
         "layer", "dstatus", "national",

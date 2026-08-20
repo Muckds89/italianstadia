@@ -90,3 +90,53 @@ class BadgeAlphaTests(SimpleTestCase):
         _paste_badge(dst, badge, (0, 0), 40)
         self.assertEqual(dst.getpixel((0, 0)), (255, 255, 255))  # corner clipped
         self.assertEqual(dst.getpixel((20, 20)), (255, 0, 0))    # centre kept
+
+
+class BadgeBackgroundTests(SimpleTestCase):
+    """The disc behind a crest is user-selectable: white, dark, or none."""
+
+    def _fill(self, value):
+        from italiastadiaapp.views import _badge_bg_fill
+        return _badge_bg_fill({"badge_bg": value} if value is not None else {})
+
+    def test_white_is_the_default(self):
+        # most crests are drawn to sit on white, and a dark one needs it to read
+        self.assertEqual(self._fill(None), (255, 255, 255))
+        self.assertEqual(self._fill("white"), (255, 255, 255))
+
+    def test_dark_disc_is_not_pure_black(self):
+        # pure black would make a black-outlined crest vanish into its own backing
+        fill = self._fill("black")
+        self.assertIsNotNone(fill)
+        self.assertNotEqual(fill, (0, 0, 0))
+
+    def test_none_means_no_disc_at_all(self):
+        self.assertIsNone(self._fill("none"))
+
+    def test_an_unknown_value_falls_back_to_white(self):
+        # this arrives from a query string; a typo must not remove the backing
+        self.assertEqual(self._fill("chartreuse"), (255, 255, 255))
+        self.assertEqual(self._fill(""), (255, 255, 255))
+
+
+class BadgeBackgroundParamTests(SimpleTestCase):
+
+    def _parse(self, raw):
+        from italiastadiaapp.views import _parse_export_params
+        class _G:
+            def __init__(s, d): s.d = d
+            def get(s, k, default=""): return s.d.get(k, default)
+        class _R:
+            def __init__(s, d): s.GET = _G(d)
+        return _parse_export_params(_R(raw))["badge_bg"]
+
+    def test_accepts_the_three_valid_values(self):
+        for v in ("white", "black", "none"):
+            self.assertEqual(self._parse({"badge_bg": v}), v)
+
+    def test_is_case_insensitive_and_trims(self):
+        self.assertEqual(self._parse({"badge_bg": "  BLACK "}), "black")
+
+    def test_rejects_anything_else(self):
+        self.assertEqual(self._parse({"badge_bg": "transparent"}), "white")
+        self.assertEqual(self._parse({}), "white")

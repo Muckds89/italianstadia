@@ -257,6 +257,14 @@
                     <label class="form-label small mb-1">Badge size: <span class="range-val" id="badgeSizeVal">13</span>px</label>
                     <input type="range" class="form-range" id="expBadgeSize" min="8" max="26" value="13">
                 </div>
+                <div class="mb-2">
+                    <label class="form-label small mb-1" for="expBadgeBg">Badge background</label>
+                    <select id="expBadgeBg" class="form-select form-select-sm">
+                        <option value="white" selected>White disc</option>
+                        <option value="black">Dark disc</option>
+                        <option value="none">None &mdash; crest only</option>
+                    </select>
+                </div>
                 <div class="form-check mb-2">
                     <input class="form-check-input" type="checkbox" id="expLabels" checked>
                     <label class="form-check-label small" for="expLabels">Show team / stadium labels</label>
@@ -586,6 +594,7 @@ function _getFilters() {
         label_size:  document.getElementById("expLabelSize").value,
         label_color: document.getElementById("expLabelColor").value,
         badge_size:  document.getElementById("expBadgeSize").value,
+        badge_bg:    document.getElementById("expBadgeBg").value,
     };
     // Background colour is a flat-map option, never send it for Satellite/Topo
     const style = document.getElementById("expStyle").value;
