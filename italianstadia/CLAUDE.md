@@ -504,7 +504,11 @@ suspicious filename. A quick sanity check that catches photographs: every real c
   logged. A non-English `wikipedia_url` (e.g. `tr.`/`ru.wikipedia.org`) is fine and is the
   preferred fix when only the native page carries the data.
 - If Nominatim also fails, set `"latitude"` and `"longitude"` directly in the stadium JSON entry as a hardcoded last resort (verified from OSM way ID or Google Maps). Example: `"latitude": 45.8813164, "longitude": 25.8083825`. Missing coords block map display — they are mandatory.
-- `ownership` must never be UNKNOWN when `owner_raw` has a value — no public keyword match → PRIVATE
+- `ownership` may be UNKNOWN even when `owner_raw` has a value. The old rule here said
+  the opposite — "no public keyword match → PRIVATE" — which contradicted this file's own
+  "Strictly forbidden: silently defaulting to PRIVATE" and published the city-owned
+  Stade Marie-Marvingt ("Ville du Mans") and Stade de l'Aube ("Grand Troyes") as private
+  grounds. An owner string we cannot categorise is UNKNOWN; that is an answer, not a gap
 - JSON `stadium.owner_raw` fires only when Wikipedia infobox has no owner/operator row; it does not override Wikipedia data
 - Stadium images must be non-null — `og:image` is the fallback if infobox image not found; images stored at full resolution (no `/thumb/` in URL)
 
@@ -553,6 +557,8 @@ these two audits and resolve all findings before considering the data clean:
 
 ```bash
 python -X utf8 manage.py audit_stadium_names            # stadium name vs its Wikipedia title
+python -X utf8 manage.py check_stadium_renames --league "X"   # stored name vs TODAY's article
+python -X utf8 manage.py audit_ownership                # stored category vs the classifier
 python -X utf8 manage.py audit_team_links --country <C> # team Transfermarkt link vs real club
 python -X utf8 manage.py audit_stadium_names --fix      # adopt wiki titles for SUSPECT names
 python -X utf8 manage.py audit_team_links --country <C> --fix  # clear wrong TM links + crests
@@ -586,6 +592,24 @@ Gotchas learned the hard way:
   (the same id 502s on one slug and 200s on another, minute to minute). The fix is the
   scraper retry, not the slug — but prefer the ENGLISH TM slug for an English dataset
   (`lokomotiv-moscow`, not the German `lokomotiv-moskau`).
+
+### Stadium names go stale silently
+
+A stadium name is captured ONCE, when its league is scraped, and nothing ever looks at it
+again. The season update re-reads which clubs are in a division; it does not re-read their
+grounds. So a naming-rights change lands with no error anywhere and the map keeps
+publishing the old name until a reader complains — which is how the Vélodrome went out as
+"Orange Vélodrome" seven weeks after it became the CEPAC Vélodrome on 2 July 2026.
+
+`audit_stadium_names` does NOT catch this: it flags names sharing no token with the
+Wikipedia title, which finds bad scrapes, not renames. "Orange Vélodrome" and "Cepac
+Vélodrome" both share "Vélodrome" with the title "Stade Vélodrome", so it looked healthy
+throughout. `check_stadium_renames` is the one that asks whether the stored name still
+appears in the article's LEAD. **Run it per league before publishing a map of that league.**
+
+It reports; it does not write. Check the effective date before renaming — a sponsor
+announced is not a sponsor in use — and expect false positives where the DB deliberately
+stores the sponsored name and the article is titled with the unsponsored one.
 
 **Detection rules (embed in the scrape itself, not just the audit):**
 1. **Stadium name ↔ Wikipedia title.** If the scraped `name` shares ZERO significant
