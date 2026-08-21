@@ -1,5 +1,5 @@
 {% extends "base_detail.html" %}
-{% load static %}
+{% load static humanize %}
 
 {% block title %}{{ development.name }}, {{ development.get_status_display }} stadium project | Stadiums of Europe{% endblock %}
 
@@ -94,7 +94,7 @@
             </span>
 
             {% if development.notes %}
-            <p class="lead">{{ development.notes }}</p>
+            <div class="lead">{{ development.notes|linebreaks }}</div>
             {% endif %}
 
             <hr>
@@ -111,7 +111,7 @@
                             <strong>Status:</strong> {{ development.get_status_display }}
                         </li>
                         <li class="list-group-item">
-                            <strong>Future capacity:</strong> {{ development.future_capacity }}
+                            <strong>Future capacity:</strong> {{ development.future_capacity|intcomma }}
                         </li>
                         <li class="list-group-item">
                             <strong>Estimated opening:</strong> {{ development.estimated_opening }}
@@ -175,7 +175,10 @@
                             <h6 class="card-title">{{ team.name }}</h6>
 
                             <p class="card-text mb-1">
-                                <strong>League:</strong> {{ team.get_tier_display }}
+                                {# get_tier_display renders "First Division", which is the TIER,
+                                   not the league — it labelled Aston Villa's league as
+                                   "First Division" on a public page. #}
+                                <strong>League:</strong> {{ team.league.name|default:team.get_tier_display }}
                             </p>
 
                             <div class="mt-auto pt-2 d-flex flex-wrap gap-1">

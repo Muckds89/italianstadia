@@ -51518,7 +51518,7 @@
     "crest_file": "aston-villa.png",
     "locked": false,
     "league": 8,
-    "under_development_stadium": null,
+    "under_development_stadium": 24,
     "uefa_coefficient": null,
     "european_competition": "",
     "slug": "aston-villa"
@@ -78569,6 +78569,38 @@
         "tournament": "UEFA Euro 2032",
         "year": 2032,
         "status": "CANDIDATE"
+      }
+    ]
+  }
+},
+{
+  "model": "italiastadiaapp.stadiumdevelopment",
+  "pk": 24,
+  "fields": {
+    "stadium": 195,
+    "name": "Villa Park North Stand Expansion",
+    "slug": "villa-park-north-stand-expansion",
+    "project_type": "EXPANSION",
+    "status": "UNDER_CONSTRUCTION",
+    "future_capacity": 50000,
+    "estimated_opening": 2027,
+    "latitude": "52.509167",
+    "longitude": "-1.884722",
+    "country": "England",
+    "architect": "Grimshaw Architects",
+    "developer": "Aston Villa FC",
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "source_url": "https://www.constructionenquirer.com/2025/08/29/aston-villa-gets-go-ahead-for-100m-north-stand-expansion/",
+    "instagram_url": null,
+    "notes": "Birmingham City Council's planning committee approved the redevelopment of Villa Park's North Stand in August 2025, at a cost of around £100m. The stand grows to more than 12,000 seats and lifts the ground beyond 50,000 overall, with 54 new wheelchair spaces and rebuilt concourses and hospitality areas.\n\nAn April 2025 revision changed the approach. Rather than demolishing the stand as the 2022 submission proposed, the existing structure is adapted and reused: the core frame is retained, extended in every direction, and topped with a new steel goalpost roof behind a glazed exterior.\n\nThe North Stand is closed for the whole of the 2026/27 season, which is why Villa Park holds 36,887 this season rather than its usual 43,205.\n\nCompletion is targeted for the second half of 2027, in time for Villa Park to serve as a host venue at UEFA Euro 2028, where it is confirmed for four matches.\n\nNo exact final capacity has been announced — every source to date says only \"more than\" or \"beyond\" 50,000, and the figure shown here is that stated minimum. A 50,065 figure that circulated in 2022 belongs to the earlier demolition scheme and no longer applies. The main contractor has not been named.",
+    "tournaments": [
+      {
+        "tournament": "UEFA Euro 2028",
+        "year": 2028,
+        "status": "CONFIRMED",
+        "matches": 4
       }
     ]
   }
