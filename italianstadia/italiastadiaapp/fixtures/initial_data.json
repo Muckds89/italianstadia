@@ -32844,7 +32844,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 624,
   "fields": {
-    "name": "Jotun Arena",
+    "name": "Väre Areena",
     "capacity": 8000,
     "address": "Kuopio , Finland",
     "year_of_construction": 2007,
@@ -32939,7 +32939,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 627,
   "fields": {
-    "name": "OSiR",
+    "name": "Raatti Stadium",
     "capacity": 999,
     "address": "Koskikeskus , Oulu , Finland",
     "year_of_construction": 1953,
@@ -32993,7 +32993,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 629,
   "fields": {
-    "name": "Dudgeon Park",
+    "name": "Tehtaan kenttä",
     "capacity": 3000,
     "address": "Valkeakoski , Finland",
     "year_of_construction": 1934,
@@ -33079,7 +33079,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 632,
   "fields": {
-    "name": "The Showgrounds",
+    "name": "Arto Tolsa Areena",
     "capacity": 3873,
     "address": "Kotka , Finland",
     "year_of_construction": 1928,
@@ -33874,7 +33874,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 665,
   "fields": {
-    "name": "Grosics Gyula Stadion",
+    "name": "Kaplakriki",
     "capacity": 4000,
     "address": "Kaplakrika IS-220 Hafnarfjörður , Iceland",
     "year_of_construction": 1946,
