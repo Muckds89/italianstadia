@@ -12,3 +12,4 @@ python manage.py loaddata initial_data
 # (cheap, query-only). Must run AFTER loaddata and BEFORE collectstatic.
 python manage.py generate_city_clubs
 python manage.py collectstatic --noinput
+python manage.py setup_admin
