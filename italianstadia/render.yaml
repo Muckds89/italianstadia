@@ -1,8 +1,21 @@
 services:
+# PYTHON VERSION IS PINNED ON PURPOSE — DO NOT REMOVE.
+# With no pin, Render builds on whatever its current default is. It moved to
+# Python 3.14, and Django 5.1 does not support 3.14: django.template.context's
+# BaseContext.__copy__ does `copy(super())`, and copying a super proxy under 3.14
+# yields an object with no __dict__, so the next line `duplicate.dicts = ...`
+# raises AttributeError. Every Django admin page 500s because
+# InclusionAdminNode.render calls context.new(); the public site is unaffected
+# because none of its templates take that path, which is what made it look like
+# an admin-only bug rather than a runtime mismatch.
+# See also .python-version, which pins the same value for local parity.
   - type: web
     name: italianstadia
     env: python
     buildCommand: ./build.sh
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.4
     # Free tier = 512 MB shared across ALL workers. Without --workers, gunicorn
     # reads $WEB_CONCURRENCY (set by Render) and forks several workers, each
     # loading Pillow + the country geojson (~150 MB) → OOM. Pin to 1 worker +
@@ -23,5 +36,10 @@ services:
     schedule: "0 5 5 8 *"
     buildCommand: pip install -r requirements.txt
     startCommand: python manage.py update_all_leagues
+    # Same pin as the web service: this job runs the same Django on the same
+    # default runtime and would hit the same incompatibility.
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.4
     envVarGroups:
       - italianstadia-env
