@@ -96,6 +96,36 @@ ALLOWED_HOSTS = [
 # tags, og:url and sitemap URLs would wrongly use http:// instead of https://.
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
+# A 500 in production was reaching NOWHERE. Django's DEFAULT_LOGGING puts its
+# console handler behind a `require_debug_true` filter and routes 500 tracebacks
+# to `mail_admins`, which does nothing unless ADMINS is set. With DEBUG=False and
+# no ADMINS — which is this project — the traceback is discarded: Render's log
+# shows only the gunicorn access line and the browser shows a bare
+# "Server Error (500)" with nothing to debug from.
+#
+# This sends django.request errors to stdout, which is what Render captures. It
+# changes no behaviour; it only makes failures visible. Do not remove it to
+# quieten the logs — the silence is the bug.
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {name} {process:d} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {"class": "logging.StreamHandler", "formatter": "verbose"},
+    },
+    "loggers": {
+        # ERROR here carries the full traceback for an unhandled exception.
+        "django.request": {"handlers": ["console"], "level": "ERROR",
+                           "propagate": False},
+        "django": {"handlers": ["console"], "level": "INFO", "propagate": False},
+    },
+}
+
 # Application definition
 
 INSTALLED_APPS = [
