@@ -144,6 +144,8 @@ MIDDLEWARE = [
     # First: send any non-canonical host (e.g. the Render *.onrender.com fallback
     # domain, which serves a full duplicate of the site) to the canonical domain
     # before anything else runs.
+    # Outermost, so its process_exception sees anything raised further in.
+    "italiastadiaapp.middleware.ExceptionSummaryMiddleware",
     "italiastadiaapp.middleware.CanonicalHostMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.middleware.gzip.GZipMiddleware",

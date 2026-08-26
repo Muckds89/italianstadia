@@ -1,13 +1,61 @@
 """Site-wide middleware."""
+import logging
+import os
 import re
+import traceback
 
 from django.conf import settings
 from django.http import HttpResponsePermanentRedirect
+
+logger = logging.getLogger("django.request")
 
 # Match the first opening <head ...> tag.
 _HEAD_RE = re.compile(rb"(<head[^>]*>)", re.IGNORECASE)
 # Match the LAST closing </body> tag.
 _BODY_RE = re.compile(rb"(</body>)(?!.*</body>)", re.IGNORECASE | re.DOTALL)
+
+
+class ExceptionSummaryMiddleware:
+    """Log an unhandled exception as ONE self-contained line.
+
+    Django already logs the full traceback to django.request, but a traceback is
+    many lines and is easy to copy only partly out of a hosted log viewer. The
+    first report of the admin 500 arrived as nothing but the
+    "Internal Server Error: /admin/..." header, which carries no cause at all.
+
+    This adds a single line naming the exception, its message, and the last frame
+    INSIDE this project — which is the frame that actually matters, since the
+    deepest frame is usually somewhere in Django or psycopg. One line survives
+    being copied on its own.
+
+    It never suppresses the exception (returns None) and never raises: a
+    diagnostic that can break the response is worse than no diagnostic.
+    """
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        return self.get_response(request)
+
+    def process_exception(self, request, exception):
+        try:
+            frames = traceback.extract_tb(exception.__traceback__)
+            ours = [f for f in frames
+                    if "italiastadiaapp" in f.filename or "italianstadia" in f.filename]
+            pick = (ours or frames)
+            where = "unknown"
+            if pick:
+                f = pick[-1]
+                where = f"{os.path.basename(f.filename)}:{f.lineno} in {f.name}() -> {f.line}"
+            logger.error(
+                "UNHANDLED %s %s | %s: %s | last project frame: %s",
+                request.method, request.get_full_path(),
+                type(exception).__name__, exception, where,
+            )
+        except Exception:      # diagnostics must never break the response
+            pass
+        return None
 
 
 class CanonicalHostMiddleware:
