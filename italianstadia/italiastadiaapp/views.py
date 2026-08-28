@@ -2922,6 +2922,49 @@ def _percentile(sorted_vals, q):
     return sorted_vals[lo] + (sorted_vals[hi] - sorted_vals[lo]) * (i - lo)
 
 
+# Fixed frame for the three continental competitions. These maps are published as a
+# set, so they must be the SAME frame every time — a Conference League map that
+# reaches Baku and a Champions League map that stops at Vienna do not read as a
+# series, and auto-fitting gave exactly that.
+#
+# The window is Europe plus the two places whose clubs play in UEFA competitions
+# without being in Europe: Israel (Hapoel Be'er Sheva sits at 31.3°N, the southern
+# limit) and Turkey (Trabzonspor at 39.7°E). It deliberately does NOT stretch to the
+# Urals; no Russian club takes part, so nothing is lost by stopping short, and
+# reaching for empty Asian landmass shrinks the part anyone is looking at.
+# The east edge is 51°E, not the ~46° that "Europe" suggests, and that is deliberate:
+# it is the smallest window that already contains EVERY participant, so the widening
+# guard below never fires and all three competitions get a pixel-identical frame. At
+# 46° the guard fired for Sabah of Baku (49.8°E) and the Champions League map came out
+# framed differently from the Europa League one — a fixed frame that moves is not one.
+# The corners it buys are sea and Caucasus, both of which sit under the label columns.
+#
+# The other three edges are each pinned by a real participant, with a little air:
+#   west  -11.0  Torreense, Torres Vedras (-9.3°E)
+#   south  30.0  Hapoel Be'er Sheva (31.3°N) — the reason the Middle East is in shot
+#   north  68.5  Bodø/Glimt (67.3°N)
+_UEFA_FRAME = (-11.0, 30.0, 51.0, 68.5)      # lon0, lat0, lon1, lat1
+
+
+def _uefa_frame_bbox(stadiums):
+    """The fixed continental frame, widened only if a ground falls outside it.
+
+    A fixed frame that silently crops is worse than no fixed frame: the label engine
+    still draws the club, so the map grows a label pointing off-canvas at nothing —
+    which is precisely the defect this replaces. So the constant is a MINIMUM, never
+    a clip. Sabah of Baku (49.8°E) is the one participant beyond it today, and this
+    is what keeps them on the map instead of quietly off it.
+    """
+    lon0, lat0, lon1, lat1 = _UEFA_FRAME
+    if stadiums:
+        m = 0.6                                   # keep an outlier off the very edge
+        lon0 = min(lon0, min(s["lon"] for s in stadiums) - m)
+        lon1 = max(lon1, max(s["lon"] for s in stadiums) + m)
+        lat0 = min(lat0, min(s["lat"] for s in stadiums) - m)
+        lat1 = max(lat1, max(s["lat"] for s in stadiums) + m)
+    return (lon0, lat0, lon1, lat1)
+
+
 def _trimmed_bbox(stadiums, pad=0.06, qlon=0.02):
     """Frame the bulk of the points, trimming far E/W longitude outliers (e.g. Iceland in
     the west, Ural Russia in the east) so the broad Europe export isn't stretched across
@@ -4902,8 +4945,19 @@ def _compose_export_image(params):
     is_broad = not (params.get("tournament") or params.get("layer") == "development"
                     or params.get("country") or params.get("league")
                     or params.get("surface") or params.get("ownership")
+                    or params.get("uefa")
                     or params.get("national") or params.get("national_only"))
-    if is_broad and len(stadiums) > 30:
+    if params.get("uefa") and not (params.get("country") or params.get("league")):
+        # A whole continental competition gets the fixed frame, so the three maps
+        # are a matching set. EXPAND to aspect, never _cover_bbox_to_aspect: cover
+        # crops to fill the canvas, and cropping is what put Barcelona, Real Madrid,
+        # Roma and Galatasaray outside the frame while their labels still pointed at
+        # them from the margin.
+        #
+        # Narrowed by country or league it is no longer a continental map — "Italy in
+        # the Champions League" wants Italy — so those fall through to the normal fit.
+        bbox = _expand_bbox_to_aspect(_uefa_frame_bbox(stadiums), W, H)
+    elif is_broad and len(stadiums) > 30:
         # Trim E/W outliers, hard-clamp to a European longitude window (so Iceland in the
         # west and central/eastern Russia never widen the frame), then crop-to-fill.
         tb = _trimmed_bbox(stadiums)
