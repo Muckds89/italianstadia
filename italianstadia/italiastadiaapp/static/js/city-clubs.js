@@ -100,13 +100,15 @@
     if (!pts.length) { el.style.display = "none"; return; }
 
     var map = L.map(el, { scrollWheelZoom: false });
-    var voyager = L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
-      { maxZoom: 19, attribution: "&copy; OpenStreetMap &copy; CARTO" });
+    // See map.js: CARTO stamps "API KEY REQUIRED" on keyless tiles now. The
+    // light Esri canvas is the closest keyless stand-in for Voyager.
+    var voyager = L.tileLayer("https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+      { maxZoom: 16, attribution: "&copy; Esri, HERE, Garmin, &copy; OpenStreetMap contributors" });
     var satellite = L.tileLayer(
       "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
       { maxZoom: 19, attribution: "Tiles &copy; Esri" });
-    var dark = L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-      { maxZoom: 19, attribution: "&copy; OpenStreetMap &copy; CARTO" });
+    var dark = L.tileLayer("https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+      { maxZoom: 16, attribution: "&copy; Esri, HERE, Garmin, &copy; OpenStreetMap contributors" });
     voyager.addTo(map);   // lighter, more readable default
     L.control.layers(
       { "Map": voyager, "Satellite": satellite, "Dark": dark },

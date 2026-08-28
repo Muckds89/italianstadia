@@ -2123,10 +2123,33 @@ _EXPORT_SIZES = {
     "landscape": (1920, 1080),
 }
 
-# Free tile servers, no API key required
+# Tile servers. CARTO's keyless basemaps are NO LONGER USABLE: they now return a
+# perfectly valid PNG with "API KEY REQUIRED / carto.com/basemaps/apikey" stamped
+# diagonally across it. HTTP 200, right size, right palette — nothing an error check
+# would catch. It reached the LIVE MAP and, worse, the paid PNG export, because the
+# /tmp tile cache kept serving clean pre-change tiles locally long after production
+# had started stamping them.
+#
+# dark/light therefore move to Esri's Canvas basemaps, which need no key and come
+# from the provider this project already uses for `satellite`. Set CARTO_API_KEY to
+# go back to CARTO's styling; the key is appended as a query parameter.
+_CARTO_KEY = _os.environ.get("CARTO_API_KEY", "").strip()
+
+
+def _carto(style):
+    return (f"https://a.basemaps.cartocdn.com/{style}/{{z}}/{{x}}/{{y}}.png"
+            f"?api_key={_CARTO_KEY}")
+
+
+_ESRI = "https://services.arcgisonline.com/ArcGIS/rest/services"
 _TILE_SERVERS = {
-    "dark":      "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-    "light":     "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+    "dark":      _carto("dark_all") if _CARTO_KEY else
+                 f"{_ESRI}/Canvas/World_Dark_Gray_Base/MapServer/tile/{{z}}/{{y}}/{{x}}",
+    "light":     _carto("light_all") if _CARTO_KEY else
+                 f"{_ESRI}/Canvas/World_Light_Gray_Base/MapServer/tile/{{z}}/{{y}}/{{x}}",
+    # OSM is fine, but ONLY with the descriptive User-Agent set in _fetch_tile.
+    # A browser-ish UA gets an HTTP 200 carrying an "Access blocked / 418" image
+    # instead of a map — another failure that looks like success.
     "topo":      "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
     "satellite": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
 }
@@ -3479,17 +3502,24 @@ def _fetch_one_tile(z, x, y, style_key):
     to OOM on the 512 MB dyno. The /tmp disk cache is enough and is shared across
     workers on the same instance.
     """
+    template = _TILE_SERVERS[style_key]
     disk_path = None
     try:
         disk_dir = _os.path.join(_os.path.sep, "tmp", "soe_tiles")
         _os.makedirs(disk_dir, exist_ok=True)
-        disk_path = _os.path.join(disk_dir, f"{style_key}_{z}_{x}_{y}.png")
+        # The cache key carries a fingerprint of the SOURCE URL, not just the style
+        # name. Keyed on the style alone, changing provider kept serving whatever was
+        # already on disk -- which on production meant continuing to serve CARTO tiles
+        # with "API KEY REQUIRED" stamped across them long after the URL had changed,
+        # with no way to tell short of deleting /tmp by hand.
+        src = hashlib.md5(template.encode("utf-8")).hexdigest()[:8]
+        disk_path = _os.path.join(disk_dir, f"{style_key}_{src}_{z}_{x}_{y}.png")
         if _os.path.exists(disk_path):
             return Image.open(disk_path).convert("RGBA")
     except Exception:
         disk_path = None
 
-    url = _TILE_SERVERS[style_key].format(z=z, x=x, y=y)
+    url = template.format(z=z, x=x, y=y)
     headers = {"User-Agent": "StadiumsOfEurope/1.0 (stadiumsofeurope.com)"}
     resp = _requests.get(url, timeout=4, headers=headers)
     resp.raise_for_status()
@@ -4731,8 +4761,13 @@ def _draw_logo(img, W, H):
 # uses — Esri, OpenStreetMap and CARTO all require visible attribution.
 _TILE_ATTRIBUTION = {
     "satellite": "Imagery © Esri, Maxar, Earthstar Geographics",
-    "dark":      "© OpenStreetMap contributors, © CARTO",
-    "light":     "© OpenStreetMap contributors, © CARTO",
+    # dark/light follow whichever provider _TILE_SERVERS actually resolved to, so
+    # the credit can never drift from the imagery. Crediting CARTO on an Esri tile
+    # would be both wrong and a licence breach.
+    "dark":      ("© OpenStreetMap contributors, © CARTO" if _CARTO_KEY
+                  else "© Esri, HERE, Garmin, © OpenStreetMap contributors"),
+    "light":     ("© OpenStreetMap contributors, © CARTO" if _CARTO_KEY
+                  else "© Esri, HERE, Garmin, © OpenStreetMap contributors"),
     "topo":      "© OpenStreetMap contributors",
 }
 

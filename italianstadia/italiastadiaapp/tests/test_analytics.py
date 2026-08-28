@@ -126,11 +126,23 @@ class BasemapAttributionTests(TestCase):
     def test_satellite_credits_esri(self):
         self.assertIn("Esri", self._text(style_key="satellite"))
 
-    def test_dark_and_light_credit_osm_and_carto(self):
+    def test_dark_and_light_credit_whoever_actually_serves_the_tiles(self):
+        """The credit must name the provider _TILE_SERVERS really resolved to.
+
+        dark/light were CARTO until CARTO began stamping "API KEY REQUIRED" across
+        every keyless tile; they now fall back to Esri's Canvas basemaps unless
+        CARTO_API_KEY is set. Asserting a hard-coded "CARTO" here would go on
+        passing while the map credited a provider whose imagery it was no longer
+        using — which is both wrong and a licence breach. So assert the credit
+        tracks the source.
+        """
+        from italiastadiaapp.views import _TILE_SERVERS
         for style in ("dark", "light"):
             txt = self._text(style_key=style)
+            self.assertTrue(txt.strip(), f"{style} has no attribution at all")
+            provider = "CARTO" if "cartocdn" in _TILE_SERVERS[style] else "Esri"
+            self.assertIn(provider, txt, style)
             self.assertIn("OpenStreetMap", txt, style)
-            self.assertIn("CARTO", txt, style)
 
     def test_topo_credits_osm(self):
         self.assertIn("OpenStreetMap", self._text(style_key="topo"))

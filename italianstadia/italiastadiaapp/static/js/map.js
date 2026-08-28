@@ -6,10 +6,15 @@ const map = L.map('map', {
     zoomControl: false
 }).fitBounds(EUROPE_FOOTBALL_BOUNDS, { padding: [10, 10] });
 
+// CARTO's keyless basemaps now come back with "API KEY REQUIRED" stamped across
+// every tile -- a valid PNG, HTTP 200, so nothing errors and the whole map just
+// reads as watermarked. Esri's Canvas basemap needs no key and is the provider
+// already used for the satellite layer elsewhere in the app.
 L.tileLayer(
-    'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+    'https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
     {
-        attribution: '&copy; OpenStreetMap & CARTO'
+        attribution: '&copy; Esri, HERE, Garmin, &copy; OpenStreetMap contributors',
+        maxZoom: 16
     }
 ).addTo(map);
 

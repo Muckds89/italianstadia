@@ -55,8 +55,8 @@
 <script>
 (function () {
   var map = L.map("fullmap", { scrollWheelZoom: true }).setView([54, 12], 4);
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-    attribution: '&copy; OpenStreetMap &copy; CARTO',
+  L.tileLayer("https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}", {
+    attribution: '&copy; Esri, HERE, Garmin, &copy; OpenStreetMap contributors',
     maxZoom: 18,
   }).addTo(map);
   fetch("{% static 'data/stadiums_map.json' %}?v={{ map_version }}")

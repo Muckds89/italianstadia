@@ -8,8 +8,9 @@
   if (!el || typeof L === "undefined") return;
 
   var map = L.map(el, { scrollWheelZoom: false }).setView([54, 15], 4);
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-    attribution: "&copy; OpenStreetMap &copy; CARTO", maxZoom: 18,
+  // See map.js: CARTO stamps "API KEY REQUIRED" on keyless tiles now.
+  L.tileLayer("https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}", {
+    attribution: "&copy; Esri, HERE, Garmin, &copy; OpenStreetMap contributors", maxZoom: 16,
   }).addTo(map);
 
   var SURFACE = {
