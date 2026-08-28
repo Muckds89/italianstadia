@@ -47612,7 +47612,7 @@
     "league": 1,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "ac-milan"
   }
 },
@@ -47668,7 +47668,7 @@
     "league": 1,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "juventus-fc"
   }
 },
@@ -47808,7 +47808,7 @@
     "league": 1,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "atalanta"
   }
 },
@@ -50412,7 +50412,7 @@
     "league": 4,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "bayer-04-leverkusen"
   }
 },
@@ -50552,7 +50552,7 @@
     "league": 4,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "tsg-hoffenheim"
   }
 },
@@ -50580,7 +50580,7 @@
     "league": 4,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "sc-freiburg"
   }
 },
@@ -50860,7 +50860,7 @@
     "league": 5,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "olympique-de-marseille"
   }
 },
@@ -50888,7 +50888,7 @@
     "league": 5,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "olympique-lyonnais"
   }
 },
@@ -50916,7 +50916,7 @@
     "league": 5,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "as-monaco"
   }
 },
@@ -50972,7 +50972,7 @@
     "league": 5,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "stade-rennais-fc"
   }
 },
@@ -51336,7 +51336,7 @@
     "league": 7,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "sl-benfica"
   }
 },
@@ -51420,7 +51420,7 @@
     "league": 7,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "sc-braga"
   }
 },
@@ -52092,7 +52092,7 @@
     "league": 8,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "brighton-hove-albion"
   }
 },
@@ -52232,7 +52232,7 @@
     "league": 8,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "crystal-palace"
   }
 },
@@ -52288,7 +52288,7 @@
     "league": 8,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "bournemouth"
   }
 },
@@ -52372,7 +52372,7 @@
     "league": 8,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "sunderland"
   }
 },
@@ -52484,7 +52484,7 @@
     "league": 9,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "lech-poznan"
   }
 },
@@ -52540,7 +52540,7 @@
     "league": 9,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "jagiellonia-biaystok"
   }
 },
@@ -53128,7 +53128,7 @@
     "league": 10,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "real-sociedad"
   }
 },
@@ -53156,7 +53156,7 @@
     "league": 10,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "rc-celta-de-vigo"
   }
 },
@@ -53240,7 +53240,7 @@
     "league": 10,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "getafe-cf"
   }
 },
@@ -53912,7 +53912,7 @@
     "league": 11,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "mjallby-aif"
   }
 },
@@ -53996,7 +53996,7 @@
     "league": 12,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "sk-brann"
   }
 },
@@ -54444,7 +54444,7 @@
     "league": 13,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "celtic-fc"
   }
 },
@@ -54556,7 +54556,7 @@
     "league": 13,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "heart-of-midlothian-fc"
   }
 },
@@ -54808,7 +54808,7 @@
     "league": 14,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "besiktas-jk"
   }
 },
@@ -55228,7 +55228,7 @@
     "league": 14,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "trabzonspor"
   }
 },
@@ -55256,7 +55256,7 @@
     "league": 15,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "afc-ajax"
   }
 },
@@ -55284,7 +55284,7 @@
     "league": 15,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "az-alkmaar"
   }
 },
@@ -55368,7 +55368,7 @@
     "league": 15,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "fc-twente"
   }
 },
@@ -55564,7 +55564,7 @@
     "league": 15,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "nec-nijmegen"
   }
 },
@@ -55844,7 +55844,7 @@
     "league": 16,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "kaa-gent"
   }
 },
@@ -56068,7 +56068,7 @@
     "league": 16,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "royale-union-saint-gilloise"
   }
 },
@@ -56096,7 +56096,7 @@
     "league": 16,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "rsc-anderlecht"
   }
 },
@@ -56124,7 +56124,7 @@
     "league": 16,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "sint-truidense-vv"
   }
 },
@@ -56348,7 +56348,7 @@
     "league": 17,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "universitatea-craiova"
   }
 },
@@ -56656,7 +56656,7 @@
     "league": 18,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "ac-sparta-prague"
   }
 },
@@ -56712,7 +56712,7 @@
     "league": 18,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "fc-viktoria-plzen"
   }
 },
@@ -56852,7 +56852,7 @@
     "league": 18,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "fk-jablonec"
   }
 },
@@ -57272,7 +57272,7 @@
     "league": 19,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "fc-red-bull-salzburg"
   }
 },
@@ -57356,7 +57356,7 @@
     "league": 19,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "sk-sturm-graz"
   }
 },
@@ -59232,7 +59232,7 @@
     "league": 23,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "aarhus-gymnastikforening"
   }
 },
@@ -59288,7 +59288,7 @@
     "league": 23,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "fc-copenhagen"
   }
 },
@@ -59344,7 +59344,7 @@
     "league": 23,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "fc-midtjylland"
   }
 },
@@ -59372,7 +59372,7 @@
     "league": 23,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "fc-nordsjlland"
   }
 },
@@ -59568,7 +59568,7 @@
     "league": 24,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "olympiacos-fc"
   }
 },
@@ -59596,7 +59596,7 @@
     "league": 24,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "panathinaikos-fc"
   }
 },
@@ -59736,7 +59736,7 @@
     "league": 24,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "ofi-crete-fc"
   }
 },
@@ -60072,7 +60072,7 @@
     "league": 25,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "fc-lugano"
   }
 },
@@ -60268,7 +60268,7 @@
     "league": 25,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "fc-thun"
   }
 },
@@ -60296,7 +60296,7 @@
     "league": 26,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "gnk-dinamo-zagreb"
   }
 },
@@ -60324,7 +60324,7 @@
     "league": 26,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "hnk-hajduk-split"
   }
 },
@@ -60604,7 +60604,7 @@
     "league": 27,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "ac-omonia"
   }
 },
@@ -60828,7 +60828,7 @@
     "league": 27,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "pafos-fc"
   }
 },
@@ -60968,7 +60968,7 @@
     "league": 28,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "ferencvarosi-tc"
   }
 },
@@ -61304,7 +61304,7 @@
     "league": 29,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "fk-red-star-belgrade"
   }
 },
@@ -61920,7 +61920,7 @@
     "league": 30,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "pfc-cska-sofia"
   }
 },
@@ -61976,7 +61976,7 @@
     "league": 30,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "pfc-levski-sofia"
   }
 },
@@ -62592,7 +62592,7 @@
     "league": 32,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "nk-celje"
   }
 },
@@ -64272,7 +64272,7 @@
     "league": 36,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "kups-kuopio"
   }
 },
@@ -64664,7 +64664,7 @@
     "league": 37,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "fk-borac-banja-luka"
   }
 },
@@ -64860,7 +64860,7 @@
     "league": 49,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "fk-kauno-zalgiris"
   }
 },
@@ -66568,7 +66568,7 @@
     "league": 45,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "kf-egnatia"
   }
 },
@@ -66652,7 +66652,7 @@
     "league": 46,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UECL",
     "slug": "riga-fc"
   }
 },
@@ -72504,7 +72504,7 @@
     "league": 76,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "torreense"
   }
 },
@@ -73764,7 +73764,7 @@
     "league": 78,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "ararat-armenia"
   }
 },
@@ -74352,7 +74352,7 @@
     "league": 80,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "hapoel-beer-sheva"
   }
 },
@@ -78552,7 +78552,7 @@
     "league": 12,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UEL",
     "slug": "lillestrm-sk"
   }
 },
