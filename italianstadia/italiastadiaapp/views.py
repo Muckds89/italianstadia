@@ -1520,7 +1520,7 @@ def tournament_detail(request, slug):
 # ── Insights (data-story pages: SEO / CTR) ─────────────────────────────────────
 
 # Current dataset season — bump on the August bulk update for the new season.
-CURRENT_SEASON = "2025/2026"
+CURRENT_SEASON = "2026/2027"
 
 _INSIGHTS = [
     {
@@ -5494,6 +5494,34 @@ def export_options(request):
             if nm:
                 tour_map.setdefault(slugify(nm), nm)
     tournaments = [{"slug": s, "label": tour_map[s]} for s in sorted(tour_map, key=lambda k: tour_map[k])]
+
+    # The three European club competitions belong in the same picker, because to
+    # anyone using the page they are simply more tournaments. They are NOT stored
+    # the same way: Euro 2028 lives in Stadium.tournaments (a JSON list on the
+    # ground), while these live on Team.european_competition (a property of the
+    # CLUB, since a club carries its competition to whatever ground it plays at).
+    # Two different filters, one control — so the slug is prefixed and the page
+    # sends it as `uefa=` rather than `tournament=`.
+    #
+    # Only offered once clubs actually carry the field. It stays empty until the
+    # play-offs resolve, and an empty "Champions League" option would render a map
+    # with nothing on it.
+    _uefa_present = set(
+        Team.objects.exclude(european_competition="")
+        .exclude(european_competition__isnull=True)
+        .values_list("european_competition", flat=True).distinct()
+    )
+    for code in ("UCL", "UEL", "UECL"):
+        if code in _uefa_present:
+            tournaments.append({
+                "slug": f"uefa:{code}",
+                "label": f"UEFA {_UEFA_LABELS[code]} {CURRENT_SEASON.replace('/20', '/')}",
+            })
+    if len(_uefa_present & {"UCL", "UEL", "UECL"}) > 1:
+        tournaments.append({
+            "slug": "uefa:ANY",
+            "label": f"All European competitions {CURRENT_SEASON.replace('/20', '/')}",
+        })
 
     return JsonResponse({
         "countries":          list(countries),

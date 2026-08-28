@@ -194,6 +194,7 @@
                         <option value="surface">Pitch surface</option>
                         <option value="type">Stadium type (roof)</option>
                         <option value="country">Country</option>
+                        <option value="uefa">European competition</option>
                     </select>
                     <div class="small text-secondary mt-1">Colours each badge's outer ring. Turn on “Legend” to label the colours.</div>
                 </div>
@@ -426,11 +427,22 @@ document.getElementById("expDevLayer").addEventListener("change", function () {
 });
 
 document.getElementById("expTournament").addEventListener("change", function () {
-    const on = !!this.value;
-    document.getElementById("tstatusGroup").style.display = on ? "" : "none";
+    // Only a VENUE tournament (Euro 2028 …) takes over the map: its confirmed/
+    // candidate statuses apply and the other filters are replaced. A European
+    // competition composes with them instead, so the filters stay live and the
+    // venue-status checkboxes — which mean nothing here — stay hidden.
+    const isVenue = !!this.value && !this.value.startsWith("uefa:");
+    document.getElementById("tstatusGroup").style.display = isVenue ? "" : "none";
     const fc = document.getElementById("filtersCard");
-    fc.style.opacity = on ? "0.4" : "1";
-    fc.style.pointerEvents = on ? "none" : "";
+    fc.style.opacity = isVenue ? "0.4" : "1";
+    fc.style.pointerEvents = isVenue ? "none" : "";
+
+    // Three competitions on one map are indistinguishable as plain dots, so pick
+    // the colour-coding for them unless a choice has already been made.
+    if (this.value === "uefa:ANY") {
+        const cb = document.getElementById("expColourBy");
+        if (!cb.value) cb.value = "uefa";
+    }
 });
 
 function _showAC(input, list, items) {
@@ -610,9 +622,19 @@ function _getFilters() {
         return f;
     }
 
-    // Tournament mode overrides the country/league/surface/ownership filters
     const tour = document.getElementById("expTournament").value;
-    if (tour) {
+
+    // The European competitions share the tournament picker but NOT its behaviour.
+    // Euro 2028 is a set of host GROUNDS, so it replaces the other filters. UCL/UEL/
+    // UECL are a property of the CLUB, so they compose: "Italy + Champions League"
+    // is a legitimate and useful map. Hence no early return here -- country, league,
+    // surface and ownership all stay in play.
+    if (tour.startsWith("uefa:")) {
+        f.uefa = tour.slice(5);
+    }
+
+    // Tournament mode overrides the country/league/surface/ownership filters
+    if (tour && !tour.startsWith("uefa:")) {
         f.tournament = tour;
         const st = ["tsConfirmed", "tsCandidate", "tsDiscarded"]
             .filter(id => document.getElementById(id).checked)
