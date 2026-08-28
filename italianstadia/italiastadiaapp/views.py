@@ -2438,6 +2438,18 @@ def _get_export_stadiums(params):
                 _in_league = [t for t in clubs
                               if t.league and t.league.name == params["league"]]
                 clubs = _in_league or clubs
+            # A UEFA filter narrows them for exactly the same reason. Cercle Brugge
+            # share the Jan Breydel with Club Brugge and Rukh Lviv share the Arena
+            # Lviv with Shakhtar, so a Champions League map labelled those grounds
+            # "Cercle Brugge KSV / Club Brugge KV" and "Shakhtar Donetsk / Rukh
+            # Lviv" -- naming two clubs that are not in the competition, on a map of
+            # that competition. The league filter already had this guard; the UEFA
+            # filter was added later and did not.
+            if params.get("uefa"):
+                _want = ({"UCL", "UEL", "UECL"} if params["uefa"] == "ANY"
+                         else {params["uefa"]})
+                _in_uefa = [t for t in clubs if t.european_competition in _want]
+                clubs = _in_uefa or clubs
             tenants = [{"name": t.name, "image_url": (t.image_url or ""),
                         "crest_file": (t.crest_file or "")} for t in clubs[:4]]
             if not tenants and team_name:

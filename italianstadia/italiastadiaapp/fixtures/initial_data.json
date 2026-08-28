@@ -47640,7 +47640,7 @@
     "league": 1,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "inter-milan"
   }
 },
@@ -47724,7 +47724,7 @@
     "league": 1,
     "under_development_stadium": 11,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "as-roma"
   }
 },
@@ -47780,7 +47780,7 @@
     "league": 1,
     "under_development_stadium": 17,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "napoli"
   }
 },
@@ -50356,7 +50356,7 @@
     "league": 1,
     "under_development_stadium": 5,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "como-1907"
   }
 },
@@ -50384,7 +50384,7 @@
     "league": 4,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "bayern-munchen"
   }
 },
@@ -50440,7 +50440,7 @@
     "league": 4,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "vfb-stuttgart"
   }
 },
@@ -50468,7 +50468,7 @@
     "league": 4,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "rb-leipzig"
   }
 },
@@ -50496,7 +50496,7 @@
     "league": 4,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "borussia-dortmund"
   }
 },
@@ -50832,7 +50832,7 @@
     "league": 5,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "paris-saint-germain"
   }
 },
@@ -50944,7 +50944,7 @@
     "league": 5,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "losc-lille"
   }
 },
@@ -51000,7 +51000,7 @@
     "league": 5,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "rc-lens"
   }
 },
@@ -51364,7 +51364,7 @@
     "league": 7,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "fc-porto"
   }
 },
@@ -51392,7 +51392,7 @@
     "league": 7,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "sporting-cp"
   }
 },
@@ -51840,7 +51840,7 @@
     "league": 8,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "arsenal"
   }
 },
@@ -51896,7 +51896,7 @@
     "league": 8,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "liverpool"
   }
 },
@@ -51924,7 +51924,7 @@
     "league": 8,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "manchester-city"
   }
 },
@@ -51952,7 +51952,7 @@
     "league": 8,
     "under_development_stadium": 12,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "manchester-united"
   }
 },
@@ -52036,7 +52036,7 @@
     "league": 8,
     "under_development_stadium": 24,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "aston-villa"
   }
 },
@@ -52960,7 +52960,7 @@
     "league": 10,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "real-madrid"
   }
 },
@@ -52988,7 +52988,7 @@
     "league": 10,
     "under_development_stadium": 20,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "fc-barcelona"
   }
 },
@@ -53016,7 +53016,7 @@
     "league": 10,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "atletico-de-madrid"
   }
 },
@@ -53072,7 +53072,7 @@
     "league": 10,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "villarreal-cf"
   }
 },
@@ -53100,7 +53100,7 @@
     "league": 10,
     "under_development_stadium": 15,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "real-betis"
   }
 },
@@ -53968,7 +53968,7 @@
     "league": 12,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "fk-bodglimt"
   }
 },
@@ -54360,7 +54360,7 @@
     "league": 12,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "viking-fk"
   }
 },
@@ -54920,7 +54920,7 @@
     "league": 14,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "fenerbahce-sk"
   }
 },
@@ -54948,7 +54948,7 @@
     "league": 14,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "galatasaray-sk"
   }
 },
@@ -55424,7 +55424,7 @@
     "league": 15,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "feyenoord"
   }
 },
@@ -55620,7 +55620,7 @@
     "league": 15,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "psv-eindhoven"
   }
 },
@@ -55788,7 +55788,7 @@
     "league": 16,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "club-brugge-kv"
   }
 },
@@ -56684,7 +56684,7 @@
     "league": 18,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "sk-slavia-prague"
   }
 },
@@ -57216,7 +57216,7 @@
     "league": 19,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "lask"
   }
 },
@@ -59652,7 +59652,7 @@
     "league": 24,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "aek-athens-fc"
   }
 },
@@ -62200,7 +62200,7 @@
     "league": 31,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "sk-slovan-bratislava"
   }
 },
@@ -63768,7 +63768,7 @@
     "league": 35,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "shakhtar-donetsk"
   }
 },
@@ -70068,7 +70068,7 @@
     "league": 71,
     "under_development_stadium": null,
     "uefa_coefficient": null,
-    "european_competition": "",
+    "european_competition": "UCL",
     "slug": "sabah"
   }
 },
