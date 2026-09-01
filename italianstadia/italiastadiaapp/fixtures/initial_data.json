@@ -50673,7 +50673,7 @@
   "pk": 147,
   "fields": {
     "is_national": false,
-    "name": "FSV Mainz 05",
+    "name": "1. FSV Mainz 05",
     "founded": "1905-01-01",
     "tier": 1,
     "girone": null,
@@ -50701,7 +50701,7 @@
   "pk": 148,
   "fields": {
     "is_national": false,
-    "name": "Borussia M'gladbach",
+    "name": "Borussia Mönchengladbach",
     "founded": "1900-01-01",
     "tier": 1,
     "girone": null,
