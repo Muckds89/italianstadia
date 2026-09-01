@@ -26161,7 +26161,7 @@
   "pk": 422,
   "fields": {
     "name": "Ursapharm-Arena an der Kaiserlinde",
-    "capacity": 9307,
+    "capacity": 10000,
     "address": "Spiesen-Elversberg , Germany",
     "year_of_construction": 2005,
     "city": 356,
@@ -26544,7 +26544,7 @@
   "pk": 432,
   "fields": {
     "name": "Veltins-Arena",
-    "capacity": 62278,
+    "capacity": 62271,
     "address": "Gelsenkirchen , North Rhine-Westphalia, Germany",
     "year_of_construction": 2001,
     "city": 365,
