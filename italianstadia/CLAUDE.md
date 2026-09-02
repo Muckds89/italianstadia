@@ -611,6 +611,25 @@ It reports; it does not write. Check the effective date before renaming — a sp
 announced is not a sponsor in use — and expect false positives where the DB deliberately
 stores the sponsored name and the article is titled with the unsponsored one.
 
+**Containment alone cannot see a rename, which is the whole point of the tool.** A renamed
+ground KEEPS its old name in the lead, introduced as "previously known as X" — so asking
+"does the stored name still appear?" answers yes and the check passes. Hoffenheim was
+published as the PreZero Arena on the day its article read "currently known as SNP Arena
+and previously as PreZero Arena", and a reader caught it. The check therefore asks FIRST
+whether the stored name sits inside a previously/formerly clause, by EQUALITY not
+containment: when a sponsor prefix is dropped the former name contains the current one
+("formerly McDOS Goffertstadion"), and containment would flag the correct name as stale.
+
+**The English article is not always the current one.** Borussia-Park became the
+ista-Borussia-Park on 1 July 2026; the German article says so and the English one does not
+mention it at all. No check can find what its source does not say — for a German, French or
+Spanish ground, read the native-language article before trusting a clean result.
+
+Expect the DB to be RIGHT and the flag to be wrong in the other direction too. Real Betis
+looked stale because the Benito Villamarín lead calls itself their home, but the season
+table still has them at La Cartuja while the main stand is rebuilt. Always settle a venue
+against the SEASON article, which knows where the club actually plays this year.
+
 **Detection rules (embed in the scrape itself, not just the audit):**
 1. **Stadium name ↔ Wikipedia title.** If the scraped `name` shares ZERO significant
    tokens with its own Wikipedia page title, it's suspect. SPONSOR renames (both names

@@ -16744,7 +16744,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 135,
   "fields": {
-    "name": "PreZero Arena",
+    "name": "SNP Arena",
     "capacity": 30150,
     "address": "Sinsheim , Baden-Württemberg, Germany",
     "year_of_construction": 2009,
@@ -16905,7 +16905,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 142,
   "fields": {
-    "name": "Borussia-Park",
+    "name": "ista-Borussia-Park",
     "capacity": 54057,
     "address": "Hennes-Weisweiler-Allee 1, Mönchengladbach , North Rhine-Westphalia, Germany",
     "year_of_construction": 2004,
@@ -19705,7 +19705,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 232,
   "fields": {
-    "name": "Santiago Bernabéu",
+    "name": "Bernabéu",
     "capacity": 83186,
     "address": "Madrid , Spain",
     "year_of_construction": 1947,
@@ -20220,7 +20220,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 247,
   "fields": {
-    "name": "Mendizorroza",
+    "name": "Mendizorrotza",
     "capacity": 19840,
     "address": "Vitoria-Gasteiz , Spain",
     "year_of_construction": 1924,
@@ -50404,8 +50404,8 @@
     "average_attendance": 30016,
     "wikipedia_url": "https://en.wikipedia.org/wiki/Bayer_04_Leverkusen",
     "transfermarkt_url": "https://www.transfermarkt.com/bayer-04-leverkusen/startseite/verein/15",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Logo_TSV_Bayer_04_Leverkusen.svg",
-    "image_credit": "Crest via Commons (P154); Transfermarkt copy unavailable.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/5/59/Bayer_04_Leverkusen_logo.svg",
+    "image_credit": "Crest from the club article's infobox (Bayer 04 Leverkusen logo.svg).",
     "description": "Bayer 04 Leverkusen , officially known as Bayer 04 Leverkusen Fußball GmbH ( German: [ˌbaɪ̯ɐ ˈleːvɐˌkuːzn̩] ) and commonly known as Bayer Leverkusen or simply Leverkusen , is a German professional football club based in Leverkusen , North Rhine-Westphalia. [ 7 ] It competes in the Bundesliga , the top tier of German football , and plays its home matches at the BayArena . [ 3 ] [ 8 ]",
     "crest_file": "bayer-04-leverkusen.png",
     "locked": false,

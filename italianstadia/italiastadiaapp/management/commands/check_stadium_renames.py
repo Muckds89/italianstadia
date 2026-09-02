@@ -74,6 +74,34 @@ def _tokens(s: str) -> set:
     return {t for t in _fold(s).split() if t and t not in GENERIC}
 
 
+# "…, currently known as SNP Arena and previously as PreZero Arena, is a stadium…"
+# A rename usually LEAVES the old name in the lead, introduced like this. Plain
+# containment therefore reports the name as healthy while the ground has already
+# been renamed — which is exactly how Hoffenheim's PreZero Arena passed this check
+# on the day it was published as the SNP Arena, and a reader caught it instead.
+FORMER_RE = re.compile(
+    r"(?:previously|formerly|förmals|ehemals|früher|until\s+\d{4}|bis\s+\d{4})"
+    r"[\s,]+(?:also\s+)?(?:known\s+)?(?:as\s+)?(?:the\s+)?"
+    r"([^,.;:()\[\]]{2,60})",
+    re.IGNORECASE | re.UNICODE)
+
+
+def _stored_name_is_marked_former(lead: str, want: set) -> bool:
+    """True when the lead introduces the STORED name as a former one.
+
+    Only fires when the old name sits inside a "previously/formerly …" clause, so a
+    lead that merely mentions the current name in passing is untouched.
+    """
+    for m in FORMER_RE.finditer(lead):
+        # EQUALITY, not containment. When a sponsor prefix is DROPPED the former name
+        # contains the current one — the Goffertstadion was "formerly McDOS
+        # Goffertstadion", so a containment test flags the correct current name as
+        # stale. Equality flags only a name that IS the former one, whole.
+        if want and want == _tokens(m.group(1)):
+            return True
+    return False
+
+
 class Command(BaseCommand):
     help = "Flag stadiums whose stored name is absent from their Wikipedia lead."
 
@@ -134,14 +162,23 @@ class Command(BaseCommand):
                         noleads.append(stadium)
                         continue
                     checked += 1
-
-                    # The only question that matters: does every DISTINCTIVE word of
-                    # the stored name still turn up somewhere in the lead? If it does,
-                    # the name is alive in the article and there is nothing to report —
-                    # even when the article ALSO mentions some other sponsored title.
-                    # The MKM Stadium's article names "Hull City Stadium" (the version
-                    # UEFA requires) further down; the stored name is not stale.
                     want = _tokens(stadium.name)
+
+                    # FIRST: is the stored name introduced as a FORMER one? This has to
+                    # be asked before containment, because a renamed ground keeps its old
+                    # name in the lead and would otherwise sail through as healthy.
+                    if _stored_name_is_marked_former(lead, want):
+                        m = SPONSOR_RE.search(lead)
+                        flagged.append((stadium, m.group(1).strip() if m else None,
+                                        lead[:180].replace("\n", " ")))
+                        continue
+
+                    # Otherwise: does every DISTINCTIVE word of the stored name still
+                    # turn up in the lead? If so the name is alive in the article and
+                    # there is nothing to report — even when the article ALSO mentions
+                    # some other sponsored title. The MKM Stadium's article names "Hull
+                    # City Stadium" (the version UEFA requires) further down; the stored
+                    # name is not stale.
                     if not want or want <= _tokens(lead):
                         continue
 
