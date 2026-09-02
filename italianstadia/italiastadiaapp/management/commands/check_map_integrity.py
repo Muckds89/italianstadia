@@ -20,7 +20,7 @@ from collections import Counter, defaultdict
 
 from django.core.management.base import BaseCommand
 
-from italiastadiaapp.models import League, Stadium, Team
+from italiastadiaapp.models import Country, League, Stadium, Team
 
 
 class Command(BaseCommand):
@@ -97,6 +97,28 @@ class Command(BaseCommand):
                 [f"{la},{lo}: " + " | ".join(f"{s.name} ({s.capacity})" for s in v)
                  for (la, lo), v in sorted(pos.items()) if len(v) > 1],
                 "either one venue stored twice, or one of them has the wrong position")
+
+        # 7. The spotlight joins clubs to borders BY NAME, on the federation. A name
+        #    that matches no polygon fails silently: the country simply never lights
+        #    up, which reads as a design choice rather than a missing alias.
+        import json as _json
+        from pathlib import Path as _Path
+        from italiastadiaapp.views import _FEDERATION_POLYGON_ALIAS
+        try:
+            _p = (_Path(__file__).resolve().parents[2]
+                  / "static" / "data" / "countries_hires.geojson")
+            _poly = {(f.get("properties", {}).get("name") or "").strip().lower()
+                     for f in _json.loads(_p.read_text(encoding="utf-8"))["features"]}
+        except Exception as e:
+            _poly = None
+            self.stdout.write(self.style.WARNING(
+                f"Could not read the border data, skipping the federation check: {e}"))
+        if _poly:
+            section("Federations with no matching border polygon",
+                    [c.name for c in Country.objects.all()
+                     if _FEDERATION_POLYGON_ALIAS.get(c.name.lower(), c.name).lower()
+                     not in _poly],
+                    "the spotlight would leave these countries unlit, with no error")
 
         self.stdout.write("")
         if problems:

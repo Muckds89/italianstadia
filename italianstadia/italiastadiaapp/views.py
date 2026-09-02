@@ -2377,6 +2377,36 @@ def _draw_rank(s):
     return (titles, s.capacity or 0, s.name or "")
 
 
+# The border data spells a few countries differently from the Country model. Only a
+# name join can hit this, and it fails SILENTLY — the polygon simply never lights up —
+# so the aliases live here and _spotlight_country reports anything it still cannot
+# match rather than dropping it.
+_FEDERATION_POLYGON_ALIAS = {
+    "czechia": "Czech Republic",
+}
+
+
+def _federation_of(teams):
+    """The country whose federation runs the competition these clubs play in.
+
+    NOT the country the ground stands in. A club can play abroad — AS Monaco in
+    Ligue 1, FC Andorra in the Segunda, Vaduz in the Swiss league, Derry City in the
+    League of Ireland, Cardiff and Swansea in the EFL — and for every one of them the
+    federation is the useful answer and the ground's own country is the misleading one.
+    """
+    for t in teams or ():
+        if getattr(t, "is_national", False):
+            continue
+        if t.league_id and t.league and t.league.country:
+            return t.league.country.name
+    # National sides last: their league IS the country, but a club tenant is the
+    # better answer when a ground has both.
+    for t in teams or ():
+        if t.league_id and t.league and t.league.country:
+            return t.league.country.name
+    return ""
+
+
 def _get_export_stadiums(params):
     """Return list of dicts for stadiums matching the filter params."""
     qs = Stadium.objects.select_related("city").prefetch_related("teams__league__country")
@@ -2503,6 +2533,14 @@ def _get_export_stadiums(params):
             "stadium_type": s.stadium_type or "",
             "ownership":    s.ownership or "",
             "country":      country,
+            # The FEDERATION that runs the competition this club plays in, which is
+            # not the same thing as the country the ground stands in. AS Monaco play
+            # in Ligue 1, so their federation is France while their ground is in the
+            # sovereign state of Monaco. Same for FC Andorra (Spain), Vaduz
+            # (Switzerland), Derry City (Ireland) and the Welsh clubs in the EFL.
+            # The spotlight joins on THIS, by name, instead of asking which polygon
+            # happens to contain the dot.
+            "federation":   _federation_of(teams),
             "image_url":    image_url,
         })
     return results
@@ -3465,7 +3503,42 @@ def _spotlight_country(img, stadiums, bbox, W, H, dim=165, focus=None):
         if named:
             return _spotlight_draw(img, feat_rings, named, bbox, W, H, dim)
 
-    # First pass: which country polygon strictly contains each displayed ground?
+    # ATTRIBUTE JOIN, not a spatial one. Which countries light up is a question about
+    # the clubs' FEDERATION, and a federation is not a shape: AS Monaco play in Ligue 1
+    # from a ground in a different sovereign state, so asking which polygon contains
+    # the dot lights up Monaco and leaves France dark. The same is true of FC Andorra
+    # in the Segunda, Vaduz in the Swiss league, Derry City in the League of Ireland
+    # and Cardiff, Swansea and Wrexham in the EFL. Join on the attribute the club
+    # actually carries and the geography stops mattering.
+    #
+    # Containment survives only as the fallback for grounds with no federation
+    # recorded, which is a data gap rather than a design.
+    feds = {(s.get("federation") or "").strip() for s in stadiums}
+    feds.discard("")
+    if feds:
+        by_name = {}
+        for i, f in enumerate(feats):
+            nm = (f.get("properties", {}).get("name") or "").strip().lower()
+            if nm:
+                by_name.setdefault(nm, i)
+        matched, unresolved = set(), []
+        for fed in sorted(feds):
+            key = _FEDERATION_POLYGON_ALIAS.get(fed.lower(), fed).lower()
+            idx = by_name.get(key)
+            if idx is None:
+                unresolved.append(fed)
+            else:
+                matched.add(idx)
+        if unresolved:
+            # Say so. A name join that misses just leaves the country unlit, which
+            # looks like a deliberate design choice rather than a missing alias.
+            logging.getLogger(__name__).warning(
+                "spotlight: no border polygon named %s — add it to "
+                "_FEDERATION_POLYGON_ALIAS", ", ".join(sorted(unresolved)))
+        if matched:
+            return _spotlight_draw(img, feat_rings, matched, bbox, W, H, dim)
+
+    # Fallback: which country polygon strictly contains each displayed ground?
     matched = set()
     unmatched = []
     for lo, la in pts:
