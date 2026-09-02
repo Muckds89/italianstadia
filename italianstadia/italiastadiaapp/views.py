@@ -5203,6 +5203,33 @@ def export_page(request):
     })
 
 
+# Every parameter that survives into the PAID download. The preview is rendered
+# straight from the query string, but the paid file is rebuilt later from this token,
+# so anything missing here is SILENTLY DROPPED and the customer gets a different map
+# from the one they previewed and bought.
+#
+# That is not hypothetical. `uefa` was added for the continental maps and never added
+# here, so paying for a Conference League map returned every ground in Europe — about
+# a thousand clubs instead of thirty-two. Six more were missing with it: national_only,
+# tiles, dot_color, surface_known, and the size/style aliases.
+#
+# test_export_token_keys asserts this covers every key _parse_export_params reads, so
+# the next parameter added without touching this list fails the build instead of a
+# customer's download.
+_EXPORT_TOKEN_KEYS = {
+    "country", "league", "ownership", "surface", "surface_known", "stadium_type",
+    "uefa", "national", "national_only",
+    "color_by", "ring_by", "no_badges", "dot_color",
+    "style", "style_key", "size", "size_key", "tiles",
+    "title", "subtitle", "labels",
+    "north", "legend", "scale", "spotlight", "logo", "bg_color", "inset", "inset_box",
+    "inset_size", "inset_corner", "label_pos", "badge_bg",
+    "islands",
+    "label_size", "label_color", "badge_size", "tournament", "tstatus",
+    "layer", "dstatus",
+}
+
+
 @require_POST
 def export_checkout(request):
     """Create a Stripe Checkout Session and redirect the user to it."""
@@ -5214,18 +5241,7 @@ def export_checkout(request):
     except Exception:
         return JsonResponse({"error": "Invalid JSON."}, status=400)
 
-    # Build filter param string that will be stored and used at download time
-    allowed_keys = {
-        "country", "league", "ownership", "surface", "stadium_type",
-        "color_by", "ring_by", "no_badges",
-        "style_key", "size_key", "title", "subtitle", "labels",
-        "north", "legend", "scale", "spotlight", "logo", "bg_color", "inset", "inset_box",
-        "inset_size", "inset_corner", "label_pos", "badge_bg",
-        "islands",
-        "label_size", "label_color", "badge_size", "tournament", "tstatus",
-        "layer", "dstatus", "national",
-    }
-    filters = {k: v for k, v in body.items() if k in allowed_keys}
+    filters = {k: v for k, v in body.items() if k in _EXPORT_TOKEN_KEYS}
     filters_json = json.dumps(filters)
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
