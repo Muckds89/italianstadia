@@ -593,10 +593,15 @@ class InsetSizeTests(TestCase):
 
     def test_survives_the_paid_checkout_allowlist(self):
         """Filters are re-read from the stored JSON at download time; a key missing
-        from the allowlist would silently reset to default on the paid export."""
-        import inspect
-        from italiastadiaapp import views
-        self.assertIn('"inset_size"', inspect.getsource(views.export_checkout))
+        from the allowlist would silently reset to default on the paid export.
+
+        Asserted against the constant, not against the source text of
+        export_checkout — the list moved out of that function, and a test that greps
+        a function body goes green or red for reasons that have nothing to do with
+        the behaviour it claims to check.
+        """
+        from italiastadiaapp.views import _EXPORT_TOKEN_KEYS
+        self.assertIn("inset_size", _EXPORT_TOKEN_KEYS)
 
 
 class InsetLabelLayoutTests(TestCase):
@@ -1136,6 +1141,5 @@ class InsetCornerTests(TestCase):
         self.assertEqual(self._corner_of(self._layout("bl", markers=crowded)), "bl")
 
     def test_survives_the_paid_checkout_allowlist(self):
-        import inspect
-        from italiastadiaapp import views
-        self.assertIn('"inset_corner"', inspect.getsource(views.export_checkout))
+        from italiastadiaapp.views import _EXPORT_TOKEN_KEYS
+        self.assertIn("inset_corner", _EXPORT_TOKEN_KEYS)
