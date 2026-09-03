@@ -1,7 +1,10 @@
 """
-System checks that run on every `manage.py` command, including the `migrate` in
-build.sh — so an incompatible runtime fails the DEPLOY instead of shipping a site
-whose admin 500s on every page.
+System checks, run explicitly by build.sh so an incompatible runtime fails the DEPLOY
+instead of shipping a site whose admin 500s on every page.
+
+build.sh calls `manage.py check` for this. It cannot rely on `migrate`: that command
+sets requires_system_checks = [] and runs NONE of them, so this file was originally
+described as gating the deploy while in fact never running during one.
 
 WHY THIS FILE EXISTS. The project had no Python version pin. Render moved its
 default runtime to Python 3.14, and Django 5.1 cannot copy a template Context on
