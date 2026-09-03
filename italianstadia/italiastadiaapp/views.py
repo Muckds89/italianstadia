@@ -2864,6 +2864,64 @@ def _auto_inset_cluster_legacy(stadiums, max_n=6):
     return near
 
 
+def _outside_frame_groups(stadiums, frame, link_deg=6.0, max_groups=3):
+    """Split grounds that fall OUTSIDE a fixed frame into their own box groups.
+
+    This is not _outlier_island_groups. That one answers "which islands belong to
+    this country", picking the LARGEST remaining clusters and requiring them to
+    share a country with the main body — both right for Madeira and the Azores, and
+    both wrong here. Asked to box Kairat of Almaty it returned Spain and Turkey,
+    because those are the biggest non-main clusters, and left Almaty on the map.
+
+    The question for a continental map is different and much simpler: the frame is
+    FIXED, so anything outside it needs a box. Distance decides, nothing else.
+
+    NOTHING IS EVER DROPPED. Grounds beyond `max_groups` boxes are handed back to
+    the main body, where the caller's frame widens to cover them. A club that
+    silently fails to appear on a map of its own competition is the worst outcome
+    here, so the function is written so that every input comes back in exactly one
+    of the two returned collections.
+    """
+    lon0, lat0, lon1, lat1 = frame
+    inside, outside = [], []
+    for st in stadiums:
+        if lon0 <= st["lon"] <= lon1 and lat0 <= st["lat"] <= lat1:
+            inside.append(st)
+        else:
+            outside.append(st)
+    if not outside:
+        return stadiums, []
+
+    # Single-linkage among the outsiders only, so two distant grounds near each
+    # other share one box instead of taking two.
+    parent = list(range(len(outside)))
+
+    def find(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+
+    for i in range(len(outside)):
+        for j in range(i + 1, len(outside)):
+            dlon = outside[i]["lon"] - outside[j]["lon"]
+            dlat = outside[i]["lat"] - outside[j]["lat"]
+            if (dlon * dlon + dlat * dlat) ** 0.5 <= link_deg:
+                a, b = find(i), find(j)
+                if a != b:
+                    parent[a] = b
+
+    clusters = {}
+    for idx in range(len(outside)):
+        clusters.setdefault(find(idx), []).append(outside[idx])
+    ordered = sorted(clusters.values(), key=len, reverse=True)
+
+    groups, overflow = ordered[:max_groups], ordered[max_groups:]
+    for grp in overflow:
+        inside.extend(grp)          # back on the main map; the frame will widen
+    return inside, groups
+
+
 def _outlier_island_groups(stadiums, max_groups=2, link_deg=4.0, sep_deg=7.0):
     """Split stadiums into (main_body, [outlier_group, ...]).
 
@@ -2970,7 +3028,7 @@ def _percentile(sorted_vals, q):
 # limit) and Turkey (Trabzonspor at 39.7°E). It deliberately does NOT stretch to the
 # Urals; no Russian club takes part, so nothing is lost by stopping short, and
 # reaching for empty Asian landmass shrinks the part anyone is looking at.
-# The east edge is 78°E, far beyond "Europe", and that is deliberate:
+# The east edge is 51°E, not the ~46° that "Europe" suggests, and that is deliberate:
 # it is the smallest window that already contains EVERY participant, so the widening
 # guard below never fires and all three competitions get a pixel-identical frame. At
 # 46° the guard fired for Sabah of Baku (49.8°E) and the Champions League map came out
@@ -2981,7 +3039,7 @@ def _percentile(sorted_vals, q):
 #   west  -11.0  Torreense, Torres Vedras (-9.3°E)
 #   south  30.0  Hapoel Be'er Sheva (31.3°N) — the reason the Middle East is in shot
 #   north  68.5  Bodø/Glimt (67.3°N)
-_UEFA_FRAME = (-11.0, 30.0, 78.0, 68.5)      # lon0, lat0, lon1, lat1
+_UEFA_FRAME = (-11.0, 30.0, 51.0, 68.5)      # lon0, lat0, lon1, lat1
 
 
 def _uefa_frame_bbox(stadiums):
@@ -4264,6 +4322,55 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
         "ownership", "surface", "type", "country") else ""
     RING_EXTRA = max(3, BADGE_R // 3)
     FONT_SZ   = params.get("label_size", 22)
+
+    # FIT PASS. The margin columns pack labels into the real free space and clamp the
+    # last ones to the bottom edge, so when a column runs out of room the labels do
+    # not fall off — they pile ON TOP of each other, which is what a continental map
+    # of 36 clubs looked like: the bottom of both columns was an unreadable stack.
+    # Shrink the type until ceil(N/2) pills actually fit the column.
+    #
+    # THE FIT IS COMPUTED IN REFERENCE PIXELS AND APPLIED AS A RATIO. Doing it in real
+    # pixels gave 55% of base at HD and 68% at 4K for the same map, because PAD_Y and
+    # LINE_GAP are absolute counts that do not scale — so the preview and the file
+    # someone paid for would carry different label layouts, which is the one thing the
+    # renderer may never do.
+    _single_line = False
+    _n_labels = (len([st for st in stadiums
+                      if _badge_key(st) not in (no_label_names or set())])
+                 + len(extra_label_points or []))
+    if _n_labels > 2 and FONT_SZ > 0:
+        _k = max(0.1, W / float(_REFERENCE_W))
+        _ref_h = H / _k                      # canvas height in reference pixels
+        _ref_base = max(1.0, FONT_SZ / _k)   # requested size in reference pixels
+        _ref_edge = max(20, int(min(_REFERENCE_W, _ref_h) * 0.03))
+        _per_col = (_n_labels + 1) // 2      # two margin columns
+        _ref_floor = max(9.0, _ref_base * 0.55)     # legibility floor
+        # Not the whole column: the title, the source credit, the logo and any
+        # outlier box are reserved bands the packer must skip, and they eat into the
+        # very ends of the columns. Sizing against the full height left the last
+        # label sitting under the logo. 0.85 is what the overlays actually cost on a
+        # 16:9 canvas with a bottom-right logo and a bottom-left credit.
+        _room = (_ref_h - 2 * _ref_edge) * 0.85
+
+        def _fits(sz, two_line):
+            pill = (sz + max(10.0, sz * 0.78) + 3 + 14) if two_line else (sz + 14)
+            return _per_col * (pill + max(6.0, sz * 0.35)) <= _room
+
+        # Try to keep both lines — the club AND its ground — at the largest size that
+        # fits. Only if even the floor cannot hold two lines does the club line go:
+        # at 36 clubs two-line pills need roughly 810 reference pixels of column and
+        # there are 680, so a continental map cannot have both and stay legible.
+        # One readable line beats two illegible ones, and the badge still identifies
+        # the club.
+        _ref_sz, _single_line = _ref_base, False
+        while _ref_sz > _ref_floor and not _fits(_ref_sz, True):
+            _ref_sz -= 1.0
+        if not _fits(_ref_sz, True):
+            _single_line = True
+            _ref_sz = _ref_base
+            while _ref_sz > _ref_floor and not _fits(_ref_sz, False):
+                _ref_sz -= 1.0
+        FONT_SZ = max(9, int(round(FONT_SZ * (_ref_sz / _ref_base))))
     FONT_SZ2  = max(10, int(FONT_SZ * 0.78))
     PAD_X     = 10
     PAD_Y     = 7
@@ -4450,7 +4557,7 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
             continue                            # badge already drawn; label lives in the inset
         team_line, stadium_line = (s.get("team_name", "") or ""), s["name"]
         rows = []                                # [(text, font, fill_key, w, h)]
-        if team_line:
+        if team_line and not _single_line:
             for ln, w, h in _wrap(team_line, font_team, inner_w, 7):
                 rows.append((ln, font_team, "team", w, h))
         for ln, w, h in _wrap(stadium_line, font_stadium, inner_w, 9):
@@ -5012,6 +5119,7 @@ def _compose_export_image(params):
             return None, "No stadiums match the selected filters."
 
     W, H = params["W"], params["H"]
+    forced_outlier_groups = None
     # Broad, unfiltered Europe export: trim longitude outliers (Iceland / Ural Russia) so
     # the frame stays on Europe. Filtered exports (country/league/tournament/dev/national)
     # keep the full bbox so they're never cropped.
@@ -5030,7 +5138,14 @@ def _compose_export_image(params):
         # Narrowed by country or league it is no longer a continental map — "Italy in
         # the Champions League" wants Italy — so those fall through to the normal fit.
         #
-        bbox = _expand_bbox_to_aspect(_uefa_frame_bbox(stadiums), W, H)
+        # Grounds beyond the window get their own box rather than dragging it east.
+        # _outside_frame_groups returns every input in exactly one of the two, so a
+        # club can never fall out of the map between the frame and the boxes.
+        frame_stadiums = stadiums
+        if params.get("islands", True):
+            frame_stadiums, forced_outlier_groups = _outside_frame_groups(
+                stadiums, _UEFA_FRAME)
+        bbox = _expand_bbox_to_aspect(_uefa_frame_bbox(frame_stadiums), W, H)
     elif is_broad and len(stadiums) > 30:
         # Trim E/W outliers, hard-clamp to a European longitude window (so Iceland in the
         # west and central/eastern Russia never widen the frame), then crop-to-fill.
@@ -5116,7 +5231,11 @@ def _compose_export_image(params):
     # or land in the wrong place).
     island_layouts = []
     if params.get("islands", True):
-        _, island_groups = _outlier_island_groups(stadiums)
+        # A continental map has already decided its outliers against the FIXED frame;
+        # re-deriving them here with the island rule would disagree with the bbox and
+        # leave a ground drawn nowhere.
+        island_groups = (forced_outlier_groups if forced_outlier_groups is not None
+                         else _outlier_island_groups(stadiums)[1])
         for grp in island_groups:
             # Narrower than a magnifier inset: two of these plus the label columns
             # have to share the frame. Framed MUCH wider than a magnifier though —
