@@ -530,6 +530,26 @@
   }
 },
 {
+  "model": "italiastadiaapp.country",
+  "pk": 55,
+  "fields": {
+    "name": "Kazakhstan",
+    "code": "KZ",
+    "uefa_rank": null,
+    "population": null
+  }
+},
+{
+  "model": "italiastadiaapp.country",
+  "pk": 56,
+  "fields": {
+    "name": "Gibraltar",
+    "code": "GI",
+    "uefa_rank": null,
+    "population": null
+  }
+},
+{
   "model": "italiastadiaapp.league",
   "pk": 1,
   "fields": {
@@ -1736,6 +1756,39 @@
     "country": 22,
     "division_level": 2,
     "season": "2026",
+    "hidden": true
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 114,
+  "fields": {
+    "name": "Primera Divisió",
+    "country": 8,
+    "division_level": 1,
+    "season": "2026/27",
+    "hidden": true
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 115,
+  "fields": {
+    "name": "Kazakhstan Premier League",
+    "country": 55,
+    "division_level": 1,
+    "season": "2026/27",
+    "hidden": true
+  }
+},
+{
+  "model": "italiastadiaapp.league",
+  "pk": 116,
+  "fields": {
+    "name": "Gibraltar Football League",
+    "country": 56,
+    "division_level": 1,
+    "season": "2026/27",
     "hidden": true
   }
 },
@@ -13641,6 +13694,32 @@
     "name": "Dundalk",
     "population": null,
     "country": "Ireland",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 943,
+  "fields": {
+    "name": "Gibraltar",
+    "population": null,
+    "country": "Gibraltar",
+    "wikipedia_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "description": null
+  }
+},
+{
+  "model": "italiastadiaapp.city",
+  "pk": 944,
+  "fields": {
+    "name": "Almaty",
+    "population": null,
+    "country": "Kazakhstan",
     "wikipedia_url": null,
     "image_url": null,
     "image_credit": null,
@@ -47589,6 +47668,60 @@
   }
 },
 {
+  "model": "italiastadiaapp.stadium",
+  "pk": 1149,
+  "fields": {
+    "name": "Victoria Stadium",
+    "capacity": 2300,
+    "address": null,
+    "year_of_construction": 1970,
+    "city": 943,
+    "latitude": "36.149440",
+    "longitude": "-5.350280",
+    "owner_raw": "Gibraltar Football Association",
+    "ownership": "UNKNOWN",
+    "slug": "victoria-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Victoria_Stadium_(Gibraltar)",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
+  "model": "italiastadiaapp.stadium",
+  "pk": 1150,
+  "fields": {
+    "name": "Almaty Central Stadium",
+    "capacity": 23804,
+    "address": null,
+    "year_of_construction": 1958,
+    "city": 944,
+    "latitude": "43.238330",
+    "longitude": "76.924440",
+    "owner_raw": "Municipality of Almaty",
+    "ownership": "PUBLIC",
+    "slug": "almaty-central-stadium",
+    "stadium_type": null,
+    "surface": null,
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Almaty_Central_Stadium",
+    "transfermarkt_url": null,
+    "image_url": null,
+    "image_credit": null,
+    "extra_images": [],
+    "description": null,
+    "locked": false
+  }
+},
+{
   "model": "italiastadiaapp.team",
   "pk": 7,
   "fields": {
@@ -78806,6 +78939,90 @@
     "uefa_coefficient": null,
     "european_competition": "",
     "slug": "spaeri-tbilisi"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1191,
+  "fields": {
+    "is_national": false,
+    "name": "Lincoln Red Imps",
+    "founded": "1976-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1149,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 943,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Lincoln_Red_Imps_F.C.",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/6/6e/Lincoln_Red_Imps_FC_logo.svg",
+    "image_credit": "Crest via Wikipedia article scan; Transfermarkt copy unavailable.",
+    "description": null,
+    "crest_file": "lincoln-red-imps.png",
+    "locked": false,
+    "league": 116,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "european_competition": "UECL",
+    "slug": "lincoln-red-imps"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1192,
+  "fields": {
+    "is_national": false,
+    "name": "Kairat",
+    "founded": "1954-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 1150,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 944,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/FC_Kairat",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/FCKairat_logo.png",
+    "image_credit": "Crest via Wikipedia article scan; Transfermarkt copy unavailable.",
+    "description": null,
+    "crest_file": "kairat.png",
+    "locked": false,
+    "league": 115,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "european_competition": "UECL",
+    "slug": "kairat"
+  }
+},
+{
+  "model": "italiastadiaapp.team",
+  "pk": 1193,
+  "fields": {
+    "is_national": false,
+    "name": "Inter Club d'Escaldes",
+    "founded": "1991-01-01",
+    "tier": 1,
+    "girone": null,
+    "stadium": 435,
+    "manager": null,
+    "num_of_titles": null,
+    "city": 368,
+    "average_attendance": null,
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Inter_Club_d%27Escaldes",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/3/38/Inter_Club_d%27Escaldes_LOGO_86.png",
+    "image_credit": "Crest via Wikipedia article scan; Transfermarkt copy unavailable.",
+    "description": null,
+    "crest_file": "inter-club-descaldes.png",
+    "locked": false,
+    "league": 114,
+    "under_development_stadium": null,
+    "uefa_coefficient": null,
+    "european_competition": "UECL",
+    "slug": "inter-club-descaldes"
   }
 },
 {

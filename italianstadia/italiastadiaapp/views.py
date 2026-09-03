@@ -2970,7 +2970,7 @@ def _percentile(sorted_vals, q):
 # limit) and Turkey (Trabzonspor at 39.7°E). It deliberately does NOT stretch to the
 # Urals; no Russian club takes part, so nothing is lost by stopping short, and
 # reaching for empty Asian landmass shrinks the part anyone is looking at.
-# The east edge is 51°E, not the ~46° that "Europe" suggests, and that is deliberate:
+# The east edge is 78°E, far beyond "Europe", and that is deliberate:
 # it is the smallest window that already contains EVERY participant, so the widening
 # guard below never fires and all three competitions get a pixel-identical frame. At
 # 46° the guard fired for Sabah of Baku (49.8°E) and the Champions League map came out
@@ -2981,7 +2981,7 @@ def _percentile(sorted_vals, q):
 #   west  -11.0  Torreense, Torres Vedras (-9.3°E)
 #   south  30.0  Hapoel Be'er Sheva (31.3°N) — the reason the Middle East is in shot
 #   north  68.5  Bodø/Glimt (67.3°N)
-_UEFA_FRAME = (-11.0, 30.0, 51.0, 68.5)      # lon0, lat0, lon1, lat1
+_UEFA_FRAME = (-11.0, 30.0, 78.0, 68.5)      # lon0, lat0, lon1, lat1
 
 
 def _uefa_frame_bbox(stadiums):
@@ -5029,6 +5029,7 @@ def _compose_export_image(params):
         #
         # Narrowed by country or league it is no longer a continental map — "Italy in
         # the Champions League" wants Italy — so those fall through to the normal fit.
+        #
         bbox = _expand_bbox_to_aspect(_uefa_frame_bbox(stadiums), W, H)
     elif is_broad and len(stadiums) > 30:
         # Trim E/W outliers, hard-clamp to a European longitude window (so Iceland in the

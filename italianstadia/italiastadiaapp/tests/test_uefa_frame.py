@@ -16,7 +16,8 @@ from italiastadiaapp.views import (_UEFA_FRAME, _expand_bbox_to_aspect,
 # clubs play in UEFA competitions. Coordinates are the stored ones.
 EDGE_CASES = [
     {"lon": -9.257, "lat": 38.567, "n": "Torreense (west)"},
-    {"lon": 49.766, "lat": 40.435, "n": "Sabah, Baku (east)"},
+    {"lon": 49.766, "lat": 40.435, "n": "Sabah, Baku"},
+    {"lon": 76.924, "lat": 43.238, "n": "Kairat, Almaty (east pin)"},
     {"lon": 34.789, "lat": 31.273, "n": "Hapoel Be'er Sheva (south)"},
     {"lon": 14.383, "lat": 67.277, "n": "Bodo/Glimt (north)"},
     {"lon": 39.647, "lat": 41.003, "n": "Trabzonspor (Turkey)"},
@@ -63,3 +64,9 @@ class UefaFrameTests(SimpleTestCase):
         lon0, lat0, lon1, lat1 = _UEFA_FRAME
         self.assertLess(lat0, 31.3, "southern edge cuts off Israel")
         self.assertGreater(lon1, 39.7, "eastern edge cuts off eastern Turkey")
+
+    def test_the_east_edge_reaches_kazakhstan(self):
+        """Almaty is the eastern limit of UEFA membership, so the frame cannot ever
+        need to go further — and it must go this far, or Kairat widens it and the
+        three competitions stop sharing one window."""
+        self.assertGreaterEqual(_UEFA_FRAME[2], 76.93)
