@@ -3661,10 +3661,18 @@ def _spotlight_draw(img, feat_rings, selected, bbox, W, H, dim):
     outside = ImageChops.invert(mask).point(lambda p: dim if p > 127 else 0)
     img.paste(Image.new("RGB", (W, H), (3, 5, 12)), (0, 0), outside)
 
-    # Bright border around the selected country
+    # Bright border around the selected country.
+    #
+    # The width SCALES. At a flat 2px it was the same two pixels on a 1280-wide
+    # preview and a 3840-wide download, so the paid file carried a border three times
+    # thinner in relative terms than the preview it was bought from — the absolute-
+    # pixel trap this renderer keeps falling into. One reference pixel reads as a
+    # clean outline rather than the heavy cyan band 2px gave at HD.
+    _k = max(0.1, W / float(_REFERENCE_W))
+    _bw = max(1, int(round(1.0 * _k)))
     d = ImageDraw.Draw(img)
     for pix in border_rings:
-        d.line(pix + [pix[0]], fill=(0, 230, 255), width=2)
+        d.line(pix + [pix[0]], fill=(0, 230, 255), width=_bw)
     return img
 
 
