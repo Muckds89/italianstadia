@@ -4334,67 +4334,9 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
     # LINE_GAP are absolute counts that do not scale — so the preview and the file
     # someone paid for would carry different label layouts, which is the one thing the
     # renderer may never do.
-    _single_line = False
-    _n_labels = (len([st for st in stadiums
-                      if _badge_key(st) not in (no_label_names or set())])
-                 + len(extra_label_points or []))
-    if _n_labels > 2 and FONT_SZ > 0:
-        _k = max(0.1, W / float(_REFERENCE_W))
-        _ref_h = H / _k                      # canvas height in reference pixels
-        _ref_base = max(1.0, FONT_SZ / _k)   # requested size in reference pixels
-        _ref_edge = max(20, int(min(_REFERENCE_W, _ref_h) * 0.03))
-        _ref_floor = max(9.0, _ref_base * 0.55)     # legibility floor
-        # Size against the TOTAL free height of both columns, divided by the number
-        # of labels. The split below is proportional to each column's free space, so
-        # both end up at the same labels-per-pixel density and this single number is
-        # the right constraint for either of them.
-        #
-        # Sizing for "half the labels in half the height" was wrong twice over: the
-        # columns are not equal (the Conference League map puts the outlier box AND
-        # the logo on the right) and the split is no longer even. Both times the
-        # surplus label landed under the logo, which paints AFTER the labels, so it
-        # was covered rather than visibly broken — the map showed 34 of 36 and
-        # nothing reported it.
-        _edge_px = max(20, int(min(W, H) * 0.03))
-        _wid_px = max(160, int(W * 0.23))
-
-        def _free_px(x0, x1):
-            room = H - 2 * _edge_px
-            for _rb in (reserve_boxes or []):
-                try:
-                    rx0, ry0, rx1, ry1 = (float(v) for v in _rb[:4])
-                except Exception:
-                    continue
-                if rx1 < x0 or rx0 > x1:
-                    continue
-                room -= max(0.0, min(ry1, H - _edge_px) - max(ry0, _edge_px))
-            return max(1.0, room)
-
-        _room = ((_free_px(_edge_px, _edge_px + _wid_px)
-                  + _free_px(W - _edge_px - _wid_px, W - _edge_px)) / _k) / _n_labels
-
-        def _fits(sz, two_line):
-            pill = (sz + max(10.0, sz * 0.78) + 3 + 14) if two_line else (sz + 14)
-            return (pill + max(6.0, sz * 0.35)) <= _room
-
-        # Try to keep both lines — the club AND its ground — at the largest size that
-        # fits. Only if even the floor cannot hold two lines does the club line go:
-        # at 36 clubs two-line pills need roughly 810 reference pixels of column and
-        # there are 680, so a continental map cannot have both and stay legible.
-        # One readable line beats two illegible ones, and the badge still identifies
-        # the club.
-        _ref_sz, _single_line = _ref_base, False
-        while _ref_sz > _ref_floor and not _fits(_ref_sz, True):
-            _ref_sz -= 1.0
-        if not _fits(_ref_sz, True):
-            _single_line = True
-            _ref_sz = _ref_base
-            while _ref_sz > _ref_floor and not _fits(_ref_sz, False):
-                _ref_sz -= 1.0
-        FONT_SZ = max(9, int(round(FONT_SZ * (_ref_sz / _ref_base))))
     FONT_SZ2  = max(10, int(FONT_SZ * 0.78))
     PAD_X     = 10
-    PAD_Y     = 7
+    PAD_Y     = 7      # replaced below when the fit pass asks for a tighter pill
     LINE_GAP  = 3
 
     # Parse label colour, hex string → RGB tuple
@@ -4549,14 +4491,11 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
     # margins also keeps them clear of the badges (no congestion). Reserved overlay
     # areas (title, legend, logo, inset, …) become forbidden vertical bands the
     # column skips. Works for any selection without tuning.
-    EDGE = max(20, int(min(W, H) * 0.03))
-    GAPY = max(6, int(FONT_SZ * 0.35))
 
     # Cap how wide a label may get. Names like "Stadion Miejski im. Marszałka Józefa
     # Piłsudskiego" run half the frame on one line, so they reach across the map and
     # sit on top of the badges however they're stacked vertically. Wrapping them
     # keeps every pill inside its margin column, where it can't cover anything.
-    MAX_PILL_W = max(160, int(W * 0.23))
 
     # Module-level helpers, shared with the inset so both label layouts measure and
     # wrap text identically.
@@ -4570,49 +4509,97 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
     # play at a "Romeo Menti"; with Juve Stabia's in the inset, a name-keyed skip set
     # suppressed VICENZA's label on the main map too, leaving an unnamed badge and a
     # Serie B map that silently showed 19 of its 20 clubs.
-    skip = no_label_names or set()
-    items = []
+    EDGE = max(20, int(min(W, H) * 0.03))
+    # Cap how wide a label may get. Names like "Stadion Miejski im. Marszalka Jozefa
+    # Pilsudskiego" run half the frame on one line, reaching across the map and sitting
+    # on top of the badges however they are stacked. Wrapping keeps every pill inside
+    # its margin column, where it cannot cover anything.
+    MAX_PILL_W = max(160, int(W * 0.23))
     inner_w = MAX_PILL_W - PAD_X * 2
-    for px, py, s in dot_positions:
-        if _badge_key(s) in skip:
-            continue                            # badge already drawn; label lives in the inset
-        team_line, stadium_line = (s.get("team_name", "") or ""), s["name"]
-        rows = []                                # [(text, font, fill_key, w, h)]
-        if _single_line:
-            # One line only, and it carries the CLUB. The badge is the club's crest,
-            # so a lone stadium name leaves a reader unable to say whose ground it
-            # is — which is what a Conference League map with 36 stadium names and
-            # no club names looked like. Where a ground has no club (a national
-            # venue, a tournament host) the stadium name is all there is, so it
-            # falls through to the line below.
-            if team_line:
-                for ln, w, h in _wrap(team_line, font_stadium, inner_w, 9):
-                    rows.append((ln, font_stadium, "stadium", w, h))
-        elif team_line:
-            for ln, w, h in _wrap(team_line, font_team, inner_w, 7):
-                rows.append((ln, font_team, "team", w, h))
-        if not (_single_line and rows):
-            for ln, w, h in _wrap(stadium_line, font_stadium, inner_w, 9):
-                rows.append((ln, font_stadium, "stadium", w, h))
-        pill_w = max(r[3] for r in rows) + PAD_X * 2
-        pill_h = sum(r[4] for r in rows) + LINE_GAP * (len(rows) - 1) + PAD_Y * 2
-        items.append(dict(px=px, py=py, rows=rows, pill_w=pill_w, pill_h=pill_h))
 
-    # Split the labels into the two columns. Default: MEDIAN x, so roughly half go
-    # each side. But when the badges form two clearly separated horizontal groups
-    # (e.g. a two-country tournament map: Italy west, Turkey east), split at the
-    # LARGEST x-gap instead — every west-group label goes left and every east-group
-    # label right, which reads far better than mixing the groups. General rule, no
-    # per-map tuning: the gap split only kicks in when the widest gap between
-    # neighbouring badges is big in absolute terms AND dominates typical spacing.
+    skip = no_label_names or set()
+
+    def _build_items(sz, tight):
+        """Build every label pill at a given type size, MEASURED not estimated.
+
+        The earlier fit predicted a pill as "two text lines plus padding" and was
+        wrong whenever a name wrapped: "Aarhus Gymnastikforening" and "Daio Wasabi
+        Stayen Stadium" become three lines, so the column overflowed and the last
+        labels were cut off by the frame edge and the logo. Long names are exactly
+        the ones that break an estimate, so the pills are now built and measured for
+        real, and the caller shrinks until what it measured actually fits.
+        """
+        f_team = _load_font(bold=False, size=max(8, int(sz * 0.78)))
+        f_std = _load_font(bold=True, size=sz)
+        pad_y = max(2, int(sz * 0.2)) if tight else 7
+        lgap = max(2, int(sz * 0.15)) if tight else 3
+        out = []
+        for px, py, st in dot_positions:
+            if _badge_key(st) in skip:
+                continue                # badge already drawn; label lives in the inset
+            team_line = (st.get("team_name", "") or "")
+            rows = []                   # [(text, font, fill_key, w, h)]
+            if team_line:
+                for ln, w, h in _wrap(team_line, f_team, inner_w, 7):
+                    rows.append((ln, f_team, "team", w, h))
+            for ln, w, h in _wrap(st["name"], f_std, inner_w, 9):
+                rows.append((ln, f_std, "stadium", w, h))
+            out.append(dict(px=px, py=py, rows=rows,
+                            pill_w=max(r[3] for r in rows) + PAD_X * 2,
+                            pill_h=sum(r[4] for r in rows) + lgap * (len(rows) - 1)
+                                   + pad_y * 2))
+        return out, pad_y, lgap
+
+    # How much column there actually is, both sides, minus the reserved bands.
+    _edge0 = max(20, int(min(W, H) * 0.03))
+    _colw0 = max(160, int(W * 0.23))
+
+    def _free_px(x0, x1):
+        room = H - 2 * _edge0
+        for _rb in (reserve_boxes or []):
+            try:
+                rx0, ry0, rx1, ry1 = (float(v) for v in _rb[:4])
+            except Exception:
+                continue
+            if rx1 < x0 or rx0 > x1:
+                continue
+            room -= max(0.0, min(ry1, H - _edge0) - max(ry0, _edge0))
+        return max(1.0, room)
+
+    _budget = _free_px(_edge0, _edge0 + _colw0) + _free_px(W - _edge0 - _colw0, W - _edge0)
+
+    # Shrink until the MEASURED pills fit, in steps proportional to the requested
+    # size so HD, FHD and 4K walk the same ladder and settle on the same fraction.
+    _k = max(0.1, W / float(_REFERENCE_W))
+    _base = FONT_SZ
+    _floor = max(9, int(round(_base * 0.5)))
+    items, PAD_Y, LINE_GAP = _build_items(FONT_SZ, False)
+    _tight = False
+    while True:
+        need = sum(it["pill_h"] for it in items) + max(2, int(FONT_SZ * 0.35)) * len(items)
+        if need <= _budget or FONT_SZ <= _floor:
+            break
+        FONT_SZ -= max(1, int(round(_k)))
+        FONT_SZ = max(_floor, FONT_SZ)
+        _tight = True
+        items, PAD_Y, LINE_GAP = _build_items(FONT_SZ, True)
+    FONT_SZ2 = max(8, int(FONT_SZ * 0.78))
+    font_team = _load_font(bold=False, size=FONT_SZ2)
+    font_stadium = _load_font(bold=True, size=FONT_SZ)
+    GAPY = max(2, int(FONT_SZ * 0.35)) if _tight else max(6, int(FONT_SZ * 0.35))
+
+    # Order the labels left-to-right by their badge, then split them into the two
+    # margin columns. An order-preserving point-to-column matching is planar, so the
+    # leader lines never cross.
     by_x = sorted(items, key=lambda it: it["px"])
     mid = len(by_x) // 2
     if len(by_x) >= 6:
+        # When the badges form two clearly separated horizontal groups (a
+        # two-country tournament map, say) split at the LARGEST x-gap instead of the
+        # median, so each group's labels stay on its own side. Only splits that stay
+        # reasonably balanced qualify: requiring just two per side once threw every
+        # mainland label into one column until it overflowed.
         gaps = [(by_x[i + 1]["px"] - by_x[i]["px"], i + 1) for i in range(len(by_x) - 1)]
-        # Only splits that stay reasonably BALANCED. Requiring just 2-per-side let
-        # the gap split fire on island anchors sitting far right, throwing all 15
-        # mainland labels into one column until it overflowed the frame. A genuine
-        # two-group map (Italy/Turkey) splits near the middle anyway.
         lo, hi = max(2, int(len(by_x) * 0.35)), min(len(by_x) - 2, int(len(by_x) * 0.65))
         cand = [(g, i) for g, i in gaps if lo <= i <= hi]
         if cand:
@@ -4621,6 +4608,7 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
             typical = others[len(others) // 2] or 1
             if gsize > W * 0.15 and gsize > 4 * typical:
                 mid = gidx
+
     def _bands_for(col_x0, col_x1):
         """Vertical [y0,y1] intervals the column must skip (reserved boxes that
         overlap the column's x-range), sorted top-down."""
@@ -5293,7 +5281,17 @@ def _compose_export_image(params):
             # island box is only useful if you can see the island's shape and place
             # it geographically. The ~0.45 degree floor (~50 km each side) fits
             # Madeira and Sao Miguel, both roughly 60 km long.
-            lay = _inset_layout(grp, W, H, main_bbox=bbox, reserves=reserves,
+            # Keep the box off the label margins. Placed in a corner it sits on
+            # top of a whole column, and that column then has a third less room —
+            # which on the Conference League map was the difference between the
+            # labels carrying club AND ground and being cut to one line. The map
+            # interior beside it is empty steppe, so the box loses nothing by
+            # moving inward.
+            _edge = max(20, int(min(W, H) * 0.03))
+            _colw = max(160, int(W * 0.23))
+            _margins = [(0, 0, _edge + _colw, H), (W - _edge - _colw, 0, W, H)]
+            lay = _inset_layout(grp, W, H, main_bbox=bbox,
+                                reserves=reserves + _margins,
                                 width_frac=0.17, bbox_pad=1.2, bbox_floor=0.45)
             reserves.append(lay["box"])
             island_layouts.append((grp, lay))
