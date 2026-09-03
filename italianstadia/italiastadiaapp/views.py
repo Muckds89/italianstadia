@@ -4343,18 +4343,39 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
         _ref_h = H / _k                      # canvas height in reference pixels
         _ref_base = max(1.0, FONT_SZ / _k)   # requested size in reference pixels
         _ref_edge = max(20, int(min(_REFERENCE_W, _ref_h) * 0.03))
-        _per_col = (_n_labels + 1) // 2      # two margin columns
         _ref_floor = max(9.0, _ref_base * 0.55)     # legibility floor
-        # Not the whole column: the title, the source credit, the logo and any
-        # outlier box are reserved bands the packer must skip, and they eat into the
-        # very ends of the columns. Sizing against the full height left the last
-        # label sitting under the logo. 0.85 is what the overlays actually cost on a
-        # 16:9 canvas with a bottom-right logo and a bottom-left credit.
-        _room = (_ref_h - 2 * _ref_edge) * 0.85
+        # Size against the TOTAL free height of both columns, divided by the number
+        # of labels. The split below is proportional to each column's free space, so
+        # both end up at the same labels-per-pixel density and this single number is
+        # the right constraint for either of them.
+        #
+        # Sizing for "half the labels in half the height" was wrong twice over: the
+        # columns are not equal (the Conference League map puts the outlier box AND
+        # the logo on the right) and the split is no longer even. Both times the
+        # surplus label landed under the logo, which paints AFTER the labels, so it
+        # was covered rather than visibly broken — the map showed 34 of 36 and
+        # nothing reported it.
+        _edge_px = max(20, int(min(W, H) * 0.03))
+        _wid_px = max(160, int(W * 0.23))
+
+        def _free_px(x0, x1):
+            room = H - 2 * _edge_px
+            for _rb in (reserve_boxes or []):
+                try:
+                    rx0, ry0, rx1, ry1 = (float(v) for v in _rb[:4])
+                except Exception:
+                    continue
+                if rx1 < x0 or rx0 > x1:
+                    continue
+                room -= max(0.0, min(ry1, H - _edge_px) - max(ry0, _edge_px))
+            return max(1.0, room)
+
+        _room = ((_free_px(_edge_px, _edge_px + _wid_px)
+                  + _free_px(W - _edge_px - _wid_px, W - _edge_px)) / _k) / _n_labels
 
         def _fits(sz, two_line):
             pill = (sz + max(10.0, sz * 0.78) + 3 + 14) if two_line else (sz + 14)
-            return _per_col * (pill + max(6.0, sz * 0.35)) <= _room
+            return (pill + max(6.0, sz * 0.35)) <= _room
 
         # Try to keep both lines — the club AND its ground — at the largest size that
         # fits. Only if even the floor cannot hold two lines does the club line go:
@@ -4557,11 +4578,22 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
             continue                            # badge already drawn; label lives in the inset
         team_line, stadium_line = (s.get("team_name", "") or ""), s["name"]
         rows = []                                # [(text, font, fill_key, w, h)]
-        if team_line and not _single_line:
+        if _single_line:
+            # One line only, and it carries the CLUB. The badge is the club's crest,
+            # so a lone stadium name leaves a reader unable to say whose ground it
+            # is — which is what a Conference League map with 36 stadium names and
+            # no club names looked like. Where a ground has no club (a national
+            # venue, a tournament host) the stadium name is all there is, so it
+            # falls through to the line below.
+            if team_line:
+                for ln, w, h in _wrap(team_line, font_stadium, inner_w, 9):
+                    rows.append((ln, font_stadium, "stadium", w, h))
+        elif team_line:
             for ln, w, h in _wrap(team_line, font_team, inner_w, 7):
                 rows.append((ln, font_team, "team", w, h))
-        for ln, w, h in _wrap(stadium_line, font_stadium, inner_w, 9):
-            rows.append((ln, font_stadium, "stadium", w, h))
+        if not (_single_line and rows):
+            for ln, w, h in _wrap(stadium_line, font_stadium, inner_w, 9):
+                rows.append((ln, font_stadium, "stadium", w, h))
         pill_w = max(r[3] for r in rows) + PAD_X * 2
         pill_h = sum(r[4] for r in rows) + LINE_GAP * (len(rows) - 1) + PAD_Y * 2
         items.append(dict(px=px, py=py, rows=rows, pill_w=pill_w, pill_h=pill_h))
@@ -4589,14 +4621,32 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
             typical = others[len(others) // 2] or 1
             if gsize > W * 0.15 and gsize > 4 * typical:
                 mid = gidx
-    left_col = by_x[:mid]
-    right_col = by_x[mid:]
-
     def _bands_for(col_x0, col_x1):
         """Vertical [y0,y1] intervals the column must skip (reserved boxes that
         overlap the column's x-range), sorted top-down."""
         return sorted((rb[1], rb[3]) for rb in (reserve_boxes or [])
                       if not (rb[2] < col_x0 or rb[0] > col_x1))
+
+    # REBALANCE BY FREE SPACE, not down the middle. The two columns rarely have the
+    # same room: on the Conference League map the outlier box AND the logo both sit
+    # right, costing that column about a third of its height while the left lost
+    # almost nothing. Splitting 18/18 into unequal space overflowed the right column,
+    # and because the logo paints AFTER the labels, the two that did not fit were
+    # covered rather than visibly broken — the map showed 34 of 36 and said nothing.
+    _wid = max((it["pill_w"] for it in items), default=MAX_PILL_W)
+    def _free_height(bands):
+        room = H - 2 * EDGE
+        for b0, b1 in bands:
+            room -= max(0, min(b1, H - EDGE) - max(b0, EDGE))
+        return max(1.0, float(room))
+    _fl = _free_height(_bands_for(EDGE, EDGE + _wid))
+    _fr = _free_height(_bands_for(W - EDGE - _wid, W - EDGE))
+    if len(by_x) >= 4 and _fl + _fr > 0:
+        _bal = int(round(len(by_x) * _fl / (_fl + _fr)))
+        mid = max(2, min(len(by_x) - 2, _bal))
+
+    left_col = by_x[:mid]
+    right_col = by_x[mid:]
 
 
     def _place_column(col, side):
