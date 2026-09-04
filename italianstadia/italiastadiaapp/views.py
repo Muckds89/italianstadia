@@ -2480,6 +2480,11 @@ def _get_export_stadiums(params):
         # name -- Cepheus Park Randers would be labelled "Randers FC" on a map of a
         # competition Randers are not in.
         teams = list(s.teams.all()) + _displaced.get(s.pk, [])
+        # Set only on the UEFA path, so it must exist for every ground: national
+        # mode never reaches the block that fills it, and reading it there would
+        # raise UnboundLocalError and 500 the whole export -- which is exactly how
+        # the `_euro` colour lookup broke once already.
+        _uefa_clubs = []
         # In national mode, prefer the national side's crest/name as the badge.
         primary_team = None
         if params.get("national") or params.get("national_only"):
@@ -2531,6 +2536,7 @@ def _get_export_stadiums(params):
                             if t.european_competition in _want
                             and _uefa_venue_of.get(t.pk) == s.pk]
                 clubs = _in_uefa or clubs
+                _uefa_clubs = _in_uefa
             tenants = [{"name": t.name, "image_url": (t.image_url or ""),
                         "crest_file": (t.crest_file or "")} for t in clubs[:4]]
             if not tenants and team_name:
@@ -2538,7 +2544,15 @@ def _get_export_stadiums(params):
         label_name = " / ".join(t["name"] for t in tenants[:2]) or team_name
         # Whose federation this ground counts for. On a UEFA map that is the club the
         # map is about, which for a displaced club is not the ground's own tenant.
-        _fed_teams = (_displaced.get(s.pk) or teams) if params.get("uefa") else teams
+        #
+        # On a UEFA map the federation must come from the club that is IN the
+        # competition, not from whichever tenant the ground lists first. Estadi
+        # de la FAF is shared by Inter Club d'Escaldes, who play in the Andorran
+        # Primera Divisio, and FC Andorra, who play in the SPANISH Segunda -- so
+        # a Conference League map lit up Spain for a ground whose only club in
+        # the competition is Andorran, and left Andorra dark.
+        _fed_teams = ((_displaced.get(s.pk) or _uefa_clubs or teams)
+                      if params.get("uefa") else teams)
         if params.get("no_badges"):
             image_url = ""   # render colour-coded dots instead of club crests
             tenants = []

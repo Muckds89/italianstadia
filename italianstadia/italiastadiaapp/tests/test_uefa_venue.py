@@ -157,3 +157,46 @@ class UefaVenueAbroadTests(TestCase):
         self.assertEqual(len(rows), 1)
         self.assertEqual(rows[0]["name"], "UefaVenueTest Borrowed Ground")
         self.assertEqual(rows[0]["federation"], "Ukraine")
+
+
+class UefaGroundshareFederationTests(TestCase):
+    """A shared ground answers with the federation of the club IN the competition.
+
+    Estadi de la FAF is used by Inter Club d'Escaldes, who play in the Andorran
+    Primera Divisio, and by FC Andorra, who play in the SPANISH Segunda. The
+    federation was taken from whichever tenant the ground happened to list first,
+    so a Conference League map lit up SPAIN for a ground whose only club in the
+    competition is Andorran -- and left Andorra dark, on the very map that had
+    just been extended to include Andorra so that every competition showed 36.
+    """
+
+    @classmethod
+    def setUpTestData(cls):
+        ad, _ = Country.objects.get_or_create(name="Andorra",
+                                              defaults={"code": "AD"})
+        es, _ = Country.objects.get_or_create(name="Spain", defaults={"code": "ES"})
+        home = League.objects.create(name="UefaVenueTest Primera Divisio",
+                                     country=ad, division_level=1)
+        abroad = League.objects.create(name="UefaVenueTest Segunda",
+                                       country=es, division_level=2)
+        city = City.objects.create(name="UefaVenueTest Encamp", country="Andorra")
+        ground = Stadium.objects.create(
+            name="UefaVenueTest Estadi de la FAF", city=city, capacity=5600,
+            latitude="42.536111", longitude="1.583333")
+
+        # Created FIRST, so it leads s.teams.all() and wins a naive lookup.
+        Team.objects.create(name="UefaVenueTest FC Andorra", city=city,
+                            league=abroad, tier=2, stadium=ground)
+        Team.objects.create(name="UefaVenueTest Inter Escaldes", city=city,
+                            league=home, tier=1, stadium=ground,
+                            european_competition="UECL")
+
+    def test_federation_comes_from_the_club_in_the_competition(self):
+        rows = _get_export_stadiums(_params(uefa="UECL"))
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["federation"], "Andorra")
+
+    def test_the_label_names_only_the_club_in_the_competition(self):
+        rows = _get_export_stadiums(_params(uefa="UECL"))
+        self.assertEqual([t["name"] for t in rows[0]["teams"]],
+                         ["UefaVenueTest Inter Escaldes"])

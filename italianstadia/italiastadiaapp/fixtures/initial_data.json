@@ -28942,7 +28942,7 @@
   "model": "italiastadiaapp.stadium",
   "pk": 503,
   "fields": {
-    "name": "Limassol Arena",
+    "name": "Alphamega Stadium",
     "capacity": 10700,
     "address": "Kolossi , Limassol District , Cyprus",
     "year_of_construction": 2022,
@@ -30404,7 +30404,7 @@
   "pk": 546,
   "fields": {
     "name": "Vasil Levski",
-    "capacity": 43630,
+    "capacity": 43230,
     "address": "Sofia , Bulgaria",
     "year_of_construction": 1953,
     "city": 469,
@@ -30417,7 +30417,7 @@
     "surface": "GRASS",
     "architect": null,
     "tournaments": [],
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Stadion_Lokomotiv_(Sofia)",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Vasil_Levski_National_Stadium",
     "transfermarkt_url": "https://www.transfermarkt.com/septemvri-sofia/stadion/verein/40416",
     "image_url": "https://upload.wikimedia.org/wikipedia/en/1/15/Lokomotiv_stadium%2C_main_stand.jpg",
     "image_credit": null,
@@ -35317,7 +35317,7 @@
   "pk": 718,
   "fields": {
     "name": "Elbasan Arena",
-    "capacity": 1500,
+    "capacity": 12640,
     "address": "Sheshi Ruzhdi Bizhuta 1, 3001 Elbasan , Albania",
     "year_of_construction": 1967,
     "city": 617,
@@ -47762,6 +47762,33 @@
   }
 },
 {
+  "model": "italiastadiaapp.stadium",
+  "pk": 1152,
+  "fields": {
+    "name": "Europa Point Stadium",
+    "capacity": 8066,
+    "address": null,
+    "year_of_construction": null,
+    "city": 943,
+    "latitude": "36.110694",
+    "longitude": "-5.346750",
+    "owner_raw": "HM Government of Gibraltar",
+    "ownership": "PUBLIC",
+    "slug": "europa-point-stadium",
+    "stadium_type": "OPEN",
+    "surface": "ARTIFICIAL",
+    "architect": null,
+    "tournaments": [],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Europa_Sports_Park",
+    "transfermarkt_url": null,
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/07/Europa_Point%2C_Gibraltar_-_panoramio.jpg",
+    "image_credit": null,
+    "extra_images": [],
+    "description": "Multi-purpose ground at Europa Point, called Europa Point Stadium in UEFA competition. Used by Lincoln Red Imps for European home matches while Victoria Stadium is rebuilt. Capacity from Wikidata P1083; the Wikipedia infobox carries no capacity value.",
+    "locked": false
+  }
+},
+{
   "model": "italiastadiaapp.team",
   "pk": 7,
   "fields": {
@@ -56544,7 +56571,7 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "european_competition": "UEL",
-    "uefa_stadium": null,
+    "uefa_stadium": 336,
     "slug": "royale-union-saint-gilloise"
   }
 },
@@ -61474,7 +61501,7 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "european_competition": "UECL",
-    "uefa_stadium": null,
+    "uefa_stadium": 503,
     "slug": "pafos-fc"
   }
 },
@@ -62663,7 +62690,7 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "european_competition": "UEL",
-    "uefa_stadium": null,
+    "uefa_stadium": 546,
     "slug": "pfc-levski-sofia"
   }
 },
@@ -64519,7 +64546,7 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "european_competition": "UCL",
-    "uefa_stadium": null,
+    "uefa_stadium": 189,
     "slug": "shakhtar-donetsk"
   }
 },
@@ -65041,7 +65068,7 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "european_competition": "UECL",
-    "uefa_stadium": null,
+    "uefa_stadium": 626,
     "slug": "kups-kuopio"
   }
 },
@@ -67419,7 +67446,7 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "european_competition": "UECL",
-    "uefa_stadium": null,
+    "uefa_stadium": 718,
     "slug": "kf-egnatia"
   }
 },
@@ -73567,7 +73594,7 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "european_competition": "UEL",
-    "uefa_stadium": null,
+    "uefa_stadium": 939,
     "slug": "torreense"
   }
 },
@@ -74872,7 +74899,7 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "european_competition": "UEL",
-    "uefa_stadium": null,
+    "uefa_stadium": 790,
     "slug": "ararat-armenia"
   }
 },
@@ -75481,7 +75508,7 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "european_competition": "UEL",
-    "uefa_stadium": null,
+    "uefa_stadium": 351,
     "slug": "hapoel-beer-sheva"
   }
 },
@@ -80121,7 +80148,7 @@
     "under_development_stadium": null,
     "uefa_coefficient": null,
     "european_competition": "UECL",
-    "uefa_stadium": null,
+    "uefa_stadium": 1152,
     "slug": "lincoln-red-imps"
   }
 },
