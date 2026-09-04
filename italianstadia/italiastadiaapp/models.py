@@ -232,6 +232,25 @@ class Team(models.Model):
         max_length=8, choices=EUROPEAN_COMPETITION_CHOICES,
         blank=True, default="", db_index=True)
 
+    # Where this club hosts its EUROPEAN home matches, when that is not `stadium`.
+    #
+    # A club's domestic ground and its European ground are two different facts, and
+    # a continental map that publishes the first is wrong even though the club plays
+    # there every other week. Two readers caught this on the same map: AGF Aarhus are
+    # in a temporary ground while their new stadium is built and it is not licensed
+    # for European matches, so they host at Cepheus Park Randers; Mjallby AIF host at
+    # Olympia in Helsingborg, 147km from Strandvallen, for the same reason.
+    #
+    # Null is the normal case and means "the same ground as always" -- this is NOT a
+    # second home ground field, and nothing outside the UEFA export path reads it.
+    # The replacement is frequently in another CITY, and for clubs barred from hosting
+    # at home it is in another COUNTRY, so the marker moves; the club's federation,
+    # which drives country highlighting, stays its own.
+    uefa_stadium = models.ForeignKey(
+        Stadium, on_delete=models.SET_NULL, null=True, blank=True,
+        related_name="uefa_tenants", db_index=True,
+        help_text="Ground used for European home matches, if not the usual one.")
+
     slug = models.SlugField(max_length=255, unique=True, blank=True)
 
     def save(self, *args, **kwargs):

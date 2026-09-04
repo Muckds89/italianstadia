@@ -2439,11 +2439,28 @@ def _get_export_stadiums(params):
     # it COMPOSES with any country/league filter instead of replacing it: "Italy +
     # UEFA=ANY" is every Italian club in Europe, "UEFA=UCL" alone is the whole
     # Champions League league phase across the continent.
+    #
+    # This filter cannot be a join on `teams`, because the ground a club uses in
+    # Europe is not always the ground it is a tenant of. AGF Aarhus host at Cepheus
+    # Park Randers and Mjallby at Olympia in Helsingborg, neither of which they are
+    # tenants of; joining on tenancy drew both clubs at their domestic grounds and
+    # both errors were reported by readers. So resolve club -> venue FIRST, then
+    # select the venues -- `_displaced` carries the clubs that have to be attached to
+    # a ground they do not appear in `teams` for.
+    _uefa_venue_of, _displaced = {}, {}
     if params.get("uefa"):
         want = params["uefa"]
-        qs = (qs.filter(teams__european_competition__in=("UCL", "UEL", "UECL"))
-              if want == "ANY" else
-              qs.filter(teams__european_competition=want)).distinct()
+        _want_comps = ({"UCL", "UEL", "UECL"} if want == "ANY" else {want})
+        for t in (Team.objects.filter(european_competition__in=_want_comps,
+                                      is_national=False)
+                  .select_related("league__country")):
+            venue_id = t.uefa_stadium_id or t.stadium_id
+            if not venue_id:
+                continue
+            _uefa_venue_of[t.pk] = venue_id
+            if t.uefa_stadium_id and t.uefa_stadium_id != t.stadium_id:
+                _displaced.setdefault(venue_id, []).append(t)
+        qs = qs.filter(pk__in=set(_uefa_venue_of.values())).distinct()
     if params.get("national"):
         qs = qs.filter(teams__is_national=True)
     if params.get("national_only"):
@@ -2458,7 +2475,11 @@ def _get_export_stadiums(params):
     results = []
     for s in ordered:
         country = s.city.country if s.city else ""
-        teams = list(s.teams.all())
+        # Clubs displaced HERE for Europe are not tenants, so they are absent from
+        # s.teams. Add them, or the ground is drawn with the wrong club's badge and
+        # name -- Cepheus Park Randers would be labelled "Randers FC" on a map of a
+        # competition Randers are not in.
+        teams = list(s.teams.all()) + _displaced.get(s.pk, [])
         # In national mode, prefer the national side's crest/name as the badge.
         primary_team = None
         if params.get("national") or params.get("national_only"):
@@ -2498,16 +2519,26 @@ def _get_export_stadiums(params):
             # Lviv" -- naming two clubs that are not in the competition, on a map of
             # that competition. The league filter already had this guard; the UEFA
             # filter was added later and did not.
+            #
+            # Membership of the competition is not enough on its own any more: a club
+            # that hosts its European ties elsewhere must NOT be listed at its own
+            # ground, or it appears twice on the map. `_uefa_venue_of` is the single
+            # answer to "which ground does this club use in this competition".
             if params.get("uefa"):
                 _want = ({"UCL", "UEL", "UECL"} if params["uefa"] == "ANY"
                          else {params["uefa"]})
-                _in_uefa = [t for t in clubs if t.european_competition in _want]
+                _in_uefa = [t for t in clubs
+                            if t.european_competition in _want
+                            and _uefa_venue_of.get(t.pk) == s.pk]
                 clubs = _in_uefa or clubs
             tenants = [{"name": t.name, "image_url": (t.image_url or ""),
                         "crest_file": (t.crest_file or "")} for t in clubs[:4]]
             if not tenants and team_name:
                 tenants = [{"name": team_name, "image_url": image_url}]
         label_name = " / ".join(t["name"] for t in tenants[:2]) or team_name
+        # Whose federation this ground counts for. On a UEFA map that is the club the
+        # map is about, which for a displaced club is not the ground's own tenant.
+        _fed_teams = (_displaced.get(s.pk) or teams) if params.get("uefa") else teams
         if params.get("no_badges"):
             image_url = ""   # render colour-coded dots instead of club crests
             tenants = []
@@ -2540,7 +2571,14 @@ def _get_export_stadiums(params):
             # (Switzerland), Derry City (Ireland) and the Welsh clubs in the EFL.
             # The spotlight joins on THIS, by name, instead of asking which polygon
             # happens to contain the dot.
-            "federation":   _federation_of(teams),
+            #
+            # On a UEFA map the federation is the DISPLACED CLUB's, not the host
+            # ground's. A club barred from hosting at home plays in another country
+            # entirely; taking the federation from the ground's own tenant would
+            # highlight the country lending the stadium and leave the club's own
+            # association unlit, which is precisely the coordinate-driven answer this
+            # field exists to avoid.
+            "federation":   _federation_of(_fed_teams),
             "image_url":    image_url,
         })
     return results
