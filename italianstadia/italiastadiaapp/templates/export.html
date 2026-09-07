@@ -275,13 +275,33 @@
                         <label class="form-label small mb-1">Font size: <span class="range-val" id="labelSizeVal">22</span>px</label>
                         <input type="range" class="form-range" id="expLabelSize" min="12" max="40" value="22">
                     </div>
-                    <div class="mb-0">
+                    <div class="mb-2">
                         <label class="form-label small mb-1">Label text colour</label>
                         <div class="d-flex align-items-center gap-2">
                             <input type="color" id="expLabelColor" value="#ffffff">
                             <input type="text"  id="expLabelHex"  class="form-control form-control-sm" value="#ffffff" style="max-width:90px">
                         </div>
                     </div>
+                    <div class="mb-2">
+                        <label class="form-label small mb-1">Leader line colour</label>
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="color" id="expLineColor" value="#ffffff">
+                            <input type="text"  id="expLineHex" class="form-control form-control-sm" value="" placeholder="same as label" style="max-width:120px">
+                        </div>
+                        <div class="form-text small">Leave empty to follow the label colour.</div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label small mb-1">Leader line thickness: <span class="range-val" id="lineWidthVal">1</span>px</label>
+                        <input type="range" class="form-range" id="expLineWidth" min="0.5" max="6" step="0.5" value="1">
+                        <div class="form-text small">Measured at preview size and scaled up, so a 4K download keeps the same weight.</div>
+                    </div>
+                    <div class="form-check mb-1">
+                        <input class="form-check-input" type="checkbox" id="expEditMapLabels">
+                        <label class="form-check-label small" for="expEditMapLabels">Move labels by hand</label>
+                    </div>
+                    <div class="form-text small mb-1">Drag any label on the preview. Positions are kept when you regenerate.</div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" id="expResetMapLabels">Reset label positions</button>
+                    <div class="form-text small text-info" id="mapLabelStatus"></div>
                 </div>
             </div>
 
@@ -398,6 +418,7 @@
 <div id="exportAnalytics" data-step="view" data-price="{{ export_price_eur }}" hidden></div>
 <script src="{% static 'js/export-analytics.js' %}" defer></script>
 <script src="{% static 'js/inset-label-editor.js' %}" defer></script>
+<script src="{% static 'js/map-label-editor.js' %}" defer></script>
 
 <script>
 // ── Autocomplete ──────────────────────────────────────────────────────────────
@@ -537,6 +558,29 @@ document.getElementById("expLabelHex").addEventListener("input", function () {
         document.getElementById("expLabelColor").value = this.value;
 });
 
+// ── Leader line colour ────────────────────────────────────────────────────────
+// The swatch WRITES the hex box, but the hex box is what gets sent, because empty
+// has to stay expressible: empty means "follow the label colour" and a colour
+// input can never be empty. Clearing the text is how you go back to the default.
+document.getElementById("expLineColor").addEventListener("input", function () {
+    document.getElementById("expLineHex").value = this.value;
+});
+document.getElementById("expLineHex").addEventListener("input", function () {
+    if (/^#[0-9a-fA-F]{6}$/.test(this.value))
+        document.getElementById("expLineColor").value = this.value;
+});
+document.getElementById("expLineWidth").addEventListener("input", function () {
+    document.getElementById("lineWidthVal").textContent = this.value;
+});
+
+// ── Hand-placed main-map labels ───────────────────────────────────────────────
+document.getElementById("expEditMapLabels").addEventListener("change", function () {
+    if (window.mapLabelEditor) window.mapLabelEditor.setEnabled(this.checked);
+});
+document.getElementById("expResetMapLabels").addEventListener("click", function () {
+    if (window.mapLabelEditor) window.mapLabelEditor.reset();
+});
+
 // ── Label / badge size ranges ─────────────────────────────────────────────────
 document.getElementById("expLabelSize").addEventListener("input", function () {
     document.getElementById("labelSizeVal").textContent = this.value;
@@ -603,8 +647,17 @@ function _getFilters() {
                       ? document.getElementById("expColourBy").value : ""),
         no_badges:   ((document.getElementById("expColourBy").value &&
                        document.getElementById("expColourDots").checked) ? "1" : "0"),
+        // Hand-placed MAIN-map labels, fractions of the whole image (the inset's
+        // are fractions of the inset box). Same reason: the preview is HD and the
+        // paid file may be 4K, so pixels would move every pill on the download.
+        map_label_pos: (window.mapLabelEditor
+                        ? window.mapLabelEditor.serialize() : ""),
         label_size:  document.getElementById("expLabelSize").value,
         label_color: document.getElementById("expLabelColor").value,
+        // Empty means "follow the label colour" — the server treats it that way,
+        // so an untouched control must send "" and not the colour input's #ffffff.
+        line_color:  document.getElementById("expLineHex").value.trim(),
+        line_width:  document.getElementById("expLineWidth").value,
         badge_size:  document.getElementById("expBadgeSize").value,
         badge_bg:    document.getElementById("expBadgeBg").value,
     };

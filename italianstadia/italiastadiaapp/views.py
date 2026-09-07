@@ -2251,6 +2251,22 @@ def _parse_export_params(request):
         label_size = 22
     label_color = request.GET.get("label_color", "#ffffff").strip()
 
+    # Leader lines. Until now these borrowed the label colour and were drawn at a
+    # flat width=1 -- an absolute pixel count, so a 4K download carried leaders a
+    # third as heavy, relative to everything else, as the HD preview they were
+    # chosen from. `line_width` is therefore in REFERENCE pixels and scaled at
+    # draw time, exactly like label_size and badge_size.
+    #
+    # `line_color` defaults to EMPTY, not to a colour: empty means "follow the
+    # label colour", which is what every existing saved link and every existing
+    # paid token expects. Defaulting it to #ffffff instead would silently repaint
+    # the leaders white on every map that had picked a non-white label colour.
+    line_color = request.GET.get("line_color", "").strip()
+    try:
+        line_width = max(0.5, min(6.0, float(request.GET.get("line_width", "1"))))
+    except ValueError:
+        line_width = 1.0
+
     # Badge (club crest) radius on the map
     try:
         badge_size = max(7, min(28, int(request.GET.get("badge_size", "13"))))
@@ -2295,6 +2311,8 @@ def _parse_export_params(request):
         "bg_color": bg_color,
         "label_size": label_size,
         "label_color": label_color,
+        "line_color": line_color,
+        "line_width": line_width,
         "badge_size": badge_size,
         "legend": request.GET.get("legend", "0") == "1",
         "north": request.GET.get("north", "0") == "1",
@@ -2337,6 +2355,10 @@ def _parse_export_params(request):
             request.GET.get("inset_size", "m").strip().lower(), 0.30),
         # Hand-placed inset labels from the drag editor, keyed by stadium slug.
         "label_pos": _parse_label_overrides(request.GET.get("label_pos", "")),
+        # Same grammar, different frame: `label_pos` is fractions of the INSET
+        # box, `map_label_pos` fractions of the whole image.
+        "map_label_pos": _parse_label_overrides(
+            request.GET.get("map_label_pos", "")),
         # Disc drawn behind each crest: white (default), black, or none.
         "badge_bg": (request.GET.get("badge_bg", "white").strip().lower()
                      if request.GET.get("badge_bg", "white").strip().lower()
@@ -3218,6 +3240,44 @@ def _label_key(s):
     return (s.get("slug") or "").strip() or slugify(s.get("name", ""))[:60]
 
 
+def _leader_rgb(params, label_rgb):
+    """Colour of the leader lines.
+
+    An empty `line_color` means "follow the label colour", which is how these
+    lines have always behaved. Keeping empty as the default rather than baking in
+    #ffffff is what stops this option from repainting every existing saved link.
+    An unparseable value falls back the same way -- a bad hex in a query string
+    must never cost the whole render.
+    """
+    # str() rather than assuming a string. A query string always gives one, but
+    # the PAID path replays a JSON token, where a client can put a number here --
+    # and an AttributeError in the renderer is a 500 on a download someone paid
+    # for, over a colour.
+    raw = str(params.get("line_color") or "").strip().lstrip("#")
+    if len(raw) != 6:
+        return label_rgb
+    try:
+        return tuple(int(raw[i:i + 2], 16) for i in (0, 2, 4))
+    except ValueError:
+        return label_rgb
+
+
+def _leader_width(params, W):
+    """Leader thickness in real pixels, scaled from REFERENCE pixels.
+
+    The old value was a literal `width=1`. That is the absolute-pixel trap this
+    renderer keeps falling into: one pixel is one pixel at 1280 and still one
+    pixel at 3840, so the paid 4K file drew leaders three times finer, relative
+    to its own labels and badges, than the HD preview the buyer chose from.
+    """
+    try:
+        ref = float(params.get("line_width", 1.0) or 1.0)
+    except (TypeError, ValueError):
+        ref = 1.0
+    k = max(0.1, W / float(_REFERENCE_W))
+    return max(1, int(round(ref * k)))
+
+
 def _parse_label_overrides(raw):
     """Parse `label_pos=<key>:<nx>,<ny>;...` into {key: (nx, ny)}.
 
@@ -3459,8 +3519,12 @@ def _draw_inset(img, inset_stadiums, params, W, H, country_index, style_key,
         # leader from the badge to the pill's inner edge (right edge for a left-column
         # label, left edge for a right-column one) — drawn under the pill.
         inner_x = lx + tw if it["side"] == "left" else lx
+        # Same colour and weight as the main map's leaders, so the two label
+        # systems cannot drift apart when the user changes either control. The
+        # inset keeps its own alpha: it draws over a lighter box.
         d.line([(it["px"], it["py"]), (inner_x, ly + th // 2)],
-               fill=(255, 255, 255, 170), width=1)
+               fill=_leader_rgb(params, (255, 255, 255)) + (170,),
+               width=_leader_width(params, W))
         d.rounded_rectangle([lx - 3, ly - 2, lx + tw + 3, ly + th + 2],
                             radius=4, fill=(10, 13, 24, 235))
         yy = ly + PAD
@@ -4368,7 +4432,7 @@ def _dot_colour(stadium, params, country_index):
 
 def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
                           reserve_boxes=None, no_label_names=None,
-                          extra_label_points=None):
+                          extra_label_points=None, geometry_sink=None):
     """`extra_label_points` are (px, py, stadium) anchors already in pixel space,
     for grounds whose badge is drawn elsewhere (inside an island inset). They get
     a full-size label in the margin columns with a leader back to the box, instead
@@ -4406,6 +4470,8 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
     except Exception:
         label_rgb = (255, 255, 255)
     team_rgb = tuple(min(255, int(c * 0.75) + 40) for c in label_rgb)  # slightly dimmer for team line
+    line_rgb = _leader_rgb(params, label_rgb)
+    line_w = _leader_width(params, W)
 
     badges = _prefetch_badges(stadiums, size=BADGE_R * 2)
 
@@ -4605,6 +4671,11 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
             for ln, w, h in _wrap(st["name"], f_std, inner_w, 9):
                 rows.append((ln, f_std, "stadium", w, h))
             out.append(dict(px=px, py=py, rows=rows,
+                            # Stable across re-renders, so a dragged position
+                            # survives a filter change. A list index would
+                            # silently reassign every saved position.
+                            key=_label_key(st),
+                            team=team_line, stadium=st.get("name", ""),
                             pill_w=max(r[3] for r in rows) + PAD_X * 2,
                             pill_h=sum(r[4] for r in rows) + lgap * (len(rows) - 1)
                                    + pad_y * 2))
@@ -4748,6 +4819,51 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
     _place_column(left_col, "left")
     _place_column(right_col, "right")
 
+    # HAND-PLACED LABELS. The column layout is planar and never crosses a leader,
+    # but it has only two degrees of freedom -- which margin, and the slot in that
+    # margin's stack -- so it cannot solve a map where the interesting clubs all
+    # sit on one side. This lets the user drag a pill anywhere.
+    #
+    # Overrides are FRACTIONS OF THE FULL IMAGE, exactly like the inset's are
+    # fractions of the inset box, so a layout dragged on the HD preview lands
+    # identically on a 4K download. Storing pixels would move every pill on the
+    # file someone paid for.
+    #
+    # The side is recomputed from where the pill ENDED UP, not kept from the
+    # column it came from: drag a left-column pill to the right of its badge and
+    # a stale side would fire the leader out of the wrong edge and run it back
+    # across the map.
+    _overrides = params.get("map_label_pos") or {}
+    if _overrides:
+        for it in items:
+            pos = _overrides.get(it.get("key"))
+            if not pos:
+                continue
+            nx, ny = pos
+            pw, ph = it["pill_w"], it["pill_h"]
+            # Clamp against the FRAME in fractions, then convert. Clamping in
+            # pixels against the pill's own width would be resolution-dependent,
+            # because pill_w follows an integer font size.
+            it["lx"] = int(round(min(max(nx, -0.02), 1.0) * W))
+            it["ly"] = int(round(min(max(ny, -0.02), 1.0) * H))
+            it["lx"] = max(-pw // 4, min(it["lx"], W - pw // 4))
+            it["ly"] = max(-ph // 4, min(it["ly"], H - ph // 4))
+            it["side"] = "left" if (it["lx"] + pw / 2) < it["px"] else "right"
+
+    if geometry_sink is not None:
+        for it in items:
+            if it.get("lx") is None:
+                continue
+            geometry_sink.append({
+                "key": it["key"], "team": it["team"], "stadium": it["stadium"],
+                "x": round(it["lx"] / float(W), 5),
+                "y": round(it["ly"] / float(H), 5),
+                "w": round(it["pill_w"] / float(W), 5),
+                "h": round(it["pill_h"] / float(H), 5),
+                "anchor_x": round(it["px"] / float(W), 5),
+                "anchor_y": round(it["py"] / float(H), 5),
+            })
+
     # Leaders first (under the pills), then the pills + text.
     for it in items:
         if it.get("lx") is None:
@@ -4757,7 +4873,8 @@ def _draw_dots_and_labels(img, stadiums, params, bbox, W, H, country_index,
             inner_x, bx = lx + pw, it["px"] - rr
         else:
             inner_x, bx = lx, it["px"] + rr
-        draw.line([(bx, it["py"]), (inner_x, int(ly + ph / 2))], fill=label_rgb, width=1)
+        draw.line([(bx, it["py"]), (inner_x, int(ly + ph / 2))],
+                  fill=line_rgb, width=line_w)
 
     for it in items:
         if it.get("lx") is None:
@@ -5391,7 +5508,8 @@ def _compose_export_image(params):
     inset_names = {_badge_key(s) for s in inset_stadiums}
     img = _draw_dots_and_labels(img, main_stadiums, params, bbox, W, H, country_index,
                                 reserve_boxes=reserves, no_label_names=inset_names,
-                                extra_label_points=island_anchors)
+                                extra_label_points=island_anchors,
+                                geometry_sink=params.get("_map_geometry_sink"))
     if inset_stadiums:
         img = _draw_inset(img, inset_stadiums, params, W, H, country_index,
                           params["style_key"], main_bbox=bbox, layout=inset_layout,
@@ -5456,6 +5574,7 @@ def map_export(request):
     # preview, and this box is memory-capped enough already -- FHD and 4K are
     # downgraded to HD above precisely because the free tier OOMs otherwise.
     params["_geometry_sink"] = []
+    params["_map_geometry_sink"] = []
     try:
         img, err = _compose_export_image(params)
         if err:
@@ -5479,7 +5598,8 @@ def map_export(request):
     # UTF-8 in a header raises UnicodeEncodeError and would 500 the preview.
     try:
         geo = json.dumps({"inset": params.get("_inset_box"),
-                          "labels": params.get("_geometry_sink") or []},
+                          "labels": params.get("_geometry_sink") or [],
+                          "map_labels": params.get("_map_geometry_sink") or []},
                          ensure_ascii=False, separators=(",", ":"))
         response["X-Inset-Labels"] = base64.b64encode(
             geo.encode("utf-8")).decode("ascii")
@@ -5524,7 +5644,8 @@ _EXPORT_TOKEN_KEYS = {
     "style", "style_key", "size", "size_key", "tiles",
     "title", "subtitle", "labels",
     "north", "legend", "scale", "spotlight", "logo", "bg_color", "inset", "inset_box",
-    "inset_size", "inset_corner", "label_pos", "badge_bg",
+    "inset_size", "inset_corner", "label_pos", "map_label_pos", "badge_bg",
+    "line_color", "line_width",
     "islands",
     "label_size", "label_color", "badge_size", "tournament", "tstatus",
     "layer", "dstatus",
